@@ -1,10 +1,91 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_fragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical">
 
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:fadingEdge="none"
+        android:scrollbars="none"
+        android:background="#555555"
+        android:id="@+id/main_fragment_horizontalScrollView">
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-</RelativeLayout>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:id="@+id/main_fragment_radioGroup"
+                android:orientation="horizontal"
+                android:layout_alignParentTop="true">
+
+                <RadioButton
+                    style="@style/radioButton"
+                    android:id="@+id/main_fragment_my_message"
+                    android:text="@string/my_message"/>
+                <RadioButton
+                    style="@style/radioButton"
+                    android:id="@+id/main_fragment_my_check"
+                    android:text="@string/my_check"/>
+                <RadioButton
+                    style="@style/radioButton"
+                    android:id="@+id/main_fragment_my_leave"
+                    android:text="@string/my_leave"/>
+                <RadioButton
+                    style="@style/radioButton"
+                    android:id="@+id/main_fragment_my_mission"
+                    android:text="@string/my_mission"/>
+                <RadioButton
+                    style="@style/radioButton"
+                    android:id="@+id/main_fragment_my_maintain"
+                    android:text="@string/my_maintain"/>
+                <RadioButton
+                    style="@style/radioButton"
+                    android:id="@+id/main_fragment_my_post"
+                    android:text="@string/my_post"/>
+                <RadioButton
+                    style="@style/radioButton"
+                    android:id="@+id/main_fragment_overtime"
+                    android:text="@string/overtime"/>
+                <RadioButton
+                    style="@style/radioButton"
+                    android:id="@+id/main_fragment_travel"
+                    android:text="@string/travel"/>
+                <RadioButton
+                    style="@style/radioButton"
+                    android:id="@+id/main_fragment_my_memo"
+                    android:text="@string/my_memo"/>
+                <RadioButton
+                    style="@style/radioButton"
+                    android:id="@+id/main_fragment_my_bug"
+                    android:text="@string/my_bug"/>
+                <RadioButton
+                    style="@style/radioButton"
+                    android:id="@+id/main_fragment_my_usecase"
+                    android:text="@string/my_usecase"/>
+
+            </RadioGroup>
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="4dp"
+                android:background="#33b5e5"
+                android:layout_alignParentBottom="true"
+                android:id="@+id/main_fragment_image"/>
+
+        </RelativeLayout>
+
+    </HorizontalScrollView>
+
+    <android.supprot.v4.view.ViewPager
+        android:id="@+id/main_fragment_pager"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
+
+</LinearLayout>

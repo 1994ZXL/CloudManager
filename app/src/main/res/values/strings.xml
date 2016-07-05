@@ -6,4 +6,15 @@
     <string name="username">用户名</string>
     <string name="password">密码</string>
     <string name="login">登录</string>
+    <string name="my_message">我的信息</string>
+    <string name="my_check">我的考勤</string>
+    <string name="my_leave">我的请假</string>
+    <string name="my_mission">我的任务</string>
+    <string name="my_maintain">我的运维</string>
+    <string name="my_post">我的日报</string>
+    <string name="overtime">加班</string>
+    <string name="travel">出差</string>
+    <string name="my_memo">我的备忘录</string>
+    <string name="my_bug">我的bug</string>
+    <string name="my_usecase">我的用例</string>
 </resources>
