@@ -18,6 +18,7 @@
     <string name="my_bug">我的bug</string>
     <string name="my_usecase">我的用例</string>
 
+    <!--备忘录-->
     <string name="memo_title_textview">标题</string>
     <string name="memo_date_textview">xx年xx月xx日</string>
     <string name="memo_content_textview">备忘录内容</string>
