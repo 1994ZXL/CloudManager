@@ -1,6 +1,7 @@
 package com.example.zxl.cloudmanager;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,14 @@ public class LoginFragment extends Fragment {
         passwordEditText = (EditText)v.findViewById(R.id.loginFragment_password_edittext);
 
         loginButton = (Button)v.findViewById(R.id.loginFragment_loginbutton);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         return v;
     }
