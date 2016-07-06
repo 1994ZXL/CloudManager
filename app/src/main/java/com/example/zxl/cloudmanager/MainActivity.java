@@ -14,11 +14,11 @@ public class MainActivity extends Activity {
 
         Fragment fragment;
         FragmentManager fragmentManager = getFragmentManager();
-        fragment = fragmentManager.findFragmentById(R.id.main_fragment);
+        fragment = fragmentManager.findFragmentById(R.id.fragmentContiner);
 
         if (null == fragment) {
             fragment = new MainFragment();
-            fragmentManager.beginTransaction().replace(R.id.main_fragment, fragment).commit();
+            fragmentManager.beginTransaction().replace(R.id.fragmentContiner, fragment).commit();
         }
 
     }
