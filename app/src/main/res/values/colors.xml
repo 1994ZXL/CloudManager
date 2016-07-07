@@ -2,5 +2,5 @@
 <resources>
     <color name="radiobg_press">#43859d</color>
     <color name="radiobg_normal">#555555</color>
-    <color name="memo_background">#E1F1F1</color>
+    <color name="memo_background">#E9F1F1</color>
 </resources>
