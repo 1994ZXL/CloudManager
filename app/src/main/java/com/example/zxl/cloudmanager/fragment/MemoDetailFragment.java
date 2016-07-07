@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,9 +65,14 @@ public class MemoDetailFragment extends Fragment {
             return;
         if (requestCode == REQUEST_DATE) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            //memo.setDate(date);
-            //updateDate();
+            memo.setmDate(date);
+            updateDate();
         }
+    }
+
+    //更新时间设置
+    private void updateDate(){
+        mDetailDateBtn.setText(DateFormat.format("EEE yyyy-MM-dd", memo.getmDate()));
     }
 
 }

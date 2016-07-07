@@ -7,8 +7,7 @@ import java.util.Date;
  */
 public class Memo {
     private String mMemoTitle;
-    private Date mBeginDate;
-    private Date mEndDate;
+    private Date mDate;
     private String mContent;
 
     public Memo(String mMemoTitle, String mContent) {
@@ -32,19 +31,11 @@ public class Memo {
         this.mMemoTitle = mMemoTitle;
     }
 
-    public Date getmBeginDate() {
-        return mBeginDate;
+    public Date getmDate() {
+        return mDate;
     }
 
-    public void setmBeginDate(Date mBeginDate) {
-        this.mBeginDate = mBeginDate;
-    }
-
-    public Date getmEndDate() {
-        return mEndDate;
-    }
-
-    public void setmEndDate(Date mEndDate) {
-        this.mEndDate = mEndDate;
+    public void setmDate(Date mDate) {
+        this.mDate = mDate;
     }
 }

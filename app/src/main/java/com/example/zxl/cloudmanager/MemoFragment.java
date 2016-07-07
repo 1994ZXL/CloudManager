@@ -3,6 +3,7 @@ package com.example.zxl.cloudmanager;
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +25,7 @@ import java.util.List;
  */
 public class MemoFragment extends Fragment {
 
+    private CardView mCardView;
     private RecyclerView mRecyclerView;
     private MyAdapter myAdapter;
     private List<Memo> memos = new ArrayList<Memo>();
@@ -43,6 +45,7 @@ public class MemoFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         myAdapter = new MyAdapter(this.getActivity(), memos);
         mRecyclerView.setAdapter(myAdapter);
+        mCardView = (CardView)v.findViewById(R.id.fragment_my_memo);
 
         return v;
     }
