@@ -219,7 +219,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/my_message"
+                            android:text="@string/overtime"
                             android:id="@+id/main_fragment_overtime"/>
                     </LinearLayout>
                     <LinearLayout
@@ -236,7 +236,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/my_check"
+                            android:text="@string/travel"
                             android:id="@+id/main_fragment_travel"/>
                     </LinearLayout>
                     <LinearLayout
@@ -249,11 +249,12 @@
                             android:layout_height="wrap_content"
                             android:src="@drawable/demo"
                             android:id="@+id/main_fragment_my_memo_image"
+                            android:clickable="true"
                             android:layout_gravity="center"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/my_leave"
+                            android:text="@string/my_memo"
                             android:id="@+id/main_fragment_my_memo"/>
                     </LinearLayout>
 
