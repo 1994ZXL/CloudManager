@@ -48,7 +48,19 @@
     <!-- 我的考勤-->
     <string name="dutytime">上班时间：</string>
     <string name="offdutytime">下班时间：</string>
+    <string name="project">项目</string>
+    <string name="check_location">考勤点</string>
+    <string name="check_manager">考勤主管</string>
+    <string name="stipulate_dutytime">规定上班时间</string>
+    <string name="stipulate_offdutytime">规定下班时间</string>
+    <string name="duty_sign_time">上班签到时间</string>
+    <string name="offduty_sign_time">下班签到时间</string>
+    <string name="duty_manage_time">上班处理时间</string>
+    <string name="offduty_manage_time">下班处理时间</string>
+    <string name="manage_state">处理状态</string>
+    <string name="leave">请假</string>
+    <string name="work_overtime">加班</string>
+    <string name="work_travel">出差</string>
+    <string name="late">迟到</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

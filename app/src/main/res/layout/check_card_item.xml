@@ -2,64 +2,73 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragment_my_memo"
-    android:orientation="vertical"
+    android:id="@+id/fragment_my_check"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="4dp"
     card_view:cardBackgroundColor="@color/memo_background"
     android:layout_margin="10dp">
 
-    <!-- 第一排-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="16dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/check_card_item_time"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/check_card_item_location"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/check_card_item_map"/>
-    </LinearLayout>
+        android:orientation="vertical">
 
-    <!-- 上班时间-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="16dp">
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- 第一排-->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/dutytime"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/check_card_item_dutytime"/>
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:layout_margin="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:id="@+id/check_card_item_time" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:layout_marginLeft="50dp"
+                android:id="@+id/check_card_item_location" />
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/check_card_item_map"/>
+        </LinearLayout>
 
-    <!-- 下班时间-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="16dp">
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- 上班时间-->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/offdutytime"/>
-        <TextView
-            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dutytime"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/check_card_item_dutytime"/>
+        </LinearLayout>
+
+        <!-- 下班时间-->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/check_card_item_offdutytime"/>
+            android:orientation="horizontal"
+            android:layout_marginLeft="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/offdutytime"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/check_card_item_offdutytime"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 </android.support.v7.widget.CardView>
