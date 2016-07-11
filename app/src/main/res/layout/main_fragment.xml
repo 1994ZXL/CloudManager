@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/gray">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,11 +16,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <!-- 头像名字-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="175dp"
                 android:orientation="horizontal"
-                android:layout_margin="30dp">
+                android:padding="30dp"
+                android:background="@color/gray2">
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
@@ -35,24 +38,30 @@
                     android:text="张三"/>
             </LinearLayout>
 
+            <!-- 我的工作-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_margin="16dp">
+                android:padding="16dp"
+                android:layout_marginTop="2dp"
+                android:background="@color/white">
 
+                <!-- 我的工作TextView-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/main_fragment_my_job"
                     android:text="@string/my_job"
                     android:textSize="25dp"/>
-
+                <!-- 我的工作第一排功能列表-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center">
+
+                    <!-- 我的信息-->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -70,6 +79,8 @@
                             android:text="@string/my_message"
                             android:id="@+id/main_fragment_my_message"/>
                     </LinearLayout>
+
+                    <!-- 我的考勤-->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -87,6 +98,8 @@
                             android:text="@string/my_check"
                             android:id="@+id/main_fragment_my_check"/>
                     </LinearLayout>
+
+                    <!-- 我的请假-->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -104,6 +117,8 @@
                             android:text="@string/my_leave"
                             android:id="@+id/main_fragment_my_leave"/>
                     </LinearLayout>
+
+                    <!-- 我的任务-->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -123,12 +138,15 @@
                     </LinearLayout>
                 </LinearLayout>
 
+
+                <!-- 我的工作第二排功能列表-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center">
 
+                    <!-- 我的运维-->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -146,6 +164,8 @@
                             android:text="@string/my_maintain"
                             android:id="@+id/main_fragment_my_maintain"/>
                     </LinearLayout>
+
+                    <!-- 我的日报-->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -163,6 +183,8 @@
                             android:text="@string/my_post"
                             android:id="@+id/main_fragment_my_post"/>
                     </LinearLayout>
+
+                    <!-- 我的用例-->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -180,6 +202,8 @@
                             android:text="@string/my_usecase"
                             android:id="@+id/main_fragment_my_usecase"/>
                     </LinearLayout>
+
+                    <!-- 我的bug-->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -200,11 +224,13 @@
 
                 </LinearLayout>
 
+                <!-- 我的工作第三排功能列表-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+                    <!-- 我的加班-->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -222,6 +248,8 @@
                             android:text="@string/overtime"
                             android:id="@+id/main_fragment_overtime"/>
                     </LinearLayout>
+
+                    <!-- 我的出差-->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -239,6 +267,8 @@
                             android:text="@string/travel"
                             android:id="@+id/main_fragment_travel"/>
                     </LinearLayout>
+
+                    <!-- 我的备忘录-->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -262,12 +292,16 @@
 
             </LinearLayout>
 
+            <!-- 公共查询-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_margin="16dp">
+                android:padding="16dp"
+                android:layout_marginTop="2dp"
+                android:background="@color/white">
 
+                <!-- 公共查询TextView-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

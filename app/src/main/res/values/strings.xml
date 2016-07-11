@@ -32,4 +32,16 @@
     <string name="memo_content_textview">备忘录内容</string>
     <string name="new_memo">新增备忘录</string>
     <string name="delete_memo">删除备忘录</string>
+
+    <!-- 我的信息-->
+    <string name="name">姓名</string>
+    <string name="sex">性别</string>
+    <string name="phone">手机</string>
+    <string name="qq">qq</string>
+    <string name="wechat">微信</string>
+    <string name="location">地址</string>
+
+    <!-- 我的考勤-->
+    <string name="dutytime">上班时间：</string>
+    <string name="offdutytime">下班时间：</string>
 </resources>
