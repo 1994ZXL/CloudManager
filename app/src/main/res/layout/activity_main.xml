@@ -5,4 +5,83 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+    <LinearLayout
+        android:id="@+id/bottom_menu_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/bottom_menu_home_bar"
+            android:background="@drawable/tab_menu_bg"
+            android:drawablePadding="3dp"
+            android:drawableTop="@drawable/tab_menu_home"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/bottom_menu_home_bar"
+            android:textColor="@drawable/tab_menu_text" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/bottom_menu_addresslist_bar"
+            android:background="@drawable/tab_menu_bg"
+            android:drawablePadding="3dp"
+            android:drawableTop="@drawable/tab_menu_home"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/bottom_menu_addresslist_bar"
+            android:textColor="@drawable/tab_menu_text" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/bottom_menu_customer_bar"
+            android:background="@drawable/tab_menu_bg"
+            android:drawablePadding="3dp"
+            android:drawableTop="@drawable/tab_menu_home"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/bottom_menu_custom_bar"
+            android:textColor="@drawable/tab_menu_text" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:id="@+id/bottom_menu_about_bar"
+            android:background="@drawable/tab_menu_bg"
+            android:drawablePadding="3dp"
+            android:drawableTop="@drawable/tab_menu_home"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/bottom_menu_about_bar"
+            android:textColor="@drawable/tab_menu_text" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/div_tab_bar"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="@color/gray"
+        android:layout_above="@id/bottom_menu_bar"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/bottom_menu_bar"
+        android:layout_above="@id/div_tab_bar"
+        android:id="@+id/bottom_menu_content"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
 </RelativeLayout>
