@@ -1,7 +1,9 @@
 package com.example.zxl.cloudmanager;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +21,9 @@ public class MainFragment extends Fragment {
         getActivity().getActionBar().setTitle("企业云");
 
         init(v);
-        onClickListener(myMemoImage, new MemoFragment());
-        onClickListener(myMesssageImage, new MyMessageFragment());
-        onClickListener(myCheckImage, new MyCheckFragment());
+        onClickListener(myMemoImage, new MemoActivity());
+        onClickListener(myMesssageImage, new MyMessageAcivity());
+        onClickListener(myCheckImage, new MyCheckActivity());
         return v;
     }
 
@@ -31,14 +33,13 @@ public class MainFragment extends Fragment {
         myCheckImage = (ImageView)v.findViewById(R.id.main_fragment_my_check_image);
     }
 
-    private void onClickListener(ImageView imageView, final Fragment fragment) {
+    private void onClickListener(ImageView imageView,final Activity activity) {
+
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragmentContiner, fragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
+                Intent intent = new Intent(getActivity(), activity.getClass());
+                startActivity(intent);
             }
         });
     }
