@@ -48,7 +48,16 @@ public class MemoFragment extends Fragment {
         myAdapter = new MyAdapter(this.getActivity(), memos);
         mRecyclerView.setAdapter(myAdapter);
         mCardView = (CardView)v.findViewById(R.id.fragment_my_memo);
-
+        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+            @Override
+            public void onItemClick(View view, Object data) {
+                Fragment fragment = new MemoDetailFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.addToBackStack(null);
+                transaction.replace(R.id.fragmentContiner, fragment);
+                transaction.commit();
+            }
+        });
         return v;
     }
 
@@ -85,7 +94,14 @@ public class MemoFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+    public interface OnRecyclerViewItemClickListener {
+        void onItemClick(View view, Object data);
+    }
+
+    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+
+
+    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
         private List<Memo> memos;
         private Context mContext;
 
@@ -97,7 +113,9 @@ public class MemoFragment extends Fragment {
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
             View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.memo_card_item, viewGroup,false);
-            return new ViewHolder(v);
+            ViewHolder viewHolder = new ViewHolder(v);
+            v.setOnClickListener(this);
+            return viewHolder;
         }
 
         @Override
@@ -105,11 +123,19 @@ public class MemoFragment extends Fragment {
             Memo m = memos.get(i);
             viewHolder.mTitle.setText(m.getmMemoTitle());
             viewHolder.mContent.setText(m.getmContent());
+            viewHolder.itemView.setTag(memos.get(i));
         }
 
         @Override
         public int getItemCount() {
             return memos == null ? 0 : memos.size();
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onItemClick(v, v.getTag());
+            }
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder{
@@ -120,6 +146,10 @@ public class MemoFragment extends Fragment {
                 mTitle = (TextView)v.findViewById(R.id.memo_title_textview);
                 mContent = (TextView)v.findViewById(R.id.memo_content_textview);
             }
+        }
+
+        public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
+            mOnItemClickListener = listener;
         }
     }
 }

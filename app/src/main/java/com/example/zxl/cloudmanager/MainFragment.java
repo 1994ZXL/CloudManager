@@ -11,6 +11,7 @@ import android.widget.ImageView;
 public class MainFragment extends Fragment {
     private ImageView myMemoImage;
     private ImageView myMesssageImage;
+    private ImageView myCheckImage;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
@@ -20,12 +21,14 @@ public class MainFragment extends Fragment {
         init(v);
         onClickListener(myMemoImage, new MemoFragment());
         onClickListener(myMesssageImage, new MyMessageFragment());
+        onClickListener(myCheckImage, new MyCheckFragment());
         return v;
     }
 
     private void init(View v) {
         myMemoImage = (ImageView)v.findViewById(R.id.main_fragment_my_memo_image);
         myMesssageImage = (ImageView)v.findViewById(R.id.main_fragment_my_message_image);
+        myCheckImage = (ImageView)v.findViewById(R.id.main_fragment_my_check_image);
     }
 
     private void onClickListener(ImageView imageView, final Fragment fragment) {
