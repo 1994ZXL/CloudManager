@@ -14,14 +14,14 @@ public abstract class SingleFragmentActivity extends Activity {
     @Override
     public void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.blank_activity);
 
         Fragment fragment;
         FragmentManager fm = getFragmentManager();
-        fragment = fm.findFragmentById(R.id.fragmentContiner);
+        fragment = fm.findFragmentById(R.id.blankActivity);
         if(null == fragment){
             fragment = createFragment();
-            fm.beginTransaction().add(R.id.fragmentContiner, fragment).commit();
+            fm.beginTransaction().add(R.id.blankActivity, fragment).commit();
         } else {
             //什么都不做
         }
