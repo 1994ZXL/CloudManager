@@ -1,4 +1,4 @@
-package com.example.zxl.cloudmanager.fragment;
+package com.example.zxl.cloudmanager.model;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;

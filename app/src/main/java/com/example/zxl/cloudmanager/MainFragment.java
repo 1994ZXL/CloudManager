@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.zxl.cloudmanager.Memo.MemoFragment;
+
 public class MainFragment extends Fragment {
     private ImageView myMemoImage;
     private ImageView myMesssageImage;

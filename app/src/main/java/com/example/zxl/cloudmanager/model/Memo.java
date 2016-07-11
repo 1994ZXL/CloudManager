@@ -10,7 +10,11 @@ public class Memo {
     private Date mDate;
     private String mContent;
 
+    public Memo(){
+        this.mDate = new Date();
+    }
     public Memo(String mMemoTitle, String mContent) {
+        this.mDate = new Date();
         this.mMemoTitle = mMemoTitle;
         this.mContent = mContent;
     }

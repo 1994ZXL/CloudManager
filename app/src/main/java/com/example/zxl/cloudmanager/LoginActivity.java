@@ -40,6 +40,4 @@ public class LoginActivity extends Activity {
         linearLayout2 = (LinearLayout)findViewById(R.id.bottom_menu_content);
         linearLayout2.setVisibility(View.INVISIBLE);
     }
-
-
 }

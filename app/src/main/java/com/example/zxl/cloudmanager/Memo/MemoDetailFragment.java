@@ -1,10 +1,8 @@
-package com.example.zxl.cloudmanager.fragment;
+package com.example.zxl.cloudmanager.Memo;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
@@ -15,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.DatePickerFragment;
 import com.example.zxl.cloudmanager.model.Memo;
 
 import java.util.Date;
@@ -24,7 +23,7 @@ public class MemoDetailFragment extends Fragment {
 
     private static final int REQUEST_DATE = 0;
 
-    private Memo memo;
+    private Memo memo = new Memo();
     private EditText mDetailTitleET;
     private Button mDetailDateBtn;
     private EditText mDetailContentET;
@@ -55,6 +54,7 @@ public class MemoDetailFragment extends Fragment {
             }
         });
 
+        mDetailDateBtn.setText(memo.getmDate().toString());
         mDetailContentET = (EditText)v.findViewById(R.id.memo_detail_content_edittext);
         return  v;
     }
@@ -67,6 +67,7 @@ public class MemoDetailFragment extends Fragment {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             memo.setmDate(date);
             updateDate();
+            mDetailDateBtn.setText(memo.getmDate().toString());
         }
     }
 

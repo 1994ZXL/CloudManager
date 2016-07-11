@@ -1,4 +1,4 @@
-package com.example.zxl.cloudmanager;
+package com.example.zxl.cloudmanager.Memo;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -16,7 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.zxl.cloudmanager.fragment.MemoDetailFragment;
+import com.example.zxl.cloudmanager.Memo.MemoDetailFragment;
+import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.Memo;
 
 import java.util.ArrayList;
