@@ -19,12 +19,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        linearLayout = (LinearLayout)findViewById(R.id.bottom_menu_bar);
-        linearLayout.setVisibility(View.INVISIBLE);
-        v = (View)findViewById(R.id.div_tab_bar);
-        v.setVisibility(View.INVISIBLE);
-        linearLayout2 = (LinearLayout)findViewById(R.id.bottom_menu_content);
-        linearLayout2.setVisibility(View.INVISIBLE);
+        hideBottomBar();
 
         Fragment fragment = null;
         FragmentManager fragmentManager = getFragmentManager();
@@ -35,6 +30,15 @@ public class LoginActivity extends Activity {
             fragmentManager.beginTransaction().replace(R.id.fragmentContiner, fragment).commit();
         }
 
+    }
+
+    private void hideBottomBar(){
+        linearLayout = (LinearLayout)findViewById(R.id.bottom_menu_bar);
+        linearLayout.setVisibility(View.INVISIBLE);
+        v = (View)findViewById(R.id.div_tab_bar);
+        v.setVisibility(View.INVISIBLE);
+        linearLayout2 = (LinearLayout)findViewById(R.id.bottom_menu_content);
+        linearLayout2.setVisibility(View.INVISIBLE);
     }
 
 
