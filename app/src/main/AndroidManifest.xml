@@ -20,6 +20,9 @@
         <activity android:name=".MemoActivity" />
         <activity android:name=".MyCheckActivity" />
         <activity android:name=".MyMessageAcivity" />
+        <activity android:name=".MyLeaveActivity" />
+        <activity android:name=".MyMissionActivity"/>
+        <activity android:name=".MyPostActivity" />
 
     </application>
 

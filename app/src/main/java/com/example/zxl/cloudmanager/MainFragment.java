@@ -16,6 +16,9 @@ public class MainFragment extends Fragment {
     private ImageView myMemoImage;
     private ImageView myMesssageImage;
     private ImageView myCheckImage;
+    private ImageView myLeaveImage;
+    private ImageView myMissionImage;
+    private ImageView myPostImage;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
@@ -26,6 +29,9 @@ public class MainFragment extends Fragment {
         onClickListener(myMemoImage, new MemoActivity());
         onClickListener(myMesssageImage, new MyMessageAcivity());
         onClickListener(myCheckImage, new MyCheckActivity());
+        onClickListener(myLeaveImage, new MyLeaveActivity());
+        onClickListener(myMissionImage, new MyMissionActivity());
+        onClickListener(myPostImage, new MyPostActivity());
         return v;
     }
 
@@ -33,6 +39,9 @@ public class MainFragment extends Fragment {
         myMemoImage = (ImageView)v.findViewById(R.id.main_fragment_my_memo_image);
         myMesssageImage = (ImageView)v.findViewById(R.id.main_fragment_my_message_image);
         myCheckImage = (ImageView)v.findViewById(R.id.main_fragment_my_check_image);
+        myLeaveImage = (ImageView)v.findViewById(R.id.main_fragment_my_leave_image);
+        myMissionImage = (ImageView)v.findViewById(R.id.main_fragment_my_mission_image);
+        myPostImage = (ImageView)v.findViewById(R.id.main_fragment_my_post_image);
     }
 
     private void onClickListener(ImageView imageView,final Activity activity) {

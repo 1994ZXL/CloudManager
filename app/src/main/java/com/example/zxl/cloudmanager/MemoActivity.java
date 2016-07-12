@@ -2,6 +2,8 @@ package com.example.zxl.cloudmanager;
 
 import android.app.Fragment;
 
+import com.example.zxl.cloudmanager.Memo.MemoFragment;
+
 /**
  * Created by ZXL on 2016/7/11.
  */

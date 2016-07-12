@@ -23,21 +23,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/mission_card_item_missionName"
                 android:textSize="30dp"
-                android:id="@+id/check_card_item_time" />
+                android:text="任务名称"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="30dp"
-                android:layout_marginLeft="50dp"
-                android:id="@+id/check_card_item_location" />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/check_card_item_map"/>
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:id="@+id/mission_card_item_state"
+                android:text="进行中"/>
         </LinearLayout>
 
-        <!-- 上班时间-->
+        <!-- 任务优先级-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,14 +45,27 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/dutytime"/>
+                android:text="任务优先级"/>
+        </LinearLayout>
+
+        <!-- 开始时间-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="12dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/check_card_item_dutytime"/>
+                android:layout_weight="1"
+                android:text="@string/mission_begin_time"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/missoin_card_item_mission_begin_time"/>
         </LinearLayout>
-
-        <!-- 下班时间-->
+        <!-- 完成时间-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -63,11 +75,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/offdutytime"/>
+                android:layout_weight="1"
+                android:text="@string/mission_end_time"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/check_card_item_offdutytime"/>
+                android:layout_weight="1"
+                android:id="@+id/mission_card_item_mission_end_time"/>
         </LinearLayout>
 
     </LinearLayout>

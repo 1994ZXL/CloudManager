@@ -13,7 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.zxl.cloudmanager.model.Check;
+
+import com.example.zxl.cloudmanager.model.Leave;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -21,24 +22,17 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by ZXL on 2016/7/11.
+ * Created by ZXL on 2016/7/12.
  */
-public class MyCheckFragment extends Fragment {
+public class MyLeaveQueryFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
-    private List<Check> checks = new ArrayList<Check>();
+    private List<Leave> leaves = new ArrayList<Leave>();
     private MyAdapter myAdapter;
 
 
-    private String getTime1() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String date = formatter.format(curDate);
-        return date;
-    }
-
-    private String getTime2() {
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
+    private String getTime() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日");
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
         String date = formatter.format(curDate);
         return date;
@@ -46,26 +40,26 @@ public class MyCheckFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        View v = layoutInflater.inflate(R.layout.main_fragment_my_check, parent, false);
+        View v = layoutInflater.inflate(R.layout.main_fragment_my_leave_query, parent, false);
 
         getActivity().getActionBar().setTitle("我的考勤");
 
-        checks.add(new Check(getTime1(), "公司", getTime2(), getTime2()));
+        leaves.add(new Leave(getTime()));
 
-        mRecyclerView = (RecyclerView)v.findViewById(R.id.check_recyclerview);
+        mRecyclerView = (RecyclerView)v.findViewById(R.id.leave_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setHasFixedSize(true);
-        myAdapter = new MyAdapter(this.getActivity(), checks);
+        myAdapter = new MyAdapter(this.getActivity(), leaves);
         mRecyclerView.setAdapter(myAdapter);
-        mCardView = (CardView)v.findViewById(R.id.fragment_my_check);
+        mCardView = (CardView)v.findViewById(R.id.fragment_my_leave);
         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, Object data) {
                 Fragment fragment = new MyCheckDetailFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.addToBackStack(null);
-                transaction.replace(R.id.blankActivity, fragment);
+                transaction.replace(R.id.fragmentContiner, fragment);
                 transaction.commit();
             }
         });
@@ -80,17 +74,17 @@ public class MyCheckFragment extends Fragment {
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
-        private List<Check> checks;
+        private List<Leave> leaves;
         private Context mContext;
 
-        public MyAdapter (Context context, List<Check> checks) {
-            this.checks = checks;
+        public MyAdapter (Context context, List<Leave> leaves) {
+            this.leaves = leaves;
             this.mContext = context;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.check_card_item, viewGroup,false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.leave_card_item, viewGroup,false);
             ViewHolder viewHolder = new ViewHolder(v);
             v.setOnClickListener(this);
             return viewHolder;
@@ -98,17 +92,14 @@ public class MyCheckFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            Check check = checks.get(i);
-            viewHolder.mDate.setText(check.getDate());
-            viewHolder.mCheckLocation.setText(check.getCheckLocation());
-            viewHolder.mDutyTime.setText(check.getDutyTime());
-            viewHolder.mOffDutyTime.setText(check.getOffDutyTime());
-            viewHolder.itemView.setTag(checks.get(i));
+            Leave leave = leaves.get(i);
+            viewHolder.mLeaveTime.setText(leave.getTime());
+            viewHolder.itemView.setTag(leaves.get(i));
         }
 
         @Override
         public int getItemCount() {
-            return checks == null ? 0 : checks.size();
+            return leaves == null ? 0 : leaves.size();
         }
 
         @Override
@@ -119,16 +110,11 @@ public class MyCheckFragment extends Fragment {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder{
-            public TextView mDate;
-            public TextView mCheckLocation;
-            public TextView mDutyTime;
-            public TextView mOffDutyTime;
+            public TextView mLeaveTime;
+
             public ViewHolder(View v) {
                 super(v);
-                mDate = (TextView)v.findViewById(R.id.check_card_item_time);
-                mCheckLocation = (TextView)v.findViewById(R.id.check_card_item_location);
-                mDutyTime = (TextView)v.findViewById(R.id.check_card_item_dutytime);
-                mOffDutyTime = (TextView)v.findViewById(R.id.check_card_item_offdutytime);
+                mLeaveTime = (TextView)v.findViewById(R.id.leave_card_item_leave_time);
             }
         }
 
@@ -136,4 +122,5 @@ public class MyCheckFragment extends Fragment {
             mOnItemClickListener = listener;
         }
     }
+
 }

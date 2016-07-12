@@ -63,4 +63,19 @@
     <string name="work_travel">出差</string>
     <string name="late">迟到</string>
 
+    <!-- 我的请假-->
+    <string name="leave_record_query">请假记录查询</string>
+    <string name="apply_leave">申请请假</string>
+    <string name="leave_time">请假时间：</string>
+    <string name="leave_type">请假类型</string>
+    <string name="leave_begin_time">请假开始时间</string>
+    <string name="leave_end_time">请假结束时间</string>
+    <string name="leave_reason">请假原因</string>
+    <string name="commit_apply">提交申请</string>
+    <string name="time_erro">请重新选择结束时间</string>
+
+    <!-- 我的任务-->
+    <string name="mission_begin_time">任务开始时间</string>
+    <string name="mission_end_time">任务结束时间</string>
+
 </resources>
