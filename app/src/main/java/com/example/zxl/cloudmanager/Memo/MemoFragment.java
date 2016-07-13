@@ -35,6 +35,8 @@ public class MemoFragment extends Fragment {
     private String[] titles = {"第一条", "第二条", "第三条", "第四条", "第五条"};
     private String[] content = {"p1", "p2", "p3", "p4", "p5"};
 
+    private Fragment mFragment;
+
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.main_fragment_my_memo, parent, false);
@@ -54,9 +56,16 @@ public class MemoFragment extends Fragment {
             public void onItemClick(View view, Object data) {
                 Fragment fragment = new MemoDetailFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.addToBackStack(null);
-                transaction.replace(R.id.fragmentContiner, fragment);
-                transaction.commit();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
             }
         });
         return v;
@@ -66,6 +75,7 @@ public class MemoFragment extends Fragment {
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
+        mFragment = this;
     }
 
     @Override

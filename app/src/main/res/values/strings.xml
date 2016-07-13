@@ -78,4 +78,21 @@
     <string name="mission_begin_time">任务开始时间</string>
     <string name="mission_end_time">任务结束时间</string>
 
+    <!-- 我的用例-->
+    <string name="usecase_number">用例编号：</string>
+    <string name="version_number">程序版本：</string>
+    <string name="text_man">测试人员：</string>
+    <string name="exploit_man">开发人员：</string>
+    <string name="autorized_time">编制时间：</string>
+    
+    <!-- 我的bug-->
+    <string name="functionModule">功能模块</string>
+    <string name="bug_version">bug等级：</string>
+    <string name="bug_state">bug等级：</string>
+    <string name="found_time">发现时间：</string>
+
+    <!-- 加班-->
+    <string name="overtime_time">加班时间：</string>
+    <string name="overtime_project">项目：</string>
+
 </resources>

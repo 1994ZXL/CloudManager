@@ -23,6 +23,10 @@
         <activity android:name=".MyLeaveActivity" />
         <activity android:name=".MyMissionActivity"/>
         <activity android:name=".MyPostActivity" />
+        <activity android:name=".MyUseCaseActivity" />
+        <activity android:name=".MyBugActivity" />
+        <activity android:name=".MyOverTimeActivity" />
+        <activity android:name=".MyTravelActivity" />
 
     </application>
 

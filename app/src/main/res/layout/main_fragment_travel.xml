@@ -1,10 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/fragment_travel"
-    android:orientation="vertical"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/darker_gray">
+    android:orientation="vertical"
+    android:id="@+id/post">
 
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/fragment_travel"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_fragment_travel_name"
+            android:textSize="20dp"
+            android:layout_gravity="top|left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_fragment_travel_time"
+            android:textSize="20dp"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/main_fragment_travel_state"
+            android:textSize="20dp"
+            android:layout_gravity="top|right" />
+
+    </FrameLayout>
+
+</FrameLayout>
+

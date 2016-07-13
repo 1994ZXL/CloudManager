@@ -8,6 +8,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,16 @@ public class MyCheckFragment extends Fragment {
     private List<Check> checks = new ArrayList<Check>();
     private MyAdapter myAdapter;
 
+    private static final String TAG = "MyCheckFragment";
+
+    private Fragment mFragment;
+
+    @Override
+    public void onCreate(Bundle saveInstanceState) {
+        super.onCreate(saveInstanceState);
+        this.setHasOptionsMenu(true);
+        mFragment = this;
+    }
 
     private String getTime1() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
@@ -48,6 +59,8 @@ public class MyCheckFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.main_fragment_my_check, parent, false);
 
+        Log.d(TAG, "调用了一次");
+
         getActivity().getActionBar().setTitle("我的考勤");
 
         checks.add(new Check(getTime1(), "公司", getTime2(), getTime2()));
@@ -64,9 +77,16 @@ public class MyCheckFragment extends Fragment {
             public void onItemClick(View view, Object data) {
                 Fragment fragment = new MyCheckDetailFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.addToBackStack(null);
-                transaction.replace(R.id.blankActivity, fragment);
-                transaction.commit();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
             }
         });
 

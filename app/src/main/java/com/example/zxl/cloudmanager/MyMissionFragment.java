@@ -30,6 +30,15 @@ public class MyMissionFragment extends Fragment {
     private List<Mission> missions = new ArrayList<Mission>();
     private MyAdapter myAdapter;
 
+    private Fragment mFragment;
+
+    @Override
+    public void onCreate(Bundle saveInstanceState) {
+        super.onCreate(saveInstanceState);
+        this.setHasOptionsMenu(true);
+        mFragment = this;
+    }
+
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View view = layoutInflater.inflate(R.layout.main_fragment_my_mission, parent, false);
@@ -50,9 +59,16 @@ public class MyMissionFragment extends Fragment {
             public void onItemClick(View view, Object data) {
                 Fragment fragment = new MyCheckDetailFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.addToBackStack(null);
-                transaction.replace(R.id.blankActivity, fragment);
-                transaction.commit();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
             }
         });
 

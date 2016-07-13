@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,10 @@ public class MainFragment extends Fragment {
     private ImageView myLeaveImage;
     private ImageView myMissionImage;
     private ImageView myPostImage;
+    private ImageView mUseCaseImage;
+    private ImageView mBugImage;
+    private ImageView mOvertimeImage;
+    private ImageView mTravelImage;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
@@ -32,6 +37,10 @@ public class MainFragment extends Fragment {
         onClickListener(myLeaveImage, new MyLeaveActivity());
         onClickListener(myMissionImage, new MyMissionActivity());
         onClickListener(myPostImage, new MyPostActivity());
+        onClickListener(mUseCaseImage, new MyUseCaseActivity());
+        onClickListener(mBugImage, new MyBugActivity());
+        onClickListener(mOvertimeImage, new MyOverTimeActivity());
+        onClickListener(mTravelImage, new MyTravelActivity());
         return v;
     }
 
@@ -42,6 +51,10 @@ public class MainFragment extends Fragment {
         myLeaveImage = (ImageView)v.findViewById(R.id.main_fragment_my_leave_image);
         myMissionImage = (ImageView)v.findViewById(R.id.main_fragment_my_mission_image);
         myPostImage = (ImageView)v.findViewById(R.id.main_fragment_my_post_image);
+        mUseCaseImage = (ImageView)v.findViewById(R.id.main_fragment_my_usecase_image);
+        mBugImage = (ImageView)v.findViewById(R.id.main_fragment_my_bug_image);
+        mOvertimeImage = (ImageView)v.findViewById(R.id.main_fragment_overtime_image);
+        mTravelImage = (ImageView)v.findViewById(R.id.main_fragment_travel_image);
     }
 
     private void onClickListener(ImageView imageView,final Activity activity) {

@@ -17,6 +17,16 @@ public class MyMessageFragment extends Fragment {
     private static final String[] list={"男", "女"};
     private ArrayAdapter<String> adapter;
 
+    private Fragment mFragment;
+
+    @Override
+    public void onCreate(Bundle saveInstanceState) {
+        super.onCreate(saveInstanceState);
+        this.setHasOptionsMenu(true);
+        mFragment = this;
+    }
+
+
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.main_fragment_my_message, parent, false);

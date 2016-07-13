@@ -16,26 +16,18 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/main_fragment_my_post_time"
+            android:id="@+id/usecase_details_key"
             android:textSize="20dp"
             android:layout_gravity="top|left" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/main_fragment_my_post_name"
+            android:id="@+id/usecase_details_value"
             android:textSize="20dp"
             android:layout_gravity="top|right" />
 
     </FrameLayout>
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:alpha="0.8"
-        android:src="@drawable/demo"
-        android:layout_gravity="bottom|right" />
 
 </FrameLayout>
 
