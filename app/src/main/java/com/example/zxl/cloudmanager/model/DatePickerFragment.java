@@ -19,19 +19,24 @@ import java.util.Date;
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener{
     private Date mDate;
     public static final String EXTRA_DATE = "crimeDate";
+    public static final String EXTRA_CODE = "requestCode";
+
+    private int sRequsetCode = 0;
     /* fragment之间传递数据用bundle
     * activity之间传递数据用intent
     */
      public DatePickerFragment(){
-
      }
-    public static DatePickerFragment newInstance(Date date){
+
+    public static DatePickerFragment newInstance(Date date, int requestCode){
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_DATE,date);
+        args.putSerializable(EXTRA_CODE,requestCode);
         DatePickerFragment fragment = new DatePickerFragment();
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         mDate = (Date)getArguments().getSerializable(EXTRA_DATE);
@@ -56,14 +61,16 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR,year);
         cal.set(Calendar.MONTH,monthOfYear);
-        cal.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+        cal.set(Calendar.DAY_OF_MONTH, dayOfMonth);
 
         if(getTargetFragment() == null){
             return;
         }
         Intent intent = new Intent();
-        intent.putExtra(EXTRA_DATE,cal.getTime());
+        intent.putExtra(EXTRA_DATE, cal.getTime());
 
-        getTargetFragment().onActivityResult(11, Activity.RESULT_OK,intent);
+        int requestCode = (Integer)getArguments().getSerializable(EXTRA_CODE);
+
+        getTargetFragment().onActivityResult(requestCode, Activity.RESULT_OK,intent);
     }
 }

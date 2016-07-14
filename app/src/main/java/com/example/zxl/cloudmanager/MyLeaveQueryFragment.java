@@ -52,7 +52,7 @@ public class MyLeaveQueryFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.main_fragment_my_leave_query, parent, false);
 
-        getActivity().getActionBar().setTitle("我的考勤");
+        getActivity().getActionBar().setTitle("我的请假");
 
         leaves.add(new Leave(getTime()));
 

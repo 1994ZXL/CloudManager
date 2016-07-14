@@ -34,6 +34,8 @@ public class MyLeaveApplyFragment extends Fragment {
     private Button mBeginTime;
     private Button mEndTime;
 
+    private static final String TAG = "MyLeaveApplyFragment";
+
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
@@ -49,7 +51,7 @@ public class MyLeaveApplyFragment extends Fragment {
         mBeginTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date());
+                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
                 fragment.setTargetFragment(MyLeaveApplyFragment.this, 12);
                 fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
                 fragment.show(getFragmentManager(), "MyLeaveApplyFragment");
@@ -60,13 +62,12 @@ public class MyLeaveApplyFragment extends Fragment {
         mEndTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date());
+                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
                 fragment.setTargetFragment(MyLeaveApplyFragment.this, 13);
                 fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
                 fragment.show(getFragmentManager(), "MyLeaveApplyFragment");
             }
         });
-
 
         return view;
     }
@@ -79,14 +80,16 @@ public class MyLeaveApplyFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != Activity.RESULT_OK)
+        Log.d(TAG, "进入回调，未进入判断 " + " resultCode:" + requestCode);
+        if (resultCode != Activity.RESULT_OK){
+            Log.d(TAG, "进入回调");
             return;
-        if (requestCode == 12) {
+        }else if (requestCode == 12) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             leave.setBeginTime(date);
+            Log.d(TAG, leave.getBeginTime().toString());
             updateBeginDate();
-        }
-        if (requestCode == 13) {
+        }else if (requestCode == 13) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             leave.setEndTime(date);
             updateEndDate();

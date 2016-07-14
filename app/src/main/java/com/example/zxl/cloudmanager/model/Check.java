@@ -9,6 +9,12 @@ public class Check {
     private String dutyTime;
     private String offDutyTime;
 
+    private String name;
+    private String checkManager;
+    private String stipulationOnDutyTime;
+    private String stipulationOffDutyTime;
+    private String state;
+
     public Check(String date, String checkLocation, String dutyTime, String offDutyTime) {
         this.date = date;
         this.checkLocation = checkLocation;

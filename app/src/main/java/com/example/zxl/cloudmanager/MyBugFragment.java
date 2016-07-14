@@ -43,7 +43,7 @@ public class MyBugFragment extends Fragment {
         View v = layoutInflater.inflate(R.layout.main_fragment_my_bug, parent, false);
 
 
-        getActivity().getActionBar().setTitle("我的用例");
+        getActivity().getActionBar().setTitle("我的bug");
 
         bugs.add(new Bug());
 
