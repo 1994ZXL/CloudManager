@@ -12,8 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.zxl.cloudmanager.check.SearchCheckFragment;
 import com.example.zxl.cloudmanager.model.Check;
 
 import java.text.SimpleDateFormat;
@@ -29,6 +31,8 @@ public class MyCheckFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private List<Check> checks = new ArrayList<Check>();
     private MyAdapter myAdapter;
+
+    private Button mBtn;
 
     private static final String TAG = "MyCheckFragment";
 
@@ -62,6 +66,25 @@ public class MyCheckFragment extends Fragment {
         Log.d(TAG, "调用了一次");
 
         getActivity().getActionBar().setTitle("我的考勤");
+
+        mBtn =(Button)v.findViewById(R.id.search_button) ;
+        mBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new SearchCheckFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
+            }
+        });
 
         checks.add(new Check(getTime1(), "公司", getTime2(), getTime2()));
 

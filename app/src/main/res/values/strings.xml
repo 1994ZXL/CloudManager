@@ -60,6 +60,10 @@
     <string name="new_memo">新增备忘录</string>
     <string name="delete_memo">删除备忘录</string>
 
+    <!--考勤查询-->
+    <string name="check_begin_time">考勤时间</string>
+    <string name="check_end_time">考勤结束时间</string>
+
     <!-- 我的信息-->
     <string name="name">姓名</string>
     <string name="sex">性别</string>
@@ -85,6 +89,7 @@
     <string name="work_overtime">加班</string>
     <string name="work_travel">出差</string>
     <string name="late">迟到</string>
+    <string name="leave_early">早退</string>
 
     <!-- 我的请假-->
     <string name="leave_record_query">请假查询</string>
