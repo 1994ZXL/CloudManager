@@ -114,8 +114,49 @@
     <string name="bug_state">bug等级：</string>
     <string name="found_time">发现时间：</string>
 
+
+    <string name="check_button">查询</string>
+
     <!-- 加班-->
     <string name="overtime_time">加班时间：</string>
     <string name="overtime_project">项目：</string>
+
+    <!--公共查询-->
+    <string name="project_name_edittext">项目名称</string>
+    <string name="project_manager_edittext">项目主管</string>
+    <string name="project_begin_time_textview">开始时间</string>
+    <string name="project_end_time_textview">结束时间</string>
+    <string name="project_create_time">项目时间</string>
+    <string name="plan_create_time">创建时间</string>
+    <string name="plan_manager_name_edittext">安排人员</string>
+    <string name="project_mission_priority">优先级</string>
+    <string name="project_mission_state">项目状态</string>
+    <string name="project_mission_time">任务时间</string>
+
+    <string name="project_customer_name">甲方负责人</string>
+
+    <string name="usecase_id">用例编号</string>
+    <string name="usecase_program_number">程序版本</string>
+    <string name="usecase_tester">测试人员</string>
+    <string name="usecase_developer">开发人员</string>
+    <string name="usecase_formation_time">编制时间</string>
+
+    <string name="bug_find_time">发现时间</string>
+    <string name="bug_finder">发现人</string>
+    <string name="bug_reviser">修改人</string>
+    <string name="my_bug_state">bug状态</string>
+    <string name="bug_level">bug等级</string>
+
+    <!--员工查询-->
+    <string name="my_leave_time">请假时间</string>
+    <string name="my_leave_kind">请假类型</string>
+    <string name="my_leave_sate">假条状态</string>
+
+    <string name="my_mission_name">任务名称</string>
+    <string name="my_mission_time">安排时间</string>
+    <string name="my_mission_state">任务状态</string>
+
+    <string name="my_overtime_time">加班时间</string>
+    <string name="my_join_project">项目</string>
 
 </resources>

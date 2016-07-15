@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".publicSearch.memberList.MemberListFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                style="@style/linearLayoutStyle"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/project_name_edittext"
+                        android:layout_weight="1"
+                        android:textSize="20dp"/>
+
+                    <EditText
+                        android:id="@+id/member_project_name_edittext"
+                        style="@style/editTextZ"
+                        android:layout_weight="6"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/member_search_button"
+                style="@style/SearchButton"
+                android:text="@string/check_button" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

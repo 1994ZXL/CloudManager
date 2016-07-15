@@ -28,6 +28,16 @@
         <activity android:name=".MyOverTimeActivity" />
         <activity android:name=".MyTravelActivity" />
 
+        <!--公共查询-->
+        <activity android:name=".publicSearch.list.ProjectListSearchActivity" />
+        <activity android:name=".publicSearch.bug.ProjectBugSearchActivity" />
+        <activity android:name=".publicSearch.memberList.MemberListActivity" />
+        <activity android:name=".publicSearch.project.PublicSearchActivity" />
+        <activity android:name=".publicSearch.usecase.UsecaseSearchActivity" />
+        <activity android:name=".publicSearch.plan.MissionSearchActivity" />
+
+
+
     </application>
 
 </manifest>

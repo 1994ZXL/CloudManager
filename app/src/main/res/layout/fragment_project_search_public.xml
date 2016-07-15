@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                style="@style/linearLayoutStyle"
+                android:padding="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:id="@+id/project_name_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/project_name_edittext"
+                        android:layout_weight="1"
+                        android:textSize="20dp"/>
+
+                    <EditText
+                        android:id="@+id/project_name_edittext"
+                        style="@style/editTextZ"
+                        android:layout_weight="7"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    >
+
+                    <TextView
+                        android:id="@+id/project_end_time_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/project_create_time"
+                        android:layout_weight="1"
+                        android:textSize="20dp"/>
+
+                    <Button
+                        android:id="@+id/project_begin_time_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="20dp"
+                        android:text="@string/project_begin_time_textview"
+                        android:layout_weight="0.2"/>
+
+                    <Button
+                        android:id="@+id/project_end_time_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="20dp"
+                        android:text="@string/project_end_time_textview"
+                        android:layout_weight="0.2"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:id="@+id/project_manager_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/project_manager_edittext"
+                        android:layout_weight="1"
+                        android:textSize="20dp"/>
+
+                    <EditText
+                        android:id="@+id/project_manager_edittext"
+                        style="@style/editTextZ"
+                        android:layout_weight="7"/>
+                </LinearLayout>
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/project_search_button"
+                style="@style/SearchButton"
+                android:layout_marginTop="70dp"
+                android:text="@string/check_button" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

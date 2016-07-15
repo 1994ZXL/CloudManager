@@ -1,0 +1,153 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".publicSearch.usecase.UsecaseFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/linearLayoutStyle"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/project_name_edittext"
+                        android:layout_weight="1"
+                        android:textSize="20dp"/>
+
+                    <EditText
+                        android:id="@+id/usecase_project_edittext"
+                        style="@style/editTextZ"
+                        android:layout_weight="6"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/usecase_id"
+                        android:layout_weight="1"
+                        android:textSize="20dp"/>
+
+                    <EditText
+                        android:id="@+id/usecase_id_edittext"
+                        style="@style/editTextZ"
+                        android:layout_weight="6"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/usecase_program_number"
+                        android:layout_weight="1"
+                        android:textSize="20dp"/>
+
+                    <EditText
+                        android:id="@+id/usecase_program_number"
+                        style="@style/editTextZ"
+                        android:layout_weight="6"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/usecase_tester"
+                        android:layout_weight="1"
+                        android:textSize="20dp"/>
+
+                    <EditText
+                        android:id="@+id/usecase_tester"
+                        style="@style/editTextZ"
+                        android:layout_weight="6"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/usecase_developer"
+                        android:layout_weight="1"
+                        android:textSize="20dp"/>
+
+                    <EditText
+                        android:id="@+id/usecase_developer"
+                        style="@style/editTextZ"
+                        android:layout_weight="6"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/usecase_formation_time"
+                        android:layout_weight="2"
+                        android:textSize="20dp"/>
+
+                    <Button
+                        android:id="@+id/usecase_begin_time_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="20dp"
+                        android:text="@string/project_begin_time_textview"
+                        android:layout_weight="0.4"/>
+                    <Button
+                        android:id="@+id/usecase_end_time_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="20dp"
+                        android:text="@string/project_end_time_textview"
+                        android:layout_weight="0.4"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/usecase_search_button"
+                style="@style/SearchButton"
+                android:text="@string/check_button" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
