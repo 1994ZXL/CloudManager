@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_fragment"
     android:layout_width="match_parent"
-    android:layout_height="500dp"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="80dp"
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:background="@color/gray">

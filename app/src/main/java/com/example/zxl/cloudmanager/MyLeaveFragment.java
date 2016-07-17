@@ -14,10 +14,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+
+import com.example.zxl.cloudmanager.check.SearchCheckFragment;
+import com.example.zxl.cloudmanager.leave.LeaveSearchFragment;
 
 import java.util.ArrayList;
 
@@ -136,6 +140,7 @@ public class MyLeaveFragment extends Fragment implements RadioGroup.OnCheckedCha
         mHorizontalScrollView = (HorizontalScrollView)v.findViewById(R.id.horizontalScrollView);
 
         mViewPager = (ViewPager)v.findViewById(R.id.main_fragment_my_leave_viewPager);
+
     }
 
     private class MyPagerAdapter extends PagerAdapter {

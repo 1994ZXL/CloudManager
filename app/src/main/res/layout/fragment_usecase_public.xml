@@ -34,7 +34,7 @@
                     <EditText
                         android:id="@+id/usecase_project_edittext"
                         style="@style/editTextZ"
-                        android:layout_weight="6"/>
+                        android:layout_weight="7"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -53,7 +53,7 @@
                     <EditText
                         android:id="@+id/usecase_id_edittext"
                         style="@style/editTextZ"
-                        android:layout_weight="6"/>
+                        android:layout_weight="7"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -72,7 +72,7 @@
                     <EditText
                         android:id="@+id/usecase_program_number"
                         style="@style/editTextZ"
-                        android:layout_weight="6"/>
+                        android:layout_weight="7"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -91,7 +91,7 @@
                     <EditText
                         android:id="@+id/usecase_tester"
                         style="@style/editTextZ"
-                        android:layout_weight="6"/>
+                        android:layout_weight="7"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -110,7 +110,7 @@
                     <EditText
                         android:id="@+id/usecase_developer"
                         style="@style/editTextZ"
-                        android:layout_weight="6"/>
+                        android:layout_weight="7"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -132,14 +132,14 @@
                         android:layout_height="wrap_content"
                         android:paddingRight="20dp"
                         android:text="@string/project_begin_time_textview"
-                        android:layout_weight="0.4"/>
+                        android:layout_weight="0.3"/>
                     <Button
                         android:id="@+id/usecase_end_time_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingRight="20dp"
                         android:text="@string/project_end_time_textview"
-                        android:layout_weight="0.4"/>
+                        android:layout_weight="0.3"/>
                 </LinearLayout>
             </LinearLayout>
 

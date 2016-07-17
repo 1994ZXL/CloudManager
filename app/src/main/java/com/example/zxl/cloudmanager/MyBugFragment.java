@@ -11,10 +11,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 
 import com.example.zxl.cloudmanager.model.Bug;
+import com.example.zxl.cloudmanager.publicSearch.bug.BugSearchFragment;
+import com.example.zxl.cloudmanager.publicSearch.usecase.UsecaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,7 @@ public class MyBugFragment extends Fragment {
     private MyAdapter myAdapter;
 
     private Fragment mFragment;
+    private Button mBtn;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -72,6 +76,24 @@ public class MyBugFragment extends Fragment {
             }
         });
 
+        mBtn =(Button) v.findViewById(R.id.my_bug_search_button) ;
+        mBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new BugSearchFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
+            }
+        });
         return v;
     }
 

@@ -11,9 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 
+import com.example.zxl.cloudmanager.leave.LeaveSearchFragment;
 import com.example.zxl.cloudmanager.model.Leave;
 
 import java.text.SimpleDateFormat;
@@ -32,6 +34,7 @@ public class MyLeaveQueryFragment extends Fragment {
 
     private Fragment mFragment;
 
+    private Button mBtn;
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -81,6 +84,24 @@ public class MyLeaveQueryFragment extends Fragment {
             }
         });
 
+        mBtn =(Button) v.findViewById(R.id.my_leave_search_button) ;
+        mBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new LeaveSearchFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
+            }
+        });
         return v;
     }
 

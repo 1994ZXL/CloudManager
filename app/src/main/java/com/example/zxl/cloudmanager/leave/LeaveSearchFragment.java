@@ -21,10 +21,10 @@ public class LeaveSearchFragment extends Fragment {
     private Button mSearchBtn;
 
     private ArrayAdapter<String> stateAdapter;
-    private static final String[] stateList={"已批准", "待批准","未批准"};
+    private static final String[] stateList={"全部","未批准", "待批准","已批准"};
 
     private ArrayAdapter<String> kindAdapter;
-    private static final String[] kindList={"病假", "事假","婚假","丧假","产假","年休假"};
+    private static final String[] kindList={"全部","病假", "事假","婚假","丧假","产假","年休假"};
 
     public LeaveSearchFragment() {
     }
@@ -59,12 +59,12 @@ public class LeaveSearchFragment extends Fragment {
     }
 
     private void init(View v){
-        mLeaveBeginBtn = (Button) v.findViewById(R.id.my_mission_begin_time_button);
-        mLeaveEndBtn = (Button) v.findViewById(R.id.my_mission_end_time_button);
-        mLeaveKindSpinner = (Spinner) v.findViewById(R.id.my_mission_state_sprinner);
-        mLeaveKindSpinner = (Spinner) v.findViewById(R.id.my_mission_state_sprinner);
+        mLeaveBeginBtn = (Button) v.findViewById(R.id.my_leave_begin_time_button);
+        mLeaveEndBtn = (Button) v.findViewById(R.id.my_leave_end_time_button);
+        mLeaveKindSpinner = (Spinner) v.findViewById(R.id.my_leave_kind_sprinner);
+        mLeaveStateSpinner = (Spinner) v.findViewById(R.id.my_leave_state_sprinner);
 
-        mSearchBtn = (Button) v.findViewById(R.id.my_mission_search_button);
+        mSearchBtn = (Button) v.findViewById(R.id.my_leave_search_button);
     }
 
 

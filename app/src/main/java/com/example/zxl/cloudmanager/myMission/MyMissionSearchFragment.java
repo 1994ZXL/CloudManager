@@ -16,7 +16,7 @@ import com.example.zxl.cloudmanager.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyMissionFragment extends Fragment {
+public class MyMissionSearchFragment extends Fragment {
     private EditText mMisiionNameET;
     private Button mMissionBeginBtn;
     private Button mMissionEndBtn;
@@ -26,7 +26,7 @@ public class MyMissionFragment extends Fragment {
 
     private ArrayAdapter<String> adapter;
     private static final String[] list={"全部","待完成", "待审核","已完成","未完成"};
-    public MyMissionFragment() {
+    public MyMissionSearchFragment() {
         // Required empty public constructor
     }
 

@@ -52,7 +52,7 @@
     <string name="project_member_manage">成员管理</string>
     <string name="project_mission_manage">计划管理</string>
     <string name="bug_manage">bug处理</string>
-    
+
     <!--备忘录-->
     <string name="memo_title_textview">标题</string>
     <string name="memo_date_textview">xx年xx月xx日</string>
@@ -112,11 +112,11 @@
     <string name="text_man">测试人员：</string>
     <string name="exploit_man">开发人员：</string>
     <string name="autorized_time">编制时间：</string>
-    
+
     <!-- 我的bug-->
     <string name="functionModule">功能模块</string>
     <string name="bug_version">bug等级：</string>
-    <string name="bug_state">bug等级：</string>
+    <string name="bug_state">bug状态：</string>
     <string name="found_time">发现时间：</string>
 
 
@@ -163,5 +163,13 @@
 
     <string name="my_overtime_time">加班时间</string>
     <string name="my_join_project">项目</string>
+
+    <!--主页地步导航栏底部-->
+    <string name="company_list_bar">公司通讯录</string>
+    <string name="customer_list_bar">客户通讯录</string>
+    <string name="about_app">关于</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -10,6 +10,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.Memo.MemoFragment;
+import com.example.zxl.cloudmanager.tabBar.AboutAppFragment;
+import com.example.zxl.cloudmanager.tabBar.CompanyMemberListFragment;
+import com.example.zxl.cloudmanager.tabBar.CustomerListFragment;
 
 
 public class MainActivity extends Activity implements View.OnClickListener{
@@ -21,9 +24,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private LinearLayout bottomContent;
     private FragmentManager fragmentManager;
     private MainFragment mainFragment;
-    private MemoFragment aLFragment;
-    private MyMessageFragment cFragment;
-    private MainFragment aFragment;
+    private CompanyMemberListFragment companyMemberListFragment;
+    private CustomerListFragment customerListFragment;
+    private AboutAppFragment aboutAppFragment;
+
     private Fragment fragment;
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -68,12 +72,12 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private void hideAllFragment(FragmentTransaction ft){
         if(mainFragment != null)
             ft.hide(mainFragment);
-        if(aLFragment != null)
-            ft.hide(aLFragment);
-        if(cFragment != null)
-            ft.hide(cFragment);
-        if(aFragment != null)
-            ft.hide(aFragment);
+        if(companyMemberListFragment != null)
+            ft.hide(companyMemberListFragment);
+        if(customerListFragment != null)
+            ft.hide(customerListFragment);
+        if(aboutAppFragment != null)
+            ft.hide(aboutAppFragment);
     }
     @Override
     public void onClick(View v){
@@ -83,7 +87,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
             case R.id.bottom_menu_home_bar:
                 setSelected();
                 bottomHomeBar.setSelected(true);
-                if(mainFragment == null){
+                if(fragment == null){
                     mainFragment = new MainFragment();
                     //fragmentManager.beginTransaction().replace(R.id.fragmentContiner, mainFragment).commit();
                     ft.add(R.id.fragmentContiner,mainFragment);
@@ -95,30 +99,30 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 setSelected();
                 bottomAddressListBar.setSelected(true);
                 if(fragment == null){
-                    aLFragment = new MemoFragment();
-                    ft.add(R.id.fragmentContiner,aLFragment);
+                    companyMemberListFragment = new CompanyMemberListFragment();
+                    ft.add(R.id.fragmentContiner,companyMemberListFragment);
                 }else {
-                    fragmentManager.beginTransaction().replace(R.id.fragmentContiner, aLFragment).commit();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentContiner, companyMemberListFragment).commit();
                 }
                 break;
             case R.id.bottom_menu_customer_bar:
                 setSelected();
                 bottomCustomerBar.setSelected(true);
-                if(cFragment == null){
-                    cFragment = new MyMessageFragment();
-                    ft.add(R.id.fragmentContiner,cFragment);
+                if(fragment == null){
+                    customerListFragment = new CustomerListFragment();
+                    ft.add(R.id.fragmentContiner,customerListFragment);
                 }else {
-                    fragmentManager.beginTransaction().replace(R.id.fragmentContiner, cFragment).commit();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentContiner, customerListFragment).commit();
                 }
                 break;
             case R.id.bottom_menu_about_bar:
                 setSelected();
                 bottomAboutBar.setSelected(true);
-                if(aFragment == null){
-                    aFragment = new MainFragment();
-                    ft.add(R.id.fragmentContiner,aFragment);
+                if(fragment == null){
+                    aboutAppFragment = new AboutAppFragment();
+                    ft.add(R.id.fragmentContiner,aboutAppFragment);
                 }else {
-                    fragmentManager.beginTransaction().replace(R.id.fragmentContiner, aFragment).commit();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentContiner, aboutAppFragment).commit();
                 }
                 break;
         }

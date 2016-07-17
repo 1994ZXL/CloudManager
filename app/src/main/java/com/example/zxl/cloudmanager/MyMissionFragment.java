@@ -11,9 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.zxl.cloudmanager.leave.LeaveSearchFragment;
 import com.example.zxl.cloudmanager.model.Mission;
+import com.example.zxl.cloudmanager.myMission.MyMissionSearchFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,6 +34,8 @@ public class MyMissionFragment extends Fragment {
     private MyAdapter myAdapter;
 
     private Fragment mFragment;
+
+    private Button mBtn;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -58,6 +63,24 @@ public class MyMissionFragment extends Fragment {
             @Override
             public void onItemClick(View view, Object data) {
                 Fragment fragment = new MyCheckDetailFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
+            }
+        });
+        mBtn =(Button) view.findViewById(R.id.mine_mission_search_button) ;
+        mBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new MyMissionSearchFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);

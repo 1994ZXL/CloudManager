@@ -12,10 +12,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.zxl.cloudmanager.leave.LeaveSearchFragment;
 import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.UseCase;
+import com.example.zxl.cloudmanager.publicSearch.usecase.UsecaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,7 @@ public class MyUseCaseFragment extends Fragment {
     private MyAdapter myAdapter;
 
     private Fragment mFragment;
+    private Button mBtn;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -72,6 +76,24 @@ public class MyUseCaseFragment extends Fragment {
             }
         });
 
+        mBtn =(Button) v.findViewById(R.id.my_usecase_search_button) ;
+        mBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new UsecaseFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
+            }
+        });
         return v;
     }
 
