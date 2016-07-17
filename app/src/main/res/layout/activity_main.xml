@@ -23,7 +23,6 @@
             android:drawablePadding="3dp"
             android:drawableTop="@drawable/tab_menu_home"
             android:gravity="center"
-            android:padding="5dp"
             android:text="@string/bottom_menu_home_bar"
             android:textColor="@drawable/tab_menu_text" />
 
@@ -36,7 +35,6 @@
             android:drawablePadding="3dp"
             android:drawableTop="@drawable/tab_menu_home"
             android:gravity="center"
-            android:padding="5dp"
             android:text="@string/bottom_menu_addresslist_bar"
             android:textColor="@drawable/tab_menu_text" />
 
@@ -49,7 +47,6 @@
             android:drawablePadding="3dp"
             android:drawableTop="@drawable/tab_menu_home"
             android:gravity="center"
-            android:padding="5dp"
             android:text="@string/bottom_menu_custom_bar"
             android:textColor="@drawable/tab_menu_text" />
 
@@ -62,7 +59,6 @@
             android:drawablePadding="3dp"
             android:drawableTop="@drawable/tab_menu_home"
             android:gravity="center"
-            android:padding="5dp"
             android:text="@string/bottom_menu_about_bar"
             android:textColor="@drawable/tab_menu_text" />
     </LinearLayout>
