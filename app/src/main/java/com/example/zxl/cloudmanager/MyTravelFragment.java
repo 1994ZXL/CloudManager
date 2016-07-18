@@ -1,16 +1,20 @@
 package com.example.zxl.cloudmanager;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 
 import com.example.zxl.cloudmanager.model.Travel;
 import com.example.zxl.cloudmanager.model.TravelLab;
+import com.example.zxl.cloudmanager.myOvertime.OverTimeFragment;
+import com.example.zxl.cloudmanager.travel.TravelSearchFragment;
 
 import java.util.ArrayList;
 
@@ -19,6 +23,27 @@ import java.util.ArrayList;
  */
 public class MyTravelFragment extends ListFragment {
     private ArrayList<Travel> travels;
+
+    /*private Button mBtn;
+    private Fragment mFragment;
+    mBtn = (Button) convertView.findViewById(R.id.my_travel_list_search_button) ;
+    mBtn.setOnClickListener(new View.OnClickListener(){
+        @Override
+        public void onClick(View view) {
+            Fragment fragment = new TravelSearchFragment();
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            if (!fragment.isAdded()) {
+                transaction.addToBackStack(null);
+                transaction.hide(mFragment);
+                transaction.add(R.id.blankActivity, fragment);
+                transaction.commit();
+            } else {
+                transaction.hide(mFragment);
+                transaction.show(fragment);
+                transaction.commit();
+            }
+        }
+    });*/
 
     @Override
     public void onCreate(Bundle saveInstanceState) {

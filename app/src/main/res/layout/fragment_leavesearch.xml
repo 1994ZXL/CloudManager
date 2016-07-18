@@ -93,7 +93,8 @@
             <Button
                 android:id="@+id/my_leave_search_button"
                 android:text="@string/check_button"
-                style="@style/SearchButton" />
+                style="@style/SearchButton"
+                android:layout_marginTop="70dp" />
         </LinearLayout>
 
     </ScrollView>

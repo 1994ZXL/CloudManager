@@ -61,6 +61,7 @@
     <string name="memo_content_textview">备忘录内容</string>
     <string name="new_memo">新增备忘录</string>
     <string name="delete_memo">删除备忘录</string>
+    <string name="submit_time">提交时间</string>
 
     <!--考勤查询-->
     <string name="check_end_time">考勤结束时间</string>
@@ -169,7 +170,15 @@
     <string name="my_overtime_time">加班时间</string>
     <string name="my_join_project">项目</string>
 
-    <!--主页地步导航栏底部-->
+    <string name="employer_travel_time">出差时间</string>
+    <string name="employer_back_time">回程时间</string>
+    <string name="employer_travel_state">状态</string>
+
+    <string name="post_submit_time">日报时间</string>
+    <string name="my_post_content">日报内容</string>
+
+
+    <!--主页底部导航栏底部-->
     <string name="company_list_bar">公司通讯录</string>
     <string name="customer_list_bar">客户通讯录</string>
     <string name="about_app">关于</string>

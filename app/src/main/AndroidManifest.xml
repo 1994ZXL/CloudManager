@@ -29,6 +29,7 @@
         <activity android:name=".MyTravelActivity" />
         <activity android:name=".ManagerCheckAcitvity" />
         <activity android:name=".ManagerLeaveActivity" />
+        <activity android:name=".operation.MyOperationActivity" />
 
         <!--公共查询-->
         <activity android:name=".publicSearch.list.ProjectListSearchActivity" />
@@ -37,6 +38,13 @@
         <activity android:name=".publicSearch.project.PublicSearchActivity" />
         <activity android:name=".publicSearch.usecase.UsecaseSearchActivity" />
         <activity android:name=".publicSearch.plan.MissionSearchActivity" />
+
+        <!--领导查询-->
+        <activity android:name=".leaderSearch.LeaderCheckSearchActivity" />
+        <activity android:name=".leaderSearch.LeaderOvertimeSearchActivity" />
+        <activity android:name=".leaderSearch.LeaderTravelSearchActivity" />
+        <activity android:name=".leaderSearch.LeaderLeaveSearchActivity" />
+        <activity android:name=".leaderSearch.LeaderPostSearchActivity" />
 
 
 

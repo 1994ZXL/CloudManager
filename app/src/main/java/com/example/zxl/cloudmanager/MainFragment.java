@@ -12,6 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.zxl.cloudmanager.Memo.MemoFragment;
+import com.example.zxl.cloudmanager.leaderSearch.LeaderCheckSearchActivity;
+import com.example.zxl.cloudmanager.leaderSearch.LeaderLeaveSearchActivity;
+import com.example.zxl.cloudmanager.leaderSearch.LeaderOvertimeSearchActivity;
+import com.example.zxl.cloudmanager.leaderSearch.LeaderPostSearchActivity;
+import com.example.zxl.cloudmanager.leaderSearch.LeaderTravelSearchActivity;
+import com.example.zxl.cloudmanager.operation.MyOperationActivity;
 import com.example.zxl.cloudmanager.publicSearch.bug.ProjectBugSearchActivity;
 import com.example.zxl.cloudmanager.publicSearch.list.ProjectListSearchActivity;
 import com.example.zxl.cloudmanager.publicSearch.memberList.MemberListActivity;
@@ -41,6 +47,14 @@ public class MainFragment extends Fragment {
     private ImageView myMemberListImage;
     private ImageView myUseCaseImage;
     private ImageView myBugImage;
+    private ImageView myOperationImage;
+
+    //领导查询
+    private ImageView leaderPostImage;
+    private ImageView leaderCheckImage;
+    private ImageView leaderLeaveImage;
+    private ImageView leaderTravelImage;
+    private ImageView leaderOvertimeImage;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
@@ -58,7 +72,7 @@ public class MainFragment extends Fragment {
         onClickListener(mBugImage, new MyBugActivity());
         onClickListener(mOvertimeImage, new MyOverTimeActivity());
         onClickListener(mTravelImage, new MyTravelActivity());
-
+        onClickListener(myOperationImage, new MyOperationActivity());
 
         //公共查询
         onClickListener(myProjectImage,new PublicSearchActivity());
@@ -69,6 +83,12 @@ public class MainFragment extends Fragment {
         onClickListener(myBugImage,new ProjectBugSearchActivity());
         onClickListener(mManageCheck, new ManagerCheckAcitvity());
         onClickListener(mManageLeave, new ManagerLeaveActivity());
+
+        //领导查询
+        onClickListener(leaderCheckImage, new LeaderCheckSearchActivity());
+        onClickListener(leaderLeaveImage, new LeaderLeaveSearchActivity());
+        onClickListener(leaderOvertimeImage, new LeaderOvertimeSearchActivity());
+        onClickListener(leaderPostImage, new LeaderPostSearchActivity());
         return v;
     }
 
@@ -83,6 +103,7 @@ public class MainFragment extends Fragment {
         mBugImage = (ImageView)v.findViewById(R.id.main_fragment_my_bug_image);
         mOvertimeImage = (ImageView)v.findViewById(R.id.main_fragment_overtime_image);
         mTravelImage = (ImageView)v.findViewById(R.id.main_fragment_travel_image);
+        myOperationImage = (ImageView) v.findViewById(R.id.main_fragment_my_maintain_image) ;
 
 
         //公共查询
@@ -94,6 +115,13 @@ public class MainFragment extends Fragment {
         myBugImage = (ImageView) v.findViewById(R.id.main_fragment_bug_query_image);
         mManageCheck = (ImageView)v.findViewById(R.id.main_fragment_check_deal_image);
         mManageLeave = (ImageView)v.findViewById(R.id.main_fragment_leave_deal_image);
+
+        //领导查询
+        leaderPostImage = (ImageView) v.findViewById(R.id.main_fragment_post_query_image);
+        leaderCheckImage = (ImageView) v.findViewById(R.id.main_fragment_check_query_image);
+        leaderLeaveImage =(ImageView) v.findViewById(R.id.main_fragment_leave_record_query_image);
+        leaderOvertimeImage =(ImageView) v.findViewById(R.id.imageView);
+        leaderTravelImage =(ImageView) v.findViewById(R.id.imageView2);
     }
 
     private void onClickListener(ImageView imageView,final Activity activity) {

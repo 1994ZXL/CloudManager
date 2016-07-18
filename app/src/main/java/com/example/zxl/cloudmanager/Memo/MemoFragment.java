@@ -14,6 +14,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.Memo.MemoDetailFragment;
@@ -36,6 +37,7 @@ public class MemoFragment extends Fragment {
     private String[] content = {"p1", "p2", "p3", "p4", "p5"};
 
     private Fragment mFragment;
+    private Button mBtn;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
@@ -55,6 +57,25 @@ public class MemoFragment extends Fragment {
             @Override
             public void onItemClick(View view, Object data) {
                 Fragment fragment = new MemoDetailFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
+            }
+        });
+
+        mBtn = (Button) v.findViewById(R.id.my_memo_list_search_button) ;
+        mBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new MemoSearchFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);

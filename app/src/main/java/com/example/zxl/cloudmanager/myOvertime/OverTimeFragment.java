@@ -15,7 +15,7 @@ import com.example.zxl.cloudmanager.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyOverTimeFragment extends Fragment {
+public class OverTimeFragment extends Fragment {
 
 
     private Button mOvertimeBeginBtn;
@@ -29,7 +29,7 @@ public class MyOverTimeFragment extends Fragment {
     private static final String[] nameList={"全部"};
     private static final String[] projectLst={"全部"};
     private Button mSearchBtn;
-    public MyOverTimeFragment() {
+    public OverTimeFragment() {
         // Required empty public constructor
     }
 
@@ -88,7 +88,7 @@ public class MyOverTimeFragment extends Fragment {
         mEmployerNameSpinner = (Spinner) v.findViewById(R.id.employer_name_spinner);
         mEmployerProjectSpinner = (Spinner) v.findViewById(R.id.employer_project_spinner);
 
-        mSearchBtn = (Button) v.findViewById(R.id.my_mission_search_button);
+        mSearchBtn = (Button) v.findViewById(R.id.my_overtime_search_button);
     }
 
 }

@@ -40,6 +40,8 @@ public class SearchCheckFragment extends Fragment {
 
     private static final String TAG = "SearchCheckFragment";
 
+    private Button mSearchBtn;
+
     public SearchCheckFragment() {
         // Required empty public constructor
     }
@@ -94,6 +96,8 @@ public class SearchCheckFragment extends Fragment {
         mTravelSpinner = (Spinner) v.findViewById(R.id.check_travel_sprinner);
         mOverTimeSpinner = (Spinner) v.findViewById(R.id.check_overtime_sprinner);
         mEndTimeBtn = (Button) v.findViewById(R.id.check_end_time_button);
+
+        mSearchBtn = (Button) v.findViewById(R.id.search_check_search_button);
     }
 
     /*@Override

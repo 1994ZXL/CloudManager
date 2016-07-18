@@ -3,11 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".myOvertime.OverTimeFragment">
+    tools:context=".myPost.MyPostSearchFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,49 +21,26 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/name"
-                        android:layout_weight="1"
-                        android:layout_gravity="center_vertical"
-                        android:textSize="20dp"/>
-
-                    <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/employer_name_spinner"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_marginTop="20dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/my_overtime_time"
-                        android:layout_weight="2"
+                        android:text="@string/post_submit_time"
+                        android:layout_weight="1"
                         android:textSize="20dp"/>
 
                     <Button
-                        android:id="@+id/employer_overtime_begin_time_button"
+                        android:id="@+id/memo_submit_begin_time_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="20dp"
                         android:text="@string/project_begin_time_textview"
                         android:layout_weight="0.3"/>
                     <Button
-                        android:id="@+id/employer_overtime_end_time_button"
+                        android:id="@+id/memo_submit_end_time_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="20dp"
                         android:text="@string/project_end_time_textview"
                         android:layout_weight="0.3"/>
                 </LinearLayout>
@@ -76,22 +54,27 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/my_join_project"
-                        android:layout_weight="1"
-                        android:layout_gravity="center_vertical"
+                        android:text="@string/my_post_content"
+                        android:layout_weight="5"
                         android:textSize="20dp"/>
-
-                    <Spinner
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/employer_project_spinner"
-                        />
-                </LinearLayout>
+                        android:layout_height="150dp"
+                        android:layout_weight="3"
+                        android:background="@color/content"
+                        >
+                        <EditText
+                            android:id="@+id/my_post_content_edittext"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@null"
+                            />
+                    </LinearLayout>
 
+                </LinearLayout>
             </LinearLayout>
             <Button
-                android:id="@+id/my_overtime_search_button"
+                android:id="@+id/my_post_search_button"
                 style="@style/SearchButton"
                 android:text="@string/check_button" />
         </LinearLayout>

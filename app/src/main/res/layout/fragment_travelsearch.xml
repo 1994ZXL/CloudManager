@@ -1,37 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem"
-        android:visibility="invisible"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textSize="20dp"
-        android:textAppearance="?attr/textAppearanceListItem" />
+            <LinearLayout
+                style="@style/linearLayoutStyle"
+                android:padding="10dp">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/travel_time_button"
-        android:visibility="invisible"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
 
-    <TextView
-        android:id="@+id/travel_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textSize="20dp"
-        android:textAppearance="?attr/textAppearanceListItem" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/employer_travel_time"
+                        android:layout_weight="2"
+                        android:textSize="20dp"/>
+
+                    <Button
+                        android:id="@+id/employer_travel_begin_time_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="20dp"
+                        android:text="@string/project_begin_time_textview"
+                        android:layout_weight="0.3"/>
+                    <Button
+                        android:id="@+id/employer_travel_end_time_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="20dp"
+                        android:text="@string/project_end_time_textview"
+                        android:layout_weight="0.3"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/employer_back_time"
+                        android:layout_weight="2"
+                        android:textSize="20dp"/>
+
+                    <Button
+                        android:id="@+id/employer_back_begin_time_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="20dp"
+                        android:text="@string/project_begin_time_textview"
+                        android:layout_weight="0.3"/>
+                    <Button
+                        android:id="@+id/employer_back_end_time_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingRight="20dp"
+                        android:text="@string/project_end_time_textview"
+                        android:layout_weight="0.3"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/employer_travel_state"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="20dp"/>
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/employer_travel_state_spinner"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+            <Button
+                android:id="@+id/my_travel_search_button"
+                style="@style/SearchButton"
+                android:text="@string/check_button" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
