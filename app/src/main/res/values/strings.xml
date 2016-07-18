@@ -31,6 +31,7 @@
     <string name="bottom_menu_custom_bar">客户</string>
     <string name="bottom_menu_about_bar">关于</string>
     <string name="query">查询</string>
+    <string name="edit">修改</string>
 
     <!-- 我是领导-->
     <string name="leader">我是领导</string>
@@ -67,6 +68,7 @@
     <string name="check_end_time">考勤结束时间</string>
 
     <!-- 我的信息-->
+    <string name="head">头像</string>
     <string name="name">姓名</string>
     <string name="sex">性别</string>
     <string name="phone">手机</string>

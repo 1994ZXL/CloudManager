@@ -1,6 +1,9 @@
 package com.example.zxl.cloudmanager;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,14 +11,33 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
+
+import com.example.zxl.cloudmanager.model.UseCaseLab;
+import com.example.zxl.cloudmanager.model.User;
+import com.example.zxl.cloudmanager.model.UserLab;
 
 /**
  * Created by ZXL on 2016/7/11.
  */
 public class MyMessageFragment extends Fragment {
     private Spinner sexSpinner;
+    private TextView mNameText;
+    private TextView mPhoneNumber;
+    private TextView mQQText;
+    private TextView mWeChat;
+    private TextView mAddress;
+
+    private String name;
+    private String phoneNumber;
+    private String qq;
+    private String weChat;
+    private String address;
+
     private static final String[] list={"男", "女"};
     private ArrayAdapter<String> adapter;
+
+    private static final String NAME_CHANGE = "修改名字";
 
     private Fragment mFragment;
 
@@ -24,6 +46,7 @@ public class MyMessageFragment extends Fragment {
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
         mFragment = this;
+
     }
 
 
@@ -36,24 +59,33 @@ public class MyMessageFragment extends Fragment {
         adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sexSpinner.setAdapter(adapter);
-//        sexSpinner.setOnItemClickListener(new SprinnerSelectedListener());
+
+        mNameText.setText(User.newInstance(mFragment.getActivity()).getName());
+        mNameText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MessageEdit fragment = MessageEdit.newInstance(NAME_CHANGE, User.newInstance(mFragment.getActivity()).getName());
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.blankActivity, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+        mPhoneNumber.setText(User.newInstance(mFragment.getActivity()).getPhone());
+        mQQText.setText(User.newInstance(mFragment.getActivity()).getQq());
+        mWeChat.setText(User.newInstance(mFragment.getActivity()).getWechat());
+        mAddress.setText(User.newInstance(mFragment.getActivity()).getAddress());
 
         return v;
     }
 
     private void init(View v) {
         sexSpinner = (Spinner)v.findViewById(R.id.main_fragment_my_message_sexSprinner);
-    }
-
-    class SprinnerSelectedListener implements AdapterView.OnItemSelectedListener {
-        @Override
-        public void onNothingSelected(AdapterView<?> arg0) {
-
-        }
-
-        @Override
-        public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-
-        }
+        mNameText = (TextView)v.findViewById(R.id.main_fragment_my_message_nameTextView);
+        mPhoneNumber = (TextView)v.findViewById(R.id.main_fragment_my_message_phoneTextView);
+        mQQText = (TextView)v.findViewById(R.id.main_fragment_my_message_qqTextView);
+        mWeChat = (TextView)v.findViewById(R.id.main_fragment_my_message_wechatTextView);
+        mAddress = (TextView)v.findViewById(R.id.main_fragment_my_message_locationTextView);
     }
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Created by ZXL on 2016/7/13.
  */
 public class UseCase {
+    private String title;
     private String name;
     private String functionModule;
     private String usecasetNumber;
@@ -29,7 +30,25 @@ public class UseCase {
     private String exploitMan;
     private String principal;
 
+    private String content;
+
     public UseCase() {
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getUsecasetNumber() {

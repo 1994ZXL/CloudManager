@@ -45,10 +45,10 @@ public class MyUseCaseDetailFragment extends ListFragment {
             UseCase useCase = getItem(position);
 
             TextView key = (TextView) convertView.findViewById(R.id.usecase_details_key);
-            key.setText(UseCaseLab.newInstance(getActivity()).getTitle()[position]);
+            key.setText(useCase.getTitle());
 
             TextView value = (TextView) convertView.findViewById(R.id.usecase_details_value);
-            value.setText(UseCaseLab.newInstance(getActivity()).getTitle()[position]);
+            value.setText(useCase.getContent());
 
             return convertView;
         }

@@ -7,6 +7,25 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
+    <!-- 头像-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/font"
+            android:layout_weight="1"
+            android:text="@string/head"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/demo"
+            android:id="@+id/main_fragment_my_message_head_icon" />
+
+    </LinearLayout>
+
     <!-- 姓名-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,10 +35,17 @@
 
         <TextView
             style="@style/font"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
             android:text="@string/name" />
-        <EditText
-            style="@style/editText"
-            android:id="@+id/main_fragment_my_message_nameEditText"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/main_fragment_my_message_nameTextView"
+            android:text="张三"/>
 
     </LinearLayout>
 
@@ -32,10 +58,14 @@
 
         <TextView
             style="@style/font"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
             android:text="@string/sex" />
         <Spinner
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
             android:layout_marginLeft="16dp"
             android:id="@+id/main_fragment_my_message_sexSprinner">
 
@@ -51,10 +81,17 @@
 
         <TextView
             style="@style/font"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
             android:text="@string/phone" />
-        <EditText
-            style="@style/editText"
-            android:id="@+id/main_fragment_my_message_phoneEditText"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/main_fragment_my_message_phoneTextView"
+            android:text="12345678987"/>
     </LinearLayout>
 
     <!-- QQ-->
@@ -66,10 +103,16 @@
 
         <TextView
             style="@style/font"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
             android:text="@string/qq" />
-        <EditText
-            style="@style/editText"
-            android:id="@+id/main_fragment_my_message_qqEditText"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/main_fragment_my_message_qqTextView"/>
     </LinearLayout>
 
     <!-- 微信-->
@@ -81,10 +124,16 @@
 
         <TextView
             style="@style/font"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
             android:text="@string/wechat" />
-        <EditText
-            style="@style/editText"
-            android:id="@+id/main_fragment_my_message_wechatEditText"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/main_fragment_my_message_wechatTextView"/>
     </LinearLayout>
 
     <!-- 地址-->
@@ -96,9 +145,15 @@
 
         <TextView
             style="@style/font"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
             android:text="@string/location"/>
-        <EditText
-            style="@style/editText"
-            android:id="@+id/main_fragment_my_message_locationEditText"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/main_fragment_my_message_locationTextView"/>
     </LinearLayout>
 </LinearLayout>
