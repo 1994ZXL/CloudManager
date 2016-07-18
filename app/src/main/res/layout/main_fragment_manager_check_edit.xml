@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_manager_check_edit"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!-- 姓名-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    style="@style/font"
+                    android:id="@+id/textView11"
+                    android:layout_weight="1"
+                    android:text="@string/name"
+                    android:layout_width="match_parent" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="张三"
+                    android:id="@+id/main_fragment_manager_check_edit_name"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- 考勤点-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:longClickable="true"
+                android:padding="16dp">
+
+                <TextView
+                    style="@style/font"
+                    android:id="@+id/textView12"
+                    android:layout_weight="1"
+                    android:text="@string/check_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="公司"
+                    android:id="@+id/main_fragment_manager_check_edit_location"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- 考勤主管-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    style="@style/font"
+                    android:id="@+id/textView13"
+                    android:layout_weight="1"
+                    android:text="@string/check_manager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="张三"
+                    android:id="@+id/main_fragment_manager_check_edit_manager"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- 规定上班签到时间-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp" >
+
+                <TextView
+                    style="@style/font"
+                    android:id="@+id/textView14"
+                    android:layout_weight="1"
+                    android:text="@string/stipulate_dutytime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2016.7.14  12:12:12"
+                    android:id="@+id/main_fragment_manager_check_edit_stipulate_dutytime"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- 上班签到时间-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp" >
+
+                <TextView
+                    style="@style/font"
+                    android:id="@+id/textView15"
+                    android:layout_weight="1"
+                    android:text="@string/duty_sign_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2016.7.14  12:12:12"
+                    android:id="@+id/main_fragment_manager_check_edit_duty_sign_time"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- 规定下班时间-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp" >
+
+                <TextView
+                    style="@style/font"
+                    android:id="@+id/textView16"
+                    android:layout_weight="1"
+                    android:text="@string/stipulate_offdutytime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="张三"
+                    android:id="@+id/main_fragment_manager_check_edit_stipulate_offdutytime"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- 下班签到时间-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp" >
+
+                <TextView
+                    style="@style/font"
+                    android:id="@+id/textView17"
+                    android:layout_weight="1"
+                    android:text="@string/offduty_sign_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="张三"
+                    android:id="@+id/main_fragment_manager_check_edit_offduty_sign_time"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- 处理状态-->
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp" >
+
+                <TextView
+                    style="@style/font"
+                    android:id="@+id/textView18"
+                    android:layout_weight="1"
+                    android:text="@string/manage_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="张三"
+                    android:id="@+id/main_fragment_manager_check_edit_manage_state"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <!-- 查询按钮-->
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:id="@+id/main_fragment_manager_check_edit_save_edit_button"
+                android:text="@string/save_edit"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

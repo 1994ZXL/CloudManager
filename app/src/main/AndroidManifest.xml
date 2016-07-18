@@ -27,6 +27,8 @@
         <activity android:name=".MyBugActivity" />
         <activity android:name=".MyOverTimeActivity" />
         <activity android:name=".MyTravelActivity" />
+        <activity android:name=".ManagerCheckAcitvity" />
+        <activity android:name=".ManagerLeaveActivity" />
 
         <!--公共查询-->
         <activity android:name=".publicSearch.list.ProjectListSearchActivity" />

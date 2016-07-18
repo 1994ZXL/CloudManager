@@ -44,6 +44,8 @@
     <string name="leave_deal">请假处理</string>
     <string name="overtime_deal">加班处理</string>
     <string name="travel_deal">出差处理</string>
+    <string name="save_edit">保存修改</string>
+    <string name="check_begin_time">考勤时间</string>
 
     <!-- 项目主管-->
     <string name="project_manager">项目主管</string>
@@ -61,7 +63,6 @@
     <string name="delete_memo">删除备忘录</string>
 
     <!--考勤查询-->
-    <string name="check_begin_time">考勤时间</string>
     <string name="check_end_time">考勤结束时间</string>
 
     <!-- 我的信息-->
@@ -93,6 +94,7 @@
 
     <!-- 我的请假-->
     <string name="leave_record_query">请假查询</string>
+    <string name="apply_time">申请时间</string>
     <string name="apply_leave">申请请假</string>
     <string name="leave_time">请假时间：</string>
     <string name="leave_type">请假类型</string>
@@ -101,6 +103,9 @@
     <string name="leave_reason">请假原因</string>
     <string name="commit_apply">提交申请</string>
     <string name="time_erro">请重新选择结束时间</string>
+    <string name="dispose_suggestion">处理意见</string>
+    <string name="dispose_time">处理时间</string>
+    <string name="leave_state">请假状态</string>
 
     <!-- 我的任务-->
     <string name="mission_begin_time">任务开始时间</string>

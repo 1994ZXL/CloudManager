@@ -22,6 +22,52 @@ public class Check {
         this.offDutyTime = offDutyTime;
     }
 
+    public Check(){
+        state = "未处理";
+        checkLocation = "公司";
+        checkManager = "领导";
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCheckManager() {
+        return checkManager;
+    }
+
+    public void setCheckManager(String checkManager) {
+        this.checkManager = checkManager;
+    }
+
+    public String getStipulationOnDutyTime() {
+        return stipulationOnDutyTime;
+    }
+
+    public void setStipulationOnDutyTime(String stipulationOnDutyTime) {
+        this.stipulationOnDutyTime = stipulationOnDutyTime;
+    }
+
+    public String getStipulationOffDutyTime() {
+        return stipulationOffDutyTime;
+    }
+
+    public void setStipulationOffDutyTime(String stipulationOffDutyTime) {
+        this.stipulationOffDutyTime = stipulationOffDutyTime;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
     public String getDate() {
         return date;
     }

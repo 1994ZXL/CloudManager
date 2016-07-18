@@ -14,12 +14,58 @@ public class Leave {
     private Date beginTime;
     private Date endTime;
 
+    private String type;
+    private String resion;
+    private String suggestion;
+    private Date applyTime;
+    private Date disposeTime;
+
     public Leave(String time) {
         this.time = time;
     }
 
     public Leave() {
 
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getResion() {
+        return resion;
+    }
+
+    public void setResion(String resion) {
+        this.resion = resion;
+    }
+
+    public String getSuggestion() {
+        return suggestion;
+    }
+
+    public void setSuggestion(String suggestion) {
+        this.suggestion = suggestion;
+    }
+
+    public Date getApplyTime() {
+        return applyTime;
+    }
+
+    public void setApplyTime(Date applyTime) {
+        this.applyTime = applyTime;
+    }
+
+    public Date getDisposeTime() {
+        return disposeTime;
+    }
+
+    public void setDisposeTime(Date disposeTime) {
+        this.disposeTime = disposeTime;
     }
 
     public Date getBeginTime() {

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/fragment_manager_leave"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardCornerRadius="4dp"
+    card_view:cardBackgroundColor="@color/memo_background"
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/manager_leave_card_item_name"
+                android:text="@string/name"
+                android:textSize="30dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="已批准"
+                android:textSize="20dp"
+                android:id="@+id/manager_leave_card_item_state"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                style="@style/font"
+                android:text="@string/leave_type"
+                android:layout_width="wrap_content" />
+
+            <TextView
+                style="@style/font"
+                android:id="@+id/manager_leave_card_item_leave_leave_type"
+                android:layout_marginLeft="16dp" />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                style="@style/font"
+                android:text="@string/leave_begin_time"
+                android:layout_width="wrap_content"/>
+
+            <TextView
+                style="@style/font"
+                android:layout_marginLeft="16dp"
+                android:id="@+id/manager_leave_card_item_leave_begin_time"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <TextView
+                style="@style/font"
+                android:text="@string/leave_end_time"
+                android:layout_width="wrap_content" />
+
+            <TextView
+                style="@style/font"
+                android:id="@+id/manager_leave_card_item_leave_end_time"
+                android:layout_marginLeft="16dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
