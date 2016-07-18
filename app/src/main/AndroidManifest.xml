@@ -46,6 +46,10 @@
         <activity android:name=".leaderSearch.LeaderLeaveSearchActivity" />
         <activity android:name=".leaderSearch.LeaderPostSearchActivity" />
 
+        <!--考勤主管-->
+        <activity android:name=".checkManager.ManagerOvertimeActivity" />
+        <activity android:name=".checkManager.ManagerTravelActivity" />
+
 
 
     </application>

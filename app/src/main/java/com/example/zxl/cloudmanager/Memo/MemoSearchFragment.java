@@ -32,6 +32,7 @@ public class MemoSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_memo_search, container, false);
+        getActivity().getActionBar().setTitle("备忘录查询");
         init(v);
         return v;
     }

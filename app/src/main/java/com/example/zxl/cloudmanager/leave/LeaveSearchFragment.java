@@ -39,6 +39,7 @@ public class LeaveSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_leavesearch, container, false);
+        getActivity().getActionBar().setTitle("请假查询");
 
         init(v);
         stateAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, stateList);
