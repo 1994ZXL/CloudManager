@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.model.Check;
+import com.example.zxl.cloudmanager.model.CheckLab;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ public class ManagerCheckListFragment extends Fragment {
 
         getActivity().getActionBar().setTitle("考勤主管");
 
-        checks.add(new Check(getTime1(), "公司", getTime2(), getTime2()));
+        checks = CheckLab.newInstance(mFragment.getActivity()).get();
 
         mRecyclerView = (RecyclerView)v.findViewById(R.id.manager_check_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));

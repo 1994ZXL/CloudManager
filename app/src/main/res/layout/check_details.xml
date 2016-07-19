@@ -36,7 +36,7 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:text="张三"
+                        android:gravity="center"
                         android:id="@+id/check_details_name"/>
                 </LinearLayout>
                 <!-- 项目-->
@@ -52,8 +52,8 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:id="@+id/check_details_project"
-                        android:text="项目名称"/>
+                        android:gravity="center"
+                        android:id="@+id/check_details_project"/>
                 </LinearLayout>
                 <!-- 考勤点-->
                 <LinearLayout
@@ -68,8 +68,8 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:id="@+id/check_details_check_location"
-                        android:text="公司"/>
+                        android:gravity="center"
+                        android:id="@+id/check_details_check_location"/>
                 </LinearLayout>
                 <!-- 考勤主管-->
                 <LinearLayout
@@ -84,8 +84,8 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:id="@+id/check_details_check_manager"
-                        android:text="李四"/>
+                        android:gravity="center"
+                        android:id="@+id/check_details_check_manager"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -111,8 +111,8 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:id="@+id/check_details_stipulate_dutytime"
-                        android:text="李四"/>
+                        android:gravity="center"
+                        android:id="@+id/check_details_stipulate_dutytime" />
                 </LinearLayout>
                 <!-- 规定下班时间-->
                 <LinearLayout
@@ -127,8 +127,8 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:id="@+id/check_details_stipulate_offdutytime"
-                        android:text="李四"/>
+                        android:gravity="center"
+                        android:id="@+id/check_details_stipulate_offdutytime"/>
                 </LinearLayout>
                 <!-- 上班签到时间-->
                 <LinearLayout
@@ -143,8 +143,8 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:id="@+id/check_details_duty_sign_time"
-                        android:text="李四"/>
+                        android:gravity="center"
+                        android:id="@+id/check_details_duty_sign_time"/>
                 </LinearLayout>
                 <!-- 下班签到时间-->
                 <LinearLayout
@@ -159,8 +159,8 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:id="@+id/check_details_offduty_sign_time"
-                        android:text="李四"/>
+                        android:gravity="center"
+                        android:id="@+id/check_details_offduty_sign_time"/>
                 </LinearLayout>
                 <!-- 上班处理时间-->
                 <LinearLayout
@@ -175,8 +175,8 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:id="@+id/check_details_duty_manage_time"
-                        android:text="李四"/>
+                        android:gravity="center"
+                        android:id="@+id/check_details_duty_manage_time"/>
                 </LinearLayout>
                 <!-- 下班处理时间-->
                 <LinearLayout
@@ -191,8 +191,8 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:id="@+id/check_details_offduty_manage_time"
-                        android:text="李四"/>
+                        android:gravity="center"
+                        android:id="@+id/check_details_offduty_manage_time"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -218,8 +218,8 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:id="@+id/check_details_manage_state"
-                        android:text="李四"/>
+                        android:gravity="center"
+                        android:id="@+id/check_details_manage_state"/>
                 </LinearLayout>
                 <!-- 请假-->
                 <LinearLayout
@@ -234,8 +234,8 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:id="@+id/check_details_leave"
-                        android:text="李四"/>
+                        android:gravity="center"
+                        android:id="@+id/check_details_leave"/>
                 </LinearLayout>
                 <!-- 加班-->
                 <LinearLayout
@@ -250,8 +250,8 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:id="@+id/check_details_work_overtime"
-                        android:text="李四"/>
+                        android:gravity="center"
+                        android:id="@+id/check_details_work_overtime"/>
                 </LinearLayout>
                 <!-- 出差-->
                 <LinearLayout
@@ -266,8 +266,8 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:id="@+id/check_details_work_travel"
-                        android:text="李四"/>
+                        android:gravity="center"
+                        android:id="@+id/check_details_work_travel"/>
                 </LinearLayout>
                 <!-- 迟到-->
                 <LinearLayout
@@ -282,8 +282,8 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:id="@+id/check_details_late"
-                        android:text="李四"/>
+                        android:gravity="center"
+                        android:id="@+id/check_details_late"/>
                 </LinearLayout>
 
             </LinearLayout>

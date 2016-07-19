@@ -58,7 +58,6 @@ public class MessageEdit extends Fragment{
         title = (String) getArguments().getSerializable(EXTRA_TITLE);
         getActivity().getActionBar().setTitle(title);
 
-//        toolbar = (Toolbar) view.findViewById(R.id.my_message_edit_toolbar);
         value = (String) getArguments().getSerializable(EXTRA_VALUE);
         mEdit = (EditText) view.findViewById(R.id.my_message_editText);
         mEdit.setText(value);
@@ -70,7 +69,7 @@ public class MessageEdit extends Fragment{
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                User.newInstance(mFragment.getActivity()).setName(charSequence.toString());
+                changeValue(charSequence);
             }
 
             @Override
@@ -79,16 +78,22 @@ public class MessageEdit extends Fragment{
             }
         });
 
-//        mEditTextView = (TextView) view.findViewById(R.id.toolbar_edit);
-//        mEditTextView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                FragmentManager fragmentManager = getFragmentManager();
-//                fragmentManager.popBackStack();
-//            }
-//        });
-
         return view;
+    }
+
+    private void changeValue(CharSequence charSequence) {
+        String title = (String) getArguments().getSerializable(EXTRA_TITLE);
+        if (title == "名字修改") {
+            User.newInstance(mFragment.getActivity()).setName(charSequence.toString());
+        } else if (title == "手机修改") {
+            User.newInstance(mFragment.getActivity()).setPhone(charSequence.toString());
+        } else if (title == "QQ修改") {
+            User.newInstance(mFragment.getActivity()).setQq(charSequence.toString());
+        } else if (title == "微信修改") {
+            User.newInstance(mFragment.getActivity()).setWechat(charSequence.toString());
+        } else if (title == "地址修改") {
+            User.newInstance(mFragment.getActivity()).setAddress(charSequence.toString());
+        }
     }
 
     @Override

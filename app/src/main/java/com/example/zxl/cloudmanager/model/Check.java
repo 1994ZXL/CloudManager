@@ -1,31 +1,117 @@
 package com.example.zxl.cloudmanager.model;
 
+import android.content.Context;
+
+import java.util.ArrayList;
+
 /**
  * Created by ZXL on 2016/7/11.
  */
 public class Check {
     private String date;
-    private String checkLocation;
-    private String dutyTime;
-    private String offDutyTime;
 
     private String name;
+    private String project;
+    private String checkLocation;
     private String checkManager;
     private String stipulationOnDutyTime;
     private String stipulationOffDutyTime;
+    private String dutyTime;
+    private String offDutyTime;
+    private String ondutyDisposeTime;
+    private String offDutyDisposeTime;
     private String state;
+    private String leave;
+    private String overTime;
+    private String travel;
+    private String late;
 
-    public Check(String date, String checkLocation, String dutyTime, String offDutyTime) {
-        this.date = date;
-        this.checkLocation = checkLocation;
-        this.dutyTime = dutyTime;
-        this.offDutyTime = offDutyTime;
-    }
+    private int index;
+
+    private String[] content;
 
     public Check(){
-        state = "未处理";
-        checkLocation = "公司";
-        checkManager = "领导";
+
+    }
+
+
+    public String[] getContent() {
+        return content;
+    }
+
+    public void setContent(String[] content) {
+        this.content = content;
+        setName(content[0]);
+        setProject(content[1]);
+        setCheckLocation(content[2]);
+        setCheckManager(content[3]);
+        setStipulationOnDutyTime(content[4]);
+        setStipulationOffDutyTime(content[5]);
+        setDutyTime(content[6]);
+        setOffDutyTime(content[7]);
+        setOndutyDisposeTime(content[8]);
+        setOffDutyDisposeTime(content[9]);
+        setState(content[10]);
+        setLeave(content[11]);
+        setOverTime(content[12]);
+        setTravel(content[13]);
+        setLate(content[14]);
+    }
+
+    public String getProject() {
+        return project;
+    }
+
+    public void setProject(String project) {
+        this.project = project;
+    }
+
+    public String getOndutyDisposeTime() {
+        return ondutyDisposeTime;
+    }
+
+    public void setOndutyDisposeTime(String ondutyDisposeTime) {
+        this.ondutyDisposeTime = ondutyDisposeTime;
+    }
+
+    public String getOffDutyDisposeTime() {
+        return offDutyDisposeTime;
+    }
+
+    public void setOffDutyDisposeTime(String offDutyDisposeTime) {
+        this.offDutyDisposeTime = offDutyDisposeTime;
+    }
+
+    public String getLeave() {
+        return leave;
+    }
+
+    public void setLeave(String leave) {
+        this.leave = leave;
+    }
+
+    public String getOverTime() {
+        return overTime;
+    }
+
+    public void setOverTime(String overTime) {
+        this.overTime = overTime;
+    }
+
+    public String getTravel() {
+        return travel;
+    }
+
+    public void setTravel(String travel) {
+        this.travel = travel;
+    }
+
+    public String getLate() {
+        return late;
+    }
+
+    public void setLate(String late) {
+        this.late = late;
     }
 
     public String getName() {

@@ -30,6 +30,7 @@
         <activity android:name=".ManagerCheckAcitvity" />
         <activity android:name=".ManagerLeaveActivity" />
         <activity android:name=".operation.MyOperationActivity" />
+        <activity android:name=".leave.LeaveSearchActivity" />
 
         <!--公共查询-->
         <activity android:name=".publicSearch.list.ProjectListSearchActivity" />

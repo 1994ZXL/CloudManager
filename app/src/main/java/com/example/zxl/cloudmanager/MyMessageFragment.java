@@ -37,7 +37,11 @@ public class MyMessageFragment extends Fragment {
     private static final String[] list={"男", "女"};
     private ArrayAdapter<String> adapter;
 
-    private static final String NAME_CHANGE = "修改名字";
+    private static final String NAME_CHANGE = "名字修改";
+    private static final String PHONE_CHANGE = "手机修改";
+    private static final String QQ_CHANGE = "QQ修改";
+    private static final String WECHAT_CHANGE = "微信修改";
+    private static final String ADDRESS_CHANGE = "地址修改";
 
     private Fragment mFragment;
 
@@ -73,9 +77,52 @@ public class MyMessageFragment extends Fragment {
         });
 
         mPhoneNumber.setText(User.newInstance(mFragment.getActivity()).getPhone());
+        mPhoneNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MessageEdit fragment = MessageEdit.newInstance(PHONE_CHANGE, User.newInstance(mFragment.getActivity()).getPhone());
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.blankActivity, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
         mQQText.setText(User.newInstance(mFragment.getActivity()).getQq());
+        mQQText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MessageEdit fragment = MessageEdit.newInstance(QQ_CHANGE, User.newInstance(mFragment.getActivity()).getQq());
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.blankActivity, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
         mWeChat.setText(User.newInstance(mFragment.getActivity()).getWechat());
+        mWeChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MessageEdit fragment = MessageEdit.newInstance(WECHAT_CHANGE, User.newInstance(mFragment.getActivity()).getWechat());
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.blankActivity, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
         mAddress.setText(User.newInstance(mFragment.getActivity()).getAddress());
+        mAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MessageEdit fragment = MessageEdit.newInstance(ADDRESS_CHANGE, User.newInstance(mFragment.getActivity()).getAddress());
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.blankActivity, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
 
         return v;
     }

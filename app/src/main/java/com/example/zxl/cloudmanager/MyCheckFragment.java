@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.check.SearchCheckFragment;
 import com.example.zxl.cloudmanager.model.Check;
+import com.example.zxl.cloudmanager.model.CheckLab;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,12 +30,14 @@ import java.util.List;
 public class MyCheckFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
-    private List<Check> checks = new ArrayList<Check>();
+    private ArrayList<Check> checks = new ArrayList<Check>();
     private MyAdapter myAdapter;
 
-    private Button mBtn;
+    private Button mSearchBtn;
 
     private static final String TAG = "MyCheckFragment";
+    private static final String SEARCH_KEY = "search_key";
+    private int searchKey;
 
     private Fragment mFragment;
 
@@ -45,33 +48,39 @@ public class MyCheckFragment extends Fragment {
         mFragment = this;
     }
 
-    private String getTime1() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String date = formatter.format(curDate);
-        return date;
-    }
-
-    private String getTime2() {
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String date = formatter.format(curDate);
-        return date;
-    }
-
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.main_fragment_my_check, parent, false);
 
-        Log.d(TAG, "调用了一次");
 
         getActivity().getActionBar().setTitle("我的考勤");
 
-        mBtn =(Button)v.findViewById(R.id.search_button) ;
-        mBtn.setOnClickListener(new View.OnClickListener(){
+        saveInstanceState = getArguments();
+        if (null == saveInstanceState) {
+            searchKey = 0;
+        } else {
+            searchKey = getArguments().getInt(SEARCH_KEY);
+        }
+
+        if (1 == searchKey) {
+            checks.add(CheckLab.newInstance(mFragment.getActivity()).get().get(0));
+        } else if (2 == searchKey) {
+            checks.add(CheckLab.newInstance(mFragment.getActivity()).get().get(1));
+        } else if (0 == searchKey){
+            checks = CheckLab.newInstance(mFragment.getActivity()).get();
+        }
+
+        mRecyclerView = (RecyclerView)v.findViewById(R.id.check_recyclerview);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        mRecyclerView.setHasFixedSize(true);
+        myAdapter = new MyAdapter(this.getActivity(), checks);
+        mRecyclerView.setAdapter(myAdapter);
+        mCardView = (CardView)v.findViewById(R.id.fragment_my_check);
+        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
             @Override
-            public void onClick(View view) {
-                Fragment fragment = new SearchCheckFragment();
+            public void onItemClick(View view, Object data) {
+                Fragment fragment = MyCheckDetailFragment.newInstance(data);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
@@ -86,30 +95,14 @@ public class MyCheckFragment extends Fragment {
             }
         });
 
-        checks.add(new Check(getTime1(), "公司", getTime2(), getTime2()));
-
-        mRecyclerView = (RecyclerView)v.findViewById(R.id.check_recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        myAdapter = new MyAdapter(this.getActivity(), checks);
-        mRecyclerView.setAdapter(myAdapter);
-        mCardView = (CardView)v.findViewById(R.id.fragment_my_check);
-        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+        mSearchBtn =(Button)v.findViewById(R.id.search_button) ;
+        mSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(View view, Object data) {
-                Fragment fragment = new MyCheckDetailFragment();
+            public void onClick(View view) {
+                Fragment fragment = new SearchCheckFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
+                transaction.replace(R.id.blankActivity, fragment);
+                transaction.commit();
             }
         });
 
@@ -123,10 +116,10 @@ public class MyCheckFragment extends Fragment {
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
-        private List<Check> checks;
+        private ArrayList<Check> checks;
         private Context mContext;
 
-        public MyAdapter (Context context, List<Check> checks) {
+        public MyAdapter (Context context, ArrayList<Check> checks) {
             this.checks = checks;
             this.mContext = context;
         }

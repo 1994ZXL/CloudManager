@@ -18,6 +18,10 @@ public class User {
     private User(Context context) {
         this.context = context;
         name = "张三";
+        phone = "12345678987";
+        qq = "123456";
+        wechat = "18296374185";
+        address = "公司";
     }
 
     public static User newInstance(Context context) {

@@ -7,25 +7,29 @@ import java.util.Date;
  */
 public class Leave {
     private String name;
-    private String illness;
-    private String time;
+    private String type;
     private String state;
 
     private Date beginTime;
     private Date endTime;
 
-    private String type;
     private String resion;
     private String suggestion;
     private Date applyTime;
     private Date disposeTime;
 
-    public Leave(String time) {
-        this.time = time;
-    }
+    private String[] content;
 
     public Leave() {
 
+    }
+
+    public String[] getContent() {
+        return content;
+    }
+
+    public void setContent(String[] content) {
+        this.content = content;
     }
 
     public String getType() {
@@ -90,22 +94,6 @@ public class Leave {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getIllness() {
-        return illness;
-    }
-
-    public void setIllness(String illness) {
-        this.illness = illness;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
     }
 
     public String getState() {

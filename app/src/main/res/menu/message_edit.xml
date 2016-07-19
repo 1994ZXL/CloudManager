@@ -3,7 +3,6 @@
 
     <item android:id="@+id/menu_item_edit_message"
         android:title="@string/edit"
-
         android:showAsAction="always"/>
 
 </menu>

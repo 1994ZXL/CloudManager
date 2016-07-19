@@ -95,13 +95,14 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_weight="1"
-            android:id="@+id/main_fragment_my_message_wechatEditText"/>
+            android:id="@+id/main_fragment_my_leave_resonEditText"/>
     </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:id="@+id/main_fragment_my_leave_apply_commitButton"
         android:text="@string/commit_apply"/>
 
 </LinearLayout>

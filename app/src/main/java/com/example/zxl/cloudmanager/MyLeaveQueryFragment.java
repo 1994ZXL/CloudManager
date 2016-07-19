@@ -3,6 +3,7 @@ package com.example.zxl.cloudmanager;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
+import com.example.zxl.cloudmanager.leave.LeaveSearchActivity;
 import com.example.zxl.cloudmanager.leave.LeaveSearchFragment;
 import com.example.zxl.cloudmanager.model.Leave;
 
@@ -34,7 +36,7 @@ public class MyLeaveQueryFragment extends Fragment {
 
     private Fragment mFragment;
 
-    private Button mBtn;
+    private Button mSearchBtn;
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -57,7 +59,7 @@ public class MyLeaveQueryFragment extends Fragment {
 
         getActivity().getActionBar().setTitle("我的请假");
 
-        leaves.add(new Leave(getTime()));
+
 
         mRecyclerView = (RecyclerView)v.findViewById(R.id.leave_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -84,22 +86,12 @@ public class MyLeaveQueryFragment extends Fragment {
             }
         });
 
-        mBtn =(Button) v.findViewById(R.id.my_leave_search_button) ;
-        mBtn.setOnClickListener(new View.OnClickListener(){
+        mSearchBtn =(Button) v.findViewById(R.id.my_leave_search_button) ;
+        mSearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Fragment fragment = new LeaveSearchFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
+                Intent intent = new Intent(mFragment.getActivity(), LeaveSearchActivity.class);
+                startActivity(intent);
             }
         });
         return v;
@@ -131,7 +123,6 @@ public class MyLeaveQueryFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             Leave leave = leaves.get(i);
-            viewHolder.mLeaveTime.setText(leave.getTime());
             viewHolder.itemView.setTag(leaves.get(i));
         }
 
