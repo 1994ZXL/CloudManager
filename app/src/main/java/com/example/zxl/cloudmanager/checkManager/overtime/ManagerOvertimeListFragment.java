@@ -1,5 +1,4 @@
-/*
-package com.example.zxl.cloudmanager.checkManager;
+package com.example.zxl.cloudmanager.checkManager.overtime;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -9,37 +8,31 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.zxl.cloudmanager.ManagerCheckEditFragment;
 import com.example.zxl.cloudmanager.R;
-import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.OverTime;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-*/
-/**
- * Created by ZXL on 2016/7/15.
- *//*
+//考勤主管查询列表
 
 public class ManagerOvertimeListFragment extends Fragment {
+
+    private static final String TAG = "ManagerOvertimeList";
     private CardView mCardView;
     private RecyclerView mRecyclerView;
-    private List<OverTime> overtimes = new ArrayList<OverTime>();
+    private List<OverTime> overTimes = new ArrayList<OverTime>();
     private MyAdapter myAdapter;
 
-    private static final String TAG = "MyCheckFragment";
-
     private Fragment mFragment;
-
+    private Fragment fragment;
+    private Button mSearchBtn;
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -47,41 +40,30 @@ public class ManagerOvertimeListFragment extends Fragment {
         mFragment = this;
     }
 
-    private String getTime1() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String date = formatter.format(curDate);
-        return date;
-    }
-
-    private String getTime2() {
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String date = formatter.format(curDate);
-        return date;
-    }
-
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        View v = layoutInflater.inflate(R.layout.main_fragment_manager_check_list, parent, false);
+        View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
 
-        Log.d(TAG, "调用了一次");
+        mSearchBtn = (Button) v.findViewById(R.id.my_overtime_list_search_button);
+        mSearchBtn.setVisibility(View.INVISIBLE);
+        getActivity().getActionBar().setTitle("加班列表");
+        /*Bundle bundle = new Bundle();
+        bundle.putString("MANAGER_OVERTIME_lIST",TAG );
+        fragment.setArguments(bundle);*/
 
-        getActivity().getActionBar().setTitle("加班安排");
+        overTimes.add(new OverTime());
 
-        overtimes.add(new Check(getTime1(), "公司", getTime2(), getTime2()));
-
-        mRecyclerView = (RecyclerView)v.findViewById(R.id.manager_check_recyclerview);
+        mRecyclerView = (RecyclerView)v.findViewById(R.id.overtime_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setHasFixedSize(true);
         myAdapter = new MyAdapter(this.getActivity(), overTimes);
         mRecyclerView.setAdapter(myAdapter);
-        mCardView = (CardView)v.findViewById(R.id.fragment_my_check);
+        mCardView = (CardView)v.findViewById(R.id.fragment_my_overtime);
         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, Object data) {
-                Fragment fragment = new ManagerCheckEditFragment();
+                fragment = new OvertimeDetailFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
@@ -96,6 +78,7 @@ public class ManagerOvertimeListFragment extends Fragment {
             }
         });
 
+
         return v;
     }
 
@@ -106,17 +89,17 @@ public class ManagerOvertimeListFragment extends Fragment {
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
-        private List<Check> checks;
+        private List<OverTime> overTimes;
         private Context mContext;
 
-        public MyAdapter (Context context, List<Check> checks) {
-            this.checks = checks;
+        public MyAdapter (Context context, List<OverTime> overTimes) {
+            this.overTimes = overTimes;
             this.mContext = context;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.manager_check_card_item, viewGroup,false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.overtime_card_item, viewGroup, false);
             ViewHolder viewHolder = new ViewHolder(v);
             v.setOnClickListener(this);
             return viewHolder;
@@ -124,16 +107,14 @@ public class ManagerOvertimeListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            Check check = checks.get(i);
-            viewHolder.mState.setText(check.getState());
-            viewHolder.mCheckLocation.setText(check.getCheckLocation());
-            viewHolder.mCheckManager.setText(check.getCheckManager());
-            viewHolder.itemView.setTag(checks.get(i));
+            OverTime OverTime = overTimes.get(i);
+
+            viewHolder.itemView.setTag(overTimes.get(i));
         }
 
         @Override
         public int getItemCount() {
-            return checks == null ? 0 : checks.size();
+            return overTimes == null ? 0 : overTimes.size();
         }
 
         @Override
@@ -144,15 +125,15 @@ public class ManagerOvertimeListFragment extends Fragment {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder{
-            public TextView mState;
-            public TextView mCheckLocation;
-            public TextView mCheckManager;
+            public TextView mOvertimeName;
+            public TextView mOvertimeDate;
+            public TextView mOvertimeProject;
 
             public ViewHolder(View v) {
                 super(v);
-                mState = (TextView)v.findViewById(R.id.manager_check_card_item_state);
-                mCheckLocation = (TextView)v.findViewById(R.id.manager_check_card_item_check_location);
-                mCheckManager = (TextView)v.findViewById(R.id.manager_check_card_item_check_manager);
+                mOvertimeName = (TextView)v.findViewById(R.id.main_fragment_overtime_name);
+                mOvertimeDate = (TextView)v.findViewById(R.id.overtime_card_item_overtime_time);
+                mOvertimeProject = (TextView)v.findViewById(R.id.overtime_card_item_overtime_project);
 
             }
         }
@@ -162,4 +143,3 @@ public class ManagerOvertimeListFragment extends Fragment {
         }
     }
 }
-*/

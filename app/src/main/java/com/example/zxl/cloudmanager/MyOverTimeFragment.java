@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 
 import com.example.zxl.cloudmanager.model.OverTime;
+import com.example.zxl.cloudmanager.myOvertime.MyOvertimeDetailFragment;
 import com.example.zxl.cloudmanager.myOvertime.OverTimeFragment;
 
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ import java.util.List;
  * Created by ZXL on 2016/7/13.
  */
 public class MyOverTimeFragment extends Fragment {
+    private static final String MY = null;
+
     private CardView mCardView;
     private RecyclerView mRecyclerView;
     private List<OverTime> overTimes = new ArrayList<OverTime>();
@@ -32,6 +35,7 @@ public class MyOverTimeFragment extends Fragment {
 
     private Fragment mFragment;
     private Button mBtn;
+    private Fragment fragment;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -43,7 +47,6 @@ public class MyOverTimeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
-
 
         getActivity().getActionBar().setTitle("我的加班");
 
@@ -59,7 +62,7 @@ public class MyOverTimeFragment extends Fragment {
         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, Object data) {
-                Fragment fragment = new MyUseCaseDetailFragment();
+                fragment = new MyOvertimeDetailFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
@@ -78,7 +81,7 @@ public class MyOverTimeFragment extends Fragment {
         mBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Fragment fragment = new OverTimeFragment();
+                fragment = new OverTimeFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);

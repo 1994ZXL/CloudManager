@@ -1,7 +1,5 @@
-package com.example.zxl.cloudmanager;
+package com.example.zxl.cloudmanager.checkManager.travel;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.View;
@@ -10,19 +8,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-
+import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.Travel;
 import com.example.zxl.cloudmanager.model.TravelLab;
-import com.example.zxl.cloudmanager.myOvertime.OverTimeFragment;
-import com.example.zxl.cloudmanager.travel.TravelSearchFragment;
 
 import java.util.ArrayList;
 
 /**
  * Created by ZXL on 2016/7/13.
  */
-public class MyTravelFragment extends ListFragment {
+public class ManagerTravelListFragment extends ListFragment {
     private ArrayList<Travel> travels;
+    private Button mSearchBtn;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -44,6 +41,8 @@ public class MyTravelFragment extends ListFragment {
         public View getView(int position, View convertView, ViewGroup parent){
             if( null == convertView){
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.main_fragment_travel, null);
+                mSearchBtn = (Button) convertView.findViewById(R.id.my_travel_list_search_button);
+                mSearchBtn.setVisibility(View.INVISIBLE);
             }
 
             Travel travel = getItem(position);

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".checkManager.overtime.OvertimeDetailFragment">
+    tools:context="com.example.zxl.cloudmanager.checkManager.travel.TravelDetailFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,7 +15,6 @@
             <LinearLayout
                 style="@style/linearLayoutStyle"
                 android:padding="10dp">
-
 
                 <!-- 姓名-->
                 <LinearLayout
@@ -35,12 +34,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:id="@+id/manager_employer_name_spinner"
+                        android:id="@+id/manager_travel_employer_name_spinner"
                         />
 
                 </LinearLayout>
 
-                <!--加班项目-->
+                <!--出差时间-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -50,29 +49,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         style="@style/font"
-                        android:text="@string/project_name_edittext"
-                        android:layout_weight="1"
-                        android:layout_gravity="center_vertical"
-                        android:textSize="20dp"/>
-                    <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/manager_overtime_project_spinner"
-                        />
-                </LinearLayout>
-
-                <!--加班时间-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        style="@style/font"
-                        android:text="@string/my_overtime_time"
+                        android:text="@string/employer_travel_time"
                         android:layout_weight="3"
                         android:textSize="20dp"
                         android:layout_gravity="center_vertical"/>
@@ -84,21 +61,21 @@
                         android:layout_weight="2">
 
                         <Button
-                            android:id="@+id/manager_overtime_begin_time_button"
+                            android:id="@+id/manager_travel_begin_time_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/project_begin_time_textview"
+                            android:text="@string/employer_travel_begin_time"
                             android:layout_weight="1"/>
                         <Button
-                            android:id="@+id/manager_overtime_end_time_button"
+                            android:id="@+id/manager_travel_end_time_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/project_end_time_textview"
+                            android:text="@string/employer_travel_end_time"
                             android:layout_weight="1"/>
                     </LinearLayout>
                 </LinearLayout>
 
-                <!--加班原因-->
+                <!--出差内容-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -108,7 +85,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         style="@style/font"
-                        android:text="@string/manager_overtime_reason"
+                        android:text="@string/travel_content"
                         android:layout_weight="4"
                         android:textSize="20dp"/>
                     <LinearLayout
@@ -118,7 +95,7 @@
                         android:background="@color/content"
                         >
                         <EditText
-                            android:id="@+id/manager_overtime_reason_edittext"
+                            android:id="@+id/manager_travel_content_edittext"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@null"
@@ -129,7 +106,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/manager_overtime_submit_button"
+                android:id="@+id/manager_travel_submit_button"
                 style="@style/SearchButton"
                 android:text="@string/submit_button" />
         </LinearLayout>

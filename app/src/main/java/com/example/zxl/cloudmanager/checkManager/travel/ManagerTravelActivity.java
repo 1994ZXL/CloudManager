@@ -1,4 +1,4 @@
-package com.example.zxl.cloudmanager.checkManager;
+package com.example.zxl.cloudmanager.checkManager.travel;
 
 import android.app.Fragment;
 
@@ -9,7 +9,7 @@ import com.example.zxl.cloudmanager.travel.TravelSearchFragment;
 public class ManagerTravelActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment(){
-        return new TravelSearchFragment();
+        return new ManagerTravelSearchFragment();
     }
 
 }

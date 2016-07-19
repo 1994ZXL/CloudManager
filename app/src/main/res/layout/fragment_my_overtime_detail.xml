@@ -1,0 +1,171 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.zxl.cloudmanager.myOvertime.MyOvertimeDetailFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- 姓名-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:text="@string/name"
+                    android:textSize="20dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="张三"
+                    android:id="@+id/manager_employer_name_textview"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    style="@style/font"
+                    android:text="@string/project_name_edittext"
+                    android:layout_weight="1"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:id="@+id/manager_overtime_project_textview"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/project_name_edittext"
+                    android:padding="5dp"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+
+            <!--加班时间-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:text="@string/overtime_begin_time"
+                    android:textSize="20dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/overtime_begin_time"
+                    android:layout_weight="1"
+                    android:id="@+id/manager_overtime_begin_time_textview"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:text="@string/overtime_end_time"
+                    android:textSize="20dp"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/overtime_end_time"
+                    android:layout_weight="1"
+                    android:id="@+id/manager_overtime_end_time_textview"
+                    />
+            </LinearLayout>
+
+            <!--加班时间小计-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="20dp"
+                    android:text="@string/manager_overtime_total" />
+                <TextView
+                    android:layout_width="match_parent"
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:text="@string/manager_overtime_total"
+                    android:id="@+id/manager_overtime_total_time_textview"/>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    style="@style/font"
+                    android:text="@string/manager_overtime_reason"
+                    android:layout_weight="1"
+                    android:textSize="20dp"/>
+                <TextView
+                    android:id="@+id/manager_overtime_reason_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/manager_overtime_reason"
+                    android:layout_weight="1"
+                    />
+            </LinearLayout>
+
+            <!--加班总时间-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:textSize="20dp"
+                    android:text="@string/manager_overtime_alltime" />
+                <TextView
+                    android:layout_width="match_parent"
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:text="@string/manager_overtime_alltime"
+                    android:id="@+id/manager_overtime_all_time_textview"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

@@ -2,23 +2,19 @@ package com.example.zxl.cloudmanager;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.example.zxl.cloudmanager.Memo.MemoFragment;
-import com.example.zxl.cloudmanager.checkManager.ManagerOvertimeActivity;
-import com.example.zxl.cloudmanager.checkManager.ManagerTravelActivity;
+import com.example.zxl.cloudmanager.checkManager.overtime.ManagerOvertimeActivity;
+import com.example.zxl.cloudmanager.checkManager.travel.ManagerTravelActivity;
 import com.example.zxl.cloudmanager.leaderSearch.LeaderCheckSearchActivity;
 import com.example.zxl.cloudmanager.leaderSearch.LeaderLeaveSearchActivity;
 import com.example.zxl.cloudmanager.leaderSearch.LeaderOvertimeSearchActivity;
 import com.example.zxl.cloudmanager.leaderSearch.LeaderPostSearchActivity;
-import com.example.zxl.cloudmanager.leaderSearch.LeaderTravelSearchActivity;
 import com.example.zxl.cloudmanager.operation.MyOperationActivity;
 import com.example.zxl.cloudmanager.publicSearch.bug.ProjectBugSearchActivity;
 import com.example.zxl.cloudmanager.publicSearch.list.ProjectListSearchActivity;

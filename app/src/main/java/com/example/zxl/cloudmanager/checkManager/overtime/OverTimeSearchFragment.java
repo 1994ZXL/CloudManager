@@ -1,4 +1,4 @@
-package com.example.zxl.cloudmanager.myOvertime;
+package com.example.zxl.cloudmanager.checkManager.overtime;
 
 
 import android.app.Fragment;
@@ -11,13 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
-import com.example.zxl.cloudmanager.MyOverTimeFragment;
 import com.example.zxl.cloudmanager.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class OverTimeFragment extends Fragment {
+public class OverTimeSearchFragment extends Fragment {
 
     private static final String MY = "MY_OVERTIME_LIST";
     private Button mOvertimeBeginBtn;
@@ -67,8 +66,7 @@ public class OverTimeFragment extends Fragment {
         mSearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                fragment = new MyOverTimeFragment();
-
+                fragment = new ManagerOvertimeListFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
@@ -111,7 +109,4 @@ public class OverTimeFragment extends Fragment {
         mSearchBtn = (Button) v.findViewById(R.id.my_overtime_search_button);
     }
 
-    /*private void getExtra(){
-        this.string = getArguments().getString(MY);
-    }*/
 }

@@ -129,6 +129,7 @@
 
 
     <string name="check_button">查询</string>
+    <string name="submit_button">提交</string>
 
     <!-- 加班-->
     <string name="overtime_time">加班时间：</string>
@@ -170,6 +171,8 @@
     <string name="my_mission_state">任务状态</string>
 
     <string name="my_overtime_time">加班时间</string>
+    <string name="overtime_begin_time">加班开始时间</string>
+    <string name="overtime_end_time">加班结束时间</string>
     <string name="manager_overtime_total">加班时间小计</string>
     <string name="manager_overtime_reason">加班原因</string>
     <string name="manager_overtime_project">加班项目</string>
@@ -177,6 +180,9 @@
     <string name="my_join_project">项目</string>
 
     <string name="employer_travel_time">出差时间</string>
+    <string name="employer_travel_begin_time">出差开始时间</string>
+    <string name="employer_travel_end_time">出差结束时间</string>
+    <string name="travel_content">出差内容</string>
     <string name="employer_back_time">回程时间</string>
     <string name="employer_travel_state">状态</string>
 
@@ -188,6 +194,7 @@
     <string name="company_list_bar">公司通讯录</string>
     <string name="customer_list_bar">客户通讯录</string>
     <string name="about_app">关于</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
