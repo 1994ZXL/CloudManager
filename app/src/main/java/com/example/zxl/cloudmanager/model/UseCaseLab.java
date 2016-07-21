@@ -14,7 +14,7 @@ public class UseCaseLab {
     private ArrayList<UseCase> mUseCases = new ArrayList<UseCase>();
     private static UseCaseLab sUseCaseLab;
 
-    private String[] title;
+    private String[] content2;
     private String[] content;
     private int index;
 
@@ -22,7 +22,7 @@ public class UseCaseLab {
 
     private UseCaseLab(Context c){
         context = c;
-        title = new String[]{
+        content2 = new String[]{
                 "项目/软件",
                 "功能模块",
                 "用例编号",
@@ -70,119 +70,8 @@ public class UseCaseLab {
                 "开发人员",
                 "负责人"};
 
-        for (index = 1; index <= 22; index++) {
-            if (index == 1) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 2) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 3) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 4) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 5) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 6) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 7) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 8) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 9) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 10) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 11) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 12) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 13) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 14) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 15) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 16) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 17) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 18) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 19) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 20) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 21) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            } else if (index == 22) {
-                UseCase useCase = new UseCase();
-                useCase.setTitle(title[index - 1]);
-                useCase.setContent(content[index - 1]);
-                mUseCases.add(useCase);
-            }
-        }
+        set(content2);
+        set(content);
     }
 
     public static UseCaseLab newInstance(Context c) {
@@ -196,7 +85,9 @@ public class UseCaseLab {
         return mUseCases;
     }
 
-    public String[] getTitle() {
-        return title;
+    public void set(String[] content) {
+        UseCase useCase = new UseCase();
+        useCase.setContent(content);
+        mUseCases.add(useCase);
     }
 }

@@ -24,13 +24,11 @@
             <TextView
                 style="@style/font"
                 android:layout_width="wrap_content"
-                android:text="@string/name"
                 android:id="@+id/leave_card_item_name"/>
             <TextView
                 style="@style/font"
                 android:layout_width="wrap_content"
                 android:layout_marginLeft="50dp"
-                android:text="病假"
                 android:id="@+id/leave_card_item_illness" />
         </LinearLayout>
         <!-- 第二排-->
@@ -53,7 +51,6 @@
             style="@style/font"
             android:layout_width="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="未批准"
             android:textColor="#FF4040"
             android:id="@+id/leave_card_item_state" />
     </LinearLayout>

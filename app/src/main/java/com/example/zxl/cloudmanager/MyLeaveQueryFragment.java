@@ -1,5 +1,6 @@
 package com.example.zxl.cloudmanager;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
@@ -9,6 +10,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +21,13 @@ import android.widget.TextView;
 import com.example.zxl.cloudmanager.leave.LeaveSearchActivity;
 import com.example.zxl.cloudmanager.leave.LeaveSearchFragment;
 import com.example.zxl.cloudmanager.model.Leave;
+import com.example.zxl.cloudmanager.model.LeaveMyLab;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by ZXL on 2016/7/12.
@@ -35,6 +39,10 @@ public class MyLeaveQueryFragment extends Fragment {
     private MyAdapter myAdapter;
 
     private Fragment mFragment;
+    private static final String TAG = "MyLeaveQueryFragment";
+
+    private int type;
+    private int index;
 
     private Button mSearchBtn;
     @Override
@@ -54,12 +62,24 @@ public class MyLeaveQueryFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        Intent intent = activity.getIntent();
+        Log.d(TAG, "onAttach调用");
+        type =  intent.getIntExtra("TYPE", -1);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.main_fragment_my_leave_query, parent, false);
 
         getActivity().getActionBar().setTitle("我的请假");
 
-
+        if (type == -1) {
+            leaves = LeaveMyLab.newInstance(mFragment.getActivity()).get();
+        } else {
+            leaves.add(LeaveMyLab.newInstance(mFragment.getActivity()).get().get(type));
+        }
 
         mRecyclerView = (RecyclerView)v.findViewById(R.id.leave_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -123,6 +143,11 @@ public class MyLeaveQueryFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             Leave leave = leaves.get(i);
+
+            viewHolder.mLeaveName.setText(leave.getName());
+            viewHolder.mLeaveType.setText(leave.getType());
+            viewHolder.mLeaveState.setText(leave.getState());
+
             viewHolder.itemView.setTag(leaves.get(i));
         }
 
@@ -140,10 +165,16 @@ public class MyLeaveQueryFragment extends Fragment {
 
         public class ViewHolder extends RecyclerView.ViewHolder{
             public TextView mLeaveTime;
+            public TextView mLeaveName;
+            public TextView mLeaveType;
+            public TextView mLeaveState;
 
             public ViewHolder(View v) {
                 super(v);
                 mLeaveTime = (TextView)v.findViewById(R.id.leave_card_item_leave_time);
+                mLeaveName = (TextView) v.findViewById(R.id.leave_card_item_name);
+                mLeaveType = (TextView) v.findViewById(R.id.leave_card_item_illness);
+                mLeaveState = (TextView) v.findViewById(R.id.leave_card_item_state);
             }
         }
 

@@ -111,8 +111,14 @@
     <string name="leave_state">请假状态</string>
 
     <!-- 我的任务-->
+    <string name="mission_name">任务名称</string>
+    <string name="mission_content">任务内容</string>
+    <string name="mission_level">任务优先级</string>
+    <string name="mission_content_details">任务内容说明</string>
     <string name="mission_begin_time">任务开始时间</string>
     <string name="mission_end_time">任务结束时间</string>
+    <string name="mission_progress">任务完成进度</string>
+    <string name="mission_state">任务状态</string>
 
     <!-- 我的用例-->
     <string name="usecase_number">用例编号：</string>
@@ -120,7 +126,7 @@
     <string name="text_man">测试人员：</string>
     <string name="exploit_man">开发人员：</string>
     <string name="autorized_time">编制时间：</string>
-
+    
     <!-- 我的bug-->
     <string name="functionModule">功能模块</string>
     <string name="bug_version">bug等级：</string>
@@ -154,6 +160,24 @@
     <string name="usecase_tester">测试人员</string>
     <string name="usecase_developer">开发人员</string>
     <string name="usecase_formation_time">编制时间</string>
+    <string name="usecase_project_soft">项目/软件</string>
+    <string name="usecase_autorized_strength">编制人</string>
+    <string name="usecase_correlation_usecase">相关用例</string>
+    <string name="usecase_function_character">功能特性</string>
+    <string name="usecase_text_aim">测试目的</string>
+    <string name="usecase_presetValue">预置条件</string>
+    <string name="usecase_referenceInformation">参考信息</string>
+    <string name="usecase_textDate">测试数据</string>
+    <string name="usecase_Scene">场景</string>
+    <string name="usecase_operationSequence">操作步骤</string>
+    <string name="usecase_operationDescription">操作描述</string>
+    <string name="usecase_data">数据</string>
+    <string name="usecase_expectedOutcome">期望结果</string>
+    <string name="usecase_particalOutcome">实际结果</string>
+    <string name="usecase_textState">测试状态</string>
+    <string name="usecase_testMan">测试人员</string>
+    <string name="usecase_exploitMan">开发人员</string>
+    <string name="usecase_principal">负责人</string>
 
     <string name="bug_find_time">发现时间</string>
     <string name="bug_finder">发现人</string>

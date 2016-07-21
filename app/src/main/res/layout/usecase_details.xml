@@ -1,33 +1,384 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mission_details"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/post">
+    android:background="@color/gray2">
 
-    <FrameLayout
-        android:id="@+id/fragment_my_post"
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:background="@color/white">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/usecase_details_key"
-            android:textSize="20dp"
-            android:layout_gravity="top|left" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/usecase_details_value"
-            android:textSize="20dp"
-            android:layout_gravity="top|right" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:background="@color/white">
 
-    </FrameLayout>
+                <!-- 项目/软件-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_project_soft"/>
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_project_soft"/>
+                </LinearLayout>
+                <!-- 功能模块-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/functionModule" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_functionModule"/>
+                </LinearLayout>
+                <!-- 用例编号-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_id" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_id"/>
+                </LinearLayout>
+                <!-- 程序版本-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_program_number" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_program_number"/>
+                </LinearLayout>
+                <!-- 编制人-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_autorized_strength" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_autorized_strength"/>
+                </LinearLayout>
+                <!-- 编制时间-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_formation_time" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_formation_time"/>
+                </LinearLayout>
+                <!-- 相关用例-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_correlation_usecase" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_correlation_usecase"/>
+                </LinearLayout>
+                <!-- 功能特性-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_function_character" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_function_character"/>
+                </LinearLayout>
+                <!-- 测试目的-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_text_aim" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_text_aim"/>
+                </LinearLayout>
+                <!-- 预置条件-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_presetValue" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_presetValue"/>
+                </LinearLayout>
+                <!-- 参考信息-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_referenceInformation" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_referenceInformation"/>
+                </LinearLayout>
+                <!-- 测试数据-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_textDate" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_textDate"/>
+                </LinearLayout>
+                <!-- 场景-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_Scene" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_Scene"/>
+                </LinearLayout>
+                <!-- 操作步骤-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_operationSequence" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_operationSequence"/>
+                </LinearLayout>
+                <!-- 操作描述-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_operationDescription" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_operationDescription"/>
+                </LinearLayout>
+                <!-- 数据-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_data" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_data"/>
+                </LinearLayout>
+                <!-- 期望结果-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_expectedOutcome" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_expectedOutcome"/>
+                </LinearLayout>
+                <!-- 实际结果-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_particalOutcome" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_particalOutcome"/>
+                </LinearLayout>
+                <!-- 测试状态-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_textState" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_textState"/>
+                </LinearLayout>
+                <!-- 测试人员-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_testMan" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_testMan"/>
+                </LinearLayout>
+                <!-- 开发人员-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_exploitMan" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_exploitMan"/>
+                </LinearLayout>
+                <!-- 负责人-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/usecase_principal" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/usecase_details_principal"/>
+                </LinearLayout>
 
-</FrameLayout>
+            </LinearLayout>
 
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

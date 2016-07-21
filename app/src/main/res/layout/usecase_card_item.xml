@@ -14,14 +14,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- 项目名称-->
+        <!-- 项目/软件-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
-            android:id="@+id/main_fragment_my_usecase_projectName"
-            android:textSize="30dp"
-            android:text="项目名称"/>
+            android:id="@+id/usecase_card_item_project_soft"
+            android:textSize="30dp"/>
 
         <!-- 用例编号-->
         <LinearLayout
@@ -37,7 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/check_card_item_usecase_number"/>
+                android:id="@+id/usecase_card_item_usecase_number"/>
         </LinearLayout>
 
         <!-- 程序版本-->
@@ -54,7 +53,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/check_card_item_version_number"/>
+                android:id="@+id/usecase_card_item_version_number"/>
         </LinearLayout>
 
         <!-- 测试人员-->
@@ -71,7 +70,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/check_card_item_text_man"/>
+                android:id="@+id/usecase_card_item_text_man"/>
         </LinearLayout>
 
         <!-- 开发人员-->
@@ -88,7 +87,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/check_card_item_exploit_man"/>
+                android:id="@+id/usecase_card_item_exploit_man"/>
         </LinearLayout>
 
         <!-- 编制时间-->
@@ -105,7 +104,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/check_card_item_autorized_time"/>
+                android:id="@+id/usecase_card_item_autorized_time"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.leave.LeaveSearchFragment;
 import com.example.zxl.cloudmanager.model.Mission;
+import com.example.zxl.cloudmanager.model.MissionLab;
 import com.example.zxl.cloudmanager.myMission.MyMissionSearchFragment;
 
 import java.text.SimpleDateFormat;
@@ -35,7 +36,7 @@ public class MyMissionFragment extends Fragment {
 
     private Fragment mFragment;
 
-    private Button mBtn;
+    private Button mSearchBtn;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -50,7 +51,7 @@ public class MyMissionFragment extends Fragment {
 
         getActivity().getActionBar().setTitle("我的任务");
 
-        missions.add(new Mission(getTime(), getTime()));
+        missions = MissionLab.newInstance(mFragment.getActivity()).get();
 
         mRecyclerView = (RecyclerView)view.findViewById(R.id.mission_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -62,7 +63,7 @@ public class MyMissionFragment extends Fragment {
         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, Object data) {
-                Fragment fragment = new MyCheckDetailFragment();
+                Fragment fragment = MyMissionDetailFragment.newInstance(data);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
@@ -76,11 +77,11 @@ public class MyMissionFragment extends Fragment {
                 }
             }
         });
-        mBtn =(Button) view.findViewById(R.id.mine_mission_search_button) ;
-        mBtn.setOnClickListener(new View.OnClickListener(){
+        mSearchBtn =(Button) view.findViewById(R.id.mine_mission_search_button) ;
+        mSearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Fragment fragment = new MyMissionSearchFragment();
+                Fragment fragment = new MyMissionDetailFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
@@ -133,6 +134,9 @@ public class MyMissionFragment extends Fragment {
             Mission mission = missions.get(i);
             viewHolder.mBeginTime.setText(mission.getMissionBeginTime().toString());
             viewHolder.mEndTime.setText(mission.getMissionEndTime().toString());
+            viewHolder.mName.setText(mission.getName());
+            viewHolder.mState.setText(mission.getState());
+            viewHolder.mlevel.setText(mission.getLevel());
             viewHolder.itemView.setTag(missions.get(i));
         }
 
@@ -149,11 +153,17 @@ public class MyMissionFragment extends Fragment {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder{
+            public TextView mName;
+            public TextView mState;
+            public TextView mlevel;
             public TextView mBeginTime;
             public TextView mEndTime;
 
             public ViewHolder(View v) {
                 super(v);
+                mName = (TextView) v.findViewById(R.id.mission_card_item_name);
+                mState = (TextView)v.findViewById(R.id.mission_card_item_state);
+                mlevel = (TextView)v.findViewById(R.id.mission_card_item_level);
                 mBeginTime = (TextView)v.findViewById(R.id.missoin_card_item_mission_begin_time);
                 mEndTime = (TextView)v.findViewById(R.id.mission_card_item_mission_end_time);
             }

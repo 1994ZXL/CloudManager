@@ -22,6 +22,8 @@ import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
 import com.example.zxl.cloudmanager.model.Leave;
+import com.example.zxl.cloudmanager.model.LeaveMyLab;
+import com.example.zxl.cloudmanager.model.LeaveQueryLab;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,7 +34,6 @@ import java.util.Date;
  */
 public class MyLeaveApplyFragment extends Fragment {
     private Leave leave = new Leave();
-    private ArrayList<Leave> mLeaves = new ArrayList<Leave>();
 
     private ArrayAdapter<String> adapter;
     private static final String[] list={"病假", "事假", "婚假", "丧假", "产假", "年休假"};
@@ -50,6 +51,16 @@ public class MyLeaveApplyFragment extends Fragment {
     private Button mCommitBtn;
 
     private static final String TAG = "MyLeaveApplyFragment";
+    private static final String ARRAY = "array";
+
+    private Fragment mFragment;
+
+    @Override
+    public void onCreate(Bundle saveInstanceState) {
+        super.onCreate(saveInstanceState);
+
+        mFragment = this;
+    }
 
 
     @Override
@@ -136,12 +147,9 @@ public class MyLeaveApplyFragment extends Fragment {
         leave.setBeginTime(beginTime);
         leave.setEndTime(endTime);
         leave.setResion(reson);
-        mLeaves.add(leave);
-        MyLeaveQueryFragment fragment = new MyLeaveQueryFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.blankActivity, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        LeaveMyLab.newInstance(mFragment.getActivity()).add(leave);
+        Intent intent = new Intent(mFragment.getActivity(), MyLeaveActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -153,7 +161,6 @@ public class MyLeaveApplyFragment extends Fragment {
         }else if (requestCode == 12) {
             beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             leave.setBeginTime(beginTime);
-            Log.d(TAG, leave.getBeginTime().toString());
             updateBeginDate();
         }else if (requestCode == 13) {
             endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
