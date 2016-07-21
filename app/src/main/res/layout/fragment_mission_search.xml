@@ -1,9 +1,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.zxl.cloudmanager.publicSearch.plan.PlanFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context="com.example.zxl.cloudmanager.projectManager.mission.MissionSearchFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -30,7 +30,7 @@
                         android:textSize="20dp"/>
 
                     <EditText
-                        android:id="@+id/project_plan_name_edittext"
+                        android:id="@+id/pm_mission_name_edittext"
                         style="@style/editTextZ"
                         android:layout_weight="7"/>
                 </LinearLayout>
@@ -51,33 +51,9 @@
                         android:textSize="20dp"/>
 
                     <EditText
-                        android:id="@+id/project_plan_manager_name_edittext"
+                        android:id="@+id/pm_employer_name_edittext"
                         style="@style/editTextZ"
                         android:layout_weight="7"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
-
-                    <TextView
-                        android:id="@+id/project_plan_priority_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/project_mission_priority"
-                        android:layout_weight="1"
-                        android:textSize="20dp"
-                        android:layout_gravity="center_vertical" />
-
-                    <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/project_plan_priority_sprinner">
-
-                    </Spinner>
                 </LinearLayout>
 
                 <LinearLayout
@@ -99,7 +75,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:id="@+id/project_mission_state_sprinner">
+                        android:id="@+id/pm_mission_state_sprinner">
 
                     </Spinner>
                 </LinearLayout>
@@ -114,30 +90,27 @@
                         android:id="@+id/plan_create_time_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/plan_create_time"
+                        android:text="@string/project_mission_time"
                         android:layout_weight="1"
                         android:textSize="20dp"/>
 
                     <Button
-                        android:id="@+id/project_mission_begin_time_button"
+                        android:id="@+id/pm_mission_begin_time_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="20dp"
                         android:text="@string/project_begin_time_textview"
                         android:layout_weight="0.3"/>
                     <Button
-                        android:id="@+id/project_mission_end_time_button"
+                        android:id="@+id/pm_mission_end_time_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="20dp"
                         android:text="@string/project_end_time_textview"
                         android:layout_weight="0.3"/>
                 </LinearLayout>
             </LinearLayout>
 
-
             <Button
-                android:id="@+id/plan_search_button"
+                android:id="@+id/pm_mission_search_button"
                 style="@style/SearchButton"
                 android:text="@string/check_button"
                 android:textSize="20dp" />

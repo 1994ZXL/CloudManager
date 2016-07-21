@@ -484,19 +484,19 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_margin="12dp"
-                        android:layout_weight="1"
-                        android:visibility="invisible">
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:src="@drawable/demo"
+                            android:id="@+id/main_fragment_usecase_manage_image"
                             android:layout_gravity="center" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/bug_manage"/>
+                            android:text="@string/project_usecase" />
                     </LinearLayout>
 
                     <LinearLayout
