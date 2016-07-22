@@ -1,6 +1,5 @@
 package com.example.zxl.cloudmanager.tabBar;
 
-
 import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
@@ -12,26 +11,34 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.zxl.cloudmanager.R;
-import com.example.zxl.cloudmanager.tabBar.dummy.EmployerLab;
+import com.example.zxl.cloudmanager.tabBar.dummy.CustomerLab;
+import com.example.zxl.cloudmanager.tabBar.dummy.CustomerLab.DummyItem;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class CompanyMemberListFragment extends Fragment {
+public class CustomerItemFragment extends Fragment {
 
+    // TODO: Customize parameters
     private int mColumnCount = 1;
 
-   private OnListFragmentInteractionListener mListener;
+    private OnListFragmentInteractionListener mListener;
 
-    public CompanyMemberListFragment() {
-        // Required empty public constructor
+    /**
+     * Mandatory empty constructor for the fragment manager to instantiate the
+     * fragment (e.g. upon screen orientation changes).
+     */
+    public CustomerItemFragment() {
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_company_member_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_customeritem_list, container, false);
+
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -41,7 +48,7 @@ public class CompanyMemberListFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            recyclerView.setAdapter(new CompanyEmployerItemRecyclerViewAdapter(EmployerLab.ITEMS, mListener));
+            recyclerView.setAdapter(new CustomerItemRecyclerViewAdapter(CustomerLab.ITEMS, mListener));
         }
         return view;
     }
@@ -66,6 +73,6 @@ public class CompanyMemberListFragment extends Fragment {
 
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(EmployerLab.DummyItem item);
+        void onListFragmentInteraction(DummyItem item);
     }
 }

@@ -57,8 +57,8 @@
         <activity android:name=".projectManager.memberManager.ProjectMemberManagerActivity" />
         <activity android:name=".projectManager.mission.ProjectMissionManagerActivity" />
         <activity android:name=".projectManager.projectList.ProjectConnectionListActivity" />
-        <activity android:name=".projectManager.usecase.ProjectUsecaseActivity" />
-        
+        <activity android:name=".projectManager.usecase.ProjectManagerUsecaseActivity" />
+
 
     </application>
 

@@ -9,10 +9,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.zxl.cloudmanager.Memo.MemoFragment;
 import com.example.zxl.cloudmanager.tabBar.AboutAppFragment;
 import com.example.zxl.cloudmanager.tabBar.CompanyMemberListFragment;
-import com.example.zxl.cloudmanager.tabBar.CustomerListFragment;
+import com.example.zxl.cloudmanager.tabBar.CustomerItemFragment;
 
 
 public class MainActivity extends Activity implements View.OnClickListener{
@@ -25,7 +24,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private FragmentManager fragmentManager;
     private MainFragment mainFragment;
     private CompanyMemberListFragment companyMemberListFragment;
-    private CustomerListFragment customerListFragment;
+    private CustomerItemFragment customerListFragment;
     private AboutAppFragment aboutAppFragment;
 
     private Fragment fragment;
@@ -109,7 +108,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 setSelected();
                 bottomCustomerBar.setSelected(true);
                 if(fragment == null){
-                    customerListFragment = new CustomerListFragment();
+                    customerListFragment = new CustomerItemFragment();
                     ft.add(R.id.fragmentContiner,customerListFragment);
                 }else {
                     fragmentManager.beginTransaction().replace(R.id.fragmentContiner, customerListFragment).commit();
