@@ -21,7 +21,7 @@ import com.example.zxl.cloudmanager.projectManager.manager.ProjectManagerActivit
 import com.example.zxl.cloudmanager.projectManager.memberManager.ProjectMemberManagerActivity;
 import com.example.zxl.cloudmanager.projectManager.mission.ProjectMissionManagerActivity;
 import com.example.zxl.cloudmanager.projectManager.projectList.ProjectConnectionListActivity;
-import com.example.zxl.cloudmanager.projectManager.usecase.ProjectUsecaseActivity;
+import com.example.zxl.cloudmanager.projectManager.usecase.ProjectManagerUsecaseActivity;
 import com.example.zxl.cloudmanager.publicSearch.bug.ProjectBugSearchActivity;
 import com.example.zxl.cloudmanager.publicSearch.list.ProjectListSearchActivity;
 import com.example.zxl.cloudmanager.publicSearch.memberList.MemberListActivity;
@@ -116,7 +116,7 @@ public class MainFragment extends Fragment {
         onClickListener(pmListImage, new ProjectConnectionListActivity());
         onClickListener(pmMemberManagerImage, new ProjectMemberManagerActivity());
         onClickListener(pmMissionImage, new ProjectMissionManagerActivity());
-        onClickListener(pmUsecaseImage, new ProjectUsecaseActivity());
+        onClickListener(pmUsecaseImage, new ProjectManagerUsecaseActivity());
 
         return v;
     }
