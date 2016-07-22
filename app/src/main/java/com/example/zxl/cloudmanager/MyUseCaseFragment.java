@@ -3,6 +3,7 @@ package com.example.zxl.cloudmanager;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.leave.LeaveSearchFragment;
 import com.example.zxl.cloudmanager.model.Check;
+import com.example.zxl.cloudmanager.model.CheckLab;
 import com.example.zxl.cloudmanager.model.UseCase;
 import com.example.zxl.cloudmanager.model.UseCaseLab;
 import com.example.zxl.cloudmanager.model.UserLab;
@@ -35,7 +37,11 @@ public class MyUseCaseFragment extends Fragment {
     private MyAdapter myAdapter;
 
     private Fragment mFragment;
-    private Button mBtn;
+    private Button mSearchBtn;
+
+    private static final String SEARCH_KEY = "search_key";
+    private static final String TAG = "MyUseCaseFragment";
+    private int searchKey;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -50,7 +56,20 @@ public class MyUseCaseFragment extends Fragment {
 
         getActivity().getActionBar().setTitle("我的用例");
 
-        useCases = UseCaseLab.newInstance(mFragment.getActivity()).getUseCase();
+        saveInstanceState = getArguments();
+        if (null == saveInstanceState) {
+            searchKey = -1;
+        } else {
+            searchKey = getArguments().getInt(SEARCH_KEY);
+        }
+
+        if (-1 == searchKey) {
+            useCases = UseCaseLab.newInstance(mFragment.getActivity()).getUseCase();
+        } else {
+            useCases.add(UseCaseLab.newInstance(mFragment.getActivity()).getUseCase().get(searchKey));
+        }
+
+        Log.d(TAG, "searchKey: " + searchKey);
 
         mRecyclerView = (RecyclerView)v.findViewById(R.id.usecase_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -77,8 +96,8 @@ public class MyUseCaseFragment extends Fragment {
             }
         });
 
-        mBtn =(Button) v.findViewById(R.id.my_usecase_search_button) ;
-        mBtn.setOnClickListener(new View.OnClickListener(){
+        mSearchBtn =(Button) v.findViewById(R.id.my_usecase_search_button) ;
+        mSearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Fragment fragment = new UsecaseFragment();

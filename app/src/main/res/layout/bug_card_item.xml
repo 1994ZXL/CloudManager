@@ -37,6 +37,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
                 android:id="@+id/bug_card_item_bug_version"/>
         </LinearLayout>
 
@@ -54,6 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
                 android:id="@+id/bug_card_item_bug_state"/>
         </LinearLayout>
 
@@ -67,10 +69,11 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/usecase_number"/>
+                android:text="@string/usecase_id"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
                 android:id="@+id/bug_card_item_usecase_number"/>
         </LinearLayout>
 
@@ -88,6 +91,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
                 android:id="@+id/bug_card_item_found_time"/>
         </LinearLayout>
 

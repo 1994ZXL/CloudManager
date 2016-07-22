@@ -6,10 +6,10 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="20dp">
 
@@ -17,20 +17,19 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="20dp">
+                android:orientation="horizontal">
 
                 <TextView
                     style="@style/font"
                     android:layout_width="match_parent"
                     android:text="@string/name"
-                    android:textSize="20dp"
                     android:layout_weight="1"/>
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/font"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="张三"
                     android:id="@+id/manager_employer_name_textview"
                     />
@@ -41,21 +40,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="40dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     style="@style/font"
                     android:text="@string/project_name_edittext"
-                    android:layout_weight="1"
-                    android:textSize="20dp"/>
+                    android:layout_weight="1"/>
                 <TextView
                     android:id="@+id/manager_overtime_project_textview"
                     android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:text="@string/project_name_edittext"
-                    android:padding="5dp"
-                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    style="@style/font"
                     />
             </LinearLayout>
 
@@ -64,20 +62,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="40dp">
 
                 <TextView
                     style="@style/font"
                     android:layout_width="match_parent"
                     android:text="@string/overtime_begin_time"
-                    android:textSize="20dp"
                     android:layout_weight="1"/>
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/font"
                     android:text="@string/overtime_begin_time"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:id="@+id/manager_overtime_begin_time_textview"
                     />
             </LinearLayout>
@@ -85,20 +83,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="40dp">
 
                 <TextView
                     style="@style/font"
                     android:layout_width="match_parent"
                     android:text="@string/overtime_end_time"
-                    android:textSize="20dp"
                     android:layout_weight="1"/>
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/font"
                     android:text="@string/overtime_end_time"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:id="@+id/manager_overtime_end_time_textview"
                     />
             </LinearLayout>
@@ -108,19 +106,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="40dp">
 
                 <TextView
                     style="@style/font"
                     android:layout_width="match_parent"
                     android:layout_weight="1"
-                    android:textSize="20dp"
                     android:text="@string/manager_overtime_total" />
                 <TextView
                     android:layout_width="match_parent"
                     style="@style/font"
                     android:layout_weight="1"
                     android:text="@string/manager_overtime_total"
+                    android:gravity="center"
                     android:id="@+id/manager_overtime_total_time_textview"/>
 
             </LinearLayout>
@@ -128,19 +126,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="40dp">
 
                 <TextView
                     android:layout_width="match_parent"
                     style="@style/font"
                     android:text="@string/manager_overtime_reason"
-                    android:layout_weight="1"
-                    android:textSize="20dp"/>
+                    android:layout_weight="1"/>
                 <TextView
                     android:id="@+id/manager_overtime_reason_textview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/font"
                     android:text="@string/manager_overtime_reason"
+                    android:gravity="center"
                     android:layout_weight="1"
                     />
             </LinearLayout>
@@ -150,19 +148,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="40dp">
 
                 <TextView
                     style="@style/font"
                     android:layout_width="match_parent"
                     android:layout_weight="1"
-                    android:textSize="20dp"
                     android:text="@string/manager_overtime_alltime" />
                 <TextView
                     android:layout_width="match_parent"
                     style="@style/font"
                     android:layout_weight="1"
                     android:text="@string/manager_overtime_alltime"
+                    android:gravity="center"
                     android:id="@+id/manager_overtime_all_time_textview"/>
 
             </LinearLayout>
