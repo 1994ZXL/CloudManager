@@ -55,6 +55,7 @@
     <string name="project_member_manage">成员管理</string>
     <string name="project_mission_manage">计划管理</string>
     <string name="bug_manage">bug处理</string>
+    <string name="project_usecase">项目用例</string>
 
     <!--备忘录-->
     <string name="memo_title_textview">标题</string>
@@ -225,6 +226,11 @@
     <string name="company_list_bar">公司通讯录</string>
     <string name="customer_list_bar">客户通讯录</string>
     <string name="about_app">关于</string>
+    <string name="APP_name">企业云</string>
+    <string name="program_number">V 1.0</string>
+    <string name="program_flash">版本更新</string>
+    <string name="function_introduce">功能介绍</string>
+    <string name="help">帮助</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

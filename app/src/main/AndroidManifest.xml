@@ -51,7 +51,14 @@
         <activity android:name=".checkManager.overtime.ManagerOvertimeActivity" />
         <activity android:name=".checkManager.travel.ManagerTravelActivity" />
 
-
+        <!--项目主管-->
+        <activity android:name=".projectManager.bugDeal.ProjectBugDealActivity" />
+        <activity android:name=".projectManager.manager.ProjectManagerActivity" />
+        <activity android:name=".projectManager.memberManager.ProjectMemberManagerActivity" />
+        <activity android:name=".projectManager.mission.ProjectMissionManagerActivity" />
+        <activity android:name=".projectManager.projectList.ProjectConnectionListActivity" />
+        <activity android:name=".projectManager.usecase.ProjectUsecaseActivity" />
+        
 
     </application>
 
