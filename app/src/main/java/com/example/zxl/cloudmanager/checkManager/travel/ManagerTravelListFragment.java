@@ -50,11 +50,11 @@ public class ManagerTravelListFragment extends ListFragment {
             TextView name = (TextView) convertView.findViewById(R.id.main_fragment_travel_name);
             name.setText(travel.getName());
 
-            TextView time = (TextView) convertView.findViewById(R.id.main_fragment_travel_time);
-            time.setText(travel.getTravleTime());
+            TextView time = (TextView) convertView.findViewById(R.id.main_fragment_travel_beginTime);
+            time.setText(travel.getBeginTime());
 
             TextView state = (TextView) convertView.findViewById(R.id.main_fragment_travel_state);
-            state.setText(travel.getTravleState());
+            state.setText(travel.getTravelState());
 
             return convertView;
         }

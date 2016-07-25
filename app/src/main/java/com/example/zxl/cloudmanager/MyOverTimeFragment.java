@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 
 import com.example.zxl.cloudmanager.model.OverTime;
+import com.example.zxl.cloudmanager.model.OverTimeLab;
 import com.example.zxl.cloudmanager.myOvertime.MyOvertimeDetailFragment;
 import com.example.zxl.cloudmanager.myOvertime.OverTimeFragment;
 
@@ -34,7 +35,7 @@ public class MyOverTimeFragment extends Fragment {
     private MyAdapter myAdapter;
 
     private Fragment mFragment;
-    private Button mBtn;
+    private Button searchBtn;
     private Fragment fragment;
 
     @Override
@@ -50,7 +51,7 @@ public class MyOverTimeFragment extends Fragment {
 
         getActivity().getActionBar().setTitle("我的加班");
 
-        overTimes.add(new OverTime());
+        overTimes = OverTimeLab.newInstance(mFragment.getActivity()).get();
 
         mRecyclerView = (RecyclerView)v.findViewById(R.id.overtime_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -62,7 +63,7 @@ public class MyOverTimeFragment extends Fragment {
         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, Object data) {
-                fragment = new MyOvertimeDetailFragment();
+                fragment = MyOvertimeDetailFragment.newInstance(data);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
@@ -77,8 +78,8 @@ public class MyOverTimeFragment extends Fragment {
             }
         });
 
-        mBtn =(Button) v.findViewById(R.id.my_overtime_list_search_button) ;
-        mBtn.setOnClickListener(new View.OnClickListener(){
+        searchBtn =(Button) v.findViewById(R.id.my_overtime_list_search_button) ;
+        searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 fragment = new OverTimeFragment();
@@ -123,7 +124,12 @@ public class MyOverTimeFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            OverTime OverTime = overTimes.get(i);
+            OverTime overTime = overTimes.get(i);
+
+            viewHolder.mOvertimeName.setText(overTime.getName());
+            viewHolder.mOvertimeProject.setText(overTime.getProject());
+            viewHolder.mBeginTime.setText(overTime.getBeginTime());
+            viewHolder.mEndTime.setText(overTime.getEndTime());
 
             viewHolder.itemView.setTag(overTimes.get(i));
         }
@@ -142,15 +148,16 @@ public class MyOverTimeFragment extends Fragment {
 
         public class ViewHolder extends RecyclerView.ViewHolder{
             public TextView mOvertimeName;
-            public TextView mOvertimeDate;
+            public TextView mBeginTime;
+            public TextView mEndTime;
             public TextView mOvertimeProject;
 
             public ViewHolder(View v) {
                 super(v);
                 mOvertimeName = (TextView)v.findViewById(R.id.main_fragment_overtime_name);
-                mOvertimeDate = (TextView)v.findViewById(R.id.overtime_card_item_overtime_time);
-                mOvertimeProject = (TextView)v.findViewById(R.id.overtime_card_item_overtime_project);
-
+                mBeginTime = (TextView) v.findViewById(R.id.overtime_card_item_begin_time);
+                mEndTime = (TextView)v.findViewById(R.id.overtime_card_item_end_time);
+                mOvertimeProject = (TextView) v.findViewById(R.id.overtime_card_item_overtime_project);
             }
         }
 

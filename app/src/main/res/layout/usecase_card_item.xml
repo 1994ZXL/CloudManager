@@ -36,6 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
                 android:id="@+id/usecase_card_item_usecase_number"/>
         </LinearLayout>
 
@@ -53,6 +54,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
                 android:id="@+id/usecase_card_item_version_number"/>
         </LinearLayout>
 
@@ -70,6 +72,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
                 android:id="@+id/usecase_card_item_text_man"/>
         </LinearLayout>
 
@@ -87,6 +90,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
                 android:id="@+id/usecase_card_item_exploit_man"/>
         </LinearLayout>
 
@@ -104,6 +108,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
                 android:id="@+id/usecase_card_item_autorized_time"/>
         </LinearLayout>
 

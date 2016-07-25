@@ -130,10 +130,17 @@
     
     <!-- 我的bug-->
     <string name="functionModule">功能模块</string>
-    <string name="bug_version">bug等级：</string>
-    <string name="bug_state">bug状态：</string>
-    <string name="found_time">发现时间：</string>
-
+    <string name="bug_version">bug等级</string>
+    <string name="bug_state">bug状态</string>
+    <string name="found_time">发现时间</string>
+    <string name="bug_number">bug序号</string>
+    <string name="bug_content">bug内容</string>
+    <string name="operation_mode">操作模式</string>
+    <string name="entrance_mode">进入方式</string>
+    <string name="found_man">发现人</string>
+    <string name="edit_time">修改时间</string>
+    <string name="edit_man">修改人</string>
+    <string name="under_program">所属项目</string>
 
     <string name="check_button">查询</string>
     <string name="submit_button">提交</string>
@@ -209,6 +216,10 @@
     <string name="employer_travel_end_time">出差结束时间</string>
     <string name="travel_content">出差内容</string>
     <string name="employer_back_time">回程时间</string>
+    <string name="employer_back_beginTime">回程开始时间</string>
+    <string name="employer_back_endTime">回程结束时间</string>
+    <string name="employer_travel_add">出差地址</string>
+    <string name="employer_travel_address">出差详细地址</string>
     <string name="employer_travel_state">状态</string>
 
     <string name="post_submit_time">日报时间</string>

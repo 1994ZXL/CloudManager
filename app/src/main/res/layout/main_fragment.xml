@@ -77,6 +77,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/post_query"
                             android:id="@+id/main_fragment_post_query"/>
                     </LinearLayout>
@@ -97,6 +98,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/check_query"
                             android:id="@+id/main_fragment_check_query"/>
                     </LinearLayout>
@@ -117,6 +119,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/leave_record_query"
                             android:id="@+id/main_fragment_leave_record_query"/>
                     </LinearLayout>
@@ -139,6 +142,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/travel_record_query"
                             android:id="@+id/textView2" />
                     </LinearLayout>
@@ -168,6 +172,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/overtime_record_query"
                             android:id="@+id/textView" />
                     </LinearLayout>
@@ -190,6 +195,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/check_query"
                             android:id="@+id/textView4" />
                     </LinearLayout>
@@ -212,6 +218,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/leave_record_query"
                             android:id="@+id/textView5" />
                     </LinearLayout>
@@ -234,6 +241,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/travel_record_query"
                             android:id="@+id/textView6" />
                     </LinearLayout>
@@ -266,8 +274,9 @@
 
                     <!-- 考勤处理-->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:orientation="vertical"
                         android:layout_margin="12dp">
                         <ImageView
@@ -279,14 +288,16 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/check_deal"
                             android:id="@+id/main_fragment_check_deal"/>
                     </LinearLayout>
 
                     <!-- 请假处理-->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:orientation="vertical"
                         android:layout_margin="12dp">
                         <ImageView
@@ -298,14 +309,16 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/leave_deal"
                             android:id="@+id/main_fragment_leave_deal"/>
                     </LinearLayout>
 
                     <!-- 加班处理-->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:orientation="vertical"
                         android:layout_margin="12dp">
                         <ImageView
@@ -317,14 +330,16 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/overtime_deal"
                             android:id="@+id/main_fragment_overtime_deal"/>
                     </LinearLayout>
 
                     <!-- 出差处理-->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:orientation="vertical"
                         android:layout_margin="12dp">
                         <ImageView
@@ -336,6 +351,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/travel_deal"
                             android:id="@+id/main_fragment_travel_deal"/>
                     </LinearLayout>
@@ -383,6 +399,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/project_manage"/>
                     </LinearLayout>
 
@@ -426,6 +443,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/project_member_manage"
                             android:id="@+id/textView3" />
                     </LinearLayout>
@@ -448,6 +466,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/project_mission_manage"/>
                     </LinearLayout>
 
@@ -475,6 +494,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/bug_manage"
                             android:id="@+id/main_fragment_bug_manage"/>
                     </LinearLayout>
@@ -496,6 +516,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/project_usecase" />
                     </LinearLayout>
 
@@ -517,6 +538,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/bug_manage"
                             android:id="@+id/textView7" />
                     </LinearLayout>
@@ -539,6 +561,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/bug_manage"
                             android:id="@+id/textView8" />
                     </LinearLayout>
@@ -586,6 +609,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/my_message"
                             android:id="@+id/main_fragment_my_message"/>
                     </LinearLayout>
@@ -606,6 +630,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/my_check"
                             android:id="@+id/main_fragment_my_check"/>
                     </LinearLayout>
@@ -626,6 +651,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/my_leave"
                             android:id="@+id/main_fragment_my_leave"/>
                     </LinearLayout>
@@ -646,6 +672,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/my_mission"
                             android:id="@+id/main_fragment_my_mission"/>
                     </LinearLayout>
@@ -675,6 +702,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/my_maintain"
                             android:id="@+id/main_fragment_my_maintain"/>
                     </LinearLayout>
@@ -695,6 +723,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/my_post"
                             android:id="@+id/main_fragment_my_post"/>
                     </LinearLayout>
@@ -715,6 +744,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/my_usecase"
                             android:id="@+id/main_fragment_my_usecase"/>
                     </LinearLayout>
@@ -735,6 +765,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/my_bug"
                             android:id="@+id/main_fragment_my_bug"/>
                     </LinearLayout>
@@ -763,6 +794,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/overtime"
                             android:id="@+id/main_fragment_overtime"/>
                     </LinearLayout>
@@ -783,6 +815,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/travel"
                             android:id="@+id/main_fragment_travel"/>
                     </LinearLayout>
@@ -804,8 +837,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/my_memo"
                             android:layout_gravity="center"
+                            android:text="@string/my_memo"
                             android:id="@+id/main_fragment_my_memo"/>
                     </LinearLayout>
 
@@ -827,6 +860,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/my_memo"
                             android:id="@+id/main_fragment_my_memo2"/>
                     </LinearLayout>
@@ -871,6 +905,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/project_query"
                             android:id="@+id/main_fragment_project_query"/>
                     </LinearLayout>
@@ -889,6 +924,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/project_plan_query"
                             android:id="@+id/main_fragment_project_plan_query"/>
                     </LinearLayout>
@@ -927,6 +963,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/project_memberlist"
                             android:id="@+id/main_fragment_project_memberlist"/>
                     </LinearLayout>
@@ -953,6 +990,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/usecase_query"
                             android:id="@+id/main_fragment_usecase_query"/>
                     </LinearLayout>
@@ -971,6 +1009,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/bug_query"
                             android:id="@+id/main_fragment_bug_query"/>
                     </LinearLayout>
@@ -993,6 +1032,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/bug_query"
                             android:id="@+id/textView9" />
                     </LinearLayout>
@@ -1015,10 +1055,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
                             android:text="@string/bug_query"
                             android:id="@+id/textView10" />
                     </LinearLayout>
-
 
                 </LinearLayout>
 

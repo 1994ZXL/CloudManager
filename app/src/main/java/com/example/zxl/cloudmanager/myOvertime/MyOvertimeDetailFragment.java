@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.OverTime;
 
 import org.w3c.dom.Text;
 
 
 public class MyOvertimeDetailFragment extends Fragment {
+    private static OverTime sOverTime = new OverTime();
 
     private TextView mEmployerNameTV;
     private TextView mProjectNameTV;
@@ -27,12 +29,19 @@ public class MyOvertimeDetailFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static MyOvertimeDetailFragment newInstance(Object data) {
+        sOverTime = (OverTime) data;
+        MyOvertimeDetailFragment fragment = new MyOvertimeDetailFragment();
+        return fragment;
+    }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_my_overtime_detail, container, false);
+
         init(v);
+        control();
+
         return v;
     }
 
@@ -44,5 +53,15 @@ public class MyOvertimeDetailFragment extends Fragment {
         mOvertimeReasonTV = (TextView) v.findViewById(R.id.manager_overtime_reason_textview);
         mTotalTimeTV = (TextView) v.findViewById(R.id.manager_overtime_total_time_textview);
         mAllTimeTV = (TextView) v.findViewById(R.id.manager_overtime_all_time_textview);
+    }
+
+    private void control() {
+        mEmployerNameTV.setText(sOverTime.getName());
+        mProjectNameTV.setText(sOverTime.getProject());
+        mBeginTimeTV.setText(sOverTime.getBeginTime());
+        mEndTimeTV.setText(sOverTime.getEndTime());
+        mOvertimeReasonTV.setText(sOverTime.getReson());
+        mTotalTimeTV.setText(sOverTime.getThisTime());
+        mAllTimeTV.setText(sOverTime.getTotalTime());
     }
 }

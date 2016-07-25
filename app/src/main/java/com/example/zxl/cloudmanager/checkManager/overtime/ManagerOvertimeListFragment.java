@@ -132,7 +132,7 @@ public class ManagerOvertimeListFragment extends Fragment {
             public ViewHolder(View v) {
                 super(v);
                 mOvertimeName = (TextView)v.findViewById(R.id.main_fragment_overtime_name);
-                mOvertimeDate = (TextView)v.findViewById(R.id.overtime_card_item_overtime_time);
+
                 mOvertimeProject = (TextView)v.findViewById(R.id.overtime_card_item_overtime_project);
 
             }

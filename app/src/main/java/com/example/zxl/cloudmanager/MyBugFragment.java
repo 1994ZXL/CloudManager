@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 
 import com.example.zxl.cloudmanager.model.Bug;
+import com.example.zxl.cloudmanager.model.BugLab;
 import com.example.zxl.cloudmanager.publicSearch.bug.BugSearchFragment;
 import com.example.zxl.cloudmanager.publicSearch.usecase.UsecaseFragment;
 
@@ -33,7 +34,11 @@ public class MyBugFragment extends Fragment {
     private MyAdapter myAdapter;
 
     private Fragment mFragment;
-    private Button mBtn;
+    private Button mSearchBtn;
+
+    private static final String SEARCH_KEY = "search_key";
+    private static final String TAG = "MyBugFragment";
+    private int searchKey;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -49,7 +54,18 @@ public class MyBugFragment extends Fragment {
 
         getActivity().getActionBar().setTitle("我的bug");
 
-        bugs.add(new Bug());
+        saveInstanceState = getArguments();
+        if (null == saveInstanceState) {
+            searchKey = -1;
+        } else {
+            searchKey = getArguments().getInt(SEARCH_KEY);
+        }
+
+        if (-1 == searchKey) {
+            bugs = BugLab.newInstance(mFragment.getActivity()).get();
+        } else {
+            bugs.add(BugLab.newInstance(mFragment.getActivity()).get().get(searchKey));
+        }
 
         mRecyclerView = (RecyclerView)v.findViewById(R.id.bug_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -61,7 +77,7 @@ public class MyBugFragment extends Fragment {
         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, Object data) {
-                Fragment fragment = new MyUseCaseDetailFragment();
+                Fragment fragment = MyBugDetailFragment.newInstance(data);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
@@ -76,8 +92,8 @@ public class MyBugFragment extends Fragment {
             }
         });
 
-        mBtn =(Button) v.findViewById(R.id.my_bug_search_button) ;
-        mBtn.setOnClickListener(new View.OnClickListener(){
+        mSearchBtn =(Button) v.findViewById(R.id.my_bug_search_button) ;
+        mSearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 Fragment fragment = new BugSearchFragment();
@@ -122,7 +138,13 @@ public class MyBugFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            Bug Bug = bugs.get(i);
+            Bug bug = bugs.get(i);
+
+            viewHolder.mFunctionModuel.setText(bug.getFunctionModel());
+            viewHolder.mBugVersion.setText(bug.getBugVersion());
+            viewHolder.mBugState.setText(bug.getBugState());
+            viewHolder.mUseCaseNumber.setText(bug.getUseCaseNumber());
+            viewHolder.mFoundTime.setText(bug.getFoundTime());
 
             viewHolder.itemView.setTag(bugs.get(i));
         }
@@ -144,7 +166,7 @@ public class MyBugFragment extends Fragment {
             public TextView mBugVersion;
             public TextView mBugState;
             public TextView mUseCaseNumber;
-            public TextView mFoundState;
+            public TextView mFoundTime;
 
             public ViewHolder(View v) {
                 super(v);
@@ -152,7 +174,7 @@ public class MyBugFragment extends Fragment {
                 mBugVersion = (TextView)v.findViewById(R.id.bug_card_item_bug_version);
                 mBugState = (TextView)v.findViewById(R.id.bug_card_item_bug_state);
                 mUseCaseNumber = (TextView)v.findViewById(R.id.bug_card_item_usecase_number);
-                mFoundState = (TextView)v.findViewById(R.id.bug_card_item_found_time);
+                mFoundTime = (TextView)v.findViewById(R.id.bug_card_item_found_time);
                 
             }
         }
