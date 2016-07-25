@@ -62,6 +62,7 @@ public class CompanyContactionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getActivity().getActionBar().hide();
 
         View v =  inflater.inflate(R.layout.fragment_company_contaction, container, false);
         initView(v);
