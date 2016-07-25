@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.zxl.cloudmanager.R;
@@ -19,6 +20,7 @@ public class ManagerTravelSearchFragment extends Fragment {
     private Button mEndTimeBtn;
     private Button mComeBeginBtn;
     private Button mComeEndBtn;
+    private EditText mEmployerNameET;
 
     private Spinner mStateSpinner;
     private Fragment mFragment;
@@ -75,6 +77,7 @@ public class ManagerTravelSearchFragment extends Fragment {
         mComeBeginBtn = (Button) v.findViewById(R.id.employer_back_begin_time_button);
         mComeEndBtn = (Button) v.findViewById(R.id.employer_back_end_time_button);
         mStateSpinner = (Spinner) v.findViewById(R.id.employer_travel_state_spinner);
+        mEmployerNameET = (EditText) v.findViewById(R.id.cm_employer_name_edittext);
 
         mSearchBtn = (Button) v.findViewById(R.id.my_travel_search_button);
     }

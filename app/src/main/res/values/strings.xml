@@ -67,6 +67,7 @@
 
     <!--考勤查询-->
     <string name="check_end_time">考勤结束时间</string>
+    <string name="employer_name">员工姓名</string>
 
     <!-- 我的信息-->
     <string name="head">头像</string>
@@ -127,7 +128,7 @@
     <string name="text_man">测试人员：</string>
     <string name="exploit_man">开发人员：</string>
     <string name="autorized_time">编制时间：</string>
-    
+
     <!-- 我的bug-->
     <string name="functionModule">功能模块</string>
     <string name="bug_version">bug等级</string>
@@ -235,6 +236,10 @@
     <string name="program_flash">版本更新</string>
     <string name="function_introduce">功能介绍</string>
     <string name="help">帮助</string>
+
+    <!--通讯录-->
+    <string name="search_contact">搜索联系人</string>
+    <string name="no_contact">没有找到联系人</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

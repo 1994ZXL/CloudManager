@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.tabBar.AboutAppFragment;
+import com.example.zxl.cloudmanager.tabBar.CompanyContactionFragment;
 import com.example.zxl.cloudmanager.tabBar.CompanyMemberListFragment;
 import com.example.zxl.cloudmanager.tabBar.CustomerItemFragment;
 
@@ -23,7 +24,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private LinearLayout bottomContent;
     private FragmentManager fragmentManager;
     private MainFragment mainFragment;
-    private CompanyMemberListFragment companyMemberListFragment;
+    private CompanyContactionFragment companyMemberListFragment;
     private CustomerItemFragment customerListFragment;
     private AboutAppFragment aboutAppFragment;
 
@@ -98,7 +99,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 setSelected();
                 bottomAddressListBar.setSelected(true);
                 if(fragment == null){
-                    companyMemberListFragment = new CompanyMemberListFragment();
+                    companyMemberListFragment = new CompanyContactionFragment();
                     ft.add(R.id.fragmentContiner,companyMemberListFragment);
                 }else {
                     fragmentManager.beginTransaction().replace(R.id.fragmentContiner, companyMemberListFragment).commit();
