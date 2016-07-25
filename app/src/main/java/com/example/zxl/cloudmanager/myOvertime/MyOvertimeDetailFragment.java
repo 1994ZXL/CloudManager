@@ -15,7 +15,7 @@ import org.w3c.dom.Text;
 
 
 public class MyOvertimeDetailFragment extends Fragment {
-    private static OverTime sOverTime;
+    private static OverTime sOverTime = new OverTime();
 
     private TextView mEmployerNameTV;
     private TextView mProjectNameTV;
@@ -61,8 +61,7 @@ public class MyOvertimeDetailFragment extends Fragment {
         mBeginTimeTV.setText(sOverTime.getBeginTime());
         mEndTimeTV.setText(sOverTime.getEndTime());
         mOvertimeReasonTV.setText(sOverTime.getReson());
-        mTotalTimeTV.setText(sOverTime.getTotalTime());
-        mAllTimeTV.setText(sOverTime.getTotalTime());
         mTotalTimeTV.setText(sOverTime.getThisTime());
+        mAllTimeTV.setText(sOverTime.getTotalTime());
     }
 }

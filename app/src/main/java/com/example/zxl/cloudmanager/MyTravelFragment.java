@@ -1,19 +1,23 @@
 package com.example.zxl.cloudmanager;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
 import com.example.zxl.cloudmanager.model.Travel;
 import com.example.zxl.cloudmanager.model.TravelLab;
-import com.example.zxl.cloudmanager.myOvertime.OverTimeFragment;
 import com.example.zxl.cloudmanager.travel.TravelSearchFragment;
 
 import java.util.ArrayList;
@@ -22,16 +26,59 @@ import java.util.ArrayList;
  * Created by ZXL on 2016/7/13.
  */
 public class MyTravelFragment extends ListFragment {
-    private ArrayList<Travel> travels;
+    private ArrayList<Travel> travels = new ArrayList<Travel>();
+    private Button searchBtn;
+    private WebView webView;
+
+    private static final String TAG = "MyTravelFragment";
+    private static final String SEARCH_KEY = "search_key";
+    private int searchKey;
+
+    private Fragment mFragment;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setHasOptionsMenu(true);
+        mFragment = this;
 
-        travels = TravelLab.newInstance(getActivity()).getTravels();
+        saveInstanceState = getArguments();
+        if (null == saveInstanceState) {
+            searchKey = -1;
+        } else {
+            searchKey = getArguments().getInt(SEARCH_KEY);
+        }
+
+        if (-1 == searchKey) {
+            travels = TravelLab.newInstance(mFragment.getActivity()).getTravels();
+        } else {
+            Log.d(TAG, "travels: " + TravelLab.newInstance(mFragment.getActivity()).getTravels().get(searchKey).get()[8]);
+            Log.d(TAG, "searchkey: " + searchKey);
+            travels.add(TravelLab.newInstance(mFragment.getActivity()).getTravels().get(searchKey));
+        }
+
         TravelAdapter adapter = new TravelAdapter(travels);
         setListAdapter(adapter);
+
+    }
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id){
+        Travel travel= ((TravelAdapter)getListAdapter()).getItem(position);
+        Log.d(TAG, "item被点击");
+
+        Fragment fragment = MyTravelDetailFragment.newInstance(travel);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if (!fragment.isAdded()) {
+            transaction.addToBackStack(null);
+            transaction.hide(mFragment);
+            transaction.add(R.id.blankActivity, fragment);
+            transaction.commit();
+        } else {
+            transaction.hide(mFragment);
+            transaction.show(fragment);
+            transaction.commit();
+        }
     }
 
     private class TravelAdapter extends ArrayAdapter<Travel> {
@@ -51,11 +98,33 @@ public class MyTravelFragment extends ListFragment {
             TextView name = (TextView) convertView.findViewById(R.id.main_fragment_travel_name);
             name.setText(travel.getName());
 
-            TextView time = (TextView) convertView.findViewById(R.id.main_fragment_travel_time);
-            time.setText(travel.getTravleTime());
+            TextView beginTime = (TextView) convertView.findViewById(R.id.main_fragment_travel_beginTime);
+            beginTime.setText(travel.getBeginTime());
+
+            TextView endTime = (TextView) convertView.findViewById(R.id.main_fragment_travel_endTime);
+            endTime.setText(travel.getBeginTime());
 
             TextView state = (TextView) convertView.findViewById(R.id.main_fragment_travel_state);
-            state.setText(travel.getTravleState());
+            state.setText(travel.getTravelState());
+
+            searchBtn = (Button) convertView.findViewById(R.id.my_travel_list_search_button);
+            searchBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Fragment fragment = new TravelSearchFragment();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    if (!fragment.isAdded()) {
+                        transaction.addToBackStack(null);
+                        transaction.hide(mFragment);
+                        transaction.add(R.id.blankActivity, fragment);
+                        transaction.commit();
+                    } else {
+                        transaction.hide(mFragment);
+                        transaction.show(fragment);
+                        transaction.commit();
+                    }
+                }
+            });
 
             return convertView;
         }

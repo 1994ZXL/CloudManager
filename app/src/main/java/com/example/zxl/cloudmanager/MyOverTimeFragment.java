@@ -63,7 +63,7 @@ public class MyOverTimeFragment extends Fragment {
         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, Object data) {
-                fragment = new MyOvertimeDetailFragment();
+                fragment = MyOvertimeDetailFragment.newInstance(data);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
