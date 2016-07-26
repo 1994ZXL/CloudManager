@@ -9,7 +9,7 @@ import com.example.zxl.cloudmanager.myPost.MyPostSearchFragment;
 public class LeaderPostSearchActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment(){
-        return new MyPostSearchFragment();
+        return new LeaderPostSearchFragment();
     }
 
 }

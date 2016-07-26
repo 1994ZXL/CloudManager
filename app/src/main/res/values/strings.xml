@@ -32,6 +32,8 @@
     <string name="bottom_menu_about_bar">关于</string>
     <string name="query">查询</string>
     <string name="edit">修改</string>
+    <string name="work_sign">上班考勤</string>
+    <string name="work_off_sign">下班考勤</string>
 
     <!-- 我是领导-->
     <string name="leader">我是领导</string>

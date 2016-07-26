@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.example.zxl.cloudmanager.checkManager.overtime.ManagerOvertimeActivity;
@@ -43,6 +44,9 @@ public class MainFragment extends Fragment {
     private ImageView mManageCheck;
     private ImageView mManageLeave;
 
+    /*考勤按钮*/
+    private Button mSignBtn;
+    private Button mOffSignBtn;
 
     //公共查询
     private ImageView myProjectImage;
@@ -118,6 +122,18 @@ public class MainFragment extends Fragment {
         onClickListener(pmMissionImage, new ProjectMissionManagerActivity());
         onClickListener(pmUsecaseImage, new ProjectManagerUsecaseActivity());
 
+        mSignBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+            }
+        });
+        mOffSignBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+            }
+        });
         return v;
     }
 
@@ -134,6 +150,9 @@ public class MainFragment extends Fragment {
         mTravelImage = (ImageView)v.findViewById(R.id.main_fragment_travel_image);
         myOperationImage = (ImageView) v.findViewById(R.id.main_fragment_my_maintain_image) ;
 
+        /*考勤按钮*/
+        mSignBtn = (Button) v.findViewById(R.id.work_sign_button);
+        mOffSignBtn = (Button) v.findViewById(R.id.work_off_sign_button);
 
         //公共查询
         myProjectImage = (ImageView) v.findViewById(R.id.main_fragment_project_query_image);

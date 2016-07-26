@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
 import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,7 +23,6 @@ import com.example.zxl.cloudmanager.ContactionSearchController.ContactionAdapter
 import com.example.zxl.cloudmanager.ContactionSearchController.PinyinUtil;
 import com.example.zxl.cloudmanager.ContactionSearchController.QuickIndexBar;
 import com.example.zxl.cloudmanager.ContactionSearchController.SearchAdapter;
-import com.example.zxl.cloudmanager.MainActivity;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.EmployerContaction;
 
@@ -35,7 +33,7 @@ import java.util.Locale;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CompanyContactionFragment extends Fragment {
+public class CustomerContactionFragment extends Fragment {
 
     private ListView lv_contact;
     private QuickIndexBar qib;
@@ -55,7 +53,7 @@ public class CompanyContactionFragment extends Fragment {
      */
     private String alphabet = "#ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-    public CompanyContactionFragment() {
+    public CustomerContactionFragment() {
         // Required empty public constructor
     }
 
