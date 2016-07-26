@@ -23,7 +23,7 @@ public class ManagerCheckQueryFragment extends Fragment {
     private Spinner mOverTimeSpinner;
     private Button mQueryButton;
 
-    private static final String[] list={"是", "否"};
+    private static final String[] list={"否", "是"};
     private ArrayAdapter<String> adapter;
 
     private Fragment mFragment;

@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.leave.LeaveSearchActivity;
 import com.example.zxl.cloudmanager.leave.LeaveSearchFragment;
+import com.example.zxl.cloudmanager.leave.MyLeaveDetailFragment;
 import com.example.zxl.cloudmanager.model.Leave;
 import com.example.zxl.cloudmanager.model.LeaveMyLab;
 
@@ -91,7 +92,7 @@ public class MyLeaveQueryFragment extends Fragment {
         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, Object data) {
-                Fragment fragment = new MyCheckDetailFragment();
+                Fragment fragment = MyLeaveDetailFragment.newInstance(data);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
