@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.model.Post;
@@ -28,6 +30,13 @@ public class MyPostDetailFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ImageButton mBtn = (ImageButton) getActivity().findViewById(R.id.my_post_activity_searchBtn);
+        mBtn.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.post_details, container, false);
 
@@ -47,5 +56,12 @@ public class MyPostDetailFragment extends Fragment {
         mName.setText(sPost.getName());
         mContent.setText(sPost.getContent());
         mSubmitTime.setText(sPost.getPostTime());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ImageButton mBtn = (ImageButton) getActivity().findViewById(R.id.my_post_activity_searchBtn);
+        mBtn.setVisibility(View.VISIBLE);
     }
 }

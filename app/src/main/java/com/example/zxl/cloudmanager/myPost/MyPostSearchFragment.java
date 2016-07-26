@@ -3,6 +3,7 @@ package com.example.zxl.cloudmanager.myPost;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.media.Image;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -57,7 +59,12 @@ public class MyPostSearchFragment extends Fragment {
         mFragment = this;
     }
 
-
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ImageButton mBtn = (ImageButton) getActivity().findViewById(R.id.my_post_activity_searchBtn);
+        mBtn.setVisibility(View.INVISIBLE);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v =  inflater.inflate(R.layout.fragment_my_post_search, container, false);
@@ -184,4 +191,10 @@ public class MyPostSearchFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        ImageButton mBtn = (ImageButton) getActivity().findViewById(R.id.my_post_activity_searchBtn);
+        mBtn.setVisibility(View.INVISIBLE);
+    }
 }

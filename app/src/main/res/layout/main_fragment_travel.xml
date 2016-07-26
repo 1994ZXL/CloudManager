@@ -57,8 +57,6 @@
         android:text="SearchButton"
         android:id="@+id/my_travel_list_search_button"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="129dp"
         android:layout_gravity="left|bottom" />
 
 

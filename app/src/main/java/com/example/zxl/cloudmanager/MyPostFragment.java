@@ -1,12 +1,16 @@
 package com.example.zxl.cloudmanager;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -17,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.leaderSearch.LeaderPostSearchActivity;
+import com.example.zxl.cloudmanager.leaderSearch.LeaderPostSearchFragment;
 import com.example.zxl.cloudmanager.model.Post;
 import com.example.zxl.cloudmanager.model.PostLab;
 import com.example.zxl.cloudmanager.myPost.MyPostSearchFragment;
@@ -40,7 +45,6 @@ public class MyPostFragment extends ListFragment {
     public void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
         setHasOptionsMenu(true);
-
         mFragment = this;
 
         saveInstanceState = getArguments();
@@ -67,7 +71,7 @@ public class MyPostFragment extends ListFragment {
         if (!fragment.isAdded()) {
             transaction.addToBackStack(null);
             transaction.hide(mFragment);
-            transaction.add(R.id.blankActivity, fragment);
+            transaction.add(R.id.postActivity, fragment);
             transaction.commit();
         } else {
             transaction.hide(mFragment);
@@ -117,5 +121,28 @@ public class MyPostFragment extends ListFragment {
 
             return convertView;
         }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_search, menu);
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new MyPostSearchFragment();
+                    fm.beginTransaction().replace(R.id.postActivity, fragment).commit();
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
