@@ -45,7 +45,9 @@ public class MyLeaveApplyFragment extends Fragment {
     private EditText mReson;
 
     private Date beginTime;
+    private String bgtime;
     private Date endTime;
+    private String edtime;
     private String reson;
 
     private Button mCommitBtn;
@@ -144,8 +146,8 @@ public class MyLeaveApplyFragment extends Fragment {
 
     public void commit() {
         leave.setType(type);
-        leave.setBeginTime(beginTime);
-        leave.setEndTime(endTime);
+        leave.setBeginTime(bgtime);
+        leave.setEndTime(edtime);
         leave.setResion(reson);
         LeaveMyLab.newInstance(mFragment.getActivity()).add(leave);
         Intent intent = new Intent(mFragment.getActivity(), MyLeaveActivity.class);
@@ -160,23 +162,25 @@ public class MyLeaveApplyFragment extends Fragment {
             return;
         }else if (requestCode == 12) {
             beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            leave.setBeginTime(beginTime);
+            bgtime = android.text.format.DateFormat.format("yyyy年M月dd日", beginTime).toString();
+            leave.setBeginTime(bgtime);
             updateBeginDate();
         }else if (requestCode == 13) {
             endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            leave.setEndTime(endTime);
+            edtime = android.text.format.DateFormat.format("yyyy年M月dd日", endTime).toString();
+            leave.setEndTime(edtime);
             updateEndDate();
         }
     }
 
     private void updateBeginDate(){
-        mBeginTime.setText(android.text.format.DateFormat.format("yyyy年M月dd日", leave.getBeginTime()));
-        Log.d("BeginDate", leave.getBeginTime().toString());
+        mBeginTime.setText(bgtime);
+        Log.d("BeginDate", leave.getBeginTime());
     }
     private void updateEndDate(){
-        if (leave.getEndTime().after(leave.getBeginTime())) {
-            mEndTime.setText(android.text.format.DateFormat.format("yyyy年M月dd日", leave.getEndTime()));
-            Log.d("EndDate", leave.getEndTime().toString());
+        if (endTime.after(beginTime)) {
+            mEndTime.setText(edtime);
+            Log.d("EndDate", leave.getEndTime());
         } else {
             Toast.makeText(getActivity(),
                     R.string.time_erro,

@@ -8,6 +8,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +37,9 @@ public class MyMissionFragment extends Fragment {
 
     private Fragment mFragment;
 
+    private static final String SEARCH_KEY = "search_key";
+    private int searchKey;
+
     private Button mSearchBtn;
 
     @Override
@@ -51,7 +55,18 @@ public class MyMissionFragment extends Fragment {
 
         getActivity().getActionBar().setTitle("我的任务");
 
-        missions = MissionLab.newInstance(mFragment.getActivity()).get();
+        saveInstanceState = getArguments();
+        if (null == saveInstanceState) {
+            searchKey = -1;
+        } else {
+            searchKey = getArguments().getInt(SEARCH_KEY);
+        }
+
+        if (-1 == searchKey) {
+            missions = MissionLab.newInstance(mFragment.getActivity()).get();
+        } else {
+            missions.add(MissionLab.newInstance(mFragment.getActivity()).get().get(searchKey));
+        }
 
         mRecyclerView = (RecyclerView)view.findViewById(R.id.mission_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -81,7 +96,7 @@ public class MyMissionFragment extends Fragment {
         mSearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Fragment fragment = new MyMissionDetailFragment();
+                Fragment fragment = new MyMissionSearchFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
@@ -132,11 +147,13 @@ public class MyMissionFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             Mission mission = missions.get(i);
+
             viewHolder.mBeginTime.setText(mission.getMissionBeginTime().toString());
             viewHolder.mEndTime.setText(mission.getMissionEndTime().toString());
             viewHolder.mName.setText(mission.getName());
             viewHolder.mState.setText(mission.getState());
             viewHolder.mlevel.setText(mission.getLevel());
+
             viewHolder.itemView.setTag(missions.get(i));
         }
 

@@ -148,6 +148,8 @@ public class MyLeaveQueryFragment extends Fragment {
             viewHolder.mLeaveName.setText(leave.getName());
             viewHolder.mLeaveType.setText(leave.getType());
             viewHolder.mLeaveState.setText(leave.getState());
+            viewHolder.mLeaveBeginTime.setText(leave.getBeginTime());
+            viewHolder.mLeaveEndTime.setText(leave.getEndTime());
 
             viewHolder.itemView.setTag(leaves.get(i));
         }
@@ -165,14 +167,17 @@ public class MyLeaveQueryFragment extends Fragment {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder{
-            public TextView mLeaveTime;
+
             public TextView mLeaveName;
             public TextView mLeaveType;
             public TextView mLeaveState;
+            public TextView mLeaveBeginTime;
+            public TextView mLeaveEndTime;
 
             public ViewHolder(View v) {
                 super(v);
-                mLeaveTime = (TextView)v.findViewById(R.id.leave_card_item_leave_time);
+                mLeaveBeginTime = (TextView) v.findViewById(R.id.leave_card_item_begin_time);
+                mLeaveEndTime = (TextView) v.findViewById(R.id.leave_card_item_end_time);
                 mLeaveName = (TextView) v.findViewById(R.id.leave_card_item_name);
                 mLeaveType = (TextView) v.findViewById(R.id.leave_card_item_illness);
                 mLeaveState = (TextView) v.findViewById(R.id.leave_card_item_state);

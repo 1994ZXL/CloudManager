@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants"
     android:id="@+id/post">
 
     <FrameLayout
@@ -35,7 +36,8 @@
         android:layout_margin="16dp"
         android:alpha="0.8"
         android:src="@drawable/demo"
-        android:layout_gravity="bottom|right" />
+        android:layout_gravity="bottom|right"
+        android:id="@+id/main_fragment_my_post_searchBtn"/>
 
 </FrameLayout>
 

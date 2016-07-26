@@ -24,7 +24,8 @@
             <TextView
                 style="@style/font"
                 android:layout_width="wrap_content"
-                android:id="@+id/leave_card_item_name"/>
+                android:id="@+id/leave_card_item_name"
+                android:text="@string/name"/>
             <TextView
                 style="@style/font"
                 android:layout_width="wrap_content"
@@ -40,11 +41,27 @@
             <TextView
                 style="@style/font"
                 android:layout_width="wrap_content"
-                android:text="@string/leave_time" />
+                android:text="@string/leave_begin_time" />
             <TextView
                 style="@style/font"
                 android:layout_width="wrap_content"
-                android:id="@+id/leave_card_item_leave_time" />
+                android:layout_marginLeft="8dp"
+                android:id="@+id/leave_card_item_begin_time" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+            <TextView
+                style="@style/font"
+                android:layout_width="wrap_content"
+                android:text="@string/leave_end_time" />
+            <TextView
+                style="@style/font"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:id="@+id/leave_card_item_end_time" />
         </LinearLayout>
         <!-- 第三排-->
         <TextView

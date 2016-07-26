@@ -14,7 +14,7 @@ public class LeaveMyLab {
     private Context context;
 
     private String[] content;
-    private ArrayList<String[]> contents = new ArrayList<String[]>();
+    private String[] content2;
     private int index;
 
     private LeaveMyLab(Context context) {
@@ -22,18 +22,25 @@ public class LeaveMyLab {
         content = new String[] {
                 "张三",
                 "病假",
+                "未批准",
                 "2016.7.21",
-                "2016.8.21",
-                "未批准"};
-        contents.add(content);
-
-        for (index = 0; index < contents.size(); index++) {
-            Leave mLeave = new Leave();
-            mLeave.setName(contents.get(index)[index]);
-            mLeave.setType(contents.get(index)[index + 1]);
-            mLeave.setState(contents.get(index)[index + 4]);
-            mLeaves.add(mLeave);
-        }
+                "2016.7.26",
+                "reson",
+                "suggestion",
+                "2016.7.21",
+                "2016.7.21",};
+        content2 = new String[] {
+                "张三",
+                "丧假",
+                "未批准",
+                "2016.7.21",
+                "2016.7.26",
+                "reson",
+                "suggestion",
+                "2016.7.21",
+                "2016.7.21",};
+        set(content);
+        set(content2);
     }
 
     public static LeaveMyLab newInstance(Context context) {
@@ -49,5 +56,11 @@ public class LeaveMyLab {
 
     public void add(Leave mLeaves) {
         this.mLeaves.add(mLeaves);
+    }
+
+    private void set(String[] content) {
+        Leave leave = new Leave();
+        leave.set(content);
+        mLeaves.add(leave);
     }
 }

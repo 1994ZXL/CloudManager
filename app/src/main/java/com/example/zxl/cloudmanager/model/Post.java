@@ -15,6 +15,12 @@ public class Post {
 
     }
 
+    public void set(String[] content) {
+        setName(content[0]);
+        setContent(content[1]);
+        setPostTime(content[2]);
+    }
+
     public String getName() {
         return name;
     }

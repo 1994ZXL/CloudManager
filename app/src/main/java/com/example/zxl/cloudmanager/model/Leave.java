@@ -10,21 +10,30 @@ public class Leave {
     private String type;
     private String state;
 
-    private Date beginTime;
-    private Date endTime;
+    private String beginTime;
+    private String endTime;
 
     private String resion;
     private String suggestion;
-    private Date applyTime;
-    private Date disposeTime;
+    private String applyTime;
+    private String disposeTime;
 
     private String[] content;
 
     public Leave() {
-
+        setName("张三");
     }
     
-
+    public void set(String[] content) {
+        setType(content[1]);
+        setState(content[2]);
+        setBeginTime(content[3]);
+        setEndTime(content[4]);
+        setResion(content[5]);
+        setSuggestion(content[6]);
+        setApplyTime(content[7]);
+        setDisposeTime(content[8]);
+    }
 
     public String[] getContent() {
         return content;
@@ -58,36 +67,36 @@ public class Leave {
         this.suggestion = suggestion;
     }
 
-    public Date getApplyTime() {
-        return applyTime;
-    }
-
-    public void setApplyTime(Date applyTime) {
-        this.applyTime = applyTime;
-    }
-
-    public Date getDisposeTime() {
-        return disposeTime;
-    }
-
-    public void setDisposeTime(Date disposeTime) {
-        this.disposeTime = disposeTime;
-    }
-
-    public Date getBeginTime() {
+    public String getBeginTime() {
         return beginTime;
     }
 
-    public void setBeginTime(Date beginTime) {
+    public void setBeginTime(String beginTime) {
         this.beginTime = beginTime;
     }
 
-    public Date getEndTime() {
+    public String getApplyTime() {
+        return applyTime;
+    }
+
+    public void setApplyTime(String applyTime) {
+        this.applyTime = applyTime;
+    }
+
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
+    }
+
+    public String getDisposeTime() {
+        return disposeTime;
+    }
+
+    public void setDisposeTime(String disposeTime) {
+        this.disposeTime = disposeTime;
     }
 
     public String getName() {

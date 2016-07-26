@@ -38,7 +38,7 @@ public class MissionLab {
                 "2016.7.21",
                 "2016.7.21",
                 "100%",
-                "完成",
+                "已完成",
                 "处理意见"};
         setMissions(content);
         setMissions(content2);

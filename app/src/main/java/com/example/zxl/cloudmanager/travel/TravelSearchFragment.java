@@ -101,7 +101,8 @@ public class TravelSearchFragment extends Fragment {
     private void search() {
         mTravels = TravelLab.newInstance(mFragment.getActivity()).getTravels();
         for (index = 0;index < mTravels.size(); index++) {
-            if (bgtime.equals(mTravels.get(index).getBeginTime()) && edtime.equals(mTravels.get(index).getEndTime())
+            if (bgtime.equals(mTravels.get(index).getBeginTime())
+                    && edtime.equals(mTravels.get(index).getEndTime())
                     && cbgtime.equals(mTravels.get(index).getBackBeginTime())
                     && cedtime.equals(mTravels.get(index).getBackEndTime())
                     && state.equals(mTravels.get(index).getTravelState())) {
@@ -130,6 +131,8 @@ public class TravelSearchFragment extends Fragment {
                     transaction.show(fragment);
                     transaction.commit();
                 }
+            } else {
+
             }
         }
     }
@@ -151,7 +154,7 @@ public class TravelSearchFragment extends Fragment {
                 DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
                 fragment.setTargetFragment(TravelSearchFragment.this, 12);
                 fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyLeaveApplyFragment");
+                fragment.show(getFragmentManager(), "TravelSearchFragment");
             }
         });
 
@@ -162,7 +165,7 @@ public class TravelSearchFragment extends Fragment {
                 DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
                 fragment.setTargetFragment(TravelSearchFragment.this, 13);
                 fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyLeaveApplyFragment");
+                fragment.show(getFragmentManager(), "TravelSearchFragment");
             }
         });
 
@@ -172,7 +175,7 @@ public class TravelSearchFragment extends Fragment {
                 DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 14);
                 fragment.setTargetFragment(TravelSearchFragment.this, 14);
                 fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyLeaveApplyFragment");
+                fragment.show(getFragmentManager(), "TravelSearchFragment");
             }
         });
 
@@ -183,7 +186,7 @@ public class TravelSearchFragment extends Fragment {
                 DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 15);
                 fragment.setTargetFragment(TravelSearchFragment.this, 15);
                 fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyLeaveApplyFragment");
+                fragment.show(getFragmentManager(), "TravelSearchFragment");
             }
         });
     }

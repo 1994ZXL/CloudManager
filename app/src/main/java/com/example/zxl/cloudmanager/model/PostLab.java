@@ -15,13 +15,24 @@ public class PostLab {
     private static PostLab sPost;
     private ArrayList<Post> mPosts = new ArrayList<Post>();
 
-    private PostLab(Context c) {
+    private String[] content;
+    private String[] content2;
 
-        for(int i = 0;i < 3;i++){
-            mPost.setName("张三");
-            mPost.setPostTime(getTime());
-            mPosts.add(mPost);
-        }
+    private Context context;
+
+    private PostLab(Context c) {
+        context = c;
+
+        content = new String[]{
+                "张三",
+                "1.编写了商品分类列表和轮换图（完成）2.学习了document.getElementById方法和setInterval方法的使用（完成）3.遇到了setInterval在window.onload里无法多次运行的问题并解决。",
+                "2016.7.26"};
+        content2 = new String[]{
+                "李四",
+                "1.编写了商品分类列表和轮换图（完成）2.学习了document.getElementById方法和setInterval方法的使用（完成）3.遇到了setInterval在window.onload里无法多次运行的问题并解决。",
+                "2016.7.27"};
+        set(content);
+        set(content2);
     }
 
     private String getTime() {
@@ -40,5 +51,11 @@ public class PostLab {
 
     public ArrayList<Post> getPosts(){
         return mPosts;
+    }
+
+    public void set(String[] content) {
+        Post post = new Post();
+        post.set(content);
+        mPosts.add(post);
     }
 }
