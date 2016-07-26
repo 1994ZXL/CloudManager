@@ -1,5 +1,6 @@
 package com.example.zxl.cloudmanager.leave;
 
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,13 +9,12 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
-import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.Leave;
 
 /**
  * Created by ZXL on 2016/7/11.
  */
-public class MyLeaveDetailFragment extends Fragment{
+public class MyLeaveDetailFragment extends Fragment {
     private TextView name;
     private TextView leaveBeginTime,leaveEndTime,leaveKind,leaveReason,leaveSuggestion,leaveApplyTime;
     private TextView leaveState,leaveDealTime;

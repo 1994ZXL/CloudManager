@@ -42,21 +42,6 @@
             </LinearLayout>
 
             <!-- 第二块-->
-            <!--请假类型-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:text="@string/leave_type"/>
-                <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:id="@+id/my_leave_details_type"/>
-            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,11 +50,27 @@
                 android:orientation="vertical"
                 android:background="@color/white">
 
-                <!-- 请假开始时间-->
+                <!--请假类型-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/leave_type"/>
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/my_leave_details_type"/>
+                </LinearLayout>
+                <!-- 请假开始时间-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
@@ -96,12 +97,22 @@
                         android:gravity="center"
                         android:id="@+id/leave_end_time"/>
                 </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 第三块-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:background="@color/white">
                 <!-- 请假原因-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    android:orientation="horizontal">
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
@@ -128,10 +139,9 @@
                         android:gravity="center"
                         android:id="@+id/leave_details_suggestion"/>
                 </LinearLayout>
-
             </LinearLayout>
 
-            <!-- 第三块-->
+            <!-- 第四块-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -144,8 +154,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    android:orientation="horizontal">
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
@@ -160,7 +169,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
