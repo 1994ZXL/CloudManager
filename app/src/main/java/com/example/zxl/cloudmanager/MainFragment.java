@@ -16,6 +16,8 @@ import com.example.zxl.cloudmanager.leaderSearch.LeaderCheckSearchActivity;
 import com.example.zxl.cloudmanager.leaderSearch.LeaderLeaveSearchActivity;
 import com.example.zxl.cloudmanager.leaderSearch.LeaderOvertimeSearchActivity;
 import com.example.zxl.cloudmanager.leaderSearch.LeaderPostSearchActivity;
+import com.example.zxl.cloudmanager.model.Check;
+import com.example.zxl.cloudmanager.model.CheckLab;
 import com.example.zxl.cloudmanager.operation.MyOperationActivity;
 import com.example.zxl.cloudmanager.projectManager.bugDeal.ProjectBugDealActivity;
 import com.example.zxl.cloudmanager.projectManager.manager.ProjectManagerActivity;
@@ -29,6 +31,10 @@ import com.example.zxl.cloudmanager.publicSearch.memberList.MemberListActivity;
 import com.example.zxl.cloudmanager.publicSearch.plan.MissionSearchActivity;
 import com.example.zxl.cloudmanager.publicSearch.project.PublicSearchActivity;
 import com.example.zxl.cloudmanager.publicSearch.usecase.UsecaseSearchActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class MainFragment extends Fragment {
     private ImageView myMemoImage;
@@ -47,6 +53,9 @@ public class MainFragment extends Fragment {
     /*考勤按钮*/
     private Button mSignBtn;
     private Button mOffSignBtn;
+    private String mSignTime;
+    private ArrayList<Check> mChecks = new ArrayList<Check>();
+    private String mOffSignTime;
 
     //公共查询
     private ImageView myProjectImage;
@@ -75,6 +84,15 @@ public class MainFragment extends Fragment {
     private ImageView pmMemberManagerImage;
     private ImageView pmListImage;
     private ImageView pmMissionImage;
+
+    private Fragment mFragment;
+
+    @Override
+    public void onCreate(Bundle saveInstanceState) {
+        super.onCreate(saveInstanceState);
+        this.setHasOptionsMenu(true);
+        mFragment = this;
+    }
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
@@ -125,13 +143,13 @@ public class MainFragment extends Fragment {
         mSignBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
+                sign();
             }
         });
         mOffSignBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
+                offSign();
             }
         });
         return v;
@@ -193,6 +211,29 @@ public class MainFragment extends Fragment {
                 startActivity(intent);
             }
         });
+    }
+
+    private void sign() {
+        mSignTime = android.text.format.DateFormat.format("yyyy.M.dd   HH:mm:ss", getTime()).toString();
+        Check check = new Check();
+        check.setDutyTime(mSignTime);
+        CheckLab.newInstance(mFragment.getActivity()).add(check);
+        mSignBtn.setText(mSignTime);
+        mSignBtn.setClickable(false);
+    }
+
+    private void offSign() {
+        mOffSignTime = android.text.format.DateFormat.format("yyyy.M.dd   HH:mm:ss", getTime()).toString();
+        mChecks = CheckLab.newInstance(mFragment.getActivity()).get();
+        mChecks.get(mChecks.size() - 1).setOffDutyTime(mOffSignTime);
+        mOffSignBtn.setText(mOffSignTime);
+        mSignBtn.setClickable(false);
+    }
+
+    private Date getTime() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+        return curDate;
     }
 
 }

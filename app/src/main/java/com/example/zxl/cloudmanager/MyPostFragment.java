@@ -28,10 +28,13 @@ import java.util.ArrayList;
  */
 public class MyPostFragment extends ListFragment {
 
-    private ArrayList<Post> mPosts;
+    private ArrayList<Post> mPosts = new ArrayList<Post>();
 
     private Fragment mFragment;
 
+    private static final String SEARCH_KEY = "search_key";
+    private int searchKey;
+    private ArrayList<Integer> key = new ArrayList<Integer>();
 
     @Override
     public void onCreate(Bundle saveInstanceState){
@@ -40,7 +43,17 @@ public class MyPostFragment extends ListFragment {
 
         mFragment = this;
 
-        mPosts = PostLab.newInstance(getActivity()).getPosts();
+        saveInstanceState = getArguments();
+        if (null == saveInstanceState) {
+            mPosts = PostLab.newInstance(mFragment.getActivity()).getPosts();
+        } else {
+            key = getArguments().getIntegerArrayList(SEARCH_KEY);
+        }
+
+        for (int i = 0; i < key.size(); i++) {
+            mPosts.add(PostLab.newInstance(mFragment.getActivity()).getPosts().get(key.get(i)));
+        }
+
         PostAdapter adapter = new PostAdapter(mPosts);
         setListAdapter(adapter);
     }
@@ -87,8 +100,18 @@ public class MyPostFragment extends ListFragment {
             searchBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mFragment.getActivity(), LeaderPostSearchActivity.class);
-                    startActivity(intent);
+                    Fragment fragment = new MyPostSearchFragment();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    if (!fragment.isAdded()) {
+                        transaction.addToBackStack(null);
+                        transaction.hide(mFragment);
+                        transaction.add(R.id.blankActivity, fragment);
+                        transaction.commit();
+                    } else {
+                        transaction.hide(mFragment);
+                        transaction.show(fragment);
+                        transaction.commit();
+                    }
                 }
             });
 

@@ -80,4 +80,8 @@ public class CheckLab {
         return mChecks;
     }
 
+    public void add(Check check) {
+        mChecks.add(check);
+    }
+
 }

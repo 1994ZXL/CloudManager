@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class LeaveSearchFragment extends Fragment {
     private Leave mLeave;
     private ArrayList<Leave> mLeaves = new ArrayList<Leave>();
+    private ArrayList<Integer> sum = new ArrayList<Integer>();
     private int index;
 
     private Button mLeaveBeginBtn;
@@ -100,11 +101,12 @@ public class LeaveSearchFragment extends Fragment {
         mLeaves = LeaveMyLab.newInstance(mFragment.getActivity()).get();
         for (index = 0; index < mLeaves.size(); index++) {
             if (mType.equals(mLeaves.get(index).getType())) {
-                Intent intent = new Intent(mFragment.getActivity(), MyLeaveActivity.class);
-                intent.putExtra("TYPE", index);
-                startActivity(intent);
+                sum.add(index);
             }
         }
+        Intent intent = new Intent(mFragment.getActivity(), MyLeaveActivity.class);
+        intent.putIntegerArrayListExtra("TYPE", sum);
+        startActivity(intent);
     }
 
     private void init(View v){

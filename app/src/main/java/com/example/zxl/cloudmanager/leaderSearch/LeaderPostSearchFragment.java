@@ -21,17 +21,19 @@ public class LeaderPostSearchFragment extends Fragment {
     private EditText mPostContent;
 
     private Button mSearchBtn;
+
     public LeaderPostSearchFragment() {
         // Required empty public constructor
     }
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v =  inflater.inflate(R.layout.leader_post_search, container, false);
         getActivity().getActionBar().setTitle("日报查询");
+
         init(v);
+
         return v;
     }
 

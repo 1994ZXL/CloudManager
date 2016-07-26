@@ -32,13 +32,13 @@
                         android:textSize="20dp"/>
 
                     <Button
-                        android:id="@+id/memo_submit_begin_time_button"
+                        android:id="@+id/my_post_search_begintTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/project_begin_time_textview"
                         android:layout_weight="0.3"/>
                     <Button
-                        android:id="@+id/memo_submit_end_time_button"
+                        android:id="@+id/my_post_search_endTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/project_end_time_textview"

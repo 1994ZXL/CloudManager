@@ -63,12 +63,12 @@ public class MyLeaveDetailFragment extends Fragment {
     private void control() {
         name.setText(mLeave.getName());
         leaveKind.setText(mLeave.getType());
-        leaveBeginTime.setText(mLeave.getBeginTime().toString());
-        leaveEndTime.setText(mLeave.getEndTime().toString());
+        leaveBeginTime.setText(mLeave.getBeginTime());
+        leaveEndTime.setText(mLeave.getEndTime());
         leaveSuggestion.setText(mLeave.getSuggestion());
         leaveState.setText(mLeave.getState());
-        leaveApplyTime.setText(mLeave.getApplyTime().toString());
+        leaveApplyTime.setText(mLeave.getApplyTime());
         leaveReason.setText(mLeave.getResion());
-        leaveDealTime.setText(mLeave.getDisposeTime().toString());
+        leaveDealTime.setText(mLeave.getDisposeTime());
     }
 }
