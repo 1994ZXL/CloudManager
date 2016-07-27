@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.zxl.cloudmanager.checkManager.leave.LeaveListFragment;
 import com.example.zxl.cloudmanager.model.Leave;
 import com.example.zxl.cloudmanager.model.LeaveQueryLab;
 
@@ -74,11 +75,10 @@ public class ManagerLeaveQueryFragment extends ListFragment{
                 spinner.setAdapter(spinnerAdapter);
             }
 
-
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Fragment fragment = new ManagerCheckListFragment();
+                    Fragment fragment = new LeaveListFragment();
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.addToBackStack(null);
                     transaction.replace(R.id.blankActivity, fragment);

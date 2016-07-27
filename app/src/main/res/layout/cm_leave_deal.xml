@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/check_details"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray2"
+    android:padding="16dp">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="30dp">
+
+            <!-- 姓名-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:text="@string/name"/>
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/cm_employer_leave_name"/>
+            </LinearLayout>
+
+            <!--请假类型-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp">
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:text="@string/leave_type"/>
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/cm_leave_deal_type"/>
+            </LinearLayout>
+            <!-- 请假开始时间-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp">
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:text="@string/leave_begin_time"/>
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/cm_leave_deal_begin_time" />
+            </LinearLayout>
+            <!-- 请假结束时间-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp">
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:text="@string/leave_end_time"/>
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/cm_leave_deal_end_time"/>
+            </LinearLayout>
+            <!-- 请假原因-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp">
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:text="@string/leave_reason"/>
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/cm_leave_deal_ask_reason"/>
+            </LinearLayout>
+            <!-- 处理意见-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp">
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="3"
+                    android:text="@string/dispose_suggestion"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:background="@color/content">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/cm_leave_deal_suggestion"
+                        android:paddingLeft="10dp"
+                        android:background="@null"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 申请时间-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp">
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:text="@string/apply_time"/>
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/cm_leave_deal_apply_time"/>
+            </LinearLayout>
+            <!-- 处理时间-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp">
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:text="@string/dispose_time"/>
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/cm_leave_deal_time"/>
+            </LinearLayout>
+            <!-- 请假状态-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="40dp">
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="3"
+                    android:text="@string/leave_state"/>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:id="@+id/cm_leave_deal_state"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/cm_leave_submit_button"
+                style="@style/SearchButton"
+                android:text="@string/submit_button" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
