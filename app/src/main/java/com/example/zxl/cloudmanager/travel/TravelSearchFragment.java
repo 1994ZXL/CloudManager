@@ -52,6 +52,7 @@ public class TravelSearchFragment extends Fragment {
     private ArrayList<Travel> mTravels = new ArrayList<Travel>();
     private int index;
     private static final String SEARCH_KEY = "search_key";
+    private ArrayList<Integer> sum = new ArrayList<Integer>();
 
     private Fragment mFragment;
 
@@ -102,38 +103,28 @@ public class TravelSearchFragment extends Fragment {
         mTravels = TravelLab.newInstance(mFragment.getActivity()).getTravels();
         for (index = 0;index < mTravels.size(); index++) {
             if (bgtime.equals(mTravels.get(index).getBeginTime())
-                    || edtime.equals(mTravels.get(index).getEndTime())
-                    || cbgtime.equals(mTravels.get(index).getBackBeginTime())
-                    || cedtime.equals(mTravels.get(index).getBackEndTime())
-                    || state.equals(mTravels.get(index).getTravelState())) {
-                Log.d(TAG, " 查询时间："+bgtime);
-                Log.d(TAG, " 模型时间："+mTravels.get(index).getBeginTime());
-                Log.d(TAG, " 查询时间："+edtime);
-                Log.d(TAG, " 模型时间："+mTravels.get(index).getEndTime());
-                Log.d(TAG, " 查询时间："+cbgtime);
-                Log.d(TAG, " 模型时间："+mTravels.get(index).getBackBeginTime());
-                Log.d(TAG, " 查询时间："+cedtime);
-                Log.d(TAG, " 模型时间："+mTravels.get(index).getBackEndTime());
-                Log.d(TAG, " 查询时间："+state);
-                Log.d(TAG, " 模型时间："+mTravels.get(index).getTravelState());
-                Log.d(TAG, "index:" + index);
-                Fragment fragment = new MyTravelFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt(SEARCH_KEY, index);
-                fragment.setArguments(bundle);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.hide(mFragment);
-                    transaction.replace(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
-            } else {
+                    && edtime.equals(mTravels.get(index).getEndTime())
+                    && cbgtime.equals(mTravels.get(index).getBackBeginTime())
+                    && cedtime.equals(mTravels.get(index).getBackEndTime())
+                    && state.equals(mTravels.get(index).getTravelState())) {
+
+                sum.add(index);
 
             }
+        }
+        Fragment fragment = new MyTravelFragment();
+        Bundle bundle = new Bundle();
+        bundle.putIntegerArrayList(SEARCH_KEY, sum);
+        fragment.setArguments(bundle);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if (!fragment.isAdded()) {
+            transaction.hide(mFragment);
+            transaction.replace(R.id.postActivity, fragment);
+            transaction.commit();
+        } else {
+            transaction.hide(mFragment);
+            transaction.show(fragment);
+            transaction.commit();
         }
     }
 

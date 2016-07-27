@@ -42,7 +42,7 @@ public class MyCheckFragment extends Fragment {
 
     private static final String TAG = "MyCheckFragment";
     private static final String SEARCH_KEY = "search_key";
-    private int searchKey;
+    private ArrayList<Integer> key = new ArrayList<Integer>();//下标
 
     private Fragment mFragment;
 
@@ -83,17 +83,12 @@ public class MyCheckFragment extends Fragment {
 
         saveInstanceState = getArguments();
         if (null == saveInstanceState) {
-            searchKey = 0;
-        } else {
-            searchKey = getArguments().getInt(SEARCH_KEY);
-        }
-
-        if (1 == searchKey) {
-            checks.add(CheckLab.newInstance(mFragment.getActivity()).get().get(0));
-        } else if (2 == searchKey) {
-            checks.add(CheckLab.newInstance(mFragment.getActivity()).get().get(1));
-        } else if (0 == searchKey){
             checks = CheckLab.newInstance(mFragment.getActivity()).get();
+        } else {
+            key = getArguments().getIntegerArrayList(SEARCH_KEY);
+            for (int i = 0; i < key.size(); i++){
+                checks.add(CheckLab.newInstance(mFragment.getActivity()).get().get(key.get(i)));
+            }
         }
 
         mRecyclerView = (RecyclerView)v.findViewById(R.id.check_recyclerview);

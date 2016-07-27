@@ -132,7 +132,7 @@ public class MyPostSearchFragment extends Fragment {
         mPosts = PostLab.newInstance(mFragment.getActivity()).getPosts();
         for (index = 0; index < mPosts.size(); index++ ) {
             if (ConverToDate(mPosts.get(index).getPostTime()).after(beginTime)
-                    || ConverToDate(mPosts.get(index).getPostTime()).before(endTime)) {
+                    && ConverToDate(mPosts.get(index).getPostTime()).before(endTime)) {
                 sum.add(index);
             }
         }

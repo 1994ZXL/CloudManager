@@ -42,14 +42,27 @@ public class SearchCheckFragment extends Fragment {
     private Spinner mOverTimeSpinner;
     private Button mSearchBtn;
 
-    private static final String[] list={"否", "是"};
+    private static final String[] list={"未选择","否", "是"};
     private ArrayAdapter<String> adapter;
 
     private String lateSearch;
+    private boolean latecompare;
+    private boolean lateselect = false;
     private String earlySearch;
+    private boolean earlycompare;
+    private boolean earlyselect = false;
     private String leaveSearch;
+    private boolean leavecompare;
+    private boolean leaveselect = false;
     private String travelSearch;
+    private boolean travelcompare;
+    private boolean travelselect = false;
     private String overTimeSearch;
+    private boolean overtimecompare;
+    private boolean overtimeselect = false;
+    private ArrayList<Boolean> mCompares = new ArrayList<Boolean>();
+    private ArrayList<Boolean> mSelect = new ArrayList<Boolean>();
+    private String compare;
 
     private Date beginTime;
     private Date endTime;
@@ -58,6 +71,7 @@ public class SearchCheckFragment extends Fragment {
     private static final String SEARCH_KEY = "search_key";
 
     private ArrayList<Check> mChecks = new ArrayList<Check>();
+    private ArrayList<Integer> sum = new ArrayList<Integer>();
 
     private Fragment mFragment;
 
@@ -177,24 +191,68 @@ public class SearchCheckFragment extends Fragment {
         return v;
     }
 
+    private String compare(int i) {
+        mSelect.add(lateselect);
+        mSelect.add(leaveselect);
+        mSelect.add(travelselect);
+        mSelect.add(overtimeselect);
+
+        mCompares.add(latecompare);
+        mCompares.add(leavecompare);
+        mCompares.add(travelcompare);
+        mCompares.add(overtimecompare);
+
+        if (null != lateSearch) {
+            latecompare = mChecks.get(i).getLate().equals(lateSearch);
+            lateselect = true;
+        }
+        if (null != leaveSearch) {
+            leavecompare = mChecks.get(i).getLeave().equals(leaveSearch);
+            leaveselect = true;
+        }
+        if (null != travelSearch) {
+            travelcompare = mChecks.get(i).getTravel().equals(travelSearch);
+            travelselect = true;
+        }
+        if (null != overTimeSearch) {
+            overtimecompare = mChecks.get(i).getOverTime().equals(overTimeSearch);
+            overtimeselect = true;
+        }
+        for(int j = 0; j < mSelect.size(); j++) {
+            if (mSelect.get(j)) {
+                if (j != mSelect.size() - 1){
+                    compare += mCompares.get(j);
+                    compare += "&&";
+                } else {
+                    compare += mCompares.get(j);
+                }
+            }
+        }
+        return compare;
+    }
+
+
     private void search() {
         mChecks = CheckLab.newInstance(mFragment.getActivity()).get();
+
         for (int i = 0; i < mChecks.size(); i++) {
-            if (mChecks.get(i).getLate().equals(lateSearch)
-                    || mChecks.get(i).getLeave().equals(leaveSearch)
-                    || mChecks.get(i).getTravel().equals(travelSearch)
-                    || mChecks.get(i).getOverTime().equals(overTimeSearch) ) {
-                Fragment fragment = new MyCheckFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt(SEARCH_KEY, i + 1);
-                fragment.setArguments(bundle);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.blankActivity, fragment);
-                transaction.commit();
-            } else {
-                Log.d(TAG, "查询失败模型：" + mChecks.get(i).getLate());
-                Log.d(TAG, "查询失败：" + lateSearch);
-            }
+//            if (compare(i)) {
+//                sum.add(i);
+//            }
+        }
+        Fragment fragment = new MyCheckFragment();
+        Bundle bundle = new Bundle();
+        bundle.putIntegerArrayList(SEARCH_KEY, sum);
+        fragment.setArguments(bundle);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if (!fragment.isAdded()) {
+            transaction.hide(mFragment);
+            transaction.replace(R.id.blankActivity, fragment);
+            transaction.commit();
+        } else {
+            transaction.hide(mFragment);
+            transaction.show(fragment);
+            transaction.commit();
         }
     }
 
@@ -228,5 +286,4 @@ public class SearchCheckFragment extends Fragment {
             }
         }
     }
-
 }

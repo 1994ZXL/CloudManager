@@ -40,7 +40,7 @@ public class MyPostFragment extends ListFragment {
     private static final String TAG = "MyPostFragment";
     private static final String SEARCH_KEY = "search_key";
     private static final String WHERE = "where";
-    private ArrayList<Integer> key = new ArrayList<Integer>();
+    private ArrayList<Integer> key = new ArrayList<Integer>();//下标
 
 
     @Override
@@ -54,16 +54,14 @@ public class MyPostFragment extends ListFragment {
             mPosts = PostLab.newInstance(mFragment.getActivity()).getPosts();
         } else {
             key = getArguments().getIntegerArrayList(SEARCH_KEY);
-            Log.d(TAG, "MyPostFragment: " + key + getArguments().getString(WHERE));
-        }
-
-        for (int i = 0; i < key.size(); i++) {
-            if (null == getArguments().getString(WHERE)) {
-                if ("张三" == PostLab.newInstance(mFragment.getActivity()).getPosts().get(key.get(i)).getName()){
+            for (int i = 0; i < key.size(); i++) {
+                if (null == getArguments().getString(WHERE)) {
+                    if ("张三" == PostLab.newInstance(mFragment.getActivity()).getPosts().get(key.get(i)).getName()){
+                        mPosts.add(PostLab.newInstance(mFragment.getActivity()).getPosts().get(key.get(i)));
+                    }
+                } else {
                     mPosts.add(PostLab.newInstance(mFragment.getActivity()).getPosts().get(key.get(i)));
                 }
-            } else {
-                mPosts.add(PostLab.newInstance(mFragment.getActivity()).getPosts().get(key.get(i)));
             }
         }
 

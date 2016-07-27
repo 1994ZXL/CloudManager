@@ -36,7 +36,7 @@ public class MyTravelFragment extends ListFragment {
 
     private static final String TAG = "MyTravelFragment";
     private static final String SEARCH_KEY = "search_key";
-    private int searchKey;
+    private ArrayList<Integer> key = new ArrayList<Integer>();//下标
 
     private Fragment mFragment;
 
@@ -48,17 +48,12 @@ public class MyTravelFragment extends ListFragment {
 
         saveInstanceState = getArguments();
         if (null == saveInstanceState) {
-            searchKey = -1;
-        } else {
-            searchKey = getArguments().getInt(SEARCH_KEY);
-        }
-
-        if (-1 == searchKey) {
             travels = TravelLab.newInstance(mFragment.getActivity()).getTravels();
         } else {
-            Log.d(TAG, "travels: " + TravelLab.newInstance(mFragment.getActivity()).getTravels().get(searchKey).get()[8]);
-            Log.d(TAG, "searchkey: " + searchKey);
-            travels.add(TravelLab.newInstance(mFragment.getActivity()).getTravels().get(searchKey));
+            key = getArguments().getIntegerArrayList(SEARCH_KEY);
+            for (int i = 0; i < key.size(); i++) {
+                travels.add(TravelLab.newInstance(mFragment.getActivity()).getTravels().get(key.get(i)));
+            }
         }
 
         TravelAdapter adapter = new TravelAdapter(travels);
