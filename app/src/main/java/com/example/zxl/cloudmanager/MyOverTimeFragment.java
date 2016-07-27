@@ -1,6 +1,7 @@
 package com.example.zxl.cloudmanager;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
@@ -9,6 +10,9 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,6 +23,8 @@ import com.example.zxl.cloudmanager.model.OverTime;
 import com.example.zxl.cloudmanager.model.OverTimeLab;
 import com.example.zxl.cloudmanager.myOvertime.MyOvertimeDetailFragment;
 import com.example.zxl.cloudmanager.myOvertime.OverTimeFragment;
+import com.example.zxl.cloudmanager.myPost.MyPostSearchFragment;
+import com.example.zxl.cloudmanager.publicSearch.usecase.UsecaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +51,26 @@ public class MyOverTimeFragment extends Fragment {
         mFragment = this;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_search, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new OverTimeFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
@@ -78,24 +104,6 @@ public class MyOverTimeFragment extends Fragment {
             }
         });
 
-        searchBtn =(Button) v.findViewById(R.id.my_overtime_list_search_button) ;
-        searchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fragment = new OverTimeFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
-            }
-        });
         return v;
     }
 

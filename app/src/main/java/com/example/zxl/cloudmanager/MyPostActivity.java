@@ -39,7 +39,7 @@ public class MyPostActivity extends Activity {
             //什么都不做
         }
 
-        mSearchBtn = (ImageButton) findViewById(R.id.my_post_activity_searchBtn);
+        /*mSearchBtn = (ImageButton) findViewById(R.id.my_post_activity_searchBtn);
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,6 +48,6 @@ public class MyPostActivity extends Activity {
                     fm.beginTransaction().replace(R.id.postActivity, fragment).commit();
                 }
             }
-        });
+        });*/
     }
 }

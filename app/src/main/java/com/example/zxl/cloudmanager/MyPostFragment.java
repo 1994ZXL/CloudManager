@@ -119,8 +119,6 @@ public class MyPostFragment extends ListFragment {
         inflater.inflate(R.menu.menu_search, menu);
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

@@ -1,6 +1,7 @@
 package com.example.zxl.cloudmanager;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.nfc.Tag;
@@ -11,6 +12,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,6 +26,7 @@ import com.example.zxl.cloudmanager.model.CheckLab;
 import com.example.zxl.cloudmanager.model.UseCase;
 import com.example.zxl.cloudmanager.model.UseCaseLab;
 import com.example.zxl.cloudmanager.model.UserLab;
+import com.example.zxl.cloudmanager.myPost.MyPostSearchFragment;
 import com.example.zxl.cloudmanager.publicSearch.usecase.UsecaseFragment;
 
 import java.util.ArrayList;
@@ -96,24 +101,6 @@ public class MyUseCaseFragment extends Fragment {
             }
         });
 
-        mSearchBtn =(Button) v.findViewById(R.id.my_usecase_search_button) ;
-        mSearchBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new UsecaseFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
-            }
-        });
         return v;
     }
 
@@ -122,6 +109,27 @@ public class MyUseCaseFragment extends Fragment {
     }
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_search, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new UsecaseFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
         private List<UseCase> useCases;

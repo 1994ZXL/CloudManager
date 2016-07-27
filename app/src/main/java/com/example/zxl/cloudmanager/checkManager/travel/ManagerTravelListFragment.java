@@ -41,8 +41,7 @@ public class ManagerTravelListFragment extends ListFragment {
         public View getView(int position, View convertView, ViewGroup parent){
             if( null == convertView){
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.main_fragment_travel, null);
-                mSearchBtn = (Button) convertView.findViewById(R.id.my_travel_list_search_button);
-                mSearchBtn.setVisibility(View.INVISIBLE);
+
             }
 
             Travel travel = getItem(position);

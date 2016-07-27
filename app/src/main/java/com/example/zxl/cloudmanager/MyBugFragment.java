@@ -1,22 +1,29 @@
 package com.example.zxl.cloudmanager;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
 
+import com.example.zxl.cloudmanager.leave.LeaveSearchActivity;
 import com.example.zxl.cloudmanager.model.Bug;
 import com.example.zxl.cloudmanager.model.BugLab;
+import com.example.zxl.cloudmanager.myMission.MyMissionSearchFragment;
 import com.example.zxl.cloudmanager.publicSearch.bug.BugSearchFragment;
 import com.example.zxl.cloudmanager.publicSearch.usecase.UsecaseFragment;
 
@@ -45,6 +52,27 @@ public class MyBugFragment extends Fragment {
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
         mFragment = this;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_search, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new BugSearchFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -92,24 +120,6 @@ public class MyBugFragment extends Fragment {
             }
         });
 
-        mSearchBtn =(Button) v.findViewById(R.id.my_bug_search_button) ;
-        mSearchBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new BugSearchFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
-            }
-        });
         return v;
     }
 

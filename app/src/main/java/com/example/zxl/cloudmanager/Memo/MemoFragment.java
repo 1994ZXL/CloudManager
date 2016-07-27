@@ -1,6 +1,7 @@
 package com.example.zxl.cloudmanager.Memo;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import com.example.zxl.cloudmanager.Memo.MemoDetailFragment;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.Memo;
+import com.example.zxl.cloudmanager.myMission.MyMissionSearchFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,24 +73,6 @@ public class MemoFragment extends Fragment {
             }
         });
 
-        mBtn = (Button) v.findViewById(R.id.my_memo_list_search_button) ;
-        mBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new MemoSearchFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
-            }
-        });
         return v;
     }
 
@@ -121,10 +105,18 @@ public class MemoFragment extends Fragment {
                     mRecyclerView.scrollToPosition(myAdapter.getItemCount() - 1);
                     myAdapter.notifyDataSetChanged();
                 }
+            case R.id.action_memo_search:
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new MemoSearchFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
 
     public interface OnRecyclerViewItemClickListener {
         void onItemClick(View view, Object data);

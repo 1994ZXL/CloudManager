@@ -44,8 +44,6 @@ public class ManagerOvertimeListFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
 
-        mSearchBtn = (Button) v.findViewById(R.id.my_overtime_list_search_button);
-        mSearchBtn.setVisibility(View.INVISIBLE);
         getActivity().getActionBar().setTitle("加班列表");
         /*Bundle bundle = new Bundle();
         bundle.putString("MANAGER_OVERTIME_lIST",TAG );

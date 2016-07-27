@@ -186,6 +186,8 @@ public class UsecaseFragment extends Fragment {
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
                     transaction.hide(mFragment);
+
+
                     transaction.replace(R.id.blankActivity, fragment);
                     transaction.commit();
                 } else {

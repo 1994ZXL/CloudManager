@@ -7,6 +7,9 @@ import android.app.ListFragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.model.Travel;
 import com.example.zxl.cloudmanager.model.TravelLab;
+import com.example.zxl.cloudmanager.publicSearch.usecase.UsecaseFragment;
 import com.example.zxl.cloudmanager.travel.TravelSearchFragment;
 
 import java.util.ArrayList;
@@ -107,26 +111,27 @@ public class MyTravelFragment extends ListFragment {
             TextView state = (TextView) convertView.findViewById(R.id.main_fragment_travel_state);
             state.setText(travel.getTravelState());
 
-            searchBtn = (Button) convertView.findViewById(R.id.my_travel_list_search_button);
-            searchBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Fragment fragment = new TravelSearchFragment();
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    if (!fragment.isAdded()) {
-                        transaction.addToBackStack(null);
-                        transaction.hide(mFragment);
-                        transaction.add(R.id.blankActivity, fragment);
-                        transaction.commit();
-                    } else {
-                        transaction.hide(mFragment);
-                        transaction.show(fragment);
-                        transaction.commit();
-                    }
-                }
-            });
-
             return convertView;
         }
+    }
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_search, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new TravelSearchFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

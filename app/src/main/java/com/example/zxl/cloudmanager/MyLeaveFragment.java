@@ -3,6 +3,7 @@ package com.example.zxl.cloudmanager;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v13.app.FragmentStatePagerAdapter;
@@ -10,6 +11,9 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationSet;
@@ -21,7 +25,9 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.zxl.cloudmanager.check.SearchCheckFragment;
+import com.example.zxl.cloudmanager.leave.LeaveSearchActivity;
 import com.example.zxl.cloudmanager.leave.LeaveSearchFragment;
+import com.example.zxl.cloudmanager.myMission.MyMissionSearchFragment;
 
 import java.util.ArrayList;
 
@@ -37,7 +43,14 @@ public class MyLeaveFragment extends Fragment implements RadioGroup.OnCheckedCha
     private HorizontalScrollView mHorizontalScrollView;
     private ViewPager mViewPager;
     private ArrayList<View> mViews;
+    private Fragment mFragment;
 
+    @Override
+    public void onCreate(Bundle saveInstanceState) {
+        super.onCreate(saveInstanceState);
+        this.setHasOptionsMenu(true);
+        mFragment = this;
+    }
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View view = layoutInflater.inflate(R.layout.main_fragment_my_leave, parent, false);
@@ -54,6 +67,23 @@ public class MyLeaveFragment extends Fragment implements RadioGroup.OnCheckedCha
         mCurrentCheckedRadioLeft = getCurrentCheckedRadioLeft();
 
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_search, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                Intent intent = new Intent(mFragment.getActivity(), LeaveSearchActivity.class);
+                startActivity(intent);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     public void initPager(FragmentManager fragmentManager) {

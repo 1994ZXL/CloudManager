@@ -1,6 +1,7 @@
 package com.example.zxl.cloudmanager;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
@@ -10,11 +11,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.zxl.cloudmanager.check.SearchCheckFragment;
 import com.example.zxl.cloudmanager.leave.LeaveSearchFragment;
 import com.example.zxl.cloudmanager.model.Mission;
 import com.example.zxl.cloudmanager.model.MissionLab;
@@ -50,6 +55,26 @@ public class MyMissionFragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_search, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new MyMissionSearchFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View view = layoutInflater.inflate(R.layout.main_fragment_my_mission, parent, false);
 
@@ -79,24 +104,6 @@ public class MyMissionFragment extends Fragment {
             @Override
             public void onItemClick(View view, Object data) {
                 Fragment fragment = MyMissionDetailFragment.newInstance(data);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
-            }
-        });
-        mSearchBtn =(Button) view.findViewById(R.id.mine_mission_search_button) ;
-        mSearchBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new MyMissionSearchFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);

@@ -1,6 +1,7 @@
 package com.example.zxl.cloudmanager;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
@@ -10,6 +11,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -18,6 +22,7 @@ import android.widget.TextView;
 import com.example.zxl.cloudmanager.check.SearchCheckFragment;
 import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.CheckLab;
+import com.example.zxl.cloudmanager.publicSearch.usecase.UsecaseFragment;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -46,6 +51,27 @@ public class MyCheckFragment extends Fragment {
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
         mFragment = this;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_search, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new SearchCheckFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -92,17 +118,6 @@ public class MyCheckFragment extends Fragment {
                     transaction.show(fragment);
                     transaction.commit();
                 }
-            }
-        });
-
-        mSearchBtn =(Button)v.findViewById(R.id.search_button) ;
-        mSearchBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new SearchCheckFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.blankActivity, fragment);
-                transaction.commit();
             }
         });
 

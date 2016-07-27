@@ -53,7 +53,6 @@ public class MyPostSearchFragment extends Fragment {
 
     private Fragment mFragment;
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

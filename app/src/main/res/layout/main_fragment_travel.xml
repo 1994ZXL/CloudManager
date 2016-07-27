@@ -51,14 +51,6 @@
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SearchButton"
-        android:id="@+id/my_travel_list_search_button"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="left|bottom" />
-
 
 </RelativeLayout>
 

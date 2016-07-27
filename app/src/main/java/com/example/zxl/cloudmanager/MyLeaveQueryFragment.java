@@ -104,14 +104,6 @@ public class MyLeaveQueryFragment extends Fragment {
             }
         });
 
-        mSearchBtn =(Button) v.findViewById(R.id.my_leave_search_button) ;
-        mSearchBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mFragment.getActivity(), LeaveSearchActivity.class);
-                startActivity(intent);
-            }
-        });
         return v;
     }
 
