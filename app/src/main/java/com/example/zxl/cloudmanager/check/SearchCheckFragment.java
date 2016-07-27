@@ -180,8 +180,10 @@ public class SearchCheckFragment extends Fragment {
     private void search() {
         mChecks = CheckLab.newInstance(mFragment.getActivity()).get();
         for (int i = 0; i < mChecks.size(); i++) {
-            if (mChecks.get(i).getLate().equals(lateSearch) && mChecks.get(i).getLeave().equals(leaveSearch)
-                    && mChecks.get(i).getTravel().equals(travelSearch) && mChecks.get(i).getOverTime().equals(overTimeSearch) ) {
+            if (mChecks.get(i).getLate().equals(lateSearch)
+                    || mChecks.get(i).getLeave().equals(leaveSearch)
+                    || mChecks.get(i).getTravel().equals(travelSearch)
+                    || mChecks.get(i).getOverTime().equals(overTimeSearch) ) {
                 Fragment fragment = new MyCheckFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt(SEARCH_KEY, i + 1);

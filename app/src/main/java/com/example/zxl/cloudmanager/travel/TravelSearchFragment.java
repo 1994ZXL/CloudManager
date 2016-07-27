@@ -102,10 +102,10 @@ public class TravelSearchFragment extends Fragment {
         mTravels = TravelLab.newInstance(mFragment.getActivity()).getTravels();
         for (index = 0;index < mTravels.size(); index++) {
             if (bgtime.equals(mTravels.get(index).getBeginTime())
-                    && edtime.equals(mTravels.get(index).getEndTime())
-                    && cbgtime.equals(mTravels.get(index).getBackBeginTime())
-                    && cedtime.equals(mTravels.get(index).getBackEndTime())
-                    && state.equals(mTravels.get(index).getTravelState())) {
+                    || edtime.equals(mTravels.get(index).getEndTime())
+                    || cbgtime.equals(mTravels.get(index).getBackBeginTime())
+                    || cedtime.equals(mTravels.get(index).getBackEndTime())
+                    || state.equals(mTravels.get(index).getTravelState())) {
                 Log.d(TAG, " 查询时间："+bgtime);
                 Log.d(TAG, " 模型时间："+mTravels.get(index).getBeginTime());
                 Log.d(TAG, " 查询时间："+edtime);

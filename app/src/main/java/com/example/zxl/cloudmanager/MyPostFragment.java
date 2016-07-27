@@ -37,9 +37,11 @@ public class MyPostFragment extends ListFragment {
 
     private Fragment mFragment;
 
+    private static final String TAG = "MyPostFragment";
     private static final String SEARCH_KEY = "search_key";
-    private int searchKey;
+    private static final String WHERE = "where";
     private ArrayList<Integer> key = new ArrayList<Integer>();
+
 
     @Override
     public void onCreate(Bundle saveInstanceState){
@@ -52,10 +54,17 @@ public class MyPostFragment extends ListFragment {
             mPosts = PostLab.newInstance(mFragment.getActivity()).getPosts();
         } else {
             key = getArguments().getIntegerArrayList(SEARCH_KEY);
+            Log.d(TAG, "MyPostFragment: " + key + getArguments().getString(WHERE));
         }
 
         for (int i = 0; i < key.size(); i++) {
-            mPosts.add(PostLab.newInstance(mFragment.getActivity()).getPosts().get(key.get(i)));
+            if (null == getArguments().getString(WHERE)) {
+                if ("张三" == PostLab.newInstance(mFragment.getActivity()).getPosts().get(key.get(i)).getName()){
+                    mPosts.add(PostLab.newInstance(mFragment.getActivity()).getPosts().get(key.get(i)));
+                }
+            } else {
+                mPosts.add(PostLab.newInstance(mFragment.getActivity()).getPosts().get(key.get(i)));
+            }
         }
 
         PostAdapter adapter = new PostAdapter(mPosts);
@@ -99,25 +108,6 @@ public class MyPostFragment extends ListFragment {
 
             TextView postTime = (TextView) convertView.findViewById(R.id.main_fragment_my_post_time);
             postTime.setText(p.getPostTime());
-
-            ImageButton searchBtn = (ImageButton) convertView.findViewById(R.id.main_fragment_my_post_searchBtn);
-            searchBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Fragment fragment = new MyPostSearchFragment();
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    if (!fragment.isAdded()) {
-                        transaction.addToBackStack(null);
-                        transaction.hide(mFragment);
-                        transaction.add(R.id.blankActivity, fragment);
-                        transaction.commit();
-                    } else {
-                        transaction.hide(mFragment);
-                        transaction.show(fragment);
-                        transaction.commit();
-                    }
-                }
-            });
 
             return convertView;
         }

@@ -17,6 +17,7 @@ public class PostLab {
 
     private String[] content;
     private String[] content2;
+    private String[] content3;
 
     private Context context;
 
@@ -31,8 +32,13 @@ public class PostLab {
                 "李四",
                 "1.编写了商品分类列表和轮换图（完成）2.学习了document.getElementById方法和setInterval方法的使用（完成）3.遇到了setInterval在window.onload里无法多次运行的问题并解决。",
                 "2016.7.28"};
+        content3 = new String[]{
+                "张三",
+                "1.编写了商品分类列表和轮换图（完成）2.学习了document.getElementById方法和setInterval方法的使用（完成）3.遇到了setInterval在window.onload里无法多次运行的问题并解决。",
+                "2016.7.29"};
         set(content);
         set(content2);
+        set(content3);
     }
 
     private String getTime() {

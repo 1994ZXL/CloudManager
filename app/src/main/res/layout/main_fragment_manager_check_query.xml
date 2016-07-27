@@ -35,7 +35,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingRight="20dp"
-                    android:text="@string/check_begin_time"
+                    android:text="@string/project_begin_time_textview"
+                    android:layout_weight="2"/>
+                <Button
+                    android:id="@+id/check_end_time_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingRight="20dp"
+                    android:text="@string/project_end_time_textview"
                     android:layout_weight="2"/>
             </LinearLayout>
 

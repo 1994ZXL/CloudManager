@@ -49,7 +49,7 @@
     <string name="overtime_deal">加班处理</string>
     <string name="travel_deal">出差处理</string>
     <string name="save_edit">保存修改</string>
-    <string name="check_begin_time">考勤时间</string>
+    <string name="check_begin_time">考勤开始时间</string>
 
     <!-- 项目主管-->
     <string name="project_manager">项目主管</string>
