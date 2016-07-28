@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.MyTravelDetailFragment;
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.Travel;
 import com.example.zxl.cloudmanager.model.TravelLab;
 
@@ -28,6 +29,9 @@ public class ManagerTravelListFragment extends ListFragment {
     private Button mSearchBtn;
     private Fragment mFragment;
 
+    private PullToRefreshView mPullToRefreshView;
+    public static final int REFRESH_DELAY = 4000;
+
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -38,6 +42,18 @@ public class ManagerTravelListFragment extends ListFragment {
         TravelAdapter adapter = new TravelAdapter(travels);
         setListAdapter(adapter);
 
+        mPullToRefreshView = (PullToRefreshView) getActivity().findViewById(R.id.pull_to_refresh);
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPullToRefreshView.setRefreshing(false);
+                    }
+                }, REFRESH_DELAY);
+            }
+        });
     }
 
     @Override
@@ -45,12 +61,13 @@ public class ManagerTravelListFragment extends ListFragment {
         Travel travel= ((TravelAdapter)getListAdapter()).getItem(position);
         Log.d(TAG, "item被点击");
 
+
         Fragment fragment = new TravelDetailFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (!fragment.isAdded()) {
             transaction.addToBackStack(null);
             transaction.hide(mFragment);
-            transaction.add(R.id.blankActivity, fragment);
+            transaction.add(R.id.cmTravelActivity, fragment);
             transaction.commit();
         } else {
             transaction.hide(mFragment);

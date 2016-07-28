@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.ManagerCheckEditFragment;
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.CheckLab;
 import com.example.zxl.cloudmanager.model.Leave;
@@ -34,6 +35,8 @@ public class LeaveListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private List<Leave> leaves = new ArrayList<Leave>();
     private MyAdapter myAdapter;
+    private PullToRefreshView mPullToRefreshView;
+    public static final int REFRESH_DELAY = 4000;
 
     private static final String TAG = "MyCheckFragment";
 
@@ -64,6 +67,18 @@ public class LeaveListFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.main_fragment_manager_check_list, parent, false);
 
+        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPullToRefreshView.setRefreshing(false);
+                    }
+                }, REFRESH_DELAY);
+            }
+        });
         Log.d(TAG, "调用了一次");
 
         getActivity().getActionBar().setTitle("请假处理");

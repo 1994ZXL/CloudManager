@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.CheckLab;
 
@@ -31,6 +32,8 @@ public class ManagerCheckListFragment extends Fragment {
     private List<Check> checks = new ArrayList<Check>();
     private MyAdapter myAdapter;
 
+    public static final int REFRESH_DELAY = 4000;
+    private PullToRefreshView mPullToRefreshView;
     private static final String TAG = "MyCheckFragment";
 
     private Fragment mFragment;
@@ -65,6 +68,19 @@ public class ManagerCheckListFragment extends Fragment {
         getActivity().getActionBar().setTitle("考勤主管");
 
         checks = CheckLab.newInstance(mFragment.getActivity()).get();
+
+        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPullToRefreshView.setRefreshing(false);
+                    }
+                }, REFRESH_DELAY);
+            }
+        });
 
         mRecyclerView = (RecyclerView)v.findViewById(R.id.manager_check_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));

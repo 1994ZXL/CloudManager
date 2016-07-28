@@ -59,7 +59,7 @@ public class ManagerTravelSearchFragment extends Fragment {
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
                     transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.add(R.id.cmTravelActivity, fragment);
                     transaction.commit();
                 } else {
                     transaction.hide(mFragment);

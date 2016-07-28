@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.OverTime;
 
 import java.util.ArrayList;
@@ -33,6 +34,9 @@ public class ManagerOvertimeListFragment extends Fragment {
     private Fragment mFragment;
     private Fragment fragment;
     private Button mSearchBtn;
+
+    private PullToRefreshView mPullToRefreshView;
+    public static final int REFRESH_DELAY = 4000;
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -48,6 +52,18 @@ public class ManagerOvertimeListFragment extends Fragment {
         /*Bundle bundle = new Bundle();
         bundle.putString("MANAGER_OVERTIME_lIST",TAG );
         fragment.setArguments(bundle);*/
+        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPullToRefreshView.setRefreshing(false);
+                    }
+                }, REFRESH_DELAY);
+            }
+        });
 
         overTimes.add(new OverTime());
 
