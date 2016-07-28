@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.check.SearchCheckFragment;
 import com.example.zxl.cloudmanager.leave.LeaveSearchFragment;
 import com.example.zxl.cloudmanager.model.Mission;
@@ -41,6 +42,9 @@ public class MyMissionFragment extends Fragment {
     private MyAdapter myAdapter;
 
     private Fragment mFragment;
+
+    private PullToRefreshView mPullToRefreshView;
+    public static final int REFRESH_DELAY = 4000;
 
     private static final String SEARCH_KEY = "search_key";
     private int searchKey;
@@ -118,6 +122,18 @@ public class MyMissionFragment extends Fragment {
             }
         });
 
+        mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.mission_pull_to_refresh);
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPullToRefreshView.setRefreshing(false);
+                    }
+                }, REFRESH_DELAY);
+            }
+        });
         return view;
     }
 

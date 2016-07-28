@@ -227,7 +227,7 @@ public class MainFragment extends Fragment {
         mChecks = CheckLab.newInstance(mFragment.getActivity()).get();
         mChecks.get(mChecks.size() - 1).setOffDutyTime(mOffSignTime);
         mOffSignBtn.setText(mOffSignTime);
-        mSignBtn.setClickable(false);
+        mOffSignBtn.setClickable(false);
     }
 
     private Date getTime() {

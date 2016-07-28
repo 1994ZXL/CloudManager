@@ -59,6 +59,9 @@
     <string name="project_mission_manage">计划管理</string>
     <string name="bug_manage">bug处理</string>
     <string name="project_usecase">项目用例</string>
+    <string name="project_content">项目内容</string>
+    <string name="pm_customer_company_name">甲方单位名称</string>
+    <string name="pm_customer_contactor_phone">联系电话</string>
 
     <!--备忘录-->
     <string name="memo_title_textview">标题</string>

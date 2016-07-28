@@ -1,16 +1,14 @@
-package com.example.zxl.cloudmanager;
+package com.example.zxl.cloudmanager.projectManager.mission;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,26 +18,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
-import com.example.zxl.cloudmanager.leave.LeaveSearchFragment;
-import com.example.zxl.cloudmanager.model.Check;
-import com.example.zxl.cloudmanager.model.CheckLab;
-import com.example.zxl.cloudmanager.model.UseCase;
-import com.example.zxl.cloudmanager.model.UseCaseLab;
-import com.example.zxl.cloudmanager.model.UserLab;
-import com.example.zxl.cloudmanager.myPost.MyPostSearchFragment;
-import com.example.zxl.cloudmanager.publicSearch.usecase.UsecaseFragment;
+import com.example.zxl.cloudmanager.model.Mission;
+import com.example.zxl.cloudmanager.model.MissionLab;
+import com.example.zxl.cloudmanager.myMission.MyMissionSearchFragment;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
- * Created by ZXL on 2016/7/13.
+ * Created by ZXL on 2016/7/12.
  */
-public class MyUseCaseFragment extends Fragment {
+public class MissionManagerListFragment extends Fragment {
+
     private CardView mCardView;
     private RecyclerView mRecyclerView;
-    private ArrayList<UseCase> useCases = new ArrayList<UseCase>();
+    private List<Mission> missions = new ArrayList<Mission>();
     private MyAdapter myAdapter;
 
     private Fragment mFragment;
@@ -48,8 +45,9 @@ public class MyUseCaseFragment extends Fragment {
     public static final int REFRESH_DELAY = 4000;
 
     private static final String SEARCH_KEY = "search_key";
-    private static final String TAG = "MyUseCaseFragment";
     private int searchKey;
+
+    private Button mSearchBtn;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -59,12 +57,32 @@ public class MyUseCaseFragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_search, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search:
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new MyMissionSearchFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        View v = layoutInflater.inflate(R.layout.main_fragment_my_usecase, parent, false);
+        View view = layoutInflater.inflate(R.layout.main_fragment_my_mission, parent, false);
 
-        getActivity().getActionBar().setTitle("我的用例");
+        getActivity().getActionBar().setTitle("我的任务");
 
-        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
+        mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -84,24 +102,22 @@ public class MyUseCaseFragment extends Fragment {
         }
 
         if (-1 == searchKey) {
-            useCases = UseCaseLab.newInstance(mFragment.getActivity()).getUseCase();
+            missions = MissionLab.newInstance(mFragment.getActivity()).get();
         } else {
-            useCases.add(UseCaseLab.newInstance(mFragment.getActivity()).getUseCase().get(searchKey));
+            missions.add(MissionLab.newInstance(mFragment.getActivity()).get().get(searchKey));
         }
 
-        Log.d(TAG, "searchKey: " + searchKey);
-
-        mRecyclerView = (RecyclerView)v.findViewById(R.id.usecase_recyclerview);
+        mRecyclerView = (RecyclerView)view.findViewById(R.id.mission_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setHasFixedSize(true);
-        myAdapter = new MyAdapter(this.getActivity(), useCases);
+        myAdapter = new MyAdapter(this.getActivity(), missions);
         mRecyclerView.setAdapter(myAdapter);
-        mCardView = (CardView)v.findViewById(R.id.fragment_my_usecase);
+        mCardView = (CardView)view.findViewById(R.id.fragment_my_check);
         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, Object data) {
-                Fragment fragment = MyUseCaseDetailFragment.newInstance(data);
+                Fragment fragment = MissionManagerEditFragment.newInstance(data);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
@@ -116,7 +132,14 @@ public class MyUseCaseFragment extends Fragment {
             }
         });
 
-        return v;
+        return view;
+    }
+
+    private Date getTime() {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
+        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+//        String date = formatter.format(curDate);
+        return curDate;
     }
 
     public interface OnRecyclerViewItemClickListener {
@@ -125,39 +148,18 @@ public class MyUseCaseFragment extends Fragment {
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_search, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_search:
-                Fragment fragment = null;
-                if (null == fragment) {
-                    FragmentManager fm = getFragmentManager();
-                    fragment = new UsecaseFragment();
-                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
-                }
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
-        private List<UseCase> useCases;
+        private List<Mission> missions;
         private Context mContext;
 
-        public MyAdapter (Context context, List<UseCase> useCases) {
-            this.useCases = useCases;
+        public MyAdapter (Context context, List<Mission> missions) {
+            this.missions = missions;
             this.mContext = context;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.usecase_card_item, viewGroup, false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mission_card_item, viewGroup,false);
             ViewHolder viewHolder = new ViewHolder(v);
             v.setOnClickListener(this);
             return viewHolder;
@@ -165,21 +167,20 @@ public class MyUseCaseFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            UseCase useCase = useCases.get(i);
+            Mission mission = missions.get(i);
 
-            viewHolder.mProjectName.setText(useCase.getName());
-            viewHolder.mUseCaseNumber.setText(useCase.getUsecasetNumber());
-            viewHolder.mVersoinNumber.setText(useCase.getVersionNumber());
-            viewHolder.mTextMan.setText(useCase.getTestMan());
-            viewHolder.mExploitMan.setText(useCase.getExploitMan());
-            viewHolder.mAutorizedTime.setText(useCase.getAutorizedTime());
+            viewHolder.mBeginTime.setText(mission.getMissionBeginTime().toString());
+            viewHolder.mEndTime.setText(mission.getMissionEndTime().toString());
+            viewHolder.mName.setText(mission.getName());
+            viewHolder.mState.setText(mission.getState());
+            viewHolder.mlevel.setText(mission.getLevel());
 
-            viewHolder.itemView.setTag(useCases.get(i));
+            viewHolder.itemView.setTag(missions.get(i));
         }
 
         @Override
         public int getItemCount() {
-            return useCases == null ? 0 : useCases.size();
+            return missions == null ? 0 : missions.size();
         }
 
         @Override
@@ -190,21 +191,19 @@ public class MyUseCaseFragment extends Fragment {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder{
-            public TextView mProjectName;
-            public TextView mUseCaseNumber;
-            public TextView mVersoinNumber;
-            public TextView mTextMan;
-            public TextView mExploitMan;
-            public TextView mAutorizedTime;
+            public TextView mName;
+            public TextView mState;
+            public TextView mlevel;
+            public TextView mBeginTime;
+            public TextView mEndTime;
 
             public ViewHolder(View v) {
                 super(v);
-                mProjectName = (TextView)v.findViewById(R.id.usecase_card_item_project_soft);
-                mUseCaseNumber = (TextView)v.findViewById(R.id.usecase_card_item_usecase_number);
-                mVersoinNumber = (TextView)v.findViewById(R.id.usecase_card_item_version_number);
-                mTextMan = (TextView)v.findViewById(R.id.usecase_card_item_text_man);
-                mExploitMan = (TextView)v.findViewById(R.id.usecase_card_item_exploit_man);
-                mAutorizedTime = (TextView)v.findViewById(R.id.usecase_card_item_autorized_time);
+                mName = (TextView) v.findViewById(R.id.mission_card_item_name);
+                mState = (TextView)v.findViewById(R.id.mission_card_item_state);
+                mlevel = (TextView)v.findViewById(R.id.mission_card_item_level);
+                mBeginTime = (TextView)v.findViewById(R.id.missoin_card_item_mission_begin_time);
+                mEndTime = (TextView)v.findViewById(R.id.mission_card_item_mission_end_time);
             }
         }
 
@@ -212,4 +211,5 @@ public class MyUseCaseFragment extends Fragment {
             mOnItemClickListener = listener;
         }
     }
+
 }

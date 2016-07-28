@@ -17,7 +17,7 @@ public class ProjectLab {
         this.context = context;
     }
 
-    public ProjectLab newInstance(Context context) {
+    public static ProjectLab newInstance(Context context) {
         if (null == sProjectLab) {
             sProjectLab = new ProjectLab(context.getApplicationContext());
         }

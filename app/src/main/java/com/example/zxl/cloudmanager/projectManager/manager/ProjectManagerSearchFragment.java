@@ -2,6 +2,8 @@ package com.example.zxl.cloudmanager.projectManager.manager;
 
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,14 @@ public class ProjectManagerSearchFragment extends Fragment {
     private Button mSearchBtn;
     private ArrayAdapter<String> adapter;
     private static final String[] list={"全部","启动", "进行中","维护期","已结束"};
+
+    private Fragment mFragment;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mFragment = this;
+    }
 
     public ProjectManagerSearchFragment() {
         // Required empty public constructor
@@ -56,7 +66,18 @@ public class ProjectManagerSearchFragment extends Fragment {
         mSearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
+                Fragment fragment = new ProjectManagerListFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
             }
         });
 

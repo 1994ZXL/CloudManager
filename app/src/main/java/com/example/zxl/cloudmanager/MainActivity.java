@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import com.example.zxl.cloudmanager.tabBar.CustomerItemFragment;
 
 public class MainActivity extends Activity implements View.OnClickListener{
 
+    private static final String TAG = "MainActivity";
     private TextView bottomHomeBar;
     private TextView bottomAddressListBar;
     private TextView bottomCustomerBar;
@@ -29,7 +32,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private CustomerContactionFragment customerListFragment;
     private AboutAppFragment aboutAppFragment;
 
-    private Fragment fragment;
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -88,42 +90,49 @@ public class MainActivity extends Activity implements View.OnClickListener{
             case R.id.bottom_menu_home_bar:
                 setSelected();
                 bottomHomeBar.setSelected(true);
-                if(fragment == null){
+                if(mainFragment == null){
                     mainFragment = new MainFragment();
                     //fragmentManager.beginTransaction().replace(R.id.fragmentContiner, mainFragment).commit();
                     ft.add(R.id.fragmentContiner,mainFragment);
+                    //ft.addToBackStack(null);
                 }else {
-                    fragmentManager.beginTransaction().replace(R.id.fragmentContiner, mainFragment).commit();
+                    Log.e(TAG,"mainFragment : " + "显示已有的mainFragment");
+                    //fragmentManager.beginTransaction().replace(R.id.fragmentContiner, mainFragment).commit();
+                    ft.show(mainFragment);
                 }
                 break;
             case R.id.bottom_menu_addresslist_bar:
                 setSelected();
                 bottomAddressListBar.setSelected(true);
-                if(fragment == null){
+                if(companyMemberListFragment == null){
                     companyMemberListFragment = new CompanyContactionFragment();
                     ft.add(R.id.fragmentContiner,companyMemberListFragment);
                 }else {
-                    fragmentManager.beginTransaction().replace(R.id.fragmentContiner, companyMemberListFragment).commit();
+                    //fragmentManager.beginTransaction().replace(R.id.fragmentContiner, companyMemberListFragment).commit();
+                    ft.show(companyMemberListFragment);
                 }
                 break;
             case R.id.bottom_menu_customer_bar:
                 setSelected();
                 bottomCustomerBar.setSelected(true);
-                if(fragment == null){
+                if(customerListFragment == null){
                     customerListFragment = new CustomerContactionFragment();
                     ft.add(R.id.fragmentContiner,customerListFragment);
                 }else {
-                    fragmentManager.beginTransaction().replace(R.id.fragmentContiner, customerListFragment).commit();
+                   // fragmentManager.beginTransaction().replace(R.id.fragmentContiner, customerListFragment).commit();
+                    ft.show(customerListFragment);
                 }
                 break;
             case R.id.bottom_menu_about_bar:
                 setSelected();
                 bottomAboutBar.setSelected(true);
-                if(fragment == null){
+                if(aboutAppFragment == null){
                     aboutAppFragment = new AboutAppFragment();
                     ft.add(R.id.fragmentContiner,aboutAppFragment);
                 }else {
-                    fragmentManager.beginTransaction().replace(R.id.fragmentContiner, aboutAppFragment).commit();
+                    //fragmentManager.beginTransaction().replace(R.id.fragmentContiner, aboutAppFragment).commit();
+                    ft.show(aboutAppFragment);
+
                 }
                 break;
         }
