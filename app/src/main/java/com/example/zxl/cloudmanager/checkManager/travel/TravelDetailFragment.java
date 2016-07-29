@@ -36,6 +36,7 @@ public class TravelDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_travel_detail, container, false);
+        getActivity().getActionBar().setTitle("出差处理");
         init(v);
         employerAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, employerList);
         employerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

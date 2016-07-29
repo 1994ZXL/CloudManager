@@ -33,7 +33,7 @@ public class UsecaseSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_usecase_public, container, false);
-
+        getActivity().getActionBar().setTitle("用例查询");
         return v;
     }
 

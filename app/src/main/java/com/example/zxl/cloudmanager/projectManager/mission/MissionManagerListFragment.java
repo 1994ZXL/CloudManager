@@ -80,9 +80,9 @@ public class MissionManagerListFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View view = layoutInflater.inflate(R.layout.main_fragment_my_mission, parent, false);
 
-        getActivity().getActionBar().setTitle("我的任务");
+        getActivity().getActionBar().setTitle("任务处理");
 
-        mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pull_to_refresh);
+        mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.mission_pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {

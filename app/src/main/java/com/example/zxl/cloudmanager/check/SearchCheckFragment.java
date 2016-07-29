@@ -88,6 +88,7 @@ public class SearchCheckFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_search_check, container, false);
+        getActivity().getActionBar().setTitle("考勤查询");
         init(v);
         adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -22,7 +22,7 @@ import com.example.zxl.cloudmanager.model.Leave;
 public class LeaveDeallFragment extends Fragment {
     private TextView name;
     private TextView leaveBeginTime,leaveEndTime,leaveKind,leaveReason,leaveApplyTime;
-    private EditText leaveSuggestion;
+    private TextView leaveSuggestion;
     private TextView leaveDealTime;
     private Spinner leaveState;
     private Button mSubmitBtn;
@@ -70,7 +70,7 @@ public class LeaveDeallFragment extends Fragment {
         leaveEndTime = (TextView)view.findViewById(R.id.cm_leave_deal_end_time);
         leaveReason = (TextView)view.findViewById(R.id.cm_leave_deal_ask_reason);
         leaveApplyTime = (TextView)view.findViewById(R.id.cm_leave_deal_apply_time);
-        leaveSuggestion = (EditText) view.findViewById(R.id.cm_leave_deal_suggestion);
+        leaveSuggestion = (TextView) view.findViewById(R.id.cm_leave_deal_suggestion);
         leaveState = (Spinner) view.findViewById(R.id.cm_leave_deal_state);
         leaveDealTime = (TextView)view.findViewById(R.id.cm_leave_deal_time);
 

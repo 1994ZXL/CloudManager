@@ -16,6 +16,7 @@ import com.example.zxl.cloudmanager.leaderSearch.LeaderCheckSearchActivity;
 import com.example.zxl.cloudmanager.leaderSearch.LeaderLeaveSearchActivity;
 import com.example.zxl.cloudmanager.leaderSearch.LeaderOvertimeSearchActivity;
 import com.example.zxl.cloudmanager.leaderSearch.LeaderPostSearchActivity;
+import com.example.zxl.cloudmanager.leaderSearch.LeaderTravelSearchActivity;
 import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.CheckLab;
 import com.example.zxl.cloudmanager.operation.MyOperationActivity;
@@ -131,6 +132,7 @@ public class MainFragment extends Fragment {
         onClickListener(leaderLeaveImage, new LeaderLeaveSearchActivity());
         onClickListener(leaderOvertimeImage, new LeaderOvertimeSearchActivity());
         onClickListener(leaderPostImage, new LeaderPostSearchActivity());
+        onClickListener(leaderTravelImage, new LeaderTravelSearchActivity());
 
         //项目主管
         onClickListener(projectManagmentImage, new ProjectManagerActivity());

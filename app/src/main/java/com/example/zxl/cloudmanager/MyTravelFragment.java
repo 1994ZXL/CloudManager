@@ -45,7 +45,7 @@ public class MyTravelFragment extends ListFragment {
         super.onCreate(saveInstanceState);
         setHasOptionsMenu(true);
         mFragment = this;
-
+        getActivity().getActionBar().setTitle("我的出差");
         saveInstanceState = getArguments();
         if (null == saveInstanceState) {
             travels = TravelLab.newInstance(mFragment.getActivity()).getTravels();

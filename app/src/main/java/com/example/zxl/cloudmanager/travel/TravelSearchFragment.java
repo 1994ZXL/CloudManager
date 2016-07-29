@@ -71,8 +71,6 @@ public class TravelSearchFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_travelsearch, container, false);
         getActivity().getActionBar().setTitle("出差查询");
 
-
-
         init(view);
         stateAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, stateList);
         stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

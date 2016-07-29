@@ -48,6 +48,7 @@ public class MyPostFragment extends ListFragment {
         super.onCreate(saveInstanceState);
         setHasOptionsMenu(true);
         mFragment = this;
+        getActivity().getActionBar().setTitle("我的日报");
 
         saveInstanceState = getArguments();
         if (null == saveInstanceState) {

@@ -2,6 +2,7 @@ package com.example.zxl.cloudmanager.projectManager.mission;
 
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.projectManager.manager.ProjectManagerListFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,10 +30,16 @@ public class MissionSearchFragment extends Fragment {
     private static final String[] stateList={"全部","待完成", "已完成"};
     private ArrayAdapter<String> stateAdapter;
 
+    private Fragment mFragment;
     public MissionSearchFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mFragment = this;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,7 +66,18 @@ public class MissionSearchFragment extends Fragment {
         mSearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
+                Fragment fragment = new MissionManagerListFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
             }
         });
         return v;
