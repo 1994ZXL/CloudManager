@@ -16,6 +16,7 @@ public abstract class SingleFragmentActivity extends Activity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.blank_activity);
 
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         Fragment fragment;
         FragmentManager fm = getFragmentManager();
         fragment = fm.findFragmentById(R.id.blankActivity);

@@ -28,8 +28,7 @@ public class MyPostActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.post_activity);
-
-
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         fragment = fm.findFragmentById(R.id.postActivity);
         if(null == fragment){

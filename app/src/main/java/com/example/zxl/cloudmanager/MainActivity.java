@@ -138,4 +138,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
         }
         ft.commit();
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+    }
 }

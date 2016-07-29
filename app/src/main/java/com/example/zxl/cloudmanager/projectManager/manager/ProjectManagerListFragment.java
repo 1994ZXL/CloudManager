@@ -57,7 +57,7 @@ public class ProjectManagerListFragment extends Fragment {
 
         getActivity().getActionBar().setTitle("项目管理");
 
-        /*mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pm_manager_pull_to_refresh);
+        mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pm_manager_pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -68,7 +68,7 @@ public class ProjectManagerListFragment extends Fragment {
                     }
                 }, REFRESH_DELAY);
             }
-        });*/
+        });
         saveInstanceState = getArguments();
         if (null == saveInstanceState) {
             searchKey = -1;
