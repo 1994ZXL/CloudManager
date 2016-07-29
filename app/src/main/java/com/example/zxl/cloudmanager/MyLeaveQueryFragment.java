@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
+import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.leave.LeaveSearchActivity;
 import com.example.zxl.cloudmanager.leave.LeaveSearchFragment;
 import com.example.zxl.cloudmanager.leave.MyLeaveDetailFragment;
@@ -39,6 +40,8 @@ public class MyLeaveQueryFragment extends Fragment {
     private List<Leave> leaves = new ArrayList<Leave>();
     private MyAdapter myAdapter;
 
+    private PullToRefreshView mPullToRefreshView;
+    public static final int REFRESH_DELAY = 4000;
     private Fragment mFragment;
     private static final String TAG = "MyLeaveQueryFragment";
 
@@ -78,7 +81,18 @@ public class MyLeaveQueryFragment extends Fragment {
         View v = layoutInflater.inflate(R.layout.main_fragment_my_leave_query, parent, false);
 
         getActivity().getActionBar().setTitle("我的请假");
-
+        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_leave_pull_to_refresh);
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPullToRefreshView.setRefreshing(false);
+                    }
+                }, REFRESH_DELAY);
+            }
+        });
         mRecyclerView = (RecyclerView)v.findViewById(R.id.leave_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());

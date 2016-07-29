@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
 import com.example.zxl.cloudmanager.model.Memo;
+import com.example.zxl.cloudmanager.model.Mission;
 import com.example.zxl.cloudmanager.model.User;
 
 /**
@@ -93,6 +94,12 @@ public class MessageEdit extends Fragment{
             User.newInstance(mFragment.getActivity()).setWechat(charSequence.toString());
         } else if (title == "地址修改") {
             User.newInstance(mFragment.getActivity()).setAddress(charSequence.toString());
+        }else if (title == "任务内容修改") {
+            Mission.newInstance(mFragment.getActivity()).setContent(charSequence.toString());
+        }else if (title == "内容详情修改") {
+            Mission.newInstance(mFragment.getActivity()).setDetailContent(charSequence.toString());
+        }else if (title == "任务人员修改") {
+            Mission.newInstance(mFragment.getActivity()).setMissionWorker(charSequence.toString());
         }
     }
 

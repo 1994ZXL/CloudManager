@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 
+import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.leave.LeaveSearchActivity;
 import com.example.zxl.cloudmanager.model.Bug;
 import com.example.zxl.cloudmanager.model.BugLab;
@@ -46,6 +47,9 @@ public class MyBugFragment extends Fragment {
     private static final String SEARCH_KEY = "search_key";
     private static final String TAG = "MyBugFragment";
     private int searchKey;
+
+    private PullToRefreshView mPullToRefreshView;
+    public static final int REFRESH_DELAY = 4000;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -95,6 +99,18 @@ public class MyBugFragment extends Fragment {
             bugs.add(BugLab.newInstance(mFragment.getActivity()).get().get(searchKey));
         }
 
+        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_bug_pull_to_refresh);
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPullToRefreshView.setRefreshing(false);
+                    }
+                }, REFRESH_DELAY);
+            }
+        });
         mRecyclerView = (RecyclerView)v.findViewById(R.id.bug_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());

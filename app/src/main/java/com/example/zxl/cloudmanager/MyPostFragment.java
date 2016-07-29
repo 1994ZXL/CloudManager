@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.leaderSearch.LeaderPostSearchActivity;
 import com.example.zxl.cloudmanager.leaderSearch.LeaderPostSearchFragment;
 import com.example.zxl.cloudmanager.model.Post;
@@ -42,6 +43,8 @@ public class MyPostFragment extends ListFragment {
     private static final String WHERE = "where";
     private ArrayList<Integer> key = new ArrayList<Integer>();//下标
 
+    private PullToRefreshView mPullToRefreshView;
+    public static final int REFRESH_DELAY = 4000;
 
     @Override
     public void onCreate(Bundle saveInstanceState){
@@ -100,6 +103,18 @@ public class MyPostFragment extends ListFragment {
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.main_fragment_my_post, null);
             }
 
+            /*mPullToRefreshView = (PullToRefreshView) convertView.findViewById(R.id.my_post_pull_to_refresh);
+            mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    mPullToRefreshView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            mPullToRefreshView.setRefreshing(false);
+                        }
+                    }, REFRESH_DELAY);
+                }
+            });*/
             Post p = getItem(position);
 
             TextView postName = (TextView) convertView.findViewById(R.id.main_fragment_my_post_name);

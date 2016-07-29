@@ -7,38 +7,34 @@
     android:descendantFocusability="blocksDescendants"
     android:id="@+id/post">
 
-    <FrameLayout
-        android:id="@+id/fragment_my_post"
-        android:orientation="vertical"
+    <!--<com.example.zxl.cloudmanager.Refresh.PullToRefreshView
+        android:id="@+id/my_post_pull_to_refresh"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:background="@color/white">
-
-        <TextView
-            android:layout_width="wrap_content"
+        android:layout_height="match_parent">-->
+        <FrameLayout
+            android:id="@+id/fragment_my_post"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/main_fragment_my_post_time"
-            android:textSize="20dp"
-            android:layout_gravity="top|left" />
+            android:padding="20dp"
+            android:background="@color/white">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/main_fragment_my_post_name"
-            android:textSize="20dp"
-            android:layout_gravity="top|right" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_fragment_my_post_time"
+                android:textSize="20dp"
+                android:layout_gravity="top|left" />
 
-    </FrameLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_fragment_my_post_name"
+                android:textSize="20dp"
+                android:layout_gravity="top|right" />
 
-    <!--<ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:alpha="0.8"
-        android:src="@drawable/demo"
-        android:layout_gravity="bottom|right"
-        android:id="@+id/main_fragment_my_post_searchBtn"/>-->
+        </FrameLayout>
+    <!--</com.example.zxl.cloudmanager.Refresh.PullToRefreshView>-->
 
 </FrameLayout>
 

@@ -1,6 +1,7 @@
 package com.example.zxl.cloudmanager.leave;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,8 +12,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.example.zxl.cloudmanager.Memo.MemoDetailFragment;
 import com.example.zxl.cloudmanager.MyLeaveActivity;
+import com.example.zxl.cloudmanager.MyLeaveQueryFragment;
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.leaderSearch.LeaveListActivity;
 import com.example.zxl.cloudmanager.model.Leave;
 import com.example.zxl.cloudmanager.model.LeaveMyLab;
 
@@ -104,7 +108,8 @@ public class LeaveSearchFragment extends Fragment {
                 sum.add(index);
             }
         }
-        Intent intent = new Intent(mFragment.getActivity(), MyLeaveActivity.class);
+
+        Intent intent = new Intent(mFragment.getActivity(),LeaveListActivity.class);
         intent.putIntegerArrayListExtra("TYPE", sum);
         startActivity(intent);
     }

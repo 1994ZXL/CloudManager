@@ -52,14 +52,12 @@
                         android:id="@+id/employer_travel_begin_time_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="20dp"
                         android:text="@string/project_begin_time_textview"
                         android:layout_weight="0.3"/>
                     <Button
                         android:id="@+id/employer_travel_end_time_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingRight="20dp"
                         android:text="@string/project_end_time_textview"
                         android:layout_weight="0.3"/>
                 </LinearLayout>

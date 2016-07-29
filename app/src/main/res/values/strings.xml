@@ -83,6 +83,7 @@
     <string name="qq">qq</string>
     <string name="wechat">微信</string>
     <string name="location">地址</string>
+    <string name="job">职务</string>
 
     <!-- 我的考勤-->
     <string name="dutytime">上班时间：</string>

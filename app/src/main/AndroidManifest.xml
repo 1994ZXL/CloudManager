@@ -181,6 +181,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity android:name=".leaderSearch.LeaveListActivity"
+            android:parentActivityName=".MainActivity" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+        </activity>
 
         <!--考勤主管-->
         <activity android:name=".checkManager.overtime.ManagerOvertimeActivity"

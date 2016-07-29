@@ -1,0 +1,161 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".publicSearch.list.ListSearchFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                style="@style/linearLayoutStyle"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+
+                    <TextView
+                        android:id="@+id/list_project_name_textview"
+                        style="@style/font"
+                        android:text="@string/project_name_edittext"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/ps_deatail_project_name"
+                        style="@style/font"
+                        android:gravity="center"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+                <!-- 姓名-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+
+                    <TextView
+                        style="@style/font"
+                        android:text="@string/project_customer_name"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/ps_detail_customer_name"/>
+
+                </LinearLayout>
+
+                <!-- 性别-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/sex"
+                        android:layout_gravity="center_vertical" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/ps_detail_customer_sex">
+
+                    </TextView>
+                </LinearLayout>
+
+                <!-- 职务-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/job"
+                        android:layout_gravity="center_vertical" />
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/ps_detail_customer_job">
+
+                    </TextView>
+                </LinearLayout>
+                <!-- 手机-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+
+                    <TextView
+                        style="@style/font"
+                        android:text="@string/phone"
+                        android:layout_weight="2"
+                        />
+                    <TextView
+                        style="@style/font"
+                        android:gravity="center"
+                        android:id="@+id/ps_detail_customer_phone"
+                        android:layout_weight="1"
+                        />
+                </LinearLayout>
+
+                <!-- QQ-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+
+                    <TextView
+                        style="@style/font"
+                        android:text="@string/qq"
+                        android:layout_weight="1"/>
+                    <TextView
+                        style="@style/font"
+                        android:gravity="center"
+                        android:id="@+id/ps_detail_cutomer_qq"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+
+                <!-- 微信-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+
+                    <TextView
+                        style="@style/font"
+                        android:text="@string/wechat"
+                        android:layout_weight="1"/>
+                    <EditText
+                        style="@style/font"
+                        android:gravity="center"
+                        android:id="@+id/ps_detail_customer_wechat"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -37,6 +37,7 @@ public class MyTravelDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.travel_details, container, false);
 
+        getActivity().getActionBar().setTitle("出差详情");
         init(view);
         control();
 

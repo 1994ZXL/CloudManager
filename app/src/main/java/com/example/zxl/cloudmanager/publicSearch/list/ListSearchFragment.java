@@ -2,6 +2,7 @@ package com.example.zxl.cloudmanager.publicSearch.list;
 
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.projectManager.mission.MissionManagerEditFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -33,7 +35,13 @@ public class ListSearchFragment extends Fragment {
     public ListSearchFragment() {
         // Required empty public constructor
     }
+    private Fragment mFragment;
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mFragment = this;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,7 +56,18 @@ public class ListSearchFragment extends Fragment {
         mSearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
+                Fragment fragment = new PSListDetailFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
             }
         });
 

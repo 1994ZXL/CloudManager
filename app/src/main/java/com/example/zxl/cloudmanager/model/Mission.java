@@ -1,5 +1,7 @@
 package com.example.zxl.cloudmanager.model;
 
+import android.content.Context;
+
 /**
  * Created by ZXL on 2016/7/12.
  */
@@ -13,10 +15,18 @@ public class Mission {
     private String progress;
     private String state;
     private String disposeSuggestion;
+    private String missionWorker;
 
+    private static Mission sMission;
 
     public Mission(){
 
+    }
+    public static Mission newInstance(Context context) {
+        if (null == sMission) {
+            sMission = new Mission();
+        }
+        return sMission;
     }
 
     public void setData(String[] data) {
@@ -29,6 +39,15 @@ public class Mission {
         setProgress(data[6]);
         setState(data[7]);
         setDisposeSuggestion(data[8]);
+        //setMissionWorker(data[9]);
+    }
+
+    public String getMissionWorker() {
+        return missionWorker;
+    }
+
+    public void setMissionWorker(String missionWorker) {
+        this.missionWorker = missionWorker;
     }
 
     public String getContent() {

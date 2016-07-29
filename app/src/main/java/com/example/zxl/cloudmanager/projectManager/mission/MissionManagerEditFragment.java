@@ -1,6 +1,7 @@
 package com.example.zxl.cloudmanager.projectManager.mission;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +10,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.zxl.cloudmanager.MessageEdit;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.Mission;
+import com.example.zxl.cloudmanager.model.User;
 
 /**
  * Created by ZXL on 2016/7/21.
@@ -23,13 +26,13 @@ public class MissionManagerEditFragment extends Fragment {
     private TextView mBeginTime;
     private TextView mEndTime;
     private TextView mProgress;
+    private TextView mMissionWorker;
     private Spinner mState;
 
-    private static final String NAME_CHANGE = "项目修改";
-    private static final String PHONE_CHANGE = "手机修改";
-    private static final String QQ_CHANGE = "QQ修改";
-    private static final String WECHAT_CHANGE = "微信修改";
-    private static final String ADDRESS_CHANGE = "地址修改";
+    private Fragment mFragment;
+    private static final String MISSION_CONTENT = "任务内容修改";
+    private static final String CONTENT_INTRODUCE = "内容详情修改";
+    private static final String MISSION_WOKER = "任务人员修改";
 
     private static Mission sMission = new Mission();
 
@@ -41,6 +44,12 @@ public class MissionManagerEditFragment extends Fragment {
 
     private static final String[] levelList={"全部","低","中","高"};
     private ArrayAdapter<String> levelAdapter;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mFragment = this;
+    }
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
@@ -60,6 +69,37 @@ public class MissionManagerEditFragment extends Fragment {
         mLevel.setAdapter(levelAdapter);
         contorl();
 
+        //mContent.setText(Mission.newInstance(mFragment.getActivity()).getContent());
+        mContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MessageEdit fragment = MessageEdit.newInstance(MISSION_CONTENT, sMission.getContent());
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.blankActivity, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+        mDetailContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MessageEdit fragment = MessageEdit.newInstance(CONTENT_INTRODUCE, sMission.getDetailContent());
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.blankActivity, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+        mMissionWorker.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MessageEdit fragment = MessageEdit.newInstance(MISSION_WOKER, sMission.getMissionWorker());
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.blankActivity, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
         return view;
     }
 
@@ -78,6 +118,7 @@ public class MissionManagerEditFragment extends Fragment {
         mEndTime = (TextView) view.findViewById(R.id.pm_mission_end_time);
         mProgress = (TextView) view.findViewById(R.id.pm_mission_progress);
         mState = (Spinner) view.findViewById(R.id.pm_mission_state);
+        mMissionWorker = (TextView) view.findViewById(R.id.pm_mission_woker);
 
     }
 

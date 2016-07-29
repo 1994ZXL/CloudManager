@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,16 +21,13 @@ import com.example.zxl.cloudmanager.model.Leave;
 public class MyLeaveDetailFragment extends Fragment {
     private TextView name;
     private TextView leaveBeginTime,leaveEndTime,leaveKind,leaveReason,leaveApplyTime;
-    private EditText leaveSuggestion;
+    private TextView leaveSuggestion;
     private TextView leaveDealTime;
-    private Spinner leaveState;
+    private TextView leaveState;
 
     private static final String EXTRA_OBJECT = "leave";
 
     private static Leave mLeave = new Leave();
-
-    private ArrayAdapter<String> stateAdapter;
-    private static final String[] stateList = {"批准","不批准"};
 
     private Fragment mFragment;
 
@@ -48,11 +46,9 @@ public class MyLeaveDetailFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        View v = layoutInflater.inflate(R.layout.cm_leave_deal, parent, false);
+        View v = layoutInflater.inflate(R.layout.leave_deal, parent, false);
         getActivity().getActionBar().setTitle("请假处理");
-        stateAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, stateList);
-        stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        leaveState.setAdapter(stateAdapter);
+
         init(v);
         control();
 
@@ -60,15 +56,16 @@ public class MyLeaveDetailFragment extends Fragment {
     }
 
     private void init(View view) {
-        name = (TextView)view.findViewById(R.id.cm_employer_leave_name);
-        leaveKind = (TextView)view.findViewById(R.id.cm_leave_deal_type);
-        leaveBeginTime = (TextView)view.findViewById(R.id.cm_leave_deal_begin_time);
-        leaveEndTime = (TextView)view.findViewById(R.id.cm_leave_deal_end_time);
-        leaveReason = (TextView)view.findViewById(R.id.cm_leave_deal_ask_reason);
-        leaveApplyTime = (TextView)view.findViewById(R.id.cm_leave_deal_apply_time);
-        leaveSuggestion = (EditText) view.findViewById(R.id.cm_leave_deal_suggestion);
-        leaveState = (Spinner) view.findViewById(R.id.cm_leave_deal_state);
-        leaveDealTime = (TextView)view.findViewById(R.id.cm_leave_deal_time);
+        name = (TextView)view.findViewById(R.id.employer_leave_name);
+        leaveKind = (TextView)view.findViewById(R.id.leave_deal_type);
+        leaveBeginTime = (TextView)view.findViewById(R.id.leave_deal_begin_time);
+        leaveEndTime = (TextView)view.findViewById(R.id.leave_deal_end_time);
+        leaveReason = (TextView)view.findViewById(R.id.leave_deal_ask_reason);
+        leaveApplyTime = (TextView)view.findViewById(R.id.leave_deal_apply_time);
+        leaveSuggestion = (TextView) view.findViewById(R.id.leave_deal_suggestion);
+        leaveState = (TextView) view.findViewById(R.id.leave_deal_state);
+        leaveDealTime = (TextView)view.findViewById(R.id.leave_deal_time);
+
     }
 
     private void control() {
@@ -77,7 +74,7 @@ public class MyLeaveDetailFragment extends Fragment {
         leaveBeginTime.setText(mLeave.getBeginTime());
         leaveEndTime.setText(mLeave.getEndTime());
         leaveSuggestion.setText(mLeave.getSuggestion());
-        //leaveState.setText(mLeave.getState());
+        leaveState.setText(mLeave.getState());
         leaveApplyTime.setText(mLeave.getApplyTime());
         leaveReason.setText(mLeave.getResion());
         leaveDealTime.setText(mLeave.getDisposeTime());

@@ -117,7 +117,7 @@ public class TravelSearchFragment extends Fragment {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (!fragment.isAdded()) {
             transaction.hide(mFragment);
-            transaction.replace(R.id.postActivity, fragment);
+            transaction.replace(R.id.blankActivity, fragment);
             transaction.commit();
         } else {
             transaction.hide(mFragment);
