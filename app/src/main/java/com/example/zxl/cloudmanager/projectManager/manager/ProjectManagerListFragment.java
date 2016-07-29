@@ -72,6 +72,24 @@ public class ProjectManagerListFragment extends Fragment {
 //        } else {
 //            project.add(ProjectLab.newInstance(mFragment.getActivity()).getmProjects().get(searchKey));
 //        }
+        mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pm_manager_pull_to_refresh);
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPullToRefreshView.setRefreshing(false);
+                    }
+                }, REFRESH_DELAY);
+            }
+        });
+        saveInstanceState = getArguments();
+        if (null == saveInstanceState) {
+            searchKey = -1;
+        } else {
+            searchKey = getArguments().getInt(SEARCH_KEY);
+        }
 
         mRecyclerView = (RecyclerView)view.findViewById(R.id.pm_list_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
