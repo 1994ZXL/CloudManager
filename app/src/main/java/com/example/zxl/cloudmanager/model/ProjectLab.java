@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class ProjectLab {
     private static ProjectLab sProjectLab;
-    private ArrayList<Project> mProjects = new ArrayList<Project>();
+    private static ArrayList<Project> mProjects = new ArrayList<Project>();
 
     private Context context;
 
@@ -26,5 +26,9 @@ public class ProjectLab {
 
     public ArrayList<Project> getmProjects() {
         return mProjects;
+    }
+
+    public void setmProjects(ArrayList<Project> mProjects) {
+        this.mProjects = mProjects;
     }
 }

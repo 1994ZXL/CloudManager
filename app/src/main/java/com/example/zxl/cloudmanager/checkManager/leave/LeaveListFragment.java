@@ -49,20 +49,6 @@ public class LeaveListFragment extends Fragment {
         mFragment = this;
     }
 
-    private String getTime1() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String date = formatter.format(curDate);
-        return date;
-    }
-
-    private String getTime2() {
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String date = formatter.format(curDate);
-        return date;
-    }
-
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.main_fragment_manager_check_list, parent, false);

@@ -3,17 +3,20 @@ package com.example.zxl.cloudmanager.projectManager.manager;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.zxl.cloudmanager.NetUtil;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.Project;
@@ -57,30 +60,18 @@ public class ProjectManagerListFragment extends Fragment {
 
         getActivity().getActionBar().setTitle("项目管理");
 
-        /*mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pm_manager_pull_to_refresh);
-        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullToRefreshView.setRefreshing(false);
-                    }
-                }, REFRESH_DELAY);
-            }
-        });*/
-        saveInstanceState = getArguments();
-        if (null == saveInstanceState) {
-            searchKey = -1;
-        } else {
-            searchKey = getArguments().getInt(SEARCH_KEY);
-        }
-
-        if (-1 == searchKey) {
-            project = ProjectLab.newInstance(mFragment.getActivity()).getmProjects();
-        } else {
-            project.add(ProjectLab.newInstance(mFragment.getActivity()).getmProjects().get(searchKey));
-        }
+//        saveInstanceState = getArguments();
+//        if (null == saveInstanceState) {
+//            searchKey = -1;
+//        } else {
+//            searchKey = getArguments().getInt(SEARCH_KEY);
+//        }
+//
+//        if (-1 == searchKey) {
+//            project = ProjectLab.newInstance(mFragment.getActivity()).getmProjects();
+//        } else {
+//            project.add(ProjectLab.newInstance(mFragment.getActivity()).getmProjects().get(searchKey));
+//        }
 
         mRecyclerView = (RecyclerView)view.findViewById(R.id.pm_list_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -180,4 +171,23 @@ public class ProjectManagerListFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        new LoadCrimeByServerTask().execute();
+    }
+
+    private class LoadCrimeByServerTask extends AsyncTask<Void, Void, ArrayList<Project>>{
+
+        @Override
+        protected ArrayList<Project> doInBackground(Void... params) {
+            return new NetUtil().getProjects();
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Project> projects){
+            ProjectLab.newInstance(getActivity()).setmProjects(projects);
+            project = projects;
+        }
+    }
 }

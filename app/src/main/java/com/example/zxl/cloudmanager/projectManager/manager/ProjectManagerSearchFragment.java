@@ -52,7 +52,7 @@ public class ProjectManagerSearchFragment extends Fragment {
         mBeginTimeBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-
+        
             }
         });
 

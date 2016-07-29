@@ -23,11 +23,15 @@ import java.util.ArrayList;
  */
 public class ManagerLeaveQueryFragment extends ListFragment{
     private ArrayList<Leave> mLeaves;
-    private static final String[] leaveTypeList={"病假", "事假", "婚假", "丧假", "产假", "年休假"};
-    private static final String[] leaveStateList={"已批准", "待批准", "未被批准"};
+    private static final String[] leaveTypeList={"事假", "病假", "休假", "婚假", "其他"};
+    private static final String[] leaveStateList={"待批准", "已批准", "拒绝"};
     private ArrayAdapter<String> spinnerAdapter;
 
     private Fragment mFragment;
+
+    private String leaveType;
+    private String leaveStatus;
+
 
     @Override
     public void onCreate(Bundle saveInstanceState){
@@ -52,9 +56,11 @@ public class ManagerLeaveQueryFragment extends ListFragment{
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.main_fragment_manager_leave_query_item, null);
             }
 
-
             Leave leave = getItem(position);
+
             TextView textView = (TextView) convertView.findViewById(R.id.main_fragment_manager_leave_query);
+            Button beginTimeButton = (Button) convertView.findViewById(R.id.main_fragment_manager_leave_query_begin_time);
+            Button endTimeButton = (Button) convertView.findViewById(R.id.main_fragment_manager_leave_query_end_time);
             Spinner spinner = (Spinner) convertView.findViewById(R.id.main_fragment_manager_leave_query_Sprinner);
             Button button = (Button) convertView.findViewById(R.id.main_fragment_manager_leave_query_button);
 
@@ -67,11 +73,15 @@ public class ManagerLeaveQueryFragment extends ListFragment{
                 spinnerAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, leaveTypeList);
                 spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(spinnerAdapter);
+                beginTimeButton.setVisibility(View.INVISIBLE);
+                endTimeButton.setVisibility(View.INVISIBLE);
                 button.setVisibility(View.INVISIBLE);
             } else if (2 == position) {
                 textView.setText(R.string.leave_state);
                 spinnerAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, leaveStateList);
                 spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                beginTimeButton.setVisibility(View.INVISIBLE);
+                endTimeButton.setVisibility(View.INVISIBLE);
                 spinner.setAdapter(spinnerAdapter);
             }
 
