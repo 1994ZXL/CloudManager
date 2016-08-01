@@ -104,7 +104,7 @@ public class LeaveSearchFragment extends Fragment {
     private void Search() {
         mLeaves = LeaveMyLab.newInstance(mFragment.getActivity()).get();
         for (index = 0; index < mLeaves.size(); index++) {
-            if (mType.equals(mLeaves.get(index).getType())) {
+            if (mType.equals(mLeaves.get(index).getLeave_type())) {
                 sum.add(index);
             }
         }

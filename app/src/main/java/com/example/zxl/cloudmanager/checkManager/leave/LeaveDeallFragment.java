@@ -78,14 +78,13 @@ public class LeaveDeallFragment extends Fragment {
     }
 
     private void control() {
-        name.setText(mLeave.getName());
-        leaveKind.setText(mLeave.getType());
-        leaveBeginTime.setText(mLeave.getBeginTime());
-        leaveEndTime.setText(mLeave.getEndTime());
-        leaveSuggestion.setText(mLeave.getSuggestion());
+        name.setText(mLeave.getMen_name());
+        leaveKind.setText(mLeave.getLeave_type());
+        leaveBeginTime.setText(mLeave.getStart_time());
+        leaveEndTime.setText(mLeave.getEnd_time());
+        leaveSuggestion.setText(mLeave.getHandle_opinion());
         // leaveState.setText(mLeave.getState());
-        leaveApplyTime.setText(mLeave.getApplyTime());
-        leaveReason.setText(mLeave.getResion());
-        leaveDealTime.setText(mLeave.getDisposeTime());
+        leaveReason.setText(mLeave.getLeave_reason());
+        leaveDealTime.setText(mLeave.getHandle_time());
     }
 }

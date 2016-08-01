@@ -148,11 +148,11 @@ public class MyLeaveQueryFragment extends Fragment {
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             Leave leave = leaves.get(i);
 
-            viewHolder.mLeaveName.setText(leave.getName());
-            viewHolder.mLeaveType.setText(leave.getType());
-            viewHolder.mLeaveState.setText(leave.getState());
-            viewHolder.mLeaveBeginTime.setText(leave.getBeginTime());
-            viewHolder.mLeaveEndTime.setText(leave.getEndTime());
+            viewHolder.mLeaveName.setText(leave.getMen_name());
+            viewHolder.mLeaveType.setText(leave.getLeave_type());
+            viewHolder.mLeaveState.setText(leave.getStatus());
+            viewHolder.mLeaveBeginTime.setText(leave.getStart_time());
+            viewHolder.mLeaveEndTime.setText(leave.getEnd_time());
 
             viewHolder.itemView.setTag(leaves.get(i));
         }
