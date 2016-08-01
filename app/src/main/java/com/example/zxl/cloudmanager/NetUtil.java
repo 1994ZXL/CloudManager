@@ -5,6 +5,8 @@ import android.util.Log;
 import com.example.zxl.cloudmanager.model.Project;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.ByteArrayOutputStream;
@@ -20,10 +22,12 @@ import java.util.ArrayList;
  */
 
 public class NetUtil {
-    private final static String IP1 = "http://localhost/yunmgr_v1.0/api/uc.php?app=";
+    private final static String IP1 = "http://192.168.1.109/yunmgr_v1.0/api/uc.php?app=";
     private final static String ENDPOINT = IP1;
-    private final static String MANAGE_PM = "manage_pm&";
+    private final static String MANAGE_PM = "manage_leave&act=";
     private final static String TAG = "NetUtil";
+
+    private JSONObject mJsonObject;
 
     public byte[] getUrlBytes(String urlSpec) throws IOException {
         URL url = new URL(urlSpec);
@@ -106,8 +110,12 @@ public class NetUtil {
         String crimeJSON = null;
         try {
             crimeJSON = getUrl(MANAGE_PM + "get_list");
+            mJsonObject = new JSONObject(crimeJSON);
+            mJsonObject.getJSONObject("data1");
         } catch (IOException e) {
             Log.e(TAG, "ee: "+e.getLocalizedMessage());
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
         if(crimeJSON != null) {
             ArrayList<Project> projects = new ArrayList<Project>();
@@ -119,7 +127,8 @@ public class NetUtil {
                 Log.e(TAG, "projects: " + projects);
                 return projects;
             } catch (Exception e){
-                Log.e(TAG, "ee: "+e.getLocalizedMessage());
+                Log.e(TAG, "ee: "+ e.getLocalizedMessage());
+                Log.d(TAG, "mJsonObject: " + mJsonObject);
             }
         }
         return null;

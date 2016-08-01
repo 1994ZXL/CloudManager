@@ -13,6 +13,6 @@
         android:layout_marginBottom="20dp"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom|right"
-        android:src="@mipmap/add_icon"
+        android:src="@android:drawable/ic_menu_add"
         android:id="@+id/my_post_activity_searchBtn"/>
 </FrameLayout>
