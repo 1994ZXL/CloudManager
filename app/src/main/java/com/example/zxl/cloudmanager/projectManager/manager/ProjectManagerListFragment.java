@@ -3,28 +3,22 @@ package com.example.zxl.cloudmanager.projectManager.manager;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.zxl.cloudmanager.NetUtil;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.Project;
-import com.example.zxl.cloudmanager.model.ProjectLab;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -189,23 +183,5 @@ public class ProjectManagerListFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-        new LoadCrimeByServerTask().execute();
-    }
 
-    private class LoadCrimeByServerTask extends AsyncTask<Void, Void, ArrayList<Project>>{
-
-        @Override
-        protected ArrayList<Project> doInBackground(Void... params) {
-            return new NetUtil().getProjects();
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<Project> projects){
-            ProjectLab.newInstance(getActivity()).setmProjects(projects);
-            project = projects;
-        }
-    }
 }

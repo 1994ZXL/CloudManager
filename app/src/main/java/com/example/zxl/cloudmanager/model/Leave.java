@@ -1,38 +1,139 @@
 package com.example.zxl.cloudmanager.model;
 
-import java.util.Date;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by ZXL on 2016/7/12.
  */
 public class Leave {
-    private String name;
-    private String type;
-    private String state;
+    private String mem_name; //员工姓名
+    private int leave_type; //请假类型:0事假,2病假,3休假,4婚假,5其他
+    private int status; //状态:0:待批准,1:已批准,2:拒绝
 
-    private String beginTime;
-    private String endTime;
+    private String start_time;
+    private String end_time;
 
-    private String resion;
-    private String suggestion;
-    private String applyTime;
-    private String disposeTime;
+    private String leave_reason; //请假原因
+    private String handle_opinion; //处理意见
+    private String handle_time; //处理时间
+
+    private static final String JSON_NAME = "mem_name";
+    private static final String JSON_TYPE = "leave_type";
+    private static final String JSON_STATE = "status";
+    private static final String JSON_BEGINTIME = "start_time";
+    private static final String JSON_ENDTIME = "end_time";
+    private static final String JSON_LEAVE_RESON = "leave_reason";
+    private static final String JSON_HANDLE_OPTION = "handle_opinion";
+    private static final String JSON_HANDLE_TIME = "handle_time";
 
     private String[] content;
 
     public Leave() {
-        setName("张三");
+
     }
     
     public void set(String[] content) {
-        setType(content[1]);
-        setState(content[2]);
-        setBeginTime(content[3]);
-        setEndTime(content[4]);
-        setResion(content[5]);
-        setSuggestion(content[6]);
-        setApplyTime(content[7]);
-        setDisposeTime(content[8]);
+//        setType(content[1]);
+//        setState(content[2]);
+        setStart_time(content[3]);
+        setEnd_time(content[4]);
+        setLeave_reason(content[5]);
+        setHandle_opinion(content[6]);
+        setHandle_time(content[8]);
+    }
+
+    public Leave(JSONObject json) throws JSONException {
+        if (json.has(JSON_NAME))
+            mem_name = json.getString(JSON_NAME);
+        if (json.has(JSON_TYPE))
+            leave_type = json.getInt(JSON_TYPE);
+        if (json.has(JSON_STATE))
+            status = json.getInt(JSON_STATE);
+        if (json.has(JSON_BEGINTIME))
+            start_time = json.getString(JSON_BEGINTIME);
+        if (json.has(JSON_ENDTIME))
+            end_time = json.getString(JSON_ENDTIME);
+        if (json.has(JSON_HANDLE_OPTION))
+            handle_opinion = json.getString(JSON_HANDLE_OPTION);
+        if (json.has(JSON_LEAVE_RESON))
+            leave_reason = json.getString(JSON_LEAVE_RESON);
+        if (json.has(JSON_HANDLE_TIME))
+            handle_time = json.getString(JSON_HANDLE_TIME);
+    }
+
+    public JSONObject toJSON() throws JSONException{
+        JSONObject json = new JSONObject();
+        json.put(JSON_NAME, mem_name);
+        json.put(JSON_TYPE, leave_type);
+        json.put(JSON_STATE, status);
+        json.put(JSON_BEGINTIME, start_time);
+        json.put(JSON_ENDTIME, end_time);
+        json.put(JSON_LEAVE_RESON, leave_reason);
+        json.put(JSON_HANDLE_OPTION, handle_opinion);
+        json.put(JSON_HANDLE_TIME, handle_time);
+        return json;
+    }
+
+
+    public String getMen_name() {
+        return mem_name;
+    }
+
+    public void setMen_name(String men_name) {
+        this.mem_name = men_name;
+    }
+
+    public String getLeave_type() {
+        //请假类型:0事假,2病假,3休假,4婚假,5其他
+        if (leave_type == 0) {
+            return "事假";
+        } else if (leave_type == 1) {
+            return "病假";
+        } else if (leave_type == 2) {
+            return "休假";
+        } else if (leave_type == 3) {
+            return "婚假";
+        } else if (leave_type == 4) {
+            return "其他";
+        }
+        return null;
+    }
+
+    public void setLeave_type(int leave_type) {
+        this.leave_type = leave_type;
+    }
+
+    public String getStatus() {
+        //状态:0:待批准,1:已批准,2:拒绝
+        if (status == 0) {
+            return "待批准";
+        } else if (status == 1) {
+            return "已批准";
+        } else if (status == 2) {
+            return "拒绝";
+        }
+        return null;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
+    }
+
+    public String getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(String end_time) {
+        this.end_time = end_time;
     }
 
     public String[] getContent() {
@@ -43,75 +144,27 @@ public class Leave {
         this.content = content;
     }
 
-    public String getType() {
-        return type;
+    public String getLeave_reason() {
+        return leave_reason;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setLeave_reason(String leave_reason) {
+        this.leave_reason = leave_reason;
     }
 
-    public String getResion() {
-        return resion;
+    public String getHandle_opinion() {
+        return handle_opinion;
     }
 
-    public void setResion(String resion) {
-        this.resion = resion;
+    public void setHandle_opinion(String handle_opinion) {
+        this.handle_opinion = handle_opinion;
     }
 
-    public String getSuggestion() {
-        return suggestion;
+    public String getHandle_time() {
+        return handle_time;
     }
 
-    public void setSuggestion(String suggestion) {
-        this.suggestion = suggestion;
-    }
-
-    public String getBeginTime() {
-        return beginTime;
-    }
-
-    public void setBeginTime(String beginTime) {
-        this.beginTime = beginTime;
-    }
-
-    public String getApplyTime() {
-        return applyTime;
-    }
-
-    public void setApplyTime(String applyTime) {
-        this.applyTime = applyTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
-    public String getDisposeTime() {
-        return disposeTime;
-    }
-
-    public void setDisposeTime(String disposeTime) {
-        this.disposeTime = disposeTime;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
+    public void setHandle_time(String handle_time) {
+        this.handle_time = handle_time;
     }
 }

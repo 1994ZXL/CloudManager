@@ -3,6 +3,7 @@ package com.example.zxl.cloudmanager.model;
 import android.content.Context;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ZXL on 2016/7/15.
@@ -18,13 +19,12 @@ public class LeaveQueryLab {
 
         for (i = 0; i < 3; i++) {
             if (j == 0) {
-                mLeave.getApplyTime();
                 mLeaves.add(mLeave);
             } else if (j == 1) {
-                mLeave.getType();
+                mLeave.getLeave_type();
                 mLeaves.add(mLeave);
             } else if (j == 2) {
-                mLeave.getState();
+                mLeave.getStatus();
                 mLeaves.add(mLeave);
             }
         }
@@ -39,5 +39,9 @@ public class LeaveQueryLab {
 
     public ArrayList<Leave> getLeaveQuery() {
         return mLeaves;
+    }
+
+    public void setLeaves(ArrayList<Leave> mLeaves) {
+        this.mLeaves =  mLeaves;
     }
 }

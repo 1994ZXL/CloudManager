@@ -14,18 +14,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.zxl.cloudmanager.ManagerCheckEditFragment;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
-import com.example.zxl.cloudmanager.model.Check;
-import com.example.zxl.cloudmanager.model.CheckLab;
 import com.example.zxl.cloudmanager.model.Leave;
-import com.example.zxl.cloudmanager.model.LeaveQueryLab;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 
-import java.text.SimpleDateFormat;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ZXL on 2016/7/15.
@@ -33,12 +36,15 @@ import java.util.List;
 public class LeaveListFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
-    private List<Leave> leaves = new ArrayList<Leave>();
+    private ArrayList<Leave> leaves = new ArrayList<Leave>();
     private MyAdapter myAdapter;
     private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
 
-    private static final String TAG = "MyCheckFragment";
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams;
+
+    private static final String TAG = "LeaveListFragment";
 
     private Fragment mFragment;
 
@@ -50,8 +56,14 @@ public class LeaveListFragment extends Fragment {
     }
 
     @Override
+    public void onResume(){
+        super.onResume();
+//        new LoadLeaveByServerTask().execute();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        View v = layoutInflater.inflate(R.layout.main_fragment_manager_check_list, parent, false);
+        final View v = layoutInflater.inflate(R.layout.main_fragment_manager_check_list, parent, false);
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -69,30 +81,56 @@ public class LeaveListFragment extends Fragment {
 
         getActivity().getActionBar().setTitle("请假处理");
 
-        leaves = LeaveQueryLab.newInstance(mFragment.getActivity()).getLeaveQuery();
+//        leaves = LeaveQueryLab.newInstance(mFragment.getActivity()).getLeaveQuery();
 
-        mRecyclerView = (RecyclerView)v.findViewById(R.id.manager_check_recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        myAdapter = new MyAdapter(this.getActivity(), leaves);
-        mRecyclerView.setAdapter(myAdapter);
-        mCardView = (CardView)v.findViewById(R.id.fragment_my_check);
-        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+        mHttpc.post("http://192.168.0.109/yunmgr_v1.0/api/uc.php?app=manage_leave&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
-            public void onItemClick(View view, Object data) {
-                Fragment fragment = LeaveDeallFragment.newInstance(data);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
+            public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
+                try {
+                    if (rjo.getBoolean("result")) {
+                        JSONArray array = rjo.getJSONArray("data1");
+                        Log.d(TAG, "array: " + array);
+                        for (int i = 0; i < array.length(); i++) {
+                            leaves.add(new Leave(array.getJSONObject(i)));
+                        }
+                        Log.d(TAG, "leaves: " + leaves);
+
+                        mRecyclerView = (RecyclerView) v.findViewById(R.id.manager_check_recyclerview);
+                        mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
+                        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                        mRecyclerView.setHasFixedSize(true);
+                        myAdapter = new MyAdapter(mFragment.getActivity(), leaves);
+                        mRecyclerView.setAdapter(myAdapter);
+                        mCardView = (CardView) v.findViewById(R.id.fragment_my_check);
+                        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, Object data) {
+                                Fragment fragment = LeaveDeallFragment.newInstance(data);
+                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                if (!fragment.isAdded()) {
+                                    transaction.addToBackStack(null);
+                                    transaction.hide(mFragment);
+                                    transaction.add(R.id.blankActivity, fragment);
+                                    transaction.commit();
+                                } else {
+                                    transaction.hide(mFragment);
+                                    transaction.show(fragment);
+                                    transaction.commit();
+                                }
+                            }
+                        });
+
+                    } else {
+
+                    }
+                } catch (JSONException e) {
+                    Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                 }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
+
             }
         });
 
@@ -125,10 +163,12 @@ public class LeaveListFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             Leave leave = leaves.get(i);
-            viewHolder.mState.setText(leave.getState());
-            viewHolder.mType.setText(leave.getType());
-            viewHolder.mLeaveBegin.setText(leave.getBeginTime());
-            viewHolder.mLeaveEnd.setText(leave.getEndTime());
+
+            viewHolder.mState.setText(leave.getStatus());
+            viewHolder.mType.setText(leave.getLeave_type());
+            viewHolder.mLeaveBegin.setText(leave.getStart_time());
+            viewHolder.mLeaveEnd.setText(leave.getEnd_time());
+
             viewHolder.itemView.setTag(leaves.get(i));
         }
 
@@ -164,4 +204,19 @@ public class LeaveListFragment extends Fragment {
             mOnItemClickListener = listener;
         }
     }
+
+//    private class LoadLeaveByServerTask extends AsyncTask<Void, Void, ArrayList<Leave>> {
+//
+//        @Override
+//        protected ArrayList<Leave> doInBackground(Void... params) {
+//            return new HttpClient().getJSONArray();
+//        }
+//
+//        @Override
+//        protected void onPostExecute(ArrayList<Leave> leave){
+//            LeaveQueryLab.newInstance(getActivity()).setLeaves(leave);
+//            leaves = leave;
+//            Log.d(TAG, "leave: " + leave);
+//        }
+//    }
 }
