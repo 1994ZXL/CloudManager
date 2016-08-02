@@ -40,7 +40,7 @@ public class Leave {
 //        setEnd_time(content[4]);
         setLeave_reason(content[5]);
         setHandle_opinion(content[6]);
-        setHandle_time(content[8]);
+//        setHandle_time(content[8]);
     }
 
     public Leave(JSONObject json) throws JSONException {
@@ -75,14 +75,6 @@ public class Leave {
         return json;
     }
 
-
-    public String getMen_name() {
-        return mem_name;
-    }
-
-    public void setMen_name(String men_name) {
-        this.mem_name = men_name;
-    }
 
     public String getLeave_type() {
         //请假类型:0事假,2病假,3休假,4婚假,5其他

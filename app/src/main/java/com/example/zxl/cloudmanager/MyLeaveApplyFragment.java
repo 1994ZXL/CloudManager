@@ -164,12 +164,12 @@ public class MyLeaveApplyFragment extends Fragment {
         }else if (requestCode == 12) {
             beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             bgtime = android.text.format.DateFormat.format("yyyy年M月dd日", beginTime).toString();
-            leave.setStart_time(DateForGeLingWeiZhi.newInstance().setTime(bgtime));
+            leave.setStart_time(DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(bgtime));
             updateBeginDate();
         }else if (requestCode == 13) {
             endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             edtime = android.text.format.DateFormat.format("yyyy年M月dd日", endTime).toString();
-            leave.setEnd_time(DateForGeLingWeiZhi.newInstance().setTime(edtime));
+            leave.setEnd_time(DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(edtime));
             updateEndDate();
         }
     }

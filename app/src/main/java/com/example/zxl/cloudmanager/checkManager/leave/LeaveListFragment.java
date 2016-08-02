@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.DESCryptor;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Leave;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -180,10 +181,11 @@ public class LeaveListFragment extends Fragment {
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             Leave leave = leaves.get(i);
 
+            viewHolder.mName.setText(leave.getMem_name());
             viewHolder.mState.setText(leave.getStatus());
             viewHolder.mType.setText(leave.getLeave_type());
-            viewHolder.mLeaveBegin.setText(leave.getStart_time());
-            viewHolder.mLeaveEnd.setText(leave.getEnd_time());
+            viewHolder.mLeaveBegin.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(leave.getStart_time()));
+            viewHolder.mLeaveEnd.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(leave.getEnd_time()));
 
             viewHolder.itemView.setTag(leaves.get(i));
         }
@@ -205,9 +207,11 @@ public class LeaveListFragment extends Fragment {
             public TextView mLeaveBegin;
             public TextView mLeaveEnd;
             public TextView mState;
+            public TextView mName;
 
             public ViewHolder(View v) {
                 super(v);
+                mName = (TextView) v.findViewById(R.id.cm_leave_card_item_name);
                 mState = (TextView)v.findViewById(R.id.cm_leave_card_item_state);
                 mLeaveBegin = (TextView)v.findViewById(R.id.cm_leave_card_item_begin_time);
                 mLeaveEnd = (TextView)v.findViewById(R.id.cm_leave_card_item_end_time);

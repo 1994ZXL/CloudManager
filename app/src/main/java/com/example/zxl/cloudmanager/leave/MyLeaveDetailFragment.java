@@ -69,7 +69,7 @@ public class MyLeaveDetailFragment extends Fragment {
     }
 
     private void control() {
-        name.setText(mLeave.getMen_name());
+        name.setText(mLeave.getMem_name());
         leaveKind.setText(mLeave.getLeave_type());
         leaveBeginTime.setText(mLeave.getStart_time());
         leaveEndTime.setText(mLeave.getEnd_time());

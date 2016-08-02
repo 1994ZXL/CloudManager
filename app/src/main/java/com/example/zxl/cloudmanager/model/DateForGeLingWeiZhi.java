@@ -20,7 +20,7 @@ public class DateForGeLingWeiZhi {
         return dateForGeLingWeiZhi;
     }
 
-    public static String getData(int gmtime) {
+    public static String fromGeLinWeiZhi(int gmtime) {
         time = gmtime * 1000;
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(Long.valueOf(time));
@@ -29,7 +29,7 @@ public class DateForGeLingWeiZhi {
         return data;
     }
 
-    public static int setTime(String date) {
+    public static int toGeLinWeiZhi(String date) {
         SimpleDateFormat time=new SimpleDateFormat("yyyy年MM月dd HH:mm:ss");
         try {
             long millionSeconds = time.parse(date).getTime();
