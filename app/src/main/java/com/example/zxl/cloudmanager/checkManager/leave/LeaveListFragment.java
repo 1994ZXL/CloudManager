@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
+import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.Leave;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -42,9 +43,9 @@ public class LeaveListFragment extends Fragment {
     public static final int REFRESH_DELAY = 4000;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
-    private RequestParams mParams;
 
     private static final String TAG = "LeaveListFragment";
+    private RequestParams mParams = new RequestParams();
 
     private Fragment mFragment;
 
@@ -81,50 +82,65 @@ public class LeaveListFragment extends Fragment {
 
         getActivity().getActionBar().setTitle("请假处理");
 
-//        leaves = LeaveQueryLab.newInstance(mFragment.getActivity()).getLeaveQuery();
 
-        mHttpc.post("http://192.168.0.109/yunmgr_v1.0/api/uc.php?app=manage_leave&act=get_list", mParams, new JsonHttpResponseHandler() {
+        JSONObject obj = new JSONObject();
+        String key = "";
+        try {
+            obj.put("mem_name", "李祝君");
+            key = DESCryptor.Encryptor(obj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        mParams.put("key", key);
+        Log.d(TAG, "key: "+key);
+
+        mHttpc.post("http://192.168.1.101/yunmgr_v1.0/api/uc.php?app=manage_leave&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
-                try {
-                    if (rjo.getBoolean("result")) {
-                        JSONArray array = rjo.getJSONArray("data1");
-                        Log.d(TAG, "array: " + array);
-                        for (int i = 0; i < array.length(); i++) {
-                            leaves.add(new Leave(array.getJSONObject(i)));
-                        }
-                        Log.d(TAG, "leaves: " + leaves);
-
-                        mRecyclerView = (RecyclerView) v.findViewById(R.id.manager_check_recyclerview);
-                        mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
-                        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-                        mRecyclerView.setHasFixedSize(true);
-                        myAdapter = new MyAdapter(mFragment.getActivity(), leaves);
-                        mRecyclerView.setAdapter(myAdapter);
-                        mCardView = (CardView) v.findViewById(R.id.fragment_my_check);
-                        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
-                            @Override
-                            public void onItemClick(View view, Object data) {
-                                Fragment fragment = LeaveDeallFragment.newInstance(data);
-                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                                if (!fragment.isAdded()) {
-                                    transaction.addToBackStack(null);
-                                    transaction.hide(mFragment);
-                                    transaction.add(R.id.blankActivity, fragment);
-                                    transaction.commit();
-                                } else {
-                                    transaction.hide(mFragment);
-                                    transaction.show(fragment);
-                                    transaction.commit();
-                                }
+                if (statusCode == 200) {
+                    try {
+                        if (rjo.getBoolean("result")) {
+                            JSONArray array = rjo.getJSONArray("data1");
+                            Log.d(TAG, "array: " + array);
+                            for (int i = 0; i < array.length(); i++) {
+                                leaves.add(new Leave(array.getJSONObject(i)));
                             }
-                        });
+                            Log.d(TAG, "leaves: " + leaves);
 
-                    } else {
+                            mRecyclerView = (RecyclerView) v.findViewById(R.id.manager_check_recyclerview);
+                            mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
+                            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                            mRecyclerView.setHasFixedSize(true);
+                            myAdapter = new MyAdapter(mFragment.getActivity(), leaves);
+                            mRecyclerView.setAdapter(myAdapter);
+                            mCardView = (CardView) v.findViewById(R.id.fragment_my_check);
+                            myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                                @Override
+                                public void onItemClick(View view, Object data) {
+                                    Fragment fragment = LeaveDeallFragment.newInstance(data);
+                                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                    if (!fragment.isAdded()) {
+                                        transaction.addToBackStack(null);
+                                        transaction.hide(mFragment);
+                                        transaction.add(R.id.blankActivity, fragment);
+                                        transaction.commit();
+                                    } else {
+                                        transaction.hide(mFragment);
+                                        transaction.show(fragment);
+                                        transaction.commit();
+                                    }
+                                }
+                            });
 
+                        } else {
+
+                        }
+                    } catch (JSONException e) {
+                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                     }
-                } catch (JSONException e) {
-                    Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                } else {
+
                 }
             }
 

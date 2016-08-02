@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
 import com.example.zxl.cloudmanager.model.Leave;
 import com.example.zxl.cloudmanager.model.LeaveMyLab;
@@ -146,8 +147,8 @@ public class MyLeaveApplyFragment extends Fragment {
 
     public void commit() {
 //        leave.setType(type);
-        leave.setStart_time(bgtime);
-        leave.setEnd_time(edtime);
+//        leave.setStart_time(bgtime);
+//        leave.setEnd_time(edtime);
         leave.setLeave_reason(reson);
         LeaveMyLab.newInstance(mFragment.getActivity()).add(leave);
         Intent intent = new Intent(mFragment.getActivity(), MyLeaveActivity.class);
@@ -163,24 +164,22 @@ public class MyLeaveApplyFragment extends Fragment {
         }else if (requestCode == 12) {
             beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             bgtime = android.text.format.DateFormat.format("yyyy年M月dd日", beginTime).toString();
-            leave.setStart_time(bgtime);
+            leave.setStart_time(DateForGeLingWeiZhi.newInstance().setTime(bgtime));
             updateBeginDate();
         }else if (requestCode == 13) {
             endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             edtime = android.text.format.DateFormat.format("yyyy年M月dd日", endTime).toString();
-            leave.setEnd_time(edtime);
+            leave.setEnd_time(DateForGeLingWeiZhi.newInstance().setTime(edtime));
             updateEndDate();
         }
     }
 
     private void updateBeginDate(){
         mBeginTime.setText(bgtime);
-        Log.d("BeginDate", leave.getStart_time());
     }
     private void updateEndDate(){
         if (endTime.after(beginTime)) {
             mEndTime.setText(edtime);
-            Log.d("EndDate", leave.getEnd_time());
         } else {
             Toast.makeText(getActivity(),
                     R.string.time_erro,
