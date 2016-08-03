@@ -134,10 +134,10 @@ public class MyOverTimeFragment extends Fragment {
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             OverTime overTime = overTimes.get(i);
 
-            viewHolder.mOvertimeName.setText(overTime.getName());
-            viewHolder.mOvertimeProject.setText(overTime.getProject());
-            viewHolder.mBeginTime.setText(overTime.getBeginTime());
-            viewHolder.mEndTime.setText(overTime.getEndTime());
+            viewHolder.mOvertimeName.setText(overTime.getMem_id());
+            viewHolder.mOvertimeProject.setText(overTime.getPm_id());
+            viewHolder.mBeginTime.setText(overTime.getStart_time());
+            viewHolder.mEndTime.setText(overTime.getEnd_time());
 
             viewHolder.itemView.setTag(overTimes.get(i));
         }

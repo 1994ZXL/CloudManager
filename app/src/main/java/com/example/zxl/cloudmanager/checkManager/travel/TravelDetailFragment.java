@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 
@@ -21,7 +22,7 @@ public class TravelDetailFragment extends Fragment {
     private Spinner mEmployerNameSpinner;
     private Button mBeginTimeBtn;
     private Button mEndTimeBtn;
-    private EditText mTravelContentET;
+    private TextView mTravelContentET;
 
     private Button mSubmitBtn;
 
@@ -55,7 +56,7 @@ public class TravelDetailFragment extends Fragment {
         mBeginTimeBtn = (Button) v.findViewById(R.id.manager_travel_begin_time_button);
         mEndTimeBtn = (Button) v.findViewById(R.id.manager_travel_end_time_button);
         mEmployerNameSpinner = (Spinner) v.findViewById(R.id.manager_travel_employer_name_spinner);
-        mTravelContentET = (EditText) v.findViewById(R.id.manager_travel_content_edittext);
+        mTravelContentET = (TextView) v.findViewById(R.id.manager_travel_content_edittext);
 
         mSubmitBtn = (Button) v.findViewById(R.id.manager_travel_submit_button);
     }

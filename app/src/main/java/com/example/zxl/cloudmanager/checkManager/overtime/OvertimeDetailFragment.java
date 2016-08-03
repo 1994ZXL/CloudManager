@@ -13,6 +13,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.Leave;
+import com.example.zxl.cloudmanager.model.OverTime;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,9 +25,11 @@ public class OvertimeDetailFragment extends Fragment {
     private Button mBeginTimeBtn;
     private Button mEndTimeBtn;
     private Spinner mProjectNameSpinner;
-    private EditText mOvertimeReasonET;
+    private TextView mOvertimeReasonET;
 
     private Button mSubmitBtn;
+
+    private static OverTime mOverTime = new OverTime();
 
     private ArrayAdapter<String> employerAdapter;
     private static final String[] employerList={"全部"};
@@ -35,7 +39,11 @@ public class OvertimeDetailFragment extends Fragment {
     public OvertimeDetailFragment() {
         // Required empty public constructor
     }
-
+    public static OvertimeDetailFragment newInstance(Object data) {
+        mOverTime = (OverTime) data;
+        OvertimeDetailFragment fragment = new OvertimeDetailFragment();
+        return fragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,7 +72,7 @@ public class OvertimeDetailFragment extends Fragment {
         mEndTimeBtn = (Button) v.findViewById(R.id.manager_overtime_end_time_button);
         mEmployerSpinner = (Spinner) v.findViewById(R.id.manager_employer_name_spinner);
         mProjectNameSpinner = (Spinner) v.findViewById(R.id.manager_overtime_project_spinner);
-        mOvertimeReasonET = (EditText) v.findViewById(R.id.manager_overtime_reason_edittext);
+        mOvertimeReasonET = (TextView) v.findViewById(R.id.manager_overtime_reason_edittext);
 
         mSubmitBtn = (Button) v.findViewById(R.id.manager_overtime_submit_button);
     }

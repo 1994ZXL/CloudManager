@@ -21,7 +21,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="40dp"
                     android:layout_gravity="center_vertical">
 
                     <TextView
@@ -44,7 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="40dp">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -80,30 +80,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="40dp">
 
                     <TextView
-                        android:layout_width="match_parent"
                         style="@style/font"
                         android:text="@string/travel_content"
-                        android:layout_weight="4"
+                        android:layout_weight="1"
                         android:textSize="20dp"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:layout_weight="3"
-                        android:background="@color/content"
-                        >
-                        <EditText
-                            android:id="@+id/manager_travel_content_edittext"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingLeft="10dp"
-                            android:background="@null"
-                            />
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/manager_travel_content_edittext"
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        />
+
 
                 </LinearLayout>
+
             </LinearLayout>
 
             <Button

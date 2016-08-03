@@ -21,8 +21,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/list_project_name_textview"
@@ -66,16 +65,17 @@
 
                     <TextView
                         style="@style/font"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:text="@string/sex"
                         android:layout_gravity="center_vertical" />
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
                         android:id="@+id/ps_detail_customer_sex">
 
-                    </TextView>
+                    </Spinner>
                 </LinearLayout>
 
                 <!-- 职务-->
@@ -147,7 +147,7 @@
                         style="@style/font"
                         android:text="@string/wechat"
                         android:layout_weight="1"/>
-                    <EditText
+                    <TextView
                         style="@style/font"
                         android:gravity="center"
                         android:id="@+id/ps_detail_customer_wechat"

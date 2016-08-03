@@ -2,7 +2,6 @@ package com.example.zxl.cloudmanager;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,15 +15,15 @@ import com.example.zxl.cloudmanager.model.Travel;
 public class MyTravelDetailFragment extends Fragment {
     private static Travel sTravel = new Travel();
 
-    private TextView mName;
-    private TextView mBeginTime;
-    private TextView mEndTime;
-    private TextView mBackBeginTime;
-    private TextView mBackEndTime;
-    private TextView mContent;
-    private TextView mAdd;
-    private TextView mAddress;
-    private TextView mState;
+    private TextView mem_id;
+    private TextView start_time_s;
+    private TextView start_time_e;
+    private TextView over_time_s;
+    private TextView over_time_e;
+    private TextView trip_reason;
+    private TextView detail_addr;
+    private TextView address;
+    private TextView status;
 
 
     public static MyTravelDetailFragment newInstance(Travel travel){
@@ -45,26 +44,26 @@ public class MyTravelDetailFragment extends Fragment {
     }
 
     private void init(View view) {
-        mName = (TextView) view.findViewById(R.id.travel_details_name);
-        mBeginTime = (TextView) view.findViewById(R.id.travel_details_begin_time);
-        mEndTime = (TextView) view.findViewById(R.id.travel_details_end_time);
-        mBackBeginTime = (TextView) view.findViewById(R.id.travel_details_back_beginTime);
-        mBackEndTime = (TextView) view.findViewById(R.id.travel_details_back_endTime);
-        mContent = (TextView) view.findViewById(R.id.travel_details_content);
-        mAdd = (TextView) view.findViewById(R.id.travel_details_add);
-        mAddress = (TextView) view.findViewById(R.id.travel_details_address);
-        mState = (TextView) view.findViewById(R.id.travel_details_state);
+        mem_id = (TextView) view.findViewById(R.id.travel_details_name);
+        start_time_s = (TextView) view.findViewById(R.id.travel_details_begin_time);
+        start_time_e = (TextView) view.findViewById(R.id.travel_details_end_time);
+        over_time_s = (TextView) view.findViewById(R.id.travel_details_back_beginTime);
+        over_time_e = (TextView) view.findViewById(R.id.travel_details_back_endTime);
+        trip_reason = (TextView) view.findViewById(R.id.travel_details_content);
+        detail_addr = (TextView) view.findViewById(R.id.travel_details_add);
+        address = (TextView) view.findViewById(R.id.travel_details_address);
+        status = (TextView) view.findViewById(R.id.travel_details_state);
     }
 
     private void control() {
-        mName.setText(sTravel.getName());
-        mBeginTime.setText(sTravel.getBeginTime());
-        mEndTime.setText(sTravel.getEndTime());
-        mBackBeginTime.setText(sTravel.getBackBeginTime());
-        mBackEndTime.setText(sTravel.getBackEndTime());
-        mContent.setText(sTravel.getTravelContent());
-        mAdd.setText(sTravel.getTravelAdd());
-        mAddress.setText(sTravel.getTravelAddress());
-        mState.setText(sTravel.getTravelState());
+        mem_id.setText(sTravel.getMem_id());
+        start_time_s.setText(sTravel.getStart_time_s());
+        start_time_e.setText(sTravel.getStart_time_e());
+        over_time_s.setText(sTravel.getOver_time_s());
+        over_time_e.setText(sTravel.getOver_time_e());
+        trip_reason.setText(sTravel.getTrip_reason());
+        detail_addr.setText(sTravel.getDetail_addr());
+        address.setText(sTravel.getAddress());
+        status.setText(sTravel.getStatus());
     }
 }

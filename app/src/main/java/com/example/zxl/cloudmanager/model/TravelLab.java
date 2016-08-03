@@ -15,7 +15,7 @@ public class TravelLab {
     private String[] content2;
 
     private TravelLab(Context context) {
-        content = new String[] {
+        /*content = new String[] {
                 "张三",
                 "2016.7.25",
                 "2016.7.26",
@@ -37,7 +37,7 @@ public class TravelLab {
                 "出差详细地址",
                 "取消",};
         set(content);
-        set(content2);
+        set(content2);*/
     }
 
     public static TravelLab newInstance(Context context) {

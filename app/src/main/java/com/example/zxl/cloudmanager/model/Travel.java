@@ -1,20 +1,34 @@
 package com.example.zxl.cloudmanager.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by ZXL on 2016/7/13.
  */
 public class Travel {
 
 
-    private String name;
-    private String beginTime;
-    private String endTime;
-    private String backBeginTime;
-    private String backEndTime;
-    private String travelContent;
-    private String travelAdd;
-    private String travelAddress;
-    private String travelState;
+    private String mem_id; //员工姓名
+    private int start_time_e; //开始时间（大）
+    private int start_time_s; //开始时间（小）
+    private int over_time_e; //回归时间（大）
+    private int over_time_s; //回归时间（小）
+    private int status; //出差状态 0：等待，1：确认，2：取消
+
+    private int start_time;
+    private int over_time;
+    private String address;
+    private String detail_addr;
+    private String trip_reason;
+
+    private static final String JSON_NAME = "mem_name";
+    private static final String JSON_STATUS = "status";
+    private static final String JSON_ADDRESS = "address";
+    private static final String JSON_DETAIL_ADDR = "detail_addr";
+    private static final String JSON_BEGIN_TIME = "start_time";
+    private static final String JSON_END_TIME = "end_time";
+    private static final String JSON_TRIP_RESON = "trip_reason";
 
     private String[] mContent;
 
@@ -28,90 +42,138 @@ public class Travel {
     }
 
     public void set(String[] content) {
-        setName(content[0]);
-        setBeginTime(content[1]);
-        setEndTime(content[2]);
-        setBackBeginTime(content[3]);
-        setBackEndTime(content[4]);
-        setTravelContent(content[5]);
-        setTravelAdd(content[6]);
-        setTravelAddress(content[7]);
-        setTravelState(content[8]);
+        setMem_id(content[0]);
+       /* setStart_time(content[1]);
+        setOver_time(content[2]);*/
+        setAddress(content[3]);
+        setDetail_addr(content[4]);
+        setTrip_reason(content[5]);
     }
 
+    public Travel(JSONObject json) throws JSONException {
+        if (json.has(JSON_NAME))
+            mem_id = json.getString(JSON_NAME);
+        if (json.has(JSON_ADDRESS))
+            address = json.getString(JSON_ADDRESS);
+        if (json.has(JSON_STATUS))
+            status = json.getInt(JSON_STATUS);
+        if (json.has(JSON_BEGIN_TIME))
+            start_time = json.getInt(JSON_BEGIN_TIME);
+        if (json.has(JSON_END_TIME))
+            over_time = json.getInt(JSON_END_TIME);
+        if (json.has(JSON_DETAIL_ADDR))
+            detail_addr = json.getString(JSON_DETAIL_ADDR);
+        if (json.has(JSON_TRIP_RESON))
+            trip_reason = json.getString(JSON_TRIP_RESON);
+
+    }
+    public JSONObject toJSON() throws JSONException{
+        JSONObject json = new JSONObject();
+        json.put(JSON_NAME, mem_id);
+        json.put(JSON_STATUS, status);
+        json.put(JSON_ADDRESS,address);
+        json.put(JSON_DETAIL_ADDR, detail_addr);
+        json.put(JSON_END_TIME, over_time);
+        json.put(JSON_TRIP_RESON, trip_reason);
+        json.put(JSON_BEGIN_TIME, start_time);
+        json.put(JSON_BEGIN_TIME, start_time);
+        return json;
+    }
+
+    public String getStatus() {
+        //状态:0:等待,1:确认,2:取消
+        if (status == 0) {
+            return "等待";
+        } else if (status == 1) {
+            return "确认";
+        } else if (status == 2) {
+            return "取消";
+        }
+        return null;
+    }
     public String[] get() {
         return mContent;
     }
 
-    public String getBeginTime() {
-        return beginTime;
+    public String getMem_id() {
+        return mem_id;
     }
 
-    public void setBeginTime(String beginTime) {
-        this.beginTime = beginTime;
+    public void setMem_id(String mem_id) {
+        this.mem_id = mem_id;
     }
 
-    public String getEndTime() {
-        return endTime;
+    public int getStart_time_e() {
+        return start_time_e;
     }
 
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
+    public void setStart_time_e(int start_time_e) {
+        this.start_time_e = start_time_e;
     }
 
-    public String getBackBeginTime() {
-        return backBeginTime;
+    public int getOver_time_s() {
+        return over_time_s;
     }
 
-    public void setBackBeginTime(String backBeginTime) {
-        this.backBeginTime = backBeginTime;
+    public void setOver_time_s(int over_time_s) {
+        this.over_time_s = over_time_s;
     }
 
-    public String getBackEndTime() {
-        return backEndTime;
+    public int getOver_time_e() {
+        return over_time_e;
     }
 
-    public void setBackEndTime(String backEndTime) {
-        this.backEndTime = backEndTime;
+    public void setOver_time_e(int over_time_e) {
+        this.over_time_e = over_time_e;
     }
 
-    public String getTravelAdd() {
-        return travelAdd;
+    public int getStart_time_s() {
+        return start_time_s;
     }
 
-    public void setTravelAdd(String travelAdd) {
-        this.travelAdd = travelAdd;
+    public void setStart_time_s(int start_time_s) {
+        this.start_time_s = start_time_s;
     }
 
-    public String getTravelAddress() {
-        return travelAddress;
+    public int getStart_time() {
+        return start_time;
     }
 
-    public void setTravelAddress(String travelAddress) {
-        this.travelAddress = travelAddress;
+    public void setStart_time(int start_time) {
+        this.start_time = start_time;
     }
 
-    public String getTravelContent() {
-        return travelContent;
+    public int getOver_time() {
+        return over_time;
     }
 
-    public void setTravelContent(String travelContent) {
-        this.travelContent = travelContent;
+    public void setOver_time(int over_time) {
+        this.over_time = over_time;
     }
 
-    public String getName() {
-        return name;
+    public String getAddress() {
+        return address;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getTravelState() {
-        return travelState;
+    public String getDetail_addr() {
+        return detail_addr;
     }
 
-    public void setTravelState(String travleState) {
-        this.travelState = travleState;
+    public void setDetail_addr(String detail_addr) {
+        this.detail_addr = detail_addr;
     }
+
+    public String getTrip_reason() {
+        return trip_reason;
+    }
+
+    public void setTrip_reason(String trip_reason) {
+        this.trip_reason = trip_reason;
+    }
+
+
 }
