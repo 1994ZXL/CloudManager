@@ -7,13 +7,6 @@
     tools:context=".MainActivity"
     android:background="@color/white">
 
-    <com.example.zxl.cloudmanager.Refresh.PullToRefreshView
-        android:id="@+id/pull_to_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </com.example.zxl.cloudmanager.Refresh.PullToRefreshView>
-
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

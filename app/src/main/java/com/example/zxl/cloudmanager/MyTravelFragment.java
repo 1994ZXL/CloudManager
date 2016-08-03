@@ -95,16 +95,16 @@ public class MyTravelFragment extends ListFragment {
             Travel travel = getItem(position);
 
             TextView name = (TextView) convertView.findViewById(R.id.main_fragment_travel_name);
-            name.setText(travel.getName());
+            name.setText(travel.getMem_id());
 
             TextView beginTime = (TextView) convertView.findViewById(R.id.main_fragment_travel_beginTime);
-            beginTime.setText(travel.getBeginTime());
+            //beginTime.setText(travel.getStart_time());
 
             TextView endTime = (TextView) convertView.findViewById(R.id.main_fragment_travel_endTime);
-            endTime.setText(travel.getBeginTime());
+            //endTime.setText(travel.getOver_time());
 
             TextView state = (TextView) convertView.findViewById(R.id.main_fragment_travel_state);
-            state.setText(travel.getTravelState());
+            state.setText(travel.getStatus());
 
             return convertView;
         }

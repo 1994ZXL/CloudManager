@@ -8,6 +8,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +18,18 @@ import android.widget.TextView;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.OverTime;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 //考勤主管查询列表
 
@@ -44,14 +54,14 @@ public class ManagerOvertimeListFragment extends Fragment {
         mFragment = this;
     }
 
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams;
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
+       final View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
 
         getActivity().getActionBar().setTitle("加班列表");
-        /*Bundle bundle = new Bundle();
-        bundle.putString("MANAGER_OVERTIME_lIST",TAG );
-        fragment.setArguments(bundle);*/
+
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
@@ -66,29 +76,53 @@ public class ManagerOvertimeListFragment extends Fragment {
         });
 
         overTimes.add(new OverTime());
-
-        mRecyclerView = (RecyclerView)v.findViewById(R.id.overtime_recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        myAdapter = new MyAdapter(this.getActivity(), overTimes);
-        mRecyclerView.setAdapter(myAdapter);
-        mCardView = (CardView)v.findViewById(R.id.fragment_my_overtime);
-        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+        mHttpc.post("http://192.168.1.109/yunmgr_v1.0/api/uc.php?app=manage_work&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
-            public void onItemClick(View view, Object data) {
-                fragment = new OvertimeDetailFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
+            public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
+                try {
+                    if (rjo.getBoolean("result")) {
+                        JSONArray array = rjo.getJSONArray("data1");
+                        Log.d(TAG, "array: " + array);
+                        for (int i = 0; i < array.length(); i++) {
+                            overTimes.add(new OverTime(array.getJSONObject(i)));
+                        }
+                        Log.d(TAG, "overtimes: " + overTimes);
+                        mRecyclerView = (RecyclerView)v.findViewById(R.id.overtime_recyclerview);
+                        mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
+                        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                        mRecyclerView.setHasFixedSize(true);
+                        myAdapter = new MyAdapter(mFragment.getActivity(), overTimes);
+                        mRecyclerView.setAdapter(myAdapter);
+                        mCardView = (CardView) v.findViewById(R.id.fragment_my_overtime);
+                        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, Object data) {
+                                Fragment fragment = OvertimeDetailFragment.newInstance(data);
+                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                if (!fragment.isAdded()) {
+                                    transaction.addToBackStack(null);
+                                    transaction.hide(mFragment);
+                                    transaction.add(R.id.blankActivity, fragment);
+                                    transaction.commit();
+                                } else {
+                                    transaction.hide(mFragment);
+                                    transaction.show(fragment);
+                                    transaction.commit();
+                                }
+                            }
+                        });
+
+                    } else {
+
+                    }
+                } catch (JSONException e) {
+                    Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                 }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
+
             }
         });
 
@@ -121,9 +155,11 @@ public class ManagerOvertimeListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            OverTime OverTime = overTimes.get(i);
-
-            viewHolder.itemView.setTag(overTimes.get(i));
+            OverTime mOverTime = overTimes.get(i);
+            // viewHolder.mOvertimeDate.setText(mOverTime.getStart_time());
+            viewHolder.mOvertimeName.setText(mOverTime.getMem_id());
+            viewHolder.mProject.setText(mOverTime.getPm_id());
+           // viewHolder.itemView.setTag(overTimes.get(i));
         }
 
         @Override
@@ -141,13 +177,13 @@ public class ManagerOvertimeListFragment extends Fragment {
         public class ViewHolder extends RecyclerView.ViewHolder{
             public TextView mOvertimeName;
             public TextView mOvertimeDate;
-            public TextView mOvertimeProject;
+            public TextView mProject;
 
             public ViewHolder(View v) {
                 super(v);
                 mOvertimeName = (TextView)v.findViewById(R.id.main_fragment_overtime_name);
 
-                mOvertimeProject = (TextView)v.findViewById(R.id.overtime_card_item_overtime_project);
+                mProject = (TextView)v.findViewById(R.id.overtime_card_item_overtime_project);
 
             }
         }

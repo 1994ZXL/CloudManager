@@ -100,11 +100,11 @@ public class TravelSearchFragment extends Fragment {
     private void search() {
         mTravels = TravelLab.newInstance(mFragment.getActivity()).getTravels();
         for (index = 0;index < mTravels.size(); index++) {
-            if (bgtime.equals(mTravels.get(index).getBeginTime())
-                    && edtime.equals(mTravels.get(index).getEndTime())
-                    && cbgtime.equals(mTravels.get(index).getBackBeginTime())
-                    && cedtime.equals(mTravels.get(index).getBackEndTime())
-                    && state.equals(mTravels.get(index).getTravelState())) {
+            if (bgtime.equals(mTravels.get(index).getStart_time_s())
+                    && edtime.equals(mTravels.get(index).getStart_time_e())
+                    && cbgtime.equals(mTravels.get(index).getOver_time_s())
+                    && cedtime.equals(mTravels.get(index).getOver_time_e())
+                    && state.equals(mTravels.get(index).getStatus())) {
 
                 sum.add(index);
 
