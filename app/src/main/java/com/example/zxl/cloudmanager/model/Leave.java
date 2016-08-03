@@ -11,8 +11,8 @@ public class Leave {
     private int leave_type; //请假类型:0事假,2病假,3休假,4婚假,5其他
     private int status; //状态:0:待批准,1:已批准,2:拒绝
 
-    private String start_time;
-    private String end_time;
+    private int start_time;
+    private int end_time;
 
     private String leave_reason; //请假原因
     private String handle_opinion; //处理意见
@@ -36,11 +36,11 @@ public class Leave {
     public void set(String[] content) {
 //        setType(content[1]);
 //        setState(content[2]);
-        setStart_time(content[3]);
-        setEnd_time(content[4]);
+//        setStart_time(content[3]);
+//        setEnd_time(content[4]);
         setLeave_reason(content[5]);
         setHandle_opinion(content[6]);
-        setHandle_time(content[8]);
+//        setHandle_time(content[8]);
     }
 
     public Leave(JSONObject json) throws JSONException {
@@ -51,9 +51,9 @@ public class Leave {
         if (json.has(JSON_STATE))
             status = json.getInt(JSON_STATE);
         if (json.has(JSON_BEGINTIME))
-            start_time = json.getString(JSON_BEGINTIME);
+            start_time = json.getInt(JSON_BEGINTIME);
         if (json.has(JSON_ENDTIME))
-            end_time = json.getString(JSON_ENDTIME);
+            end_time = json.getInt(JSON_ENDTIME);
         if (json.has(JSON_HANDLE_OPTION))
             handle_opinion = json.getString(JSON_HANDLE_OPTION);
         if (json.has(JSON_LEAVE_RESON))
@@ -75,14 +75,6 @@ public class Leave {
         return json;
     }
 
-
-    public String getMen_name() {
-        return mem_name;
-    }
-
-    public void setMen_name(String men_name) {
-        this.mem_name = men_name;
-    }
 
     public String getLeave_type() {
         //请假类型:0事假,2病假,3休假,4婚假,5其他
@@ -120,19 +112,27 @@ public class Leave {
         this.status = status;
     }
 
-    public String getStart_time() {
+    public String getMem_name() {
+        return mem_name;
+    }
+
+    public void setMem_name(String mem_name) {
+        this.mem_name = mem_name;
+    }
+
+    public int getStart_time() {
         return start_time;
     }
 
-    public void setStart_time(String start_time) {
+    public void setStart_time(int start_time) {
         this.start_time = start_time;
     }
 
-    public String getEnd_time() {
+    public int getEnd_time() {
         return end_time;
     }
 
-    public void setEnd_time(String end_time) {
+    public void setEnd_time(int end_time) {
         this.end_time = end_time;
     }
 

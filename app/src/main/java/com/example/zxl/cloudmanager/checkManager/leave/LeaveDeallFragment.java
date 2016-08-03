@@ -14,7 +14,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Leave;
+
+import java.util.Date;
 
 /**
  * Created by ZXL on 2016/7/11.
@@ -34,6 +37,7 @@ public class LeaveDeallFragment extends Fragment {
     private static Leave mLeave = new Leave();
 
     private Fragment mFragment;
+    private static final String TAG = "LeaveDeallFragment";
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -78,13 +82,18 @@ public class LeaveDeallFragment extends Fragment {
     }
 
     private void control() {
-        name.setText(mLeave.getMen_name());
+        name.setText(mLeave.getMem_name());
         leaveKind.setText(mLeave.getLeave_type());
-        leaveBeginTime.setText(mLeave.getStart_time());
-        leaveEndTime.setText(mLeave.getEnd_time());
+        leaveBeginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mLeave.getStart_time()));
+        leaveEndTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mLeave.getEnd_time()));
         leaveSuggestion.setText(mLeave.getHandle_opinion());
-        // leaveState.setText(mLeave.getState());
         leaveReason.setText(mLeave.getLeave_reason());
-        leaveDealTime.setText(mLeave.getHandle_time());
+        if ("null" != mLeave.getHandle_time()) {
+            Log.d(TAG, "Handle_time1: " + mLeave.getHandle_time());
+            leaveDealTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(Integer.parseInt(mLeave.getHandle_time())));
+        } else {
+            Log.d(TAG, "Handle_time2: " + mLeave.getHandle_time());
+            leaveDealTime.setText("——");
+        }
     }
 }
