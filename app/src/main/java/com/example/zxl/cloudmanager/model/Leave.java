@@ -8,8 +8,8 @@ import org.json.JSONObject;
  */
 public class Leave {
     private String mem_name; //员工姓名
-    private int leave_type; //请假类型:0事假,2病假,3休假,4婚假,5其他
-    private int status; //状态:0:待批准,1:已批准,2:拒绝
+    private int leave_type; //请假类型:0:没有请假，1:事假,2:病假,3:休假,4:婚假,5:其他
+    private int status; //状态:1:待批准,2:已批准,3:拒绝
 
     private int start_time;
     private int end_time;
@@ -77,16 +77,18 @@ public class Leave {
 
 
     public String getLeave_type() {
-        //请假类型:0事假,2病假,3休假,4婚假,5其他
+        //请假类型:0:没有请假，1:事假,2:病假,3:休假,4:婚假,5:其他
         if (leave_type == 0) {
-            return "事假";
+            return "没有请假";
         } else if (leave_type == 1) {
-            return "病假";
+            return "事假";
         } else if (leave_type == 2) {
-            return "休假";
+            return "病假";
         } else if (leave_type == 3) {
-            return "婚假";
+            return "休假";
         } else if (leave_type == 4) {
+            return "婚假";
+        } else if (leave_type == 5) {
             return "其他";
         }
         return null;
@@ -97,12 +99,12 @@ public class Leave {
     }
 
     public String getStatus() {
-        //状态:0:待批准,1:已批准,2:拒绝
-        if (status == 0) {
+        //状态:1:待批准,2:已批准,3:拒绝
+        if (status == 1) {
             return "待批准";
-        } else if (status == 1) {
-            return "已批准";
         } else if (status == 2) {
+            return "已批准";
+        } else if (status == 3) {
             return "拒绝";
         }
         return null;

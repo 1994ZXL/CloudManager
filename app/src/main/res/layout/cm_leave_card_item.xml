@@ -45,7 +45,7 @@
             <TextView
                 style="@style/font"
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="20dp"
                 android:id="@+id/cm_leave_card_item_begin_time" />
         </LinearLayout>
         <LinearLayout
@@ -60,7 +60,7 @@
             <TextView
                 style="@style/font"
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="20dp"
                 android:id="@+id/cm_leave_card_item_end_time" />
         </LinearLayout>
         <!-- 第三排-->

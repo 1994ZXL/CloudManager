@@ -19,6 +19,7 @@ import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Leave;
+import com.example.zxl.cloudmanager.model.Link;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -44,9 +45,11 @@ public class LeaveListFragment extends Fragment {
     public static final int REFRESH_DELAY = 4000;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams = new RequestParams();
+    private String key = "";
+    private JSONObject keyObj = new JSONObject();
 
     private static final String TAG = "LeaveListFragment";
-    private RequestParams mParams = new RequestParams();
 
     private Fragment mFragment;
 
@@ -54,6 +57,7 @@ public class LeaveListFragment extends Fragment {
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
+
         mFragment = this;
     }
 
@@ -66,6 +70,7 @@ public class LeaveListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View v = layoutInflater.inflate(R.layout.main_fragment_manager_check_list, parent, false);
+        saveInstanceState = getArguments();
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -83,20 +88,34 @@ public class LeaveListFragment extends Fragment {
 
         getActivity().getActionBar().setTitle("请假处理");
 
+        if (null == saveInstanceState) {
+            Log.d(TAG, "没有选择条件");
+        } else {
+            try {
+                if (-1 != saveInstanceState.getInt(Link.start_time)) {
+                    keyObj.put(Link.start_time, saveInstanceState.getInt(Link.start_time));
+                }
+                if (-1 != saveInstanceState.getInt(Link.end_time)) {
+                    keyObj.put(Link.end_time, saveInstanceState.getInt(Link.end_time));
+                }
+                if (-1 != saveInstanceState.getInt(Link.leave_type)) {
+                    keyObj.put(Link.leave_type, saveInstanceState.getInt(Link.leave_type));
+                }
+                if (-1 != saveInstanceState.getInt(Link.status)) {
+                    keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
+                }
 
-        JSONObject obj = new JSONObject();
-        String key = "";
-        try {
-            obj.put("mem_name", "李祝君");
-            key = DESCryptor.Encryptor(obj.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
+                key = DESCryptor.Encryptor(keyObj.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            mParams.put("key", key);
+            Log.d(TAG, "key: " + key);
         }
 
-        mParams.put("key", key);
-        Log.d(TAG, "key: "+key);
+        String url = Link.API + Link.manage_Leave + Link.get_List;
 
-        mHttpc.post("http://192.168.1.101/yunmgr_v1.0/api/uc.php?app=manage_leave&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post("http://192.168.1.101/yunmgr_v1.0/api/uc.php?app=manage_leave&act=get_list" , mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 if (statusCode == 200) {
@@ -107,7 +126,6 @@ public class LeaveListFragment extends Fragment {
                             for (int i = 0; i < array.length(); i++) {
                                 leaves.add(new Leave(array.getJSONObject(i)));
                             }
-                            Log.d(TAG, "leaves: " + leaves);
 
                             mRecyclerView = (RecyclerView) v.findViewById(R.id.manager_check_recyclerview);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
