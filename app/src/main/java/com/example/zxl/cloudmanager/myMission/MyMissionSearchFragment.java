@@ -177,9 +177,9 @@ public class MyMissionSearchFragment extends Fragment {
         mMissions = MissionLab.newInstance(mFragment.getActivity()).get();
         for (index = 0; index < mMissions.size(); index++) {
             if (name.equals(mMissions.get(index).getName())
-                    && bgtime.equals(mMissions.get(index).getMissionBeginTime())
-                    && edtime.equals(mMissions.get(index).getMissionEndTime())
-                    && state.equals(mMissions.get(index).getState())) {
+                    && bgtime.equals(mMissions.get(index).getStart_time())
+                    && edtime.equals(mMissions.get(index).getOver_time())
+                    && state.equals(mMissions.get(index).getStatus())) {
                 Fragment fragment = new MyMissionFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt(SEARCH_KEY, index);

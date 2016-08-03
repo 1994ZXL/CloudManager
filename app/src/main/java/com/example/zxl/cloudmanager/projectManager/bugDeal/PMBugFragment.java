@@ -1,4 +1,4 @@
-package com.example.zxl.cloudmanager;
+package com.example.zxl.cloudmanager.projectManager.bugDeal;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -18,35 +18,35 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.zxl.cloudmanager.MyBugDetailFragment;
+import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
-import com.example.zxl.cloudmanager.model.Mission;
-import com.example.zxl.cloudmanager.model.MissionLab;
-import com.example.zxl.cloudmanager.myMission.MyMissionSearchFragment;
+import com.example.zxl.cloudmanager.model.Bug;
+import com.example.zxl.cloudmanager.model.BugLab;
+import com.example.zxl.cloudmanager.publicSearch.bug.BugSearchFragment;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
- * Created by ZXL on 2016/7/12.
+ * Created by ZXL on 2016/7/13.
  */
-public class MyMissionFragment extends Fragment {
+public class PMBugFragment extends Fragment {
 
     private CardView mCardView;
     private RecyclerView mRecyclerView;
-    private List<Mission> missions = new ArrayList<Mission>();
+    private List<Bug> bugs = new ArrayList<Bug>();
     private MyAdapter myAdapter;
 
     private Fragment mFragment;
+    private Button mSearchBtn;
+
+    private static final String SEARCH_KEY = "search_key";
+    private static final String TAG = "MyBugFragment";
+    private int searchKey;
 
     private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
-
-    private static final String SEARCH_KEY = "search_key";
-    private int searchKey;
-
-    private Button mSearchBtn;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -68,18 +68,20 @@ public class MyMissionFragment extends Fragment {
                 Fragment fragment = null;
                 if (null == fragment) {
                     FragmentManager fm = getFragmentManager();
-                    fragment = new MyMissionSearchFragment();
+                    fragment = new BugSearchFragment();
                     fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
                 }
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        View view = layoutInflater.inflate(R.layout.main_fragment_my_mission, parent, false);
+        View v = layoutInflater.inflate(R.layout.main_fragment_my_bug, parent, false);
 
-        getActivity().getActionBar().setTitle("我的任务");
+
+        getActivity().getActionBar().setTitle("我的bug");
 
         saveInstanceState = getArguments();
         if (null == saveInstanceState) {
@@ -89,22 +91,34 @@ public class MyMissionFragment extends Fragment {
         }
 
         if (-1 == searchKey) {
-            missions = MissionLab.newInstance(mFragment.getActivity()).get();
+            bugs = BugLab.newInstance(mFragment.getActivity()).get();
         } else {
-            missions.add(MissionLab.newInstance(mFragment.getActivity()).get().get(searchKey));
+            bugs.add(BugLab.newInstance(mFragment.getActivity()).get().get(searchKey));
         }
 
-        mRecyclerView = (RecyclerView)view.findViewById(R.id.mission_recyclerview);
+        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_bug_pull_to_refresh);
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPullToRefreshView.setRefreshing(false);
+                    }
+                }, REFRESH_DELAY);
+            }
+        });
+        mRecyclerView = (RecyclerView)v.findViewById(R.id.bug_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setHasFixedSize(true);
-        myAdapter = new MyAdapter(this.getActivity(), missions);
+        myAdapter = new MyAdapter(this.getActivity(), bugs);
         mRecyclerView.setAdapter(myAdapter);
-        mCardView = (CardView)view.findViewById(R.id.fragment_my_check);
+        mCardView = (CardView)v.findViewById(R.id.fragment_my_bug);
         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, Object data) {
-                Fragment fragment = MyMissionDetailFragment.newInstance(data);
+                Fragment fragment = MyBugDetailFragment.newInstance(data);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
@@ -119,26 +133,7 @@ public class MyMissionFragment extends Fragment {
             }
         });
 
-        mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.mission_pull_to_refresh);
-        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullToRefreshView.setRefreshing(false);
-                    }
-                }, REFRESH_DELAY);
-            }
-        });
-        return view;
-    }
-
-    private Date getTime() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-//        String date = formatter.format(curDate);
-        return curDate;
+        return v;
     }
 
     public interface OnRecyclerViewItemClickListener {
@@ -148,17 +143,17 @@ public class MyMissionFragment extends Fragment {
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
-        private List<Mission> missions;
+        private List<Bug> bugs;
         private Context mContext;
 
-        public MyAdapter (Context context, List<Mission> missions) {
-            this.missions = missions;
+        public MyAdapter (Context context, List<Bug> bugs) {
+            this.bugs = bugs;
             this.mContext = context;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mission_card_item, viewGroup,false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.bug_card_item, viewGroup, false);
             ViewHolder viewHolder = new ViewHolder(v);
             v.setOnClickListener(this);
             return viewHolder;
@@ -166,20 +161,20 @@ public class MyMissionFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            Mission mission = missions.get(i);
+            Bug bug = bugs.get(i);
 
-            /*viewHolder.mBeginTime.setText(mission.getStart_time().toString());
-            viewHolder.mEndTime.setText(mission.getOver_time().toString());*/
-            viewHolder.mName.setText(mission.getName());
-            viewHolder.mState.setText(mission.getStatus());
-            viewHolder.mlevel.setText(mission.getLevel());
+            viewHolder.mFunctionModuel.setText(bug.getFunctionModel());
+            viewHolder.mBugVersion.setText(bug.getBugVersion());
+            viewHolder.mBugState.setText(bug.getBugState());
+            viewHolder.mUseCaseNumber.setText(bug.getUseCaseNumber());
+            viewHolder.mFoundTime.setText(bug.getFoundTime());
 
-            viewHolder.itemView.setTag(missions.get(i));
+            viewHolder.itemView.setTag(bugs.get(i));
         }
 
         @Override
         public int getItemCount() {
-            return missions == null ? 0 : missions.size();
+            return bugs == null ? 0 : bugs.size();
         }
 
         @Override
@@ -190,19 +185,20 @@ public class MyMissionFragment extends Fragment {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder{
-            public TextView mName;
-            public TextView mState;
-            public TextView mlevel;
-            public TextView mBeginTime;
-            public TextView mEndTime;
+            public TextView mFunctionModuel;
+            public TextView mBugVersion;
+            public TextView mBugState;
+            public TextView mUseCaseNumber;
+            public TextView mFoundTime;
 
             public ViewHolder(View v) {
                 super(v);
-                mName = (TextView) v.findViewById(R.id.mission_card_item_name);
-                mState = (TextView)v.findViewById(R.id.mission_card_item_state);
-                mlevel = (TextView)v.findViewById(R.id.mission_card_item_level);
-                mBeginTime = (TextView)v.findViewById(R.id.missoin_card_item_mission_begin_time);
-                mEndTime = (TextView)v.findViewById(R.id.mission_card_item_mission_end_time);
+                mFunctionModuel = (TextView)v.findViewById(R.id.main_fragment_my_bug_functionModuel);
+                mBugVersion = (TextView)v.findViewById(R.id.bug_card_item_bug_version);
+                mBugState = (TextView)v.findViewById(R.id.bug_card_item_bug_state);
+                mUseCaseNumber = (TextView)v.findViewById(R.id.bug_card_item_usecase_number);
+                mFoundTime = (TextView)v.findViewById(R.id.bug_card_item_found_time);
+                
             }
         }
 

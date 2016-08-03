@@ -58,10 +58,10 @@ public class MyMissionDetailFragment extends Fragment {
         mContent.setText(sMission.getContent());
         mLevel.setText(sMission.getLevel());
         mDetailContent.setText(sMission.getDetailContent());
-        mBeginTime.setText(sMission.getMissionBeginTime().toString());
-        mEndTime.setText(sMission.getMissionEndTime().toString());
+       /* mBeginTime.setText(sMission.getStart_time().toString());
+        mEndTime.setText(sMission.getOver_time().toString());*/
         mProgress.setText(sMission.getProgress());
-        mState.setText(sMission.getState());
+        mState.setText(sMission.getStatus());
         mDisposeSuggestion.setText(sMission.getDisposeSuggestion());
     }
 

@@ -9,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,20 +21,34 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
+import com.example.zxl.cloudmanager.checkManager.leave.LeaveDeallFragment;
+import com.example.zxl.cloudmanager.model.DESCryptor;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
+import com.example.zxl.cloudmanager.model.Leave;
 import com.example.zxl.cloudmanager.model.Mission;
 import com.example.zxl.cloudmanager.model.MissionLab;
 import com.example.zxl.cloudmanager.myMission.MyMissionSearchFragment;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import cz.msebera.android.httpclient.Header;
+
 /**
  * Created by ZXL on 2016/7/12.
  */
 public class MissionManagerListFragment extends Fragment {
 
+    private static final String TAG = "MissionManagerList";
     private CardView mCardView;
     private RecyclerView mRecyclerView;
     private List<Mission> missions = new ArrayList<Mission>();
@@ -46,6 +61,9 @@ public class MissionManagerListFragment extends Fragment {
 
     private static final String SEARCH_KEY = "search_key";
     private int searchKey;
+
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams = new RequestParams();
 
     private Button mSearchBtn;
 
@@ -78,7 +96,7 @@ public class MissionManagerListFragment extends Fragment {
     }
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        View view = layoutInflater.inflate(R.layout.main_fragment_my_mission, parent, false);
+        final View view = layoutInflater.inflate(R.layout.main_fragment_my_mission, parent, false);
 
         getActivity().getActionBar().setTitle("任务处理");
 
@@ -107,31 +125,71 @@ public class MissionManagerListFragment extends Fragment {
             missions.add(MissionLab.newInstance(mFragment.getActivity()).get().get(searchKey));
         }
 
-        mRecyclerView = (RecyclerView)view.findViewById(R.id.mission_recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        myAdapter = new MyAdapter(this.getActivity(), missions);
-        mRecyclerView.setAdapter(myAdapter);
-        mCardView = (CardView)view.findViewById(R.id.fragment_my_check);
-        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+        JSONObject obj = new JSONObject();
+        String key = "";
+        try {
+            obj.put("mem_name", "李驻军");
+            key = DESCryptor.Encryptor(obj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        mParams.put("key", key);
+        Log.d(TAG, "key: "+key);
+        mHttpc.post("http://192.168.1.109/yunmgr_v1.0/api/uc.php?app=pm_task&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
-            public void onItemClick(View view, Object data) {
-                Fragment fragment = MissionManagerEditFragment.newInstance(data);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
+            public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
+                if (statusCode == 200) {
+                    try {
+                        if (rjo.getBoolean("result")) {
+                            JSONArray array = rjo.getJSONArray("data1");
+                            Log.d(TAG, "array: " + array);
+                            for (int i = 0; i < array.length(); i++) {
+                                missions.add(new Mission(array.getJSONObject(i)));
+                            }
+                            Log.d(TAG, "missions: " + missions);
+
+                            mRecyclerView = (RecyclerView)view.findViewById(R.id.mission_recyclerview);
+                            mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
+                            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                            mRecyclerView.setHasFixedSize(true);
+                            myAdapter = new MyAdapter(mFragment.getActivity(), missions);
+                            mRecyclerView.setAdapter(myAdapter);
+                            mCardView = (CardView)view.findViewById(R.id.fragment_my_check);
+                            myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                                @Override
+                                public void onItemClick(View view, Object data) {
+                                    Fragment fragment = MissionManagerEditFragment.newInstance(data);
+                                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                    if (!fragment.isAdded()) {
+                                        transaction.addToBackStack(null);
+                                        transaction.hide(mFragment);
+                                        transaction.add(R.id.blankActivity, fragment);
+                                        transaction.commit();
+                                    } else {
+                                        transaction.hide(mFragment);
+                                        transaction.show(fragment);
+                                        transaction.commit();
+                                    }
+                                }
+                            });
+
+                        } else {
+
+                        }
+                    } catch (JSONException e) {
+                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                    }
                 } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
+
                 }
             }
-        });
 
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
+
+            }
+        });
         return view;
     }
 
@@ -169,10 +227,10 @@ public class MissionManagerListFragment extends Fragment {
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             Mission mission = missions.get(i);
 
-            viewHolder.mBeginTime.setText(mission.getMissionBeginTime().toString());
-            viewHolder.mEndTime.setText(mission.getMissionEndTime().toString());
+            viewHolder.mBeginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mission.getStart_time()));
+            viewHolder.mEndTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mission.getOver_time()));
             viewHolder.mName.setText(mission.getName());
-            viewHolder.mState.setText(mission.getState());
+            //viewHolder.mState.setText(mission.getStatus());
             viewHolder.mlevel.setText(mission.getLevel());
 
             viewHolder.itemView.setTag(missions.get(i));

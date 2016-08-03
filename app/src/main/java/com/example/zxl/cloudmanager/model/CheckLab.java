@@ -22,8 +22,7 @@ public class CheckLab {
 
     private CheckLab(Context context) {
         this.context = context;
-
-        content = new String[]{
+        /*content = new String[]{
                 "张三",
                 "项目名称",
                 "公司",
@@ -58,8 +57,7 @@ public class CheckLab {
                 "否"};
 
         setChecks(content);
-        setChecks(content2);
-
+        setChecks(content2);*/
     }
 
     public static CheckLab newInstance(Context context) {
@@ -72,7 +70,7 @@ public class CheckLab {
     private void setChecks(String[] content) {
         Check check = new Check();
         check.setContent(content);
-        Log.d("CheckLab", check.getName());
+        Log.d("CheckLab", check.getMem_name());
         mChecks.add(check);
     }
 

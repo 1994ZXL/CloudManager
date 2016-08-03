@@ -15,13 +15,24 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
+import com.example.zxl.cloudmanager.checkManager.leave.LeaveDeallFragment;
 import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.CheckLab;
+import com.example.zxl.cloudmanager.model.Leave;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ZXL on 2016/7/15.
@@ -37,6 +48,9 @@ public class ManagerCheckListFragment extends Fragment {
     private static final String TAG = "MyCheckFragment";
 
     private Fragment mFragment;
+
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams = new RequestParams();
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -61,7 +75,7 @@ public class ManagerCheckListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        View v = layoutInflater.inflate(R.layout.main_fragment_manager_check_list, parent, false);
+        final View v = layoutInflater.inflate(R.layout.main_fragment_manager_check_list, parent, false);
 
         Log.d(TAG, "调用了一次");
 
@@ -82,31 +96,58 @@ public class ManagerCheckListFragment extends Fragment {
             }
         });
 
-        mRecyclerView = (RecyclerView)v.findViewById(R.id.manager_check_recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        myAdapter = new MyAdapter(this.getActivity(), checks);
-        mRecyclerView.setAdapter(myAdapter);
-        mCardView = (CardView)v.findViewById(R.id.fragment_my_check);
-        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+        mHttpc.post("http://192.168.1.109/yunmgr_v1.0/api/uc.php?app=manage_puncher&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
-            public void onItemClick(View view, Object data) {
-                Fragment fragment = new ManagerCheckEditFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
+            public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
+                if (statusCode == 200) {
+                    try {
+                        if (rjo.getBoolean("result")) {
+                            JSONArray array = rjo.getJSONArray("data1");
+                            Log.d(TAG, "array: " + array);
+                            for (int i = 0; i < array.length(); i++) {
+                                checks.add(new Check(array.getJSONObject(i)));
+                            }
+                            Log.d(TAG, "checks: " + checks);
+
+                            mRecyclerView = (RecyclerView)v.findViewById(R.id.manager_check_recyclerview);
+                            mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
+                            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                            mRecyclerView.setHasFixedSize(true);
+                            myAdapter = new MyAdapter(mFragment.getActivity(), checks);
+                            mRecyclerView.setAdapter(myAdapter);
+                            mCardView = (CardView)v.findViewById(R.id.fragment_manager_check);
+                            myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                                @Override
+                                public void onItemClick(View view, Object data) {
+                                    Fragment fragment = new ManagerCheckEditFragment();
+                                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                    if (!fragment.isAdded()) {
+                                        transaction.addToBackStack(null);
+                                        transaction.hide(mFragment);
+                                        transaction.add(R.id.blankActivity, fragment);
+                                        transaction.commit();
+                                    } else {
+                                        transaction.hide(mFragment);
+                                        transaction.show(fragment);
+                                        transaction.commit();
+                                    }
+                                }
+                            });
+                        } else {
+
+                        }
+                    } catch (JSONException e) {
+                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                    }
                 } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
+
                 }
             }
-        });
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
 
+            }
+        });
         return v;
     }
 
@@ -137,8 +178,8 @@ public class ManagerCheckListFragment extends Fragment {
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             Check check = checks.get(i);
             viewHolder.mState.setText(check.getState());
+            viewHolder.mName.setText(check.getMem_name());
             viewHolder.mCheckLocation.setText(check.getCheckLocation());
-            viewHolder.mCheckManager.setText(check.getCheckManager());
             viewHolder.itemView.setTag(checks.get(i));
         }
 
@@ -155,12 +196,14 @@ public class ManagerCheckListFragment extends Fragment {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder{
+            public TextView mName;
             public TextView mState;
             public TextView mCheckLocation;
             public TextView mCheckManager;
 
             public ViewHolder(View v) {
                 super(v);
+                mName = (TextView) v.findViewById(R.id.manager_check_card_item_name);
                 mState = (TextView)v.findViewById(R.id.manager_check_card_item_state);
                 mCheckLocation = (TextView)v.findViewById(R.id.manager_check_card_item_check_location);
                 mCheckManager = (TextView)v.findViewById(R.id.manager_check_card_item_check_manager);

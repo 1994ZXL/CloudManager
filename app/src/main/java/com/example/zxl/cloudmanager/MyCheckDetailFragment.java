@@ -67,10 +67,9 @@ public class MyCheckDetailFragment extends Fragment{
     }
 
     private void control() {
-        name.setText(mCheck.getName());
+        name.setText(mCheck.getMem_name());
         project.setText(mCheck.getProject());
         checkLocation.setText(mCheck.getCheckLocation());
-        checkManager.setText(mCheck.getCheckManager());
         stipulationOnDuty.setText(mCheck.getStipulationOnDutyTime());
         stipulaitonOffDuty.setText(mCheck.getStipulationOffDutyTime());
         onDuty.setText(mCheck.getDutyTime());

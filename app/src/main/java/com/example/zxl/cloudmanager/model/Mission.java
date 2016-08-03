@@ -2,22 +2,32 @@ package com.example.zxl.cloudmanager.model;
 
 import android.content.Context;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by ZXL on 2016/7/12.
  */
 public class Mission {
-    private String name;
-    private String content;
+    private String title; //项目标题
+    private String content; //内容
     private String level;
     private String detailContent;
-    private String missionBeginTime;
-    private String missionEndTime;
+    private int start_time;
+    private int over_time;
     private String progress;
-    private String state;
-    private String disposeSuggestion;
+    private int status; //项目任务状态
+    private String evaluete; //评价
     private String missionWorker;
 
     private static Mission sMission;
+
+    private static final String JSON_TITLE = "title";
+    private static final String JSON_CONTENT = "content";
+    private static final String JSON_STATE = "status";
+    private static final String JSON_BEGINTIME = "start_time";
+    private static final String JSON_ENDTIME = "over_time";
+    private static final String JSON_EVALUETE = "evaluete";
 
     public Mission(){
 
@@ -34,14 +44,40 @@ public class Mission {
         setContent(data[1]);
         setLevel(data[2]);
         setDetailContent(data[3]);
-        setMissionBeginTime(data[4]);
-        setMissionEndTime(data[5]);
+        /*setStart_time(data[4]);
+        setOver_time(data[5]);*/
         setProgress(data[6]);
-        setState(data[7]);
+        /*setStatus(data[7]);*/
         setDisposeSuggestion(data[8]);
         //setMissionWorker(data[9]);
     }
 
+    public Mission(JSONObject json) throws JSONException {
+        if (json.has(JSON_TITLE))
+            title = json.getString(JSON_TITLE);
+        if (json.has(JSON_CONTENT))
+            content = json.getString(JSON_CONTENT);
+        if (json.has(JSON_STATE))
+            status = json.getInt(JSON_STATE);
+        if (json.has(JSON_BEGINTIME))
+            start_time = json.getInt(JSON_BEGINTIME);
+        if (json.has(JSON_ENDTIME))
+            over_time = json.getInt(JSON_ENDTIME);
+        if (json.has(JSON_EVALUETE))
+            evaluete = json.getString(JSON_EVALUETE);
+    }
+
+    public JSONObject toJSON() throws JSONException{
+        JSONObject json = new JSONObject();
+        json.put(JSON_TITLE, title);
+        json.put(JSON_CONTENT, content);
+        json.put(JSON_STATE, status);
+        json.put(JSON_BEGINTIME, start_time);
+        json.put(JSON_ENDTIME, over_time);
+        json.put(JSON_EVALUETE, evaluete);
+
+        return json;
+    }
     public String getMissionWorker() {
         return missionWorker;
     }
@@ -83,47 +119,47 @@ public class Mission {
     }
 
     public String getDisposeSuggestion() {
-        return disposeSuggestion;
+        return evaluete;
     }
 
     public void setDisposeSuggestion(String disposeSuggestion) {
-        this.disposeSuggestion = disposeSuggestion;
+        this.evaluete = disposeSuggestion;
     }
 
-    public Mission(String missionBeginTime, String missionEndTime) {
-        this.missionBeginTime = missionBeginTime;
-        this.missionEndTime = missionEndTime;
+    public Mission(int start_time, int over_time) {
+        this.start_time = start_time;
+        this.over_time = over_time;
     }
 
     public String getName() {
-        return name;
+        return title;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.title = name;
     }
 
-    public String getMissionBeginTime() {
-        return missionBeginTime;
+    public int getStart_time() {
+        return start_time;
     }
 
-    public void setMissionBeginTime(String missionBeginTime) {
-        this.missionBeginTime = missionBeginTime;
+    public void setStart_time(int start_time) {
+        this.start_time = start_time;
     }
 
-    public String getMissionEndTime() {
-        return missionEndTime;
+    public int getOver_time() {
+        return over_time;
     }
 
-    public void setMissionEndTime(String missionEndTime) {
-        this.missionEndTime = missionEndTime;
+    public void setOver_time(int over_time) {
+        this.over_time = over_time;
     }
 
-    public String getState() {
-        return state;
+    public int getStatus() {
+        return status;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

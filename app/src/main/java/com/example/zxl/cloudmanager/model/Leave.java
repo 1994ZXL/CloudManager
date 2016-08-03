@@ -35,7 +35,7 @@ public class Leave {
     
     public void set(String[] content) {
 //        setType(content[1]);
-//        setState(content[2]);
+//        setStatus(content[2]);
 //        setStart_time(content[3]);
 //        setEnd_time(content[4]);
         setLeave_reason(content[5]);

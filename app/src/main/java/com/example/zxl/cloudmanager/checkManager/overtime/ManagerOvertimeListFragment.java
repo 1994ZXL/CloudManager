@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.OverTime;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -156,7 +157,8 @@ public class ManagerOvertimeListFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             OverTime mOverTime = overTimes.get(i);
-            // viewHolder.mOvertimeDate.setText(mOverTime.getStart_time());
+            viewHolder.mOvertimeDateBegin.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mOverTime.getStart_time()));
+            viewHolder.mOvertimeDateEnd.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mOverTime.getStart_time()));
             viewHolder.mOvertimeName.setText(mOverTime.getMem_id());
             viewHolder.mProject.setText(mOverTime.getPm_id());
            // viewHolder.itemView.setTag(overTimes.get(i));
@@ -176,13 +178,15 @@ public class ManagerOvertimeListFragment extends Fragment {
 
         public class ViewHolder extends RecyclerView.ViewHolder{
             public TextView mOvertimeName;
-            public TextView mOvertimeDate;
+            public TextView mOvertimeDateBegin;
+            public TextView mOvertimeDateEnd;
             public TextView mProject;
 
             public ViewHolder(View v) {
                 super(v);
                 mOvertimeName = (TextView)v.findViewById(R.id.main_fragment_overtime_name);
-
+                mOvertimeDateBegin = (TextView) v.findViewById(R.id.overtime_card_item_begin_time);
+                mOvertimeDateEnd = (TextView) v.findViewById(R.id.overtime_card_item_end_time);
                 mProject = (TextView)v.findViewById(R.id.overtime_card_item_overtime_project);
 
             }

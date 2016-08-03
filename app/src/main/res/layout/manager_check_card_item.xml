@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:text="未处理"
                 android:textSize="20dp"
+                android:textColor="#FF0000"
                 android:id="@+id/manager_check_card_item_state"
                 android:layout_weight="1" />
         </LinearLayout>

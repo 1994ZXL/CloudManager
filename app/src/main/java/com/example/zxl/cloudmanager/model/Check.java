@@ -2,6 +2,9 @@ package com.example.zxl.cloudmanager.model;
 
 import android.content.Context;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -10,10 +13,11 @@ import java.util.ArrayList;
 public class Check {
     private String date;
 
-    private String name;
+
+    private String mem_name; //员工姓名
     private String project;
-    private String checkLocation;
-    private String checkManager;
+    private String punch_address; //考勤地址
+    private String punch_mgr; //考勤主管
     private String stipulationOnDutyTime;
     private String stipulationOffDutyTime;
     private String dutyTime;
@@ -33,29 +37,47 @@ public class Check {
     public Check(){
 
     }
+    private static final String JSON_MGR = "punch_mgr";
+    private static final String JSON_NAME = "mem_name";
+    private static final String JSON_ADDRESS = "punch_address";
 
+    public Check(JSONObject json) throws JSONException {
+        if (json.has(JSON_MGR))
+            punch_mgr = json.getString(JSON_MGR);
+        if (json.has(JSON_ADDRESS))
+            punch_address = json.getString(JSON_ADDRESS);
+        if (json.has(JSON_NAME))
+            mem_name = json.getString(JSON_NAME);
+    }
 
+    public JSONObject toJSON() throws JSONException{
+        JSONObject json = new JSONObject();
+        json.put(JSON_MGR, punch_mgr);
+        json.put(JSON_ADDRESS, punch_address);
+        json.put(JSON_NAME,mem_name);
+        return json;
+    }
     public String[] getContent() {
         return content;
     }
 
     public void setContent(String[] content) {
         this.content = content;
-        setName(content[0]);
-        setProject(content[1]);
+        setMem_name(content[0]);
+         /*setProject(content[1]);*/
         setCheckLocation(content[2]);
-        setCheckManager(content[3]);
-        setStipulationOnDutyTime(content[4]);
+        setPunch_mgr(content[3]);
+        /*setStipulationOnDutyTime(content[4]);
         setStipulationOffDutyTime(content[5]);
         setDutyTime(content[6]);
         setOffDutyTime(content[7]);
         setOndutyDisposeTime(content[8]);
         setOffDutyDisposeTime(content[9]);
-        setState(content[10]);
+        setStatus(content[10]);
         setLeave(content[11]);
         setOverTime(content[12]);
         setTravel(content[13]);
-        setLate(content[14]);
+        setLate(content[14]);*/
     }
 
     public String getProject() {
@@ -114,20 +136,20 @@ public class Check {
         this.late = late;
     }
 
-    public String getName() {
-        return name;
+    public String getMem_name() {
+        return mem_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setMem_name(String mem_name) {
+        this.mem_name = mem_name;
     }
 
-    public String getCheckManager() {
-        return checkManager;
+    public String getPunch_mgr() {
+        return punch_mgr;
     }
 
-    public void setCheckManager(String checkManager) {
-        this.checkManager = checkManager;
+    public void setPunch_mgr(String punch_mgr) {
+        this.punch_mgr = punch_mgr;
     }
 
     public String getStipulationOnDutyTime() {
@@ -163,11 +185,11 @@ public class Check {
     }
 
     public String getCheckLocation() {
-        return checkLocation;
+        return punch_address;
     }
 
     public void setCheckLocation(String checkLocation) {
-        this.checkLocation = checkLocation;
+        this.punch_address = checkLocation;
     }
 
     public String getDutyTime() {

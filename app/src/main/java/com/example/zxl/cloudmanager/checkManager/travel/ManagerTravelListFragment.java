@@ -20,6 +20,7 @@ import com.example.zxl.cloudmanager.MyTravelDetailFragment;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.checkManager.leave.LeaveDeallFragment;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Leave;
 import com.example.zxl.cloudmanager.model.Travel;
 import com.example.zxl.cloudmanager.model.TravelLab;
@@ -139,10 +140,10 @@ public class ManagerTravelListFragment extends ListFragment {
             name.setText(travel.getMem_id());
 
             TextView beginTime = (TextView) convertView.findViewById(R.id.main_fragment_travel_beginTime);
-            //beginTime.setText(travel.getStart_time());
+            beginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(travel.getStart_time()));
 
             TextView endTime = (TextView) convertView.findViewById(R.id.main_fragment_travel_endTime);
-            //endTime.setText(travel.getOver_time());
+            endTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(travel.getOver_time()));
 
             TextView state = (TextView) convertView.findViewById(R.id.main_fragment_travel_state);
             state.setText(travel.getStatus());
