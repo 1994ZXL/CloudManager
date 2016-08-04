@@ -175,9 +175,9 @@ public class UsecaseFragment extends Fragment {
     private void search() {
         sUsecase = UseCaseLab.newInstance(mFragment.getActivity()).getUseCase();
         for (index = 0; index < sUsecase.size(); index++ ) {
-            if (name.equals(sUsecase.get(index).getName()) && useCaseId.equals(sUsecase.get(index).getUsecasetNumber())
-                    && programNumber.equals(sUsecase.get(index).getVersionNumber()) && tester.equals(sUsecase.get(index).getTestMan())
-                    && developer.equals(sUsecase.get(index).getExploitMan())) {
+            if (name.equals(sUsecase.get(index).getName()) && useCaseId.equals(sUsecase.get(index).getTest_content())
+                    && programNumber.equals(sUsecase.get(index).getVersionNumber()) && tester.equals(sUsecase.get(index).getTestter_name())
+                    && developer.equals(sUsecase.get(index).getSubmitter_name())) {
                 Fragment fragment = new MyUseCaseFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt(SEARCH_KEY, index);
@@ -197,10 +197,10 @@ public class UsecaseFragment extends Fragment {
                 }
             } else {
                 Log.d(TAG, name + "   " + sUsecase.get(index).getName());
-                Log.d(TAG, useCaseId + "   " + sUsecase.get(index).getUsecasetNumber());
+                Log.d(TAG, useCaseId + "   " + sUsecase.get(index).getTest_content());
                 Log.d(TAG, programNumber + "   " + sUsecase.get(index).getVersionNumber());
-                Log.d(TAG, tester + "   " + sUsecase.get(index).getTestMan());
-                Log.d(TAG, developer + "   " + sUsecase.get(index).getExploitMan());
+                Log.d(TAG, tester + "   " + sUsecase.get(index).getTestter_name());
+                Log.d(TAG, developer + "   " + sUsecase.get(index).getSubmitter_name());
             }
         }
     }

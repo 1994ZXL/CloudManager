@@ -90,10 +90,10 @@ public class PMUseCaseDetailFragment extends Fragment {
     private void contorl() {
         mName.setText(sUseCase.getName());
         mFunctionModel.setText(sUseCase.getFunctionModule());
-        mUsecaseNumber.setText(sUseCase.getUsecasetNumber());
+        mUsecaseNumber.setText(sUseCase.getTest_content());
         mVersionNumber.setText(sUseCase.getVersionNumber());
-        mAutorizedMan.setText(sUseCase.getAutorizedMan());
-        mAutorizedTime.setText(sUseCase.getAutorizedTime());
+        mAutorizedMan.setText(sUseCase.getDevelop_name());
+        mAutorizedTime.setText(sUseCase.getStart_time());
         mCorrelationUseCase.setText(sUseCase.getCorrelationUseCase());
         mFunctionCharacter.setText(sUseCase.getFunctionCharacter());
         mTextAim.setText(sUseCase.getTextAim());
@@ -101,15 +101,15 @@ public class PMUseCaseDetailFragment extends Fragment {
         mReferenceInformation.setText(sUseCase.getReferenceInformation());
         mTextDate.setText(sUseCase.getTextDate());
         mScene.setText(sUseCase.getScene());
-        mOperationSequence.setText(sUseCase.getOperationSequence());
+        mOperationSequence.setText(sUseCase.getContent());
         mOperationDescription.setText(sUseCase.getOperationDescription());
         mDate.setText(sUseCase.getDate());
         mExpectedOutcome.setText(sUseCase.getExpectedOutcome());
         mParticalOutcome.setText(sUseCase.getParticalOutcome());
-        mTextState.setText(sUseCase.getTextState());
-        mTestMan.setText(sUseCase.getTestMan());
-        mExploitMan.setText(sUseCase.getExploitMan());
-        mPrincipal.setText(sUseCase.getPrincipal());
+        mTextState.setText(sUseCase.getStatus());
+        mTestMan.setText(sUseCase.getTestter_name());
+        mExploitMan.setText(sUseCase.getSubmitter_name());
+        mPrincipal.setText(sUseCase.getRemark());
     }
 
 }

@@ -18,12 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.zxl.cloudmanager.MyUseCaseDetailFragment;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.UseCase;
 import com.example.zxl.cloudmanager.model.UseCaseLab;
-import com.example.zxl.cloudmanager.projectManager.bugDeal.PMBugDetailFragment;
 import com.example.zxl.cloudmanager.publicSearch.usecase.UsecaseFragment;
 
 import java.util.ArrayList;
@@ -164,11 +162,11 @@ public class PMUseCaseFragment extends Fragment {
             UseCase useCase = useCases.get(i);
 
             viewHolder.mProjectName.setText(useCase.getName());
-            viewHolder.mUseCaseNumber.setText(useCase.getUsecasetNumber());
+            viewHolder.mUseCaseNumber.setText(useCase.getTest_content());
             viewHolder.mVersoinNumber.setText(useCase.getVersionNumber());
-            viewHolder.mTextMan.setText(useCase.getTestMan());
-            viewHolder.mExploitMan.setText(useCase.getExploitMan());
-            viewHolder.mAutorizedTime.setText(useCase.getAutorizedTime());
+            viewHolder.mTextMan.setText(useCase.getTestter_name());
+            viewHolder.mExploitMan.setText(useCase.getSubmitter_name());
+            viewHolder.mAutorizedTime.setText(useCase.getStart_time());
 
             viewHolder.itemView.setTag(useCases.get(i));
         }

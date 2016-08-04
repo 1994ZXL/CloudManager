@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -17,17 +16,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
-import com.example.zxl.cloudmanager.leave.LeaveSearchFragment;
-import com.example.zxl.cloudmanager.model.Check;
-import com.example.zxl.cloudmanager.model.CheckLab;
 import com.example.zxl.cloudmanager.model.UseCase;
 import com.example.zxl.cloudmanager.model.UseCaseLab;
-import com.example.zxl.cloudmanager.model.UserLab;
-import com.example.zxl.cloudmanager.myPost.MyPostSearchFragment;
 import com.example.zxl.cloudmanager.publicSearch.usecase.UsecaseFragment;
 
 import java.util.ArrayList;
@@ -168,11 +161,11 @@ public class MyUseCaseFragment extends Fragment {
             UseCase useCase = useCases.get(i);
 
             viewHolder.mProjectName.setText(useCase.getName());
-            viewHolder.mUseCaseNumber.setText(useCase.getUsecasetNumber());
+            viewHolder.mUseCaseNumber.setText(useCase.getTest_content());
             viewHolder.mVersoinNumber.setText(useCase.getVersionNumber());
-            viewHolder.mTextMan.setText(useCase.getTestMan());
-            viewHolder.mExploitMan.setText(useCase.getExploitMan());
-            viewHolder.mAutorizedTime.setText(useCase.getAutorizedTime());
+            viewHolder.mTextMan.setText(useCase.getTestter_name());
+            viewHolder.mExploitMan.setText(useCase.getSubmitter_name());
+            viewHolder.mAutorizedTime.setText(useCase.getStart_time());
 
             viewHolder.itemView.setTag(useCases.get(i));
         }

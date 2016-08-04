@@ -1,18 +1,13 @@
 package com.example.zxl.cloudmanager;
 
 import android.app.Fragment;
-import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.model.UseCase;
-import com.example.zxl.cloudmanager.model.UseCaseLab;
-
-import java.util.ArrayList;
 
 
 /**
@@ -94,10 +89,10 @@ public class MyUseCaseDetailFragment extends Fragment {
     private void contorl() {
         mName.setText(sUseCase.getName());
         mFunctionModel.setText(sUseCase.getFunctionModule());
-        mUsecaseNumber.setText(sUseCase.getUsecasetNumber());
+        mUsecaseNumber.setText(sUseCase.getTest_content());
         mVersionNumber.setText(sUseCase.getVersionNumber());
-        mAutorizedMan.setText(sUseCase.getAutorizedMan());
-        mAutorizedTime.setText(sUseCase.getAutorizedTime());
+        mAutorizedMan.setText(sUseCase.getDevelop_name());
+        mAutorizedTime.setText(sUseCase.getStart_time());
         mCorrelationUseCase.setText(sUseCase.getCorrelationUseCase());
         mFunctionCharacter.setText(sUseCase.getFunctionCharacter());
         mTextAim.setText(sUseCase.getTextAim());
@@ -105,15 +100,15 @@ public class MyUseCaseDetailFragment extends Fragment {
         mReferenceInformation.setText(sUseCase.getReferenceInformation());
         mTextDate.setText(sUseCase.getTextDate());
         mScene.setText(sUseCase.getScene());
-        mOperationSequence.setText(sUseCase.getOperationSequence());
+        mOperationSequence.setText(sUseCase.getContent());
         mOperationDescription.setText(sUseCase.getOperationDescription());
         mDate.setText(sUseCase.getDate());
         mExpectedOutcome.setText(sUseCase.getExpectedOutcome());
         mParticalOutcome.setText(sUseCase.getParticalOutcome());
-        mTextState.setText(sUseCase.getTextState());
-        mTestMan.setText(sUseCase.getTestMan());
-        mExploitMan.setText(sUseCase.getExploitMan());
-        mPrincipal.setText(sUseCase.getPrincipal());
+        mTextState.setText(sUseCase.getStatus());
+        mTestMan.setText(sUseCase.getTestter_name());
+        mExploitMan.setText(sUseCase.getSubmitter_name());
+        mPrincipal.setText(sUseCase.getRemark());
     }
 
 }

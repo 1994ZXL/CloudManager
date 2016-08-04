@@ -1,47 +1,60 @@
 package com.example.zxl.cloudmanager.model;
 
-import java.util.ArrayList;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by ZXL on 2016/7/13.
  */
 public class UseCase {
-    private String name;
-    private String functionModule;
-    private String usecasetNumber;
+    private String name; //项目名称
+    private String test_app; //功能模块
+    private String test_content; //测试内容
     private String versionNumber;
-    private String autorizedMan;
-    private String autorizedTime;
-    private String correlationUseCase;
+    private String develop_name; //开发人员
+    private int start_time; //开始时间
+    private int end_time; //结束时间
+    private int test_time; //测试时间
+    private String header_name; //项目主管
     private String functionCharacter;
     private String textAim;
     private String presetValue;
     private String referenceInformation;
     private String textDate;
-    private String Scene;
-    private String operationSequence;
+    private String Scene; //用例场景
+    private String content; //场景内容
     private String operationDescription;
     private String date;
     private String expectedOutcome;
     private String particalOutcome;
-    private String textState;
-    private String testMan;
-    private String exploitMan;
-    private String principal;
+    private int status; //测试状态
+    private String testter_name; //测试人员
+    private String submitter_name; //提交人员
+    private String remark; //备注
 
-
+    private static final String JSON_DEVELOPPER = "develop_name";
+    private static final String JSON_STATE = "status";
+    private static final String JSON_PROJECT = "project_name";
+    private static final String JSON_HEADER_NAME = "header_name";
+    private static final String JSON_TEST_TIME = "test_time";
+    private static final String JSON_START_TIME = "start_time";
+    private static final String JSON_END_TIME = "over_time";
+    private static final String JSON_TEST_CONTENT = "test_content";
+    private static final String JSON_CONTENT = "ontent";
+    private static final String JSON_APP = "test_app";
+    private static final String JSON_SUBMITTER = "submitter_name";
+    private static final String JSON_REMARK = "remark";
+    private static final String JSON_TESTER = "tester_name";
     public UseCase() {
     }
-
-
 
     public void setContent(String[] content) {
         setName(content[0]);
         setFunctionModule(content[1]);
-        setUsecasetNumber(content[2]);
+        setTest_content(content[2]);
         setVersionNumber(content[3]);
-        setAutorizedMan(content[4]);
-        setAutorizedTime(content[5]);
+        setDevelop_name(content[4]);
+        //setStart_time(content[5]);
         setCorrelationUseCase(content[6]);
         setFunctionCharacter(content[7]);
         setTextAim(content[8]);
@@ -49,23 +62,68 @@ public class UseCase {
         setReferenceInformation(content[10]);
         setTextDate(content[11]);
         setScene(content[12]);
-        setOperationSequence(content[13]);
+        setContent(content[13]);
         setOperationDescription(content[14]);
         setDate(content[15]);
         setExpectedOutcome(content[16]);
         setParticalOutcome(content[17]);
-        setTextState(content[18]);
-        setTestMan(content[19]);
-        setExploitMan(content[20]);
-        setPrincipal(content[21]);
+        //setStatus(content[18]);
+        setTestter_name(content[19]);
+        setSubmitter_name(content[20]);
+        setRemark(content[21]);
     }
 
-    public String getUsecasetNumber() {
-        return usecasetNumber;
+    public UseCase(JSONObject json) throws JSONException {
+        if (json.has(JSON_DEVELOPPER))
+            develop_name = json.getString(JSON_DEVELOPPER);
+        if (json.has(JSON_STATE))
+            status = json.getInt(JSON_STATE);
+        if (json.has(JSON_START_TIME))
+            start_time = json.getInt(JSON_START_TIME);
+        if (json.has(JSON_END_TIME))
+            end_time = json.getInt(JSON_END_TIME);
+        if (json.has(JSON_APP))
+            test_app = json.getString(JSON_APP);
+        if (json.has(JSON_TEST_CONTENT))
+            test_content = json.getString(JSON_TEST_CONTENT);
+        if (json.has(JSON_REMARK))
+            remark = json.getString(JSON_REMARK);
+        if (json.has(JSON_PROJECT))
+            name = json.getString(JSON_PROJECT);
+        if (json.has(JSON_HEADER_NAME))
+            header_name = json.getString(JSON_HEADER_NAME);
+        if (json.has(JSON_TESTER))
+            testter_name = json.getString(JSON_TESTER);
+        if (json.has(JSON_CONTENT))
+            content = json.getString(JSON_CONTENT);
+        if (json.has(JSON_TEST_TIME))
+            test_time = json.getInt(JSON_TEST_TIME);
+        if (json.has(JSON_SUBMITTER))
+            submitter_name = json.getString(JSON_SUBMITTER);
     }
 
-    public void setUsecasetNumber(String usecasetNumber) {
-        this.usecasetNumber = usecasetNumber;
+    public JSONObject toJSON() throws JSONException{
+        JSONObject json = new JSONObject();
+        json.put(JSON_DEVELOPPER, develop_name);
+        json.put(JSON_HEADER_NAME, status);
+        json.put(JSON_START_TIME, start_time);
+        json.put(JSON_END_TIME, end_time);
+        json.put(JSON_TEST_CONTENT, test_content);
+        json.put(JSON_APP, test_app);
+        json.put(JSON_TESTER, testter_name);
+        json.put(JSON_HEADER_NAME, header_name);
+        json.put(JSON_PROJECT, name);
+        json.put(JSON_CONTENT, content);
+        json.put(JSON_TEST_TIME, test_time);
+        json.put(JSON_SUBMITTER, submitter_name);
+        return json;
+    }
+    public String getTest_content() {
+        return test_content;
+    }
+
+    public void setTest_content(String test_content) {
+        this.test_content = test_content;
     }
 
     public String getName() {
@@ -84,52 +142,44 @@ public class UseCase {
         this.versionNumber = versionNumber;
     }
 
-    public String getTestMan() {
-        return testMan;
+    public String getTestter_name() {
+        return testter_name;
     }
 
-    public void setTestMan(String testMan) {
-        this.testMan = testMan;
+    public void setTestter_name(String testter_name) {
+        this.testter_name = testter_name;
     }
 
-    public String getExploitMan() {
-        return exploitMan;
+    public String getSubmitter_name() {
+        return submitter_name;
     }
 
-    public void setExploitMan(String exploitMan) {
-        this.exploitMan = exploitMan;
-    }
-
-    public String getAutorizedTime() {
-        return autorizedTime;
-    }
-
-    public void setAutorizedTime(String autorizedTime) {
-        this.autorizedTime = autorizedTime;
+    public void setSubmitter_name(String submitter_name) {
+        this.submitter_name = submitter_name;
     }
 
     public String getFunctionModule() {
-        return functionModule;
+        return test_app;
     }
 
     public void setFunctionModule(String functionModule) {
-        this.functionModule = functionModule;
+        this.test_app = functionModule;
     }
 
-    public String getAutorizedMan() {
-        return autorizedMan;
+    public String getDevelop_name() {
+        return develop_name;
     }
 
-    public void setAutorizedMan(String autorizedMan) {
-        this.autorizedMan = autorizedMan;
+    public void setDevelop_name(String develop_name) {
+        this.develop_name = develop_name;
     }
 
     public String getCorrelationUseCase() {
-        return correlationUseCase;
+        return header_name;
     }
 
     public void setCorrelationUseCase(String correlationUseCase) {
-        this.correlationUseCase = correlationUseCase;
+        this.header_name = correlationUseCase;
     }
 
     public String getFunctionCharacter() {
@@ -138,6 +188,38 @@ public class UseCase {
 
     public void setFunctionCharacter(String functionCharacter) {
         this.functionCharacter = functionCharacter;
+    }
+
+    public int getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(int start_time) {
+        this.start_time = start_time;
+    }
+
+    public int getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(int end_time) {
+        this.end_time = end_time;
+    }
+
+    public int getTest_time() {
+        return test_time;
+    }
+
+    public void setTest_time(int test_time) {
+        this.test_time = test_time;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getTextAim() {
@@ -180,12 +262,12 @@ public class UseCase {
         Scene = scene;
     }
 
-    public String getOperationSequence() {
-        return operationSequence;
+    public String getContent() {
+        return content;
     }
 
-    public void setOperationSequence(String operationSequence) {
-        this.operationSequence = operationSequence;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getOperationDescription() {
@@ -220,19 +302,11 @@ public class UseCase {
         this.expectedOutcome = expectedOutcome;
     }
 
-    public String getTextState() {
-        return textState;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setTextState(String textState) {
-        this.textState = textState;
-    }
-
-    public String getPrincipal() {
-        return principal;
-    }
-
-    public void setPrincipal(String principal) {
-        this.principal = principal;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }
