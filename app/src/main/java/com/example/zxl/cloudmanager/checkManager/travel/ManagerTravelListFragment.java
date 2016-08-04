@@ -20,8 +20,10 @@ import com.example.zxl.cloudmanager.MyTravelDetailFragment;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.checkManager.leave.LeaveDeallFragment;
+import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Leave;
+import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Travel;
 import com.example.zxl.cloudmanager.model.TravelLab;
 import com.loopj.android.http.AsyncHttpClient;
@@ -40,7 +42,7 @@ import cz.msebera.android.httpclient.Header;
  * Created by ZXL on 2016/7/13.
  */
 public class ManagerTravelListFragment extends ListFragment {
-    private static final String TAG = "CMTravelFragment";
+    private static final String TAG = "MTravelListFragment";
     private ArrayList<Travel> travels = new ArrayList<Travel>();
     private Button mSearchBtn;
     private Fragment mFragment;
@@ -49,7 +51,9 @@ public class ManagerTravelListFragment extends ListFragment {
     public static final int REFRESH_DELAY = 4000;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
-    private RequestParams mParams;
+    private RequestParams mParams = new RequestParams();
+    private JSONObject keyObj = new JSONObject();
+    private String key = "";
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -57,6 +61,37 @@ public class ManagerTravelListFragment extends ListFragment {
         setHasOptionsMenu(true);
         mFragment = this;
 
+        saveInstanceState = getArguments();
+        if (null == saveInstanceState) {
+            Log.d(TAG, "没有选择条件");
+        } else {
+            try {
+                if (null != saveInstanceState.getString(Link.mem_name)) {
+                    keyObj.put(Link.mem_name, saveInstanceState.getInt(Link.mem_name));
+                }
+                if (-1 != saveInstanceState.getInt(Link.start_time_s)) {
+                    keyObj.put(Link.start_time_s, saveInstanceState.getInt(Link.start_time_s));
+                }
+                if (-1 != saveInstanceState.getInt(Link.start_time_e)) {
+                    keyObj.put(Link.start_time_e, saveInstanceState.getInt(Link.start_time_e));
+                }
+                if (-1 != saveInstanceState.getInt(Link.over_time_s)) {
+                    keyObj.put(Link.over_time_s, saveInstanceState.getInt(Link.over_time_s));
+                }
+                if (-1 != saveInstanceState.getInt(Link.over_time_e)) {
+                    keyObj.put(Link.over_time_e, saveInstanceState.getInt(Link.over_time_e));
+                }
+                if (-1 != saveInstanceState.getInt(Link.status)) {
+                    keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
+                }
+
+                key = DESCryptor.Encryptor(keyObj.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            mParams.put("key", key);
+            Log.d(TAG, "key: " + key);
+        }
 
         mHttpc.post("http://192.168.1.101/yunmgr_v1.0/api/uc.php?app=manage_trip&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override

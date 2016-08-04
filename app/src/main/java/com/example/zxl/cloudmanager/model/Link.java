@@ -10,9 +10,16 @@ public class Link {
 
     public static final String get_List = "get_list";
 
-    public static final String mem_name = "mem_name";
-    public static final String leave_type = "leave_type";
-    public static final String status = "status";
-    public static final String start_time = "start_time";
-    public static final String end_time = "end_time";
+    //manage_leave
+    public static final String mem_name = "mem_name";//员工姓名
+    public static final String leave_type = "leave_type";//请假类型
+    public static final String status = "status";//状态
+    public static final String start_time = "start_time";//开始时间
+    public static final String end_time = "end_time";//结束时间
+
+    //manage_trip
+    public static final String start_time_s = "start_time_s";//开始时间(小)
+    public static final String start_time_e = "start_time_e";//开始时间(大)
+    public static final String over_time_s = "over_time_s";//回归时间（小）
+    public static final String over_time_e = "over_time_e";//回归时间（大）
 }
