@@ -112,9 +112,9 @@ public class LeaveListFragment extends Fragment {
             Log.d(TAG, "key: " + key);
         }
 
-        String url = Link.API + Link.manage_Leave + Link.get_List;
+        String url = Link.localhost + Link.manage_Leave + Link.get_List;
 
-        mHttpc.post(Link.API + "manage_leave&act=get_list" , mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + "manage_leave&act=get_list" , mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 if (statusCode == 200) {

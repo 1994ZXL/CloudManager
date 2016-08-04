@@ -15,10 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
-import com.example.zxl.cloudmanager.checkManager.leave.LeaveDeallFragment;
 import com.example.zxl.cloudmanager.model.Check;
-import com.example.zxl.cloudmanager.model.CheckLab;
-import com.example.zxl.cloudmanager.model.Leave;
 import com.example.zxl.cloudmanager.model.Link;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -28,9 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
@@ -81,7 +76,7 @@ public class ManagerCheckListFragment extends Fragment {
             }
         });
 
-        mHttpc.post(Link.API + "manage_puncher&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + "manage_puncher&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 if (statusCode == 200) {

@@ -4,10 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,16 +12,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.zxl.cloudmanager.MyTravelDetailFragment;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
-import com.example.zxl.cloudmanager.checkManager.leave.LeaveDeallFragment;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
-import com.example.zxl.cloudmanager.model.Leave;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Travel;
-import com.example.zxl.cloudmanager.model.TravelLab;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -67,7 +59,7 @@ public class ManagerTravelListFragment extends ListFragment {
         } else {
             try {
                 if (null != saveInstanceState.getString(Link.mem_name)) {
-                    keyObj.put(Link.mem_name, saveInstanceState.getInt(Link.mem_name));
+                    keyObj.put(Link.mem_name, saveInstanceState.getString(Link.mem_name));
                 }
                 if (-1 != saveInstanceState.getInt(Link.start_time_s)) {
                     keyObj.put(Link.start_time_s, saveInstanceState.getInt(Link.start_time_s));
@@ -93,7 +85,7 @@ public class ManagerTravelListFragment extends ListFragment {
             Log.d(TAG, "key: " + key);
         }
 
-        mHttpc.post(Link.API + "manage_trip&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + "manage_trip&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 try {

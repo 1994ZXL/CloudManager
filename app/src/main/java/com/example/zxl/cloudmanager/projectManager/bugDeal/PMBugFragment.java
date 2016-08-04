@@ -53,7 +53,7 @@ public class PMBugFragment extends Fragment {
     private Button mSearchBtn;
 
     private static final String SEARCH_KEY = "search_key";
-    private static final String TAG = "MyBugFragment";
+    private static final String TAG = "PMBugFragment";
     private int searchKey;
 
     private PullToRefreshView mPullToRefreshView;
@@ -123,7 +123,7 @@ public class PMBugFragment extends Fragment {
             }
         });
 
-        mHttpc.post(Link.API + "pm_bug&act=get_list" , mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + "pm_bug&act=get_list" , mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 if (statusCode == 200) {
@@ -207,13 +207,12 @@ public class PMBugFragment extends Fragment {
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             Bug bug = bugs.get(i);
 
-            viewHolder.mFunctionModuel.setText(bug.getFunctionModel());
+            viewHolder.mFunctionModuel.setText(bug.getProject_name());
             viewHolder.mBugVersion.setText(bug.getLevel());
             viewHolder.mBugState.setText(bug.getStatus());
             viewHolder.mUseCaseNumber.setText(bug.getMem_name());
-            viewHolder.mFoundTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(bug.getSubmit_time_start())
-                    + "--"
-                    + DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(bug.getModify_time_end()));
+            viewHolder.mFoundTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(bug.getSubmit_time()));
+
 
             viewHolder.itemView.setTag(bugs.get(i));
         }

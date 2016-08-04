@@ -13,7 +13,8 @@ public class Bug {
     private String project_name;
     private String mem_name;
     private int case_mode; //用例模型
-    private String entranceMode;
+    private int submit_time;
+    private int modify_time;
     private int submit_time_start; //发现时间 开始
     private int submit_time_end; //发现时间 结束
     private String submitter; //发现人
@@ -30,10 +31,12 @@ public class Bug {
     private static final String JSON_STATE = "status";
     private static final String JSON_PROJECT = "project_name";
     private static final String JSON_NAME = "mem_name";
+    private static final String JSON_SUBMIT = "submit_time";
     private static final String JSON_SUBMIT_START = "submit_time_start";
     private static final String JSON_SUBMIT_END = "submit_time_end";
     private static final String JSON_MODIFY_START = "modify_time_start";
     private static final String JSON_MODIFY_END = "modify_time_end";
+    private static final String JSON_MODIFY = "modify_tine";
     private static final String JSON_CASE_MODE = "case_mode";
     private static final String JSON_SUBMITTER = "submitter";
     private static final String JSON_MODIFIER = "modifier" ;
@@ -46,7 +49,7 @@ public class Bug {
         setProject_name(content[4]);
         setMem_name(content[5]);
         //setCase_mode(content[6]);
-        setEntranceMode(content[7]);
+        //setSubmit_time(content[7]);
         //setSubmit_time(content[8]);
         setSubmitter(content[9]);
         /*setModify_time(content[10]);*/
@@ -77,6 +80,10 @@ public class Bug {
             submitter = json.getString(JSON_SUBMITTER);
         if (json.has(JSON_MODIFIER))
             modifier = json.getString(JSON_MODIFIER);
+        if (json.has(JSON_SUBMIT))
+            submit_time = json.getInt(JSON_SUBMIT);
+        if (json.has(JSON_MODIFY))
+            modify_time = json.getInt(JSON_MODIFY);
     }
 
     public JSONObject toJSON() throws JSONException{
@@ -92,6 +99,8 @@ public class Bug {
         json.put(JSON_PROJECT, project_name);
         json.put(JSON_SUBMITTER, submitter);
         json.put(JSON_MODIFIER, modifier);
+        json.put(JSON_SUBMIT, submit_time);
+        json.put(JSON_MODIFY, modify_time);
         return json;
     }
     public String getFunctionModel() {
@@ -127,12 +136,20 @@ public class Bug {
         this.case_mode = case_mode;
     }
 
-    public String getEntranceMode() {
-        return entranceMode;
+    public int getSubmit_time() {
+        return submit_time;
     }
 
-    public void setEntranceMode(String entranceMode) {
-        this.entranceMode = entranceMode;
+    public void setSubmit_time(int submit_time) {
+        this.submit_time = submit_time;
+    }
+
+    public int getModify_time() {
+        return modify_time;
+    }
+
+    public void setModify_time(int modify_time) {
+        this.modify_time = modify_time;
     }
 
     public String getSubmitter() {

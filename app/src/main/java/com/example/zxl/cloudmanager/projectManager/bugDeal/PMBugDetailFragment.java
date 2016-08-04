@@ -64,20 +64,16 @@ public class PMBugDetailFragment extends Fragment {
     }
 
     private void contorl() {
-        mFunctionModul.setText(sBug.getFunctionModel());
+        mFunctionModul.setText(sBug.getProject_name());
         mBugNumber.setText(sBug.getBugNumber());
         mBugVersion.setText(sBug.getLevel());
         mBugState.setText(sBug.getStatus());
         mBugContent.setText(sBug.getProject_name());
         mUseCaseNumber.setText(sBug.getMem_name());
         mOperationMode.setText(sBug.getCase_mode());
-        mEntranceMode.setText(sBug.getEntranceMode());
-        mFoundTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sBug.getSubmit_time_start())
-                + "--"
-                + DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sBug.getModify_time_end()));
-        mEditTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sBug.getModify_time_start())
-                + "--"
-                + DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sBug.getModify_time_end()));
+        //mEntranceMode.setText(sBug.getSubmit_time());
+        mFoundTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sBug.getSubmit_time()));
+        mEditTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sBug.getModify_time()));
         mFoundMan.setText(sBug.getSubmitter());
         mEditMan.setText(sBug.getEditMan());
         mUnderProgram.setText(sBug.getUnderProgram());

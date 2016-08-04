@@ -85,6 +85,7 @@ public class LeaveDeallFragment extends Fragment {
         name.setText(mLeave.getMem_name());
         leaveKind.setText(mLeave.getLeave_type());
         leaveBeginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mLeave.getStart_time()));
+        Log.d(TAG, "beginTime: " + leaveBeginTime.getText());
         leaveEndTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mLeave.getEnd_time()));
         leaveSuggestion.setText(mLeave.getHandle_opinion());
         leaveReason.setText(mLeave.getLeave_reason());

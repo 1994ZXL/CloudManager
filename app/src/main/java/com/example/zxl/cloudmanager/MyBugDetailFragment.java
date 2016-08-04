@@ -69,7 +69,7 @@ public class MyBugDetailFragment extends Fragment {
         mBugContent.setText(sBug.getProject_name());
         mUseCaseNumber.setText(sBug.getMem_name());
         mOperationMode.setText(sBug.getCase_mode());
-        mEntranceMode.setText(sBug.getEntranceMode());
+        mEntranceMode.setText(sBug.getSubmit_time());
         mFoundTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sBug.getSubmit_time_start())
                 + "--"
                 + DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sBug.getModify_time_end()));

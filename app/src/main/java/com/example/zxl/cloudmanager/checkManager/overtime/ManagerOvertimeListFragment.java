@@ -78,7 +78,7 @@ public class ManagerOvertimeListFragment extends Fragment {
         });
 
         overTimes.add(new OverTime());
-        mHttpc.post(Link.API + "manage_work&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + "manage_work&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 try {
