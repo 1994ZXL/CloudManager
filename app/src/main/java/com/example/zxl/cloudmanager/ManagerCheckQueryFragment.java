@@ -155,7 +155,11 @@ public class ManagerCheckQueryFragment extends Fragment {
         mQueryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                search();
+                Fragment fragment = new ManagerCheckListFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.addToBackStack(null);
+                transaction.replace(R.id.blankActivity, fragment);
+                transaction.commit();
             }
         });
 
@@ -193,19 +197,6 @@ public class ManagerCheckQueryFragment extends Fragment {
     private void updateCheckOffDate(){
         cotime = android.text.format.DateFormat.format("yyyy.M.dd", checkOffTime).toString();
         mEndTimeBtn.setText(cotime);
-    }
-
-    private void search() {
-        mChecks = CheckLab.newInstance(mFragment.getActivity()).get();
-        for (index = 0; index < mChecks.size(); index++){
-
-        }
-
-        Fragment fragment = new ManagerCheckListFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.addToBackStack(null);
-        transaction.replace(R.id.blankActivity, fragment);
-        transaction.commit();
     }
 
     public static Date ConverToDate(String strDate) throws Exception

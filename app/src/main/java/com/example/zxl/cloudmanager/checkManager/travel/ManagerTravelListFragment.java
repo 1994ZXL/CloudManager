@@ -41,7 +41,7 @@ import cz.msebera.android.httpclient.Header;
  */
 public class ManagerTravelListFragment extends ListFragment {
     private static final String TAG = "CMTravelFragment";
-    private ArrayList<Travel> travels;
+    private ArrayList<Travel> travels = new ArrayList<Travel>();
     private Button mSearchBtn;
     private Fragment mFragment;
 
@@ -57,11 +57,8 @@ public class ManagerTravelListFragment extends ListFragment {
         setHasOptionsMenu(true);
         mFragment = this;
 
-        travels = TravelLab.newInstance(getActivity()).getTravels();
-        TravelAdapter adapter = new TravelAdapter(travels);
-        setListAdapter(adapter);
 
-        mHttpc.post("http://192.168.1.109/yunmgr_v1.0/api/uc.php?app=manage_trip&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post("http://192.168.1.101/yunmgr_v1.0/api/uc.php?app=manage_trip&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 try {
@@ -72,7 +69,6 @@ public class ManagerTravelListFragment extends ListFragment {
                             travels.add(new Travel(array.getJSONObject(i)));
                         }
                         Log.d(TAG, "Travels: " + travels);
-                        travels = TravelLab.newInstance(getActivity()).getTravels();
                         TravelAdapter adapter = new TravelAdapter(travels);
                         setListAdapter(adapter);
 

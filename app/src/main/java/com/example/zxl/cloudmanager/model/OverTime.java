@@ -11,7 +11,7 @@ public class OverTime {
     private String pm_id; //项目
     private int start_time; //加班开始时间
     private int end_time; //加班结束时间
-    private int status; //状态 0：等待，1：确认，2：取消
+    private int status; //状态 1:等待,2:确认,3:取消，默认为等待
     private String thisTime;
     private String work_reason; //加班原因
     private String totalTime;

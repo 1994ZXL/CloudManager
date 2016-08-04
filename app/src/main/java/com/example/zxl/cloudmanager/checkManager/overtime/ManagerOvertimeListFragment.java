@@ -77,7 +77,7 @@ public class ManagerOvertimeListFragment extends Fragment {
         });
 
         overTimes.add(new OverTime());
-        mHttpc.post("http://192.168.1.109/yunmgr_v1.0/api/uc.php?app=manage_work&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post("http://192.168.1.101/yunmgr_v1.0/api/uc.php?app=manage_work&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 try {

@@ -45,7 +45,7 @@ public class ManagerCheckListFragment extends Fragment {
 
     public static final int REFRESH_DELAY = 4000;
     private PullToRefreshView mPullToRefreshView;
-    private static final String TAG = "MyCheckFragment";
+    private static final String TAG = "MCListFragment";
 
     private Fragment mFragment;
 
@@ -59,20 +59,6 @@ public class ManagerCheckListFragment extends Fragment {
         mFragment = this;
     }
 
-    private String getTime1() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String date = formatter.format(curDate);
-        return date;
-    }
-
-    private String getTime2() {
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm:ss");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String date = formatter.format(curDate);
-        return date;
-    }
-
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View v = layoutInflater.inflate(R.layout.main_fragment_manager_check_list, parent, false);
@@ -80,8 +66,6 @@ public class ManagerCheckListFragment extends Fragment {
         Log.d(TAG, "调用了一次");
 
         getActivity().getActionBar().setTitle("考勤主管");
-
-        checks = CheckLab.newInstance(mFragment.getActivity()).get();
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -96,7 +80,7 @@ public class ManagerCheckListFragment extends Fragment {
             }
         });
 
-        mHttpc.post("http://192.168.1.109/yunmgr_v1.0/api/uc.php?app=manage_puncher&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post("http://192.168.1.101/yunmgr_v1.0/api/uc.php?app=manage_puncher&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 if (statusCode == 200) {
