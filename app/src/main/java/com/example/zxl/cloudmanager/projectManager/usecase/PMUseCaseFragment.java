@@ -23,6 +23,7 @@ import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.UseCase;
 import com.example.zxl.cloudmanager.model.UseCaseLab;
+import com.example.zxl.cloudmanager.projectManager.bugDeal.PMBugDetailFragment;
 import com.example.zxl.cloudmanager.publicSearch.usecase.UsecaseFragment;
 
 import java.util.ArrayList;
@@ -96,7 +97,7 @@ public class PMUseCaseFragment extends Fragment {
         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
             @Override
             public void onItemClick(View view, Object data) {
-                Fragment fragment = MyUseCaseDetailFragment.newInstance(data);
+                Fragment fragment = PMUseCaseDetailFragment.newInstance(data);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
