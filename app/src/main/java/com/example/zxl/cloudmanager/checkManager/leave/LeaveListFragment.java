@@ -114,7 +114,7 @@ public class LeaveListFragment extends Fragment {
 
         String url = Link.API + Link.manage_Leave + Link.get_List;
 
-        mHttpc.post("http://192.168.1.101/yunmgr_v1.0/api/uc.php?app=manage_leave&act=get_list" , mParams, new JsonHttpResponseHandler() {
+        mHttpc.post("http://192.168.1.109/yunmgr_v1.0/api/uc.php?app=manage_leave&act=get_list" , mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 if (statusCode == 200) {

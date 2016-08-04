@@ -80,7 +80,7 @@ public class ManagerCheckListFragment extends Fragment {
             }
         });
 
-        mHttpc.post("http://192.168.1.101/yunmgr_v1.0/api/uc.php?app=manage_puncher&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post("http://192.168.1.109/yunmgr_v1.0/api/uc.php?app=manage_puncher&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 if (statusCode == 200) {

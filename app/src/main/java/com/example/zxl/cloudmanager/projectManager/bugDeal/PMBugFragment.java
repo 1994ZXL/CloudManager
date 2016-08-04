@@ -165,9 +165,9 @@ public class PMBugFragment extends Fragment {
 
             viewHolder.mFunctionModuel.setText(bug.getFunctionModel());
             viewHolder.mBugVersion.setText(bug.getBugVersion());
-            viewHolder.mBugState.setText(bug.getBugState());
+            viewHolder.mBugState.setText(bug.getStatus());
             viewHolder.mUseCaseNumber.setText(bug.getUseCaseNumber());
-            viewHolder.mFoundTime.setText(bug.getFoundTime());
+            viewHolder.mFoundTime.setText(bug.getSubmit_time());
 
             viewHolder.itemView.setTag(bugs.get(i));
         }

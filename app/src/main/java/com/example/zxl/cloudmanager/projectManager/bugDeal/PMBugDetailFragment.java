@@ -65,14 +65,14 @@ public class PMBugDetailFragment extends Fragment {
         mFunctionModul.setText(sBug.getFunctionModel());
         mBugNumber.setText(sBug.getBugNumber());
         mBugVersion.setText(sBug.getBugVersion());
-        mBugState.setText(sBug.getBugState());
+        mBugState.setText(sBug.getStatus());
         mBugContent.setText(sBug.getBugContent());
         mUseCaseNumber.setText(sBug.getUseCaseNumber());
         mOperationMode.setText(sBug.getOperationMode());
         mEntranceMode.setText(sBug.getEntranceMode());
-        mFoundTime.setText(sBug.getFoundTime());
+        mFoundTime.setText(sBug.getSubmit_time());
         mFoundMan.setText(sBug.getFoundMan());
-        mEditTime.setText(sBug.getEditTime());
+        mEditTime.setText(sBug.getModify_time());
         mEditMan.setText(sBug.getEditMan());
         mUnderProgram.setText(sBug.getUnderProgram());
     }

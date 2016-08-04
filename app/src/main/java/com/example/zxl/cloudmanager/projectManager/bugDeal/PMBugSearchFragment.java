@@ -1,4 +1,4 @@
-package com.example.zxl.cloudmanager.publicSearch.bug;
+package com.example.zxl.cloudmanager.projectManager.bugDeal;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -22,7 +22,7 @@ import com.example.zxl.cloudmanager.model.BugLab;
 import java.util.ArrayList;
 
 
-public class BugSearchFragment extends Fragment {
+public class PMBugSearchFragment extends Fragment {
     private  static ArrayList<Bug> sBugs = new ArrayList<Bug>();
     private static final String SEARCH_KEY = "search_key";
     private static final String TAG = "BugSearchFragment";
@@ -53,7 +53,7 @@ public class BugSearchFragment extends Fragment {
     private int index;
     private Fragment mFragment;
 
-    public BugSearchFragment() {
+    public PMBugSearchFragment() {
         // Required empty public constructor
     }
 
@@ -85,7 +85,21 @@ public class BugSearchFragment extends Fragment {
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                search();
+                Fragment fragment = new PMBugFragment();
+                /*Bundle bundle = new Bundle();
+                bundle.putInt(SEARCH_KEY, index);
+                fragment.setArguments(bundle);*/
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.replace(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
             }
         });
 
@@ -179,7 +193,7 @@ public class BugSearchFragment extends Fragment {
         });
     }
 
-    private void search() {
+    /*private void search() {
         sBugs = BugLab.newInstance(mFragment.getActivity()).get();
         for (index = 0; index < sBugs.size(); index++ ) {
             if (projectName.equals(sBugs.get(index).getFunctionModel()) && finder.equals(sBugs.get(index).getFoundMan())
@@ -202,5 +216,5 @@ public class BugSearchFragment extends Fragment {
                 }
             }
         }
-    }
+    }*/
 }

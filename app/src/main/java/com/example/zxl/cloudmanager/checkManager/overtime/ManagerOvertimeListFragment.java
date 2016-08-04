@@ -77,7 +77,7 @@ public class ManagerOvertimeListFragment extends Fragment {
         });
 
         overTimes.add(new OverTime());
-        mHttpc.post("http://192.168.1.101/yunmgr_v1.0/api/uc.php?app=manage_work&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post("http://192.168.1.109/yunmgr_v1.0/api/uc.php?app=manage_work&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 try {
@@ -158,7 +158,7 @@ public class ManagerOvertimeListFragment extends Fragment {
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             OverTime mOverTime = overTimes.get(i);
             viewHolder.mOvertimeDateBegin.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mOverTime.getStart_time()));
-            viewHolder.mOvertimeDateEnd.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mOverTime.getStart_time()));
+
             viewHolder.mOvertimeName.setText(mOverTime.getMem_id());
             viewHolder.mProject.setText(mOverTime.getPm_id());
            // viewHolder.itemView.setTag(overTimes.get(i));

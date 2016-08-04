@@ -12,7 +12,7 @@ public class ProjectBugDealActivity extends SingleFragmentActivity {
     }*/
     @Override
     protected Fragment createFragment(){
-        return new BugSearchFragment();
+        return new PMBugSearchFragment();
     }
 
 }

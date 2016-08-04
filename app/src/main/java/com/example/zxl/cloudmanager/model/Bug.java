@@ -6,14 +6,14 @@ package com.example.zxl.cloudmanager.model;
 public class Bug {
     private String bugNumber;
     private String bugVersion;
-    private String bugState;
+    private int status; //bug状态
     private String bugContent;
     private String useCaseNumber;
     private String operationMode;
     private String entranceMode;
-    private String foundTime;
+    private int submit_time; //发现时间
     private String foundMan;
-    private String editTime;
+    private int modify_time; //修改时间
     private String editMan;
     private String underProgram;
 
@@ -25,14 +25,14 @@ public class Bug {
         setFunctionModel(content[0]);
         setBugNumber(content[1]);
         setBugVersion(content[2]);
-        setBugState(content[3]);
+        //setStatus(content[3]);
         setBugContent(content[4]);
         setUseCaseNumber(content[5]);
         setOperationMode(content[6]);
         setEntranceMode(content[7]);
-        setFoundTime(content[8]);
+        //setSubmit_time(content[8]);
         setFoundMan(content[9]);
-        setEditTime(content[10]);
+        /*setModify_time(content[10]);*/
         setEditMan(content[11]);
         setUnderProgram(content[12]);
     }
@@ -85,14 +85,6 @@ public class Bug {
         this.foundMan = foundMan;
     }
 
-    public String getEditTime() {
-        return editTime;
-    }
-
-    public void setEditTime(String editTime) {
-        this.editTime = editTime;
-    }
-
     public String getEditMan() {
         return editMan;
     }
@@ -117,13 +109,6 @@ public class Bug {
         this.bugVersion = bugVersion;
     }
 
-    public String getBugState() {
-        return bugState;
-    }
-
-    public void setBugState(String bugState) {
-        this.bugState = bugState;
-    }
 
     public String getUseCaseNumber() {
         return useCaseNumber;
@@ -133,11 +118,42 @@ public class Bug {
         this.useCaseNumber = useCaseNumber;
     }
 
-    public String getFoundTime() {
-        return foundTime;
+    public String getStatus() {
+        if (status == 1) {
+            return "待确认";
+        } else if (status == 2) {
+            return "已排除";
+        } else if (status == 3) {
+            return "不解决";
+        } else if (status == 4) {
+            return "待修改";
+        } else if (status == 5) {
+            return "待测试";
+        } else if (status == 6) {
+            return "已通过";
+        }else if (status == 7) {
+            return "已修改";
+        }
+        return null;
     }
 
-    public void setFoundTime(String foundTime) {
-        this.foundTime = foundTime;
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getSubmit_time() {
+        return submit_time;
+    }
+
+    public void setSubmit_time(int submit_time) {
+        this.submit_time = submit_time;
+    }
+
+    public int getModify_time() {
+        return modify_time;
+    }
+
+    public void setModify_time(int modify_time) {
+        this.modify_time = modify_time;
     }
 }

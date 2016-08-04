@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -21,12 +20,9 @@ import android.widget.TextView;
 
 
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
-import com.example.zxl.cloudmanager.leave.LeaveSearchActivity;
 import com.example.zxl.cloudmanager.model.Bug;
 import com.example.zxl.cloudmanager.model.BugLab;
-import com.example.zxl.cloudmanager.myMission.MyMissionSearchFragment;
 import com.example.zxl.cloudmanager.publicSearch.bug.BugSearchFragment;
-import com.example.zxl.cloudmanager.publicSearch.usecase.UsecaseFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -168,9 +164,9 @@ public class MyBugFragment extends Fragment {
 
             viewHolder.mFunctionModuel.setText(bug.getFunctionModel());
             viewHolder.mBugVersion.setText(bug.getBugVersion());
-            viewHolder.mBugState.setText(bug.getBugState());
+            viewHolder.mBugState.setText(bug.getStatus());
             viewHolder.mUseCaseNumber.setText(bug.getUseCaseNumber());
-            viewHolder.mFoundTime.setText(bug.getFoundTime());
+            viewHolder.mFoundTime.setText(bug.getSubmit_time());
 
             viewHolder.itemView.setTag(bugs.get(i));
         }
