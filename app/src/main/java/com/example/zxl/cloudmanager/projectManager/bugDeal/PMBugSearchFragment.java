@@ -196,9 +196,9 @@ public class PMBugSearchFragment extends Fragment {
     /*private void search() {
         sBugs = BugLab.newInstance(mFragment.getActivity()).get();
         for (index = 0; index < sBugs.size(); index++ ) {
-            if (projectName.equals(sBugs.get(index).getFunctionModel()) && finder.equals(sBugs.get(index).getFoundMan())
+            if (projectName.equals(sBugs.get(index).getFunctionModel()) && finder.equals(sBugs.get(index).getSubmitter())
                     && reviser.equals(sBugs.get(index).getEditMan()) && bugState.equals(sBugs.get(index).getStatus())
-                    && bugLevel.equals(sBugs.get(index).getBugVersion())) {
+                    && bugLevel.equals(sBugs.get(index).getLevel())) {
                 Fragment fragment = new MyBugFragment();
                 Bundle bundle = new Bundle();
                 bundle.putInt(SEARCH_KEY, index);

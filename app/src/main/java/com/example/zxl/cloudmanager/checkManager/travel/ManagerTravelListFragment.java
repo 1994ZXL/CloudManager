@@ -93,7 +93,7 @@ public class ManagerTravelListFragment extends ListFragment {
             Log.d(TAG, "key: " + key);
         }
 
-        mHttpc.post("http://192.168.1.101/yunmgr_v1.0/api/uc.php?app=manage_trip&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.API + "manage_trip&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 try {

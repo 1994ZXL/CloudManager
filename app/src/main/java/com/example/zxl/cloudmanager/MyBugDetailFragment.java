@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.model.Bug;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 
 /**
  * Created by ZXL on 2016/7/22.
@@ -63,15 +64,20 @@ public class MyBugDetailFragment extends Fragment {
     private void contorl() {
         mFunctionModul.setText(sBug.getFunctionModel());
         mBugNumber.setText(sBug.getBugNumber());
-        mBugVersion.setText(sBug.getBugVersion());
+        mBugVersion.setText(sBug.getLevel());
         mBugState.setText(sBug.getStatus());
-        mBugContent.setText(sBug.getBugContent());
-        mUseCaseNumber.setText(sBug.getUseCaseNumber());
-        mOperationMode.setText(sBug.getOperationMode());
+        mBugContent.setText(sBug.getProject_name());
+        mUseCaseNumber.setText(sBug.getMem_name());
+        mOperationMode.setText(sBug.getCase_mode());
         mEntranceMode.setText(sBug.getEntranceMode());
-        mFoundTime.setText(sBug.getSubmit_time());
-        mFoundMan.setText(sBug.getFoundMan());
-        mEditTime.setText(sBug.getModify_time());
+        mFoundTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sBug.getSubmit_time_start())
+                + "--"
+                + DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sBug.getModify_time_end()));
+        mFoundMan.setText(sBug.getSubmitter());
+        mEditTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sBug.getModify_time_start())
+                + "--"
+                + DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sBug.getModify_time_end()));
+        mFoundMan.setText(sBug.getSubmitter());
         mEditMan.setText(sBug.getEditMan());
         mUnderProgram.setText(sBug.getUnderProgram());
     }

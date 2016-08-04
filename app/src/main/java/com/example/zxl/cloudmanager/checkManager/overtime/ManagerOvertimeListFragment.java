@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
+import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.OverTime;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -77,7 +78,7 @@ public class ManagerOvertimeListFragment extends Fragment {
         });
 
         overTimes.add(new OverTime());
-        mHttpc.post("http://192.168.1.101/yunmgr_v1.0/api/uc.php?app=manage_work&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.API + "manage_work&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 try {

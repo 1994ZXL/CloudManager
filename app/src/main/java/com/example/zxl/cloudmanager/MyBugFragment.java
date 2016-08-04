@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.Bug;
 import com.example.zxl.cloudmanager.model.BugLab;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.publicSearch.bug.BugSearchFragment;
 
 import java.util.ArrayList;
@@ -163,10 +164,13 @@ public class MyBugFragment extends Fragment {
             Bug bug = bugs.get(i);
 
             viewHolder.mFunctionModuel.setText(bug.getFunctionModel());
-            viewHolder.mBugVersion.setText(bug.getBugVersion());
+            viewHolder.mBugVersion.setText(bug.getLevel());
             viewHolder.mBugState.setText(bug.getStatus());
-            viewHolder.mUseCaseNumber.setText(bug.getUseCaseNumber());
-            viewHolder.mFoundTime.setText(bug.getSubmit_time());
+            viewHolder.mUseCaseNumber.setText(bug.getMem_name());
+            viewHolder.mFoundTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(bug.getSubmit_time_start())
+                    + "--"
+                    + DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(bug.getModify_time_end()));
+
 
             viewHolder.itemView.setTag(bugs.get(i));
         }

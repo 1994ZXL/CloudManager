@@ -1,42 +1,99 @@
 package com.example.zxl.cloudmanager.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by ZXL on 2016/7/13.
  */
 public class Bug {
     private String bugNumber;
-    private String bugVersion;
+    private int level; //bug等级
     private int status; //bug状态
-    private String bugContent;
-    private String useCaseNumber;
-    private String operationMode;
+    private String project_name;
+    private String mem_name;
+    private int case_mode; //用例模型
     private String entranceMode;
-    private int submit_time; //发现时间
-    private String foundMan;
-    private int modify_time; //修改时间
-    private String editMan;
+    private int submit_time_start; //发现时间 开始
+    private int submit_time_end; //发现时间 结束
+    private String submitter; //发现人
+    private int modify_time_start; //修改时间 开始
+    private int modify_time_end; //修改时间 结束
+    private String modifier; //修改人
     private String underProgram;
 
     private String functionModel;
 
     public Bug(){}
 
+    private static final String JSON_LEVEL = "level";
+    private static final String JSON_STATE = "status";
+    private static final String JSON_PROJECT = "project_name";
+    private static final String JSON_NAME = "mem_name";
+    private static final String JSON_SUBMIT_START = "submit_time_start";
+    private static final String JSON_SUBMIT_END = "submit_time_end";
+    private static final String JSON_MODIFY_START = "modify_time_start";
+    private static final String JSON_MODIFY_END = "modify_time_end";
+    private static final String JSON_CASE_MODE = "case_mode";
+    private static final String JSON_SUBMITTER = "submitter";
+    private static final String JSON_MODIFIER = "modifier" ;
+
     public void setContent(String[] content) {
         setFunctionModel(content[0]);
         setBugNumber(content[1]);
-        setBugVersion(content[2]);
+        //setLevel(content[2]);
         //setStatus(content[3]);
-        setBugContent(content[4]);
-        setUseCaseNumber(content[5]);
-        setOperationMode(content[6]);
+        setProject_name(content[4]);
+        setMem_name(content[5]);
+        //setCase_mode(content[6]);
         setEntranceMode(content[7]);
         //setSubmit_time(content[8]);
-        setFoundMan(content[9]);
+        setSubmitter(content[9]);
         /*setModify_time(content[10]);*/
         setEditMan(content[11]);
         setUnderProgram(content[12]);
     }
 
+    public Bug(JSONObject json) throws JSONException {
+        if (json.has(JSON_LEVEL))
+            level = json.getInt(JSON_LEVEL);
+        if (json.has(JSON_STATE))
+            status = json.getInt(JSON_STATE);
+        if (json.has(JSON_SUBMIT_START))
+            submit_time_start = json.getInt(JSON_SUBMIT_START);
+        if (json.has(JSON_SUBMIT_END))
+            submit_time_end = json.getInt(JSON_SUBMIT_END);
+        if (json.has(JSON_MODIFY_END))
+            modify_time_start = json.getInt(JSON_MODIFY_END);
+        if (json.has(JSON_MODIFY_START))
+            modify_time_end = json.getInt(JSON_MODIFY_START);
+        if (json.has(JSON_CASE_MODE))
+            case_mode = json.getInt(JSON_CASE_MODE);
+        if (json.has(JSON_PROJECT))
+            project_name = json.getString(JSON_PROJECT);
+        if (json.has(JSON_NAME))
+            mem_name = json.getString(JSON_NAME);
+        if (json.has(JSON_SUBMITTER))
+            submitter = json.getString(JSON_SUBMITTER);
+        if (json.has(JSON_MODIFIER))
+            modifier = json.getString(JSON_MODIFIER);
+    }
+
+    public JSONObject toJSON() throws JSONException{
+        JSONObject json = new JSONObject();
+        json.put(JSON_LEVEL, level);
+        json.put(JSON_NAME, status);
+        json.put(JSON_SUBMIT_START, submit_time_start);
+        json.put(JSON_SUBMIT_END, submit_time_end);
+        json.put(JSON_MODIFY_START, modify_time_start);
+        json.put(JSON_MODIFY_END, modify_time_end);
+        json.put(JSON_SUBMITTER, case_mode);
+        json.put(JSON_NAME, mem_name);
+        json.put(JSON_PROJECT, project_name);
+        json.put(JSON_SUBMITTER, submitter);
+        json.put(JSON_MODIFIER, modifier);
+        return json;
+    }
     public String getFunctionModel() {
         return functionModel;
     }
@@ -53,20 +110,21 @@ public class Bug {
         this.bugNumber = bugNumber;
     }
 
-    public String getBugContent() {
-        return bugContent;
+    public String getProject_name() {
+        return project_name;
     }
 
-    public void setBugContent(String bugContent) {
-        this.bugContent = bugContent;
+    public void setProject_name(String project_name) {
+        this.project_name = project_name;
     }
 
-    public String getOperationMode() {
-        return operationMode;
+    public String getCase_mode() {
+        String caseMode = " " + this.case_mode;
+        return caseMode;
     }
 
-    public void setOperationMode(String operationMode) {
-        this.operationMode = operationMode;
+    public void setCase_mode(int case_mode) {
+        this.case_mode = case_mode;
     }
 
     public String getEntranceMode() {
@@ -77,20 +135,20 @@ public class Bug {
         this.entranceMode = entranceMode;
     }
 
-    public String getFoundMan() {
-        return foundMan;
+    public String getSubmitter() {
+        return submitter;
     }
 
-    public void setFoundMan(String foundMan) {
-        this.foundMan = foundMan;
+    public void setSubmitter(String submitter) {
+        this.submitter = submitter;
     }
 
     public String getEditMan() {
-        return editMan;
+        return modifier;
     }
 
     public void setEditMan(String editMan) {
-        this.editMan = editMan;
+        this.modifier = editMan;
     }
 
     public String getUnderProgram() {
@@ -101,21 +159,33 @@ public class Bug {
         this.underProgram = underProgram;
     }
 
-    public String getBugVersion() {
-        return bugVersion;
+    public String getLevel() {
+        if (status == 1) {
+            return "一级";
+        } else if (status == 2) {
+            return "二级";
+        } else if (status == 3) {
+            return "三级";
+        } else if (status == 4) {
+            return "四级";
+        } else if (status == 5) {
+            return "五级";
+        } else if (status == 6) {
+            return "六级";
+        }
+        return null;
     }
 
-    public void setBugVersion(String bugVersion) {
-        this.bugVersion = bugVersion;
+    public void setLevel(int level) {
+        this.level = level;
     }
 
-
-    public String getUseCaseNumber() {
-        return useCaseNumber;
+    public String getMem_name() {
+        return mem_name;
     }
 
-    public void setUseCaseNumber(String useCaseNumber) {
-        this.useCaseNumber = useCaseNumber;
+    public void setMem_name(String mem_name) {
+        this.mem_name = mem_name;
     }
 
     public String getStatus() {
@@ -141,19 +211,35 @@ public class Bug {
         this.status = status;
     }
 
-    public int getSubmit_time() {
-        return submit_time;
+    public int getSubmit_time_start() {
+        return submit_time_start;
     }
 
-    public void setSubmit_time(int submit_time) {
-        this.submit_time = submit_time;
+    public void setSubmit_time_start(int submit_time_start) {
+        this.submit_time_start = submit_time_start;
     }
 
-    public int getModify_time() {
-        return modify_time;
+    public int getSubmit_time_end() {
+        return submit_time_end;
     }
 
-    public void setModify_time(int modify_time) {
-        this.modify_time = modify_time;
+    public void setSubmit_time_end(int submit_time_end) {
+        this.submit_time_end = submit_time_end;
+    }
+
+    public int getModify_time_start() {
+        return modify_time_start;
+    }
+
+    public void setModify_time_start(int modify_time_start) {
+        this.modify_time_start = modify_time_start;
+    }
+
+    public int getModify_time_end() {
+        return modify_time_end;
+    }
+
+    public void setModify_time_end(int modify_time_end) {
+        this.modify_time_end = modify_time_end;
     }
 }

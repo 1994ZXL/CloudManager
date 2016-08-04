@@ -9,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,15 +19,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.zxl.cloudmanager.MyBugDetailFragment;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.Bug;
 import com.example.zxl.cloudmanager.model.BugLab;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
+import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.publicSearch.bug.BugSearchFragment;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ZXL on 2016/7/13.
@@ -47,6 +58,9 @@ public class PMBugFragment extends Fragment {
 
     private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
+
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams = new RequestParams();
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -78,10 +92,10 @@ public class PMBugFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        View v = layoutInflater.inflate(R.layout.main_fragment_my_bug, parent, false);
+        final View v = layoutInflater.inflate(R.layout.main_fragment_my_bug, parent, false);
 
 
-        getActivity().getActionBar().setTitle("我的bug");
+        getActivity().getActionBar().setTitle("bug列表");
 
         saveInstanceState = getArguments();
         if (null == saveInstanceState) {
@@ -108,28 +122,58 @@ public class PMBugFragment extends Fragment {
                 }, REFRESH_DELAY);
             }
         });
-        mRecyclerView = (RecyclerView)v.findViewById(R.id.bug_recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        myAdapter = new MyAdapter(this.getActivity(), bugs);
-        mRecyclerView.setAdapter(myAdapter);
-        mCardView = (CardView)v.findViewById(R.id.fragment_my_bug);
-        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+
+        mHttpc.post(Link.API + "pm_bug&act=get_list" , mParams, new JsonHttpResponseHandler() {
             @Override
-            public void onItemClick(View view, Object data) {
-                Fragment fragment = MyBugDetailFragment.newInstance(data);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
+            public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
+                if (statusCode == 200) {
+                    try {
+                        if (rjo.getBoolean("result")) {
+                            JSONArray array = rjo.getJSONArray("data1");
+                            Log.d(TAG, "array: " + array);
+                            for (int i = 0; i < array.length(); i++) {
+                                bugs.add(new Bug(array.getJSONObject(i)));
+                            }
+
+                            mRecyclerView = (RecyclerView)v.findViewById(R.id.bug_recyclerview);
+                            mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
+                            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                            mRecyclerView.setHasFixedSize(true);
+                            myAdapter = new MyAdapter(mFragment.getActivity(), bugs);
+                            mRecyclerView.setAdapter(myAdapter);
+                            mCardView = (CardView)v.findViewById(R.id.fragment_my_bug);
+                            myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                                @Override
+                                public void onItemClick(View view, Object data) {
+                                    Fragment fragment = PMBugDetailFragment.newInstance(data);
+                                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                    if (!fragment.isAdded()) {
+                                        transaction.addToBackStack(null);
+                                        transaction.hide(mFragment);
+                                        transaction.add(R.id.blankActivity, fragment);
+                                        transaction.commit();
+                                    } else {
+                                        transaction.hide(mFragment);
+                                        transaction.show(fragment);
+                                        transaction.commit();
+                                    }
+                                }
+                            });
+
+                        } else {
+
+                        }
+                    } catch (JSONException e) {
+                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                    }
                 } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
+
                 }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
+
             }
         });
 
@@ -164,10 +208,12 @@ public class PMBugFragment extends Fragment {
             Bug bug = bugs.get(i);
 
             viewHolder.mFunctionModuel.setText(bug.getFunctionModel());
-            viewHolder.mBugVersion.setText(bug.getBugVersion());
+            viewHolder.mBugVersion.setText(bug.getLevel());
             viewHolder.mBugState.setText(bug.getStatus());
-            viewHolder.mUseCaseNumber.setText(bug.getUseCaseNumber());
-            viewHolder.mFoundTime.setText(bug.getSubmit_time());
+            viewHolder.mUseCaseNumber.setText(bug.getMem_name());
+            viewHolder.mFoundTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(bug.getSubmit_time_start())
+                    + "--"
+                    + DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(bug.getModify_time_end()));
 
             viewHolder.itemView.setTag(bugs.get(i));
         }
