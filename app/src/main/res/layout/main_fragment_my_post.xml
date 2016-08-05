@@ -7,34 +7,79 @@
     android:descendantFocusability="blocksDescendants"
     android:id="@+id/post">
 
-    <!--<com.example.zxl.cloudmanager.Refresh.PullToRefreshView
-        android:id="@+id/my_post_pull_to_refresh"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">-->
-        <FrameLayout
+        <LinearLayout
             android:id="@+id/fragment_my_post"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="20dp"
             android:background="@color/white">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/main_fragment_my_post_time"
+                android:layout_weight="1.2"
+                android:id="@+id/main_fragment_my_post_name_hit"
+                android:text="@string/name"
+                android:textSize="20dp"
+                android:layout_gravity="top|right" />
+
+            <TextView
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/main_fragment_my_post_create_time_hit"
+                android:text="@string/my_post_create_time_hit"
                 android:textSize="20dp"
                 android:layout_gravity="top|left" />
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/main_fragment_my_post_name"
+                android:layout_weight="1"
+                android:text="@string/my_post_post_time_hit"
                 android:textSize="20dp"
+                android:id="@+id/main_fragment_my_post_post_time_hit"/>
+
+            <TextView
+                android:layout_marginTop="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.2"
+                android:textSize="20dp"
+                android:id="@+id/main_fragment_my_post_name"
                 android:layout_gravity="top|right" />
 
-        </FrameLayout>
-    <!--</com.example.zxl.cloudmanager.Refresh.PullToRefreshView>-->
+            <TextView
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="20dp"
+                android:id="@+id/main_fragment_my_post_create_time"
+                android:layout_gravity="top|left" />
+
+            <TextView
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textSize="20dp"
+                android:id="@+id/main_fragment_my_post_post_time"/>
+
+
+        </LinearLayout>
 
 </FrameLayout>
 
