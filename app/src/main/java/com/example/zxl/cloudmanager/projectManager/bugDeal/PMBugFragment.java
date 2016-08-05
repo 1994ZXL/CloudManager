@@ -93,22 +93,9 @@ public class PMBugFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View v = layoutInflater.inflate(R.layout.main_fragment_my_bug, parent, false);
-
-
         getActivity().getActionBar().setTitle("bug列表");
 
         saveInstanceState = getArguments();
-        if (null == saveInstanceState) {
-            searchKey = -1;
-        } else {
-            searchKey = getArguments().getInt(SEARCH_KEY);
-        }
-
-        if (-1 == searchKey) {
-            bugs = BugLab.newInstance(mFragment.getActivity()).get();
-        } else {
-            bugs.add(BugLab.newInstance(mFragment.getActivity()).get().get(searchKey));
-        }
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_bug_pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {

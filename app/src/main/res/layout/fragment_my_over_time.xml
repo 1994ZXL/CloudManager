@@ -90,6 +90,27 @@
                         />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp" >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/overtime_status"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="20dp" />
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/overtime_status_spinner" />
+                </LinearLayout>
+
             </LinearLayout>
             <Button
                 android:id="@+id/my_overtime_search_button"

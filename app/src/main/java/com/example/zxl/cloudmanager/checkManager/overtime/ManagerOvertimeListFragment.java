@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
+import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.OverTime;
@@ -49,6 +50,12 @@ public class ManagerOvertimeListFragment extends Fragment {
 
     private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
+
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams = new RequestParams();
+    private String key = "";
+    private JSONObject keyObj = new JSONObject();
+
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -56,13 +63,13 @@ public class ManagerOvertimeListFragment extends Fragment {
         mFragment = this;
     }
 
-    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
-    private RequestParams mParams;
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
        final View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
 
         getActivity().getActionBar().setTitle("加班列表");
+
+        saveInstanceState = getArguments();
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -77,7 +84,30 @@ public class ManagerOvertimeListFragment extends Fragment {
             }
         });
 
-        overTimes.add(new OverTime());
+        if (null == saveInstanceState) {
+            Log.d(TAG, "没有选择条件");
+        } else {
+            try {
+                if (-1 != saveInstanceState.getInt(Link.start_time)) {
+                    keyObj.put(Link.start_time, saveInstanceState.getInt(Link.start_time));
+                }
+                if (-1 != saveInstanceState.getInt(Link.end_time)) {
+                    keyObj.put(Link.end_time, saveInstanceState.getInt(Link.end_time));
+                }
+                if (-1 != saveInstanceState.getInt(Link.status)) {
+                    keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
+                }
+                keyObj.put(Link.mem_name, saveInstanceState.getString(Link.mem_name));
+                keyObj.put(Link.work_pm, saveInstanceState.getString(Link.work_pm));
+
+                key = DESCryptor.Encryptor(keyObj.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            mParams.put("key", key);
+            Log.d(TAG, "key: " + key);
+        }
+
         mHttpc.post(Link.localhost + "manage_work&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
@@ -158,11 +188,12 @@ public class ManagerOvertimeListFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             OverTime mOverTime = overTimes.get(i);
-            viewHolder.mOvertimeDateBegin.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mOverTime.getStart_time()));
 
-            viewHolder.mOvertimeName.setText(mOverTime.getMem_id());
-            viewHolder.mProject.setText(mOverTime.getPm_id());
-           // viewHolder.itemView.setTag(overTimes.get(i));
+            viewHolder.mOvertimeDateBegin.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mOverTime.getStart_time()));
+            viewHolder.mOvertimeName.setText(mOverTime.getMem_name());
+            viewHolder.mProject.setText(mOverTime.getWork_name());
+
+            viewHolder.itemView.setTag(overTimes.get(i));
         }
 
         @Override

@@ -86,8 +86,6 @@ public class ManagerTravelSearchFragment extends Fragment {
                     status = 1;
                 if (state == "取消")
                     status = 2;
-                if (state == "未选择")
-                    status = -1;
             }
 
             @Override
