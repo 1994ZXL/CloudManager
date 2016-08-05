@@ -23,11 +23,21 @@ import android.widget.TextView;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.leaderSearch.LeaderPostSearchActivity;
 import com.example.zxl.cloudmanager.leaderSearch.LeaderPostSearchFragment;
+import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
 import com.example.zxl.cloudmanager.model.PostLab;
 import com.example.zxl.cloudmanager.myPost.MyPostSearchFragment;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ZXL on 2016/7/12.
@@ -41,10 +51,14 @@ public class MyPostFragment extends ListFragment {
     private static final String TAG = "MyPostFragment";
     private static final String SEARCH_KEY = "search_key";
     private static final String WHERE = "where";
-    private ArrayList<Integer> key = new ArrayList<Integer>();//下标
 
     private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
+
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams = new RequestParams();
+    private JSONObject keyObj = new JSONObject();
+    private String key = "";
 
     @Override
     public void onCreate(Bundle saveInstanceState){
@@ -54,23 +68,35 @@ public class MyPostFragment extends ListFragment {
         getActivity().getActionBar().setTitle("我的日报");
 
         saveInstanceState = getArguments();
-        if (null == saveInstanceState) {
-            mPosts = PostLab.newInstance(mFragment.getActivity()).getPosts();
-        } else {
-            key = getArguments().getIntegerArrayList(SEARCH_KEY);
-            for (int i = 0; i < key.size(); i++) {
-                if (null == getArguments().getString(WHERE)) {
-                    if ("张三" == PostLab.newInstance(mFragment.getActivity()).getPosts().get(key.get(i)).getName()){
-                        mPosts.add(PostLab.newInstance(mFragment.getActivity()).getPosts().get(key.get(i)));
+
+        mHttpc.post(Link.localhost + "manage_trip&act=get_list", mParams, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
+                try {
+                    if (rjo.getBoolean("result")) {
+                        JSONArray array = rjo.getJSONArray("data1");
+                        Log.d(TAG, "array: " + array);
+                        for (int i = 0; i < array.length(); i++) {
+                            mPosts.add(new Post(array.getJSONObject(i)));
+                        }
+                        Log.d(TAG, "mPosts: " + mPosts);
+                        PostAdapter adapter = new PostAdapter(mPosts);
+                        setListAdapter(adapter);
+
+                    } else {
+
                     }
-                } else {
-                    mPosts.add(PostLab.newInstance(mFragment.getActivity()).getPosts().get(key.get(i)));
+                } catch (JSONException e) {
+                    Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                 }
             }
-        }
 
-        PostAdapter adapter = new PostAdapter(mPosts);
-        setListAdapter(adapter);
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
+
+            }
+        });
+
     }
 
     @Override
@@ -118,10 +144,10 @@ public class MyPostFragment extends ListFragment {
             Post p = getItem(position);
 
             TextView postName = (TextView) convertView.findViewById(R.id.main_fragment_my_post_name);
-            postName.setText(p.getName());
+            postName.setText(p.getMem_name());
 
             TextView postTime = (TextView) convertView.findViewById(R.id.main_fragment_my_post_time);
-            postTime.setText(p.getPostTime());
+            postTime.setText(p.getReport_time());
 
             return convertView;
         }

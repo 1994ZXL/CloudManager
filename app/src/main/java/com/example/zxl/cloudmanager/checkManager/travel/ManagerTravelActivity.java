@@ -6,7 +6,6 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
-import com.example.zxl.cloudmanager.MyPostFragment;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.SingleFragmentActivity;
