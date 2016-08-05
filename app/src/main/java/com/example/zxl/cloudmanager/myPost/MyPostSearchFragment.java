@@ -129,27 +129,6 @@ public class MyPostSearchFragment extends Fragment {
     }
 
     private void search() throws Exception {
-        mPosts = PostLab.newInstance(mFragment.getActivity()).getPosts();
-        for (index = 0; index < mPosts.size(); index++ ) {
-            if (ConverToDate(mPosts.get(index).getPostTime()).after(beginTime)
-                    && ConverToDate(mPosts.get(index).getPostTime()).before(endTime)) {
-                sum.add(index);
-            }
-        }
-        Fragment fragment = new MyPostFragment();
-        Bundle bundle = new Bundle();
-        bundle.putIntegerArrayList(SEARCH_KEY, sum);
-        fragment.setArguments(bundle);
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        if (!fragment.isAdded()) {
-            transaction.hide(mFragment);
-            transaction.replace(R.id.postActivity, fragment);
-            transaction.commit();
-        } else {
-            transaction.hide(mFragment);
-            transaction.show(fragment);
-            transaction.commit();
-        }
     }
 
     public static Date ConverToDate(String strDate) throws Exception

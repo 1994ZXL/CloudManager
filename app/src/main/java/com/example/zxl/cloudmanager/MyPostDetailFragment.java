@@ -53,9 +53,9 @@ public class MyPostDetailFragment extends Fragment {
     }
 
     private void control() {
-        mName.setText(sPost.getName());
+        mName.setText(sPost.getMem_name());
         mContent.setText(sPost.getContent());
-        mSubmitTime.setText(sPost.getPostTime());
+        mSubmitTime.setText(sPost.getReport_time());
     }
 
     @Override

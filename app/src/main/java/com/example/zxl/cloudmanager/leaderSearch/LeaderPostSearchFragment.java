@@ -126,13 +126,7 @@ public class LeaderPostSearchFragment extends Fragment {
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, name);
-                try {
-                    search();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Log.d(TAG, "抛异常");
-                }
+                search();
             }
         });
     }
@@ -165,21 +159,8 @@ public class LeaderPostSearchFragment extends Fragment {
         }
     }
 
-    private void search() throws Exception {
-        mPosts = PostLab.newInstance(mFragment.getActivity()).getPosts();
-        for (index = 0; index < mPosts.size(); index++ ) {
-            if (ConverToDate(mPosts.get(index).getPostTime()).after(beginTime)
-                    && ConverToDate(mPosts.get(index).getPostTime()).before(endTime)
-                    && name.equals(mPosts.get(index).getName())) {
-                sum.add(index);
-            }
-        }
-        Log.d(TAG, "下标：" + sum);
+    private void search() {
         Fragment fragment = new MyPostFragment();
-        Bundle bundle = new Bundle();
-        bundle.putIntegerArrayList(SEARCH_KEY, sum);
-        bundle.putString(WHERE, "LeaderPostSearchFragment");
-        fragment.setArguments(bundle);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (!fragment.isAdded()) {
             transaction.hide(mFragment);

@@ -30,4 +30,9 @@ public class Link {
 
     //pm_bug
     public static final String pm_id = "";
+
+    //find_daily
+    public static final String creat_time_t = "creat_time_t"; //日报的创建时间 开始
+    public static final String creat_time_f = "creat_time_f"; //日报的创建时间 结束
+    public static final String content = "content"; //日报内容
 }
