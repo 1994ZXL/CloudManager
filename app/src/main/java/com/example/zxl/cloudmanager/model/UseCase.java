@@ -1,5 +1,7 @@
 package com.example.zxl.cloudmanager.model;
 
+import android.widget.TextView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,25 +10,27 @@ import org.json.JSONObject;
  */
 public class UseCase {
     private String name; //项目名称
+    private String usecase_number; //用例编号
     private String test_app; //功能模块
     private String test_content; //测试内容
-    private String versionNumber;
+    private String versionNumber; //版本程序
     private String develop_name; //开发人员
     private int start_time; //开始时间
     private int end_time; //结束时间
     private int test_time; //测试时间
     private String header_name; //项目主管
-    private String functionCharacter;
-    private String textAim;
-    private String presetValue;
-    private String referenceInformation;
+    private String functionCharacter; //功能特性
+    private String textAim; //测试目的
+    private String presetValue; //预置条件
+    private String referenceInformation; //参考信息
     private String textDate;
     private String Scene; //用例场景
     private String content; //场景内容
-    private String operationDescription;
-    private String date;
-    private String expectedOutcome;
-    private String particalOutcome;
+    private String operationDescription; //操作描述
+    private String operationSequence; //操作步骤
+    private String data; //数据
+    private String expectedOutcome; //期望结果
+    private String particalOutcome; //实际结果
     private int status; //测试状态
     private String testter_name; //测试人员
     private String submitter_name; //提交人员
@@ -40,11 +44,15 @@ public class UseCase {
     private static final String JSON_START_TIME = "start_time";
     private static final String JSON_END_TIME = "over_time";
     private static final String JSON_TEST_CONTENT = "test_content";
-    private static final String JSON_CONTENT = "ontent";
+    private static final String JSON_CONTENT = "content";
     private static final String JSON_APP = "test_app";
     private static final String JSON_SUBMITTER = "submitter_name";
     private static final String JSON_REMARK = "remark";
     private static final String JSON_TESTER = "tester_name";
+    private static final String JSON_DATA = "data";
+    private static final String JSON_EXCEPT = "expect_result";
+    private static final String JSON_REAL = "real_result";
+    private static final String JSON_DESCRIPTION= "description";
     public UseCase() {
     }
 
@@ -64,7 +72,7 @@ public class UseCase {
         setScene(content[12]);
         setContent(content[13]);
         setOperationDescription(content[14]);
-        setDate(content[15]);
+        setData(content[15]);
         setExpectedOutcome(content[16]);
         setParticalOutcome(content[17]);
         //setStatus(content[18]);
@@ -100,6 +108,14 @@ public class UseCase {
             test_time = json.getInt(JSON_TEST_TIME);
         if (json.has(JSON_SUBMITTER))
             submitter_name = json.getString(JSON_SUBMITTER);
+        if (json.has(JSON_DATA))
+            data = json.getString(JSON_DATA);
+        if (json.has(JSON_EXCEPT))
+            expectedOutcome = json.getString(JSON_EXCEPT);
+        if (json.has(JSON_REAL))
+            particalOutcome = json.getString(JSON_REAL);
+        if (json.has(JSON_DESCRIPTION))
+            operationDescription = json.getString(JSON_DESCRIPTION);
     }
 
     public JSONObject toJSON() throws JSONException{
@@ -116,8 +132,45 @@ public class UseCase {
         json.put(JSON_CONTENT, content);
         json.put(JSON_TEST_TIME, test_time);
         json.put(JSON_SUBMITTER, submitter_name);
+        json.put(JSON_DATA, data);
+        json.put(JSON_EXCEPT, expectedOutcome);
+        json.put(JSON_REAL, particalOutcome);
+        json.put(JSON_DESCRIPTION, operationDescription);
         return json;
     }
+
+    public String getOperationSequence() {
+        return operationSequence;
+    }
+
+    public void setOperationSequence(String operationSequence) {
+        this.operationSequence = operationSequence;
+    }
+
+    public String getUsecase_number() {
+        return usecase_number;
+    }
+
+    public void setUsecase_number(String usecase_number) {
+        this.usecase_number = usecase_number;
+    }
+
+    public String getTest_app() {
+        return test_app;
+    }
+
+    public void setTest_app(String test_app) {
+        this.test_app = test_app;
+    }
+
+    public String getHeader_name() {
+        return header_name;
+    }
+
+    public void setHeader_name(String header_name) {
+        this.header_name = header_name;
+    }
+
     public String getTest_content() {
         return test_content;
     }
@@ -214,8 +267,14 @@ public class UseCase {
         this.test_time = test_time;
     }
 
-    public int getStatus() {
-        return status;
+    public String getStatus() {
+        if(status == 0)
+            return "待测试";
+        if(status == 1)
+            return "待修改";
+        if(status == 2)
+            return "已通过";
+        return null;
     }
 
     public void setStatus(int status) {
@@ -278,12 +337,12 @@ public class UseCase {
         this.operationDescription = operationDescription;
     }
 
-    public String getDate() {
-        return date;
+    public String getData() {
+        return data;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setData(String data) {
+        this.data = data;
     }
 
     public String getParticalOutcome() {

@@ -20,12 +20,25 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
+import com.example.zxl.cloudmanager.checkManager.overtime.OvertimeDetailFragment;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
+import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.model.OverTime;
 import com.example.zxl.cloudmanager.model.UseCase;
 import com.example.zxl.cloudmanager.model.UseCaseLab;
 import com.example.zxl.cloudmanager.publicSearch.usecase.UsecaseFragment;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ZXL on 2016/7/13.
@@ -42,9 +55,11 @@ public class PMUseCaseFragment extends Fragment {
     public static final int REFRESH_DELAY = 4000;
 
     private static final String SEARCH_KEY = "search_key";
-    private static final String TAG = "MyUseCaseFragment";
+    private static final String TAG = "PMUseCaseFragment";
     private int searchKey;
 
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams = new RequestParams();
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -54,7 +69,7 @@ public class PMUseCaseFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        View v = layoutInflater.inflate(R.layout.main_fragment_my_usecase, parent, false);
+        final View v = layoutInflater.inflate(R.layout.main_fragment_my_usecase, parent, false);
 
         getActivity().getActionBar().setTitle("我的用例");
 
@@ -71,42 +86,54 @@ public class PMUseCaseFragment extends Fragment {
             }
         });
         saveInstanceState = getArguments();
-        if (null == saveInstanceState) {
-            searchKey = -1;
-        } else {
-            searchKey = getArguments().getInt(SEARCH_KEY);
-        }
 
-        if (-1 == searchKey) {
-            useCases = UseCaseLab.newInstance(mFragment.getActivity()).getUseCase();
-        } else {
-            useCases.add(UseCaseLab.newInstance(mFragment.getActivity()).getUseCase().get(searchKey));
-        }
-
-        Log.d(TAG, "searchKey: " + searchKey);
-
-        mRecyclerView = (RecyclerView)v.findViewById(R.id.usecase_recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        myAdapter = new MyAdapter(this.getActivity(), useCases);
-        mRecyclerView.setAdapter(myAdapter);
-        mCardView = (CardView)v.findViewById(R.id.fragment_my_usecase);
-        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+        mHttpc.post(Link.localhost + "pm_case&act=get_list_case", mParams, new JsonHttpResponseHandler() {
             @Override
-            public void onItemClick(View view, Object data) {
-                Fragment fragment = PMUseCaseDetailFragment.newInstance(data);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
+            public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
+                try {
+                    if (rjo.getBoolean("result")) {
+                        JSONArray array = rjo.getJSONArray("data1");
+                        Log.d(TAG, "array: " + array);
+                        for (int i = 0; i < array.length(); i++) {
+                            useCases.add(new UseCase(array.getJSONObject(i)));
+                        }
+                        Log.d(TAG, "useCase: " + useCases);
+                        mRecyclerView = (RecyclerView)v.findViewById(R.id.usecase_recyclerview);
+                        mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
+                        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                        mRecyclerView.setHasFixedSize(true);
+                        myAdapter = new MyAdapter(mFragment.getActivity(), useCases);
+                        mRecyclerView.setAdapter(myAdapter);
+                        mCardView = (CardView)v.findViewById(R.id.fragment_my_usecase);
+                        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, Object data) {
+                                Fragment fragment = PMUseCaseDetailFragment.newInstance(data);
+                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                if (!fragment.isAdded()) {
+                                    transaction.addToBackStack(null);
+                                    transaction.hide(mFragment);
+                                    transaction.add(R.id.blankActivity, fragment);
+                                    transaction.commit();
+                                } else {
+                                    transaction.hide(mFragment);
+                                    transaction.show(fragment);
+                                    transaction.commit();
+                                }
+                            }
+                        });
+
+                    } else {
+
+                    }
+                } catch (JSONException e) {
+                    Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                 }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
+
             }
         });
 
@@ -162,11 +189,11 @@ public class PMUseCaseFragment extends Fragment {
             UseCase useCase = useCases.get(i);
 
             viewHolder.mProjectName.setText(useCase.getName());
-            viewHolder.mUseCaseNumber.setText(useCase.getTest_content());
-            viewHolder.mVersoinNumber.setText(useCase.getVersionNumber());
+            viewHolder.test_app.setText(useCase.getTest_app());
+            viewHolder.header_name.setText(useCase.getHeader_name());
             viewHolder.mTextMan.setText(useCase.getTestter_name());
-            viewHolder.mExploitMan.setText(useCase.getSubmitter_name());
-            viewHolder.mAutorizedTime.setText(useCase.getStart_time());
+            viewHolder.develop_name.setText(useCase.getDevelop_name());
+            viewHolder.mAutorizedTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(useCase.getStart_time()));
 
             viewHolder.itemView.setTag(useCases.get(i));
         }
@@ -185,19 +212,19 @@ public class PMUseCaseFragment extends Fragment {
 
         public class ViewHolder extends RecyclerView.ViewHolder{
             public TextView mProjectName;
-            public TextView mUseCaseNumber;
-            public TextView mVersoinNumber;
+            public TextView test_app;
+            public TextView header_name;
             public TextView mTextMan;
-            public TextView mExploitMan;
+            public TextView develop_name;
             public TextView mAutorizedTime;
 
             public ViewHolder(View v) {
                 super(v);
                 mProjectName = (TextView)v.findViewById(R.id.usecase_card_item_project_soft);
-                mUseCaseNumber = (TextView)v.findViewById(R.id.usecase_card_item_usecase_number);
-                mVersoinNumber = (TextView)v.findViewById(R.id.usecase_card_item_version_number);
+                test_app = (TextView)v.findViewById(R.id.usecase_card_item_usecase_number);
+                header_name = (TextView)v.findViewById(R.id.usecase_card_item_version_number);
                 mTextMan = (TextView)v.findViewById(R.id.usecase_card_item_text_man);
-                mExploitMan = (TextView)v.findViewById(R.id.usecase_card_item_exploit_man);
+                develop_name = (TextView)v.findViewById(R.id.usecase_card_item_exploit_man);
                 mAutorizedTime = (TextView)v.findViewById(R.id.usecase_card_item_autorized_time);
             }
         }

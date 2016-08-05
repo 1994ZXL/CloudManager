@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.UseCase;
 
 
@@ -17,28 +18,32 @@ import com.example.zxl.cloudmanager.model.UseCase;
 public class PMUseCaseDetailFragment extends Fragment {
     private static UseCase sUseCase = new UseCase();
 
-    private TextView mName;
-    private TextView mFunctionModel;
-    private TextView mUsecaseNumber;
-    private TextView mVersionNumber;
-    private TextView mAutorizedMan;
-    private TextView mAutorizedTime;
-    private TextView mCorrelationUseCase;
-    private TextView mFunctionCharacter;
-    private TextView mTextAim;
-    private TextView mPresetValue;
-    private TextView mReferenceInformation;
-    private TextView mTextDate;
-    private TextView mScene;
-    private TextView mOperationSequence;
-    private TextView mOperationDescription;
-    private TextView mDate;
-    private TextView mExpectedOutcome;
-    private TextView mParticalOutcome;
-    private TextView mTextState;
-    private TextView mTestMan;
-    private TextView mExploitMan;
-    private TextView mPrincipal;
+    private TextView name; //项目名称
+    private TextView test_app; //功能模块
+    private TextView test_content; //测试内容
+    private TextView versionNumber; //用例编号
+    private TextView develop_name; //开发人员
+    private TextView start_time; //开始时间
+    private TextView end_time; //结束时间
+    private TextView test_time; //测试时间
+    private TextView header_name; //项目主管
+    private TextView functionCharacter; //功能特性
+    private TextView useCase_about; //相关用例
+    private TextView test_aim; //测试目的
+    private TextView presetValue; //预置条件
+    private TextView referenceInformation; //参考信息
+    private TextView textDate; //
+    private TextView Scene; //用例场景
+    private TextView content; //场景内容
+    private TextView operationDescription; //操作描述
+    private TextView operationSequence; //操作步骤
+    private TextView data;
+    private TextView expectedOutcome;
+    private TextView particalOutcome;
+    private TextView status; //测试状态
+    private TextView testter_name; //测试人员
+    private TextView submitter_name; //提交人员
+    private TextView remark; //备注
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -63,53 +68,54 @@ public class PMUseCaseDetailFragment extends Fragment {
     }
 
     private void init(View view) {
-        mName = (TextView)view.findViewById(R.id.usecase_details_program_number);
-        mFunctionModel = (TextView)view.findViewById(R.id.usecase_details_functionModule);
-        mUsecaseNumber = (TextView)view.findViewById(R.id.usecase_details_id);
-        mVersionNumber = (TextView)view.findViewById(R.id.usecase_details_program_number);
-        mAutorizedMan = (TextView)view.findViewById(R.id.usecase_details_autorized_strength);
-        mAutorizedTime = (TextView)view.findViewById(R.id.usecase_details_formation_time);
-        mCorrelationUseCase = (TextView)view.findViewById(R.id.usecase_details_correlation_usecase);
-        mFunctionCharacter = (TextView)view.findViewById(R.id.usecase_details_function_character);
-        mTextAim = (TextView)view.findViewById(R.id.usecase_details_text_aim);
-        mPresetValue = (TextView)view.findViewById(R.id.usecase_details_presetValue);
-        mReferenceInformation = (TextView)view.findViewById(R.id.usecase_details_referenceInformation);
-        mTextDate = (TextView)view.findViewById(R.id.usecase_details_textDate);
-        mScene = (TextView)view.findViewById(R.id.usecase_details_Scene);
-        mOperationSequence = (TextView)view.findViewById(R.id.usecase_details_operationSequence);
-        mOperationDescription = (TextView)view.findViewById(R.id.usecase_details_operationDescription);
-        mDate = (TextView)view.findViewById(R.id.usecase_details_data);
-        mExpectedOutcome = (TextView)view.findViewById(R.id.usecase_details_expectedOutcome);
-        mParticalOutcome = (TextView)view.findViewById(R.id.usecase_details_particalOutcome);
-        mTextState = (TextView)view.findViewById(R.id.usecase_details_textState);
-        mTestMan = (TextView)view.findViewById(R.id.usecase_details_testMan);
-        mExploitMan = (TextView)view.findViewById(R.id.usecase_details_exploitMan);
-        mPrincipal = (TextView)view.findViewById(R.id.usecase_details_principal);
+        name = (TextView)view.findViewById(R.id.usecase_details_program_number);
+        versionNumber = (TextView)view.findViewById(R.id.usecase_details_functionModule);
+        test_app = (TextView)view.findViewById(R.id.usecase_details_id);
+        header_name = (TextView)view.findViewById(R.id.usecase_details_program_number);
+        versionNumber = (TextView)view.findViewById(R.id.usecase_details_autorized_strength);
+        start_time = (TextView)view.findViewById(R.id.usecase_details_formation_time);
+        useCase_about = (TextView)view.findViewById(R.id.usecase_details_correlation_usecase);
+        functionCharacter = (TextView)view.findViewById(R.id.usecase_details_function_character);
+        test_aim = (TextView)view.findViewById(R.id.usecase_details_text_aim);
+        presetValue = (TextView)view.findViewById(R.id.usecase_details_presetValue);
+        referenceInformation = (TextView)view.findViewById(R.id.usecase_details_referenceInformation);
+        data = (TextView)view.findViewById(R.id.usecase_details_textDate);
+        Scene = (TextView)view.findViewById(R.id.usecase_details_Scene);
+        operationSequence = (TextView)view.findViewById(R.id.usecase_details_operationSequence);
+        operationDescription = (TextView)view.findViewById(R.id.usecase_details_operationDescription);
+        expectedOutcome = (TextView)view.findViewById(R.id.usecase_details_data);
+        particalOutcome = (TextView)view.findViewById(R.id.usecase_details_expectedOutcome);
+        status = (TextView)view.findViewById(R.id.usecase_details_particalOutcome);
+        testter_name = (TextView)view.findViewById(R.id.usecase_details_textState);
+        submitter_name = (TextView)view.findViewById(R.id.usecase_details_testMan);
+        develop_name = (TextView)view.findViewById(R.id.usecase_details_exploitMan);
+        remark = (TextView)view.findViewById(R.id.usecase_details_principal);
     }
 
     private void contorl() {
-        mName.setText(sUseCase.getName());
-        mFunctionModel.setText(sUseCase.getFunctionModule());
-        mUsecaseNumber.setText(sUseCase.getTest_content());
-        mVersionNumber.setText(sUseCase.getVersionNumber());
-        mAutorizedMan.setText(sUseCase.getDevelop_name());
-        mAutorizedTime.setText(sUseCase.getStart_time());
-        mCorrelationUseCase.setText(sUseCase.getCorrelationUseCase());
-        mFunctionCharacter.setText(sUseCase.getFunctionCharacter());
-        mTextAim.setText(sUseCase.getTextAim());
-        mPresetValue.setText(sUseCase.getPresetValue());
-        mReferenceInformation.setText(sUseCase.getReferenceInformation());
-        mTextDate.setText(sUseCase.getTextDate());
-        mScene.setText(sUseCase.getScene());
-        mOperationSequence.setText(sUseCase.getContent());
-        mOperationDescription.setText(sUseCase.getOperationDescription());
-        mDate.setText(sUseCase.getDate());
-        mExpectedOutcome.setText(sUseCase.getExpectedOutcome());
-        mParticalOutcome.setText(sUseCase.getParticalOutcome());
-        mTextState.setText(sUseCase.getStatus());
-        mTestMan.setText(sUseCase.getTestter_name());
-        mExploitMan.setText(sUseCase.getSubmitter_name());
-        mPrincipal.setText(sUseCase.getRemark());
+        name.setText(sUseCase.getName());
+        test_app.setText(sUseCase.getFunctionModule());
+        versionNumber.setText(sUseCase.getVersionNumber());
+        header_name.setText(sUseCase.getVersionNumber());
+        develop_name.setText(sUseCase.getDevelop_name());
+        start_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sUseCase.getStart_time()));
+        end_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sUseCase.getEnd_time()));
+        functionCharacter.setText(sUseCase.getFunctionCharacter());
+        test_aim.setText(sUseCase.getTest_content());
+        presetValue.setText(sUseCase.getPresetValue());
+        referenceInformation.setText(sUseCase.getReferenceInformation());
+        test_time.setText(sUseCase.getData());
+        Scene.setText(sUseCase.getScene());
+        content.setText(sUseCase.getContent());
+        operationSequence.setText(sUseCase.getOperationSequence());
+        operationDescription.setText(sUseCase.getOperationDescription());
+        data.setText(sUseCase.getData());
+        expectedOutcome.setText(sUseCase.getExpectedOutcome());
+        particalOutcome.setText(sUseCase.getParticalOutcome());
+        status.setText(sUseCase.getStatus());
+        testter_name.setText(sUseCase.getTestter_name());
+        submitter_name.setText(sUseCase.getSubmitter_name());
+        remark.setText(sUseCase.getRemark());
     }
 
 }

@@ -22,7 +22,7 @@ public class UseCaseLab {
 
     private UseCaseLab(Context c){
         context = c;
-        content2 = new String[]{
+        /*content2 = new String[]{
                 "项目/软件",
                 "功能模块",
                 "用例编号",
@@ -69,9 +69,8 @@ public class UseCaseLab {
                 "测试人员",
                 "开发人员",
                 "负责人"};
-
         set(content2);
-        set(content);
+        set(content);*/
     }
 
     public static UseCaseLab newInstance(Context c) {

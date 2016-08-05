@@ -102,7 +102,7 @@ public class MyUseCaseDetailFragment extends Fragment {
         mScene.setText(sUseCase.getScene());
         mOperationSequence.setText(sUseCase.getContent());
         mOperationDescription.setText(sUseCase.getOperationDescription());
-        mDate.setText(sUseCase.getDate());
+        mDate.setText(sUseCase.getData());
         mExpectedOutcome.setText(sUseCase.getExpectedOutcome());
         mParticalOutcome.setText(sUseCase.getParticalOutcome());
         mTextState.setText(sUseCase.getStatus());
