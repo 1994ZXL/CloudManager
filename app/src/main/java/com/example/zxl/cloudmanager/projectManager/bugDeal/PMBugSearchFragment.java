@@ -1,10 +1,14 @@
 package com.example.zxl.cloudmanager.projectManager.bugDeal;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +17,18 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.MyBugFragment;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.Bug;
 import com.example.zxl.cloudmanager.model.BugLab;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
+import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.Link;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class PMBugSearchFragment extends Fragment {
@@ -40,15 +49,23 @@ public class PMBugSearchFragment extends Fragment {
     private ArrayAdapter<String> levelAdapter;
 
     private static final String stateList[] =
-            {"全部","待确认","待修改","待测试","已通过","已排除","不解决"};
+            {"全部","待确认","待修改","待测试","已通过","已排除","不解决"}; //状态 1:一级 2:二级 3:三级 4:四级 5:五级 6:六级
     private static final String levelList[] =
-            {"全部","一级","二级","三级","四级","五级","六级"};
+            {"全部","一级","二级","三级","四级","五级","六级"}; //状态 1:待确认 2:已排除 3:不解决 4:待修改 5:待测试 6:已通过 7:已修改
 
     private String projectName;
     private String finder;
     private String reviser;
     private String bugState;
+    private int status;
     private String bugLevel;
+    private int level;
+
+    private Date beginTime;
+    private String bgtime;
+
+    private Date endTime;
+    private String edtime;
 
     private int index;
     private Fragment mFragment;
@@ -86,17 +103,25 @@ public class PMBugSearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Fragment fragment = new PMBugFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.replace(R.id.blankActivity, fragment);
-                    transaction.commit();
+                Bundle bundle = new Bundle();
+
+                if (null != bgtime) {
+                    bundle.putInt(Link.start_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(bgtime));
                 } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
+                    bundle.putInt(Link.start_time, -1);
                 }
+                if (null != edtime) {
+                    bundle.putInt(Link.end_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(edtime));
+                } else {
+                    bundle.putInt(Link.end_time, -1);
+                }
+
+
+                fragment.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.addToBackStack(null);
+                transaction.replace(R.id.blankActivity, fragment);
+                transaction.commit();
             }
         });
 
@@ -169,6 +194,7 @@ public class PMBugSearchFragment extends Fragment {
         mBugStateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //等级 1:待确认 2:已排除 3:不解决 4:待修改 5:待测试 6:已通过 7:已修改
                 bugState = stateList[i];
             }
 
@@ -180,6 +206,7 @@ public class PMBugSearchFragment extends Fragment {
         mBugLevelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //状态 1:一级 2:二级 3:三级 4:四级 5:五级 6:六级
                 bugLevel = levelList[i];
             }
 
@@ -188,30 +215,57 @@ public class PMBugSearchFragment extends Fragment {
 
             }
         });
+        mBugBeginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
+                fragment.setTargetFragment(PMBugSearchFragment.this, 12);
+                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
+                fragment.show(getFragmentManager(), "PMBugSearchFragment");
+            }
+        });
+        mBugEndBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
+                fragment.setTargetFragment(PMBugSearchFragment.this, 13);
+                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
+                fragment.show(getFragmentManager(), "PMBugSearchFragment");
+            }
+        });
     }
 
-    /*private void search() {
-        sBugs = BugLab.newInstance(mFragment.getActivity()).get();
-        for (index = 0; index < sBugs.size(); index++ ) {
-            if (projectName.equals(sBugs.get(index).getFunctionModel()) && finder.equals(sBugs.get(index).getSubmitter())
-                    && reviser.equals(sBugs.get(index).getEditMan()) && bugState.equals(sBugs.get(index).getStatus())
-                    && bugLevel.equals(sBugs.get(index).getLevel())) {
-                Fragment fragment = new MyBugFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt(SEARCH_KEY, index);
-                fragment.setArguments(bundle);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.replace(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
-            }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "进入回调 " + " resultCode:" + requestCode);
+        if (resultCode != Activity.RESULT_OK){
+            Log.d(TAG, "未进入判断");
+            return;
+        } else if (requestCode == 12) {
+            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            updateBeginDate();
+        } else if (requestCode == 13) {
+            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            updateEndDate();
         }
-    }*/
+    }
+
+    private void updateBeginDate(){
+        bgtime = android.text.format.DateFormat.format("yyyy年MM月dd", beginTime).toString();
+        Log.d(TAG, "bgtime: " + bgtime);
+        mBugBeginBtn.setText(bgtime);
+        Log.d(TAG, "mBugBeginBtn: " + mBugBeginBtn.getText());
+    }
+    private void updateEndDate(){
+        if (endTime.after(beginTime)) {
+            edtime = android.text.format.DateFormat.format("yyyy年MM月dd", endTime).toString();
+            Log.d(TAG, "edtime: " + edtime);
+            mBugEndBtn.setText(edtime);
+            Log.d(TAG, "mBugEndBtn: " + mBugEndBtn.getText());
+        } else {
+            Toast.makeText(getActivity(),
+                    R.string.time_erro,
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
 }

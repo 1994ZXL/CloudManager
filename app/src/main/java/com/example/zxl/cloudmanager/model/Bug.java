@@ -177,6 +177,7 @@ public class Bug {
     }
 
     public String getLevel() {
+        //等级 1:一级 2:二级 3:三级 4:四级 5:五级 6:六级
         if (status == 1) {
             return "一级";
         } else if (status == 2) {
@@ -206,6 +207,7 @@ public class Bug {
     }
 
     public String getStatus() {
+        //状态 1:待确认 2:已排除 3:不解决 4:待修改 5:待测试 6:已通过 7:已修改
         if (status == 1) {
             return "待确认";
         } else if (status == 2) {

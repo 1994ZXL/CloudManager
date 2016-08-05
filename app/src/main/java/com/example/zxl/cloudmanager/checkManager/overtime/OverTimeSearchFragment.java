@@ -86,7 +86,7 @@ public class OverTimeSearchFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mFragment = this;
     }
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
