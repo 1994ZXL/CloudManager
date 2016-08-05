@@ -50,6 +50,7 @@
     <string name="travel_deal">出差处理</string>
     <string name="save_edit">保存修改</string>
     <string name="check_begin_time">考勤开始时间</string>
+    <string name="overtime_status">加班状态</string>
 
     <!-- 项目主管-->
     <string name="project_manager">项目主管</string>

@@ -42,24 +42,24 @@
                     android:layout_marginTop="20dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/employer_travel_time"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:textSize="20dp"/>
 
                     <Button
                         android:id="@+id/employer_travel_begin_time_button"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/project_begin_time_textview"
-                        android:layout_weight="0.3"/>
+                        android:layout_weight="1"/>
                     <Button
                         android:id="@+id/employer_travel_end_time_button"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/project_end_time_textview"
-                        android:layout_weight="0.3"/>
+                        android:layout_weight="1"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -68,24 +68,24 @@
                     android:layout_marginTop="20dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/employer_back_time"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:textSize="20dp"/>
 
                     <Button
                         android:id="@+id/employer_back_begin_time_button"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/project_begin_time_textview"
-                        android:layout_weight="0.3"/>
+                        android:layout_weight="1"/>
                     <Button
                         android:id="@+id/employer_back_end_time_button"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/project_end_time_textview"
-                        android:layout_weight="0.3"/>
+                        android:layout_weight="1"/>
                 </LinearLayout>
 
                 <LinearLayout

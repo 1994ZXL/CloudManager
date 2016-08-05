@@ -135,7 +135,7 @@ public class MyOverTimeFragment extends Fragment {
             OverTime overTime = overTimes.get(i);
 
             viewHolder.mOvertimeName.setText(overTime.getMem_id());
-            viewHolder.mOvertimeProject.setText(overTime.getPm_id());
+            viewHolder.mOvertimeProject.setText(overTime.getWork_name());
             viewHolder.mBeginTime.setText(overTime.getStart_time());
             viewHolder.mEndTime.setText(overTime.getEnd_time());
 

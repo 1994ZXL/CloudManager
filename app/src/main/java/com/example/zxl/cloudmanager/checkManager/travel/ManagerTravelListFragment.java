@@ -73,9 +73,7 @@ public class ManagerTravelListFragment extends ListFragment {
                 if (-1 != saveInstanceState.getInt(Link.over_time_e)) {
                     keyObj.put(Link.over_time_e, saveInstanceState.getInt(Link.over_time_e));
                 }
-                if (-1 != saveInstanceState.getInt(Link.status)) {
-                    keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
-                }
+                keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
 
                 key = DESCryptor.Encryptor(keyObj.toString());
             } catch (Exception e) {

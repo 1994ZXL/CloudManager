@@ -86,9 +86,6 @@ public class PMBugSearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Fragment fragment = new PMBugFragment();
-                /*Bundle bundle = new Bundle();
-                bundle.putInt(SEARCH_KEY, index);
-                fragment.setArguments(bundle);*/
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
