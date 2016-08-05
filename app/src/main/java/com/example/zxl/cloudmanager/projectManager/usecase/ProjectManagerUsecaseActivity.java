@@ -7,12 +7,9 @@ import com.example.zxl.cloudmanager.publicSearch.list.ListSearchFragment;
 
 public class ProjectManagerUsecaseActivity extends SingleFragmentActivity {
 
-    /*public PublicSearchActivity(int i){
-        switch ()
-    }*/
     @Override
     protected Fragment createFragment(){
-        return new ListSearchFragment();
+        return new UsecaseSearchFragment();
     }
 
 }
