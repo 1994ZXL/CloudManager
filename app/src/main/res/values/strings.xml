@@ -233,6 +233,8 @@
 
     <string name="post_submit_time">日报时间</string>
     <string name="my_post_content">日报内容</string>
+    <string name="my_post_create_time_hit">日报创建时间</string>
+    <string name="my_post_post_time_hit">日报提交时间</string>
 
 
     <!--主页底部导航栏底部-->
@@ -248,7 +250,6 @@
     <!--通讯录-->
     <string name="search_contact">搜索联系人</string>
     <string name="no_contact">没有找到联系人</string>
-
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
