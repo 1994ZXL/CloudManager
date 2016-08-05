@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.leaderSearch.LeaderPostSearchActivity;
 import com.example.zxl.cloudmanager.leaderSearch.LeaderPostSearchFragment;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
 import com.example.zxl.cloudmanager.model.PostLab;
@@ -45,6 +46,9 @@ import cz.msebera.android.httpclient.Header;
 public class MyPostFragment extends ListFragment {
 
     private ArrayList<Post> mPosts = new ArrayList<Post>();
+
+    private TextView mName, mCreateTime, mPostTime, mNameHit, mCreateTimeHit, mPostTimeHit;
+
 
     private Fragment mFragment;
 
@@ -129,26 +133,44 @@ public class MyPostFragment extends ListFragment {
                 convertView = getActivity().getLayoutInflater().inflate(R.layout.main_fragment_my_post, null);
             }
 
-            /*mPullToRefreshView = (PullToRefreshView) convertView.findViewById(R.id.my_post_pull_to_refresh);
-            mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-                @Override
-                public void onRefresh() {
-                    mPullToRefreshView.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            mPullToRefreshView.setRefreshing(false);
-                        }
-                    }, REFRESH_DELAY);
-                }
-            });*/
+//            mPullToRefreshView = (PullToRefreshView) convertView.findViewById(R.id.my_post_pull_to_refresh);
+//            mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+//                @Override
+//                public void onRefresh() {
+//                    mPullToRefreshView.postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            mPullToRefreshView.setRefreshing(false);
+//                        }
+//                    }, REFRESH_DELAY);
+//                }
+//            });
             Post p = getItem(position);
 
-            TextView postName = (TextView) convertView.findViewById(R.id.main_fragment_my_post_name);
-            postName.setText(p.getMem_name());
+            mNameHit = (TextView)convertView.findViewById(R.id.main_fragment_my_post_name_hit);
+            mCreateTimeHit = (TextView)convertView.findViewById(R.id.main_fragment_my_post_create_time_hit);
+            mPostTimeHit = (TextView)convertView.findViewById(R.id.main_fragment_my_post_post_time_hit);
+            mName = (TextView) convertView.findViewById(R.id.main_fragment_my_post_name);
+            mName.setText(p.getMem_name());
 
-            TextView postTime = (TextView) convertView.findViewById(R.id.main_fragment_my_post_time);
-            postTime.setText(p.getReport_time());
+            mPostTime = (TextView) convertView.findViewById(R.id.main_fragment_my_post_post_time);
+            if(p.getReport_time() == 0) {
+                mPostTime.setText("——");
+            }else {
+                mPostTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(p.getReport_time()));
+            }
+            mCreateTime = (TextView) convertView.findViewById(R.id.main_fragment_my_post_create_time);
+            mCreateTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(p.getCreate_time()));
 
+            if (position != 0) {
+                mNameHit.setVisibility(View.GONE);
+                mCreateTimeHit.setVisibility(View.GONE);
+                mPostTimeHit.setVisibility(View.GONE);
+            } else {
+                mName.setVisibility(View.GONE);
+                mCreateTime.setVisibility(View.GONE);
+                mPostTime.setVisibility(View.GONE);
+            }
             return convertView;
         }
     }
