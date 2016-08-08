@@ -152,10 +152,6 @@ public class ManagerOvertimeListFragment extends Fragment {
                 }
             }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
-
-            }
         });
 
 

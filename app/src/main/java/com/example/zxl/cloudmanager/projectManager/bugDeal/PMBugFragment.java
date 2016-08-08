@@ -158,10 +158,6 @@ public class PMBugFragment extends Fragment {
                 }
             }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
-
-            }
         });
 
         return v;

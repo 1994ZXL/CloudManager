@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
-import android.content.Intent;
 import android.os.Bundle;
 
 import android.util.Log;
@@ -15,8 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,11 +24,11 @@ import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
-import com.example.zxl.cloudmanager.model.PostLab;
 import com.example.zxl.cloudmanager.myPost.MyPostSearchFragment;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -66,7 +63,7 @@ public class MyPostFragment extends ListFragment {
     private String key = "";
 
     @Override
-    public void onCreate(Bundle saveInstanceState){
+    public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         setHasOptionsMenu(true);
         mFragment = this;
@@ -74,25 +71,26 @@ public class MyPostFragment extends ListFragment {
 
         saveInstanceState = getArguments();
 
-            try {
 
-                keyObj.put("page_count", 10);
-                keyObj.put("curl_page", 1);
+        try {
 
-                key = DESCryptor.Encryptor(keyObj.toString());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            mParams.put("key", key);
-            Log.d(TAG, "key: " + key);
+            keyObj.put("page_count", 10);
+            keyObj.put("curl_page", 1);
+
+            key = DESCryptor.Encryptor(keyObj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mParams.put("key", key);
+        Log.d(TAG, "key: " + key);
 
 
         mHttpc.post(Link.localhost + "find_daily&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
-                    if (rjo.getBoolean("result")) {
-                        JSONArray array = rjo.getJSONArray("data1");
+                    if (response.getBoolean("result")) {
+                        JSONArray array = response.getJSONArray("data1");
                         Log.d(TAG, "array: " + array);
                         for (int i = 0; i < array.length(); i++) {
                             mPosts.add(new Post(array.getJSONObject(i)));
@@ -101,6 +99,7 @@ public class MyPostFragment extends ListFragment {
                         PostAdapter adapter = new PostAdapter(mPosts);
                         setListAdapter(adapter);
 
+
                     } else {
 
                     }
@@ -108,14 +107,10 @@ public class MyPostFragment extends ListFragment {
                     Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                 }
             }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
-
-            }
         });
-
     }
+
+
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id){
@@ -159,6 +154,7 @@ public class MyPostFragment extends ListFragment {
 //                    }, REFRESH_DELAY);
 //                }
 //            });
+
             Post p = getItem(position);
 
             mNameHit = (TextView)convertView.findViewById(R.id.main_fragment_my_post_name_hit);

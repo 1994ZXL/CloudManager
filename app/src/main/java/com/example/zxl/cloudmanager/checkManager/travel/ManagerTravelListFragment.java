@@ -105,10 +105,6 @@ public class ManagerTravelListFragment extends ListFragment {
                 }
             }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
-
-            }
         });
     }
 

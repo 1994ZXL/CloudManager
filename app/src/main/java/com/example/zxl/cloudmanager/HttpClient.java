@@ -47,10 +47,7 @@ public class HttpClient {
                 }
             }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
 
-            }
         });
         return mLeaves;
     }

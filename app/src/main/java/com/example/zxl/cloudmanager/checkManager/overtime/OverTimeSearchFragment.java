@@ -132,17 +132,14 @@ public class OverTimeSearchFragment extends Fragment {
                 }
             }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
 
-            }
         });
 
         mOvertimeEndBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
-                fragment.setTargetFragment(OverTimeSearchFragment.this, 12);
+                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
+                fragment.setTargetFragment(OverTimeSearchFragment.this, 13);
                 fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
                 fragment.show(getFragmentManager(), "OverTimeSearchFragment");
             }
@@ -151,8 +148,8 @@ public class OverTimeSearchFragment extends Fragment {
         mOvertimeBeginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
-                fragment.setTargetFragment(OverTimeSearchFragment.this, 13);
+                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
+                fragment.setTargetFragment(OverTimeSearchFragment.this, 12);
                 fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
                 fragment.show(getFragmentManager(), "OverTimeSearchFragment");
             }

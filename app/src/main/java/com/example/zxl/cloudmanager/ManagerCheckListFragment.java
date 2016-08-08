@@ -123,10 +123,7 @@ public class ManagerCheckListFragment extends Fragment {
 
                 }
             }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
 
-            }
         });
         return v;
     }

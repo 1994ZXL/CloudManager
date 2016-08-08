@@ -130,11 +130,6 @@ public class PMUseCaseFragment extends Fragment {
                     Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                 }
             }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
-
-            }
         });
 
         return v;
