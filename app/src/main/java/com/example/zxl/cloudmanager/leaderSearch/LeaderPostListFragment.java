@@ -47,7 +47,7 @@ public class LeaderPostListFragment extends ListFragment {
 
     private Fragment mFragment;
 
-    private static final String TAG = "MyPostFragment";
+    private static final String TAG = "LeaderPostListFragment";
     private static final String SEARCH_KEY = "search_key";
     private static final String WHERE = "where";
 

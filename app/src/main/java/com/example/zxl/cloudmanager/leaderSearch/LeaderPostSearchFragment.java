@@ -74,6 +74,8 @@ public class LeaderPostSearchFragment extends Fragment {
         View v =  inflater.inflate(R.layout.leader_post_search, container, false);
         getActivity().getActionBar().setTitle("日报查询");
 
+        init(v);
+        //查询条件
         mEmployerName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -99,7 +101,7 @@ public class LeaderPostSearchFragment extends Fragment {
                 fragment.show(getFragmentManager(), "LeaderPostSearchFragment");
             }
         });
-        mPostContent.setOnClickListener(new View.OnClickListener() {
+        mEndTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
@@ -127,34 +129,26 @@ public class LeaderPostSearchFragment extends Fragment {
         mSearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Fragment fragment = new ManagerTravelListFragment();
+                Fragment fragment = new LeaderPostListFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString(Link.mem_name, name);
-                if (null != bgtime) {
-                    bundle.putInt(Link.start_time_s, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(bgtime));
-                } else {
-                    bundle.putInt(Link.start_time_s, -1);
-                }
-                if (null != edtime) {
-                    bundle.putInt(Link.start_time_e, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(edtime));
-                } else {
-                    bundle.putInt(Link.start_time_e, -1);
-                }
-                bundle.putString(Link.status, content);
+                bundle.putInt(Link.creat_time_t, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(bgtime));
+                bundle.putInt(Link.creat_time_f, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(edtime));
+                bundle.putString(Link.content, content);
                 Log.d(TAG, "选择条件："
                         + " mem_name: " + name
-                        + " start_time_s: " + bgtime
-                        + " start_time_e: " + edtime
+                        + " start_time: " + bgtime
+                        + " over_time: " + edtime
                         + " content: " + mPostContent);
                 fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.addToBackStack(null);
-                transaction.replace(R.id.cmTravelActivity, fragment);
+                transaction.replace(R.id.blankActivity, fragment);
                 transaction.commit();
             }
         });
-        init(v);
-        control();
+
+        /*control();*/
 
         return v;
     }

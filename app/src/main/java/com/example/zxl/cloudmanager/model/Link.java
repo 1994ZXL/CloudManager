@@ -17,6 +17,7 @@ public class Link {
     public static final String status = "status";//状态
     public static final String start_time = "start_time";//开始时间
     public static final String end_time = "end_time";//结束时间
+    public static final String over_time = "over_time";//结束时间
 
     //manage_trip
     public static final String start_time_s = "start_time_s";//开始时间(小)
