@@ -20,7 +20,7 @@ public class MissionLab {
 
     private MissionLab(Context context) {
         this.context = context;
-        content = new String[] {
+        /*content = new String[] {
                 "任务名称",
                 "任务内容",
                 "高",
@@ -41,7 +41,7 @@ public class MissionLab {
                 "已完成",
                 "处理意见"};
         setMissions(content);
-        setMissions(content2);
+        setMissions(content2);*/
     }
 
     public static MissionLab newInstance(Context context) {

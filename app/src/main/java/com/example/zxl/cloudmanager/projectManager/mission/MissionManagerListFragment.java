@@ -125,17 +125,6 @@ public class MissionManagerListFragment extends Fragment {
             missions.add(MissionLab.newInstance(mFragment.getActivity()).get().get(searchKey));
         }
 
-        JSONObject obj = new JSONObject();
-        String key = "";
-        try {
-            obj.put("mem_name", "李驻军");
-            key = DESCryptor.Encryptor(obj.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        mParams.put("key", key);
-        Log.d(TAG, "key: "+key);
         mHttpc.post("http://192.168.1.109/yunmgr_v1.0/api/uc.php?app=pm_task&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
@@ -230,7 +219,7 @@ public class MissionManagerListFragment extends Fragment {
             viewHolder.mBeginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mission.getStart_time()));
             viewHolder.mEndTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mission.getOver_time()));
             viewHolder.mName.setText(mission.getName());
-            //viewHolder.mState.setText(mission.getStatus());
+            viewHolder.mState.setText(mission.getStatus());
             viewHolder.mlevel.setText(mission.getLevel());
 
             viewHolder.itemView.setTag(missions.get(i));

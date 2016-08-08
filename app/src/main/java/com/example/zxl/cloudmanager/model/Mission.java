@@ -9,12 +9,14 @@ import org.json.JSONObject;
  * Created by ZXL on 2016/7/12.
  */
 public class Mission {
+    private String mem_name; //成员名字
     private String title; //项目标题
     private String content; //内容
     private String level;
     private String detailContent;
     private int start_time;
     private int over_time;
+    private int percent; //进度
     private String progress;
     private int status; //项目任务状态
     private String evaluete; //评价
@@ -22,6 +24,8 @@ public class Mission {
 
     private static Mission sMission;
 
+    private static final String JSON_MEM= "mem_name";
+    //private static final String JSON_PERCENT = "percent";
     private static final String JSON_TITLE = "title";
     private static final String JSON_CONTENT = "content";
     private static final String JSON_STATE = "status";
@@ -65,6 +69,10 @@ public class Mission {
             over_time = json.getInt(JSON_ENDTIME);
         if (json.has(JSON_EVALUETE))
             evaluete = json.getString(JSON_EVALUETE);
+        if (json.has(JSON_MEM))
+            mem_name = json.getString(JSON_MEM);
+        /*if (json.has(JSON_PERCENT))
+            percent = json.getInt(JSON_PERCENT);*/
     }
 
     public JSONObject toJSON() throws JSONException{
@@ -75,7 +83,8 @@ public class Mission {
         json.put(JSON_BEGINTIME, start_time);
         json.put(JSON_ENDTIME, over_time);
         json.put(JSON_EVALUETE, evaluete);
-
+        json.put(JSON_MEM, mem_name);
+        //json.put(JSON_PERCENT, percent);
         return json;
     }
     public String getMissionWorker() {
@@ -84,6 +93,38 @@ public class Mission {
 
     public void setMissionWorker(String missionWorker) {
         this.missionWorker = missionWorker;
+    }
+
+    public String getMem_name() {
+        return mem_name;
+    }
+
+    public void setMem_name(String mem_name) {
+        this.mem_name = mem_name;
+    }
+
+    public String getEvaluete() {
+        return evaluete;
+    }
+
+    public void setEvaluete(String evaluete) {
+        this.evaluete = evaluete;
+    }
+
+    public String getPercent() {
+        return percent + "%";
+    }
+
+    public void setPercent(int percent) {
+        this.percent = percent;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getContent() {
@@ -155,8 +196,12 @@ public class Mission {
         this.over_time = over_time;
     }
 
-    public int getStatus() {
-        return status;
+    public String getStatus() {
+        if(status == 0)
+            return "待完成";
+        if(status == 1)
+            return "已完成";
+        return null;
     }
 
     public void setStatus(int status) {

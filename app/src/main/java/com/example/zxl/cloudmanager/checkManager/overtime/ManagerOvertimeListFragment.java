@@ -190,6 +190,7 @@ public class ManagerOvertimeListFragment extends Fragment {
             OverTime mOverTime = overTimes.get(i);
 
             viewHolder.mOvertimeDateBegin.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mOverTime.getStart_time()));
+            viewHolder.mOvertimeDateEnd.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mOverTime.getEnd_time()));
             viewHolder.mOvertimeName.setText(mOverTime.getMem_name());
             viewHolder.mProject.setText(mOverTime.getWork_name());
 

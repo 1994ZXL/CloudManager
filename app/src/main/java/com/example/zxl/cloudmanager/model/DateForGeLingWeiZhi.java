@@ -25,7 +25,7 @@ public class DateForGeLingWeiZhi {
         time = time * 1000;
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(Long.valueOf(time));
-        SimpleDateFormat time=new SimpleDateFormat("yyyy年MM月dd   HH:mm:ss");
+        SimpleDateFormat time=new SimpleDateFormat("yyyy年MM月dd");
         data = time.format(cal.getTime());
         return data;
     }
