@@ -20,7 +20,10 @@ import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.MyPostFragment;
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.checkManager.travel.ManagerTravelListFragment;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
 import com.example.zxl.cloudmanager.model.PostLab;
 
@@ -46,6 +49,7 @@ public class LeaderPostSearchFragment extends Fragment {
     private Date endTime;
     private String edtime;
     private String name;
+    private String content;
 
     private ArrayList<Post> mPosts = new ArrayList<Post>();
     private int index;
@@ -70,6 +74,85 @@ public class LeaderPostSearchFragment extends Fragment {
         View v =  inflater.inflate(R.layout.leader_post_search, container, false);
         getActivity().getActionBar().setTitle("日报查询");
 
+        mEmployerName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                name = charSequence.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        mBeginTimeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
+                fragment.setTargetFragment(LeaderPostSearchFragment.this, 12);
+                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
+                fragment.show(getFragmentManager(), "LeaderPostSearchFragment");
+            }
+        });
+        mPostContent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
+                fragment.setTargetFragment(LeaderPostSearchFragment.this, 13);
+                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
+                fragment.show(getFragmentManager(), "LeaderPostSearchFragment");
+            }
+        });
+        mPostContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                content = charSequence.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        mSearchBtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                Fragment fragment = new ManagerTravelListFragment();
+                Bundle bundle = new Bundle();
+                bundle.putString(Link.mem_name, name);
+                if (null != bgtime) {
+                    bundle.putInt(Link.start_time_s, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(bgtime));
+                } else {
+                    bundle.putInt(Link.start_time_s, -1);
+                }
+                if (null != edtime) {
+                    bundle.putInt(Link.start_time_e, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(edtime));
+                } else {
+                    bundle.putInt(Link.start_time_e, -1);
+                }
+                bundle.putString(Link.status, content);
+                Log.d(TAG, "选择条件："
+                        + " mem_name: " + name
+                        + " start_time_s: " + bgtime
+                        + " start_time_e: " + edtime
+                        + " content: " + mPostContent);
+                fragment.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.addToBackStack(null);
+                transaction.replace(R.id.cmTravelActivity, fragment);
+                transaction.commit();
+            }
+        });
         init(v);
         control();
 
@@ -160,7 +243,7 @@ public class LeaderPostSearchFragment extends Fragment {
     }
 
     private void search() {
-        Fragment fragment = new MyPostFragment();
+        Fragment fragment = new LeaderPostListFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (!fragment.isAdded()) {
             transaction.hide(mFragment);

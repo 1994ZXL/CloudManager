@@ -1,12 +1,10 @@
-package com.example.zxl.cloudmanager;
+package com.example.zxl.cloudmanager.leaderSearch;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
-import android.content.Intent;
 import android.os.Bundle;
-
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,20 +12,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.zxl.cloudmanager.MyPostDetailFragment;
+import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
-import com.example.zxl.cloudmanager.leaderSearch.LeaderPostSearchActivity;
-import com.example.zxl.cloudmanager.leaderSearch.LeaderPostSearchFragment;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
-import com.example.zxl.cloudmanager.model.PostLab;
 import com.example.zxl.cloudmanager.myPost.MyPostSearchFragment;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -44,7 +38,7 @@ import cz.msebera.android.httpclient.Header;
 /**
  * Created by ZXL on 2016/7/12.
  */
-public class MyPostFragment extends ListFragment {
+public class LeaderPostListFragment extends ListFragment {
 
     private ArrayList<Post> mPosts = new ArrayList<Post>();
 
@@ -126,7 +120,7 @@ public class MyPostFragment extends ListFragment {
         if (!fragment.isAdded()) {
             transaction.addToBackStack(null);
             transaction.hide(mFragment);
-            transaction.add(R.id.postActivity, fragment);
+            transaction.add(R.id.blankActivity, fragment);
             transaction.commit();
         } else {
             transaction.hide(mFragment);
