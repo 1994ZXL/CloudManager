@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="20dp"
-    tools:context="com.example.zxl.cloudmanager.check.SearchCheckFragment"
+    tools:context=".check.myCheck.SearchCheckFragment"
     android:orientation="vertical">
 
     <ScrollView

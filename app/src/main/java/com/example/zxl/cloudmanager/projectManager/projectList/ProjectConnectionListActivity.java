@@ -3,8 +3,7 @@ package com.example.zxl.cloudmanager.projectManager.projectList;
 import android.app.Fragment;
 
 import com.example.zxl.cloudmanager.SingleFragmentActivity;
-import com.example.zxl.cloudmanager.publicSearch.bug.BugSearchFragment;
-import com.example.zxl.cloudmanager.publicSearch.list.ListSearchFragment;
+import com.example.zxl.cloudmanager.publicSearch.PSAddressBook.ListSearchFragment;
 
 public class ProjectConnectionListActivity extends SingleFragmentActivity {
 

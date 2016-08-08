@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".myPost.MyPostSearchFragment">
+    tools:context=".post.myPost.MyPostSearchFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,7 +27,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/post_submit_time"
+                        android:text="@string/my_post_create_time_hit"
                         android:layout_weight="1"
                         android:textSize="20dp"/>
 
@@ -39,6 +39,33 @@
                         android:layout_weight="0.3"/>
                     <Button
                         android:id="@+id/my_post_search_endTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/project_end_time_textview"
+                        android:layout_weight="0.3"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/my_post_post_time_hit"
+                        android:layout_weight="1"
+                        android:textSize="20dp"/>
+
+                    <Button
+                        android:id="@+id/my_post_search_post_begintTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/project_begin_time_textview"
+                        android:layout_weight="0.3"/>
+                    <Button
+                        android:id="@+id/my_post_search_post_endTime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/project_end_time_textview"

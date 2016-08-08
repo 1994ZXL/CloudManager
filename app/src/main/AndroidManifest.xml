@@ -33,67 +33,67 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".MyCheckActivity"
+        <activity android:name=".check.myCheck.MyCheckActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".MyMessageAcivity"
+        <activity android:name=".message.myMessage.MyMessageAcivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".MyLeaveActivity"
+        <activity android:name=".leave.myLeave.MyLeaveActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".MyMissionActivity"
+        <activity android:name=".mission.myMission.MyMissionActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".MyPostActivity"
+        <activity android:name=".post.myPost.MyPostActivity"
             android:parentActivityName=".MainActivity" >
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value=".MainActivity" />
         </activity>
-        <activity android:name=".MyUseCaseActivity"
+        <activity android:name=".usecase.myUseCase.MyUseCaseActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".MyBugActivity"
+        <activity android:name=".bug.myBug.MyBugActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".MyOverTimeActivity"
+        <activity android:name=".overtime.myOvertime.MyOverTimeActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".MyTravelActivity"
+        <activity android:name=".travel.myTravel.MyTravelActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".ManagerCheckAcitvity"
+        <activity android:name=".check.checkManager.ManagerCheckAcitvity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".ManagerLeaveActivity"
+        <activity android:name=".leave.checkManagerLeave.ManagerLeaveActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -105,7 +105,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".leave.LeaveSearchActivity"
+        <activity android:name=".leave.myLeave.MyLeaveSearchActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -113,13 +113,13 @@
         </activity>
 
         <!--公共查询-->
-        <activity android:name=".publicSearch.list.ProjectListSearchActivity"
+        <activity android:name=".publicSearch.PSAddressBook.ProjectListSearchActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".publicSearch.bug.ProjectBugSearchActivity"
+        <activity android:name=".bug.publicSearchBug.ProjectBugSearchActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -131,19 +131,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".publicSearch.project.PublicSearchActivity"
+        <activity android:name=".publicSearch.projectSearch.PublicSearchActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".publicSearch.usecase.UsecaseSearchActivity"
+        <activity android:name=".usecase.publicSearchUseCase.UsecaseSearchActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".publicSearch.plan.MissionSearchActivity"
+        <activity android:name=".mission.publicSearchMission.MissionSearchActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -151,31 +151,31 @@
         </activity>
 
         <!--领导查询-->
-        <activity android:name=".leaderSearch.LeaderCheckSearchActivity"
+        <activity android:name=".check.leader.LeaderCheckSearchActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".leaderSearch.LeaderOvertimeSearchActivity"
+        <activity android:name=".overtime.leader.LeaderOvertimeSearchActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".leaderSearch.LeaderTravelSearchActivity"
+        <activity android:name=".travel.leader.LeaderTravelSearchActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".leaderSearch.LeaderLeaveSearchActivity"
+        <activity android:name=".leave.leader.LeaderLeaveSearchActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".leaderSearch.LeaderPostSearchActivity"
+        <activity android:name=".post.leader.LeaderPostSearchActivity"
 
             android:parentActivityName=".MainActivity" >
             <meta-data
@@ -190,13 +190,13 @@
         </activity>
 
         <!--考勤主管-->
-        <activity android:name=".checkManager.overtime.ManagerOvertimeActivity"
+        <activity android:name=".overtime.checkManagerOverTime.ManagerOvertimeActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".checkManager.travel.ManagerTravelActivity"
+        <activity android:name=".travel.checkManagerTravel.ManagerTravelActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -204,13 +204,13 @@
         </activity>
 
         <!--项目主管-->
-        <activity android:name=".projectManager.bugDeal.ProjectBugDealActivity"
+        <activity android:name=".bug.projectManagerBug.ProjectBugDealActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".projectManager.manager.ProjectManagerActivity"
+        <activity android:name=".projectManager.PMAdressBook.ProjectManagerActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -222,7 +222,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".projectManager.mission.ProjectMissionManagerActivity"
+        <activity android:name=".mission.projectManagerMission.ProjectMissionManagerActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -234,7 +234,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".projectManager.usecase.ProjectManagerUsecaseActivity"
+        <activity android:name=".usecase.projectManagerUseCase.ProjectManagerUsecaseActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

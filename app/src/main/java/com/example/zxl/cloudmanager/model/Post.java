@@ -15,12 +15,14 @@ public class Post {
     private int report_time; //日报提交时间
     private String content; //日报内容
     private String daily_id; //日报id
+    private int state; //日报状态
 
 
     private static final String JSON_MEM_NAME = "mem_name";
     private static final String JSON_CREATE_TIME = "create_time";
     private static final String JSON_REPORT_TIME = "report_time";
     private static final String JSON_CONTENT = "content";
+    private static final String JSON_STATE = "state";
 
     public Post() {
 
@@ -41,6 +43,8 @@ public class Post {
             report_time = json.getInt(JSON_REPORT_TIME);
         if (json.has(JSON_CONTENT))
             content = json.getString(JSON_CONTENT);
+        if (json.has(JSON_STATE))
+            state = json.getInt(JSON_STATE);
     }
 
     public JSONObject toJSON() throws JSONException{
@@ -49,6 +53,7 @@ public class Post {
         json.put(JSON_CREATE_TIME, create_time);
         json.put(JSON_REPORT_TIME, report_time);
         json.put(JSON_CONTENT, content);
+        json.put(JSON_STATE, state);
         return json;
     }
 
