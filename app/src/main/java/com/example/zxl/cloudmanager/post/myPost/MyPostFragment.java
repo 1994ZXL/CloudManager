@@ -23,6 +23,7 @@ import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
+import com.example.zxl.cloudmanager.model.PostLab;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -105,12 +106,11 @@ public class MyPostFragment extends ListFragment {
                         JSONArray array = response.getJSONArray("data1");
                         Log.d(TAG, "array: " + array);
                         for (int i = 0; i < array.length(); i++) {
-                            mPosts.add(new Post(array.getJSONObject(i)));
+//                            mPosts.add(new Post(array.getJSONObject(i)));
+                            PostLab.newInstance(mFragment.getActivity()).setPosts(new Post(array.getJSONObject(i)));
                         }
-                        Log.d(TAG, "mPosts: " + mPosts);
-                        PostAdapter adapter = new PostAdapter(mPosts);
+                        PostAdapter adapter = new PostAdapter(PostLab.newInstance(mFragment.getActivity()).getPosts());
                         setListAdapter(adapter);
-
 
                     } else {
 
@@ -128,7 +128,7 @@ public class MyPostFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id){
         Post post= ((PostAdapter)getListAdapter()).getItem(position);
 
-        Fragment fragment = MyPostDetailFragment.newInstance(post);
+        Fragment fragment = MyPostDetailFragment.newInstance(post, position);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (!fragment.isAdded()) {
             transaction.addToBackStack(null);

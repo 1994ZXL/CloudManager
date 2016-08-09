@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.zxl.cloudmanager.Edit;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.User;
 
@@ -64,7 +65,7 @@ public class MyMessageFragment extends Fragment {
         mNameText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MessageEdit fragment = MessageEdit.newInstance(NAME_CHANGE, User.newInstance(mFragment.getActivity()).getName());
+                Edit fragment = Edit.newInstance(NAME_CHANGE, User.newInstance(mFragment.getActivity()).getName());
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.blankActivity, fragment);
                 transaction.addToBackStack(null);
@@ -76,7 +77,7 @@ public class MyMessageFragment extends Fragment {
         mPhoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MessageEdit fragment = MessageEdit.newInstance(PHONE_CHANGE, User.newInstance(mFragment.getActivity()).getPhone());
+                Edit fragment = Edit.newInstance(PHONE_CHANGE, User.newInstance(mFragment.getActivity()).getPhone());
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.blankActivity, fragment);
                 transaction.addToBackStack(null);
@@ -88,7 +89,7 @@ public class MyMessageFragment extends Fragment {
         mQQText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MessageEdit fragment = MessageEdit.newInstance(QQ_CHANGE, User.newInstance(mFragment.getActivity()).getQq());
+                Edit fragment = Edit.newInstance(QQ_CHANGE, User.newInstance(mFragment.getActivity()).getQq());
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.blankActivity, fragment);
                 transaction.addToBackStack(null);
@@ -100,7 +101,7 @@ public class MyMessageFragment extends Fragment {
         mWeChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MessageEdit fragment = MessageEdit.newInstance(WECHAT_CHANGE, User.newInstance(mFragment.getActivity()).getWechat());
+                Edit fragment = Edit.newInstance(WECHAT_CHANGE, User.newInstance(mFragment.getActivity()).getWechat());
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.blankActivity, fragment);
                 transaction.addToBackStack(null);
@@ -112,7 +113,7 @@ public class MyMessageFragment extends Fragment {
         mAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MessageEdit fragment = MessageEdit.newInstance(ADDRESS_CHANGE, User.newInstance(mFragment.getActivity()).getAddress());
+                Edit fragment = Edit.newInstance(ADDRESS_CHANGE, User.newInstance(mFragment.getActivity()).getAddress());
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.blankActivity, fragment);
                 transaction.addToBackStack(null);

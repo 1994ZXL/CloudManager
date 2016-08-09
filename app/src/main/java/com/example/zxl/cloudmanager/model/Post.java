@@ -3,9 +3,6 @@ package com.example.zxl.cloudmanager.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 /**
  * Created by ZXL on 2016/7/12.
  */
@@ -23,6 +20,7 @@ public class Post {
     private static final String JSON_REPORT_TIME = "report_time";
     private static final String JSON_CONTENT = "content";
     private static final String JSON_STATE = "state";
+    private static final String JSON_DAILY_ID = "daily_id";
 
     public Post() {
 
@@ -45,6 +43,8 @@ public class Post {
             content = json.getString(JSON_CONTENT);
         if (json.has(JSON_STATE))
             state = json.getInt(JSON_STATE);
+        if (json.has(JSON_DAILY_ID))
+            daily_id = json.getString(JSON_DAILY_ID);
     }
 
     public JSONObject toJSON() throws JSONException{
@@ -54,12 +54,15 @@ public class Post {
         json.put(JSON_REPORT_TIME, report_time);
         json.put(JSON_CONTENT, content);
         json.put(JSON_STATE, state);
+        json.put(JSON_DAILY_ID, daily_id);
         return json;
     }
 
     public String getMem_name() {
         return mem_name;
     }
+
+
 
     public void setMem_name(String mem_name) {
         this.mem_name = mem_name;

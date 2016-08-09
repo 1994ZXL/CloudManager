@@ -10,7 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.zxl.cloudmanager.message.myMessage.MessageEdit;
+import com.example.zxl.cloudmanager.Edit;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.Mission;
 
@@ -72,7 +72,7 @@ public class MissionManagerEditFragment extends Fragment {
         mContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MessageEdit fragment = MessageEdit.newInstance(MISSION_CONTENT, sMission.getContent());
+                Edit fragment = Edit.newInstance(MISSION_CONTENT, sMission.getContent());
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.blankActivity, fragment);
                 transaction.addToBackStack(null);
@@ -82,7 +82,7 @@ public class MissionManagerEditFragment extends Fragment {
         mDetailContent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MessageEdit fragment = MessageEdit.newInstance(CONTENT_INTRODUCE, sMission.getDetailContent());
+                Edit fragment = Edit.newInstance(CONTENT_INTRODUCE, sMission.getDetailContent());
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.blankActivity, fragment);
                 transaction.addToBackStack(null);
@@ -92,7 +92,7 @@ public class MissionManagerEditFragment extends Fragment {
         mMissionWorker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MessageEdit fragment = MessageEdit.newInstance(MISSION_WOKER, sMission.getMissionWorker());
+                Edit fragment = Edit.newInstance(MISSION_WOKER, sMission.getMissionWorker());
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.blankActivity, fragment);
                 transaction.addToBackStack(null);

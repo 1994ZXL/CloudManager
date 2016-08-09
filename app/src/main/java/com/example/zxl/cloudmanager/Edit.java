@@ -1,4 +1,4 @@
-package com.example.zxl.cloudmanager.message.myMessage;
+package com.example.zxl.cloudmanager;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -15,14 +15,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
-import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.Mission;
+import com.example.zxl.cloudmanager.model.PostLab;
 import com.example.zxl.cloudmanager.model.User;
 
 /**
  * Created by ZXL on 2016/7/18.
  */
-public class MessageEdit extends Fragment{
+public class Edit extends Fragment{
     private EditText mEdit;
     private TextView mEditTextView;
     private static String EXTRA_VALUE = "message";
@@ -41,12 +41,12 @@ public class MessageEdit extends Fragment{
         mFragment = this;
     }
 
-    public static MessageEdit newInstance(String title, String value) {
+    public static Edit newInstance(String title, String value) {
         Bundle args = new Bundle();
         args.putSerializable(EXTRA_VALUE, value);
         args.putSerializable(EXTRA_TITLE, title);
 
-        MessageEdit fragment = new MessageEdit();
+        Edit fragment = new Edit();
         fragment.setArguments(args);
         return fragment;
     }
@@ -93,11 +93,11 @@ public class MessageEdit extends Fragment{
             User.newInstance(mFragment.getActivity()).setWechat(charSequence.toString());
         } else if (title == "地址修改") {
             User.newInstance(mFragment.getActivity()).setAddress(charSequence.toString());
-        }else if (title == "任务内容修改") {
+        } else if (title == "任务内容修改") {
             Mission.newInstance(mFragment.getActivity()).setContent(charSequence.toString());
-        }else if (title == "内容详情修改") {
+        } else if (title == "内容详情修改") {
             Mission.newInstance(mFragment.getActivity()).setDetailContent(charSequence.toString());
-        }else if (title == "任务人员修改") {
+        } else if (title == "任务人员修改") {
             Mission.newInstance(mFragment.getActivity()).setMissionWorker(charSequence.toString());
         }
     }
