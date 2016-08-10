@@ -89,14 +89,14 @@ public class MyCheckDetailFragment extends Fragment{
             stipulaitonOffDuty.setText("——");
         }
 
-        if (mCheck.getAtt_date_start() == 0) {
+        if (mCheck.getS_att_time() == 0) {
             onDuty.setText("——");
         }else {
-            onDuty.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mCheck.getAtt_date_start()));
+            onDuty.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mCheck.getS_att_time()));
         }
 
-        if (mCheck.getAtt_date_end() == 0) {
-            offDuty.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mCheck.getAtt_date_end()));
+        if (mCheck.getE_att_time() == 0) {
+            offDuty.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mCheck.getE_att_time()));
         } else {
             offDuty.setText("——");
         }
