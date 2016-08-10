@@ -56,11 +56,11 @@ public class PSListDetailFragment extends Fragment {
         sexSpinner.setAdapter(adapter);
 
         /*TODO:项目通讯录模型*/
-        mProjectName.setText(User.newInstance(mFragment.getActivity()).getName());
+        mProjectName.setText(User.newInstance(mFragment.getActivity()).getUser_name());
         mProjectName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Edit fragment = Edit.newInstance(NAME_CHANGE, User.newInstance(mFragment.getActivity()).getName());
+                Edit fragment = Edit.newInstance(NAME_CHANGE, User.newInstance(mFragment.getActivity()).getUser_name());
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.blankActivity, fragment);
                 transaction.addToBackStack(null);

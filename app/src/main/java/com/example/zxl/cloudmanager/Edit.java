@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
 
 import com.example.zxl.cloudmanager.model.Mission;
-import com.example.zxl.cloudmanager.model.PostLab;
 import com.example.zxl.cloudmanager.model.User;
 
 /**
@@ -84,7 +83,7 @@ public class Edit extends Fragment{
     private void changeValue(CharSequence charSequence) {
         String title = (String) getArguments().getSerializable(EXTRA_TITLE);
         if (title == "名字修改") {
-            User.newInstance(mFragment.getActivity()).setName(charSequence.toString());
+            User.newInstance(mFragment.getActivity()).setUser_name(charSequence.toString());
         } else if (title == "手机修改") {
             User.newInstance(mFragment.getActivity()).setPhone(charSequence.toString());
         } else if (title == "QQ修改") {
@@ -105,7 +104,7 @@ public class Edit extends Fragment{
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.message_edit, menu);
+        inflater.inflate(R.menu.message_save, menu);
     }
 
     @Override

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
+import com.example.zxl.cloudmanager.check.myCheck.MyCheckDetailFragment;
 import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.Link;
 import com.loopj.android.http.AsyncHttpClient;
@@ -100,7 +101,7 @@ public class ManagerCheckListFragment extends Fragment {
                             myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
-                                    Fragment fragment = new ManagerCheckEditFragment();
+                                    Fragment fragment = MyCheckDetailFragment.newInstance(data);
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     if (!fragment.isAdded()) {
                                         transaction.addToBackStack(null);

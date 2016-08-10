@@ -61,11 +61,11 @@ public class MyMessageFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sexSpinner.setAdapter(adapter);
 
-        mNameText.setText(User.newInstance(mFragment.getActivity()).getName());
+        mNameText.setText(User.newInstance(mFragment.getActivity()).getUser_name());
         mNameText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Edit fragment = Edit.newInstance(NAME_CHANGE, User.newInstance(mFragment.getActivity()).getName());
+                Edit fragment = Edit.newInstance(NAME_CHANGE, User.newInstance(mFragment.getActivity()).getUser_name());
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.blankActivity, fragment);
                 transaction.addToBackStack(null);

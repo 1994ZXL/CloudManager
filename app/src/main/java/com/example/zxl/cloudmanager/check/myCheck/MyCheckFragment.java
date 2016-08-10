@@ -60,12 +60,12 @@ public class MyCheckFragment extends Fragment {
     private String key = "";
 
     private Fragment mFragment;
-
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
         mFragment = this;
+
     }
 
     @Override
@@ -92,8 +92,6 @@ public class MyCheckFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View v = layoutInflater.inflate(R.layout.main_fragment_my_check, parent, false);
-
-
         getActivity().getActionBar().setTitle("我的考勤");
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_check_pull_to_refresh);
@@ -111,6 +109,7 @@ public class MyCheckFragment extends Fragment {
 
         saveInstanceState = getArguments();
         if (null != saveInstanceState) {
+
             try {
 
                 if (-1 != saveInstanceState.getInt(Link.att_date_start)) {
@@ -120,16 +119,18 @@ public class MyCheckFragment extends Fragment {
                     keyObj.put(Link.att_date_end, saveInstanceState.getInt(Link.att_date_end));
                 }
 
-                keyObj.put(Link.mem_id, saveInstanceState.getInt(Link.mem_id));
-
-                key = DESCryptor.Encryptor(keyObj.toString());
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            mParams.put("key", key);
         }
+        try {
+            keyObj.put(Link.mem_id, "d075ee12479c7f197d6fc856dcf79256");
+            key = DESCryptor.Encryptor(keyObj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mParams.put("key", key);
         Log.d(TAG, "key: " + key);
-
         mHttpc.post(Link.localhost + "my_punch&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -140,6 +141,7 @@ public class MyCheckFragment extends Fragment {
                         for (int i = 0; i < array.length(); i++) {
                             checks.add(new Check(array.getJSONObject(i)));
                         }
+                        Log.d(TAG, "checks: " + checks);
                         mRecyclerView = (RecyclerView)v.findViewById(R.id.check_recyclerview);
                         mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -204,8 +206,17 @@ public class MyCheckFragment extends Fragment {
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             Check check = checks.get(i);
             viewHolder.mCheckLocation.setText(check.getPuncher_name());
-            viewHolder.mDutyTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(check.getAtt_date_start()));
-            viewHolder.mOffDutyTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(check.getAtt_date_end()));
+            viewHolder.mDate.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(check.getAtt_date()));
+            if (check.getS_att_time() != 0) {
+                viewHolder.mDutyTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(check.getS_att_time()));
+            } else {
+                viewHolder.mDutyTime.setText("--");
+            }
+            if (check.getE_att_time() != 0) {
+                viewHolder.mOffDutyTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(check.getE_att_time()));
+            } else {
+                viewHolder.mOffDutyTime.setText("--");
+            }
             viewHolder.itemView.setTag(checks.get(i));
         }
 

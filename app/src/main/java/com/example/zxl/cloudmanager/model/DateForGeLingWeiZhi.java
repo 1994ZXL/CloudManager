@@ -30,6 +30,16 @@ public class DateForGeLingWeiZhi {
         return data;
     }
 
+    public static String fromGeLinWeiZhi2(int gmtime) {
+        time = (long) gmtime;
+        time = time * 1000;
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(Long.valueOf(time));
+        SimpleDateFormat time=new SimpleDateFormat("yyyy年MM月dd HH:mm:ss");
+        data = time.format(cal.getTime());
+        return data;
+    }
+
     public static int toGeLinWeiZhi(String date) {
         SimpleDateFormat time=new SimpleDateFormat("yyyy年MM月dd");
         try {

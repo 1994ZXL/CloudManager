@@ -48,8 +48,6 @@ public class SearchCheckFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
         this.mFragment = this;
     }
 
@@ -64,7 +62,7 @@ public class SearchCheckFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
-                fragment.setTargetFragment(SearchCheckFragment.this, 17);
+                fragment.setTargetFragment(SearchCheckFragment.this, 12);
                 fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
                 fragment.show(getFragmentManager(), "MyLeaveApplyFragment");
             }
@@ -73,7 +71,7 @@ public class SearchCheckFragment extends Fragment {
             @Override
             public void onClick(View v){
                 DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
-                fragment.setTargetFragment(SearchCheckFragment.this, 18);
+                fragment.setTargetFragment(SearchCheckFragment.this, 13);
                 fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
                 fragment.show(getFragmentManager(), "MyLeaveApplyFragment");
             }
@@ -94,7 +92,7 @@ public class SearchCheckFragment extends Fragment {
 
         Fragment fragment = new MyCheckFragment();
         Bundle bundle = new Bundle();
-
+        bundle.putString("where", "SearchCheckFragment");
         if (null != bgtime) {
             bundle.putInt(Link.att_date_start, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(bgtime));
         } else {

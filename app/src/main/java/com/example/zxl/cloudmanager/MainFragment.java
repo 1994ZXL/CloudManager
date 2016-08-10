@@ -14,6 +14,7 @@ import com.example.zxl.cloudmanager.bug.myBug.MyBugActivity;
 import com.example.zxl.cloudmanager.check.checkManager.ManagerCheckAcitvity;
 import com.example.zxl.cloudmanager.check.myCheck.MyCheckActivity;
 import com.example.zxl.cloudmanager.leave.checkManagerLeave.ManagerLeaveActivity;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.usecase.myUseCase.MyUseCaseActivity;
 import com.example.zxl.cloudmanager.overtime.checkManagerOverTime.ManagerOvertimeActivity;
 import com.example.zxl.cloudmanager.travel.checkManagerTravel.ManagerTravelActivity;
@@ -153,18 +154,18 @@ public class MainFragment extends Fragment {
         onClickListener(pmMissionImage, new ProjectMissionManagerActivity());
         onClickListener(pmUsecaseImage, new ProjectManagerUsecaseActivity());
 
-        mSignBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                sign();
-            }
-        });
-        mOffSignBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                offSign();
-            }
-        });
+//        mSignBtn.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                sign();
+//            }
+//        });
+//        mOffSignBtn.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v){
+//                offSign();
+//            }
+//        });
         return v;
     }
 
@@ -226,22 +227,22 @@ public class MainFragment extends Fragment {
         });
     }
 
-    private void sign() {
-        mSignTime = android.text.format.DateFormat.format("yyyy.M.dd   HH:mm:ss", getTime()).toString();
-        Check check = new Check();
-        check.setDutyTime(mSignTime);
-        CheckLab.newInstance(mFragment.getActivity()).add(check);
-        mSignBtn.setText(mSignTime);
-        mSignBtn.setClickable(false);
-    }
-
-    private void offSign() {
-        mOffSignTime = android.text.format.DateFormat.format("yyyy.M.dd   HH:mm:ss", getTime()).toString();
-        mChecks = CheckLab.newInstance(mFragment.getActivity()).get();
-        mChecks.get(mChecks.size() - 1).setOffDutyTime(mOffSignTime);
-        mOffSignBtn.setText(mOffSignTime);
-        mOffSignBtn.setClickable(false);
-    }
+//    private void sign() {
+//        mSignTime = android.text.format.DateFormat.format("yyyy.M.dd   HH:mm:ss", getTime()).toString();
+//        Check check = new Check();
+//        check.setS_att_time(DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(mSignTime));
+//        CheckLab.newInstance(mFragment.getActivity()).add(check);
+//        mSignBtn.setText(mSignTime);
+//        mSignBtn.setClickable(false);
+//    }
+//
+//    private void offSign() {
+//        mOffSignTime = android.text.format.DateFormat.format("yyyy.M.dd   HH:mm:ss", getTime()).toString();
+//        mChecks = CheckLab.newInstance(mFragment.getActivity()).get();
+//        mChecks.get(mChecks.size() - 1).sete(mOffSignTime);
+//        mOffSignBtn.setText(mOffSignTime);
+//        mOffSignBtn.setClickable(false);
+//    }
 
     private Date getTime() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");

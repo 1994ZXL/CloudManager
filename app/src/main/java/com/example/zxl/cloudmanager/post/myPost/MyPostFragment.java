@@ -86,16 +86,22 @@ public class MyPostFragment extends ListFragment {
                 if (null != saveInstanceState.getString(Link.content)) {
                     keyObj.put(Link.content, saveInstanceState.getInt(Link.content));
                 }
-                keyObj.put("sort", "desc");
-                keyObj.put("page_count", 20);
-                keyObj.put("curl_page", 1);
 
-                key = DESCryptor.Encryptor(keyObj.toString());
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            mParams.put("key", key);
+
         }
+
+        try {
+            keyObj.put("sort", "create_time desc");
+            keyObj.put("page_count", 20);
+            keyObj.put("curl_page", 1);
+            key = DESCryptor.Encryptor(keyObj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mParams.put("key", key);
         Log.d(TAG, "key: " + key);
 
         mHttpc.post(Link.localhost + "my_daily&act=get_list", mParams, new JsonHttpResponseHandler() {
