@@ -1,4 +1,4 @@
-package com.example.zxl.cloudmanager.memo;
+package com.example.zxl.cloudmanager.Memo;
 
 import android.app.Fragment;
 import android.app.FragmentManager;

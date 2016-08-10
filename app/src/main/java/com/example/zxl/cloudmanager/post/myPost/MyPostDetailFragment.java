@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.example.zxl.cloudmanager.Edit;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DESCryptor;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
 import com.example.zxl.cloudmanager.model.PostLab;
@@ -39,6 +40,7 @@ import cz.msebera.android.httpclient.Header;
  */
 public class MyPostDetailFragment extends Fragment {
 
+    private static final String TAG = "MPDetailFragment";
     private TextView mName;
     private EditText mContent;
     private TextView mSubmitTime;
@@ -59,9 +61,8 @@ public class MyPostDetailFragment extends Fragment {
 
     private String content;
 
-    public static MyPostDetailFragment newInstance(Post post, int position) {
+    public static MyPostDetailFragment newInstance(Post post) {
         sPost = post;
-        mPosition = position;
         MyPostDetailFragment fragment = new MyPostDetailFragment();
         return fragment;
     }
@@ -71,8 +72,8 @@ public class MyPostDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         this.setHasOptionsMenu(true);
         mFragment = this;
-        ImageButton mBtn = (ImageButton) getActivity().findViewById(R.id.my_post_activity_searchBtn);
-        mBtn.setVisibility(View.INVISIBLE);
+        //ImageButton mBtn = (ImageButton) getActivity().findViewById(R.id.my_post_activity_searchBtn);
+       // mBtn.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -111,15 +112,15 @@ public class MyPostDetailFragment extends Fragment {
 
             }
         });
-        mSubmitTime.setText(sPost.getReport_time());
-        mCreateTime.setText(sPost.getCreate_time());
+        mSubmitTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sPost.getReport_time()));
+        mCreateTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sPost.getCreate_time()));
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        ImageButton mBtn = (ImageButton) getActivity().findViewById(R.id.my_post_activity_searchBtn);
-        mBtn.setVisibility(View.VISIBLE);
+        /*ImageButton mBtn = (ImageButton) getActivity().findViewById(R.id.my_post_activity_searchBtn);
+        mBtn.setVisibility(View.VISIBLE);*/
     }
 
     @Override
@@ -140,6 +141,7 @@ public class MyPostDetailFragment extends Fragment {
                     e.printStackTrace();
                 }
                 mParams.put("key", key);
+                Log.d(TAG,"key:" + key);
                 mHttpc.post(Link.localhost + "my_daily&act=edit", mParams, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {

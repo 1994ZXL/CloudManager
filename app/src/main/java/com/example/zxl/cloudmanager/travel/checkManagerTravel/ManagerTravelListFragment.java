@@ -73,7 +73,10 @@ public class ManagerTravelListFragment extends ListFragment {
                 if (-1 != saveInstanceState.getInt(Link.over_time_e)) {
                     keyObj.put(Link.over_time_e, saveInstanceState.getInt(Link.over_time_e));
                 }
-                keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
+                keyObj.put("sort", "desc");
+                keyObj.put("page_count", 20);
+                keyObj.put("curl_page", 1);
+                //keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
 
                 key = DESCryptor.Encryptor(keyObj.toString());
             } catch (Exception e) {

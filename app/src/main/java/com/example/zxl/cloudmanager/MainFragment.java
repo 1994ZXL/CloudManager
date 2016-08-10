@@ -33,7 +33,7 @@ import com.example.zxl.cloudmanager.overtime.myOvertime.MyOverTimeActivity;
 import com.example.zxl.cloudmanager.bug.projectManagerBug.ProjectBugDealActivity;
 import com.example.zxl.cloudmanager.projectManager.PMAdressBook.ProjectManagerActivity;
 import com.example.zxl.cloudmanager.projectManager.memberManager.ProjectMemberManagerActivity;
-import com.example.zxl.cloudmanager.mission.projectManagerMission.ProjectMissionManagerActivity;
+import com.example.zxl.cloudmanager.mission.ProjectManagerMission.ProjectMissionManagerActivity;
 import com.example.zxl.cloudmanager.projectManager.projectList.ProjectConnectionListActivity;
 import com.example.zxl.cloudmanager.usecase.projectManagerUseCase.ProjectManagerUsecaseActivity;
 import com.example.zxl.cloudmanager.bug.publicSearchBug.ProjectBugSearchActivity;

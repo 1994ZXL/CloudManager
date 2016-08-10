@@ -184,7 +184,7 @@ public class MyPostSearchFragment extends Fragment {
                 fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.addToBackStack(null);
-                transaction.replace(R.id.blankActivity, fragment);
+                transaction.replace(R.id.postActivity, fragment);
                 transaction.commit();
             }
         });

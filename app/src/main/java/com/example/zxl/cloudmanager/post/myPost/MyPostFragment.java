@@ -128,7 +128,7 @@ public class MyPostFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id){
         Post post= ((PostAdapter)getListAdapter()).getItem(position);
 
-        Fragment fragment = MyPostDetailFragment.newInstance(post, position);
+        Fragment fragment = MyPostDetailFragment.newInstance(post);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (!fragment.isAdded()) {
             transaction.addToBackStack(null);
