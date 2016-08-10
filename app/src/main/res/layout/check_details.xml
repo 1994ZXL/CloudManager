@@ -39,22 +39,6 @@
                         android:gravity="center"
                         android:id="@+id/check_details_name"/>
                 </LinearLayout>
-                <!-- 项目-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/project" />
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/check_details_project"/>
-                </LinearLayout>
                 <!-- 考勤点-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -98,7 +82,21 @@
                 android:padding="16dp"
                 android:orientation="vertical"
                 android:background="@color/white">
-
+                <!-- 考勤日期-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:text="@string/check_date"/>
+                    <TextView
+                        style="@style/font"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:id="@+id/check_details_check_date" />
+                </LinearLayout>
                 <!-- 规定上班时间-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -162,7 +160,7 @@
                         android:gravity="center"
                         android:id="@+id/check_details_offduty_sign_time"/>
                 </LinearLayout>
-                <!-- 上班处理时间-->
+                <!-- 迟到分钟数-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -171,14 +169,14 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:text="@string/duty_manage_time"/>
+                        android:text="@string/late_min"/>
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:id="@+id/check_details_duty_manage_time"/>
+                        android:id="@+id/check_details_late_min"/>
                 </LinearLayout>
-                <!-- 下班处理时间-->
+                <!-- 早退分钟数-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -187,12 +185,12 @@
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
-                        android:text="@string/offduty_manage_time"/>
+                        android:text="@string/early_min"/>
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:id="@+id/check_details_offduty_manage_time"/>
+                        android:id="@+id/check_details_early_min"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -205,22 +203,6 @@
                 android:padding="16dp"
                 android:orientation="vertical"
                 android:background="@color/white">
-
-                <!-- 处理状态-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/manage_state"/>
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/check_details_manage_state"/>
-                </LinearLayout>
                 <!-- 请假-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -268,22 +250,6 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:id="@+id/check_details_work_travel"/>
-                </LinearLayout>
-                <!-- 迟到-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/late"/>
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/check_details_late"/>
                 </LinearLayout>
 
             </LinearLayout>

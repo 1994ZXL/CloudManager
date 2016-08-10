@@ -77,7 +77,7 @@ public class ManagerCheckListFragment extends Fragment {
             }
         });
 
-        mHttpc.post(Link.localhost + "manage_puncher&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + "manage_punch&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 if (statusCode == 200) {
@@ -155,9 +155,8 @@ public class ManagerCheckListFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             Check check = checks.get(i);
-            viewHolder.mState.setText(check.getState());
             viewHolder.mName.setText(check.getMem_name());
-            viewHolder.mCheckLocation.setText(check.getCheckLocation());
+            viewHolder.mCheckLocation.setText(check.getPuncher_name());
             viewHolder.itemView.setTag(checks.get(i));
         }
 

@@ -19,7 +19,9 @@ import android.widget.Toast;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.CheckLab;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.Link;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -27,45 +29,19 @@ import java.util.Date;
 public class SearchCheckFragment extends Fragment {
     private Check check;
 
-    private Button mBeginTimeBtn;
-    private Button mEndTimeBtn;
-    private Spinner mLateSpinner;
-    private Spinner mEarlySpinner;
-    private Spinner mLeaveSpinner;
-    private Spinner mTravelSpinner;
-    private Spinner mOverTimeSpinner;
+    private Button beginTimeButton;
+    private Button endTimeButton;
+
     private Button mSearchBtn;
 
-    private static final String[] list={"未选择","否", "是"};
-    private ArrayAdapter<String> adapter;
-
-    private String lateSearch;
-    private boolean latecompare;
-    private boolean lateselect = false;
-    private String earlySearch;
-    private boolean earlycompare;
-    private boolean earlyselect = false;
-    private String leaveSearch;
-    private boolean leavecompare;
-    private boolean leaveselect = false;
-    private String travelSearch;
-    private boolean travelcompare;
-    private boolean travelselect = false;
-    private String overTimeSearch;
-    private boolean overtimecompare;
-    private boolean overtimeselect = false;
-    private ArrayList<Boolean> mCompares = new ArrayList<Boolean>();
-    private ArrayList<Boolean> mSelect = new ArrayList<Boolean>();
-    private String compare;
-
     private Date beginTime;
+    private String bgtime;
     private Date endTime;
+    private String edtime;
 
     private static final String TAG = "SearchCheckFragment";
-    private static final String SEARCH_KEY = "search_key";
 
     private ArrayList<Check> mChecks = new ArrayList<Check>();
-    private ArrayList<Integer> sum = new ArrayList<Integer>();
 
     private Fragment mFragment;
 
@@ -83,91 +59,20 @@ public class SearchCheckFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_search_check, container, false);
         getActivity().getActionBar().setTitle("考勤查询");
         init(v);
-        adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mLateSpinner.setAdapter(adapter);
-        mLateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                lateSearch = list[i];
-                adapterView.setVisibility(View.VISIBLE);
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        mEarlySpinner.setAdapter(adapter);
-        mEarlySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                earlySearch = list[i];
-                adapterView.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        mTravelSpinner.setAdapter(adapter);
-        mTravelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                travelSearch = list[i];
-                adapterView.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        mLeaveSpinner.setAdapter(adapter);
-        mLeaveSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                leaveSearch = list[i];
-                adapterView.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        mOverTimeSpinner.setAdapter(adapter);
-        mOverTimeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                overTimeSearch = list[i];
-                adapterView.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        mBeginTimeBtn.setOnClickListener(new View.OnClickListener() {
+        beginTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 17);
+                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
                 fragment.setTargetFragment(SearchCheckFragment.this, 17);
                 fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
                 fragment.show(getFragmentManager(), "MyLeaveApplyFragment");
             }
         });
-        mEndTimeBtn.setOnClickListener(new View.OnClickListener(){
+        endTimeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 18);
+                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
                 fragment.setTargetFragment(SearchCheckFragment.this, 18);
                 fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
                 fragment.show(getFragmentManager(), "MyLeaveApplyFragment");
@@ -177,7 +82,6 @@ public class SearchCheckFragment extends Fragment {
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "被点击");
                 search();
             }
         });
@@ -185,58 +89,23 @@ public class SearchCheckFragment extends Fragment {
         return v;
     }
 
-    private String compare(int i) {
-        mSelect.add(lateselect);
-        mSelect.add(leaveselect);
-        mSelect.add(travelselect);
-        mSelect.add(overtimeselect);
-
-        mCompares.add(latecompare);
-        mCompares.add(leavecompare);
-        mCompares.add(travelcompare);
-        mCompares.add(overtimecompare);
-
-        if (null != lateSearch) {
-            latecompare = mChecks.get(i).getLate().equals(lateSearch);
-            lateselect = true;
-        }
-        if (null != leaveSearch) {
-            leavecompare = mChecks.get(i).getLeave().equals(leaveSearch);
-            leaveselect = true;
-        }
-        if (null != travelSearch) {
-            travelcompare = mChecks.get(i).getTravel().equals(travelSearch);
-            travelselect = true;
-        }
-        if (null != overTimeSearch) {
-            overtimecompare = mChecks.get(i).getOverTime().equals(overTimeSearch);
-            overtimeselect = true;
-        }
-        for(int j = 0; j < mSelect.size(); j++) {
-            if (mSelect.get(j)) {
-                if (j != mSelect.size() - 1){
-                    compare += mCompares.get(j);
-                    compare += "&&";
-                } else {
-                    compare += mCompares.get(j);
-                }
-            }
-        }
-        return compare;
-    }
-
-
     private void search() {
         mChecks = CheckLab.newInstance(mFragment.getActivity()).get();
 
-        for (int i = 0; i < mChecks.size(); i++) {
-//            if (compare(i)) {
-//                sum.add(i);
-//            }
-        }
         Fragment fragment = new MyCheckFragment();
         Bundle bundle = new Bundle();
-        bundle.putIntegerArrayList(SEARCH_KEY, sum);
+
+        if (null != bgtime) {
+            bundle.putInt(Link.att_date_start, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(bgtime));
+        } else {
+            bundle.putInt(Link.att_date_start, -1);
+        }
+        if (null != edtime) {
+            bundle.putInt(Link.att_date_end, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(edtime));
+        } else {
+            bundle.putInt(Link.att_date_end, -1);
+        }
+
         fragment.setArguments(bundle);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (!fragment.isAdded()) {
@@ -251,33 +120,42 @@ public class SearchCheckFragment extends Fragment {
     }
 
     private void init(View v){
-        mBeginTimeBtn = (Button)v.findViewById(R.id.check_begin_time_button);
-        mLateSpinner = (Spinner) v.findViewById(R.id.check_late_time_sprinner);
-        mLeaveSpinner = (Spinner) v.findViewById(R.id.check_leave_sprinner);
-        mEarlySpinner = (Spinner) v.findViewById(R.id.check_leave_early_sprinner);
-        mTravelSpinner = (Spinner) v.findViewById(R.id.check_travel_sprinner);
-        mOverTimeSpinner = (Spinner) v.findViewById(R.id.check_overtime_sprinner);
-        mEndTimeBtn = (Button) v.findViewById(R.id.check_end_time_button);
+        beginTimeButton = (Button)v.findViewById(R.id.check_begin_time_button);
+        endTimeButton = (Button) v.findViewById(R.id.check_end_time_button);
         mSearchBtn = (Button) v.findViewById(R.id.search_check_search_button);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "进入回调");
+        Log.d(TAG, "进入回调 " + " resultCode:" + requestCode);
         if (resultCode != Activity.RESULT_OK){
+            Log.d(TAG, "未进入判断");
             return;
-        }else if (requestCode == 17) {
+        } else if (requestCode == 12) {
             beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            mBeginTimeBtn.setText(android.text.format.DateFormat.format("yyyy.M.dd", beginTime));
-        }else if (requestCode == 18) {
+            updateBeginDate();
+        } else if (requestCode == 13) {
             endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            if (endTime.after(beginTime)) {
-                mEndTimeBtn.setText(android.text.format.DateFormat.format("yyyy.M.dd", endTime));
-            } else {
-                Toast.makeText(getActivity(),
-                        R.string.time_erro,
-                        Toast.LENGTH_SHORT).show();
-            }
+            updateEndDate();
+        }
+    }
+
+    private void updateBeginDate(){
+        bgtime = android.text.format.DateFormat.format("yyyy年MM月dd", beginTime).toString();
+        Log.d(TAG, "bgtime: " + bgtime);
+        beginTimeButton.setText(bgtime);
+        Log.d(TAG, "beginTimeButton: " + beginTimeButton.getText());
+    }
+    private void updateEndDate(){
+        if (endTime.after(beginTime)) {
+            edtime = android.text.format.DateFormat.format("yyyy年MM月dd", endTime).toString();
+            Log.d(TAG, "edtime: " + edtime);
+            endTimeButton.setText(edtime);
+            Log.d(TAG, "endTimeButton: " + endTimeButton.getText());
+        } else {
+            Toast.makeText(getActivity(),
+                    R.string.time_erro,
+                    Toast.LENGTH_SHORT).show();
         }
     }
 }

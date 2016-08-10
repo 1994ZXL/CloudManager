@@ -6,22 +6,20 @@ import android.content.Context;
  * Created by ZXL on 2016/7/18.
  */
 public class User {
-    private String name;
+    private String user_name;
+    private String password;
     private String phone;
     private String qq;
     private String wechat;
     private String address;
+    private String user_type;
     private static User sUser;
 
     private Context context;
 
     private User(Context context) {
         this.context = context;
-        name = "张三";
-        phone = "12345678987";
-        qq = "123456";
-        wechat = "18296374185";
-        address = "公司";
+
     }
 
     public static User newInstance(Context context) {
@@ -31,12 +29,28 @@ public class User {
         return sUser;
     }
 
-    public String getName() {
-        return name;
+    public String getUser_name() {
+        return user_name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUser_type() {
+        return user_type;
+    }
+
+    public void setUser_type(String user_type) {
+        this.user_type = user_type;
     }
 
     public String getPhone() {

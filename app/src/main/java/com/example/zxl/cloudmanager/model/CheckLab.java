@@ -67,12 +67,12 @@ public class CheckLab {
         return sCheckLab;
     }
 
-    private void setChecks(String[] content) {
-        Check check = new Check();
-        check.setContent(content);
-        Log.d("CheckLab", check.getMem_name());
-        mChecks.add(check);
-    }
+//    private void setChecks(String[] content) {
+//        Check check = new Check();
+//        check.setContent(content);
+//        Log.d("CheckLab", check.getMem_name());
+//        mChecks.add(check);
+//    }
 
     public ArrayList<Check> get() {
         return mChecks;

@@ -6,17 +6,25 @@ import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.example.zxl.cloudmanager.Edit;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.Check;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.Link;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -27,33 +35,18 @@ import java.util.Date;
  * Created by ZXL on 2016/7/14.
  */
 public class ManagerCheckQueryFragment extends Fragment {
+    private static final String TAG = "MCQFragment";
 
     private Button mBeginTimeBtn;
     private Button mEndTimeBtn;
-    private Spinner mLateSpinner;
-    private Spinner mEarlySpinner;
-    private Spinner mLeaveSpinner;
-    private Spinner mTravelSpinner;
-    private Spinner mOverTimeSpinner;
+    private EditText mName;
     private Button mQueryButton;
 
-    private static final String[] list={"否", "是"};
-    private ArrayAdapter<String> adapter;
-
-    private Date checkTime;
-    private String ctime;
-    private Date checkOffTime;
-    private String cotime;
-    private String late;
-    private String early;
-    private String leave;
-    private String travel;
-    private String overtime;
-
-    private ArrayList<Check> mChecks = new ArrayList<Check>();
-    private int index;
-    private ArrayList<Integer> sum = new ArrayList<Integer>();
-    private static final String SEARCH_KEY = "search_key";
+    private Date beginTime;
+    private String bgtime;
+    private Date endTime;
+    private String edtime;
+    private String name;
 
     private Fragment mFragment;
 
@@ -70,65 +63,20 @@ public class ManagerCheckQueryFragment extends Fragment {
         View v = inflater.inflate(R.layout.main_fragment_manager_check_query, container, false);
 
         init(v);
-        adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mLateSpinner.setAdapter(adapter);
-        mLateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        mName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                late = list[i];
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        mEarlySpinner.setAdapter(adapter);
-        mEarlySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                early = list[i];
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                name = charSequence.toString();
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        mTravelSpinner.setAdapter(adapter);
-        mTravelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                travel = list[i];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        mLeaveSpinner.setAdapter(adapter);
-        mLeaveSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                leave = list[i];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        mOverTimeSpinner.setAdapter(adapter);
-        mOverTimeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                overtime = list[i];
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void afterTextChanged(Editable editable) {
 
             }
         });
@@ -156,6 +104,23 @@ public class ManagerCheckQueryFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Fragment fragment = new ManagerCheckListFragment();
+                Bundle bundle = new Bundle();
+
+                bundle.putString(Link.mem_name, name);
+
+                if (null != bgtime) {
+                    bundle.putInt(Link.att_date_start, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(bgtime));
+                } else {
+                    bundle.putInt(Link.att_date_start, -1);
+                }
+
+                if (null != edtime) {
+                    bundle.putInt(Link.att_date_end, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(edtime));
+                } else {
+                    bundle.putInt(Link.att_date_end, -1);
+                }
+
+                fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.addToBackStack(null);
                 transaction.replace(R.id.blankActivity, fragment);
@@ -169,39 +134,41 @@ public class ManagerCheckQueryFragment extends Fragment {
     private void init(View v){
         mBeginTimeBtn = (Button)v.findViewById(R.id.check_begin_time_button);
         mEndTimeBtn = (Button) v.findViewById(R.id.check_end_time_button);
-        mLateSpinner = (Spinner) v.findViewById(R.id.check_late_time_sprinner);
-        mLeaveSpinner = (Spinner) v.findViewById(R.id.check_leave_sprinner);
-        mEarlySpinner = (Spinner) v.findViewById(R.id.check_leave_early_sprinner);
-        mTravelSpinner = (Spinner) v.findViewById(R.id.check_travel_sprinner);
-        mOverTimeSpinner = (Spinner) v.findViewById(R.id.check_overtime_sprinner);
+        mName = (EditText) v.findViewById(R.id.manager_check_name_edittext);
         mQueryButton = (Button) v.findViewById(R.id.main_fragment_manager_check_query_button);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "进入回调 " + " resultCode:" + requestCode);
         if (resultCode != Activity.RESULT_OK){
+            Log.d(TAG, "未进入判断");
             return;
         } else if (requestCode == 12) {
-            checkTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateCheckDate();
+            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            updateBeginDate();
         } else if (requestCode == 13) {
-            checkOffTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateCheckOffDate();
+            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            updateEndDate();
         }
     }
 
-    private void updateCheckDate(){
-        ctime = android.text.format.DateFormat.format("yyyy.M.dd", checkTime).toString();
-        mBeginTimeBtn.setText(ctime);
+    private void updateBeginDate(){
+        bgtime = android.text.format.DateFormat.format("yyyy年MM月dd", beginTime).toString();
+        Log.d(TAG, "bgtime: " + bgtime);
+        mBeginTimeBtn.setText(bgtime);
+        Log.d(TAG, "beginTimeButton: " + mBeginTimeBtn.getText());
     }
-    private void updateCheckOffDate(){
-        cotime = android.text.format.DateFormat.format("yyyy.M.dd", checkOffTime).toString();
-        mEndTimeBtn.setText(cotime);
-    }
-
-    public static Date ConverToDate(String strDate) throws Exception
-    {
-        DateFormat df = new SimpleDateFormat("yyyy.MM.dd");
-        return df.parse(strDate);
+    private void updateEndDate(){
+        if (endTime.after(beginTime)) {
+            edtime = android.text.format.DateFormat.format("yyyy年MM月dd", endTime).toString();
+            Log.d(TAG, "edtime: " + edtime);
+            mEndTimeBtn.setText(edtime);
+            Log.d(TAG, "endTimeButton: " + mEndTimeBtn.getText());
+        } else {
+            Toast.makeText(getActivity(),
+                    R.string.time_erro,
+                    Toast.LENGTH_SHORT).show();
+        }
     }
 }

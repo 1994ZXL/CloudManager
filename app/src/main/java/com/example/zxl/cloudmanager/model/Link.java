@@ -26,11 +26,11 @@ public class Link {
     public static final String over_time_e = "over_time_e";//回归时间（大）
 
     //manage_work
-    public static final String mem_id = "";//加班员工ID
-    public static final String work_pm = "";//加班项目ID
+    public static final String mem_id = "mem_id";//加班员工ID
+    public static final String work_pm = "work_pm";//加班项目ID
 
     //pm_bug
-    public static final String pm_id = "";
+    public static final String pm_id = "pm_id";
 
     //find_daily
     public static final String report_time_t = "report_time_t"; //日报的提交时间 开始
@@ -45,4 +45,13 @@ public class Link {
     public static final String create_time_f = "create_time_f"; //日报的创建时间 结束
     public static final String state = "state"; //日报状态
     public static final String daily_id = "daily_id"; //日报的提交时间 开始
+
+    //member
+    public static final String user_name = "user_name"; //用户名
+    public static final String password = "password"; //密码
+    public static final String user_type = "user_type"; //用户类型
+
+    //my_punch
+    public static final String att_date_start = "att_date_start"; //考勤日期(早)
+    public static final String att_date_end = "att_date_end"; //考勤日期（晚）
 }

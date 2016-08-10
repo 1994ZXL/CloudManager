@@ -9,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,8 +23,20 @@ import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.CheckLab;
+import com.example.zxl.cloudmanager.model.DESCryptor;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
+import com.example.zxl.cloudmanager.model.Link;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ZXL on 2016/7/11.
@@ -37,11 +50,14 @@ public class MyCheckFragment extends Fragment {
     private Button mSearchBtn;
 
     private static final String TAG = "MyCheckFragment";
-    private static final String SEARCH_KEY = "search_key";
-    private ArrayList<Integer> key = new ArrayList<Integer>();//下标
 
     private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
+
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams = new RequestParams();
+    private JSONObject keyObj = new JSONObject();
+    private String key = "";
 
     private Fragment mFragment;
 
@@ -75,7 +91,7 @@ public class MyCheckFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        View v = layoutInflater.inflate(R.layout.main_fragment_my_check, parent, false);
+        final View v = layoutInflater.inflate(R.layout.main_fragment_my_check, parent, false);
 
 
         getActivity().getActionBar().setTitle("我的考勤");
@@ -94,36 +110,66 @@ public class MyCheckFragment extends Fragment {
         });
 
         saveInstanceState = getArguments();
-        if (null == saveInstanceState) {
-            checks = CheckLab.newInstance(mFragment.getActivity()).get();
-        } else {
-            key = getArguments().getIntegerArrayList(SEARCH_KEY);
-            for (int i = 0; i < key.size(); i++){
-                checks.add(CheckLab.newInstance(mFragment.getActivity()).get().get(key.get(i)));
-            }
-        }
+        if (null != saveInstanceState) {
+            try {
 
-        mRecyclerView = (RecyclerView)v.findViewById(R.id.check_recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        myAdapter = new MyAdapter(this.getActivity(), checks);
-        mRecyclerView.setAdapter(myAdapter);
-        mCardView = (CardView)v.findViewById(R.id.fragment_my_check);
-        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                if (-1 != saveInstanceState.getInt(Link.att_date_start)) {
+                    keyObj.put(Link.att_date_start, saveInstanceState.getInt(Link.att_date_start));
+                }
+                if (-1 != saveInstanceState.getInt(Link.att_date_end)) {
+                    keyObj.put(Link.att_date_end, saveInstanceState.getInt(Link.att_date_end));
+                }
+
+                keyObj.put(Link.mem_id, saveInstanceState.getInt(Link.mem_id));
+
+                key = DESCryptor.Encryptor(keyObj.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            mParams.put("key", key);
+        }
+        Log.d(TAG, "key: " + key);
+
+        mHttpc.post(Link.localhost + "my_punch&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
-            public void onItemClick(View view, Object data) {
-                Fragment fragment = MyCheckDetailFragment.newInstance(data);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    if (response.getBoolean("result")) {
+                        JSONArray array = response.getJSONArray("data1");
+                        Log.d(TAG, "array: " + array);
+                        for (int i = 0; i < array.length(); i++) {
+                            checks.add(new Check(array.getJSONObject(i)));
+                        }
+                        mRecyclerView = (RecyclerView)v.findViewById(R.id.check_recyclerview);
+                        mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
+                        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                        mRecyclerView.setHasFixedSize(true);
+                        myAdapter = new MyAdapter(mFragment.getActivity(), checks);
+                        mRecyclerView.setAdapter(myAdapter);
+                        mCardView = (CardView)v.findViewById(R.id.fragment_my_check);
+                        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, Object data) {
+                                Fragment fragment = MyCheckDetailFragment.newInstance(data);
+                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                if (!fragment.isAdded()) {
+                                    transaction.addToBackStack(null);
+                                    transaction.hide(mFragment);
+                                    transaction.add(R.id.blankActivity, fragment);
+                                    transaction.commit();
+                                } else {
+                                    transaction.hide(mFragment);
+                                    transaction.show(fragment);
+                                    transaction.commit();
+                                }
+                            }
+                        });
+
+                    } else {
+
+                    }
+                } catch (JSONException e) {
+                    Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                 }
             }
         });
@@ -157,10 +203,9 @@ public class MyCheckFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             Check check = checks.get(i);
-            viewHolder.mDate.setText(check.getDate());
-            viewHolder.mCheckLocation.setText(check.getCheckLocation());
-            viewHolder.mDutyTime.setText(check.getDutyTime());
-            viewHolder.mOffDutyTime.setText(check.getOffDutyTime());
+            viewHolder.mCheckLocation.setText(check.getPuncher_name());
+            viewHolder.mDutyTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(check.getAtt_date_start()));
+            viewHolder.mOffDutyTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(check.getAtt_date_end()));
             viewHolder.itemView.setTag(checks.get(i));
         }
 

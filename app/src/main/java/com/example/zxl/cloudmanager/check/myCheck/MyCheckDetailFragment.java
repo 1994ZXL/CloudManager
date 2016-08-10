@@ -9,14 +9,17 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.Check;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
+
+import java.util.Date;
 
 /**
  * Created by ZXL on 2016/7/11.
  */
 public class MyCheckDetailFragment extends Fragment{
-    private TextView name,project,checkLocation,checkManager;
-    private TextView stipulationOnDuty,stipulaitonOffDuty,onDuty,offDuty,onDutyDispose,offDutyDispose;
-    private TextView state, leave, overTime, travel, late;
+    private TextView name,checkLocation,checkManager;
+    private TextView chekdate,stipulationOnDuty,stipulaitonOffDuty,onDuty,offDuty,earlyMin, lateMin;
+    private TextView leave, overTime, travel;
 
     private static final String EXTRA_OBJECT = "check";
 
@@ -49,36 +52,83 @@ public class MyCheckDetailFragment extends Fragment{
 
     private void init(View view) {
         name = (TextView)view.findViewById(R.id.check_details_name);
-        project = (TextView)view.findViewById(R.id.check_details_project);
         checkLocation = (TextView)view.findViewById(R.id.check_details_check_location);
         checkManager = (TextView)view.findViewById(R.id.check_details_check_manager);
+        chekdate = (TextView)view.findViewById(R.id.check_details_check_date);
         stipulationOnDuty = (TextView)view.findViewById(R.id.check_details_stipulate_dutytime);
         stipulaitonOffDuty = (TextView)view.findViewById(R.id.check_details_stipulate_offdutytime);
         onDuty = (TextView)view.findViewById(R.id.check_details_duty_sign_time);
         offDuty = (TextView)view.findViewById(R.id.check_details_offduty_sign_time);
-        onDutyDispose = (TextView)view.findViewById(R.id.check_details_duty_manage_time);
-        offDutyDispose = (TextView)view.findViewById(R.id.check_details_offduty_manage_time);
-        state = (TextView)view.findViewById(R.id.check_details_manage_state);
+        earlyMin = (TextView)view.findViewById(R.id.check_details_early_min);
+        lateMin = (TextView)view.findViewById(R.id.check_details_late_min);
         leave = (TextView)view.findViewById(R.id.check_details_leave);
         overTime = (TextView)view.findViewById(R.id.check_details_work_overtime);
         travel = (TextView)view.findViewById(R.id.check_details_work_travel);
-        late = (TextView)view.findViewById(R.id.check_details_late);
     }
 
     private void control() {
         name.setText(mCheck.getMem_name());
-        project.setText(mCheck.getProject());
-        checkLocation.setText(mCheck.getCheckLocation());
-        stipulationOnDuty.setText(mCheck.getStipulationOnDutyTime());
-        stipulaitonOffDuty.setText(mCheck.getStipulationOffDutyTime());
-        onDuty.setText(mCheck.getDutyTime());
-        offDuty.setText(mCheck.getOffDutyTime());
-        onDutyDispose.setText(mCheck.getOndutyDisposeTime());
-        offDutyDispose.setText(mCheck.getOffDutyDisposeTime());
-        state.setText(mCheck.getState());
-        leave.setText(mCheck.getLeave());
-        overTime.setText(mCheck.getOverTime());
-        travel.setText(mCheck.getTravel());
-        late.setText(mCheck.getLate());
+        checkLocation.setText(mCheck.getPuncher_name());
+        checkManager.setText(mCheck.getMaster_name());
+
+        if (mCheck.getAtt_date() == 0) {
+            chekdate.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mCheck.getAtt_date()));
+        } else {
+            chekdate.setText("——");
+        }
+
+        if (mCheck.getS_att_time() == 0){
+            stipulationOnDuty.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mCheck.getS_att_time()));
+        } else {
+            stipulationOnDuty.setText("——");
+        }
+
+        if (mCheck.getE_att_time() == 0) {
+            stipulaitonOffDuty.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mCheck.getE_att_time()));
+        } else {
+            stipulaitonOffDuty.setText("——");
+        }
+
+        if (mCheck.getAtt_date_start() == 0) {
+            onDuty.setText("——");
+        }else {
+            onDuty.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mCheck.getAtt_date_start()));
+        }
+
+        if (mCheck.getAtt_date_end() == 0) {
+            offDuty.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mCheck.getAtt_date_end()));
+        } else {
+            offDuty.setText("——");
+        }
+
+        if (mCheck.getEarly_min() == 0) {
+            earlyMin.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mCheck.getEarly_min()));
+        } else {
+            earlyMin.setText("——");
+        }
+
+        if (mCheck.getLate_min() == 0) {
+            lateMin.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mCheck.getLate_min()));
+        } else {
+            lateMin.setText("——");
+        }
+
+        if (mCheck.isHas_my_leave()){
+            leave.setText("是");
+        } else {
+            leave.setText("否");
+        }
+
+        if (mCheck.isHas_my_work()) {
+            overTime.setText("是");
+        } else {
+            overTime.setText("否");
+        }
+
+        if (mCheck.isHas_my_trip()) {
+            travel.setText("是");
+        } else {
+            travel.setText("否");
+        }
     }
 }

@@ -45,12 +45,15 @@
     <string name="overtime_record_query">加班查询</string>
 
     <!-- 考勤主管-->
+    <string name="check_date">考勤日期</string>
     <string name="check_deal">考勤处理</string>
     <string name="leave_deal">请假处理</string>
     <string name="overtime_deal">加班处理</string>
     <string name="travel_deal">出差处理</string>
     <string name="save_edit">保存修改</string>
     <string name="check_begin_time">考勤开始时间</string>
+    <string name="early_min">早退分钟数</string>
+    <string name="late_min">迟到分钟数</string>
     <string name="overtime_status">加班状态</string>
 
     <!-- 项目主管-->
@@ -88,8 +91,9 @@
     <string name="job">职务</string>
 
     <!-- 我的考勤-->
-    <string name="dutytime">上班时间：</string>
-    <string name="offdutytime">下班时间：</string>
+    <string name="check_time">考勤时间</string>
+    <string name="dutytime">上班时间</string>
+    <string name="offdutytime">下班时间</string>
     <string name="project">项目</string>
     <string name="check_location">考勤点</string>
     <string name="check_manager">考勤主管</string>
