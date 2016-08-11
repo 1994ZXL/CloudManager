@@ -87,7 +87,11 @@
     <string name="phone">手机</string>
     <string name="qq">qq</string>
     <string name="wechat">微信</string>
+    <string name="email">邮箱</string>
     <string name="location">地址</string>
+    <string name="detail_location">详细地址</string>
+    <string name="idcard">身份证号码</string>
+    <string name="service_state">在职状态</string>
     <string name="job">职务</string>
 
     <!-- 我的考勤-->

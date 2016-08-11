@@ -28,6 +28,8 @@ import cz.msebera.android.httpclient.Header;
 public class LoginFragment extends Fragment {
     private static final String TAG = "LoginFragment";
 
+    private static final String EXTRA_TYPE = "user_type";
+
     private TextView usernameTextView, passwordTextView;
     private EditText usernameEditText, passwordEditText;
     private Button loginButton;
@@ -94,7 +96,7 @@ public class LoginFragment extends Fragment {
                     e.printStackTrace();
                 }
                 mParams.put("key", key);
-                mHttpc.post(Link.localhost + "member&act=login", mParams, new JsonHttpResponseHandler() {
+                mHttpc.post(Link.localhost + "user&act=login", mParams, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
@@ -114,7 +116,6 @@ public class LoginFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
 
         return v;
     }

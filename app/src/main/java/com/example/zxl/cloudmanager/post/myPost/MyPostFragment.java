@@ -94,6 +94,7 @@ public class MyPostFragment extends ListFragment {
         }
 
         try {
+            keyObj.put(Link.mem_id, "93aa131446db0f983904e812a2f94e6d");
             keyObj.put("sort", "create_time desc");
             keyObj.put("page_count", 20);
             keyObj.put("curl_page", 1);
@@ -112,12 +113,11 @@ public class MyPostFragment extends ListFragment {
                         JSONArray array = response.getJSONArray("data1");
                         Log.d(TAG, "array: " + array);
                         for (int i = 0; i < array.length(); i++) {
-//                            mPosts.add(new Post(array.getJSONObject(i)));
-                            PostLab.newInstance(mFragment.getActivity()).setPosts(new Post(array.getJSONObject(i)));
+                            mPosts.add(new Post(array.getJSONObject(i)));
                         }
-                        PostAdapter adapter = new PostAdapter(PostLab.newInstance(mFragment.getActivity()).getPosts());
+                        Log.d(TAG, "mPosts: " + mPosts);
+                        PostAdapter adapter = new PostAdapter(mPosts);
                         setListAdapter(adapter);
-
                     } else {
 
                     }

@@ -88,7 +88,7 @@ public class LeaderPostListFragment extends ListFragment {
                     keyObj.put(Link.content, saveInstanceState.getInt(Link.content));
                 }
                 keyObj.put("sort", "create_time desc");
-                keyObj.put("page_count", 10);
+                keyObj.put("page_count", 100);
                 keyObj.put("curl_page", 1);
 
                 key = DESCryptor.Encryptor(keyObj.toString());

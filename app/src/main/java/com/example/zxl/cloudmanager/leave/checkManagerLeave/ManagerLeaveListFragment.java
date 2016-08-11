@@ -103,6 +103,9 @@ public class ManagerLeaveListFragment extends Fragment {
                 if (-1 != saveInstanceState.getInt(Link.status)) {
                     keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
                 }
+                keyObj.put("sort", "start_time desc");
+                keyObj.put("page_count", 15);
+                keyObj.put("curl_page", 1);
 
                 key = DESCryptor.Encryptor(keyObj.toString());
             } catch (Exception e) {

@@ -83,15 +83,15 @@ public class Edit extends Fragment{
     private void changeValue(CharSequence charSequence) {
         String title = (String) getArguments().getSerializable(EXTRA_TITLE);
         if (title == "名字修改") {
-            User.newInstance(mFragment.getActivity()).setUser_name(charSequence.toString());
-        } else if (title == "手机修改") {
-            User.newInstance(mFragment.getActivity()).setPhone(charSequence.toString());
-        } else if (title == "QQ修改") {
-            User.newInstance(mFragment.getActivity()).setQq(charSequence.toString());
-        } else if (title == "微信修改") {
-            User.newInstance(mFragment.getActivity()).setWechat(charSequence.toString());
-        } else if (title == "地址修改") {
-            User.newInstance(mFragment.getActivity()).setAddress(charSequence.toString());
+//            User.newInstance(mFragment.getActivity()).setUser_name(charSequence.toString());
+//        } else if (title == "手机修改") {
+//            User.newInstance(mFragment.getActivity()).setPhone(charSequence.toString());
+//        } else if (title == "QQ修改") {
+//            User.newInstance(mFragment.getActivity()).setQq(charSequence.toString());
+//        } else if (title == "微信修改") {
+//            User.newInstance(mFragment.getActivity()).setWechat(charSequence.toString());
+//        } else if (title == "地址修改") {
+//            User.newInstance(mFragment.getActivity()).setAddress(charSequence.toString());
         } else if (title == "任务内容修改") {
             Mission.newInstance(mFragment.getActivity()).setContent(charSequence.toString());
         } else if (title == "内容详情修改") {

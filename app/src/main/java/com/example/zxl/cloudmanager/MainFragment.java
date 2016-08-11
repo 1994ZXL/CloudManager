@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.example.zxl.cloudmanager.bug.myBug.MyBugActivity;
 import com.example.zxl.cloudmanager.check.checkManager.ManagerCheckAcitvity;
@@ -94,6 +95,7 @@ public class MainFragment extends Fragment {
     private ImageView myOperationImage;
 
     //领导查询
+    private LinearLayout leaderLinearLayout;
     private ImageView leaderPostImage;
     private ImageView leaderCheckImage;
     private ImageView leaderLeaveImage;
@@ -101,10 +103,12 @@ public class MainFragment extends Fragment {
     private ImageView leaderOvertimeImage;
 
     //考勤主管
+    private LinearLayout CMLinearLayout;
     private ImageView managerOvertimeImage;
     private ImageView managerTravelImage;
 
     //项目主管
+    private LinearLayout PMLinearLayout;
     private ImageView projectManagmentImage;
     private ImageView pmBugDealImage;
     private ImageView pmUsecaseImage;
@@ -177,16 +181,16 @@ public class MainFragment extends Fragment {
 
 
         try {
-            keyObj.put(Link.att_date_start, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(getTime()));
-            keyObj.put(Link.att_date_end, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(getTime()));
-            keyObj.put(Link.mem_id, "e856969189eeab07c6b6f992ee78d96d");
+            keyObj.put(Link.att_date_start, 1470758400);
+            keyObj.put(Link.att_date_end, 1470844800);
+            keyObj.put(Link.mem_id, "93aa131446db0f983904e812a2f94e6d");
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
         mParams.put("key", key);
         Log.d(TAG, "key: " + key);
-        mHttpc.post(Link.localhost + "my_daily&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + "my_punch&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
@@ -217,7 +221,7 @@ public class MainFragment extends Fragment {
             }
         });
 
-        if (mSignTime != "——") {
+        if (mSignTime == "——" || mSignTime == null) {
             mSignBtn.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
@@ -229,7 +233,7 @@ public class MainFragment extends Fragment {
             mSignBtn.setClickable(false);
         }
 
-        if (mOffSignTime != "——") {
+        if (mOffSignTime == "——" || mOffSignTime == null) {
             mOffSignBtn.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
@@ -273,6 +277,7 @@ public class MainFragment extends Fragment {
         mManageLeave = (ImageView)v.findViewById(R.id.main_fragment_leave_deal_image);
 
         //领导查询
+        leaderLinearLayout = (LinearLayout) v.findViewById(R.id.leader_linearlayout);
         leaderPostImage = (ImageView) v.findViewById(R.id.main_fragment_post_query_image);
         leaderCheckImage = (ImageView) v.findViewById(R.id.main_fragment_check_query_image);
         leaderLeaveImage =(ImageView) v.findViewById(R.id.main_fragment_leave_record_query_image);
@@ -280,10 +285,12 @@ public class MainFragment extends Fragment {
         leaderTravelImage =(ImageView) v.findViewById(R.id.imageView2);
 
         //考勤主管
+        CMLinearLayout = (LinearLayout) v.findViewById(R.id.check_manager_linearlayout);
         managerOvertimeImage = (ImageView) v.findViewById(R.id.main_fragment_overtime_deal_image);
         managerTravelImage = (ImageView) v.findViewById(R.id.main_fragment_travel_deal_image);
 
         //项目主管
+        PMLinearLayout = (LinearLayout) v.findViewById(R.id.project_manager_linearlayout);
         projectManagmentImage = (ImageView) v.findViewById(R.id.main_fragment_project_manage);
         pmListImage = (ImageView) v.findViewById(R.id.main_fragment_project_memo);
         pmMemberManagerImage = (ImageView) v.findViewById(R.id.main_fragment_project_member_manage);
@@ -305,7 +312,7 @@ public class MainFragment extends Fragment {
 
     private void check(String function) {
         try {
-            keyObj.put(Link.daily_id, mAtt_id);
+            keyObj.put(Link.att_id, mAtt_id);
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -315,12 +322,12 @@ public class MainFragment extends Fragment {
         mHttpc.post(Link.localhost + "my_punch&act=" + function, mParams, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
+                Log.d(TAG, "签到成功");
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
+                Log.d(TAG, "签到失败");
             }
         });
     }

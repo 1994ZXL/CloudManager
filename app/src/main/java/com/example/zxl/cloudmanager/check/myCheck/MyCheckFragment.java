@@ -124,7 +124,7 @@ public class MyCheckFragment extends Fragment {
             }
         }
         try {
-            keyObj.put(Link.mem_id, "d075ee12479c7f197d6fc856dcf79256");
+            keyObj.put(Link.mem_id, "93aa131446db0f983904e812a2f94e6d");
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();

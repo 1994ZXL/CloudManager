@@ -38,13 +38,13 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:text="@string/name" />
-        <TextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:gravity="center"
             android:layout_weight="1"
-            android:id="@+id/main_fragment_my_message_nameTextView"
+            android:id="@+id/main_fragment_my_message_name"
             android:text="张三"/>
 
     </LinearLayout>
@@ -84,13 +84,13 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:text="@string/phone" />
-        <TextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:gravity="center"
             android:layout_weight="1"
-            android:id="@+id/main_fragment_my_message_phoneTextView"
+            android:id="@+id/main_fragment_my_message_phone"
             android:text="12345678987"/>
     </LinearLayout>
 
@@ -106,13 +106,13 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:text="@string/qq" />
-        <TextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:gravity="center"
             android:layout_weight="1"
-            android:id="@+id/main_fragment_my_message_qqTextView"/>
+            android:id="@+id/main_fragment_my_message_qq"/>
     </LinearLayout>
 
     <!-- 微信-->
@@ -127,13 +127,34 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:text="@string/wechat" />
-        <TextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:gravity="center"
             android:layout_weight="1"
-            android:id="@+id/main_fragment_my_message_wechatTextView"/>
+            android:id="@+id/main_fragment_my_message_wechat"/>
+    </LinearLayout>
+
+    <!-- 邮箱-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            style="@style/font"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="@string/email" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/main_fragment_my_message_email"/>
     </LinearLayout>
 
     <!-- 地址-->
@@ -148,12 +169,76 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:text="@string/location"/>
-        <TextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:gravity="center"
             android:layout_weight="1"
-            android:id="@+id/main_fragment_my_message_locationTextView"/>
+            android:id="@+id/main_fragment_my_message_location"/>
     </LinearLayout>
+
+    <!-- 详细地址-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            style="@style/font"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="@string/detail_location"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/main_fragment_my_message_detail_location"/>
+    </LinearLayout>
+
+    <!-- 身份证号码-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            style="@style/font"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="@string/idcard"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/main_fragment_my_message_idcard"/>
+    </LinearLayout>
+
+    <!-- 在职状态-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+
+        <TextView
+            style="@style/font"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="@string/service_state"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/main_fragment_my_message_service_state"/>
+    </LinearLayout>
+
 </LinearLayout>
