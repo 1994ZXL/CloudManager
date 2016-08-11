@@ -17,11 +17,19 @@ import android.widget.Toast;
 import com.example.zxl.cloudmanager.Edit;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.Check;
+import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
 import com.example.zxl.cloudmanager.model.Link;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONObject;
 
 import java.util.Date;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ZXL on 2016/7/15.
@@ -45,6 +53,11 @@ public class ManagerCheckEditFragment extends Fragment{
     private String eatttime;
     private Date e_time;
     private String etime;
+
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams = new RequestParams();
+    private JSONObject keyObj = new JSONObject();
+    private String key = "";
 
     private Fragment mFragment;
 
@@ -127,7 +140,7 @@ public class ManagerCheckEditFragment extends Fragment{
         mE_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 14);
+                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 15);
                 fragment.setTargetFragment(ManagerCheckEditFragment.this, 14);
                 fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
                 fragment.show(getFragmentManager(), "ManagerCheckEditFragment");
@@ -137,12 +150,29 @@ public class ManagerCheckEditFragment extends Fragment{
         mSaveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    keyObj.put(Link.S_att_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(satttime));
+                    keyObj.put(Link.S_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(stime));
+                    keyObj.put(Link.E_att_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(eatttime));
+                    keyObj.put(Link.E_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(etime));
+                    key = DESCryptor.Encryptor(keyObj.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mParams.put("key", key);
+                Log.d(TAG,"key:" + key);
+                mHttpc.post(Link.localhost + "manage_punch&act=edit", mParams, new AsyncHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                    }
+                });
                 Fragment fragment = new ManagerCheckListFragment();
-                Bundle bundle = new Bundle();
-
-
-
-                fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.hide(mFragment);

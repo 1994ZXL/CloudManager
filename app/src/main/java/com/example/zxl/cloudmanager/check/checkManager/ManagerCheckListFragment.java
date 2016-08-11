@@ -18,6 +18,7 @@ import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.check.myCheck.MyCheckDetailFragment;
 import com.example.zxl.cloudmanager.model.Check;
+import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.Link;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -49,6 +50,8 @@ public class ManagerCheckListFragment extends Fragment {
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
+    private JSONObject keyObj = new JSONObject();
+    private String key = "";
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -78,6 +81,30 @@ public class ManagerCheckListFragment extends Fragment {
             }
         });
 
+        saveInstanceState = getArguments();
+        if (null != saveInstanceState) {
+
+            try {
+                keyObj.put(Link.mem_name, saveInstanceState.getString(Link.mem_name));
+                if (-1 != saveInstanceState.getInt(Link.att_date_start)) {
+                    keyObj.put(Link.att_date_start, saveInstanceState.getInt(Link.att_date_start));
+                }
+                if (-1 != saveInstanceState.getInt(Link.att_date_end)) {
+                    keyObj.put(Link.att_date_end, saveInstanceState.getInt(Link.att_date_end));
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            key = DESCryptor.Encryptor(keyObj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mParams.put("key", key);
+        Log.d(TAG, "key: " + key);
+
         mHttpc.post(Link.localhost + "manage_punch&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
@@ -101,7 +128,7 @@ public class ManagerCheckListFragment extends Fragment {
                             myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
-                                    Fragment fragment = MyCheckDetailFragment.newInstance(data);
+                                    Fragment fragment = ManagerCheckDetailFragment.newInstance(data);
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     if (!fragment.isAdded()) {
                                         transaction.addToBackStack(null);

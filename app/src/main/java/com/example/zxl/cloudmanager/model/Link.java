@@ -54,4 +54,10 @@ public class Link {
     //my_punch
     public static final String att_date_start = "att_date_start"; //考勤日期(早)
     public static final String att_date_end = "att_date_end"; //考勤日期（晚）
+
+    //manage_punch
+    public static final String S_att_time = "S_att_time"; //上班签到时间
+    public static final String S_time = "S_time"; //规定上班时间
+    public static final String E_att_time = "E_att_time"; //下班签到时间
+    public static final String E_time = "E_time"; //规定下班时间
 }

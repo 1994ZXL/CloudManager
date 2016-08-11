@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/menu_item_edit_message"
+    <item android:id="@+id/menu_item_edit_check"
         android:title="@string/edit"
         android:showAsAction="always"/>
 
