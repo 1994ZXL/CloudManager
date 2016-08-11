@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,12 @@ import com.example.zxl.cloudmanager.check.checkManager.ManagerCheckAcitvity;
 import com.example.zxl.cloudmanager.check.myCheck.MyCheckActivity;
 import com.example.zxl.cloudmanager.leave.checkManagerLeave.ManagerLeaveActivity;
 import com.example.zxl.cloudmanager.mission.projectManagerMission.ProjectMissionManagerActivity;
+import com.example.zxl.cloudmanager.model.CheckLab;
+import com.example.zxl.cloudmanager.model.DESCryptor;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
+import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.model.Post;
+import com.example.zxl.cloudmanager.model.PostLab;
 import com.example.zxl.cloudmanager.usecase.myUseCase.MyUseCaseActivity;
 import com.example.zxl.cloudmanager.overtime.checkManagerOverTime.ManagerOvertimeActivity;
 import com.example.zxl.cloudmanager.travel.checkManagerTravel.ManagerTravelActivity;
@@ -24,7 +31,6 @@ import com.example.zxl.cloudmanager.overtime.leader.LeaderOvertimeSearchActivity
 import com.example.zxl.cloudmanager.post.leader.LeaderPostSearchActivity;
 import com.example.zxl.cloudmanager.travel.leader.LeaderTravelSearchActivity;
 import com.example.zxl.cloudmanager.mission.myMission.MyMissionActivity;
-import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.message.myMessage.MyMessageAcivity;
 import com.example.zxl.cloudmanager.leave.myLeave.MyLeaveActivity;
 import com.example.zxl.cloudmanager.post.myPost.MyPostActivity;
@@ -42,12 +48,23 @@ import com.example.zxl.cloudmanager.mission.publicSearchMission.MissionSearchAct
 import com.example.zxl.cloudmanager.publicSearch.projectSearch.PublicSearchActivity;
 import com.example.zxl.cloudmanager.usecase.publicSearchUseCase.UsecaseSearchActivity;
 import com.example.zxl.cloudmanager.travel.myTravel.MyTravelActivity;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
+import cz.msebera.android.httpclient.Header;
+
 public class MainFragment extends Fragment {
+    private static final String TAG = "MainFragment";
+
     private ImageView myMemoImage;
     private ImageView myMesssageImage;
     private ImageView myCheckImage;
@@ -65,7 +82,6 @@ public class MainFragment extends Fragment {
     private Button mSignBtn;
     private Button mOffSignBtn;
     private String mSignTime;
-    private ArrayList<Check> mChecks = new ArrayList<Check>();
     private String mOffSignTime;
 
     //公共查询
@@ -95,6 +111,13 @@ public class MainFragment extends Fragment {
     private ImageView pmMemberManagerImage;
     private ImageView pmListImage;
     private ImageView pmMissionImage;
+
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams = new RequestParams();
+    private JSONObject keyObj = new JSONObject();
+    private String key = "";
+
+    private String mAtt_id;
 
     private Fragment mFragment;
 
@@ -152,18 +175,73 @@ public class MainFragment extends Fragment {
         onClickListener(pmMissionImage, new ProjectMissionManagerActivity());
         onClickListener(pmUsecaseImage, new ProjectManagerUsecaseActivity());
 
-//        mSignBtn.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v){
-//                sign();
-//            }
-//        });
-//        mOffSignBtn.setOnClickListener(new View.OnClickListener(){
-//            @Override
-//            public void onClick(View v){
-//                offSign();
-//            }
-//        });
+
+        try {
+            keyObj.put(Link.att_date_start, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(getTime()));
+            keyObj.put(Link.att_date_end, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(getTime()));
+            keyObj.put(Link.mem_id, "e856969189eeab07c6b6f992ee78d96d");
+            key = DESCryptor.Encryptor(keyObj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mParams.put("key", key);
+        Log.d(TAG, "key: " + key);
+        mHttpc.post(Link.localhost + "my_daily&act=get_list", mParams, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    if (response.getBoolean("result")) {
+                        JSONArray array = response.getJSONArray("data1");
+                        Log.d(TAG, "array: " + array);
+                        for (int i = 0; i < array.length(); i++) {
+                            mAtt_id = array.getJSONObject(i).getString(Link.att_id);
+                            if (0 == array.getJSONObject(i).getInt(Link.s_att_time)) {
+                                mSignTime = "——";
+                            } else {
+                                mSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(array.getJSONObject(i).getInt(Link.s_att_time));
+                            }
+                            if (0 == array.getJSONObject(i).getInt(Link.e_att_time)) {
+                                mOffSignTime = "——";
+                            } else {
+                                mOffSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(array.getJSONObject(i).getInt(Link.e_att_time));
+                            }
+                        }
+                        mSignBtn.setText(mSignTime);
+                        mOffSignBtn.setText(mOffSignTime);
+                    } else {
+
+                    }
+                } catch (JSONException e) {
+                    Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                }
+            }
+        });
+
+        if (mSignTime != "——") {
+            mSignBtn.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    check("start_work");
+                    sign();
+                }
+            });
+        } else {
+            mSignBtn.setClickable(false);
+        }
+
+        if (mOffSignTime != "——") {
+            mOffSignBtn.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    check("end_work");
+                    offSign();
+                }
+            });
+        } else {
+            mOffSignBtn.setClickable(false);
+        }
+
+
         return v;
     }
 
@@ -225,27 +303,44 @@ public class MainFragment extends Fragment {
         });
     }
 
-//    private void sign() {
-//        mSignTime = android.text.format.DateFormat.format("yyyy.M.dd   HH:mm:ss", getTime()).toString();
-//        Check check = new Check();
-//        check.setS_att_time(DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(mSignTime));
-//        CheckLab.newInstance(mFragment.getActivity()).add(check);
-//        mSignBtn.setText(mSignTime);
-//        mSignBtn.setClickable(false);
-//    }
-//
-//    private void offSign() {
-//        mOffSignTime = android.text.format.DateFormat.format("yyyy.M.dd   HH:mm:ss", getTime()).toString();
-//        mChecks = CheckLab.newInstance(mFragment.getActivity()).get();
-//        mChecks.get(mChecks.size() - 1).sete(mOffSignTime);
-//        mOffSignBtn.setText(mOffSignTime);
-//        mOffSignBtn.setClickable(false);
-//    }
+    private void check(String function) {
+        try {
+            keyObj.put(Link.daily_id, mAtt_id);
+            key = DESCryptor.Encryptor(keyObj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mParams.put("key", key);
+        Log.d(TAG,"key:" + key);
+        mHttpc.post(Link.localhost + "my_punch&act=" + function, mParams, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
 
-    private Date getTime() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
+    }
+
+    private void sign() {
+        mSignTime = android.text.format.DateFormat.format("yyyy.M.dd   HH:mm:ss", System.currentTimeMillis()).toString();
+        mSignBtn.setText(mSignTime);
+        mSignBtn.setClickable(false);
+    }
+
+    private void offSign() {
+        mOffSignTime = android.text.format.DateFormat.format("yyyy.M.dd   HH:mm:ss", System.currentTimeMillis()).toString();
+        mOffSignBtn.setText(mOffSignTime);
+        mOffSignBtn.setClickable(false);
+    }
+
+    private String getTime() {
         Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        return curDate;
+        String date = android.text.format.DateFormat.format("yyyy年MM月dd", curDate).toString();
+        return date;
     }
 
 }
