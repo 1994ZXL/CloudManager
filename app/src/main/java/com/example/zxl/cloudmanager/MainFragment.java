@@ -23,6 +23,7 @@ import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
 import com.example.zxl.cloudmanager.model.PostLab;
+import com.example.zxl.cloudmanager.model.User;
 import com.example.zxl.cloudmanager.usecase.myUseCase.MyUseCaseActivity;
 import com.example.zxl.cloudmanager.overtime.checkManagerOverTime.ManagerOvertimeActivity;
 import com.example.zxl.cloudmanager.travel.checkManagerTravel.ManagerTravelActivity;
@@ -58,7 +59,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
@@ -138,6 +138,19 @@ public class MainFragment extends Fragment {
         getActivity().getActionBar().setTitle("企业云");
 
         init(v);
+
+        //职位(1.领导 2.项目负责人 3.一般员工)
+        if (User.newInstance().getMem_job().equals("1")) {
+            CMLinearLayout.setVisibility(View.GONE);
+            PMLinearLayout.setVisibility(View.GONE);
+        } else if (User.newInstance().getMem_job().equals("2")) {
+            leaderLinearLayout.setVisibility(View.GONE);
+        } else if (User.newInstance().getMem_job().equals("3")) {
+            leaderLinearLayout.setVisibility(View.GONE);
+            CMLinearLayout.setVisibility(View.GONE);
+            PMLinearLayout.setVisibility(View.GONE);
+        }
+
         onClickListener(myMemoImage, new MemoActivity());
         onClickListener(myMesssageImage, new MyMessageAcivity());
         onClickListener(myCheckImage, new MyCheckActivity());
@@ -181,9 +194,9 @@ public class MainFragment extends Fragment {
 
 
         try {
-            keyObj.put(Link.att_date_start, 1470758400);
-            keyObj.put(Link.att_date_end, 1470844800);
-            keyObj.put(Link.mem_id, "93aa131446db0f983904e812a2f94e6d");
+            keyObj.put(Link.att_date_start, System.currentTimeMillis()/1000);
+            keyObj.put(Link.att_date_end, System.currentTimeMillis()/1000 + 86400);
+            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -345,7 +358,7 @@ public class MainFragment extends Fragment {
     }
 
     private String getTime() {
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
+        Date curDate = new Date(System.currentTimeMillis()); //获取当前时间
         String date = android.text.format.DateFormat.format("yyyy年MM月dd", curDate).toString();
         return date;
     }

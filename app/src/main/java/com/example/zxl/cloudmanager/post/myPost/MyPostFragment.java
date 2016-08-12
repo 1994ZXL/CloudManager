@@ -24,6 +24,7 @@ import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
 import com.example.zxl.cloudmanager.model.PostLab;
+import com.example.zxl.cloudmanager.model.User;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -94,7 +95,7 @@ public class MyPostFragment extends ListFragment {
         }
 
         try {
-            keyObj.put(Link.mem_id, "93aa131446db0f983904e812a2f94e6d");
+            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
             keyObj.put("sort", "create_time desc");
             keyObj.put("page_count", 20);
             keyObj.put("curl_page", 1);

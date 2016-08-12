@@ -21,8 +21,9 @@ public class User {
     private String service_state; //在职状态 0在职 1休假 2离职
     private String punch_mgr; //考勤主管
     private String comp_name; //公司名
-    private String mem_job; //职位
+    private String mem_job; //职位(1.领导 2.项目负责人 3.一般员工)
     private String user_type; //用户类型
+    private String user_id; //用户id
 
     private static final String JSON_USER_NAME = "mem_name";
     private static final String JSON_GENDER = "gender";
@@ -38,13 +39,22 @@ public class User {
     private static final String JSON_COMP_NAME = "comp_name";
     private static final String JSON_MEM_JOB = "mem_job";
     private static final String JSON_USER_TYPE = "user_type";
+    private static final String JSON_USER_ID = "user_id";
 
+    private static User sUser;
 
-    public User() {
+    private User() {
 
     }
 
-    public User(JSONObject json) throws JSONException {
+    public static User newInstance() {
+        if (null == sUser) {
+            sUser = new User();
+        }
+        return sUser;
+    }
+
+    public void setUser(JSONObject json) throws JSONException {
         if (json.has(JSON_USER_NAME))
             mem_name = json.getString(JSON_USER_NAME);
         if (json.has(JSON_GENDER))
@@ -81,6 +91,16 @@ public class User {
             mem_job = json.getString(JSON_MEM_JOB);
         if (json.has(JSON_USER_TYPE))
             user_type = json.getString(JSON_USER_TYPE);
+        if (json.has(JSON_USER_ID))
+            user_id = json.getString(JSON_USER_ID);
+    }
+
+    public String getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
     public String getMem_name() {

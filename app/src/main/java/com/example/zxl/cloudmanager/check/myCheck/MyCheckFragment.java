@@ -26,6 +26,7 @@ import com.example.zxl.cloudmanager.model.CheckLab;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.model.User;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -124,7 +125,7 @@ public class MyCheckFragment extends Fragment {
             }
         }
         try {
-            keyObj.put(Link.mem_id, "93aa131446db0f983904e812a2f94e6d");
+            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();

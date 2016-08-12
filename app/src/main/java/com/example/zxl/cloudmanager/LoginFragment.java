@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.model.User;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -103,7 +104,9 @@ public class LoginFragment extends Fragment {
                             if (response.getBoolean("result")) {
                                 JSONArray array = response.getJSONArray("data1");
                                 Log.d(TAG, "array: " + array);
-
+                                for (int i = 0; i < array.length(); i++) {
+                                    User.newInstance().setUser(array.getJSONObject(i));
+                                }
                             } else {
 
                             }

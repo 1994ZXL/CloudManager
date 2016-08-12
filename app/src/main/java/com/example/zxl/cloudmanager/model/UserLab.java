@@ -14,14 +14,7 @@ public class UserLab {
     private Context context;
 
     private UserLab(Context context) {
-//        this.context = context;
-//        User user = new User();
-//        user.setName("张三");
-//        user.setAddress("成都");
-//        user.setPhone("12345678987");
-//        user.setQq("123456");
-//        user.setWechat("12345678987");
-//        mUsers.add(user);
+
     }
 
     public static UserLab newInstance(Context context) {

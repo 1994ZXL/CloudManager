@@ -38,7 +38,6 @@ import cz.msebera.android.httpclient.Header;
  */
 public class MyMessageFragment extends Fragment {
     private static final String TAG = "MyMessageFragment";
-    private User mUser;
 
     private EditText mName;
     private Spinner sexSpinner;
@@ -89,7 +88,7 @@ public class MyMessageFragment extends Fragment {
         init(v);
 
         try {
-            keyObj.put(Link.mem_id, "93aa131446db0f983904e812a2f94e6d");
+            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -104,7 +103,7 @@ public class MyMessageFragment extends Fragment {
                         JSONArray array = response.getJSONArray("data1");
                         Log.d(TAG, "array: " + array);
                         for (int i = 0; i < array.length(); i++) {
-                            mUser = new User(array.getJSONObject(i));
+                            User.newInstance().setUser(array.getJSONObject(i));
                         }
                     } else {
                     }
@@ -114,9 +113,9 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        if (mUser.getGender() == 1) {
+        if (User.newInstance().getGender() == 1) {
             list = new String[]{"男", "女"};
-        } else if (mUser.getGender() == 2) {
+        } else if (User.newInstance().getGender() == 2) {
             list = new String[]{"女", "男"};
         }
         adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, list);
@@ -139,7 +138,7 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        mName.setText(mUser.getMem_name());
+        mName.setText(User.newInstance().getMem_name());
         mName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -157,7 +156,7 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        mPhoneNumber.setText(mUser.getPhone());
+        mPhoneNumber.setText(User.newInstance().getPhone());
         mPhoneNumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -175,7 +174,7 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        mQQ.setText(mUser.getQq());
+        mQQ.setText(User.newInstance().getQq());
         mQQ.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -193,7 +192,7 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        mWeChat.setText(mUser.getWchat());
+        mWeChat.setText(User.newInstance().getWchat());
         mWeChat.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -211,7 +210,7 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        mEmail.setText(mUser.getEmail());
+        mEmail.setText(User.newInstance().getEmail());
         mEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -229,7 +228,7 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        mAddress.setText(mUser.getAddress());
+        mAddress.setText(User.newInstance().getAddress());
         mAddress.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -247,7 +246,7 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        mDetailAddress.setText(mUser.getDetail_addr());
+        mDetailAddress.setText(User.newInstance().getDetail_addr());
         mDetailAddress.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -265,7 +264,7 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        mIDCard.setText(mUser.getCard());
+        mIDCard.setText(User.newInstance().getCard());
         mIDCard.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -283,7 +282,7 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        mServiceState.setText(mUser.getService_state());
+        mServiceState.setText(User.newInstance().getService_state());
         mServiceState.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
