@@ -103,43 +103,45 @@ public class LoginFragment extends Fragment {
                 mHttpc.post(Link.localhost + "user&act=login", mParams, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        try {
-                            if (response.getInt("code") == 200) {
-                                JSONArray array = response.getJSONArray("data1");
-                                Log.d(TAG, "array: " + array);
-                                for (int i = 0; i < array.length(); i++) {
-                                    User.newInstance().setUser(array.getJSONObject(i));
+                        if (statusCode == 200) {
+                            try {
+                                if (response.getBoolean("result")) {
+                                    JSONArray array = response.getJSONArray("data1");
+                                    Log.d(TAG, "array: " + array);
+                                    for (int i = 0; i < array.length(); i++) {
+                                        User.newInstance().setUser(array.getJSONObject(i));
+                                    }
+                                    Intent intent = new Intent(getActivity(), MainActivity.class);
+                                    startActivity(intent);
                                 }
-                                Intent intent = new Intent(getActivity(), MainActivity.class);
-                                startActivity(intent);
-                            } else {
-
+                            } catch (JSONException e) {
+                                Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                             }
-                        } catch (JSONException e) {
-                            Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                        } else if (statusCode == 400) {
+                            try {
+                                if (response.getString("msg") != "user_name_not_exist") {
+                                    if (response.getString("msg") == "password_error"){
+                                        Toast.makeText(getActivity(),
+                                                R.string.password_error,
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                } else if (response.getString("msg") == "user_name_not_exist") {
+                                    Toast.makeText(getActivity(),
+                                            R.string.user_name_not_exist,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            } catch (JSONException e) {
+                                Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                            }
                         }
                     }
 
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                        try {
-                            if (errorResponse.getInt("code") == 400) {
-                                if (errorResponse.getString("msg") != "user_name_not_exist") {
-                                    if (errorResponse.getString("msg") == "password_error"){
-                                        Toast.makeText(getActivity(),
-                                                R.string.password_error,
-                                                Toast.LENGTH_SHORT).show();
-                                    }
-                                } else if (errorResponse.getString("msg") == "user_name_not_exist") {
-                                    Toast.makeText(getActivity(),
-                                            R.string.user_name_not_exist,
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        Log.d(TAG, "请求失败  " + throwable);
+                    
                     }
+
                 });
 
             }
