@@ -109,22 +109,31 @@ public class MyPostFragment extends ListFragment {
         mHttpc.post(Link.localhost + "my_daily&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    if (response.getBoolean("result")) {
-                        JSONArray array = response.getJSONArray("data1");
-                        Log.d(TAG, "array: " + array);
-                        for (int i = 0; i < array.length(); i++) {
-                            mPosts.add(new Post(array.getJSONObject(i)));
-                        }
-                        Log.d(TAG, "mPosts: " + mPosts);
-                        PostAdapter adapter = new PostAdapter(mPosts);
-                        setListAdapter(adapter);
-                    } else {
+                if (statusCode == 200) {
+                    try {
+                        if (response.getBoolean("result")) {
+                            JSONArray array = response.getJSONArray("data1");
+                            Log.d(TAG, "array: " + array);
+                            for (int i = 0; i < array.length(); i++) {
+                                mPosts.add(new Post(array.getJSONObject(i)));
+                            }
+                            Log.d(TAG, "mPosts: " + mPosts);
+                            PostAdapter adapter = new PostAdapter(mPosts);
+                            setListAdapter(adapter);
+                        } else {
 
+                        }
+                    } catch (JSONException e) {
+                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                     }
-                } catch (JSONException e) {
-                    Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                } else if (statusCode == 400) {
+                    try {
+                        Log.d(TAG, "msg: " + response.getString("msg"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
+
             }
         });
     }

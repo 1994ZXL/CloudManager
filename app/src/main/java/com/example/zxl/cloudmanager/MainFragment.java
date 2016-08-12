@@ -194,8 +194,8 @@ public class MainFragment extends Fragment {
 
 
         try {
-            keyObj.put(Link.att_date_start, System.currentTimeMillis()/1000);
-            keyObj.put(Link.att_date_end, System.currentTimeMillis()/1000 + 86400);
+            keyObj.put(Link.att_date_start, System.currentTimeMillis()/1000 - 86400);
+            keyObj.put(Link.att_date_end, System.currentTimeMillis()/1000);
             keyObj.put(Link.mem_id, User.newInstance().getUser_id());
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {

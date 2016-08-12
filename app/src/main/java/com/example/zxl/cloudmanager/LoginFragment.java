@@ -139,7 +139,7 @@ public class LoginFragment extends Fragment {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         Log.d(TAG, "请求失败  " + throwable);
-                    
+
                     }
 
                 });
