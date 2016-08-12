@@ -56,11 +56,11 @@ public class PSListDetailFragment extends Fragment {
         sexSpinner.setAdapter(adapter);
 
         /*TODO:项目通讯录模型*/
-        mProjectName.setText(User.newInstance(mFragment.getActivity()).getUser_name());
+        mProjectName.setText(User.newInstance().getMem_name());
         mProjectName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Edit fragment = Edit.newInstance(NAME_CHANGE, User.newInstance(mFragment.getActivity()).getUser_name());
+                Edit fragment = Edit.newInstance(NAME_CHANGE, User.newInstance().getMem_name());
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.blankActivity, fragment);
                 transaction.addToBackStack(null);
@@ -68,11 +68,11 @@ public class PSListDetailFragment extends Fragment {
             }
         });
 
-        mPhoneNumber.setText(User.newInstance(mFragment.getActivity()).getPhone());
+        mPhoneNumber.setText(User.newInstance().getPhone());
         mPhoneNumber.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Edit fragment = Edit.newInstance(PHONE_CHANGE, User.newInstance(mFragment.getActivity()).getPhone());
+                Edit fragment = Edit.newInstance(PHONE_CHANGE, User.newInstance().getPhone());
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.blankActivity, fragment);
                 transaction.addToBackStack(null);
@@ -80,22 +80,22 @@ public class PSListDetailFragment extends Fragment {
             }
         });
 
-        mQQText.setText(User.newInstance(mFragment.getActivity()).getQq());
+        mQQText.setText(User.newInstance().getQq());
         mQQText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Edit fragment = Edit.newInstance(QQ_CHANGE, User.newInstance(mFragment.getActivity()).getQq());
+                Edit fragment = Edit.newInstance(QQ_CHANGE, User.newInstance().getQq());
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.blankActivity, fragment);
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
         });
-        mWeChat.setText(User.newInstance(mFragment.getActivity()).getWechat());
+        mWeChat.setText(User.newInstance().getWchat());
         mWeChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Edit fragment = Edit.newInstance(WECHAT_CHANGE, User.newInstance(mFragment.getActivity()).getWechat());
+                Edit fragment = Edit.newInstance(WECHAT_CHANGE, User.newInstance().getWchat());
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.blankActivity, fragment);
                 transaction.addToBackStack(null);

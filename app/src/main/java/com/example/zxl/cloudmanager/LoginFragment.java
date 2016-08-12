@@ -43,6 +43,7 @@ public class LoginFragment extends Fragment {
 
     private String name;
     private String password;
+    static int code;
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
@@ -98,11 +99,14 @@ public class LoginFragment extends Fragment {
                     e.printStackTrace();
                 }
                 mParams.put("key", key);
+                Log.d(TAG,"key: " + key );
+
                 mHttpc.post(Link.localhost + "user&act=login", mParams, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
                             if (response.getInt("code") == 200) {
+                                code = response.getInt("code");
                                 JSONArray array = response.getJSONArray("data1");
                                 Log.d(TAG, "array: " + array);
                                 for (int i = 0; i < array.length(); i++) {
@@ -122,6 +126,7 @@ public class LoginFragment extends Fragment {
                     public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                         try {
                             if (errorResponse.getInt("code") == 400) {
+                                code = errorResponse.getInt("code");
                                 if (errorResponse.getString("msg") != "user_name_not_exist") {
                                     if (errorResponse.getString("msg") == "password_error"){
                                         Toast.makeText(getActivity(),
@@ -133,7 +138,6 @@ public class LoginFragment extends Fragment {
                                             R.string.user_name_not_exist,
                                             Toast.LENGTH_SHORT).show();
                                 }
-
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
