@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.Link;
@@ -101,12 +102,14 @@ public class LoginFragment extends Fragment {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
-                            if (response.getBoolean("result")) {
+                            if (response.getInt("code") == 200) {
                                 JSONArray array = response.getJSONArray("data1");
                                 Log.d(TAG, "array: " + array);
                                 for (int i = 0; i < array.length(); i++) {
                                     User.newInstance().setUser(array.getJSONObject(i));
                                 }
+                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                startActivity(intent);
                             } else {
 
                             }
@@ -114,9 +117,30 @@ public class LoginFragment extends Fragment {
                             Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                         }
                     }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        try {
+                            if (errorResponse.getInt("code") == 400) {
+                                if (errorResponse.getString("msg") != "user_name_not_exist") {
+                                    if (errorResponse.getString("msg") == "password_error"){
+                                        Toast.makeText(getActivity(),
+                                                R.string.password_error,
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                } else if (errorResponse.getString("msg") == "user_name_not_exist") {
+                                    Toast.makeText(getActivity(),
+                                            R.string.user_name_not_exist,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
                 });
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
+
             }
         });
 

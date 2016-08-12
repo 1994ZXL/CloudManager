@@ -36,7 +36,11 @@
     <string name="query_erro">查询失败</string>
     <string name="work_sign">上班考勤</string>
     <string name="work_off_sign">下班考勤</string>
-
+    
+    <!--登录-->
+    <string name="user_name_not_exist">用户名不存在</string>
+    <string name="password_error">密码错误</string>
+    
     <!-- 我是领导-->
     <string name="leader">我是领导</string>
     <string name="post_query">日报查询</string>
