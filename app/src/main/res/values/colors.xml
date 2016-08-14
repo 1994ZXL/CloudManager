@@ -12,4 +12,8 @@
     <color name="button_bg_color">#FD6E3D</color>
 
     <color name="sky_background">#228FC1</color>
+
+    <color name="light_blue">#6593cb</color>
+    <color name="logo_background">#0D568C</color>
+    <color name="login_background">#DDF0FF</color>
 </resources>

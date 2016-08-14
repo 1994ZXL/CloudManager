@@ -47,9 +47,8 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.login_fragment, parent, false);
-
-        usernameTextView = (TextView)v.findViewById(R.id.loginFragment_username_textview);
-        passwordTextView = (TextView)v.findViewById(R.id.loginFragment_password_textview);
+        /*usernameTextView = (TextView)v.findViewById(R.id.loginFragment_username_textview);
+        passwordTextView = (TextView)v.findViewById(R.id.loginFragment_password_textview);*/
         usernameEditText = (EditText)v.findViewById(R.id.loginFragment_username_edittext);
         usernameEditText.addTextChangedListener(new TextWatcher() {
             @Override

@@ -1,12 +1,28 @@
 <resources>
     <string name="app_name">CloudManager</string>
 
+    <string name="logo_title">川科企业云管理平台系统</string>
+    <string name="user_hint">请输入用户名</string>
+    <string name="pwd_hint">请输入密码</string>
+
+    <!--刷新加载-->
+    <string name="pull_to_refresh">下拉刷新</string>
+    <string name="release_to_refresh">释放立即刷新</string>
+    <string name="refreshing">正在刷新...</string>
+    <string name="refresh_succeed">刷新成功</string>
+    <string name="refresh_fail">刷新失败</string>
+    <string name="pullup_to_load">上拉加载更多</string>
+    <string name="release_to_load">释放立即加载</string>
+    <string name="loading">正在加载...</string>
+    <string name="load_succeed">加载成功</string>
+    <string name="load_fail">加载失败</string>
+
     <!-- 主界面-->
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="username">用户名</string>
     <string name="password">密码</string>
-    <string name="login">登录</string>
+    <string name="login">登  录</string>
     <string name="my_job">我的工作</string>
     <string name="my_message">我的信息</string>
     <string name="my_check">我的考勤</string>
