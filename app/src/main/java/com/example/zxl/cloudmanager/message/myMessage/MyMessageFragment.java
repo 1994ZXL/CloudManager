@@ -1,12 +1,17 @@
 package com.example.zxl.cloudmanager.message.myMessage;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.text.AutoText;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -14,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.Edit;
 import com.example.zxl.cloudmanager.R;
@@ -22,6 +28,7 @@ import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.User;
 import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -39,35 +46,36 @@ import cz.msebera.android.httpclient.Header;
 public class MyMessageFragment extends Fragment {
     private static final String TAG = "MyMessageFragment";
 
-    private EditText mName;
-    private Spinner sexSpinner;
+    private TextView mUserName;
+    private TextView mName;
+    private TextView mSex;
     private EditText mPhoneNumber;
     private EditText mQQ;
     private EditText mWeChat;
     private EditText mEmail;
     private EditText mAddress;
     private EditText mDetailAddress;
-    private EditText mIDCard;
-    private EditText mServiceState;
+    private TextView mIDCard;
+    private TextView mServiceState;
+    private TextView mCompany;
+    private TextView mPunchAddress;
+    private TextView mPuncherMaster;
+    private TextView mJoinTime;
 
-    private String name;
-    private int sex;
     private String phoneNumber;
     private String qq;
     private String weChat;
     private String email;
     private String address;
     private String detailAddress;
-    private String idCard;
-    private String serviceState;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
     private JSONObject keyObj = new JSONObject();
     private String key = "";
-
-    private ArrayAdapter<String> adapter;
-    private String[] list;
+    private RequestParams mParams2 = new RequestParams();
+    private JSONObject keyObj2 = new JSONObject();
+    private String key2 = "";
 
     private Fragment mFragment;
 
@@ -104,7 +112,23 @@ public class MyMessageFragment extends Fragment {
                         Log.d(TAG, "array: " + array);
                         for (int i = 0; i < array.length(); i++) {
                             User.newInstance().setUser(array.getJSONObject(i));
+                            Log.d(TAG, "Name: " + User.newInstance().getMem_name());
                         }
+                        mUserName.setText(User.newInstance().getUser_name());
+                        mName.setText(User.newInstance().getMem_name());
+                        mSex.setText(User.newInstance().getMem_sex());
+                        mPhoneNumber.setText(User.newInstance().getPhone());
+                        mQQ.setText(User.newInstance().getQq());
+                        mWeChat.setText(User.newInstance().getWchat());
+                        mEmail.setText(User.newInstance().getEmail());
+                        mAddress.setText(User.newInstance().getMem_region());
+                        mDetailAddress.setText(User.newInstance().getMem_addr());
+                        mIDCard.setText(User.newInstance().getCard());
+                        mServiceState.setText(User.newInstance().getMem_state());
+                        mCompany.setText(User.newInstance().getComp_name());
+                        mPunchAddress.setText(User.newInstance().getPuncher_name());
+                        mPuncherMaster.setText(User.newInstance().getPuncher_master());
+                        mJoinTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(User.newInstance().getJoin_time()));
                     } else {
                     }
                 } catch (JSONException e) {
@@ -113,50 +137,7 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        if (User.newInstance().getGender() == 1) {
-            list = new String[]{"男", "女"};
-        } else if (User.newInstance().getGender() == 2) {
-            list = new String[]{"女", "男"};
-        }
-        adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sexSpinner.setAdapter(adapter);
-        sexSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (list[i] == "男") {
-                    sex = 1;
-                } else if (list[i] == "女") {
-                    sex = 2;
-                }
 
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        mName.setText(User.newInstance().getMem_name());
-        mName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                name = charSequence.toString();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        mPhoneNumber.setText(User.newInstance().getPhone());
         mPhoneNumber.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -174,7 +155,7 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        mQQ.setText(User.newInstance().getQq());
+
         mQQ.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -192,7 +173,7 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        mWeChat.setText(User.newInstance().getWchat());
+
         mWeChat.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -210,7 +191,7 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        mEmail.setText(User.newInstance().getEmail());
+
         mEmail.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -228,7 +209,7 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        mAddress.setText(User.newInstance().getAddress());
+
         mAddress.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -246,7 +227,7 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        mDetailAddress.setText(User.newInstance().getDetail_addr());
+
         mDetailAddress.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -264,55 +245,77 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        mIDCard.setText(User.newInstance().getCard());
-        mIDCard.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                idCard = charSequence.toString();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-        mServiceState.setText(User.newInstance().getService_state());
-        mServiceState.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                serviceState = charSequence.toString();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
         return v;
     }
 
     private void init(View v) {
-        sexSpinner = (Spinner)v.findViewById(R.id.main_fragment_my_message_sexSprinner);
-        mName = (EditText)v.findViewById(R.id.main_fragment_my_message_name);
+        mUserName = (TextView)v.findViewById(R.id.main_fragment_my_message_user_name);
+        mName = (TextView)v.findViewById(R.id.main_fragment_my_message_name);
+        mSex = (TextView)v.findViewById(R.id.main_fragment_my_message_sex);
         mPhoneNumber = (EditText)v.findViewById(R.id.main_fragment_my_message_phone);
         mQQ = (EditText)v.findViewById(R.id.main_fragment_my_message_qq);
         mWeChat = (EditText)v.findViewById(R.id.main_fragment_my_message_wechat);
         mEmail = (EditText) v.findViewById(R.id.main_fragment_my_message_email);
         mAddress = (EditText)v.findViewById(R.id.main_fragment_my_message_location);
         mDetailAddress = (EditText) v.findViewById(R.id.main_fragment_my_message_detail_location);
-        mIDCard = (EditText) v.findViewById(R.id.main_fragment_my_message_idcard);
-        mServiceState = (EditText) v.findViewById(R.id.main_fragment_my_message_service_state);
+        mIDCard = (TextView) v.findViewById(R.id.main_fragment_my_message_idcard);
+        mServiceState = (TextView) v.findViewById(R.id.main_fragment_my_message_service_state);
+        mCompany = (TextView)v.findViewById(R.id.main_fragment_my_message_comp_name);
+        mPunchAddress = (TextView)v.findViewById(R.id.main_fragment_my_message_punch_address);
+        mPuncherMaster = (TextView)v.findViewById(R.id.main_fragment_my_message_puncher_master);
+        mJoinTime = (TextView)v.findViewById(R.id.main_fragment_my_message_join_time);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.message_save, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_edit_message:
+                try {
+                    keyObj2.put(Link.mem_id, User.newInstance().getUser_id());
+                    if (phoneNumber != null) {
+                        keyObj2.put(Link.phone, phoneNumber);
+                    }
+                    if (qq != null) {
+                        keyObj2.put(Link.qq, qq);
+                    }
+                    if (weChat != null) {
+                        keyObj2.put(Link.wchat, weChat);
+                    }
+                    if (email != null) {
+                        keyObj2.put(Link.email, email);
+                    }
+                    if (address != null) {
+                        keyObj2.put(Link.mem_region, address);
+                    }
+                    if (detailAddress != null) {
+                        keyObj2.put(Link.mem_addr, detailAddress);
+                    }
+                    key2 = DESCryptor.Encryptor(keyObj2.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mParams2.put("key", key2);
+                Log.d(TAG,"key2: " + key2);
+                mHttpc.post(Link.localhost + "member&act=edit_profile", mParams2, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            Toast.makeText(getActivity(),
+                                    response.getString("msg"),
+                                    Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                        }
+                    }
+                });
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

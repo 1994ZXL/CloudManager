@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
@@ -51,8 +52,6 @@ public class MyPostFragment extends ListFragment {
     private Fragment mFragment;
 
     private static final String TAG = "MyPostFragment";
-    private static final String SEARCH_KEY = "search_key";
-    private static final String WHERE = "where";
 
     private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
@@ -109,6 +108,16 @@ public class MyPostFragment extends ListFragment {
         mHttpc.post(Link.localhost + "my_daily&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                if (statusCode == 500) {
+                    try {
+                        Toast.makeText(getActivity(),
+                                response.getString("msg"),
+                                Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                    }
+                    return;
+                }
                 if (statusCode == 200) {
                     try {
                         if (response.getBoolean("result")) {
@@ -134,6 +143,11 @@ public class MyPostFragment extends ListFragment {
                     }
                 }
 
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                return;
             }
         });
     }

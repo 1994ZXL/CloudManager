@@ -105,7 +105,12 @@ public class MyPostDetailFragment extends Fragment {
 
             }
         });
-        mSubmitTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sPost.getReport_time()));
+        if (sPost.getReport_time() == 0) {
+            mSubmitTime.setText("——");
+        } else {
+            mSubmitTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sPost.getReport_time()));
+        }
+
         mCreateTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sPost.getCreate_time()));
     }
 

@@ -17,6 +17,7 @@ public class Leave {
     private String leave_reason; //请假原因
     private String handle_opinion; //处理意见
     private String handle_time; //处理时间
+    private String leave_id; //请假id
 
     private static final String JSON_NAME = "mem_name";
     private static final String JSON_TYPE = "leave_type";
@@ -26,6 +27,7 @@ public class Leave {
     private static final String JSON_LEAVE_RESON = "leave_reason";
     private static final String JSON_HANDLE_OPTION = "handle_opinion";
     private static final String JSON_HANDLE_TIME = "handle_time";
+    private static final String JSON_LEAVE_ID = "leave_id";
 
     private String[] content;
 
@@ -60,6 +62,8 @@ public class Leave {
             leave_reason = json.getString(JSON_LEAVE_RESON);
         if (json.has(JSON_HANDLE_TIME))
             handle_time = json.getString(JSON_HANDLE_TIME);
+        if (json.has(JSON_LEAVE_ID))
+            leave_id = json.getString(JSON_LEAVE_ID);
     }
 
     public JSONObject toJSON() throws JSONException{
@@ -108,6 +112,14 @@ public class Leave {
             return "拒绝";
         }
         return null;
+    }
+
+    public String getLeave_id() {
+        return leave_id;
+    }
+
+    public void setLeave_id(String leave_id) {
+        this.leave_id = leave_id;
     }
 
     public void setStatus(int status) {

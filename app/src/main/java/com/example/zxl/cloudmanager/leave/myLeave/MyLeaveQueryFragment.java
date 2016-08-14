@@ -9,22 +9,37 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
+import com.example.zxl.cloudmanager.model.DESCryptor;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Leave;
 import com.example.zxl.cloudmanager.model.LeaveMyLab;
+import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.model.User;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ZXL on 2016/7/12.
@@ -32,7 +47,7 @@ import java.util.List;
 public class MyLeaveQueryFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
-    private List<Leave> leaves = new ArrayList<Leave>();
+    private ArrayList<Leave> leaves = new ArrayList<Leave>();
     private MyAdapter myAdapter;
 
     private PullToRefreshView mPullToRefreshView;
@@ -40,9 +55,10 @@ public class MyLeaveQueryFragment extends Fragment {
     private Fragment mFragment;
     private static final String TAG = "MyLeaveQueryFragment";
 
-    private int type;
-    private int index;
-    private ArrayList<Integer> key = new ArrayList<Integer>();
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams = new RequestParams();
+    private JSONObject keyObj = new JSONObject();
+    private String key = "";
 
     private Button mSearchBtn;
     @Override
@@ -51,15 +67,7 @@ public class MyLeaveQueryFragment extends Fragment {
         this.setHasOptionsMenu(true);
         mFragment = this;
 
-        Intent intent = this.getActivity().getIntent();
-        if (null == intent.getIntegerArrayListExtra("TYPE")){
-            leaves = LeaveMyLab.newInstance(mFragment.getActivity()).get();
-        } else {
-            key =  intent.getIntegerArrayListExtra("TYPE");
-            for (int i = 0; i < key.size(); i++) {
-                leaves.add(LeaveMyLab.newInstance(mFragment.getActivity()).get().get(key.get(i)));
-            }
-        }
+
     }
 
 
@@ -73,7 +81,7 @@ public class MyLeaveQueryFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        View v = layoutInflater.inflate(R.layout.main_fragment_my_leave_query, parent, false);
+        final View v = layoutInflater.inflate(R.layout.main_fragment_my_leave_query, parent, false);
 
         getActivity().getActionBar().setTitle("我的请假");
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_leave_pull_to_refresh);
@@ -88,29 +96,60 @@ public class MyLeaveQueryFragment extends Fragment {
                 }, REFRESH_DELAY);
             }
         });
-        mRecyclerView = (RecyclerView)v.findViewById(R.id.leave_recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        myAdapter = new MyAdapter(this.getActivity(), leaves);
-        mRecyclerView.setAdapter(myAdapter);
-        mCardView = (CardView)v.findViewById(R.id.fragment_my_leave);
-        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+
+        try {
+            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+            keyObj.put(Link.page_count, 20);
+            keyObj.put(Link.curl_page, 1);
+            key = DESCryptor.Encryptor(keyObj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mParams.put("key", key);
+        Log.d(TAG,"key:" + key);
+        mHttpc.post(Link.localhost + "my_leave&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
-            public void onItemClick(View view, Object data) {
-                Fragment fragment = MyLeaveDetailFragment.newInstance(data);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                if (statusCode == 200) {
+                    try {
+                        if (response.getBoolean("result")) {
+                            JSONArray array = response.getJSONArray("data1");
+                            for (int i = 0; i < array.length(); i++) {
+                                leaves.add(new Leave(array.getJSONObject(i)));
+                            }
+
+                            mRecyclerView = (RecyclerView)v.findViewById(R.id.leave_recyclerview);
+                            mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
+                            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                            mRecyclerView.setHasFixedSize(true);
+                            myAdapter = new MyAdapter(mFragment.getActivity(), leaves);
+                            mRecyclerView.setAdapter(myAdapter);
+                            mCardView = (CardView)v.findViewById(R.id.fragment_my_leave);
+                            myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                                @Override
+                                public void onItemClick(View view, Object data) {
+                                    Fragment fragment = MyLeaveDetailFragment.newInstance(data);
+                                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                    if (!fragment.isAdded()) {
+                                        transaction.addToBackStack(null);
+                                        transaction.hide(mFragment);
+                                        transaction.add(R.id.blankActivity, fragment);
+                                        transaction.commit();
+                                    } else {
+                                        transaction.hide(mFragment);
+                                        transaction.show(fragment);
+                                        transaction.commit();
+                                    }
+                                }
+                            });
+                        }
+                    } catch (JSONException e) {
+                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                    }
                 }
+
             }
+
         });
 
         return v;
@@ -146,8 +185,8 @@ public class MyLeaveQueryFragment extends Fragment {
             viewHolder.mLeaveName.setText(leave.getMem_name());
             viewHolder.mLeaveType.setText(leave.getLeave_type());
             viewHolder.mLeaveState.setText(leave.getStatus());
-            viewHolder.mLeaveBeginTime.setText(leave.getStart_time());
-            viewHolder.mLeaveEndTime.setText(leave.getEnd_time());
+            viewHolder.mLeaveBeginTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi2(leave.getStart_time()));
+            viewHolder.mLeaveEndTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi2(leave.getEnd_time()));
 
             viewHolder.itemView.setTag(leaves.get(i));
         }

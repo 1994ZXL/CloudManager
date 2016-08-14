@@ -20,6 +20,7 @@ import com.example.zxl.cloudmanager.check.myCheck.MyCheckDetailFragment;
 import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.model.User;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -98,6 +99,7 @@ public class ManagerCheckListFragment extends Fragment {
             }
         }
         try {
+            keyObj.put(Link.comp_id, User.newInstance().getComp_id());
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -146,7 +148,7 @@ public class ManagerCheckListFragment extends Fragment {
 
                         }
                     } catch (JSONException e) {
-                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                        Log.e(TAG, "接收数据异常: " + e.getLocalizedMessage());
                     }
                 } else {
 

@@ -7,238 +7,356 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <!-- 头像-->
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <TextView
-            style="@style/font"
-            android:layout_weight="1"
-            android:text="@string/head"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/demo"
-            android:id="@+id/main_fragment_my_message_head_icon" />
-
-    </LinearLayout>
-
-    <!-- 姓名-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
-
-        <TextView
-            style="@style/font"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:text="@string/name" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:id="@+id/main_fragment_my_message_name"
-            android:text="张三"/>
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <!-- 头像-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <!-- 性别-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:text="@string/head"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:src="@drawable/demo"
+                    android:id="@+id/main_fragment_my_message_head_icon" />
 
-        <TextView
-            style="@style/font"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:text="@string/sex" />
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:layout_marginLeft="16dp"
-            android:id="@+id/main_fragment_my_message_sexSprinner">
+            </LinearLayout>
 
-        </Spinner>
-    </LinearLayout>
+            <!-- 用户名-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
 
-    <!-- 手机-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/user_name" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_message_user_name"
+                    android:text="张三"/>
 
-        <TextView
-            style="@style/font"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:text="@string/phone" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:id="@+id/main_fragment_my_message_phone"
-            android:text="12345678987"/>
-    </LinearLayout>
+            </LinearLayout>
 
-    <!-- QQ-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+            <!-- 姓名-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
 
-        <TextView
-            style="@style/font"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:text="@string/qq" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:id="@+id/main_fragment_my_message_qq"/>
-    </LinearLayout>
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/name" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_message_name"
+                    android:text="张三"/>
 
-    <!-- 微信-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+            </LinearLayout>
 
-        <TextView
-            style="@style/font"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:text="@string/wechat" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:id="@+id/main_fragment_my_message_wechat"/>
-    </LinearLayout>
+            <!-- 性别-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
 
-    <!-- 邮箱-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/sex" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:id="@+id/main_fragment_my_message_sex"/>
 
-        <TextView
-            style="@style/font"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:text="@string/email" />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:id="@+id/main_fragment_my_message_email"/>
-    </LinearLayout>
+            </LinearLayout>
 
-    <!-- 地址-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+            <!-- 手机-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
 
-        <TextView
-            style="@style/font"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:text="@string/location"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:id="@+id/main_fragment_my_message_location"/>
-    </LinearLayout>
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/phone" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_message_phone"
+                    android:text="12345678987"/>
+            </LinearLayout>
 
-    <!-- 详细地址-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+            <!-- QQ-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
 
-        <TextView
-            style="@style/font"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:text="@string/detail_location"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:id="@+id/main_fragment_my_message_detail_location"/>
-    </LinearLayout>
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/qq" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_message_qq"/>
+            </LinearLayout>
 
-    <!-- 身份证号码-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+            <!-- 微信-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
 
-        <TextView
-            style="@style/font"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:text="@string/idcard"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:id="@+id/main_fragment_my_message_idcard"/>
-    </LinearLayout>
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/wechat" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_message_wechat"/>
+            </LinearLayout>
 
-    <!-- 在职状态-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+            <!-- 邮箱-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
 
-        <TextView
-            style="@style/font"
-            android:layout_width="match_parent"
-            android:layout_weight="1"
-            android:text="@string/service_state"/>
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:id="@+id/main_fragment_my_message_service_state"/>
-    </LinearLayout>
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/email" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_message_email"/>
+            </LinearLayout>
+
+            <!-- 地址-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/location"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_message_location"/>
+            </LinearLayout>
+
+            <!-- 详细地址-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/detail_location"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_message_detail_location"/>
+            </LinearLayout>
+
+            <!-- 身份证号码-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/idcard"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_message_idcard"/>
+            </LinearLayout>
+
+            <!-- 在职状态-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/service_state"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_message_service_state"/>
+            </LinearLayout>
+
+            <!-- 公司名-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/comp_name"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_message_comp_name"/>
+            </LinearLayout>
+
+            <!-- 考勤地址-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/punch_address"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_message_punch_address"/>
+            </LinearLayout>
+
+            <!-- 考勤主管-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/puncher_master"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_message_puncher_master"/>
+            </LinearLayout>
+
+            <!-- 入职时间-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    style="@style/font"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:text="@string/join_time"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_message_join_time"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

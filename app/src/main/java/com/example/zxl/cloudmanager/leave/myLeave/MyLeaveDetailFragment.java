@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Leave;
 
 /**
@@ -67,8 +68,8 @@ public class MyLeaveDetailFragment extends Fragment {
     private void control() {
         name.setText(mLeave.getMem_name());
         leaveKind.setText(mLeave.getLeave_type());
-        leaveBeginTime.setText(mLeave.getStart_time());
-        leaveEndTime.setText(mLeave.getEnd_time());
+        leaveBeginTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mLeave.getStart_time()));
+        leaveEndTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mLeave.getEnd_time()));
         leaveSuggestion.setText(mLeave.getHandle_opinion());
         leaveState.setText(mLeave.getStatus());
         leaveReason.setText(mLeave.getLeave_reason());

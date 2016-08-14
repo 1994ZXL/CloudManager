@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.bug.myBug.MyBugActivity;
 import com.example.zxl.cloudmanager.check.checkManager.ManagerCheckAcitvity;
@@ -118,7 +119,9 @@ public class MainFragment extends Fragment {
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
+    private RequestParams mParams2 = new RequestParams();
     private JSONObject keyObj = new JSONObject();
+    private JSONObject keyObj2 = new JSONObject();
     private String key = "";
 
     private String mAtt_id;
@@ -194,8 +197,8 @@ public class MainFragment extends Fragment {
 
 
         try {
-            keyObj.put(Link.att_date_start, System.currentTimeMillis()/1000 - 86400);
-            keyObj.put(Link.att_date_end, System.currentTimeMillis()/1000);
+            keyObj.put(Link.att_date_start, (System.currentTimeMillis()/1000)-86400-28800);
+            keyObj.put(Link.att_date_end, (System.currentTimeMillis()/1000)-28800);
             keyObj.put(Link.mem_id, User.newInstance().getUser_id());
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
@@ -215,12 +218,14 @@ public class MainFragment extends Fragment {
                             if (0 == array.getJSONObject(i).getInt(Link.s_att_time)) {
                                 mSignTime = "——";
                             } else {
-                                mSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(array.getJSONObject(i).getInt(Link.s_att_time));
+                                mSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi3(array.getJSONObject(i).getInt(Link.s_att_time));
+                                mSignBtn.setClickable(false);
                             }
                             if (0 == array.getJSONObject(i).getInt(Link.e_att_time)) {
                                 mOffSignTime = "——";
                             } else {
-                                mOffSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(array.getJSONObject(i).getInt(Link.e_att_time));
+                                mOffSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi3(array.getJSONObject(i).getInt(Link.e_att_time));
+                                mOffSignBtn.setClickable(false);
                             }
                         }
                         mSignBtn.setText(mSignTime);
@@ -325,23 +330,25 @@ public class MainFragment extends Fragment {
 
     private void check(String function) {
         try {
-            keyObj.put(Link.att_id, mAtt_id);
-            key = DESCryptor.Encryptor(keyObj.toString());
+            keyObj2.put(Link.att_id, mAtt_id);
+            key = DESCryptor.Encryptor(keyObj2.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mParams.put("key", key);
+        mParams2.put("key", key);
         Log.d(TAG,"key:" + key);
-        mHttpc.post(Link.localhost + "my_punch&act=" + function, mParams, new AsyncHttpResponseHandler() {
+        mHttpc.post(Link.localhost + "my_punch&act=" + function, mParams2, new JsonHttpResponseHandler() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Log.d(TAG, "签到成功");
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                try {
+                    Toast.makeText(getActivity(),
+                            response.getString("msg"),
+                            Toast.LENGTH_SHORT).show();
+                } catch (JSONException e) {
+                    Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                }
             }
 
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.d(TAG, "签到失败");
-            }
         });
     }
 

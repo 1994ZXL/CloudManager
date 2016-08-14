@@ -17,7 +17,7 @@ public class Link {
     public static final String status = "status";//状态
     public static final String start_time = "start_time";//开始时间
     public static final String end_time = "end_time";//结束时间
-    public static final String over_time = "over_time";//结束时间
+    public static final String leave_reson = "leave_reason"; //请假原因
 
     //manage_trip
     public static final String start_time_s = "start_time_s";//开始时间(小)
@@ -50,6 +50,12 @@ public class Link {
     public static final String user_name = "user_name"; //用户名
     public static final String password = "password"; //密码
     public static final String user_type = "user_type"; //用户类型
+    public static final String phone = "phone"; //手机号码
+    public static final String qq = "qq"; //QQ号
+    public static final String wchat = "wchat"; //微信号
+    public static final String email = "email"; //邮箱
+    public static final String mem_region = "mem_region"; //地址
+    public static final String mem_addr = "mem_addr"; //详细地址
 
     //my_punch
     public static final String att_date_start = "att_date_start"; //考勤日期(早)
@@ -63,4 +69,6 @@ public class Link {
     public static final String S_time = "S_time"; //规定上班时间
     public static final String E_att_time = "E_att_time"; //下班签到时间
     public static final String E_time = "E_time"; //规定下班时间
+    public static final String comp_id = "comp_id"; //公司id
+
 }

@@ -2,9 +2,14 @@ package com.example.zxl.cloudmanager.leave.myLeave;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,12 +24,24 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
 import com.example.zxl.cloudmanager.model.Leave;
 import com.example.zxl.cloudmanager.model.LeaveMyLab;
+import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.model.User;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Date;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ZXL on 2016/7/12.
@@ -33,8 +50,8 @@ public class MyLeaveApplyFragment extends Fragment {
     private Leave leave = new Leave();
 
     private ArrayAdapter<String> adapter;
-    private static final String[] list={"病假", "事假", "婚假", "丧假", "产假", "年休假"};
-    private String type;
+    private static final String[] list={"事假", "病假", "休假", "婚假", "其他"};
+    private int type;
 
     private Spinner mTypeSpinner;
     private Button mBeginTime;
@@ -51,6 +68,11 @@ public class MyLeaveApplyFragment extends Fragment {
 
     private static final String TAG = "MyLeaveApplyFragment";
     private static final String ARRAY = "array";
+
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams = new RequestParams();
+    private JSONObject keyObj = new JSONObject();
+    private String key = "";
 
     private Fragment mFragment;
 
@@ -74,7 +96,19 @@ public class MyLeaveApplyFragment extends Fragment {
         mTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                type = list[i];
+                //请假类型:1事假,2病假,3休假,4婚假,5其他
+                if (list[i].equals("事假")){
+                    type = 1;
+                } else if (list[i].equals("病假")){
+                    type = 2;
+                } else if (list[i].equals("休假")){
+                    type = 3;
+                } else if (list[i].equals("婚假")){
+                    type = 4;
+                } else if (list[i].equals("其他")){
+                    type = 5;
+                }
+
                 adapterView.setVisibility(View.VISIBLE);
             }
 
@@ -142,11 +176,45 @@ public class MyLeaveApplyFragment extends Fragment {
     }
 
     public void commit() {
-//        leave.setType(type);
-//        leave.setStart_time(bgtime);
-//        leave.setEnd_time(edtime);
-        leave.setLeave_reason(reson);
-        LeaveMyLab.newInstance(mFragment.getActivity()).add(leave);
+
+        try {
+            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+            keyObj.put(Link.leave_type, type);
+            keyObj.put(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi(bgtime));
+            keyObj.put(Link.end_time, DateForGeLingWeiZhi.toGeLinWeiZhi(edtime));
+            keyObj.put(Link.leave_reson, reson);
+            key = DESCryptor.Encryptor(keyObj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mParams.put("key", key);
+        Log.d(TAG,"key:" + key);
+        mHttpc.post(Link.localhost + "my_leave&act=add", mParams, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                if (statusCode == 200) {
+                    try {
+                        if (response.getBoolean("result")) {
+                            Intent intent = new Intent(mFragment.getActivity(), MyLeaveActivity.class);
+                            startActivity(intent);
+                        }
+                    } catch (JSONException e) {
+                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                    }
+                } else if (statusCode == 400) {
+                    try {
+                        Toast.makeText(getActivity(),
+                                response.getString("msg"),
+                                Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e) {
+                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                    }
+                }
+
+            }
+
+        });
+
         Intent intent = new Intent(mFragment.getActivity(), MyLeaveActivity.class);
         startActivity(intent);
     }
