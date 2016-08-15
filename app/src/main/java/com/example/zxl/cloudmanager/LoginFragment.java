@@ -111,6 +111,7 @@ public class LoginFragment extends Fragment {
                                         for (int i = 0; i < array.length(); i++) {
                                             User.newInstance().setUser(array.getJSONObject(i));
                                         }
+
                                         Intent intent = new Intent(getActivity(), MainActivity.class);
                                         startActivity(intent);
                                     }

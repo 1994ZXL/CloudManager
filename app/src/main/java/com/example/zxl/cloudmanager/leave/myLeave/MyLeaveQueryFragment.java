@@ -66,8 +66,6 @@ public class MyLeaveQueryFragment extends Fragment {
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
         mFragment = this;
-
-
     }
 
 
@@ -96,6 +94,26 @@ public class MyLeaveQueryFragment extends Fragment {
                 }, REFRESH_DELAY);
             }
         });
+
+        Intent intent = mFragment.getActivity().getIntent();
+        if (null != intent) {
+            try {
+
+                keyObj.put(Link.leave_type, intent.getIntExtra(Link.leave_type, 1));
+
+                keyObj.put(Link.status, intent.getIntExtra(Link.status, 1));
+
+                if (-1 != intent.getIntExtra(Link.start_time, 0)) {
+                    keyObj.put(Link.start_time, intent.getIntExtra(Link.start_time, -2));
+                }
+                if (-1 != intent.getIntExtra(Link.end_time, -2)) {
+                    keyObj.put(Link.end_time, intent.getIntExtra(Link.end_time, -2));
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 
         try {
             keyObj.put(Link.mem_id, User.newInstance().getUser_id());

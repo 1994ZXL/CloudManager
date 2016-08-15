@@ -22,7 +22,6 @@
         <TextView
             style="@style/font"
             android:layout_weight="1"
-            android:text="张三"
             android:id="@+id/main_fragment_my_leave_apply_name"/>
 
     </LinearLayout>

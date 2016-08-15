@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
@@ -53,6 +54,7 @@ public class MyLeaveApplyFragment extends Fragment {
     private static final String[] list={"事假", "病假", "休假", "婚假", "其他"};
     private int type;
 
+    private TextView mName;
     private Spinner mTypeSpinner;
     private Button mBeginTime;
     private Button mEndTime;
@@ -89,6 +91,8 @@ public class MyLeaveApplyFragment extends Fragment {
         View view = layoutInflater.inflate(R.layout.main_fragment_my_leave_apply, parent, false);
 
         initVariable(view);
+
+        mName.setText(User.newInstance().getMem_name());
 
         adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -168,6 +172,7 @@ public class MyLeaveApplyFragment extends Fragment {
     }
 
     public void initVariable(View view) {
+        mName = (TextView) view.findViewById(R.id.main_fragment_my_leave_apply_name);
         mTypeSpinner = (Spinner)view.findViewById(R.id.main_fragment_my_leave_typeSprinner);
         mBeginTime = (Button)view.findViewById(R.id.main_fragment_my_leave_begin_time);
         mEndTime = (Button)view.findViewById(R.id.main_fragment_my_leave_end_time);
