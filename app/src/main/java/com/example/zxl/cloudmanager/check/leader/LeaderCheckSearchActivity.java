@@ -8,7 +8,7 @@ import com.example.zxl.cloudmanager.check.myCheck.SearchCheckFragment;
 public class LeaderCheckSearchActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment(){
-        return new SearchCheckFragment();
+        return new LeaderCheckSearchFragment();
     }
 
 }

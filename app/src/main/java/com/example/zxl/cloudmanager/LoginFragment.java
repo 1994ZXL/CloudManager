@@ -104,31 +104,31 @@ public class LoginFragment extends Fragment {
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         if (statusCode == 200) {
                             try {
-                                if (response.getBoolean("result")) {
-                                    JSONArray array = response.getJSONArray("data1");
-                                    Log.d(TAG, "array: " + array);
-                                    for (int i = 0; i < array.length(); i++) {
-                                        User.newInstance().setUser(array.getJSONObject(i));
+                                if (response.getInt("code") == 200) {
+                                    if (response.getBoolean("result")) {
+                                        JSONArray array = response.getJSONArray("data1");
+                                        Log.d(TAG, "array: " + array);
+                                        for (int i = 0; i < array.length(); i++) {
+                                            User.newInstance().setUser(array.getJSONObject(i));
+                                        }
+                                        Intent intent = new Intent(getActivity(), MainActivity.class);
+                                        startActivity(intent);
                                     }
-                                    Intent intent = new Intent(getActivity(), MainActivity.class);
-                                    startActivity(intent);
-                                }
-                            } catch (JSONException e) {
-                                Log.e(TAG, "ee2: " + e.getLocalizedMessage());
-                            }
-                        } else if (statusCode == 400) {
-                            try {
-                                if (response.getString("msg") != "user_name_not_exist") {
-                                    if (response.getString("msg") == "password_error"){
+                                } else if (response.getInt("code") == 400) {
+                                    if (!response.getString("msg").equals("user_name_not_exist") ) {
+                                        if (response.getString("msg").equals("password_error")){
+                                            Toast.makeText(getActivity(),
+                                                    R.string.password_error,
+                                                    Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else if (response.getString("msg").equals("user_name_not_exist")) {
                                         Toast.makeText(getActivity(),
-                                                R.string.password_error,
+                                                R.string.user_name_not_exist,
                                                 Toast.LENGTH_SHORT).show();
                                     }
-                                } else if (response.getString("msg") == "user_name_not_exist") {
-                                    Toast.makeText(getActivity(),
-                                            R.string.user_name_not_exist,
-                                            Toast.LENGTH_SHORT).show();
+
                                 }
+
                             } catch (JSONException e) {
                                 Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                             }

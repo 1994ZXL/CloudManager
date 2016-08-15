@@ -4,7 +4,7 @@ package com.example.zxl.cloudmanager.model;
  * Created by ZXL on 2016/8/3.
  */
 public class Link {
-    public static final String localhost = "http://192.168.1.109/yunmgr_v1.0/api/uc.php?app=";
+    public static final String localhost = "http://192.168.1.117/yunmgr_v1.0/api/uc.php?app=";
     public static final String API = "http://localhost/yunmgr_v1.0/api/uc.php?app=";
 
     public static final String manage_Leave = "manage_leave&act=";
@@ -58,6 +58,7 @@ public class Link {
     public static final String mem_addr = "mem_addr"; //详细地址
 
     //my_punch
+    public static final String my_punch = "my_punch&act=get_list";
     public static final String att_date_start = "att_date_start"; //考勤日期(早)
     public static final String att_date_end = "att_date_end"; //考勤日期（晚）
     public static final String att_id = "att_id"; //考勤id
@@ -70,5 +71,10 @@ public class Link {
     public static final String E_att_time = "E_att_time"; //下班签到时间
     public static final String E_time = "E_time"; //规定下班时间
     public static final String comp_id = "comp_id"; //公司id
+
+    //punch_list
+    public static final String punch_list = "punch_list&act=get_list";
+    public static final String att_date_from = "att_date_from"; //考勤日期（早）
+    public static final String att_date_to = "att_date_to"; //考勤日期（晚）
 
 }

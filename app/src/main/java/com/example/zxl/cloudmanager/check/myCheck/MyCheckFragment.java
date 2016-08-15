@@ -60,6 +60,8 @@ public class MyCheckFragment extends Fragment {
     private JSONObject keyObj = new JSONObject();
     private String key = "";
 
+    private String url;
+
     private Fragment mFragment;
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -93,7 +95,7 @@ public class MyCheckFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View v = layoutInflater.inflate(R.layout.main_fragment_my_check, parent, false);
-        getActivity().getActionBar().setTitle("我的考勤");
+        getActivity().getActionBar().setTitle("考勤");
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_check_pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -112,7 +114,15 @@ public class MyCheckFragment extends Fragment {
         if (null != saveInstanceState) {
 
             try {
-
+                if (null != saveInstanceState.getString(Link.comp_id)) {
+                    keyObj.put(Link.comp_id, saveInstanceState.getString(Link.comp_id));
+                }
+                if (-1 != saveInstanceState.getInt(Link.att_date_from)) {
+                    keyObj.put(Link.att_date_from, saveInstanceState.getInt(Link.att_date_from));
+                }
+                if (-1 != saveInstanceState.getInt(Link.att_date_to)) {
+                    keyObj.put(Link.att_date_to, saveInstanceState.getInt(Link.att_date_to));
+                }
                 if (-1 != saveInstanceState.getInt(Link.att_date_start)) {
                     keyObj.put(Link.att_date_start, saveInstanceState.getInt(Link.att_date_start));
                 }
@@ -125,14 +135,20 @@ public class MyCheckFragment extends Fragment {
             }
         }
         try {
-            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+            if (null == saveInstanceState.getString(Link.comp_id)) {
+                keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+                url = Link.my_punch;
+            } else {
+                url = Link.punch_list;
+            }
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
         mParams.put("key", key);
         Log.d(TAG, "key: " + key);
-        mHttpc.post(Link.localhost + "my_punch&act=get_list", mParams, new JsonHttpResponseHandler() {
+
+        mHttpc.post(Link.localhost + url, mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
