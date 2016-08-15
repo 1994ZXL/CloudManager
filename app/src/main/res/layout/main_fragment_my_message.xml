@@ -53,8 +53,7 @@
                     android:textSize="20dp"
                     android:gravity="center"
                     android:layout_weight="1"
-                    android:id="@+id/main_fragment_my_message_user_name"
-                    android:text="张三"/>
+                    android:id="@+id/main_fragment_my_message_user_name"/>
 
             </LinearLayout>
 

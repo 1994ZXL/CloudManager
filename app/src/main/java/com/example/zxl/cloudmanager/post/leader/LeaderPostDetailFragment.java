@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Post;
 
 /**
@@ -17,8 +19,9 @@ import com.example.zxl.cloudmanager.model.Post;
 public class LeaderPostDetailFragment extends Fragment {
 
     private TextView mName;
-    private TextView mContent;
+    private EditText mContent;
     private TextView mSubmitTime;
+    private TextView mCreateTime;
 
     private static Post sPost = new Post();
 
@@ -31,8 +34,7 @@ public class LeaderPostDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ImageButton mBtn = (ImageButton) getActivity().findViewById(R.id.my_post_activity_searchBtn);
-        mBtn.setVisibility(View.INVISIBLE);
+
     }
 
     @Override
@@ -47,20 +49,22 @@ public class LeaderPostDetailFragment extends Fragment {
 
     private void init(View view) {
         mName = (TextView) view.findViewById(R.id.post_details_name);
-        mContent = (TextView) view.findViewById(R.id.post_details_content);
+        mContent = (EditText) view.findViewById(R.id.post_details_content);
         mSubmitTime = (TextView) view.findViewById(R.id.post_details_submit_time);
+        mCreateTime = (TextView) view.findViewById(R.id.post_details_create_time);
     }
 
     private void control() {
         mName.setText(sPost.getMem_name());
         mContent.setText(sPost.getContent());
-        mSubmitTime.setText(sPost.getReport_time());
+        mContent.setFocusable(false);
+        if (sPost.getReport_time() == 0) {
+            mSubmitTime.setText("——");
+        } else {
+            mSubmitTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sPost.getReport_time()));
+        }
+
+        mCreateTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sPost.getCreate_time()));
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        ImageButton mBtn = (ImageButton) getActivity().findViewById(R.id.my_post_activity_searchBtn);
-        mBtn.setVisibility(View.VISIBLE);
-    }
 }

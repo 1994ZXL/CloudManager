@@ -64,7 +64,7 @@ public class LeaderPostListFragment extends ListFragment {
         super.onCreate(saveInstanceState);
         setHasOptionsMenu(true);
         mFragment = this;
-        getActivity().getActionBar().setTitle("我的日报");
+        getActivity().getActionBar().setTitle("日报");
 
         saveInstanceState = getArguments();
         if (null != saveInstanceState) {
@@ -134,7 +134,7 @@ public class LeaderPostListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id){
         Post post= ((PostAdapter)getListAdapter()).getItem(position);
 
-        Fragment fragment = MyPostDetailFragment.newInstance(post);
+        Fragment fragment = LeaderPostDetailFragment.newInstance(post);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (!fragment.isAdded()) {
             transaction.addToBackStack(null);

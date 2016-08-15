@@ -2,6 +2,7 @@ package com.example.zxl.cloudmanager.post.myPost;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DESCryptor;
@@ -22,8 +24,10 @@ import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -140,19 +144,31 @@ public class MyPostDetailFragment extends Fragment {
                 }
                 mParams.put("key", key);
                 Log.d(TAG,"key:" + key);
-                mHttpc.post(Link.localhost + "my_daily&act=edit", mParams, new AsyncHttpResponseHandler() {
+                mHttpc.post(Link.localhost + "my_daily&act=edit", mParams, new JsonHttpResponseHandler() {
                     @Override
-                    public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            Toast.makeText(getActivity(),
+                                    response.getString("msg"),
+                                    Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                        }
                     }
 
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-
-                    }
                 });
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.popBackStack();
+                Fragment fragment = new MyPostFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.replace(R.id.postActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);

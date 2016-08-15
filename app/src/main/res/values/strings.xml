@@ -121,6 +121,8 @@
     <string name="job">职务</string>
 
     <!-- 我的考勤-->
+    <string name="duty">上班</string>
+    <string name="offduty">下班</string>
     <string name="check_time">考勤时间</string>
     <string name="dutytime">上班时间</string>
     <string name="offdutytime">下班时间</string>

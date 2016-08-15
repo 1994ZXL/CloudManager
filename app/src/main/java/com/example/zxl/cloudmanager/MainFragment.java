@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.bug.myBug.MyBugActivity;
@@ -66,6 +67,8 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainFragment extends Fragment {
     private static final String TAG = "MainFragment";
+
+    private TextView mMemName;
 
     private ImageView myMemoImage;
     private ImageView myMesssageImage;
@@ -125,6 +128,7 @@ public class MainFragment extends Fragment {
     private String key = "";
 
     private String mAtt_id;
+    private String mMem_name;
 
     private Fragment mFragment;
 
@@ -215,16 +219,18 @@ public class MainFragment extends Fragment {
                         Log.d(TAG, "array: " + array);
                         for (int i = 0; i < array.length(); i++) {
                             mAtt_id = array.getJSONObject(i).getString(Link.att_id);
+                            mMem_name = array.getJSONObject(i).getString(Link.mem_name);
+                            mMemName.setText(mMem_name);
                             if (0 == array.getJSONObject(i).getInt(Link.s_att_time)) {
-                                mSignTime = "——";
+                                mSignTime = "上班";
                             } else {
-                                mSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi3(array.getJSONObject(i).getInt(Link.s_att_time));
+                                mSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi3(array.getJSONObject(i).getInt(Link.s_att_time)+28800);
                                 mSignBtn.setClickable(false);
                             }
                             if (0 == array.getJSONObject(i).getInt(Link.e_att_time)) {
-                                mOffSignTime = "——";
+                                mOffSignTime = "下班";
                             } else {
-                                mOffSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi3(array.getJSONObject(i).getInt(Link.e_att_time));
+                                mOffSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi3(array.getJSONObject(i).getInt(Link.e_att_time)+28800);
                                 mOffSignBtn.setClickable(false);
                             }
                         }
@@ -239,7 +245,7 @@ public class MainFragment extends Fragment {
             }
         });
 
-        if (mSignTime == "——" || mSignTime == null) {
+        if (mSignTime == "上班" || mSignTime == null) {
             mSignBtn.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
@@ -251,7 +257,7 @@ public class MainFragment extends Fragment {
             mSignBtn.setClickable(false);
         }
 
-        if (mOffSignTime == "——" || mOffSignTime == null) {
+        if (mOffSignTime == "下班" || mOffSignTime == null) {
             mOffSignBtn.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
@@ -268,6 +274,8 @@ public class MainFragment extends Fragment {
     }
 
     private void init(View v) {
+        mMemName = (TextView)v.findViewById(R.id.main_fragment_nameTextView);
+
         myMemoImage = (ImageView)v.findViewById(R.id.main_fragment_my_memo_image);
         myMesssageImage = (ImageView)v.findViewById(R.id.main_fragment_my_message_image);
         myCheckImage = (ImageView)v.findViewById(R.id.main_fragment_my_check_image);

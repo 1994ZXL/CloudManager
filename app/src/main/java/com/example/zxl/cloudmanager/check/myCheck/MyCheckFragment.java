@@ -207,14 +207,14 @@ public class MyCheckFragment extends Fragment {
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             Check check = checks.get(i);
             viewHolder.mCheckLocation.setText(check.getPuncher_name());
-            viewHolder.mDate.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(check.getAtt_date()));
+            viewHolder.mDate.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(check.getAtt_date()+28800));
             if (check.getS_att_time() != 0) {
-                viewHolder.mDutyTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(check.getS_att_time()));
+                viewHolder.mDutyTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(check.getS_att_time()+28800));
             } else {
                 viewHolder.mDutyTime.setText("--");
             }
             if (check.getE_att_time() != 0) {
-                viewHolder.mOffDutyTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(check.getE_att_time()));
+                viewHolder.mOffDutyTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(check.getE_att_time()+28800));
             } else {
                 viewHolder.mOffDutyTime.setText("--");
             }
