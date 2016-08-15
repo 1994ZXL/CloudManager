@@ -25,7 +25,7 @@
             android:drawableTop="@drawable/tab_menu_home"
             android:gravity="center"
             android:text="@string/bottom_menu_home_bar"
-            android:textSize="12dp"
+            android:textSize="10dp"
             android:textColor="@drawable/tab_menu_text" />
 
         <TextView
@@ -39,7 +39,7 @@
             android:drawableTop="@drawable/tab_menu_addresslist"
             android:gravity="center"
             android:text="@string/bottom_menu_addresslist_bar"
-            android:textSize="12dp"
+            android:textSize="10dp"
             android:textColor="@drawable/tab_menu_text" />
 
         <TextView
@@ -53,7 +53,7 @@
             android:drawableTop="@drawable/tab_menu_customer"
             android:gravity="center"
             android:text="@string/bottom_menu_custom_bar"
-            android:textSize="12dp"
+            android:textSize="10dp"
             android:textColor="@drawable/tab_menu_text" />
 
         <TextView
@@ -67,7 +67,7 @@
             android:drawableTop="@drawable/tab_menu_about"
             android:gravity="center"
             android:text="@string/bottom_menu_about_bar"
-            android:textSize="12dp"
+            android:textSize="10dp"
             android:textColor="@drawable/tab_menu_text" />
     </LinearLayout>
 
