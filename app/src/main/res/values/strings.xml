@@ -2,6 +2,7 @@
     <string name="app_name">CloudManager</string>
 
     <string name="logo_title">川科企业云管理平台系统</string>
+    <string name="public_belong">成都川大川科网络信息有限公司  版权所有</string>
     <string name="user_hint">请输入用户名</string>
     <string name="pwd_hint">请输入密码</string>
 

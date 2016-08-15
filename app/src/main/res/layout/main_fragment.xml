@@ -20,47 +20,40 @@
             <!-- 头像名字-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="175dp"
-                android:orientation="horizontal"
-                android:padding="30dp"
-                android:background="@color/gray2">
+                android:layout_height="250dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/home_bg_img">
                 <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
                     android:id="@+id/main_fragment_image"
-                    android:src="@drawable/demo"/>
+                    android:src="@drawable/user_photo"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/main_fragment_nameTextView"
+                    android:layout_marginTop="15dp"
+                    android:textSize="20dp"/>
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="20dp"
-                    android:layout_gravity="center_horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp">
+                    <Button
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/main_fragment_nameTextView"
-                        android:layout_marginLeft="30dp"
-                        android:textSize="50dp"/>
-                    <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:text="@string/duty"
+                        android:background="@null"
+                        android:id="@+id/work_sign_button" />
+                    <Button
+                        android:layout_width="100dp"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="6dp">
-                        <Button
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/duty"
-                            android:id="@+id/work_sign_button"
-                            android:background="@color/gray2"
-                            android:layout_gravity="top"/>
-                        <Button
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/work_off_sign_button"
-                            android:text="@string/offduty"
-                            android:background="@color/gray2"
-                            android:layout_gravity="top"/>
-                    </LinearLayout>
+                        android:id="@+id/work_off_sign_button"
+                        android:background="@null"
+                        android:text="@string/offduty" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -97,16 +90,16 @@
                         android:layout_margin="12dp">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/post_icon"
                             android:id="@+id/main_fragment_post_query_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/post_query"
-                            android:id="@+id/main_fragment_post_query"/>
+                            android:id="@+id/main_fragment_post_query"/>-->
                     </LinearLayout>
 
                     <!-- 考勤查询-->
@@ -118,16 +111,16 @@
                         android:layout_margin="12dp">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/check_icon"
                             android:id="@+id/main_fragment_check_query_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/check_query"
-                            android:id="@+id/main_fragment_check_query"/>
+                            android:id="@+id/main_fragment_check_query"/>-->
                     </LinearLayout>
 
                     <!-- 请假记录查询-->
@@ -139,16 +132,16 @@
                         android:layout_margin="12dp">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/leave_icon"
                             android:id="@+id/main_fragment_leave_record_query_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/leave_record_query"
-                            android:id="@+id/main_fragment_leave_record_query"/>
+                            android:id="@+id/main_fragment_leave_record_query"/>-->
                     </LinearLayout>
 
                     <!-- 出差记录查询-->
@@ -161,17 +154,17 @@
 
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/travel_icon"
                             android:id="@+id/imageView2"
                             android:layout_gravity="center" />
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/travel_record_query"
-                            android:id="@+id/textView2" />
+                            android:id="@+id/textView2" />-->
                     </LinearLayout>
 
                 </LinearLayout>
@@ -191,17 +184,17 @@
 
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/overtime_icon"
                             android:id="@+id/imageView"
                             android:layout_gravity="center" />
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/overtime_record_query"
-                            android:id="@+id/textView" />
+                            android:id="@+id/textView" />-->
                     </LinearLayout>
 
                     <LinearLayout
@@ -214,17 +207,17 @@
 
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/post_icon"
                             android:id="@+id/imageView4"
                             android:layout_gravity="center" />
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/check_query"
-                            android:id="@+id/textView4" />
+                            android:id="@+id/textView4" />-->
                     </LinearLayout>
 
                     <LinearLayout
@@ -237,17 +230,17 @@
 
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/post_icon"
                             android:id="@+id/imageView5"
                             android:layout_gravity="center" />
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/leave_record_query"
-                            android:id="@+id/textView5" />
+                            android:id="@+id/textView5" />-->
                     </LinearLayout>
 
                     <LinearLayout
@@ -260,17 +253,17 @@
 
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/post_icon"
                             android:id="@+id/imageView6"
                             android:layout_gravity="center" />
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/travel_record_query"
-                            android:id="@+id/textView6" />
+                            android:id="@+id/textView6" />-->
                     </LinearLayout>
                 </LinearLayout>
 
