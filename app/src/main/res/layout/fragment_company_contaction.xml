@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="70dp"
+    android:layout_marginBottom="62dp"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.zxl.cloudmanager.tabBar.CompanyContactionFragment">
 

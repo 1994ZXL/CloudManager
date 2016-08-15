@@ -6,7 +6,7 @@
     android:id="@+id/list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginBottom="70dp"
+    android:layout_marginBottom="62dp"
     app:layoutManager="LinearLayoutManager"
     tools:context="com.example.zxl.cloudmanager.tabBar.CompanyMemberListFragment"
     tools:listitem="@layout/fragment_employeritem" >

@@ -18,48 +18,56 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:paddingTop="8dp"
             android:id="@+id/bottom_menu_home_bar"
             android:background="@drawable/tab_menu_bg"
             android:drawablePadding="3dp"
             android:drawableTop="@drawable/tab_menu_home"
             android:gravity="center"
             android:text="@string/bottom_menu_home_bar"
+            android:textSize="12dp"
             android:textColor="@drawable/tab_menu_text" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
+            android:paddingTop="8dp"
             android:id="@+id/bottom_menu_addresslist_bar"
             android:background="@drawable/tab_menu_bg"
             android:drawablePadding="3dp"
-            android:drawableTop="@drawable/tab_menu_home"
+            android:drawableTop="@drawable/tab_menu_addresslist"
             android:gravity="center"
             android:text="@string/bottom_menu_addresslist_bar"
+            android:textSize="12dp"
             android:textColor="@drawable/tab_menu_text" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
+            android:paddingTop="8dp"
             android:id="@+id/bottom_menu_customer_bar"
             android:background="@drawable/tab_menu_bg"
             android:drawablePadding="3dp"
-            android:drawableTop="@drawable/tab_menu_home"
+            android:drawableTop="@drawable/tab_menu_customer"
             android:gravity="center"
             android:text="@string/bottom_menu_custom_bar"
+            android:textSize="12dp"
             android:textColor="@drawable/tab_menu_text" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
+            android:padding="8dp"
             android:id="@+id/bottom_menu_about_bar"
             android:background="@drawable/tab_menu_bg"
             android:drawablePadding="3dp"
-            android:drawableTop="@drawable/tab_menu_home"
+            android:drawableTop="@drawable/tab_menu_about"
             android:gravity="center"
             android:text="@string/bottom_menu_about_bar"
+            android:textSize="12dp"
             android:textColor="@drawable/tab_menu_text" />
     </LinearLayout>
 
