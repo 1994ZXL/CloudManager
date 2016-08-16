@@ -1,4 +1,4 @@
-package com.example.zxl.cloudmanager.check.myCheck;
+package com.example.zxl.cloudmanager.check.leader;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -21,6 +21,8 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
+import com.example.zxl.cloudmanager.check.myCheck.MyCheckDetailFragment;
+import com.example.zxl.cloudmanager.check.myCheck.SearchCheckFragment;
 import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
@@ -33,6 +35,7 @@ import com.loopj.android.http.RequestParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -41,7 +44,7 @@ import cz.msebera.android.httpclient.Header;
 /**
  * Created by ZXL on 2016/7/11.
  */
-public class MyCheckFragment extends Fragment {
+public class LSCheckFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
     private ArrayList<Check> checks = new ArrayList<Check>();
@@ -58,8 +61,6 @@ public class MyCheckFragment extends Fragment {
     private RequestParams mParams = new RequestParams();
     private JSONObject keyObj = new JSONObject();
     private String key = "";
-
-    private String url;
 
     private Fragment mFragment;
     @Override
@@ -94,7 +95,7 @@ public class MyCheckFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View v = layoutInflater.inflate(R.layout.main_fragment_my_check, parent, false);
-        getActivity().getActionBar().setTitle("考勤");
+        getActivity().getActionBar().setTitle("考勤主管");
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_check_pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -113,15 +114,7 @@ public class MyCheckFragment extends Fragment {
         if (null != saveInstanceState) {
 
             try {
-                if (null != saveInstanceState.getString(Link.comp_id)) {
-                    keyObj.put(Link.comp_id, saveInstanceState.getString(Link.comp_id));
-                }
-                if (-1 != saveInstanceState.getInt(Link.att_date_from)) {
-                    keyObj.put(Link.att_date_from, saveInstanceState.getInt(Link.att_date_from));
-                }
-                if (-1 != saveInstanceState.getInt(Link.att_date_to)) {
-                    keyObj.put(Link.att_date_to, saveInstanceState.getInt(Link.att_date_to));
-                }
+
                 if (-1 != saveInstanceState.getInt(Link.att_date_start)) {
                     keyObj.put(Link.att_date_start, saveInstanceState.getInt(Link.att_date_start));
                 }
@@ -134,20 +127,14 @@ public class MyCheckFragment extends Fragment {
             }
         }
         try {
-            if (null == saveInstanceState) {
-                keyObj.put(Link.mem_id, User.newInstance().getUser_id());
-                url = Link.my_punch;
-            } else {
-                url = Link.punch_list;
-            }
+            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
         mParams.put("key", key);
         Log.d(TAG, "key: " + key);
-
-        mHttpc.post(Link.localhost + url, mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + "my_punch&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
@@ -164,7 +151,7 @@ public class MyCheckFragment extends Fragment {
                         mRecyclerView.setHasFixedSize(true);
                         myAdapter = new MyAdapter(mFragment.getActivity(), checks);
                         mRecyclerView.setAdapter(myAdapter);
-                        mCardView = (CardView)v.findViewById(R.id.fragment_my_check);
+                        mCardView = (CardView)v.findViewById(R.id.fragment_ls_check);
                         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                             @Override
                             public void onItemClick(View view, Object data) {
@@ -212,7 +199,7 @@ public class MyCheckFragment extends Fragment {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.check_card_item, viewGroup,false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.ls_check_card_item, viewGroup,false);
             ViewHolder viewHolder = new ViewHolder(v);
             v.setOnClickListener(this);
             return viewHolder;
@@ -221,6 +208,7 @@ public class MyCheckFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             Check check = checks.get(i);
+            viewHolder.mName.setText(check.getMem_name());
             viewHolder.mCheckLocation.setText(check.getPuncher_name());
             viewHolder.mDate.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(check.getAtt_date()+28800));
             if (check.getS_att_time() != 0) {
@@ -249,12 +237,14 @@ public class MyCheckFragment extends Fragment {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder{
+            public TextView mName;
             public TextView mDate;
             public TextView mCheckLocation;
             public TextView mDutyTime;
             public TextView mOffDutyTime;
             public ViewHolder(View v) {
                 super(v);
+                mName = (TextView) v.findViewById(R.id.ls_check_card_item_name);
                 mDate = (TextView)v.findViewById(R.id.ls_check_card_item_time);
                 mCheckLocation = (TextView)v.findViewById(R.id.ls_check_card_item_location);
                 mDutyTime = (TextView)v.findViewById(R.id.ls_check_card_item_dutytime);

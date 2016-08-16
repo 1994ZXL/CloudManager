@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragment_my_check"
+    android:id="@+id/fragment_ls_check"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="4dp"
@@ -21,21 +21,29 @@
             android:orientation="horizontal"
             android:layout_margin="16dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:id="@+id/ls_check_card_item_time" />
+                android:id="@+id/ls_check_card_item_name"
+                android:layout_weight="1"
+                android:textSize="20dp"/>
+
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="30dp"
-                android:layout_marginLeft="50dp"
+                android:layout_weight="1"
                 android:id="@+id/ls_check_card_item_location" />
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/check_card_item_map"/>
         </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:id="@+id/ls_check_card_item_time" />
 
         <!-- 上班时间-->
         <LinearLayout
