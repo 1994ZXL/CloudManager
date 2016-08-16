@@ -135,7 +135,7 @@ public class MyCheckFragment extends Fragment {
             }
         }
         try {
-            if (null == saveInstanceState.getString(Link.comp_id)) {
+            if (null == saveInstanceState) {
                 keyObj.put(Link.mem_id, User.newInstance().getUser_id());
                 url = Link.my_punch;
             } else {

@@ -1,6 +1,7 @@
 package com.example.zxl.cloudmanager.model;
 
 import android.content.Context;
+import android.content.Intent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
