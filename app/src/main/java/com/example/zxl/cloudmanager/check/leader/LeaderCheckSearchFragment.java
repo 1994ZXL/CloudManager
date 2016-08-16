@@ -114,7 +114,7 @@ public class LeaderCheckSearchFragment extends Fragment {
     private void search() {
         mChecks = CheckLab.newInstance(mFragment.getActivity()).get();
 
-        Fragment fragment = new MyCheckFragment();
+        Fragment fragment = new LSCheckFragment();
         Bundle bundle = new Bundle();
         if (null != name) {
             bundle.putString(Link.mem_name, name);
