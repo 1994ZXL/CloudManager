@@ -132,7 +132,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="75dp"
-                            android:src="@drawable/leave_icon"
+                            android:src="@drawable/leave_search_icon"
                             android:id="@+id/main_fragment_leave_record_query_image"
                             android:layout_gravity="center"/>
                         <!--<TextView
@@ -301,16 +301,16 @@
                         android:layout_margin="12dp">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/my_check_icon"
                             android:id="@+id/main_fragment_check_deal_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/check_deal"
-                            android:id="@+id/main_fragment_check_deal"/>
+                            android:id="@+id/main_fragment_check_deal"/>-->
                     </LinearLayout>
 
                     <!-- 请假处理-->
@@ -322,16 +322,16 @@
                         android:layout_margin="12dp">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/leave_icon"
                             android:id="@+id/main_fragment_leave_deal_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/leave_deal"
-                            android:id="@+id/main_fragment_leave_deal"/>
+                            android:id="@+id/main_fragment_leave_deal"/>-->
                     </LinearLayout>
 
                     <!-- 加班处理-->
@@ -343,16 +343,16 @@
                         android:layout_margin="12dp">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/overtime_icon"
                             android:id="@+id/main_fragment_overtime_deal_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/overtime_deal"
-                            android:id="@+id/main_fragment_overtime_deal"/>
+                            android:id="@+id/main_fragment_overtime_deal"/>-->
                     </LinearLayout>
 
                     <!-- 出差处理-->
@@ -364,16 +364,16 @@
                         android:layout_margin="12dp">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/my_travel_icon"
                             android:id="@+id/main_fragment_travel_deal_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/travel_deal"
-                            android:id="@+id/main_fragment_travel_deal"/>
+                            android:id="@+id/main_fragment_travel_deal"/>-->
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -412,16 +412,16 @@
 
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/project_manage_icon"
                             android:layout_gravity="center"
                             android:id="@+id/main_fragment_project_manage"/>
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="@string/project_manage"/>
+                            android:text="@string/project_manage"/>-->
                     </LinearLayout>
 
                     <!-- 项目通讯录-->
@@ -434,16 +434,16 @@
 
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/list_icon"
                             android:id="@+id/main_fragment_project_memo"
                             android:layout_gravity="center" />
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="@string/project_memo" />
+                            android:text="@string/project_memo" />-->
                     </LinearLayout>
 
                     <!-- 项目组成员管理-->
@@ -456,17 +456,17 @@
 
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/member_manage_icon"
                             android:id="@+id/main_fragment_project_member_manage"
                             android:layout_gravity="center" />
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/project_member_manage"
-                            android:id="@+id/textView3" />
+                            android:id="@+id/textView3" />-->
                     </LinearLayout>
 
                     <!-- 项目任务计划管理-->
@@ -479,16 +479,16 @@
 
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/plan_manage_icon"
                             android:id="@+id/main_fragment_project_mission_manage"
                             android:layout_gravity="center" />
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="@string/project_mission_manage"/>
+                            android:text="@string/project_mission_manage"/>-->
                     </LinearLayout>
 
                 </LinearLayout>
@@ -508,16 +508,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/bug_manage_icon"
                             android:id="@+id/main_fragment_bug_manage_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/bug_manage"
-                            android:id="@+id/main_fragment_bug_manage"/>
+                            android:id="@+id/main_fragment_bug_manage"/>-->
                     </LinearLayout>
 
                     <LinearLayout
@@ -529,16 +529,16 @@
 
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/usecase_icon"
                             android:id="@+id/main_fragment_usecase_manage_image"
                             android:layout_gravity="center" />
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:text="@string/project_usecase" />
+                            android:text="@string/project_usecase" />-->
                     </LinearLayout>
 
                     <LinearLayout
@@ -551,17 +551,17 @@
 
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/bug_manage_icon"
                             android:id="@+id/imageView7"
                             android:layout_gravity="center" />
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/bug_manage"
-                            android:id="@+id/textView7" />
+                            android:id="@+id/textView7" />-->
                     </LinearLayout>
 
                     <LinearLayout
@@ -574,17 +574,17 @@
 
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/bug_manage_icon"
                             android:id="@+id/imageView8"
                             android:layout_gravity="center" />
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/bug_manage"
-                            android:id="@+id/textView8" />
+                            android:id="@+id/textView8" />-->
                     </LinearLayout>
 
                 </LinearLayout>
@@ -623,16 +623,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/my_message_icon"
                             android:id="@+id/main_fragment_my_message_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/my_message"
-                            android:id="@+id/main_fragment_my_message"/>
+                            android:id="@+id/main_fragment_my_message"/>-->
                     </LinearLayout>
 
                     <!-- 我的考勤-->
@@ -644,16 +644,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/my_check_icon"
                             android:id="@+id/main_fragment_my_check_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/my_check"
-                            android:id="@+id/main_fragment_my_check"/>
+                            android:id="@+id/main_fragment_my_check"/>-->
                     </LinearLayout>
 
                     <!-- 我的请假-->
@@ -665,16 +665,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/leave_icon"
                             android:id="@+id/main_fragment_my_leave_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/my_leave"
-                            android:id="@+id/main_fragment_my_leave"/>
+                            android:id="@+id/main_fragment_my_leave"/>-->
                     </LinearLayout>
 
                     <!-- 我的任务-->
@@ -686,16 +686,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/plan_manage_icon"
                             android:id="@+id/main_fragment_my_mission_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/my_mission"
-                            android:id="@+id/main_fragment_my_mission"/>
+                            android:id="@+id/main_fragment_my_mission"/>-->
                     </LinearLayout>
                 </LinearLayout>
 
@@ -716,16 +716,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/my_yunwei_icon"
                             android:id="@+id/main_fragment_my_maintain_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/my_maintain"
-                            android:id="@+id/main_fragment_my_maintain"/>
+                            android:id="@+id/main_fragment_my_maintain"/>-->
                     </LinearLayout>
 
                     <!-- 我的日报-->
@@ -737,16 +737,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/my_post_icon"
                             android:id="@+id/main_fragment_my_post_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/my_post"
-                            android:id="@+id/main_fragment_my_post"/>
+                            android:id="@+id/main_fragment_my_post"/>-->
                     </LinearLayout>
 
                     <!-- 我的用例-->
@@ -758,16 +758,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/usecase_icon"
                             android:id="@+id/main_fragment_my_usecase_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/my_usecase"
-                            android:id="@+id/main_fragment_my_usecase"/>
+                            android:id="@+id/main_fragment_my_usecase"/>-->
                     </LinearLayout>
 
                     <!-- 我的bug-->
@@ -779,16 +779,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/bug_manage_icon"
                             android:id="@+id/main_fragment_my_bug_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/my_bug"
-                            android:id="@+id/main_fragment_my_bug"/>
+                            android:id="@+id/main_fragment_my_bug"/>-->
                     </LinearLayout>
 
                 </LinearLayout>
@@ -808,16 +808,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/overtime_icon"
                             android:id="@+id/main_fragment_overtime_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/overtime"
-                            android:id="@+id/main_fragment_overtime"/>
+                            android:id="@+id/main_fragment_overtime"/>-->
                     </LinearLayout>
 
                     <!-- 我的出差-->
@@ -829,16 +829,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/my_travel_icon"
                             android:id="@+id/main_fragment_travel_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/travel"
-                            android:id="@+id/main_fragment_travel"/>
+                            android:id="@+id/main_fragment_travel"/>-->
                     </LinearLayout>
 
                     <!-- 我的备忘录-->
@@ -850,17 +850,17 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/memo_icon"
                             android:id="@+id/main_fragment_my_memo_image"
                             android:clickable="true"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/my_memo"
-                            android:id="@+id/main_fragment_my_memo"/>
+                            android:id="@+id/main_fragment_my_memo"/>-->
                     </LinearLayout>
 
                     <!-- 我的备忘录-->
@@ -873,17 +873,17 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="75dp"
                             android:src="@drawable/demo"
                             android:id="@+id/main_fragment_my_memo_image2"
                             android:clickable="true"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/my_memo"
-                            android:id="@+id/main_fragment_my_memo2"/>
+                            android:id="@+id/main_fragment_my_memo2"/>-->
                     </LinearLayout>
 
                 </LinearLayout>
@@ -919,16 +919,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/project_search_icon"
                             android:id="@+id/main_fragment_project_query_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/project_query"
-                            android:id="@+id/main_fragment_project_query"/>
+                            android:id="@+id/main_fragment_project_query"/>-->
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -938,16 +938,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/mission_search_icon"
                             android:id="@+id/main_fragment_project_plan_query_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/project_plan_query"
-                            android:id="@+id/main_fragment_project_plan_query"/>
+                            android:id="@+id/main_fragment_project_plan_query"/>-->
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -957,16 +957,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/list_icon"
                             android:id="@+id/main_fragment_project_list_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/project_list"
                             android:layout_gravity="center"
-                            android:id="@+id/main_fragment_project_list"/>
+                            android:id="@+id/main_fragment_project_list"/>-->
                     </LinearLayout>
 
                     <LinearLayout
@@ -977,16 +977,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/member_manage_icon"
                             android:id="@+id/main_fragment_project_memberlist_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/project_memberlist"
-                            android:id="@+id/main_fragment_project_memberlist"/>
+                            android:id="@+id/main_fragment_project_memberlist"/>-->
                     </LinearLayout>
 
                 </LinearLayout>
@@ -1004,16 +1004,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/usecase_search_icon"
                             android:id="@+id/main_fragment_usecase_query_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/usecase_query"
-                            android:id="@+id/main_fragment_usecase_query"/>
+                            android:id="@+id/main_fragment_usecase_query"/>-->
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -1023,16 +1023,16 @@
                         android:layout_weight="1">
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/bug_search_icon"
                             android:id="@+id/main_fragment_bug_query_image"
                             android:layout_gravity="center"/>
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/bug_query"
-                            android:id="@+id/main_fragment_bug_query"/>
+                            android:id="@+id/main_fragment_bug_query"/>-->
                     </LinearLayout>
 
                     <LinearLayout
@@ -1045,17 +1045,17 @@
 
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/demo"
+                            android:layout_height="75dp"
+                            android:src="@drawable/bug_search_icon"
                             android:id="@+id/imageView3"
                             android:layout_gravity="center" />
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/bug_query"
-                            android:id="@+id/textView9" />
+                            android:id="@+id/textView9" />-->
                     </LinearLayout>
 
                     <LinearLayout
@@ -1068,17 +1068,17 @@
 
                         <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="75dp"
                             android:src="@drawable/demo"
                             android:id="@+id/imageView9"
                             android:layout_gravity="center" />
 
-                        <TextView
+                        <!--<TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="@string/bug_query"
-                            android:id="@+id/textView10" />
+                            android:id="@+id/textView10" />-->
                     </LinearLayout>
 
                 </LinearLayout>
