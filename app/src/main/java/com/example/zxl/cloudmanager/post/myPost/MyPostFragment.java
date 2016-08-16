@@ -108,11 +108,13 @@ public class MyPostFragment extends ListFragment {
         mHttpc.post(Link.localhost + "my_daily&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                if (statusCode == 500) {
+                if (statusCode == 200) {
                     try {
-                        Toast.makeText(getActivity(),
-                                response.getString("msg"),
-                                Toast.LENGTH_SHORT).show();
+                        if (response.getInt("code") != 200){
+                            Toast.makeText(getActivity(),
+                                    response.getString("msg"),
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     } catch (JSONException e) {
                         Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                     }
@@ -135,14 +137,7 @@ public class MyPostFragment extends ListFragment {
                     } catch (JSONException e) {
                         Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                     }
-                } else if (statusCode == 400) {
-                    try {
-                        Log.d(TAG, "msg: " + response.getString("msg"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
                 }
-
             }
 
             @Override

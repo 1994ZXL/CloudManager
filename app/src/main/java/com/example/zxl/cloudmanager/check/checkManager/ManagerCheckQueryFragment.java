@@ -109,15 +109,15 @@ public class ManagerCheckQueryFragment extends Fragment {
                 bundle.putString(Link.mem_name, name);
 
                 if (null != bgtime) {
-                    bundle.putInt(Link.att_date_start, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(bgtime));
+                    bundle.putInt(Link.att_date_from, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(bgtime));
                 } else {
-                    bundle.putInt(Link.att_date_start, -1);
+                    bundle.putInt(Link.att_date_from, -1);
                 }
 
                 if (null != edtime) {
-                    bundle.putInt(Link.att_date_end, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(edtime));
+                    bundle.putInt(Link.att_date_to, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(edtime));
                 } else {
-                    bundle.putInt(Link.att_date_end, -1);
+                    bundle.putInt(Link.att_date_to, -1);
                 }
 
                 fragment.setArguments(bundle);

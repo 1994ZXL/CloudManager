@@ -7,103 +7,114 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
-
-    <!-- 姓名-->
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
-        <TextView
-            style="@style/font"
-            android:layout_weight="1"
-            android:text="@string/name" />
-        <TextView
-            style="@style/font"
-            android:layout_weight="1"
-            android:id="@+id/main_fragment_my_leave_apply_name"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <!-- 姓名-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
-    <!-- 请假类型-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:text="@string/name" />
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_leave_apply_name"/>
 
-        <TextView
-            style="@style/font"
-            android:layout_weight="1"
-            android:text="@string/leave_type" />
-        <Spinner
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/main_fragment_my_leave_typeSprinner">
+            </LinearLayout>
 
-        </Spinner>
-    </LinearLayout>
+            <!-- 请假类型-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
 
-    <!-- 假期开始时间-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:text="@string/leave_type" />
+                <Spinner
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_leave_typeSprinner">
 
-        <TextView
-            style="@style/font"
-            android:layout_weight="1"
-            android:text="@string/leave_begin_time" />
-        <Button
-            style="@style/font"
-            android:layout_weight="1"
-            android:id="@+id/main_fragment_my_leave_begin_time"/>
-    </LinearLayout>
+                </Spinner>
+            </LinearLayout>
 
-    <!-- 假期结束时间-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+            <!-- 假期开始时间-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
 
-        <TextView
-            style="@style/font"
-            android:layout_weight="1"
-            android:text="@string/leave_end_time" />
-        <Button
-            style="@style/font"
-            android:layout_weight="1"
-            android:id="@+id/main_fragment_my_leave_end_time"/>
-    </LinearLayout>
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:text="@string/leave_begin_time" />
+                <Button
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_leave_begin_time"/>
+            </LinearLayout>
 
-    <!-- 请假原因-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30dp">
+            <!-- 假期结束时间-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
 
-        <TextView
-            style="@style/font"
-            android:layout_weight="1"
-            android:text="@string/leave_reason" />
-        <EditText
-            style="@style/editText"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:id="@+id/main_fragment_my_leave_resonEditText"/>
-    </LinearLayout>
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:text="@string/leave_end_time" />
+                <Button
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_leave_end_time"/>
+            </LinearLayout>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:id="@+id/main_fragment_my_leave_apply_commitButton"
-        android:text="@string/commit_apply"/>
+            <!-- 请假原因-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="30dp">
+
+                <TextView
+                    style="@style/font"
+                    android:layout_weight="1"
+                    android:text="@string/leave_reason" />
+                <EditText
+                    style="@style/editText"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:id="@+id/main_fragment_my_leave_resonEditText"/>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:id="@+id/main_fragment_my_leave_apply_commitButton"
+                android:text="@string/commit_apply"/>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

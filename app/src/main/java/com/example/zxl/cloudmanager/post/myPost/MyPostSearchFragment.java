@@ -52,11 +52,6 @@ public class MyPostSearchFragment extends Fragment {
 
     private String postContent;
 
-    private ArrayList<Post> mPosts = new ArrayList<Post>();
-    private int index;
-    private ArrayList<Integer> sum = new ArrayList<Integer>();
-    private static final String SEARCH_KEY = "search_key";
-
     private Fragment mFragment;
 
     @Override

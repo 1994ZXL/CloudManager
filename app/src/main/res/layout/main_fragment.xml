@@ -64,7 +64,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:layout_marginTop="2dp"
                 android:background="@color/white"
                 android:id="@+id/leader_linearlayout">
 
@@ -275,7 +274,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:id="@+id/check_manager_linearlayout">
 
@@ -385,7 +384,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="1dp"
                 android:background="@color/white"
                 android:id="@+id/project_manager_linearlayout">
 
@@ -598,7 +597,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="1dp"
                 android:background="@color/white">
 
                 <!-- 我的工作TextView-->
@@ -897,7 +896,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="1dp"
                 android:background="@color/white">
 
                 <!-- 公共查询TextView-->

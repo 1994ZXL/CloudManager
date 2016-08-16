@@ -242,7 +242,6 @@ public class ManagerOverTimeSearchFragment extends Fragment {
     private void init(View v){
         mOvertimeBeginBtn = (Button) v.findViewById(R.id.employer_overtime_begin_time_button);
         mOvertimeEndBtn = (Button) v.findViewById(R.id.employer_overtime_end_time_button);
-        mEmployerNameSpinner = (Spinner) v.findViewById(R.id.employer_name_spinner);
         mEmployerProjectSpinner = (Spinner) v.findViewById(R.id.employer_project_spinner);
         mOvertimeStatusSpinner = (Spinner) v.findViewById(R.id.overtime_status_spinner);
 

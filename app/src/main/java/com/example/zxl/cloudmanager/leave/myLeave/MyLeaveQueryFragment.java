@@ -99,15 +99,15 @@ public class MyLeaveQueryFragment extends Fragment {
         if (null != intent) {
             try {
 
-                keyObj.put(Link.leave_type, intent.getIntExtra(Link.leave_type, 1));
+                keyObj.put(Link.leave_type, intent.getIntExtra(Link.leave_type, 0));
 
-                keyObj.put(Link.status, intent.getIntExtra(Link.status, 1));
+                keyObj.put(Link.status, intent.getIntExtra(Link.status, 0));
 
                 if (-1 != intent.getIntExtra(Link.start_time, 0)) {
-                    keyObj.put(Link.start_time, intent.getIntExtra(Link.start_time, -2));
+                    keyObj.put(Link.start_time, intent.getIntExtra(Link.start_time, 0));
                 }
                 if (-1 != intent.getIntExtra(Link.end_time, -2)) {
-                    keyObj.put(Link.end_time, intent.getIntExtra(Link.end_time, -2));
+                    keyObj.put(Link.end_time, intent.getIntExtra(Link.end_time, 0));
                 }
 
             } catch (Exception e) {

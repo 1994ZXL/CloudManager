@@ -95,7 +95,7 @@ public class LSCheckFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View v = layoutInflater.inflate(R.layout.main_fragment_my_check, parent, false);
-        getActivity().getActionBar().setTitle("考勤主管");
+        getActivity().getActionBar().setTitle("考勤");
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_check_pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -114,27 +114,25 @@ public class LSCheckFragment extends Fragment {
         if (null != saveInstanceState) {
 
             try {
-
-                if (-1 != saveInstanceState.getInt(Link.att_date_start)) {
-                    keyObj.put(Link.att_date_start, saveInstanceState.getInt(Link.att_date_start));
-                }
-                if (-1 != saveInstanceState.getInt(Link.att_date_end)) {
-                    keyObj.put(Link.att_date_end, saveInstanceState.getInt(Link.att_date_end));
-                }
-
+                if (null != saveInstanceState.getString(Link.mem_name))
+                    keyObj.put(Link.mem_name, saveInstanceState.getString(Link.mem_name));
+                if (-1 != saveInstanceState.getInt(Link.att_date_from))
+                    keyObj.put(Link.att_date_from, saveInstanceState.getInt(Link.att_date_from));
+                if (-1 != saveInstanceState.getInt(Link.att_date_to))
+                    keyObj.put(Link.att_date_to, saveInstanceState.getInt(Link.att_date_to));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         try {
-            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+            keyObj.put(Link.comp_id, User.newInstance().getComp_id());
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
         mParams.put("key", key);
         Log.d(TAG, "key: " + key);
-        mHttpc.post(Link.localhost + "my_punch&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + Link.punch_list, mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {

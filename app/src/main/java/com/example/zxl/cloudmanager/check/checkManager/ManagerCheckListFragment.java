@@ -86,14 +86,12 @@ public class ManagerCheckListFragment extends Fragment {
         if (null != saveInstanceState) {
 
             try {
-                keyObj.put(Link.mem_name, saveInstanceState.getString(Link.mem_name));
-                if (-1 != saveInstanceState.getInt(Link.att_date_start)) {
-                    keyObj.put(Link.att_date_start, saveInstanceState.getInt(Link.att_date_start));
-                }
-                if (-1 != saveInstanceState.getInt(Link.att_date_end)) {
-                    keyObj.put(Link.att_date_end, saveInstanceState.getInt(Link.att_date_end));
-                }
-
+                if (null != saveInstanceState.getString(Link.mem_name))
+                    keyObj.put(Link.mem_name, saveInstanceState.getString(Link.mem_name));
+                if (-1 != saveInstanceState.getInt(Link.att_date_from))
+                    keyObj.put(Link.att_date_from, saveInstanceState.getInt(Link.att_date_from));
+                if (-1 != saveInstanceState.getInt(Link.att_date_to))
+                    keyObj.put(Link.att_date_to, saveInstanceState.getInt(Link.att_date_to));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -107,7 +105,7 @@ public class ManagerCheckListFragment extends Fragment {
         mParams.put("key", key);
         Log.d(TAG, "key: " + key);
 
-        mHttpc.post(Link.localhost + "manage_punch&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + Link.manage_punch, mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 if (statusCode == 200) {
