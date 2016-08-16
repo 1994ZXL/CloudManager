@@ -163,7 +163,7 @@ public class ManagerTravelListFragment extends ListFragment {
             beginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(travel.getStart_time()));
 
             TextView endTime = (TextView) convertView.findViewById(R.id.main_fragment_travel_endTime);
-            endTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(travel.getOver_time()));
+            endTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(travel.getEnd_time()));
 
             TextView state = (TextView) convertView.findViewById(R.id.main_fragment_travel_state);
             state.setText(travel.getStatus());

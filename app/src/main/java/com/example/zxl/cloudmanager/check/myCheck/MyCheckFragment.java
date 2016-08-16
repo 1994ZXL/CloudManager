@@ -111,7 +111,6 @@ public class MyCheckFragment extends Fragment {
 
         saveInstanceState = getArguments();
         if (null != saveInstanceState) {
-
             try {
                 if (-1 != saveInstanceState.getInt(Link.att_date_from))
                     keyObj.put(Link.att_date_from, saveInstanceState.getInt(Link.att_date_from));

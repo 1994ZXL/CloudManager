@@ -71,38 +71,38 @@
                         android:gravity="center"
                         android:id="@+id/travel_details_end_time"/>
                 </LinearLayout>
-                <!-- 回程开始时间-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/employer_back_beginTime" />
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/travel_details_back_beginTime"/>
-                </LinearLayout>
-                <!-- 回程结束时间-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/employer_back_endTime"/>
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/travel_details_back_endTime" />
-                </LinearLayout>
+                <!--&lt;!&ndash; 回程开始时间&ndash;&gt;-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:layout_marginTop="40dp">-->
+                    <!--<TextView-->
+                        <!--style="@style/font"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:text="@string/employer_back_beginTime" />-->
+                    <!--<TextView-->
+                        <!--style="@style/font"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="center"-->
+                        <!--android:id="@+id/travel_details_back_beginTime"/>-->
+                <!--</LinearLayout>-->
+                <!--&lt;!&ndash; 回程结束时间&ndash;&gt;-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:orientation="horizontal"-->
+                    <!--android:layout_marginTop="40dp">-->
+                    <!--<TextView-->
+                        <!--style="@style/font"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:text="@string/employer_back_endTime"/>-->
+                    <!--<TextView-->
+                        <!--style="@style/font"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:gravity="center"-->
+                        <!--android:id="@+id/travel_details_back_endTime" />-->
+                <!--</LinearLayout>-->
 
             </LinearLayout>
 

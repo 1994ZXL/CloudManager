@@ -51,8 +51,5 @@ public class TravelLab {
         return mTravels;
     }
 
-    private void set(String[] content) {
-        Travel travel = new Travel(content);
-        mTravels.add(travel);
-    }
+
 }

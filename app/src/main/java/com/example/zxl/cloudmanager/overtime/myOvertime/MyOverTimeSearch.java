@@ -142,6 +142,7 @@ public class MyOverTimeSearch extends Fragment {
                 bundle.putString(Link.work_pm, project);
                 bundle.putInt(Link.status, status);
 
+                fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);

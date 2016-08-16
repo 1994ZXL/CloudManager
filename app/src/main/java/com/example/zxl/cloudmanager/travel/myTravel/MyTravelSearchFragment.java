@@ -17,7 +17,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Travel;
 import com.example.zxl.cloudmanager.model.TravelLab;
 
@@ -34,7 +36,7 @@ public class MyTravelSearchFragment extends Fragment {
     private Spinner mStateSpinner;
 
     private ArrayAdapter<String> stateAdapter;
-    private static final String[] stateList={"全部","正常","取消"};
+    private static final String[] stateList={"等待","确认","取消"}; //出差状态 0：等待，1：确认，2：取消
     private static final String TAG = "MyTravelSearchFragment";
     private Button mSearchBtn;
 
@@ -46,12 +48,7 @@ public class MyTravelSearchFragment extends Fragment {
     private String cbgtime;
     private Date comeEndTime;
     private String cedtime;
-    private String state;
-
-    private ArrayList<Travel> mTravels = new ArrayList<Travel>();
-    private int index;
-    private static final String SEARCH_KEY = "search_key";
-    private ArrayList<Integer> sum = new ArrayList<Integer>();
+    private int state;
 
     private Fragment mFragment;
 
@@ -77,7 +74,13 @@ public class MyTravelSearchFragment extends Fragment {
         mStateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                state = stateList[i];
+                //出差状态 0：等待，1：确认，2：取消
+                if (stateList[i] == "等待")
+                    state = 0;
+                if (stateList[i] == "确认")
+                    state = 1;
+                if (stateList[i] == "取消")
+                    state = 2;
             }
 
             @Override
@@ -97,21 +100,35 @@ public class MyTravelSearchFragment extends Fragment {
     }
 
     private void search() {
-        mTravels = TravelLab.newInstance(mFragment.getActivity()).getTravels();
-        for (index = 0;index < mTravels.size(); index++) {
-            if (bgtime.equals(mTravels.get(index).getStart_time_s())
-                    && edtime.equals(mTravels.get(index).getStart_time_e())
-                    && cbgtime.equals(mTravels.get(index).getOver_time_s())
-                    && cedtime.equals(mTravels.get(index).getOver_time_e())
-                    && state.equals(mTravels.get(index).getStatus())) {
-
-                sum.add(index);
-
-            }
-        }
         Fragment fragment = new MyTravelFragment();
         Bundle bundle = new Bundle();
-        bundle.putIntegerArrayList(SEARCH_KEY, sum);
+
+        if (null != bgtime) {
+            bundle.putInt(Link.start_time_s, DateForGeLingWeiZhi.toGeLinWeiZhi(bgtime));
+        } else {
+            bundle.putInt(Link.start_time_s, -1);
+        }
+
+        if (null != edtime) {
+            bundle.putInt(Link.start_time_e, DateForGeLingWeiZhi.toGeLinWeiZhi(edtime));
+        } else {
+            bundle.putInt(Link.start_time_e, -1);
+        }
+
+        if (null != cbgtime) {
+            bundle.putInt(Link.over_time_s, DateForGeLingWeiZhi.toGeLinWeiZhi(cbgtime));
+        } else {
+            bundle.putInt(Link.over_time_s, -1);
+        }
+
+        if (null != cedtime) {
+            bundle.putInt(Link.over_time_e, DateForGeLingWeiZhi.toGeLinWeiZhi(cedtime));
+        } else {
+            bundle.putInt(Link.over_time_e, -1);
+        }
+
+        bundle.putInt(Link.status, state);
+
         fragment.setArguments(bundle);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (!fragment.isAdded()) {
