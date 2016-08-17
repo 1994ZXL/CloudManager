@@ -20,7 +20,6 @@ public class MyMissionDetailFragment extends Fragment {
     private TextView mBeginTime;
     private TextView mEndTime;
     private TextView mState;
-
     private static Mission sMission = new Mission();
 
     @Override

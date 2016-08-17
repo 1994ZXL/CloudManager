@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
+import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Mission;
 import com.example.zxl.cloudmanager.model.MissionLab;
 import com.example.zxl.cloudmanager.mission.myMission.MyMissionSearchFragment;
@@ -110,19 +111,8 @@ public class MissionManagerListFragment extends Fragment {
             }
         });
         saveInstanceState = getArguments();
-        if (null == saveInstanceState) {
-            searchKey = -1;
-        } else {
-            searchKey = getArguments().getInt(SEARCH_KEY);
-        }
 
-        if (-1 == searchKey) {
-            missions = MissionLab.newInstance(mFragment.getActivity()).get();
-        } else {
-            missions.add(MissionLab.newInstance(mFragment.getActivity()).get().get(searchKey));
-        }
-
-        mHttpc.post("http://192.168.1.109/yunmgr_v1.0/api/uc.php?app=pm_task&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + "pm_task&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 if (statusCode == 200) {
@@ -209,10 +199,9 @@ public class MissionManagerListFragment extends Fragment {
             Mission mission = missions.get(i);
 
             viewHolder.mBeginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mission.getStart_time()));
-            viewHolder.mEndTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mission.getOver_time()));
-            viewHolder.mName.setText(mission.getName());
+            viewHolder.mEndTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mission.getEnd_time()));
+            viewHolder.mName.setText(mission.getTitle());
             viewHolder.mState.setText(mission.getStatus());
-            viewHolder.mlevel.setText(mission.getLevel());
 
             viewHolder.itemView.setTag(missions.get(i));
         }
@@ -228,19 +217,16 @@ public class MissionManagerListFragment extends Fragment {
                 mOnItemClickListener.onItemClick(v, v.getTag());
             }
         }
-
         public class ViewHolder extends RecyclerView.ViewHolder{
             public TextView mName;
             public TextView mState;
-            public TextView mlevel;
             public TextView mBeginTime;
             public TextView mEndTime;
 
             public ViewHolder(View v) {
                 super(v);
-                mName = (TextView) v.findViewById(R.id.mission_card_item_name);
+                mName = (TextView) v.findViewById(R.id.mission_card_item_title);
                 mState = (TextView)v.findViewById(R.id.mission_card_item_state);
-                mlevel = (TextView)v.findViewById(R.id.mission_card_item_level);
                 mBeginTime = (TextView)v.findViewById(R.id.missoin_card_item_mission_begin_time);
                 mEndTime = (TextView)v.findViewById(R.id.mission_card_item_mission_end_time);
             }

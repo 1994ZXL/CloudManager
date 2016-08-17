@@ -47,7 +47,6 @@ import cz.msebera.android.httpclient.Header;
  */
 public class MyMissionFragment extends Fragment {
     private static final String TAG = "MyMissionFragment";
-
     private CardView mCardView;
     private RecyclerView mRecyclerView;
     private ArrayList<Mission> missions = new ArrayList<Mission>();

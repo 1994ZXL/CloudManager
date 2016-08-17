@@ -54,7 +54,7 @@ public class MyMissionSearchFragment extends Fragment {
     private Fragment mFragment;
 
     public MyMissionSearchFragment() {
-        // Required empty public constructor
+
     }
 
     @Override
