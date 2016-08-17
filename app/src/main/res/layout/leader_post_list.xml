@@ -14,38 +14,38 @@
             android:layout_height="wrap_content"
             android:background="@color/white">
 
-            <TextView
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                android:layout_marginLeft="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.2"
-                android:id="@+id/main_fragment_my_post_name_hit"
-                android:text="@string/name"
-                android:textSize="20dp"
-                android:layout_gravity="top|right" />
+            <!--<TextView-->
+                <!--android:layout_marginTop="12dp"-->
+                <!--android:layout_marginBottom="12dp"-->
+                <!--android:layout_marginLeft="12dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1.2"-->
+                <!--android:id="@+id/main_fragment_my_post_name_hit"-->
+                <!--android:text="@string/name"-->
+                <!--android:textSize="20dp"-->
+                <!--android:layout_gravity="top|right" />-->
 
-            <TextView
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/main_fragment_my_post_create_time_hit"
-                android:text="@string/my_post_create_time_hit"
-                android:textSize="20dp"
-                android:layout_gravity="top|left" />
+            <!--<TextView-->
+                <!--android:layout_marginTop="12dp"-->
+                <!--android:layout_marginBottom="12dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:id="@+id/main_fragment_my_post_create_time_hit"-->
+                <!--android:text="@string/my_post_create_time_hit"-->
+                <!--android:textSize="20dp"-->
+                <!--android:layout_gravity="top|left" />-->
 
-            <TextView
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/my_post_post_time_hit"
-                android:textSize="20dp"
-                android:id="@+id/main_fragment_my_post_post_time_hit"/>
+            <!--<TextView-->
+                <!--android:layout_marginTop="12dp"-->
+                <!--android:layout_marginBottom="12dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="@string/my_post_post_time_hit"-->
+                <!--android:textSize="20dp"-->
+                <!--android:id="@+id/main_fragment_my_post_post_time_hit"/>-->
 
             <TextView
                 android:layout_marginTop="12dp"

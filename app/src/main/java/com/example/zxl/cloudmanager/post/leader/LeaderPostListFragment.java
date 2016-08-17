@@ -85,7 +85,7 @@ public class LeaderPostListFragment extends ListFragment {
                     keyObj.put(Link.report_time_f, saveInstanceState.getInt(Link.report_time_f));
                 }
                 if (null != saveInstanceState.getString(Link.content)) {
-                    keyObj.put(Link.content, saveInstanceState.getInt(Link.content));
+                    keyObj.put(Link.content, saveInstanceState.getString(Link.content));
                 }
                 keyObj.put("sort", "create_time desc");
                 keyObj.put("page_count", 100);
@@ -174,9 +174,6 @@ public class LeaderPostListFragment extends ListFragment {
 //            });
             Post p = getItem(position);
 
-            mNameHit = (TextView)convertView.findViewById(R.id.main_fragment_my_post_name_hit);
-            mCreateTimeHit = (TextView)convertView.findViewById(R.id.main_fragment_my_post_create_time_hit);
-            mPostTimeHit = (TextView)convertView.findViewById(R.id.main_fragment_my_post_post_time_hit);
             mName = (TextView) convertView.findViewById(R.id.main_fragment_my_post_name);
             mName.setText(p.getMem_name());
 
@@ -189,15 +186,6 @@ public class LeaderPostListFragment extends ListFragment {
             mCreateTime = (TextView) convertView.findViewById(R.id.main_fragment_my_post_create_time);
             mCreateTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(p.getCreate_time()));
 
-            if (position != 0) {
-                mNameHit.setVisibility(View.GONE);
-                mCreateTimeHit.setVisibility(View.GONE);
-                mPostTimeHit.setVisibility(View.GONE);
-            } else {
-                mName.setVisibility(View.GONE);
-                mCreateTime.setVisibility(View.GONE);
-                mPostTime.setVisibility(View.GONE);
-            }
             return convertView;
         }
     }

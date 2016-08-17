@@ -156,13 +156,13 @@ public class LeaderPostSearchFragment extends Fragment {
                 bundle.putString(Link.mem_name, name);
 
                 if (null != bgtime){
-                    bundle.putInt(Link.create_time_t, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(bgtime));
+                    bundle.putInt(Link.create_time_t, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi2(bgtime));
                 } else {
                     bundle.putInt(Link.create_time_t, -1);
                 }
 
                 if (null != edtime) {
-                    bundle.putInt(Link.create_time_f, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(edtime));
+                    bundle.putInt(Link.create_time_f, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi2(edtime));
                 } else {
                     bundle.putInt(Link.create_time_f, -1);
                 }

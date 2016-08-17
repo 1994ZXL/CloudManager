@@ -61,4 +61,16 @@ public class DateForGeLingWeiZhi {
         }
         return 0;
     }
+
+    public static int toGeLinWeiZhi2(String date) {
+        SimpleDateFormat time=new SimpleDateFormat("yyyy.MM.dd");
+        try {
+            long millionSeconds = time.parse(date).getTime();
+            millionSeconds = millionSeconds/1000;
+            return (int)millionSeconds;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

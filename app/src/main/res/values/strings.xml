@@ -78,7 +78,7 @@
     <string name="overtime_status">加班状态</string>
 
     <!-- 项目主管-->
-    <string name="project_manager">项目主管</string>
+    <string name="project_manager">项目系统</string>
     <string name="project_manage">项目管理</string>
     <string name="project_memo">通讯录</string>
     <string name="project_member_manage">成员管理</string>
@@ -129,7 +129,7 @@
     <string name="offdutytime">下班时间</string>
     <string name="project">项目</string>
     <string name="check_location">考勤点</string>
-    <string name="check_manager">考勤主管</string>
+    <string name="check_manager">考勤系统</string>
     <string name="stipulate_dutytime">规定上班时间</string>
     <string name="stipulate_offdutytime">规定下班时间</string>
     <string name="duty_sign_time">上班签到时间</string>

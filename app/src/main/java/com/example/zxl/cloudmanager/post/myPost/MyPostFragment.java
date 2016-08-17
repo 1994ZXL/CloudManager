@@ -46,7 +46,7 @@ public class MyPostFragment extends ListFragment {
 
     private ArrayList<Post> mPosts = new ArrayList<Post>();
 
-    private TextView mName, mCreateTime, mPostTime, mNameHit, mCreateTimeHit, mPostTimeHit;
+    private TextView mName, mCreateTime, mPostTime;
 
 
     private Fragment mFragment;
@@ -108,18 +108,6 @@ public class MyPostFragment extends ListFragment {
         mHttpc.post(Link.localhost + "my_daily&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                if (statusCode == 200) {
-                    try {
-                        if (response.getInt("code") != 200){
-                            Toast.makeText(getActivity(),
-                                    response.getString("msg"),
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    } catch (JSONException e) {
-                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
-                    }
-                    return;
-                }
                 if (statusCode == 200) {
                     try {
                         if (response.getBoolean("result")) {
@@ -194,30 +182,19 @@ public class MyPostFragment extends ListFragment {
 
             Post p = getItem(position);
 
-            mNameHit = (TextView)convertView.findViewById(R.id.main_fragment_my_post_name_hit);
-            mCreateTimeHit = (TextView)convertView.findViewById(R.id.main_fragment_my_post_create_time_hit);
-            mPostTimeHit = (TextView)convertView.findViewById(R.id.main_fragment_my_post_post_time_hit);
             mName = (TextView) convertView.findViewById(R.id.main_fragment_my_post_name);
+            mPostTime = (TextView) convertView.findViewById(R.id.main_fragment_my_post_post_time);
+            mCreateTime = (TextView) convertView.findViewById(R.id.main_fragment_my_post_create_time);
+
             mName.setText(p.getMem_name());
 
-            mPostTime = (TextView) convertView.findViewById(R.id.main_fragment_my_post_post_time);
             if(p.getReport_time() == 0) {
                 mPostTime.setText("——");
             }else {
                 mPostTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(p.getReport_time()));
             }
-            mCreateTime = (TextView) convertView.findViewById(R.id.main_fragment_my_post_create_time);
             mCreateTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(p.getCreate_time()));
 
-            if (position != 0) {
-                mNameHit.setVisibility(View.GONE);
-                mCreateTimeHit.setVisibility(View.GONE);
-                mPostTimeHit.setVisibility(View.GONE);
-            } else {
-                mName.setVisibility(View.GONE);
-                mCreateTime.setVisibility(View.GONE);
-                mPostTime.setVisibility(View.GONE);
-            }
             return convertView;
         }
     }

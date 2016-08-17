@@ -130,18 +130,16 @@ public class MyOverTimeFragment extends Fragment {
         mHttpc.post(Link.localhost + "my_work&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                if (statusCode == 200) {
-                    try {
-                        if (response.getInt("code") != 200){
-                            Toast.makeText(getActivity(),
-                                    response.getString("msg"),
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    } catch (JSONException e) {
-                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                try {
+                    if (response.getInt("code") == 400){
+                        Toast.makeText(getActivity(),
+                                response.getString("msg"),
+                                Toast.LENGTH_SHORT).show();
                     }
-                    return;
+                } catch (JSONException e) {
+                    Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                 }
+
                 if (statusCode == 200) {
                     try {
                         if (response.getBoolean("result")) {
@@ -175,8 +173,6 @@ public class MyOverTimeFragment extends Fragment {
                                     }
                                 }
                             });
-                        } else {
-
                         }
                     } catch (JSONException e) {
                         Log.e(TAG, "ee2: " + e.getLocalizedMessage());

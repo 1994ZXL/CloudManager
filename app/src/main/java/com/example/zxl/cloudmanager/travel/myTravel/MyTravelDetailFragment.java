@@ -11,8 +11,6 @@ import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Travel;
 
-import java.util.Date;
-
 /**
  * Created by ZXL on 2016/7/25.
  */
