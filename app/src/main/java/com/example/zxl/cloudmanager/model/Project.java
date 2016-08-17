@@ -15,6 +15,9 @@ public class Project {
     private String contact_mob; //甲方联系电话
     private int project_cycle; //项目周期
     private int status; //项目状态
+    private int project_state; //项目状态
+    private int ready_time; //准备开始时间
+    private int finished_time; //结束时间
 
     private static final String JSON_PROJECT_NAME = "project_name";
     private static final String JSON_HEDER = "header";
@@ -24,6 +27,9 @@ public class Project {
     private static final String JSON_CONTACT_MOB = "contact_mob";
     private static final String JSON_PROJECT_CYCLE = "project_cycle";
     private static final String JSON_STATUS = "status";
+    private static final String JSON_PROJECT_STATE = "project_state";
+    private static final String JSON_READY_TIME = "ready_time";
+    private static final String JSON_FINISHED_TIME = "finished_time";
 
     public Project() {
 
@@ -46,6 +52,12 @@ public class Project {
             project_cycle = json.getInt(JSON_PROJECT_CYCLE);
         if (json.has(JSON_STATUS))
             status = json.getInt(JSON_STATUS);
+        if (json.has(JSON_PROJECT_STATE))
+            project_state = json.getInt(JSON_PROJECT_STATE);
+        if (json.has(JSON_READY_TIME))
+            project_cycle = json.getInt(JSON_READY_TIME);
+        if (json.has(JSON_FINISHED_TIME))
+            status = json.getInt(JSON_FINISHED_TIME);
     }
 
     public JSONObject toJSON() throws JSONException{
@@ -58,6 +70,9 @@ public class Project {
         json.put(JSON_CONTACT_MOB, contact_mob);
         json.put(JSON_PROJECT_CYCLE, project_cycle);
         json.put(JSON_STATUS, status);
+        json.put(JSON_PROJECT_STATE, project_state);
+        json.put(JSON_READY_TIME, ready_time);
+        json.put(JSON_FINISHED_TIME, finished_time);
         return json;
     }
 
@@ -127,5 +142,39 @@ public class Project {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public int getReady_time() {
+        return ready_time;
+    }
+
+    public void setReady_time(int ready_time) {
+        this.ready_time = ready_time;
+    }
+
+    public int getFinished_time() {
+        return finished_time;
+    }
+
+    public void setFinished_time(int finished_time) {
+        this.finished_time = finished_time;
+    }
+
+    public String getProject_state() {
+        if(project_state == 0)
+            return "取消";
+        if(project_state == 1)
+            return "准备";
+        if(project_state == 2)
+            return "开发";
+        if(project_state == 3)
+            return "维护";
+        if(project_state == 4)
+            return "结束";
+        return null;
+    }
+
+    public void setProject_state(int project_state) {
+        this.project_state = project_state;
     }
 }

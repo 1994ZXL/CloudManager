@@ -323,7 +323,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="75dp"
-                            android:src="@drawable/leave_icon"
+                            android:src="@drawable/leave_manage_icon"
                             android:id="@+id/main_fragment_leave_deal_image"
                             android:layout_gravity="center"/>
                         <!--<TextView

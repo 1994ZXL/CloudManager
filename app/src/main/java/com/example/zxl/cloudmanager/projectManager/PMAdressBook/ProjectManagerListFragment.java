@@ -8,6 +8,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,23 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
+import com.example.zxl.cloudmanager.model.DESCryptor;
+import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.model.Post;
 import com.example.zxl.cloudmanager.model.Project;
+import com.example.zxl.cloudmanager.model.ProjectLab;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ZXL on 2016/7/12.
@@ -39,6 +53,13 @@ public class ProjectManagerListFragment extends Fragment {
     private static final String SEARCH_KEY = "search_key";
     private int searchKey;
 
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams = new RequestParams();
+    private JSONObject keyObj = new JSONObject();
+    private String key = "";
+
+    private static final String TAG = "PMListFragment";
+
     private Button mSearchBtn;
 
     @Override
@@ -50,22 +71,51 @@ public class ProjectManagerListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        View view = layoutInflater.inflate(R.layout.pm_manager_list, parent, false);
+        final View view = layoutInflater.inflate(R.layout.pm_manager_list, parent, false);
 
         getActivity().getActionBar().setTitle("项目管理");
 
-//        saveInstanceState = getArguments();
-//        if (null == saveInstanceState) {
-//            searchKey = -1;
-//        } else {
-//            searchKey = getArguments().getInt(SEARCH_KEY);
-//        }
-//
-//        if (-1 == searchKey) {
-//            project = ProjectLab.newInstance(mFragment.getActivity()).getmProjects();
-//        } else {
-//            project.add(ProjectLab.newInstance(mFragment.getActivity()).getmProjects().get(searchKey));
-//        }
+        saveInstanceState = getArguments();
+        if (null != saveInstanceState) {
+            try {
+                if (null != saveInstanceState.getString(Link.project_name)) {
+                    keyObj.put(Link.project_name, saveInstanceState.getString(Link.project_name));
+                }
+                if (-1 != saveInstanceState.getInt(Link.project_state)) {
+                    keyObj.put(Link.project_state, saveInstanceState.getInt(Link.project_state));
+                }
+                if (-1 != saveInstanceState.getInt(Link.header)) {
+                    keyObj.put(Link.header, saveInstanceState.getInt(Link.header));
+                }
+                if (-1 != saveInstanceState.getInt(Link.ready_time)) {
+                    keyObj.put(Link.ready_time, saveInstanceState.getInt(Link.ready_time));
+                }
+                if (-1 != saveInstanceState.getInt(Link.finished_time)) {
+                    keyObj.put(Link.finished_time, saveInstanceState.getInt(Link.finished_time));
+                }
+                keyObj.put("sort", "project_name desc");
+                keyObj.put("page_count", 50);
+                keyObj.put("curl_page", 1);
+
+                key = DESCryptor.Encryptor(keyObj.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            mParams.put("key", key);
+        }
+        Log.d(TAG, "key: " + key);
+        /*saveInstanceState = getArguments();
+        if (null == saveInstanceState) {
+           searchKey = -1;
+        } else {
+           searchKey = getArguments().getInt(SEARCH_KEY);
+        }
+
+        if (-1 == searchKey) {
+            project = ProjectLab.newInstance(mFragment.getActivity()).getmProjects();
+        } else {
+          project.add(ProjectLab.newInstance(mFragment.getActivity()).getmProjects().get(searchKey));
+        }*/
         mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pm_manager_pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
@@ -78,35 +128,54 @@ public class ProjectManagerListFragment extends Fragment {
                 }, REFRESH_DELAY);
             }
         });
-        saveInstanceState = getArguments();
-        if (null == saveInstanceState) {
-            searchKey = -1;
-        } else {
-            searchKey = getArguments().getInt(SEARCH_KEY);
-        }
 
-        mRecyclerView = (RecyclerView)view.findViewById(R.id.pm_list_recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        myAdapter = new MyAdapter(this.getActivity(), project);
-        mRecyclerView.setAdapter(myAdapter);
-        mCardView = (CardView)view.findViewById(R.id.fragment_my_check);
-        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+        mHttpc.post(Link.localhost + "manage_pm&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
-            public void onItemClick(View view, Object data) {
-                Fragment fragment = new ProjectManagerDetailFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
+            public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
+                try {
+                    if (rjo.getBoolean("result")) {
+                        JSONArray array = rjo.getJSONArray("data1");
+                        Log.d(TAG, "array: " + array);
+                        for (int i = 0; i < array.length(); i++) {
+                            project.add(new Project(array.getJSONObject(i)));
+                        }
+                        Log.d(TAG, "mPosts: " + project);
+                        mRecyclerView = (RecyclerView)view.findViewById(R.id.pm_list_recyclerview);
+                        mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
+                        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                        mRecyclerView.setHasFixedSize(true);
+                        myAdapter = new MyAdapter(mFragment.getActivity(), project);
+                        mRecyclerView.setAdapter(myAdapter);
+                        mCardView = (CardView)view.findViewById(R.id.fragment_my_check);
+                        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                            @Override
+                            public void onItemClick(View view, Object data) {
+                                Fragment fragment = new ProjectManagerDetailFragment();
+                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                if (!fragment.isAdded()) {
+                                    transaction.addToBackStack(null);
+                                    transaction.hide(mFragment);
+                                    transaction.add(R.id.blankActivity, fragment);
+                                    transaction.commit();
+                                } else {
+                                    transaction.hide(mFragment);
+                                    transaction.show(fragment);
+                                    transaction.commit();
+                                }
+                            }
+                        });
+
+                    } else {
+
+                    }
+                } catch (JSONException e) {
+                    Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                 }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
+
             }
         });
 
@@ -143,7 +212,7 @@ public class ProjectManagerListFragment extends Fragment {
             viewHolder.mProjectName.setText(project.getProject_name());
             viewHolder.mContactName.setText(project.getContact_name());
             viewHolder.mPartA.setText(project.getPart_a());
-            viewHolder.mState.setText(project.getStatus());
+            viewHolder.mState.setText(project.getProject_state());
             viewHolder.mHeader.setText(project.getHeader());
 
             viewHolder.itemView.setTag(projects.get(i));
