@@ -234,7 +234,7 @@ public class MissionSearchFragment extends Fragment {
         mBeginTimeButton = (Button)v.findViewById(R.id.pm_mission_begin_time_button);
         mEndTimeButton = (Button)v.findViewById(R.id.pm_mission_end_time_button);
         mProjectName = (Spinner) v.findViewById(R.id.pm_mission_projectName);
-        mStateSpinner = (Spinner) v.findViewById(R.id.pm_mission_state_sprinner);
+        mStateSpinner = (Spinner) v.findViewById(R.id.pm_mission_state);
         mMemName = (Spinner) v.findViewById(R.id.pm_mission_memName);
         mSearchBtn = (Button) v.findViewById(R.id.pm_mission_search_button);
     }

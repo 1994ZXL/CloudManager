@@ -55,9 +55,5 @@ public class MissionLab {
         return mMissions;
     }
 
-    private void setMissions(String[] content) {
-        Mission mission = new Mission();
-        mission.setData(content);
-        mMissions.add(mission);
-    }
+
 }
