@@ -92,16 +92,16 @@ public class MissionSearchFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_mission_search, container, false);
         init(v);
 
-        mHttpcProject.post(Link.localhost + "pm_task&act=options_project_name", mParamsProject, new JsonHttpResponseHandler() {
+        mHttpcProject.post(Link.localhost + "pm_task&act=options_title", mParamsProject, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 try {
                     JSONArray array = response.getJSONArray("data1");
                     for (int i = 0; i < array.length(); i++) {
-                        if (array.getJSONObject(i).has("pm_id"))
-                            projectIdList.add(array.getJSONObject(i).getString("pm_id"));
-                        if (array.getJSONObject(i).has("project_name"))
-                            projecNametList.add(array.getJSONObject(i).getString("project_name"));
+                        if (array.getJSONObject(i).has("pmtask_id"))
+                            projectIdList.add(array.getJSONObject(i).getString("pmtask_id"));
+                        if (array.getJSONObject(i).has("title"))
+                            projecNametList.add(array.getJSONObject(i).getString("title"));
                     }
                     projectNameAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, projecNametList);
                     projectNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -82,4 +82,8 @@ public class Link {
     //pm_task
     public static final String pmtask_id = "pmtask_id"; //项目任务ID
     public static final String over_time = "over_time"; //结束时间
+    public static final String title = "title"; //项目标题
+    public static final String evaluate = "evaluate"; //评价
+    public static final String pmsch_id = "pmsch_id"; //项目进度ID
+    public static final String percent = "percent"; //进度
 }
