@@ -81,17 +81,14 @@ public class ProjectManagerListFragment extends Fragment {
                 if (null != saveInstanceState.getString(Link.project_name)) {
                     keyObj.put(Link.project_name, saveInstanceState.getString(Link.project_name));
                 }
-                if (-1 != saveInstanceState.getInt(Link.project_state)) {
-                    keyObj.put(Link.project_state, saveInstanceState.getInt(Link.project_state));
-                }
-                if (-1 != saveInstanceState.getInt(Link.header)) {
-                    keyObj.put(Link.header, saveInstanceState.getInt(Link.header));
-                }
                 if (-1 != saveInstanceState.getInt(Link.ready_time)) {
                     keyObj.put(Link.ready_time, saveInstanceState.getInt(Link.ready_time));
                 }
                 if (-1 != saveInstanceState.getInt(Link.finished_time)) {
                     keyObj.put(Link.finished_time, saveInstanceState.getInt(Link.finished_time));
+                }
+                if (null != saveInstanceState.getString(Link.header)) {
+                    keyObj.put(Link.header, saveInstanceState.getString(Link.header));
                 }
                 keyObj.put("sort", "project_name desc");
                 keyObj.put("page_count", 50);
