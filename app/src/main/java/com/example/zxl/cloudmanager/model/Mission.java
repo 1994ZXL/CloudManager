@@ -9,51 +9,34 @@ import org.json.JSONObject;
  * Created by ZXL on 2016/7/12.
  */
 public class Mission {
-    private String mem_name; //成员名字
-    private String title; //项目标题
+
+    private String title; //任务名称
     private String content; //内容
-    private String level;
-    private String detailContent;
     private int start_time;
-    private int over_time;
-    private int percent; //进度
-    private String progress;
-    private int status; //项目任务状态
-    private String evaluete; //评价
-    private String missionWorker;
+    private int end_time;
+    private int status; //项目任务状态 0:待完成 1:已完成
+    private String evaluate; //评价
+    private String pmtask_id; //任务id
+    private String pm_id; //项目id
+    private String mem_id; //成员id
+    private String pmsch_id; //任务进度id
+    private int percent; //任务进度
 
-    private static Mission sMission;
 
-    private static final String JSON_MEM= "mem_name";
-    //private static final String JSON_PERCENT = "percent";
     private static final String JSON_TITLE = "title";
     private static final String JSON_CONTENT = "content";
     private static final String JSON_STATE = "status";
-    private static final String JSON_BEGINTIME = "start_time";
-    private static final String JSON_ENDTIME = "over_time";
-    private static final String JSON_EVALUETE = "evaluete";
+    private static final String JSON_START_TIME = "start_time";
+    private static final String JSON_END_TIME = "end_time";
+    private static final String JSON_EVALUATE = "evaluate";
+    private static final String JSON_PMTASK_ID = "pmtask_id";
+    private static final String JSON_PM_ID = "pm_id";
+    private static final String JSON_MEM_ID = "mem_id";
+    private static final String JSON_PMSCH_ID = "pmsch_id";
+    private static final String JSON_PERCENT = "percent";
 
     public Mission(){
 
-    }
-    public static Mission newInstance(Context context) {
-        if (null == sMission) {
-            sMission = new Mission();
-        }
-        return sMission;
-    }
-
-    public void setData(String[] data) {
-        setName(data[0]);
-        setContent(data[1]);
-        setLevel(data[2]);
-        setDetailContent(data[3]);
-        /*setStart_time(data[4]);
-        setOver_time(data[5]);*/
-        setProgress(data[6]);
-        /*setStatus(data[7]);*/
-        setDisposeSuggestion(data[8]);
-        //setMissionWorker(data[9]);
     }
 
     public Mission(JSONObject json) throws JSONException {
@@ -63,16 +46,22 @@ public class Mission {
             content = json.getString(JSON_CONTENT);
         if (json.has(JSON_STATE))
             status = json.getInt(JSON_STATE);
-        if (json.has(JSON_BEGINTIME))
-            start_time = json.getInt(JSON_BEGINTIME);
-        if (json.has(JSON_ENDTIME))
-            over_time = json.getInt(JSON_ENDTIME);
-        if (json.has(JSON_EVALUETE))
-            evaluete = json.getString(JSON_EVALUETE);
-        if (json.has(JSON_MEM))
-            mem_name = json.getString(JSON_MEM);
-        /*if (json.has(JSON_PERCENT))
-            percent = json.getInt(JSON_PERCENT);*/
+        if (json.has(JSON_START_TIME))
+            start_time = json.getInt(JSON_START_TIME);
+        if (json.has(JSON_END_TIME))
+            end_time = json.getInt(JSON_END_TIME);
+        if (json.has(JSON_EVALUATE))
+            evaluate = json.getString(JSON_EVALUATE);
+        if (json.has(JSON_PMTASK_ID))
+            pmtask_id = json.getString(JSON_PMTASK_ID);
+        if (json.has(JSON_PM_ID))
+            pm_id = json.getString(JSON_PM_ID);
+        if (json.has(JSON_MEM_ID))
+            mem_id = json.getString(JSON_MEM_ID);
+        if (json.has(JSON_PMSCH_ID))
+            pmsch_id = json.getString(JSON_PMSCH_ID);
+        if (json.has(JSON_PERCENT))
+            percent = json.getInt(JSON_PERCENT);
     }
 
     public JSONObject toJSON() throws JSONException{
@@ -80,43 +69,66 @@ public class Mission {
         json.put(JSON_TITLE, title);
         json.put(JSON_CONTENT, content);
         json.put(JSON_STATE, status);
-        json.put(JSON_BEGINTIME, start_time);
-        json.put(JSON_ENDTIME, over_time);
-        json.put(JSON_EVALUETE, evaluete);
-        json.put(JSON_MEM, mem_name);
-        //json.put(JSON_PERCENT, percent);
+        json.put(JSON_START_TIME, start_time);
+        json.put(JSON_END_TIME, end_time);
+        json.put(JSON_EVALUATE, evaluate);
         return json;
     }
-    public String getMissionWorker() {
-        return missionWorker;
+
+    public String getPmtask_id() {
+        return pmtask_id;
     }
 
-    public void setMissionWorker(String missionWorker) {
-        this.missionWorker = missionWorker;
+    public void setPmtask_id(String pmtask_id) {
+        this.pmtask_id = pmtask_id;
     }
 
-    public String getMem_name() {
-        return mem_name;
+    public String getPm_id() {
+        return pm_id;
     }
 
-    public void setMem_name(String mem_name) {
-        this.mem_name = mem_name;
+    public void setPm_id(String pm_id) {
+        this.pm_id = pm_id;
     }
 
-    public String getEvaluete() {
-        return evaluete;
+    public String getMem_id() {
+        return mem_id;
     }
 
-    public void setEvaluete(String evaluete) {
-        this.evaluete = evaluete;
+    public void setMem_id(String mem_id) {
+        this.mem_id = mem_id;
     }
 
-    public String getPercent() {
-        return percent + "%";
+    public String getPmsch_id() {
+        return pmsch_id;
+    }
+
+    public void setPmsch_id(String pmsch_id) {
+        this.pmsch_id = pmsch_id;
+    }
+
+    public int getPercent() {
+        return percent;
     }
 
     public void setPercent(int percent) {
         this.percent = percent;
+    }
+
+    public int getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(int end_time) {
+        this.end_time = end_time;
+    }
+
+    public String getEvaluate() {
+        return evaluate;
+    }
+
+    public void setEvaluate(String evaluate) {
+        this.evaluate = evaluate;
     }
 
     public String getTitle() {
@@ -135,50 +147,7 @@ public class Mission {
         this.content = content;
     }
 
-    public String getLevel() {
-        return level;
-    }
 
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public String getDetailContent() {
-        return detailContent;
-    }
-
-    public void setDetailContent(String detailContent) {
-        this.detailContent = detailContent;
-    }
-
-    public String getProgress() {
-        return progress;
-    }
-
-    public void setProgress(String progress) {
-        this.progress = progress;
-    }
-
-    public String getDisposeSuggestion() {
-        return evaluete;
-    }
-
-    public void setDisposeSuggestion(String disposeSuggestion) {
-        this.evaluete = disposeSuggestion;
-    }
-
-    public Mission(int start_time, int over_time) {
-        this.start_time = start_time;
-        this.over_time = over_time;
-    }
-
-    public String getName() {
-        return title;
-    }
-
-    public void setName(String name) {
-        this.title = name;
-    }
 
     public int getStart_time() {
         return start_time;
@@ -186,14 +155,6 @@ public class Mission {
 
     public void setStart_time(int start_time) {
         this.start_time = start_time;
-    }
-
-    public int getOver_time() {
-        return over_time;
-    }
-
-    public void setOver_time(int over_time) {
-        this.over_time = over_time;
     }
 
     public String getStatus() {

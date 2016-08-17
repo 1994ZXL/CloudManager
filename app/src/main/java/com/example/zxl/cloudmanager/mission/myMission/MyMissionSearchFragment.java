@@ -50,9 +50,6 @@ public class MyMissionSearchFragment extends Fragment {
     private String edtime;
     private String state;
 
-    private ArrayList<Mission> mMissions = new ArrayList<Mission>();
-    private int index;
-    private static final String SEARCH_KEY = "search_key";
 
     private Fragment mFragment;
 
@@ -173,29 +170,19 @@ public class MyMissionSearchFragment extends Fragment {
     }
 
     private void search() {
-        mMissions = MissionLab.newInstance(mFragment.getActivity()).get();
-        for (index = 0; index < mMissions.size(); index++) {
-            if (name.equals(mMissions.get(index).getName())
-                    && bgtime.equals(mMissions.get(index).getStart_time())
-                    && edtime.equals(mMissions.get(index).getOver_time())
-                    && state.equals(mMissions.get(index).getStatus())) {
-                Fragment fragment = new MyMissionFragment();
-                Bundle bundle = new Bundle();
-                bundle.putInt(SEARCH_KEY, index);
-                fragment.setArguments(bundle);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.hide(mFragment);
-                    transaction.replace(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
-            } else {
+        Fragment fragment = new MyMissionFragment();
+        Bundle bundle = new Bundle();
 
-            }
+        fragment.setArguments(bundle);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if (!fragment.isAdded()) {
+            transaction.hide(mFragment);
+            transaction.replace(R.id.blankActivity, fragment);
+            transaction.commit();
+        } else {
+            transaction.hide(mFragment);
+            transaction.show(fragment);
+            transaction.commit();
         }
     }
 

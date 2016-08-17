@@ -55,38 +55,6 @@
                         android:gravity="center"
                         android:id="@+id/mission_details_content"/>
                 </LinearLayout>
-                <!-- 任务优先级-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/mission_level" />
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/mission_details_level"/>
-                </LinearLayout>
-                <!-- 任务内容说明-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/mission_content_details" />
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/mission_details_content_details"/>
-                </LinearLayout>
 
             </LinearLayout>
 
@@ -114,6 +82,7 @@
                         android:gravity="center"
                         android:id="@+id/mission_details_begin_time" />
                 </LinearLayout>
+
                 <!-- 任务结束时间-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -129,22 +98,6 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:id="@+id/mission_details_end_time"/>
-                </LinearLayout>
-                <!-- 任务完成进度-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/mission_progress"/>
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/mission_details_mission_progress"/>
                 </LinearLayout>
 
             </LinearLayout>
@@ -172,22 +125,6 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:id="@+id/mission_details_state"/>
-                </LinearLayout>
-                <!-- 处理意见-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/dispose_suggestion"/>
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/mission_details_dispose_suggestion"/>
                 </LinearLayout>
 
             </LinearLayout>

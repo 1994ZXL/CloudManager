@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:id="@+id/mission_card_item_name"
+                android:id="@+id/mission_card_item_title"
                 android:textSize="30dp"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -34,24 +34,6 @@
                 android:id="@+id/mission_card_item_state"/>
         </LinearLayout>
 
-        <!-- 任务优先级-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="12dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/mission_level"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:id="@+id/mission_card_item_level"/>
-        </LinearLayout>
-
         <!-- 开始时间-->
         <LinearLayout
             android:layout_width="match_parent"
@@ -59,12 +41,12 @@
             android:orientation="horizontal"
             android:layout_marginLeft="12dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/mission_begin_time"/>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/missoin_card_item_mission_begin_time"/>
@@ -77,12 +59,12 @@
             android:layout_marginLeft="12dp"
             android:layout_marginBottom="12dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/mission_end_time"/>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/mission_card_item_mission_end_time"/>

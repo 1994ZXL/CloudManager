@@ -68,7 +68,7 @@ public class Edit extends Fragment{
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                changeValue(charSequence);
+//                changeValue(charSequence);
             }
 
             @Override
@@ -80,9 +80,9 @@ public class Edit extends Fragment{
         return view;
     }
 
-    private void changeValue(CharSequence charSequence) {
-        String title = (String) getArguments().getSerializable(EXTRA_TITLE);
-        if (title == "名字修改") {
+//    private void changeValue(CharSequence charSequence) {
+//        String title = (String) getArguments().getSerializable(EXTRA_TITLE);
+//        if (title == "名字修改") {
 //            User.newInstance(mFragment.getActivity()).setUser_name(charSequence.toString());
 //        } else if (title == "手机修改") {
 //            User.newInstance(mFragment.getActivity()).setPhone(charSequence.toString());
@@ -92,30 +92,30 @@ public class Edit extends Fragment{
 //            User.newInstance(mFragment.getActivity()).setWechat(charSequence.toString());
 //        } else if (title == "地址修改") {
 //            User.newInstance(mFragment.getActivity()).setAddress(charSequence.toString());
-        } else if (title == "任务内容修改") {
-            Mission.newInstance(mFragment.getActivity()).setContent(charSequence.toString());
-        } else if (title == "内容详情修改") {
-            Mission.newInstance(mFragment.getActivity()).setDetailContent(charSequence.toString());
-        } else if (title == "任务人员修改") {
-            Mission.newInstance(mFragment.getActivity()).setMissionWorker(charSequence.toString());
-        }
-    }
+//        } else if (title == "任务内容修改") {
+//            Mission.newInstance(mFragment.getActivity()).setContent(charSequence.toString());
+//        } else if (title == "内容详情修改") {
+//            Mission.newInstance(mFragment.getActivity()).setDetailContent(charSequence.toString());
+//        } else if (title == "任务人员修改") {
+//            Mission.newInstance(mFragment.getActivity()).setMissionWorker(charSequence.toString());
+//        }
+//    }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.message_save, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_edit_message:
-                FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.popBackStack();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+//        inflater.inflate(R.menu.message_save, menu);
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.menu_item_edit_message:
+//                FragmentManager fragmentManager = getFragmentManager();
+//                fragmentManager.popBackStack();
+//                return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
 }
