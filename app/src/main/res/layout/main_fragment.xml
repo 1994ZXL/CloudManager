@@ -3,7 +3,7 @@
     android:id="@+id/main_fragment"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="62dp"
+    android:layout_marginBottom="55dp"
     tools:context=".MainActivity"
     android:orientation="vertical"
     android:background="@color/gray">
@@ -184,7 +184,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="75dp"
-                            android:src="@drawable/overtime_icon"
+                            android:src="@drawable/overtime_search_icon"
                             android:id="@+id/imageView"
                             android:layout_gravity="center" />
 
@@ -302,7 +302,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="75dp"
-                            android:src="@drawable/my_check_icon"
+                            android:src="@drawable/check_manage_icon"
                             android:id="@+id/main_fragment_check_deal_image"
                             android:layout_gravity="center"/>
                         <!--<TextView
@@ -687,7 +687,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="75dp"
-                            android:src="@drawable/plan_manage_icon"
+                            android:src="@drawable/my_mission_icon"
                             android:id="@+id/main_fragment_my_mission_image"
                             android:layout_gravity="center"/>
                         <!--<TextView
@@ -780,7 +780,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="75dp"
-                            android:src="@drawable/bug_manage_icon"
+                            android:src="@drawable/my_bug_icon"
                             android:id="@+id/main_fragment_my_bug_image"
                             android:layout_gravity="center"/>
                         <!--<TextView
@@ -809,7 +809,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="75dp"
-                            android:src="@drawable/overtime_icon"
+                            android:src="@drawable/my_overtime_icon"
                             android:id="@+id/main_fragment_overtime_image"
                             android:layout_gravity="center"/>
                         <!--<TextView

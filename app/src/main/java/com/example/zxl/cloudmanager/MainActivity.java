@@ -21,10 +21,10 @@ import com.example.zxl.cloudmanager.tabBar.CustomerItemFragment;
 public class MainActivity extends Activity implements View.OnClickListener{
 
     private static final String TAG = "MainActivity";
-    private TextView bottomHomeBar;
-    private TextView bottomAddressListBar;
-    private TextView bottomCustomerBar;
-    private TextView bottomAboutBar;
+    private LinearLayout bottomHomeBar;
+    private LinearLayout bottomAddressListBar;
+    private LinearLayout bottomCustomerBar;
+    private LinearLayout bottomAboutBar;
     private LinearLayout bottomContent;
     private FragmentManager fragmentManager;
     private MainFragment mainFragment;
@@ -51,10 +51,10 @@ public class MainActivity extends Activity implements View.OnClickListener{
     }
     private void bindViews(){
         //初始化所有组件
-        bottomHomeBar = (TextView)findViewById(R.id.bottom_menu_home_bar);
-        bottomAddressListBar = (TextView)findViewById(R.id.bottom_menu_addresslist_bar);
-        bottomCustomerBar = (TextView)findViewById(R.id.bottom_menu_customer_bar);
-        bottomAboutBar = (TextView)findViewById(R.id.bottom_menu_about_bar);
+        bottomHomeBar = (LinearLayout)findViewById(R.id.bottom_menu_home_bar);
+        bottomAddressListBar = (LinearLayout)findViewById(R.id.bottom_menu_addresslist_bar);
+        bottomCustomerBar = (LinearLayout)findViewById(R.id.bottom_menu_customer_bar);
+        bottomAboutBar = (LinearLayout)findViewById(R.id.bottom_menu_about_bar);
         bottomContent = (LinearLayout)findViewById(R.id.bottom_menu_content);
 
         bottomHomeBar.setOnClickListener(this);
