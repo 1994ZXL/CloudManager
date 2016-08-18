@@ -60,9 +60,6 @@ public class MissionManagerListFragment extends Fragment {
     private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
 
-    private static final String SEARCH_KEY = "search_key";
-    private int searchKey;
-
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
     private JSONObject keyObj = new JSONObject();

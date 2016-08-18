@@ -42,10 +42,6 @@ public class MyBugFragment extends Fragment {
     private Fragment mFragment;
     private Button mSearchBtn;
 
-    private static final String SEARCH_KEY = "search_key";
-    private static final String TAG = "MyBugFragment";
-    private int searchKey;
-
     private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
 
@@ -85,17 +81,7 @@ public class MyBugFragment extends Fragment {
         getActivity().getActionBar().setTitle("我的bug");
 
         saveInstanceState = getArguments();
-        if (null == saveInstanceState) {
-            searchKey = -1;
-        } else {
-            searchKey = getArguments().getInt(SEARCH_KEY);
-        }
 
-        if (-1 == searchKey) {
-            bugs = BugLab.newInstance(mFragment.getActivity()).get();
-        } else {
-            bugs.add(BugLab.newInstance(mFragment.getActivity()).get().get(searchKey));
-        }
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_bug_pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -169,7 +155,7 @@ public class MyBugFragment extends Fragment {
             viewHolder.mBugState.setText(bug.getStatus());
             viewHolder.mUseCaseNumber.setText(bug.getMem_name());
             viewHolder.mFoundTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(bug.getSubmit_time_start())
-                    + "--"
+                    + "——"
                     + DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(bug.getModify_time_end()));
 
 

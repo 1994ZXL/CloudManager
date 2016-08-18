@@ -1,17 +1,33 @@
 package com.example.zxl.cloudmanager.mission.projectManagerMission;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.zxl.cloudmanager.Edit;
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
+import com.example.zxl.cloudmanager.model.DatePickerFragment;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Mission;
 import com.loopj.android.http.AsyncHttpClient;
@@ -23,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -32,18 +49,29 @@ import cz.msebera.android.httpclient.Header;
 public class MissionManagerEditFragment extends Fragment {
     private static final String TAG = "PMMissionEditFragment";
 
-    private Spinner mTitle;
-    private TextView mContent;
-    private TextView mBeginTime;
-    private TextView mEndTime;
+    private EditText mTitle;
+    private EditText mContent;
+    private Button mBeginTimeButton;
+    private Button mEndTimeButton;
+    private EditText mEvaluate;
     private Spinner mState;
 
     private Fragment mFragment;
 
     private static Mission sMission = new Mission();
 
-    private static final String[] stateList={"待完成", "已完成"};
+    private String[] stateList;
     private ArrayAdapter<String> stateAdapter;
+
+    private Date beginTime;
+    private String bgtime;
+    private Date endTime;
+    private String edtime;
+
+    private String title;
+    private String content;
+    private String evaluate;
+    private int state;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
@@ -52,6 +80,7 @@ public class MissionManagerEditFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setHasOptionsMenu(true);
         mFragment = this;
     }
 
@@ -60,17 +89,6 @@ public class MissionManagerEditFragment extends Fragment {
         View view = layoutInflater.inflate(R.layout.pm_mission_edit_or_add, parent, false);
 
         init(view);
-        stateAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, stateList);
-        stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mState.setAdapter(stateAdapter);
-
-        mHttpc.post(Link.localhost + "pm_task&act=options_project_name", mParams, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-            }
-        });
-
         contorl();
 
         return view;
@@ -83,29 +101,213 @@ public class MissionManagerEditFragment extends Fragment {
     }
 
     private void init(View view) {
-        mTitle = (Spinner) view.findViewById(R.id.pm_mission_name);
-        mContent = (TextView) view.findViewById(R.id.pm_mission_content);
-        mBeginTime = (TextView) view.findViewById(R.id.pm_mission_begin_time);
-        mEndTime = (TextView) view.findViewById(R.id.pm_mission_end_time);
-
+        mTitle = (EditText) view.findViewById(R.id.pm_mission_name);
+        mContent = (EditText) view.findViewById(R.id.pm_mission_content);
+        mBeginTimeButton = (Button) view.findViewById(R.id.pm_mission_begin_time);
+        mEndTimeButton = (Button) view.findViewById(R.id.pm_mission_end_time);
+        mEvaluate = (EditText) view.findViewById(R.id.pm_mission_evaluate);
         mState = (Spinner) view.findViewById(R.id.pm_mission_state);
-
-
     }
 
     private void contorl() {
+        mTitle.setText(sMission.getTitle());
+        mTitle.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                title = charSequence.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         mContent.setText(sMission.getContent());
-        if (sMission.getStart_time() == 0) {
-            mBeginTime.setText("——");
-        } else {
-            mBeginTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sMission.getStart_time()));
-        }
+        mContent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                content = charSequence.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         if (sMission.getStart_time() == 0) {
-            mEndTime.setText("——");
+            mBeginTimeButton.setText("——");
         } else {
-            mEndTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sMission.getEnd_time()));
+            mBeginTimeButton.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sMission.getStart_time()));
         }
+        mBeginTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
+                fragment.setTargetFragment(MissionManagerEditFragment.this, 12);
+                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
+                fragment.show(getFragmentManager(), "MissionManagerEditFragment");
+            }
+        });
+
+        if (sMission.getStart_time() == 0) {
+            mEndTimeButton.setText("——");
+        } else {
+            mEndTimeButton.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sMission.getEnd_time()));
+        }
+        mEndTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
+                fragment.setTargetFragment(MissionManagerEditFragment.this, 13);
+                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
+                fragment.show(getFragmentManager(), "MissionManagerEditFragment");
+            }
+        });
+
+        mEvaluate.setText(sMission.getEvaluate());
+        mEvaluate.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                evaluate = charSequence.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        if (sMission.getStatus().equals("待完成")) {
+            stateList = new String[]{"待完成", "已完成"};
+        } else {
+            stateList = new String[]{"已完成", "待完成"};
+        }
+        stateAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, stateList);
+        stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mState.setAdapter(stateAdapter);
+        mState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //项目任务状态 0:待完成 1:已完成
+                if (stateList[i] == "待完成")
+                    state = 0;
+                if (stateList[i] == "已完成")
+                    state = 1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d(TAG, "进入回调 " + " resultCode:" + requestCode);
+        if (resultCode != Activity.RESULT_OK){
+            Log.d(TAG, "未进入判断");
+            return;
+        } else if (requestCode == 12) {
+            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            updateBeginDate();
+        } else if (requestCode == 13) {
+            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            updateEndDate();
+        }
+    }
+
+    private void updateBeginDate(){
+        bgtime = android.text.format.DateFormat.format("yyyy年MM月dd", beginTime).toString();
+        Log.d(TAG, "bgtime: " + bgtime);
+        mBeginTimeButton.setText(bgtime);
+        Log.d(TAG, "beginTimeButton: " + mBeginTimeButton.getText());
+    }
+    private void updateEndDate(){
+        if (endTime.after(beginTime)) {
+            edtime = android.text.format.DateFormat.format("yyyy年MM月dd", endTime).toString();
+            Log.d(TAG, "edtime: " + edtime);
+            mEndTimeButton.setText(edtime);
+            Log.d(TAG, "endTimeButton: " + mEndTimeButton.getText());
+        } else {
+            Toast.makeText(getActivity(),
+                    R.string.time_erro,
+                    Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.message_save, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_edit_message:
+                try {
+                    if (null != title)
+                        keyObj.put(Link.title, title);
+                    if (null != content)
+                        keyObj.put(Link.content, content);
+                    if (null != bgtime)
+                        keyObj.put(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi(bgtime));
+                    if (null != edtime)
+                        keyObj.put(Link.over_time, DateForGeLingWeiZhi.toGeLinWeiZhi(edtime));
+                    keyObj.put(Link.status, state);
+                    if (null != evaluate)
+                        keyObj.put(Link.evaluate, evaluate);
+                    keyObj.put(Link.mem_id, sMission.getMem_id());
+                    keyObj.put(Link.pmsch_id, sMission.getPmsch_id());
+                    keyObj.put(Link.percent, sMission.getPercent());
+                    key = DESCryptor.Encryptor(keyObj.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mParams.put("key", key);
+                Log.d(TAG,"key:" + key);
+
+                mHttpc.post(Link.localhost + "pm_task&act=edit", mParams, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            Toast.makeText(getActivity(),
+                                    response.getString("msg"),
+                                    Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                        Toast.makeText(getActivity(),
+                                R.string.edit_error,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
