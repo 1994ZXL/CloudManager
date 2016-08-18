@@ -67,6 +67,7 @@ public class ProjectManagerListFragment extends Fragment {
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
         mFragment = this;
+
     }
 
     @Override
@@ -74,6 +75,18 @@ public class ProjectManagerListFragment extends Fragment {
         final View view = layoutInflater.inflate(R.layout.pm_manager_list, parent, false);
 
         getActivity().getActionBar().setTitle("项目管理");
+        mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pm_manager_pull_to_refresh);
+        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mPullToRefreshView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mPullToRefreshView.setRefreshing(false);
+                    }
+                }, REFRESH_DELAY);
+            }
+        });
 
         saveInstanceState = getArguments();
         if (null != saveInstanceState) {
@@ -90,7 +103,7 @@ public class ProjectManagerListFragment extends Fragment {
                 if (null != saveInstanceState.getString(Link.header)) {
                     keyObj.put(Link.header, saveInstanceState.getString(Link.header));
                 }
-                keyObj.put("sort", "project_name desc");
+                keyObj.put("sort", "ready_time desc");
                 keyObj.put("page_count", 50);
                 keyObj.put("curl_page", 1);
 
@@ -98,33 +111,9 @@ public class ProjectManagerListFragment extends Fragment {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            mParams.put("key", key);
         }
+        mParams.put("key", key);
         Log.d(TAG, "key: " + key);
-        /*saveInstanceState = getArguments();
-        if (null == saveInstanceState) {
-           searchKey = -1;
-        } else {
-           searchKey = getArguments().getInt(SEARCH_KEY);
-        }
-
-        if (-1 == searchKey) {
-            project = ProjectLab.newInstance(mFragment.getActivity()).getmProjects();
-        } else {
-          project.add(ProjectLab.newInstance(mFragment.getActivity()).getmProjects().get(searchKey));
-        }*/
-        mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pm_manager_pull_to_refresh);
-        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullToRefreshView.setRefreshing(false);
-                    }
-                }, REFRESH_DELAY);
-            }
-        });
 
         mHttpc.post(Link.localhost + "manage_pm&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override

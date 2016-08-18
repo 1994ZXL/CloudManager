@@ -87,8 +87,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    android:orientation="horizontal">
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
@@ -104,7 +103,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
@@ -178,9 +178,11 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
                     <TextView
                         style="@style/font"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:text="@string/project_mission_state"/>
                     <Spinner
