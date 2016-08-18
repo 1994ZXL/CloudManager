@@ -19,7 +19,6 @@ public class Link {
     public static final String start_time = "start_time";//开始时间
     public static final String end_time = "end_time";//结束时间
     public static final String leave_reson = "leave_reason"; //请假原因
-
     //leave_list
     public static final String leave_list = "leave_list&act=";
 
