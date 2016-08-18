@@ -10,6 +10,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.Check;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
+import com.example.zxl.cloudmanager.model.Project;
 
 /**
  * Created by ZXL on 2016/7/21.
@@ -28,12 +31,16 @@ public class ProjectManagerDetailFragment extends Fragment {
     private TextView mCustomerContactor;
 
     private ArrayAdapter<String> adapter;
-    private static final String[] stateList={"启动", "进行中","维护期","已结束"};
+    private static final String[] stateList={"取消", "准备","开发","维护","结束"};
 
     private Fragment mFragment;
 
-
-
+    private static Project mProject = new Project();
+    public static ProjectManagerDetailFragment newInstance(Object data) {
+        mProject = (Project) data;
+        ProjectManagerDetailFragment fragment = new ProjectManagerDetailFragment();
+        return fragment;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,9 +53,11 @@ public class ProjectManagerDetailFragment extends Fragment {
 
         init(view);
 
+
         adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, stateList);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mState.setAdapter(adapter);
+        control();
 
         return view;
     }
@@ -65,4 +74,26 @@ public class ProjectManagerDetailFragment extends Fragment {
         mCustomerContactor = (TextView) view.findViewById(R.id.pm_customer_contacter);
     }
 
+    private void control(){
+        mProjectName.setText(mProject.getProject_name());
+        mManager.setText(mProject.getHeader());
+        mCustomerContactor.setText(mProject.getContact_name());
+        mContent.setText(mProject.getContent());
+        mCustomerCompany.setText(mProject.getPart_a());
+        mCustomerPhone.setText(mProject.getContact_mob());
+        //mState.setText(mCheck.getMaster_name());
+
+        if (mProject.getReady_time() != 0) {
+            mBeginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mProject.getReady_time()+28800));
+        } else {
+            mBeginTime.setText("——");
+        }
+
+        if (mProject.getFinished_time() != 0){
+            mEndTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mProject.getFinished_time()+28800));
+        } else {
+            mEndTime.setText("——");
+        }
+
+    }
 }

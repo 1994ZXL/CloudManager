@@ -136,7 +136,7 @@ public class ProjectManagerListFragment extends Fragment {
                         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                             @Override
                             public void onItemClick(View view, Object data) {
-                                Fragment fragment = new ProjectManagerDetailFragment();
+                                Fragment fragment = ProjectManagerDetailFragment.newInstance(data);
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                 if (!fragment.isAdded()) {
                                     transaction.addToBackStack(null);

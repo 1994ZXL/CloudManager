@@ -20,11 +20,11 @@ public class Project {
     private int finished_time; //结束时间
 
     private static final String JSON_PROJECT_NAME = "project_name";
-    private static final String JSON_HEDER = "header";
-    private static final String JSON_CONTENT = "content";
-    private static final String JSON_PART_A = "part_a";
-    private static final String JSON_CONTACT_NAME = "contact_name";
-    private static final String JSON_CONTACT_MOB = "contact_mob";
+    private static final String JSON_HEDER = "goon_technical";
+    private static final String JSON_CONTENT = "project_summary";
+    private static final String JSON_PART_A = "belong_unit";
+    private static final String JSON_CONTACT_NAME = "custom_name";
+    private static final String JSON_CONTACT_MOB = "custom_phone";
     private static final String JSON_PROJECT_CYCLE = "project_cycle";
     private static final String JSON_STATUS = "status";
     private static final String JSON_PROJECT_STATE = "project_state";

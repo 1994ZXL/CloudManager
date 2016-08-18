@@ -78,7 +78,7 @@
     <string name="overtime_status">加班状态</string>
 
     <!-- 项目主管-->
-    <string name="project_manager">项目系统</string>
+    <string name="project_manager">技术负责人</string>
     <string name="project_manage">项目管理</string>
     <string name="project_memo">通讯录</string>
     <string name="project_member_manage">成员管理</string>
