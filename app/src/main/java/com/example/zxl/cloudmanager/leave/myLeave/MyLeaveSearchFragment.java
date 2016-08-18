@@ -15,11 +15,13 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.Edit;
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.leave.checkManagerLeave.ManagerLeaveActivity;
 import com.example.zxl.cloudmanager.leave.leader.LeaderLeaveSearchActivity;
 import com.example.zxl.cloudmanager.leave.leader.LeaveListActivity;
 import com.example.zxl.cloudmanager.model.DESCryptor;
@@ -47,6 +49,7 @@ public class MyLeaveSearchFragment extends Fragment {
     private Button mLeaveEndBtn;
     private Spinner mLeaveKindSpinner;
     private Spinner mLeaveStateSpinner;
+    private LinearLayout mNameLinearLayout;
 
     private int mState;
     private int mType;
@@ -93,11 +96,13 @@ public class MyLeaveSearchFragment extends Fragment {
 
         init(v);
 
-        if (mFragment.getActivity().getClass() != LeaderLeaveSearchActivity.class) {
-            mName.setVisibility(View.GONE);
+        if (mFragment.getActivity().getClass() == MyLeaveSearchActivity.class) {
+            mNameLinearLayout.setVisibility(View.GONE);
             url = Link.my_leave + Link.get_List;
-        } else {
+        } else if (mFragment.getActivity().getClass() == LeaderLeaveSearchActivity.class) {
             url = Link.leave_list + Link.get_List;
+        } else if (mFragment.getActivity().getClass() == ManagerLeaveActivity.class) {
+            url = Link.manage_leave + Link.get_List;
         }
 
         mName.addTextChangedListener(new TextWatcher() {
@@ -238,6 +243,7 @@ public class MyLeaveSearchFragment extends Fragment {
     }
 
     private void init(View v){
+        mNameLinearLayout = (LinearLayout) v.findViewById(R.id.leave_search_nameLinearLayout);
         mName = (EditText) v.findViewById(R.id.my_leave_name);
         mLeaveBeginBtn = (Button) v.findViewById(R.id.my_leave_begin_time_button);
         mLeaveEndBtn = (Button) v.findViewById(R.id.my_leave_end_time_button);

@@ -4,15 +4,14 @@ package com.example.zxl.cloudmanager.model;
  * Created by ZXL on 2016/8/3.
  */
 public class Link {
-    public static final String localhost = "http://192.168.3.119:8099/yunmgr_v1.0/api/uc.php?app=";
-//    public static final String localhost = "http://192.168.1.117/yunmgr_v1.0/api/uc.php?app=";
+//    public static final String localhost = "http://192.168.3.119:8099/yunmgr_v1.0/api/uc.php?app=";
+    public static final String localhost = "http://192.168.1.117/yunmgr_v1.0/api/uc.php?app=";
     public static final String API = "http://localhost/yunmgr_v1.0/api/uc.php?app=";
-
-    public static final String manage_Leave = "manage_leave&act=";
 
     public static final String get_List = "get_list";
 
     //manage_leave
+    public static final String manage_leave = "manage_leave&act=";
     public static final String mem_name = "mem_name";//员工姓名
     public static final String leave_type = "leave_type";//请假类型
     public static final String status = "status";//状态

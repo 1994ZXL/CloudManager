@@ -115,7 +115,7 @@ public class ManagerLeaveListFragment extends Fragment {
             Log.d(TAG, "key: " + key);
         }
 
-        String url = Link.localhost + Link.manage_Leave + Link.get_List;
+        String url = Link.localhost + Link.manage_leave + Link.get_List;
 
         mHttpc.post(Link.API + "manage_leave&act=get_list" , mParams, new JsonHttpResponseHandler() {
             @Override
