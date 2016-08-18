@@ -167,6 +167,7 @@
     <string name="mission_end_time">任务结束时间</string>
     <string name="mission_progress">任务完成进度</string>
     <string name="mission_state">任务状态</string>
+    <string name="evaluate">评价</string>
 
     <!-- 我的用例-->
     <string name="usecase_number">用例编号：</string>

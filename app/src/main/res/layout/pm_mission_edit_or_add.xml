@@ -33,30 +33,12 @@
                         style="@style/font"
                         android:layout_width="match_parent"
                         android:layout_weight="1"
-                        android:text="@string/project_name_edittext"/>
-                    <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:gravity="center"
-                        android:id="@+id/pm_mission_name"/>
-                </LinearLayout>
-                <!-- 任务优先级-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-                    <TextView
-                        style="@style/font"
+                        android:text="@string/mission_name"/>
+                    <EditText
+                        style="@style/editText"
                         android:layout_width="match_parent"
                         android:layout_weight="1"
-                        android:text="@string/mission_level" />
-                    <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:id="@+id/pm_mission_level"/>
+                        android:id="@+id/pm_mission_name"/>
                 </LinearLayout>
                 <!-- 任务内容-->
                 <LinearLayout
@@ -66,12 +48,13 @@
                     android:layout_marginTop="40dp">
                     <TextView
                         style="@style/font"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:text="@string/mission_content" />
-                    <TextView
-                        style="@style/font"
+                    <EditText
+                        style="@style/editText"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
-                        android:gravity="center"
                         android:id="@+id/pm_mission_content"/>
                 </LinearLayout>
                 <!-- 任务内容说明-->
@@ -82,10 +65,12 @@
                     android:layout_marginTop="40dp">
                     <TextView
                         style="@style/font"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:text="@string/mission_content_details" />
-                    <TextView
-                        style="@style/font"
+                    <EditText
+                        style="@style/editText"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:id="@+id/pm_mission_content_details"/>
@@ -109,10 +94,12 @@
                     android:orientation="horizontal">
                     <TextView
                         style="@style/font"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:text="@string/mission_begin_time"/>
-                    <TextView
-                        style="@style/font"
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:id="@+id/pm_mission_begin_time" />
@@ -125,10 +112,12 @@
                     android:layout_marginTop="40dp">
                     <TextView
                         style="@style/font"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:text="@string/mission_end_time"/>
-                    <TextView
-                        style="@style/font"
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:id="@+id/pm_mission_end_time"/>
@@ -161,21 +150,22 @@
                 android:orientation="vertical"
                 android:background="@color/white">
 
-                <!-- 安排人员-->
+                <!-- 评价-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    android:orientation="horizontal">
                     <TextView
                         style="@style/font"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
-                        android:text="@string/plan_manager_name_edittext"/>
-                    <TextView
-                        style="@style/font"
+                        android:text="@string/evaluate"/>
+                    <EditText
+                        style="@style/editText"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:id="@+id/pm_mission_woker"/>
+                        android:id="@+id/pm_mission_evaluate"/>
                 </LinearLayout>
 
                 <!-- 完成状态-->
@@ -192,7 +182,7 @@
                     <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:id="@+id/pm_mission_state"/>
                 </LinearLayout>
 

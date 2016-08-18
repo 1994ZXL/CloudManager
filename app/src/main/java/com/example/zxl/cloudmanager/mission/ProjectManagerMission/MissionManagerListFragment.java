@@ -18,14 +18,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
+import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Mission;
 import com.example.zxl.cloudmanager.model.MissionLab;
 import com.example.zxl.cloudmanager.mission.myMission.MyMissionSearchFragment;
+import com.example.zxl.cloudmanager.model.User;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -62,6 +65,8 @@ public class MissionManagerListFragment extends Fragment {
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
+    private JSONObject keyObj = new JSONObject();
+    private String key = "";
 
     private Button mSearchBtn;
 
@@ -111,6 +116,28 @@ public class MissionManagerListFragment extends Fragment {
             }
         });
         saveInstanceState = getArguments();
+        if (null != saveInstanceState) {
+            try {
+                keyObj.put(Link.pmtask_id, saveInstanceState.getString(Link.pmtask_id));
+                keyObj.put(Link.mem_id, saveInstanceState.getString(Link.mem_id));
+                if (-1 != saveInstanceState.getInt(Link.start_time))
+                    keyObj.put(Link.start_time, saveInstanceState.getInt(Link.start_time));
+                if (-1 != saveInstanceState.getInt(Link.over_time))
+                    keyObj.put(Link.over_time, saveInstanceState.getInt(Link.over_time));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            keyObj.put("sort", "start_time desc");
+            keyObj.put("page_count", 50);
+            keyObj.put("curl_page", 1);
+            key = DESCryptor.Encryptor(keyObj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mParams.put("key", key);
+        Log.d(TAG, "key: " + key);
 
         mHttpc.post(Link.localhost + "pm_task&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
@@ -155,6 +182,13 @@ public class MissionManagerListFragment extends Fragment {
                         }
                     } catch (JSONException e) {
                         Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                        try {
+                            Toast.makeText(getActivity(),
+                                    rjo.getString("msg"),
+                                    Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
                     }
                 } else {
 
