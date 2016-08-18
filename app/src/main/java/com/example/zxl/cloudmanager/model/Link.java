@@ -78,15 +78,17 @@ public class Link {
     public static final String E_att_time = "E_att_time"; //下班签到时间
     public static final String E_time = "E_time"; //规定下班时间
     public static final String comp_id = "comp_id"; //公司id
-
     //punch_list
     public static final String punch_list = "punch_list&act=get_list";
     public static final String att_date_from = "att_date_from"; //考勤日期（早）
     public static final String att_date_to = "att_date_to"; //考勤日期（晚）
-
     //pm_task
     public static final String pmtask_id = "pmtask_id"; //项目任务ID
     public static final String over_time = "over_time"; //结束时间
+    public static final String title = "title";
+    public static final String evaluate = "evaluate";
+    public static final String pmsch_id = "pmsch_id";
+    public static final String percent = "percent";
 
     //manage_pm
     public static final String project_name = "project_name"; //项目名称
