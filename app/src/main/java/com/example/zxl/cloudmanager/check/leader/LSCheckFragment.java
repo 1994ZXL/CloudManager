@@ -84,7 +84,7 @@ public class LSCheckFragment extends Fragment {
                 Fragment fragment = null;
                 if (null == fragment) {
                     FragmentManager fm = getFragmentManager();
-                    fragment = new SearchCheckFragment();
+                    fragment = new LeaderCheckSearchFragment();
                     fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
                 }
                 return true;

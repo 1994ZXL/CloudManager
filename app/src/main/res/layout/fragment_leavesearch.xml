@@ -11,12 +11,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <LinearLayout
                 style="@style/linearLayoutStyle"
                 android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/name"
+                        android:textSize="20dp"
+                        android:layout_weight="2" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        style="@style/editText"
+                        android:id="@+id/my_leave_name"
+                        android:layout_weight="1"/>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

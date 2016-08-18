@@ -20,6 +20,12 @@ public class Link {
     public static final String end_time = "end_time";//结束时间
     public static final String leave_reson = "leave_reason"; //请假原因
 
+    //leave_list
+    public static final String leave_list = "leave_list&act=";
+
+    //my_leave
+    public static final String my_leave = "my_leave&act=";
+
     //manage_trip
     public static final String start_time_s = "start_time_s";//开始时间(小)
     public static final String start_time_e = "start_time_e";//开始时间(大)

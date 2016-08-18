@@ -51,9 +51,7 @@ public class PMBugFragment extends Fragment {
     private Fragment mFragment;
     private Button mSearchBtn;
 
-    private static final String SEARCH_KEY = "search_key";
     private static final String TAG = "PMBugFragment";
-    private int searchKey;
 
     private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;

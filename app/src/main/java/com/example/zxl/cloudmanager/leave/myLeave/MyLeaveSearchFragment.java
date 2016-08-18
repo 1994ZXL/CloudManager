@@ -5,6 +5,8 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +14,13 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.zxl.cloudmanager.Edit;
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.leave.leader.LeaderLeaveSearchActivity;
 import com.example.zxl.cloudmanager.leave.leader.LeaveListActivity;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
@@ -37,6 +42,7 @@ import cz.msebera.android.httpclient.Header;
 public class MyLeaveSearchFragment extends Fragment {
     private static final String TAG = "MyLeaveSearchFragment";
 
+    private EditText mName;
     private Button mLeaveBeginBtn;
     private Button mLeaveEndBtn;
     private Spinner mLeaveKindSpinner;
@@ -65,6 +71,10 @@ public class MyLeaveSearchFragment extends Fragment {
     private Date endTime;
     private String edtime;
 
+    private String name;
+
+    private String url;
+
     private Fragment mFragment;
 
     public MyLeaveSearchFragment() {
@@ -77,12 +87,36 @@ public class MyLeaveSearchFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_leavesearch, container, false);
         getActivity().getActionBar().setTitle("请假查询");
 
         init(v);
+
+        if (mFragment.getActivity().getClass() != LeaderLeaveSearchActivity.class) {
+            mName.setVisibility(View.GONE);
+            url = Link.my_leave + Link.get_List;
+        } else {
+            url = Link.leave_list + Link.get_List;
+        }
+
+        mName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                name = charSequence.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
         mLeaveBeginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -160,6 +194,8 @@ public class MyLeaveSearchFragment extends Fragment {
 
     private void Search() {
         try {
+            if (null != name)
+                keyObj.put(Link.mem_name, name);
             keyObj.put(Link.mem_id, User.newInstance().getUser_id());
             keyObj.put(Link.page_count, 20);
             keyObj.put(Link.curl_page, 1);
@@ -169,7 +205,7 @@ public class MyLeaveSearchFragment extends Fragment {
         }
         mParams.put("key", key);
         Log.d(TAG,"key:" + key);
-        mHttpc.post(Link.localhost + "my_leave&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + url, mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 if (statusCode == 200) {
@@ -202,6 +238,7 @@ public class MyLeaveSearchFragment extends Fragment {
     }
 
     private void init(View v){
+        mName = (EditText) v.findViewById(R.id.my_leave_name);
         mLeaveBeginBtn = (Button) v.findViewById(R.id.my_leave_begin_time_button);
         mLeaveEndBtn = (Button) v.findViewById(R.id.my_leave_end_time_button);
         mLeaveKindSpinner = (Spinner) v.findViewById(R.id.my_leave_kind_sprinner);

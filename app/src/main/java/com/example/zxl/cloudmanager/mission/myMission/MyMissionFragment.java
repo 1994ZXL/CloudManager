@@ -122,7 +122,7 @@ public class MyMissionFragment extends Fragment {
                             for (int i = 0; i < array.length(); i++) {
                                 missions.add(new Mission(array.getJSONObject(i)));
                             }
-                            Log.d(TAG, "mPosts: " + missions);
+                            Log.d(TAG, "missions: " + missions);
                             mRecyclerView = (RecyclerView)view.findViewById(R.id.mission_recyclerview);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());

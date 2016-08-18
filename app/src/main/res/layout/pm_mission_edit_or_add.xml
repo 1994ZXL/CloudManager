@@ -57,24 +57,6 @@
                         android:layout_weight="1"
                         android:id="@+id/pm_mission_content"/>
                 </LinearLayout>
-                <!-- 任务内容说明-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-                    <TextView
-                        style="@style/font"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:text="@string/mission_content_details" />
-                    <EditText
-                        style="@style/editText"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/pm_mission_content_details"/>
-                </LinearLayout>
 
             </LinearLayout>
 
@@ -187,10 +169,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-            <Button
-                android:id="@+id/pm_mission_submit_button"
-                style="@style/SearchButton"
-                android:text="@string/submit_button" />
         </LinearLayout>
 
     </ScrollView>

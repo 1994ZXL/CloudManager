@@ -147,7 +147,7 @@
     <string name="leave_record_query">请假查询</string>
     <string name="apply_time">申请时间</string>
     <string name="apply_leave">申请请假</string>
-    <string name="leave_time">请假时间：</string>
+    <string name="leave_time">请假时间</string>
     <string name="leave_type">请假类型</string>
     <string name="leave_begin_time">请假开始时间</string>
     <string name="leave_end_time">请假结束时间</string>
@@ -168,6 +168,7 @@
     <string name="mission_progress">任务完成进度</string>
     <string name="mission_state">任务状态</string>
     <string name="evaluate">评价</string>
+    <string name="edit_error">修改失败</string>
 
     <!-- 我的用例-->
     <string name="usecase_number">用例编号：</string>
