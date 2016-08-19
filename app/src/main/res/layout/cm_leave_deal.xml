@@ -167,10 +167,6 @@
                     android:id="@+id/cm_leave_deal_state"/>
             </LinearLayout>
 
-            <Button
-                android:id="@+id/cm_leave_submit_button"
-                style="@style/SearchButton"
-                android:text="@string/submit_button" />
         </LinearLayout>
     </ScrollView>
 

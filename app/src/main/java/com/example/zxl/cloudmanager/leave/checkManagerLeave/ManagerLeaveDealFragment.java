@@ -2,19 +2,36 @@ package com.example.zxl.cloudmanager.leave.checkManagerLeave;
 
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Leave;
+import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.post.myPost.MyPostFragment;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ZXL on 2016/7/11.
@@ -25,13 +42,18 @@ public class ManagerLeaveDealFragment extends Fragment {
     private TextView leaveSuggestion;
     private TextView leaveDealTime;
     private Spinner leaveState;
-    private Button mSubmitBtn;
 
     private static final String EXTRA_OBJECT = "leave";
-    private static final String[] leaveStateList={"批准", "不批准"};
+    private String[] leaveStateList; //状态:1:待批准,2:已批准,3:拒绝
     private ArrayAdapter<String> spinnerAdapter;
+    private int status;
 
     private static Leave mLeave = new Leave();
+
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams = new RequestParams();
+    private JSONObject keyObj = new JSONObject();
+    private String key = "";
 
     private Fragment mFragment;
     private static final String TAG = "MLeaveDeallFragment";
@@ -54,10 +76,8 @@ public class ManagerLeaveDealFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.cm_leave_deal, parent, false);
         Log.e(EXTRA_OBJECT,"CM_leave : " + "初始化View");
+
         init(v);
-        spinnerAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, leaveStateList);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        leaveState.setAdapter(spinnerAdapter);
         control();
 
         return v;
@@ -74,8 +94,6 @@ public class ManagerLeaveDealFragment extends Fragment {
         leaveSuggestion = (TextView) view.findViewById(R.id.cm_leave_deal_suggestion);
         leaveState = (Spinner) view.findViewById(R.id.cm_leave_deal_state);
         leaveDealTime = (TextView)view.findViewById(R.id.cm_leave_deal_time);
-
-        mSubmitBtn = (Button) view.findViewById(R.id.cm_leave_submit_button);
     }
 
     private void control() {
@@ -93,5 +111,80 @@ public class ManagerLeaveDealFragment extends Fragment {
             Log.d(TAG, "Handle_time2: " + mLeave.getHandle_time());
             leaveDealTime.setText("——");
         }
+
+        //状态:1:待批准,2:已批准,3:拒绝
+        if (mLeave.getStatus() == "待批准")
+            leaveStateList = new String[]{"待批准", "已批准", "拒绝"};
+        else if (mLeave.getStatus() == "已批准")
+            leaveStateList = new String[]{"已批准", "待批准", "拒绝"};
+        else if (mLeave.getStatus() == "拒绝")
+            leaveStateList = new String[]{"拒绝", "待批准", "已批准"};
+        spinnerAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, leaveStateList);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        leaveState.setAdapter(spinnerAdapter);
+        leaveState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (leaveStateList[i] == "待批准")
+                    status = 1;
+                else if (leaveStateList[i] == "已批准")
+                    status = 2;
+                else if (leaveStateList[i] == "拒绝")
+                    status = 3;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.message_save, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_edit_message:
+                try {
+                    keyObj.put(Link.status, status);
+                    key = DESCryptor.Encryptor(keyObj.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mParams.put("key", key);
+                Log.d(TAG,"key:" + key);
+                mHttpc.post(Link.localhost + Link.manage_leave + Link.edit, mParams, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            Toast.makeText(getActivity(),
+                                    response.getString("msg"),
+                                    Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                        }
+                    }
+
+                });
+                Fragment fragment = new ManagerLeaveListFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.replace(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

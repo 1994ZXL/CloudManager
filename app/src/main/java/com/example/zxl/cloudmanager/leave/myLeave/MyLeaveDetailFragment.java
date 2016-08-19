@@ -44,7 +44,7 @@ public class MyLeaveDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.leave_deal, parent, false);
-        getActivity().getActionBar().setTitle("请假处理");
+        getActivity().getActionBar().setTitle("我的请假");
 
         init(v);
         control();

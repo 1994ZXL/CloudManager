@@ -9,6 +9,7 @@ public class Link {
     public static final String API = "http://localhost/yunmgr_v1.0/api/uc.php?app=";
 
     public static final String get_List = "get_list";
+    public static final String edit = "edit";
 
     //manage_leave
     public static final String manage_leave = "manage_leave&act=";

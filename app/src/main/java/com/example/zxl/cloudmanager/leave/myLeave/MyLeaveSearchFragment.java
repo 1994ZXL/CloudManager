@@ -2,6 +2,7 @@ package com.example.zxl.cloudmanager.leave.myLeave;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -22,6 +23,7 @@ import android.widget.Toast;
 import com.example.zxl.cloudmanager.Edit;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.leave.checkManagerLeave.ManagerLeaveActivity;
+import com.example.zxl.cloudmanager.leave.checkManagerLeave.ManagerLeaveListFragment;
 import com.example.zxl.cloudmanager.leave.leader.LeaderLeaveSearchActivity;
 import com.example.zxl.cloudmanager.leave.leader.LeaveListActivity;
 import com.example.zxl.cloudmanager.model.DESCryptor;
@@ -80,6 +82,10 @@ public class MyLeaveSearchFragment extends Fragment {
 
     private Fragment mFragment;
 
+    private Activity mActivity;
+
+    private Fragment mAimFragment;
+
     public MyLeaveSearchFragment() {
     }
 
@@ -99,10 +105,13 @@ public class MyLeaveSearchFragment extends Fragment {
         if (mFragment.getActivity().getClass() == MyLeaveSearchActivity.class) {
             mNameLinearLayout.setVisibility(View.GONE);
             url = Link.my_leave + Link.get_List;
+            mAimFragment = new MyLeaveQueryFragment();
         } else if (mFragment.getActivity().getClass() == LeaderLeaveSearchActivity.class) {
             url = Link.leave_list + Link.get_List;
+            mAimFragment = new ManagerLeaveListFragment();
         } else if (mFragment.getActivity().getClass() == ManagerLeaveActivity.class) {
             url = Link.manage_leave + Link.get_List;
+            mAimFragment = new ManagerLeaveListFragment();
         }
 
         mName.addTextChangedListener(new TextWatcher() {
@@ -198,48 +207,34 @@ public class MyLeaveSearchFragment extends Fragment {
     }
 
     private void Search() {
-        try {
-            if (null != name)
-                keyObj.put(Link.mem_name, name);
-            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
-            keyObj.put(Link.page_count, 20);
-            keyObj.put(Link.curl_page, 1);
-            key = DESCryptor.Encryptor(keyObj.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
+        Bundle bundle = new Bundle();
+
+        if (null != name)
+            bundle.putString(Link.mem_name, name);
+
+        if (null != bgtime)
+            bundle.putInt(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi(bgtime));
+        else bundle.putInt(Link.start_time, -1);
+
+        if (null != edtime)
+            bundle.putInt(Link.end_time, DateForGeLingWeiZhi.toGeLinWeiZhi(edtime));
+        else bundle.putInt(Link.end_time, -1);
+
+        bundle.putInt(Link.leave_type, mType);
+        bundle.putInt(Link.status, mState);
+
+        mAimFragment.setArguments(bundle);
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        if (!mAimFragment.isAdded()) {
+            transaction.addToBackStack(null);
+            transaction.hide(mFragment);
+            transaction.add(R.id.blankActivity, mAimFragment);
+            transaction.commit();
+        } else {
+            transaction.hide(mFragment);
+            transaction.show(mAimFragment);
+            transaction.commit();
         }
-        mParams.put("key", key);
-        Log.d(TAG,"key:" + key);
-        mHttpc.post(Link.localhost + url, mParams, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                if (statusCode == 200) {
-                    try {
-                        if (response.getBoolean("result")) {
-                            Intent intent = new Intent(mFragment.getActivity(),LeaveListActivity.class);
-
-                            if (null != bgtime) {
-                                intent.putExtra(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi(bgtime));
-                            } else {
-                                intent.putExtra(Link.start_time, -1);
-                            }
-                            if (null != edtime) {
-                                intent.putExtra(Link.end_time, DateForGeLingWeiZhi.toGeLinWeiZhi(edtime));
-                            } else {
-                                intent.putExtra(Link.end_time, -1);
-                            }
-                            intent.putExtra(Link.leave_type, mType);
-                            intent.putExtra(Link.status, mState);
-
-                            startActivity(intent);
-                        }
-                    } catch (JSONException e) {
-                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
-                    }
-                }
-            }
-
-        });
     }
 
     private void init(View v){

@@ -16,6 +16,9 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
+import com.example.zxl.cloudmanager.leave.leader.LeaderLeaveSearchActivity;
+import com.example.zxl.cloudmanager.leave.leader.LeaveListActivity;
+import com.example.zxl.cloudmanager.leave.myLeave.MyLeaveDetailFragment;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Leave;
@@ -36,6 +39,7 @@ import cz.msebera.android.httpclient.Header;
 /**
  * Created by ZXL on 2016/7/15.
  */
+//考勤主管 领导 请假查询列表界面
 public class ManagerLeaveListFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
@@ -51,8 +55,10 @@ public class ManagerLeaveListFragment extends Fragment {
 
     private static final String TAG = "MLeaveListFragment";
 
+    private String url = new String();
 
     private Fragment mFragment;
+    private Fragment mAimFragment;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -91,33 +97,41 @@ public class ManagerLeaveListFragment extends Fragment {
             Log.d(TAG, "没有选择条件");
         } else {
             try {
-                if (-1 != saveInstanceState.getInt(Link.start_time)) {
-                    keyObj.put(Link.start_time, saveInstanceState.getInt(Link.start_time));
-                }
-                if (-1 != saveInstanceState.getInt(Link.end_time)) {
-                    keyObj.put(Link.end_time, saveInstanceState.getInt(Link.end_time));
-                }
-                if (-1 != saveInstanceState.getInt(Link.leave_type)) {
-                    keyObj.put(Link.leave_type, saveInstanceState.getInt(Link.leave_type));
-                }
-                if (-1 != saveInstanceState.getInt(Link.status)) {
-                    keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
-                }
-                keyObj.put("sort", "start_time desc");
-                keyObj.put("page_count", 15);
-                keyObj.put("curl_page", 1);
+                if (null != saveInstanceState.getString(Link.mem_name))
+                    keyObj.put(Link.mem_name, saveInstanceState.getString(Link.mem_name));
 
-                key = DESCryptor.Encryptor(keyObj.toString());
+                if (-1 != saveInstanceState.getInt(Link.start_time))
+                    keyObj.put(Link.start_time, saveInstanceState.getInt(Link.start_time));
+                if (-1 != saveInstanceState.getInt(Link.end_time))
+                    keyObj.put(Link.end_time, saveInstanceState.getInt(Link.end_time));
+
+                keyObj.put(Link.leave_type, saveInstanceState.getInt(Link.leave_type));
+                keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            mParams.put("key", key);
-            Log.d(TAG, "key: " + key);
         }
 
-        String url = Link.localhost + Link.manage_leave + Link.get_List;
+        try {
+            keyObj.put("sort", "start_time desc");
+            keyObj.put("page_count", 50);
+            keyObj.put("curl_page", 1);
 
-        mHttpc.post(Link.API + "manage_leave&act=get_list" , mParams, new JsonHttpResponseHandler() {
+            key = DESCryptor.Encryptor(keyObj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mParams.put("key", key);
+        Log.d(TAG, "key: " + key);
+
+        if (mFragment.getActivity().getClass() == LeaderLeaveSearchActivity.class) {
+            url = Link.localhost + Link.leave_list + Link.get_List;
+        } else if (mFragment.getActivity().getClass() == ManagerLeaveActivity.class) {
+            url = Link.localhost + Link.manage_leave + Link.get_List;
+        }
+        Log.d(TAG, "url: " + url);
+        mHttpc.post(url , mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 if (statusCode == 200) {
@@ -139,16 +153,20 @@ public class ManagerLeaveListFragment extends Fragment {
                             myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
-                                    Fragment fragment = ManagerLeaveDealFragment.newInstance(data);
+                                    if (mFragment.getActivity().getClass() == LeaderLeaveSearchActivity.class) {
+                                        mAimFragment = MyLeaveDetailFragment.newInstance(data);
+                                    } else if (mFragment.getActivity().getClass() == ManagerLeaveActivity.class) {
+                                        mAimFragment = ManagerLeaveDealFragment.newInstance(data);
+                                    }
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                                    if (!fragment.isAdded()) {
+                                    if (!mAimFragment.isAdded()) {
                                         transaction.addToBackStack(null);
                                         transaction.hide(mFragment);
-                                        transaction.add(R.id.blankActivity, fragment);
+                                        transaction.add(R.id.blankActivity, mAimFragment);
                                         transaction.commit();
                                     } else {
                                         transaction.hide(mFragment);
-                                        transaction.show(fragment);
+                                        transaction.show(mAimFragment);
                                         transaction.commit();
                                     }
                                 }

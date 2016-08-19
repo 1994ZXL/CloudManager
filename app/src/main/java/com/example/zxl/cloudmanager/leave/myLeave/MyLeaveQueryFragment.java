@@ -95,20 +95,18 @@ public class MyLeaveQueryFragment extends Fragment {
             }
         });
 
-        Intent intent = mFragment.getActivity().getIntent();
-        if (null != intent) {
+        saveInstanceState = getArguments();
+        if (null != saveInstanceState) {
             try {
 
-                keyObj.put(Link.leave_type, intent.getIntExtra(Link.leave_type, 0));
+                keyObj.put(Link.leave_type, saveInstanceState.getInt(Link.leave_type));
 
-                keyObj.put(Link.status, intent.getIntExtra(Link.status, 0));
+                keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
 
-                if (-1 != intent.getIntExtra(Link.start_time, 0)) {
-                    keyObj.put(Link.start_time, intent.getIntExtra(Link.start_time, 0));
-                }
-                if (-1 != intent.getIntExtra(Link.end_time, -2)) {
-                    keyObj.put(Link.end_time, intent.getIntExtra(Link.end_time, 0));
-                }
+                if (-1 != saveInstanceState.getInt(Link.start_time))
+                    keyObj.put(Link.start_time, saveInstanceState.getInt(Link.start_time));
+                if (-1 != saveInstanceState.getInt(Link.end_time))
+                    keyObj.put(Link.end_time, saveInstanceState.getInt(Link.end_time));
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -149,9 +147,9 @@ public class MyLeaveQueryFragment extends Fragment {
                                     Fragment fragment = MyLeaveDetailFragment.newInstance(data);
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     if (!fragment.isAdded()) {
-                                        transaction.addToBackStack(null);
+//                                        transaction.addToBackStack(null);
                                         transaction.hide(mFragment);
-                                        transaction.add(R.id.blankActivity, fragment);
+                                        transaction.replace(R.id.blankActivity, fragment);
                                         transaction.commit();
                                     } else {
                                         transaction.hide(mFragment);
