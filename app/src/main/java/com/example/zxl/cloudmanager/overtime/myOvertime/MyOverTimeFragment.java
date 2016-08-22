@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.example.zxl.cloudmanager.R;
@@ -59,6 +58,8 @@ public class MyOverTimeFragment extends Fragment {
     private RequestParams mParams = new RequestParams();
     private JSONObject keyObj = new JSONObject();
     private String key = "";
+
+    private String url;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -114,12 +115,15 @@ public class MyOverTimeFragment extends Fragment {
             }
         }
         try {
-//            if (null == saveInstanceState) {
-//                keyObj.put(Link.mem_id, User.newInstance().getUser_id());
-//                url = Link.my_punch;
-//            } else {
-//                url = Link.punch_list;
-//            }
+            if (null == saveInstanceState) {
+                keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+                url = Link.my_trip + Link.get_list;
+            } else {
+                url = Link.manage_trip + Link.get_list;
+            }
+            keyObj.put("sort", "start_time desc");
+            keyObj.put("page_count", 50);
+            keyObj.put("curl_page", 1);
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,7 +131,7 @@ public class MyOverTimeFragment extends Fragment {
         mParams.put("key", key);
         Log.d(TAG, "key: " + key);
 
-        mHttpc.post(Link.localhost + "my_work&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + url, mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 if (statusCode == 200) {
@@ -206,8 +210,9 @@ public class MyOverTimeFragment extends Fragment {
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             OverTime overTime = overTimes.get(i);
 
+            viewHolder.mName.setText(overTime.getMem_name());
             viewHolder.mOvertimeName.setText(overTime.getMem_id());
-            viewHolder.mOvertimeProject.setText(overTime.getWork_name());
+            viewHolder.mOvertimeReason.setText(overTime.getWork_reason());
             viewHolder.mBeginTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(overTime.getStart_time()));
             viewHolder.mEndTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(overTime.getEnd_time()));
 
@@ -230,14 +235,16 @@ public class MyOverTimeFragment extends Fragment {
             public TextView mOvertimeName;
             public TextView mBeginTime;
             public TextView mEndTime;
-            public TextView mOvertimeProject;
+            public TextView mOvertimeReason;
+            public TextView mName;
 
             public ViewHolder(View v) {
                 super(v);
+                mName = (TextView) v.findViewById(R.id.main_fragment_overtime_name);
                 mOvertimeName = (TextView)v.findViewById(R.id.main_fragment_overtime_name);
                 mBeginTime = (TextView) v.findViewById(R.id.overtime_card_item_begin_time);
                 mEndTime = (TextView)v.findViewById(R.id.overtime_card_item_end_time);
-                mOvertimeProject = (TextView) v.findViewById(R.id.overtime_card_item_overtime_project);
+                mOvertimeReason = (TextView) v.findViewById(R.id.overtime_card_item_overtime_reason);
             }
         }
 

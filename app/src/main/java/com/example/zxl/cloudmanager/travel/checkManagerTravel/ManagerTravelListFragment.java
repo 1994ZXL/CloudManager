@@ -18,6 +18,8 @@ import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Travel;
+import com.example.zxl.cloudmanager.travel.leader.LeaderTravelSearchActivity;
+import com.example.zxl.cloudmanager.travel.myTravel.MyTravelDetailFragment;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -38,6 +40,7 @@ public class ManagerTravelListFragment extends ListFragment {
     private ArrayList<Travel> travels = new ArrayList<Travel>();
     private Button mSearchBtn;
     private Fragment mFragment;
+    private Fragment mAimFragment;
 
     private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
@@ -52,6 +55,12 @@ public class ManagerTravelListFragment extends ListFragment {
         super.onCreate(saveInstanceState);
         setHasOptionsMenu(true);
         mFragment = this;
+
+        if (mFragment.getActivity().getClass() == ManagerTravelActivity.class) {
+            mAimFragment = new ManagerTravelDetailFragment();
+        } else if (mFragment.getActivity().getClass() == LeaderTravelSearchActivity.class) {
+            mAimFragment = new MyTravelDetailFragment();
+        }
 
         saveInstanceState = getArguments();
         if (null == saveInstanceState) {
@@ -73,7 +82,7 @@ public class ManagerTravelListFragment extends ListFragment {
                 if (-1 != saveInstanceState.getInt(Link.over_time_e)) {
                     keyObj.put(Link.over_time_e, saveInstanceState.getInt(Link.over_time_e));
                 }
-                keyObj.put("sort", "desc");
+                keyObj.put("sort", "start_time_s desc");
                 keyObj.put("page_count", 20);
                 keyObj.put("curl_page", 1);
                 //keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
@@ -113,19 +122,19 @@ public class ManagerTravelListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id){
+
         Travel travel= ((TravelAdapter)getListAdapter()).getItem(position);
         Log.d(TAG, "item被点击");
 
-        Fragment fragment = new ManagerTravelDetailFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        if (!fragment.isAdded()) {
+        if (!mAimFragment.isAdded()) {
             transaction.addToBackStack(null);
             transaction.hide(mFragment);
-            transaction.add(R.id.cmTravelActivity, fragment);
+            transaction.add(R.id.cmTravelActivity, mAimFragment);
             transaction.commit();
         } else {
             transaction.hide(mFragment);
-            transaction.show(fragment);
+            transaction.show(mAimFragment);
             transaction.commit();
         }
     }

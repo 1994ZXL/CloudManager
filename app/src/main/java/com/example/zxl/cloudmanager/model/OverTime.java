@@ -25,9 +25,9 @@ public class OverTime {
 
     }
 
-//    private static final String JSON_NAME = "mem_id";
+    private static final String JSON_NAME = "mem_name";
     private static final String JSON_STATUS = "status";
-//    private static final String JSON_PROJECT = "work_pm";
+    private static final String JSON_PROJECT = "work_pm";
     private static final String JSON_BEGIN_TIME = "start_time";
     private static final String JSON_END_TIME = "end_time";
     private static final String JSON_WORK_REASON = "work_reason";
@@ -42,10 +42,10 @@ public class OverTime {
         setTotalTime(content[6]);
     }
     public OverTime(JSONObject json) throws JSONException {
-//        if (json.has(JSON_NAME))
-//            mem_id = json.getJSONArray(JSON_NAME);
-//        if (json.has(JSON_PROJECT))
-//            work_pm = json.getJSONArray(JSON_PROJECT);
+        if (json.has(JSON_NAME))
+            mem_name = json.getString(JSON_NAME);
+        if (json.has(JSON_PROJECT))
+            work_pm = json.getString(JSON_PROJECT);
         if (json.has(JSON_STATUS))
             status = json.getInt(JSON_STATUS);
         if (json.has(JSON_BEGIN_TIME))

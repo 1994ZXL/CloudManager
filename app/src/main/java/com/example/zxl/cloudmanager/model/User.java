@@ -29,6 +29,9 @@ public class User {
     private String user_type; //用户类型
     private String user_id; //用户id
     private String comp_id; //公司id
+    private int is_puncher; //是否是考勤主管
+    private int is_pmmaster; //是否是项目领导
+    private int is_pmleader; //是否是项目领导
 
     private static final String JSON_USER_NAME = "user_name";
     private static final String JSON_MEM_NAME = "mem_name";
@@ -50,6 +53,9 @@ public class User {
     private static final String JSON_USER_TYPE = "user_type";
     private static final String JSON_USER_ID = "user_id";
     private static final String JSON_COMP_ID = "comp_id";
+    private static final String JSON_IS_PUNCHER = "is_puncher";
+    private static final String JSON_IS_PMMASTER = "is_pmmaster";
+    private static final String JSON_IS_PMLEADEr = "is_pmleader";
 
     private static User sUser;
 
@@ -105,6 +111,36 @@ public class User {
             user_id = json.getString(JSON_USER_ID);
         if (json.has(JSON_COMP_ID))
             comp_id = json.getString(JSON_COMP_ID);
+        if (json.has(JSON_IS_PUNCHER))
+            is_puncher = json.getInt(JSON_IS_PUNCHER);
+        if (json.has(JSON_IS_PMMASTER))
+            is_pmmaster = json.getInt(JSON_IS_PMMASTER);
+        if (json.has(JSON_IS_PMLEADEr))
+            is_pmleader = json.getInt(JSON_IS_PMLEADEr);
+    }
+
+    public int getIs_puncher() {
+        return is_puncher;
+    }
+
+    public void setIs_puncher(int is_puncher) {
+        this.is_puncher = is_puncher;
+    }
+
+    public int getIs_pmmaster() {
+        return is_pmmaster;
+    }
+
+    public void setIs_pmmaster(int is_pmmaster) {
+        this.is_pmmaster = is_pmmaster;
+    }
+
+    public int getIs_pmleader() {
+        return is_pmleader;
+    }
+
+    public void setIs_pmleader(int is_pmleader) {
+        this.is_pmleader = is_pmleader;
     }
 
     public String getUser_id() {

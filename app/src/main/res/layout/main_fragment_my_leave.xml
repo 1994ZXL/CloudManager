@@ -31,14 +31,15 @@
                     style="@style/radioButton"
                     android:text="@string/leave_record_query"
                     android:id="@+id/main_fragment_my_leave_query"
-                    android:layout_width="190dp" />
+                    android:layout_weight="1"/>
                 <RadioButton
                     style="@style/radioButton"
                     android:text="@string/apply_leave"
                     android:id="@+id/main_fragment_my_leave_apply"
-                    android:layout_width="170dp" />
+                    android:layout_weight="1" />
 
             </RadioGroup>
+
             <ImageView
                 android:layout_width="100dp"
                 android:layout_height="4dp"

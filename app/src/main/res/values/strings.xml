@@ -78,7 +78,7 @@
     <string name="overtime_status">加班状态</string>
 
     <!-- 项目主管-->
-    <string name="project_manager">技术负责人</string>
+    <string name="project_manager">项目系统</string>
     <string name="project_manage">项目管理</string>
     <string name="project_memo">通讯录</string>
     <string name="project_member_manage">成员管理</string>
@@ -169,7 +169,12 @@
     <string name="mission_state">任务状态</string>
     <string name="evaluate">评价</string>
     <string name="edit_error">修改失败</string>
-
+    
+    <!--我的出差-->
+    <string name="trip_status">出差状态</string>
+    <string name="trip_addr">出差地址</string>
+    <string name="trip_detail_addr">出差详细地址</string>
+    
     <!-- 我的用例-->
     <string name="usecase_number">用例编号：</string>
     <string name="version_number">程序版本：</string>

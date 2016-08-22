@@ -68,7 +68,11 @@ public class MyLeaveQueryFragment extends Fragment {
         mFragment = this;
     }
 
-
+    @Override
+    public void onPause() {
+        super.onPause();
+        leaves.clear();
+    }
 
     private String getTime() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日");
@@ -98,13 +102,15 @@ public class MyLeaveQueryFragment extends Fragment {
         saveInstanceState = getArguments();
         if (null != saveInstanceState) {
             try {
+                if (0 != saveInstanceState.getInt(Link.leave_type))
+                    keyObj.put(Link.leave_type, saveInstanceState.getInt(Link.leave_type));
 
-                keyObj.put(Link.leave_type, saveInstanceState.getInt(Link.leave_type));
-
-                keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
+                if (0 != saveInstanceState.getInt(Link.status))
+                    keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
 
                 if (-1 != saveInstanceState.getInt(Link.start_time))
                     keyObj.put(Link.start_time, saveInstanceState.getInt(Link.start_time));
+
                 if (-1 != saveInstanceState.getInt(Link.end_time))
                     keyObj.put(Link.end_time, saveInstanceState.getInt(Link.end_time));
 

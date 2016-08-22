@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.OverTime;
 
 
@@ -56,8 +57,8 @@ public class MyOvertimeDetailFragment extends Fragment {
     private void control() {
         mEmployerNameTV.setText(sOverTime.getMem_id());
         mProjectNameTV.setText(sOverTime.getWork_name());
-        mBeginTimeTV.setText(sOverTime.getStart_time());
-        mEndTimeTV.setText(sOverTime.getEnd_time());
+        mBeginTimeTV.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sOverTime.getStart_time()));
+        mEndTimeTV.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sOverTime.getEnd_time()));
         mOvertimeReasonTV.setText(sOverTime.getWork_reason());
         mTotalTimeTV.setText(sOverTime.getThisTime());
         mAllTimeTV.setText(sOverTime.getTotalTime());

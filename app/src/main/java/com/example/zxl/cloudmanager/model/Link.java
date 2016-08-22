@@ -5,10 +5,10 @@ package com.example.zxl.cloudmanager.model;
  */
 public class Link {
 //    public static final String localhost = "http://192.168.3.119:8099/yunmgr_v1.0/api/uc.php?app=";
-    public static final String localhost = "http://192.168.1.117/yunmgr_v1.0/api/uc.php?app=";
+    public static final String localhost = "http://192.168.1.105/yunmgr_v1.0/api/uc.php?app=";
     public static final String API = "http://localhost/yunmgr_v1.0/api/uc.php?app=";
 
-    public static final String get_List = "get_list";
+    public static final String get_list = "get_list";
     public static final String edit = "edit";
 
     //manage_leave
@@ -25,7 +25,11 @@ public class Link {
     //my_leave
     public static final String my_leave = "my_leave&act=";
 
+    //my_trip
+    public static final String my_trip = "my_trip&act=";
+
     //manage_trip
+    public static final String manage_trip = "manage_trip&act=";
     public static final String start_time_s = "start_time_s";//开始时间(小)
     public static final String start_time_e = "start_time_e";//开始时间(大)
     public static final String over_time_s = "over_time_s";//回归时间（小）
@@ -78,10 +82,12 @@ public class Link {
     public static final String E_att_time = "E_att_time"; //下班签到时间
     public static final String E_time = "E_time"; //规定下班时间
     public static final String comp_id = "comp_id"; //公司id
+
     //punch_list
     public static final String punch_list = "punch_list&act=get_list";
     public static final String att_date_from = "att_date_from"; //考勤日期（早）
     public static final String att_date_to = "att_date_to"; //考勤日期（晚）
+
     //pm_task
     public static final String pmtask_id = "pmtask_id"; //项目任务ID
     public static final String over_time = "over_time"; //结束时间

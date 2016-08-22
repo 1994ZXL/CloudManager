@@ -20,27 +20,19 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.zxl.cloudmanager.Edit;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.leave.checkManagerLeave.ManagerLeaveActivity;
 import com.example.zxl.cloudmanager.leave.checkManagerLeave.ManagerLeaveListFragment;
 import com.example.zxl.cloudmanager.leave.leader.LeaderLeaveSearchActivity;
-import com.example.zxl.cloudmanager.leave.leader.LeaveListActivity;
-import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
 import com.example.zxl.cloudmanager.model.Link;
-import com.example.zxl.cloudmanager.model.User;
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
-
-import cz.msebera.android.httpclient.Header;
 
 //我的请假 领导查询 请假查询界面
 public class MyLeaveSearchFragment extends Fragment {
@@ -60,11 +52,11 @@ public class MyLeaveSearchFragment extends Fragment {
 
     private ArrayAdapter<String> stateAdapter;
     //状态:1:待批准,2:已批准,3:拒绝
-    private static final String[] stateList={"待批准","已批准","拒绝"};
+    private static final String[] stateList={"全部", "待批准","已批准","拒绝"};
 
     private ArrayAdapter<String> kindAdapter;
     //请假类型:1事假,2病假,3休假,4婚假,5其他
-    private static final String[] kindList={"事假", "病假", "休假", "婚假", "其他"};
+    private static final String[] kindList={"全部", "事假", "病假", "休假", "婚假", "其他"};
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
@@ -104,13 +96,13 @@ public class MyLeaveSearchFragment extends Fragment {
 
         if (mFragment.getActivity().getClass() == MyLeaveSearchActivity.class) {
             mNameLinearLayout.setVisibility(View.GONE);
-            url = Link.my_leave + Link.get_List;
+            url = Link.my_leave + Link.get_list;
             mAimFragment = new MyLeaveQueryFragment();
         } else if (mFragment.getActivity().getClass() == LeaderLeaveSearchActivity.class) {
-            url = Link.leave_list + Link.get_List;
+            url = Link.leave_list + Link.get_list;
             mAimFragment = new ManagerLeaveListFragment();
         } else if (mFragment.getActivity().getClass() == ManagerLeaveActivity.class) {
-            url = Link.manage_leave + Link.get_List;
+            url = Link.manage_leave + Link.get_list;
             mAimFragment = new ManagerLeaveListFragment();
         }
 
@@ -158,6 +150,8 @@ public class MyLeaveSearchFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //状态:1:待批准,2:已批准,3:拒绝
+                if (stateList[i] == "全部")
+                    mState = 0;
                 if (stateList[i] == "待批准")
                     mState = 1;
                 if (stateList[i] == "已批准")
@@ -179,6 +173,8 @@ public class MyLeaveSearchFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //请假类型:1事假,2病假,3休假,4婚假,5其他
+                if (kindList[i] == "全部")
+                    mType = 0;
                 if (kindList[i] == "事假")
                     mType = 1;
                 if (kindList[i] == "病假")
@@ -220,8 +216,17 @@ public class MyLeaveSearchFragment extends Fragment {
             bundle.putInt(Link.end_time, DateForGeLingWeiZhi.toGeLinWeiZhi(edtime));
         else bundle.putInt(Link.end_time, -1);
 
-        bundle.putInt(Link.leave_type, mType);
-        bundle.putInt(Link.status, mState);
+        if (mType == 0) {
+            bundle.putInt(Link.leave_type, 0);
+        } else {
+            bundle.putInt(Link.leave_type, mType);
+        }
+
+        if (mState == 0) {
+            bundle.putInt(Link.status, 0);
+        } else {
+            bundle.putInt(Link.status, mState);
+        }
 
         mAimFragment.setArguments(bundle);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();

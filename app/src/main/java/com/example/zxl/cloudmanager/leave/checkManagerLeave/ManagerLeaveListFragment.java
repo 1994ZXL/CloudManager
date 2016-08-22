@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.leave.leader.LeaderLeaveSearchActivity;
-import com.example.zxl.cloudmanager.leave.leader.LeaveListActivity;
 import com.example.zxl.cloudmanager.leave.myLeave.MyLeaveDetailFragment;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
@@ -126,9 +125,9 @@ public class ManagerLeaveListFragment extends Fragment {
         Log.d(TAG, "key: " + key);
 
         if (mFragment.getActivity().getClass() == LeaderLeaveSearchActivity.class) {
-            url = Link.localhost + Link.leave_list + Link.get_List;
+            url = Link.localhost + Link.leave_list + Link.get_list;
         } else if (mFragment.getActivity().getClass() == ManagerLeaveActivity.class) {
-            url = Link.localhost + Link.manage_leave + Link.get_List;
+            url = Link.localhost + Link.manage_leave + Link.get_list;
         }
         Log.d(TAG, "url: " + url);
         mHttpc.post(url , mParams, new JsonHttpResponseHandler() {

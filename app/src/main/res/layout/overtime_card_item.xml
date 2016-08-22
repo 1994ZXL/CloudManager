@@ -20,8 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
             android:id="@+id/main_fragment_overtime_name"
-            android:textSize="30dp"
-            android:text="张三"/>
+            android:textSize="30dp"/>
 
         <!-- 开始加班时间-->
         <LinearLayout
@@ -31,12 +30,14 @@
             android:layout_marginLeft="12dp"
             android:layout_marginBottom="12dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:text="@string/overtime_begin_time"/>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:id="@+id/overtime_card_item_begin_time"/>
         </LinearLayout>
         <!-- 结束加班时间-->
@@ -47,16 +48,18 @@
             android:layout_marginLeft="12dp"
             android:layout_marginBottom="12dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:text="@string/overtime_end_time"/>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:id="@+id/overtime_card_item_end_time"/>
         </LinearLayout>
 
-        <!-- 项目-->
+        <!-- 加班原因-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,13 +67,15 @@
             android:layout_marginLeft="12dp"
             android:layout_marginBottom="12dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/my_join_project"/>
+                android:layout_weight="2"
+                android:text="@string/manager_overtime_reason"/>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/overtime_card_item_overtime_project"/>
+                android:layout_weight="1"
+                android:id="@+id/overtime_card_item_overtime_reason"/>
         </LinearLayout>
 
     </LinearLayout>

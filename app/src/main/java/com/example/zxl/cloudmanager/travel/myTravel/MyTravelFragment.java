@@ -56,6 +56,8 @@ public class MyTravelFragment extends ListFragment {
 
     private Fragment mFragment;
 
+    private Fragment mAimFragment;
+
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -74,7 +76,8 @@ public class MyTravelFragment extends ListFragment {
                     keyObj.put(Link.over_time_s, saveInstanceState.getInt(Link.over_time_s));
                 if (-1 != saveInstanceState.getInt(Link.over_time_e))
                     keyObj.put(Link.over_time_e, saveInstanceState.getInt(Link.over_time_e));
-                keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
+                if (-1 != saveInstanceState.getInt(Link.status))
+                    keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
             } catch (Exception e) {
                 e.printStackTrace();
             }
