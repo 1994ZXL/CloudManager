@@ -38,11 +38,52 @@
                         style="@style/font"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="张三"
-                        android:id="@+id/manager_employer_name_textview" />
+                        android:id="@+id/manager_overtime_name" />
                 </LinearLayout>
 
-                <!--出差状态-->
+                <!--加班项目-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        style="@style/font"
+                        android:text="@string/overtime_project"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/manager_overtime_project"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        style="@style/font" />
+                </LinearLayout>
+
+                <!--加班原因-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        style="@style/font"
+                        android:text="@string/manager_overtime_reason"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/manager_overtime_reason_textview"
+                        android:layout_width="match_parent"
+                        style="@style/font"
+                        android:text="@string/manager_overtime_reason"
+                        android:gravity="center"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <!--加班状态-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -57,50 +98,11 @@
                     <TextView
                         android:id="@+id/manager_overtime_status"
                         android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:text="@string/overtime_status"
-                        android:gravity="center"
-                        style="@style/font" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
                         style="@style/font"
-                        android:text="@string/overtime_status"
-                        android:layout_weight="1"/>
-                    <TextView
-                        android:id="@+id/manager_overtime_status"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:text="@string/overtime_status"
+                        android:text="@string/manager_overtime_reason"
                         android:gravity="center"
-                        style="@style/font" />
-                </LinearLayout>
+                        android:layout_weight="1" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        style="@style/font"
-                        android:text="@string/overtime_status"
-                        android:layout_weight="1"/>
-                    <TextView
-                        android:id="@+id/manager_overtime_status"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:text="@string/overtime_status"
-                        android:gravity="center"
-                        style="@style/font" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -176,61 +178,7 @@
                         android:layout_weight="1"
                         android:text="@string/manager_overtime_total"
                         android:gravity="center"
-                        android:id="@+id/manager_overtime_total_time_textview"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <!-- 第三块-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@color/white">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        style="@style/font"
-                        android:text="@string/manager_overtime_reason"
-                        android:layout_weight="1"/>
-                    <TextView
-                        android:id="@+id/manager_overtime_reason_textview"
-                        android:layout_width="match_parent"
-                        style="@style/font"
-                        android:text="@string/manager_overtime_reason"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        />
-                </LinearLayout>
-
-                <!--加班总时间-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-
-                    <TextView
-                        style="@style/font"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:text="@string/manager_overtime_alltime" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/manager_overtime_alltime"
-                        android:gravity="center"
-                        android:id="@+id/manager_overtime_all_time_textview"/>
+                        android:id="@+id/manager_overtime_this_time_textview"/>
 
                 </LinearLayout>
 

@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,6 +22,8 @@ import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
 import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.overtime.myOvertime.MyOverTimeActivity;
+import com.example.zxl.cloudmanager.overtime.myOvertime.MyOverTimeFragment;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -46,20 +49,22 @@ public class ManagerOverTimeSearchFragment extends Fragment {
     private Spinner mEmployerNameSpinner;
     private Spinner mEmployerProjectSpinner;
     private Spinner mOvertimeStatusSpinner;
+    private LinearLayout mNameLinearLayout;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
 
     private Fragment mFragment;
+    private Fragment mAimFragment;
 
     private ArrayAdapter<String> nameAdapter;
     private ArrayAdapter<String> projectAdapter;
     private ArrayAdapter<String> overTimeAdapter;
 
-    private ArrayList<String> nameList = new ArrayList<String>(); //名字
-    private ArrayList<String> name_Id = new ArrayList<String>(); //名字id
-    private ArrayList<String> projectList = new ArrayList<String>(); //项目
-    private ArrayList<String> project_Id = new ArrayList<String>(); //项目id
+    private ArrayList<String> mem_name = new ArrayList<String>(); //名字
+    private ArrayList<String> mem_id = new ArrayList<String>(); //名字id
+    private ArrayList<String> project_name = new ArrayList<String>(); //项目
+    private ArrayList<String> pm_id = new ArrayList<String>(); //项目id
     private static final String[] overtimeStatus = {"等待" ,"确认" ,"取消"}; //状态:1:等待,2:确认,3:取消，默认为等待
 
     private Button mSearchBtn;
@@ -80,6 +85,7 @@ public class ManagerOverTimeSearchFragment extends Fragment {
     private int status;
 
     private String string = null;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +100,13 @@ public class ManagerOverTimeSearchFragment extends Fragment {
 
         init(v);
 
+        if (mFragment.getActivity().getClass() == MyOverTimeActivity.class) {
+            mNameLinearLayout.setVisibility(View.GONE);
+            mAimFragment = new MyOverTimeFragment();
+        } else {
+            mAimFragment = new ManagerOvertimeListFragment();
+        }
+
         mHttpc.post(Link.localhost + "manage_work&act=get_options", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
@@ -105,23 +118,50 @@ public class ManagerOverTimeSearchFragment extends Fragment {
                         Log.d(TAG, "memArray: " + memArray);
 
                         for (int i = 0; i < workArray.length(); i++) {
-                            Iterator<String> sIterator = workArray.getJSONObject(i).keys();
-                            while (sIterator.hasNext()) {
-                                project_Id.add(sIterator.next());
-                                projectList.add(workArray.getJSONObject(i).getString(sIterator.next()));
-                            }
+                            if (workArray.getJSONObject(i).has("project_name"))
+                                project_name.add(workArray.getJSONObject(i).getString("project_name"));
+                            if (workArray.getJSONObject(i).has("pm_id"))
+                                pm_id.add(workArray.getJSONObject(i).getString("pm_id"));
                         }
 
                         for (int j = 0; j < memArray.length(); j++) {
-                            Iterator<String> sIterator = workArray.getJSONObject(j).keys();
-                            while (sIterator.hasNext()) {
-                                name_Id.add(sIterator.next());
-                                nameList.add(workArray.getJSONObject(j).getString(sIterator.next()));
-                            }
+                            if (memArray.getJSONObject(j).has("mem_name"))
+                                mem_name.add(memArray.getJSONObject(j).getString("mem_name"));
+                            if (memArray.getJSONObject(j).has("mem_id"))
+                                mem_id.add(memArray.getJSONObject(j).getString("mem_id"));
                         }
 
-                        Log.d(TAG, "workArray: " + workArray);
-                        Log.d(TAG, "memArray: " + memArray);
+                        projectAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, project_name);
+                        projectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        mEmployerProjectSpinner.setAdapter(projectAdapter);
+                        mEmployerProjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                projectName = project_name.get(i);
+                                projectId = pm_id.get(i);
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                            }
+                        });
+
+                        nameAdapter= new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, mem_name);
+                        nameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        mEmployerNameSpinner.setAdapter(nameAdapter);
+                        mEmployerNameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                employerName = mem_name.get(i);
+                                employerId = mem_id.get(i);
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                            }
+                        });
 
                     } else {
 
@@ -154,37 +194,6 @@ public class ManagerOverTimeSearchFragment extends Fragment {
             }
         });
 
-        projectAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, projectList);
-        projectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mEmployerProjectSpinner.setAdapter(projectAdapter);
-        mEmployerProjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                projectName = projectList.get(i);
-                projectId = project_Id.get(i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        nameAdapter= new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, nameList);
-        nameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mEmployerNameSpinner.setAdapter(nameAdapter);
-        mEmployerNameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                employerName = nameList.get(i);
-                employerId = name_Id.get(i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
 
         overTimeAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, overtimeStatus);
         overTimeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -211,7 +220,7 @@ public class ManagerOverTimeSearchFragment extends Fragment {
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new ManagerOvertimeListFragment();
+
                 Bundle bundle = new Bundle();
 
                 if (null != bgtime) {
@@ -228,10 +237,10 @@ public class ManagerOverTimeSearchFragment extends Fragment {
                 bundle.putString(Link.mem_id, employerId);
                 bundle.putString(Link.work_pm, projectId);
 
-                fragment.setArguments(bundle);
+                mAimFragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.addToBackStack(null);
-                transaction.replace(R.id.blankActivity, fragment);
+                transaction.replace(R.id.blankActivity, mAimFragment);
                 transaction.commit();
             }
         });
@@ -240,10 +249,12 @@ public class ManagerOverTimeSearchFragment extends Fragment {
     }
 
     private void init(View v){
+        mNameLinearLayout = (LinearLayout) v.findViewById(R.id.fragment_my_overtime_nameLinearLayout);
         mOvertimeBeginBtn = (Button) v.findViewById(R.id.employer_overtime_begin_time_button);
         mOvertimeEndBtn = (Button) v.findViewById(R.id.employer_overtime_end_time_button);
         mEmployerProjectSpinner = (Spinner) v.findViewById(R.id.employer_project_spinner);
         mOvertimeStatusSpinner = (Spinner) v.findViewById(R.id.overtime_status_spinner);
+        mEmployerNameSpinner = (Spinner) v.findViewById(R.id.employer_name_spinner);
 
         mSearchBtn = (Button) v.findViewById(R.id.my_overtime_search_button);
     }

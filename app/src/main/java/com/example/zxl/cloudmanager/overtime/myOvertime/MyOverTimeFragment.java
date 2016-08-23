@@ -26,6 +26,7 @@ import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.OverTime;
 import com.example.zxl.cloudmanager.model.User;
+import com.example.zxl.cloudmanager.overtime.checkManagerOverTime.ManagerOverTimeSearchFragment;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -81,7 +82,7 @@ public class MyOverTimeFragment extends Fragment {
                 Fragment fragment = null;
                 if (null == fragment) {
                     FragmentManager fm = getFragmentManager();
-                    fragment = new MyOverTimeSearch();
+                    fragment = new ManagerOverTimeSearchFragment();
                     fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
                 }
                 return true;
@@ -117,9 +118,9 @@ public class MyOverTimeFragment extends Fragment {
         try {
             if (null == saveInstanceState) {
                 keyObj.put(Link.mem_id, User.newInstance().getUser_id());
-                url = Link.my_trip + Link.get_list;
+                url = Link.my_work + Link.get_list;
             } else {
-                url = Link.manage_trip + Link.get_list;
+                url = Link.manage_work + Link.get_list;
             }
             keyObj.put("sort", "start_time desc");
             keyObj.put("page_count", 50);
@@ -211,8 +212,8 @@ public class MyOverTimeFragment extends Fragment {
             OverTime overTime = overTimes.get(i);
 
             viewHolder.mName.setText(overTime.getMem_name());
-            viewHolder.mOvertimeName.setText(overTime.getMem_id());
-            viewHolder.mOvertimeReason.setText(overTime.getWork_reason());
+            viewHolder.mProjectName.setText(overTime.getWork_pm());
+            viewHolder.mOvertimeReason.setText(overTime.getWork_resaon());
             viewHolder.mBeginTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(overTime.getStart_time()));
             viewHolder.mEndTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(overTime.getEnd_time()));
 
@@ -232,16 +233,16 @@ public class MyOverTimeFragment extends Fragment {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder{
-            public TextView mOvertimeName;
             public TextView mBeginTime;
             public TextView mEndTime;
             public TextView mOvertimeReason;
             public TextView mName;
+            public TextView mProjectName;
 
             public ViewHolder(View v) {
                 super(v);
-                mName = (TextView) v.findViewById(R.id.main_fragment_overtime_name);
-                mOvertimeName = (TextView)v.findViewById(R.id.main_fragment_overtime_name);
+                mProjectName = (TextView) v.findViewById(R.id.main_fragment_overtime_project);
+                mName = (TextView) v.findViewById(R.id.overtime_card_item_name);
                 mBeginTime = (TextView) v.findViewById(R.id.overtime_card_item_begin_time);
                 mEndTime = (TextView)v.findViewById(R.id.overtime_card_item_end_time);
                 mOvertimeReason = (TextView) v.findViewById(R.id.overtime_card_item_overtime_reason);

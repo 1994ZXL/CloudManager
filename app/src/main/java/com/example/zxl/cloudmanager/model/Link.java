@@ -36,11 +36,27 @@ public class Link {
     public static final String over_time_e = "over_time_e";//回归时间（大）
 
     //manage_work
+    public static final String manage_work = "manage_work&act=";
     public static final String mem_id = "mem_id";//加班员工ID
     public static final String work_pm = "work_pm";//加班项目名
 
+    //my_work
+    public static final String my_work = "my_work&act=";
+
+    //work_list
+    public static final String work_list = "work_list&act=";
+
     //pm_bug
     public static final String pm_id = "pm_id";
+
+    //my_bug
+    public static final String submit_time_t = "submit_time_t"; //发现时间 开始
+    public static final String submit_time_f = "submit_time_f"; //发现时间 结束
+    public static final String modify_time_t = "modify_time_t"; //修改时间 开始
+    public static final String modify_time_f = "modify_time_f"; //修改时间 结束
+    public static final String submitter = "submitter"; //发现人
+    public static final String modifier = "modifier"; //修改人
+    public static final String level = "level"; //bug等级
 
     //find_daily
     public static final String report_time_t = "report_time_t"; //日报的提交时间 开始

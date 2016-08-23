@@ -2,8 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".overtime.myOvertime.MyOverTimeSearch">
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -50,6 +49,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/fragment_my_overtime_nameLinearLayout">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/employer_name"
+                        android:layout_weight="1"
+                        android:layout_gravity="center_vertical"
+                        android:textSize="20dp"/>
+
+                    <Spinner
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/employer_name_spinner" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:layout_marginTop="20dp">
 
                     <TextView
@@ -64,8 +86,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:id="@+id/employer_project_spinner"
-                        />
+                        android:id="@+id/employer_project_spinner" />
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -87,6 +109,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:id="@+id/overtime_status_spinner" />
+
                 </LinearLayout>
 
             </LinearLayout>

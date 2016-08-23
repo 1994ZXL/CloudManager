@@ -14,13 +14,30 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- 姓名-->
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:id="@+id/main_fragment_overtime_name"
-            android:textSize="30dp"/>
+            android:orientation="horizontal">
+
+            <!-- 姓名-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:layout_margin="12dp"
+                android:id="@+id/overtime_card_item_name"
+                android:textSize="30dp"/>
+
+            <!--项目名-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_margin="12dp"
+                android:textSize="30dp"
+                android:id="@+id/main_fragment_overtime_project"/>
+
+        </LinearLayout>
 
         <!-- 开始加班时间-->
         <LinearLayout
@@ -32,11 +49,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="2.5"
                 android:text="@string/overtime_begin_time"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="left"
                 android:layout_weight="1"
                 android:id="@+id/overtime_card_item_begin_time"/>
         </LinearLayout>
@@ -50,11 +68,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="2.5"
                 android:text="@string/overtime_end_time"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="left"
                 android:layout_weight="1"
                 android:id="@+id/overtime_card_item_end_time"/>
         </LinearLayout>
@@ -69,11 +88,12 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_weight="2.5"
                 android:text="@string/manager_overtime_reason"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="left"
                 android:layout_weight="1"
                 android:id="@+id/overtime_card_item_overtime_reason"/>
         </LinearLayout>

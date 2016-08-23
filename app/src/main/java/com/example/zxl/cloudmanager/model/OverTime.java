@@ -12,14 +12,15 @@ import java.util.ArrayList;
 public class OverTime {
     private String mem_name; //员工名
     private String mem_id; //员工id
-    private String work_name; //项目名
-    private String work_pm; //项目id
+    private String work_id; //加班id
+    private String work_pm; //项目名
     private int start_time; //加班开始时间
     private int end_time; //加班结束时间
     private int status; //状态 1:等待,2:确认,3:取消，默认为等待
     private String thisTime;
-    private String work_reason; //加班原因
+    private String work_resaon; //加班原因
     private String totalTime;
+    private String work_time;
 
     public OverTime() {
 
@@ -30,17 +31,10 @@ public class OverTime {
     private static final String JSON_PROJECT = "work_pm";
     private static final String JSON_BEGIN_TIME = "start_time";
     private static final String JSON_END_TIME = "end_time";
-    private static final String JSON_WORK_REASON = "work_reason";
+    private static final String JSON_WORK_REASON = "work_resaon";
+    private static final String JSON_WORK_TIME = "work_time";
 
-    public void set(String[] content) {
-//        setMem_id(content[0]);
-//        setPm_id(content[1]);
-        /*setStart_time(content[2]);
-        setEnd_time(content[3]);*/
-        setThisTime(content[4]);
-        setWork_reason(content[5]);
-        setTotalTime(content[6]);
-    }
+
     public OverTime(JSONObject json) throws JSONException {
         if (json.has(JSON_NAME))
             mem_name = json.getString(JSON_NAME);
@@ -53,7 +47,9 @@ public class OverTime {
         if (json.has(JSON_END_TIME))
             end_time = json.getInt(JSON_END_TIME);
         if (json.has(JSON_WORK_REASON))
-            work_reason = json.getString(JSON_WORK_REASON);
+            work_resaon = json.getString(JSON_WORK_REASON);
+        if (json.has(JSON_WORK_TIME))
+            work_time = json.getString(JSON_WORK_TIME);
 
     }
     public JSONObject toJSON() throws JSONException{
@@ -62,7 +58,7 @@ public class OverTime {
         json.put(JSON_STATUS, status);
 //        json.put(JSON_PROJECT,work_pm);
         json.put(JSON_END_TIME, end_time);
-        json.put(JSON_WORK_REASON, work_reason);
+        json.put(JSON_WORK_REASON, work_resaon);
         json.put(JSON_BEGIN_TIME, start_time);
         return json;
     }
@@ -76,6 +72,14 @@ public class OverTime {
             return "取消";
         }
         return null;
+    }
+
+    public String getWork_time() {
+        return work_time;
+    }
+
+    public void setWork_time(String work_time) {
+        this.work_time = work_time;
     }
 
     public String getMem_name() {
@@ -94,12 +98,20 @@ public class OverTime {
         this.mem_id = mem_id;
     }
 
-    public String getWork_name() {
-        return work_name;
+    public String getWork_id() {
+        return work_id;
     }
 
-    public void setWork_name(String work_name) {
-        this.work_name = work_name;
+    public void setWork_id(String work_id) {
+        this.work_id = work_id;
+    }
+
+    public String getWork_resaon() {
+        return work_resaon;
+    }
+
+    public void setWork_resaon(String work_resaon) {
+        this.work_resaon = work_resaon;
     }
 
     public String getWork_pm() {
@@ -136,14 +148,6 @@ public class OverTime {
 
     public void setThisTime(String thisTime) {
         this.thisTime = thisTime;
-    }
-
-    public String getWork_reason() {
-        return work_reason;
-    }
-
-    public void setWork_reason(String work_reason) {
-        this.work_reason = work_reason;
     }
 
     public String getTotalTime() {

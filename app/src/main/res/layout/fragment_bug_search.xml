@@ -8,14 +8,16 @@
    <ScrollView
        android:layout_width="match_parent"
        android:layout_height="wrap_content">
+
        <LinearLayout
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:orientation="vertical">
-           <LinearLayout
-               style="@style/linearLayoutStyle"
-               >
 
+           <LinearLayout
+               style="@style/linearLayoutStyle">
+
+               <!--项目名-->
                <LinearLayout
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
@@ -23,18 +25,20 @@
                    android:layout_marginTop="20dp">
 
                    <TextView
-                       android:layout_width="wrap_content"
+                       android:layout_width="match_parent"
                        android:layout_height="wrap_content"
                        android:text="@string/project_name_edittext"
                        android:layout_weight="1"
                        android:textSize="20dp"/>
 
-                   <EditText
+                   <Spinner
                        android:id="@+id/bug_project_name_edittext"
-                       style="@style/editTextZ"
-                       android:layout_weight="6"/>
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"/>
                </LinearLayout>
 
+               <!--发现时间-->
                <LinearLayout
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
@@ -64,44 +68,82 @@
                        android:layout_weight="0.4"/>
                </LinearLayout>
 
+               <!--修改时间-->
                <LinearLayout
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:orientation="horizontal"
-                   android:layout_marginTop="20dp">
+                   android:layout_marginTop="20dp"
+                   android:id="@+id/bug_editTime_linearLayout">
 
                    <TextView
                        android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@string/edit_time"
+                       android:layout_weight="2"
+                       android:textSize="20dp"/>
+
+                   <Button
+                       android:id="@+id/bug_edit_begin_time_button"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:paddingRight="20dp"
+                       android:text="@string/project_begin_time_textview"
+                       android:layout_weight="0.4"/>
+                   <Button
+                       android:id="@+id/bug_edit_end_time_button"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:paddingRight="20dp"
+                       android:text="@string/project_end_time_textview"
+                       android:layout_weight="0.4"/>
+               </LinearLayout>
+
+               <!--发现人-->
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:layout_marginTop="20dp"
+                   android:id="@+id/bug_finder_linearLayout">
+
+                   <TextView
+                       android:layout_width="match_parent"
                        android:layout_height="wrap_content"
                        android:text="@string/bug_finder"
-                       android:layout_weight="2"
+                       android:layout_weight="1"
                        android:textSize="20dp"/>
 
-                   <EditText
+                   <Spinner
                        android:id="@+id/bug_finder_edittext"
-                       style="@style/editTextZ"
-                       android:layout_weight="7"/>
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"/>
                </LinearLayout>
 
+               <!--修改人-->
                <LinearLayout
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
                    android:orientation="horizontal"
-                   android:layout_marginTop="20dp">
+                   android:layout_marginTop="20dp"
+                   android:id="@+id/bug_reviser_linearLayout">
 
                    <TextView
-                       android:layout_width="wrap_content"
+                       android:layout_width="match_parent"
                        android:layout_height="wrap_content"
                        android:text="@string/bug_reviser"
-                       android:layout_weight="2"
+                       android:layout_weight="1"
                        android:textSize="20dp"/>
 
-                   <EditText
+                   <Spinner
                        android:id="@+id/bug_reviser_edittext"
-                       style="@style/editTextZ"
-                       android:layout_weight="7"/>
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_weight="1"/>
                </LinearLayout>
 
+               <!--bug状态-->
                <LinearLayout
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
@@ -123,6 +165,7 @@
                        android:layout_weight="1"/>
                </LinearLayout>
 
+               <!--bug等级-->
                <LinearLayout
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"

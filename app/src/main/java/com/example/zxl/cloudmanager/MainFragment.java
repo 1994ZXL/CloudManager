@@ -19,12 +19,9 @@ import com.example.zxl.cloudmanager.check.checkManager.ManagerCheckAcitvity;
 import com.example.zxl.cloudmanager.check.myCheck.MyCheckActivity;
 import com.example.zxl.cloudmanager.leave.checkManagerLeave.ManagerLeaveActivity;
 import com.example.zxl.cloudmanager.mission.projectManagerMission.ProjectMissionManagerActivity;
-import com.example.zxl.cloudmanager.model.CheckLab;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
-import com.example.zxl.cloudmanager.model.Post;
-import com.example.zxl.cloudmanager.model.PostLab;
 import com.example.zxl.cloudmanager.model.User;
 import com.example.zxl.cloudmanager.usecase.myUseCase.MyUseCaseActivity;
 import com.example.zxl.cloudmanager.overtime.checkManagerOverTime.ManagerOvertimeActivity;
@@ -40,12 +37,12 @@ import com.example.zxl.cloudmanager.leave.myLeave.MyLeaveActivity;
 import com.example.zxl.cloudmanager.post.myPost.MyPostActivity;
 import com.example.zxl.cloudmanager.operation.MyOperationActivity;
 import com.example.zxl.cloudmanager.overtime.myOvertime.MyOverTimeActivity;
-import com.example.zxl.cloudmanager.bug.projectManagerBug.ProjectBugDealActivity;
+import com.example.zxl.cloudmanager.bug.projectManagerBug.PMBugActivity;
 import com.example.zxl.cloudmanager.projectManager.PMAdressBook.ProjectManagerActivity;
 import com.example.zxl.cloudmanager.projectManager.memberManager.ProjectMemberManagerActivity;
 import com.example.zxl.cloudmanager.projectManager.projectList.ProjectConnectionListActivity;
 import com.example.zxl.cloudmanager.usecase.projectManagerUseCase.ProjectManagerUsecaseActivity;
-import com.example.zxl.cloudmanager.bug.publicSearchBug.ProjectBugSearchActivity;
+import com.example.zxl.cloudmanager.bug.publicSearchBug.PublicBugSearchActivity;
 import com.example.zxl.cloudmanager.publicSearch.PSAddressBook.ProjectListSearchActivity;
 import com.example.zxl.cloudmanager.publicSearch.memberList.MemberListActivity;
 import com.example.zxl.cloudmanager.mission.publicSearchMission.MissionSearchActivity;
@@ -53,7 +50,6 @@ import com.example.zxl.cloudmanager.publicSearch.projectSearch.PublicSearchActiv
 import com.example.zxl.cloudmanager.usecase.publicSearchUseCase.UsecaseSearchActivity;
 import com.example.zxl.cloudmanager.travel.myTravel.MyTravelActivity;
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
@@ -180,7 +176,7 @@ public class MainFragment extends Fragment {
         onClickListener(myListImage,new ProjectListSearchActivity());
         onClickListener(myMemberListImage,new MemberListActivity());
         onClickListener(myUseCaseImage,new UsecaseSearchActivity());
-        onClickListener(myBugImage,new ProjectBugSearchActivity());
+        onClickListener(myBugImage,new PublicBugSearchActivity());
         onClickListener(mManageCheck, new ManagerCheckAcitvity());
         onClickListener(mManageLeave, new ManagerLeaveActivity());
 
@@ -193,7 +189,7 @@ public class MainFragment extends Fragment {
 
         //项目主管
         onClickListener(projectManagmentImage, new ProjectManagerActivity());
-        onClickListener(pmBugDealImage, new ProjectBugDealActivity());
+        onClickListener(pmBugDealImage, new PMBugActivity());
         onClickListener(pmListImage, new ProjectConnectionListActivity());
         onClickListener(pmMemberManagerImage, new ProjectMemberManagerActivity());
         onClickListener(pmMissionImage, new ProjectMissionManagerActivity());

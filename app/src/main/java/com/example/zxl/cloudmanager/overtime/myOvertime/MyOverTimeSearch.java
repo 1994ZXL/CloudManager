@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,11 +22,14 @@ import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
 import com.example.zxl.cloudmanager.model.Link;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
  */
+
+//被弃用
 public class MyOverTimeSearch extends Fragment {
 
     private static final String MY = "MY_OVERTIME_LIST";
@@ -38,7 +42,8 @@ public class MyOverTimeSearch extends Fragment {
     private ArrayAdapter<String> projectAdapter;
     private ArrayAdapter<String> statusAdapter;
 
-    private static final String[] projectLst={"全部"};
+    private ArrayList<String> project_name = new ArrayList<String>(); //项目
+    private ArrayList<String> pm_id = new ArrayList<String>(); //项目id
     private static final String[] statusList = {"等待", "确认", "取消", };//状态:1:等待,2:确认,3:取消，默认为等待
     private Button mSearchBtn;
 
@@ -48,6 +53,9 @@ public class MyOverTimeSearch extends Fragment {
     private String edtime;
     private String project;
     private int status;
+
+    private String projectName;
+    private String projectId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,8 +70,9 @@ public class MyOverTimeSearch extends Fragment {
         getActivity().getActionBar().setTitle("加班查询");
 
         init(v);
-        loadNameList();
-        loadProjectList();
+
+
+
         mOvertimeEndBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -84,13 +93,14 @@ public class MyOverTimeSearch extends Fragment {
             }
         });
 
-        projectAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, projectLst);
+        projectAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, project_name);
         projectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mEmployerProjectSpinner.setAdapter(projectAdapter);
         mEmployerProjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                project = projectLst[i];
+                projectName = project_name.get(i);
+                projectId = project_name.get(i);
             }
 
             @Override
@@ -160,16 +170,8 @@ public class MyOverTimeSearch extends Fragment {
         return v;
     }
 
-    //TODO：将员工姓名和其参与的项目加载到下拉列表当中
-    public void loadNameList(){
-
-    }
-
-    public void loadProjectList(){
-
-    }
-
     private void init(View v){
+
         mOvertimeBeginBtn = (Button) v.findViewById(R.id.employer_overtime_begin_time_button);
         mOvertimeEndBtn = (Button) v.findViewById(R.id.employer_overtime_end_time_button);
         mEmployerProjectSpinner = (Spinner) v.findViewById(R.id.employer_project_spinner);

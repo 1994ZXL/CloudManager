@@ -28,7 +28,7 @@ import com.example.zxl.cloudmanager.model.Link;
 import java.util.ArrayList;
 import java.util.Date;
 
-
+//被弃用
 public class PMBugSearchFragment extends Fragment {
     private  static ArrayList<Bug> sBugs = new ArrayList<Bug>();
     private static final String SEARCH_KEY = "search_key";

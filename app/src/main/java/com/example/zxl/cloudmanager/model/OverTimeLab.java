@@ -55,7 +55,6 @@ public class OverTimeLab {
 
     public void set(String[] content) {
         OverTime overTime = new OverTime();
-        overTime.set(content);
         mOverTimes.add(overTime);
     }
 }

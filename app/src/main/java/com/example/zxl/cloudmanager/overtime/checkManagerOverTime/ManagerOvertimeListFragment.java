@@ -21,6 +21,7 @@ import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.OverTime;
+import com.example.zxl.cloudmanager.overtime.leader.LeaderOvertimeSearchActivity;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -56,6 +57,8 @@ public class ManagerOvertimeListFragment extends Fragment {
     private String key = "";
     private JSONObject keyObj = new JSONObject();
 
+    private String url;
+
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -70,6 +73,10 @@ public class ManagerOvertimeListFragment extends Fragment {
         getActivity().getActionBar().setTitle("加班列表");
 
         saveInstanceState = getArguments();
+
+        if (mFragment.getActivity().getClass() == LeaderOvertimeSearchActivity.class)
+            url = Link.work_list + Link.get_list;
+        else url = Link.manage_work + Link.get_list;
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -91,14 +98,20 @@ public class ManagerOvertimeListFragment extends Fragment {
                 if (-1 != saveInstanceState.getInt(Link.start_time)) {
                     keyObj.put(Link.start_time, saveInstanceState.getInt(Link.start_time));
                 }
+
                 if (-1 != saveInstanceState.getInt(Link.end_time)) {
                     keyObj.put(Link.end_time, saveInstanceState.getInt(Link.end_time));
                 }
-                if (-1 != saveInstanceState.getInt(Link.status)) {
-                    keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
-                }
-                keyObj.put(Link.mem_name, saveInstanceState.getString(Link.mem_name));
+
+                keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
+
+                keyObj.put(Link.mem_id, saveInstanceState.getString(Link.mem_id));
+
                 keyObj.put(Link.work_pm, saveInstanceState.getString(Link.work_pm));
+
+                keyObj.put("sort", "start_time desc");
+                keyObj.put("page_count", 50);
+                keyObj.put("curl_page", 1);
 
                 key = DESCryptor.Encryptor(keyObj.toString());
             } catch (Exception e) {
@@ -108,7 +121,7 @@ public class ManagerOvertimeListFragment extends Fragment {
             Log.d(TAG, "key: " + key);
         }
 
-        mHttpc.post(Link.localhost + "manage_work&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + url, mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 try {
@@ -188,7 +201,6 @@ public class ManagerOvertimeListFragment extends Fragment {
             viewHolder.mOvertimeDateBegin.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mOverTime.getStart_time()));
             viewHolder.mOvertimeDateEnd.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mOverTime.getEnd_time()));
             viewHolder.mOvertimeName.setText(mOverTime.getMem_name());
-            viewHolder.mProject.setText(mOverTime.getWork_name());
 
             viewHolder.itemView.setTag(overTimes.get(i));
         }
@@ -209,15 +221,12 @@ public class ManagerOvertimeListFragment extends Fragment {
             public TextView mOvertimeName;
             public TextView mOvertimeDateBegin;
             public TextView mOvertimeDateEnd;
-            public TextView mProject;
 
             public ViewHolder(View v) {
                 super(v);
-                mOvertimeName = (TextView)v.findViewById(R.id.main_fragment_overtime_name);
+                mOvertimeName = (TextView)v.findViewById(R.id.overtime_card_item_name);
                 mOvertimeDateBegin = (TextView) v.findViewById(R.id.overtime_card_item_begin_time);
                 mOvertimeDateEnd = (TextView) v.findViewById(R.id.overtime_card_item_end_time);
-                mProject = (TextView)v.findViewById(R.id.overtime_card_item_overtime_project);
-
             }
         }
 

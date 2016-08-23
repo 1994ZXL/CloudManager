@@ -1,17 +1,17 @@
-package com.example.zxl.cloudmanager.bug.projectManagerBug;
+package com.example.zxl.cloudmanager.bug.publicSearchBug;
 
 import android.app.Fragment;
 
 import com.example.zxl.cloudmanager.SingleFragmentActivity;
 
-public class ProjectBugDealActivity extends SingleFragmentActivity {
+public class PublicBugSearchActivity extends SingleFragmentActivity {
 
     /*public PublicSearchActivity(int i){
         switch ()
     }*/
     @Override
     protected Fragment createFragment(){
-        return new PMBugSearchFragment();
+        return new BugSearchFragment();
     }
 
 }

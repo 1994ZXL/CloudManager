@@ -17,12 +17,12 @@ public class MyOvertimeDetailFragment extends Fragment {
     private static OverTime sOverTime = new OverTime();
 
     private TextView mEmployerNameTV;
-    private TextView mProjectNameTV;
+    private TextView mProjectName;
     private TextView mBeginTimeTV;
     private TextView mEndTimeTV;
     private TextView mOvertimeReasonTV;
-    private TextView mTotalTimeTV;
-    private TextView mAllTimeTV;
+    private TextView mWorkTime;
+    private TextView mWorkStatus;
 
     public MyOvertimeDetailFragment() {
         // Required empty public constructor
@@ -45,22 +45,22 @@ public class MyOvertimeDetailFragment extends Fragment {
     }
 
     private void init(View v){
-        mEmployerNameTV = (TextView) v.findViewById(R.id.manager_employer_name_textview);
-        mProjectNameTV = (TextView) v.findViewById(R.id.manager_overtime_project_textview);
+        mEmployerNameTV = (TextView) v.findViewById(R.id.manager_overtime_name);
+        mProjectName = (TextView) v.findViewById(R.id.manager_overtime_project);
         mBeginTimeTV = (TextView) v.findViewById(R.id.manager_overtime_begin_time_textview);
         mEndTimeTV = (TextView) v.findViewById(R.id.manager_overtime_end_time_textview);
         mOvertimeReasonTV = (TextView) v.findViewById(R.id.manager_overtime_reason_textview);
-        mTotalTimeTV = (TextView) v.findViewById(R.id.manager_overtime_total_time_textview);
-        mAllTimeTV = (TextView) v.findViewById(R.id.manager_overtime_all_time_textview);
+        mWorkTime = (TextView) v.findViewById(R.id.manager_overtime_this_time_textview);
+        mWorkStatus = (TextView) v.findViewById(R.id.manager_overtime_status);
     }
 
     private void control() {
-        mEmployerNameTV.setText(sOverTime.getMem_id());
-        mProjectNameTV.setText(sOverTime.getWork_name());
+        mEmployerNameTV.setText(sOverTime.getMem_name());
+        mProjectName.setText(sOverTime.getWork_pm());
         mBeginTimeTV.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sOverTime.getStart_time()));
         mEndTimeTV.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sOverTime.getEnd_time()));
-        mOvertimeReasonTV.setText(sOverTime.getWork_reason());
-        mTotalTimeTV.setText(sOverTime.getThisTime());
-        mAllTimeTV.setText(sOverTime.getTotalTime());
+        mOvertimeReasonTV.setText(sOverTime.getWork_resaon());
+        mWorkTime.setText(sOverTime.getWork_time());
+        mWorkStatus.setText(sOverTime.getStatus());
     }
 }

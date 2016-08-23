@@ -115,7 +115,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".bug.publicSearchBug.ProjectBugSearchActivity"
+        <activity android:name=".bug.publicSearchBug.PublicBugSearchActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -200,7 +200,7 @@
         </activity>
 
         <!--项目主管-->
-        <activity android:name=".bug.projectManagerBug.ProjectBugDealActivity"
+        <activity android:name=".bug.projectManagerBug.PMBugActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
