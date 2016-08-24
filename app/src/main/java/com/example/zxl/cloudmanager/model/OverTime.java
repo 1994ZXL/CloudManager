@@ -16,7 +16,7 @@ public class OverTime {
     private String work_pm; //项目名
     private int start_time; //加班开始时间
     private int end_time; //加班结束时间
-    private int status; //状态 1:等待,2:确认,3:取消，默认为等待
+    private int status; //状态 2:确认,3:取消，默认为确认
     private String thisTime;
     private String work_resaon; //加班原因
     private String totalTime;
@@ -27,6 +27,7 @@ public class OverTime {
     }
 
     private static final String JSON_NAME = "mem_name";
+    private static final String JSON_WORK_ID = "work_id";
     private static final String JSON_STATUS = "status";
     private static final String JSON_PROJECT = "work_pm";
     private static final String JSON_BEGIN_TIME = "start_time";
@@ -38,6 +39,8 @@ public class OverTime {
     public OverTime(JSONObject json) throws JSONException {
         if (json.has(JSON_NAME))
             mem_name = json.getString(JSON_NAME);
+        if (json.has(JSON_WORK_ID))
+            work_id = json.getString(JSON_WORK_ID);
         if (json.has(JSON_PROJECT))
             work_pm = json.getString(JSON_PROJECT);
         if (json.has(JSON_STATUS))
@@ -63,10 +66,8 @@ public class OverTime {
         return json;
     }
     public String getStatus() {
-        //状态:1:等待,2:确认,3:取消，默认为等待
-        if (status == 1) {
-            return "等待";
-        } else if (status == 2) {
+        //状态 2:确认,3:取消，默认为确认
+        if (status == 2) {
             return "确认";
         } else if (status == 3) {
             return "取消";

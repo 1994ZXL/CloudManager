@@ -11,6 +11,9 @@ public class Link {
     public static final String get_list = "get_list";
     public static final String edit = "edit";
 
+    public static final String is_pmmaster = "is_pmmaster"; //是否是项目主管
+    public static final String is_puncher = "is_puncher"; //是否是考勤主管
+
     //manage_leave
     public static final String manage_leave = "manage_leave&act=";
     public static final String mem_name = "mem_name";//员工姓名
@@ -37,11 +40,13 @@ public class Link {
     public static final String start_time_e = "start_time_e";//开始时间(大)
     public static final String over_time_s = "over_time_s";//回归时间（小）
     public static final String over_time_e = "over_time_e";//回归时间（大）
+    public static final String trip_id = "trip_id"; //出差id
 
     //manage_work
     public static final String manage_work = "manage_work&act=";
     public static final String mem_id = "mem_id";//加班员工ID
     public static final String work_pm = "work_pm";//加班项目名
+    public static final String work_id = "work_id"; //加班id
 
     //my_work
     public static final String my_work = "my_work&act=";

@@ -53,7 +53,7 @@ public class ManagerTravelSearchFragment extends Fragment {
 
 
     private ArrayAdapter<String> stateAdapter;
-    private static final String[] stateList={"未选择","等待","确认","取消"};//出差状态 0：等待，1：确认，2：取消
+    private static final String[] stateList={"未选择","确认","取消"};//出差状态 2：确认，3：取消
     private Button mSearchBtn;
 
     public ManagerTravelSearchFragment() {
@@ -77,14 +77,12 @@ public class ManagerTravelSearchFragment extends Fragment {
         mStateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //出差状态 0：等待，1：确认，2：取消
+                //出差状态 2：确认，3：取消
                 state = stateList[i];
-                if (state == "等待")
-                    status = 0;
                 if (state == "确认")
-                    status = 1;
-                if (state == "取消")
                     status = 2;
+                if (state == "取消")
+                    status = 3;
             }
 
             @Override
@@ -183,7 +181,7 @@ public class ManagerTravelSearchFragment extends Fragment {
                 fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.addToBackStack(null);
-                transaction.replace(R.id.cmTravelActivity, fragment);
+                transaction.replace(R.id.blankActivity, fragment);
                 transaction.commit();
             }
         });

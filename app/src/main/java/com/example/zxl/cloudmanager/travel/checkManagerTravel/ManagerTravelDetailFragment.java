@@ -2,61 +2,158 @@ package com.example.zxl.cloudmanager.travel.checkManagerTravel;
 
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.DESCryptor;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
+import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.model.Travel;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ManagerTravelDetailFragment extends Fragment {
+    private static final String TAG = "MTDetailFragment";
 
-    private Spinner mEmployerNameSpinner;
-    private Button mBeginTimeBtn;
-    private Button mEndTimeBtn;
-    private TextView mTravelContentET;
+    private static Travel mTravel = new Travel();
 
-    private Button mSubmitBtn;
+    private TextView mEmployerName;
+    private TextView mBeginTime;
+    private TextView mEndTime;
+    private TextView mTravelReason;
+    private TextView mTravelAdd;
+    private TextView mTravelAddress;
+    private Spinner mStatus;
 
-    private ArrayAdapter<String> employerAdapter;
-    private static final String[] employerList={"全部"};
+    private ArrayAdapter<String> statusAdapter;
+    private String[] statusList;
+    private int status;
 
-    public ManagerTravelDetailFragment() {
-        // Required empty public constructor
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams = new RequestParams();
+    private JSONObject keyObj = new JSONObject();
+    private String key = "";
+
+    public static ManagerTravelDetailFragment newInstance(Object data) {
+        mTravel = (Travel) data;
+        ManagerTravelDetailFragment fragment = new ManagerTravelDetailFragment();
+        return fragment;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_travel_detail, container, false);
+
         getActivity().getActionBar().setTitle("出差处理");
+
         init(v);
-        employerAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, employerList);
-        employerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mEmployerNameSpinner.setAdapter(employerAdapter);
+        control();
 
-        mSubmitBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-
-            }
-        });
         return v;
     }
 
     private void init(View v){
-        mBeginTimeBtn = (Button) v.findViewById(R.id.manager_travel_begin_time_button);
-        mEndTimeBtn = (Button) v.findViewById(R.id.manager_travel_end_time_button);
-        mEmployerNameSpinner = (Spinner) v.findViewById(R.id.manager_travel_employer_name_spinner);
-        mTravelContentET = (TextView) v.findViewById(R.id.manager_travel_content_edittext);
+        mBeginTime = (TextView) v.findViewById(R.id.employer_travel_beginTime);
+        mEndTime = (TextView) v.findViewById(R.id.employer_travel_endTime);
+        mEmployerName = (TextView) v.findViewById(R.id.manager_travel_employer_name_spinner);
+        mTravelReason = (TextView) v.findViewById(R.id.manager_travel_reason);
+        mTravelAdd = (TextView) v.findViewById(R.id.manager_travel_add);
+        mTravelAddress = (TextView) v.findViewById(R.id.manager_travel_address);
+        mStatus = (Spinner) v.findViewById(R.id.manager_travel_state);
+        if (mTravel.getStatus() == "确认")
+            statusList = new String[] {"确认" ,"取消"};
+        if (mTravel.getStatus() == "取消")
+            statusList = new String[] {"取消" ,"确认"};
 
-        mSubmitBtn = (Button) v.findViewById(R.id.manager_travel_submit_button);
+    }
+
+    private void control() {
+        mEmployerName.setText(mTravel.getMem_name());
+        mBeginTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mTravel.getStart_time()));
+        mEndTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mTravel.getEnd_time()));
+        mTravelReason.setText(mTravel.getTrip_reason());
+        mTravelAdd.setText(mTravel.getAddress());
+        mTravelAddress.setText(mTravel.getDetail_addr());
+
+        statusAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, statusList);
+        statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mStatus.setAdapter(statusAdapter);
+        mStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                //出差状态 2：确认，3：取消
+                if (statusList[i] == "确认")
+                    status = 2;
+                if (statusList[i] == "取消")
+                    status = 3;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.message_save, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_edit_message:
+                try {
+                    keyObj.put(Link.trip_id, mTravel.getTrip_id());
+                    keyObj.put(Link.status, status);
+                    key = DESCryptor.Encryptor(keyObj.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mParams.put("key", key);
+                Log.d(TAG,"key:" + key);
+                mHttpc.post(Link.localhost + Link.manage_trip + Link.edit, mParams, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                    }
+                });
+
+                FragmentManager fm = getFragmentManager();
+                fm.popBackStack();
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

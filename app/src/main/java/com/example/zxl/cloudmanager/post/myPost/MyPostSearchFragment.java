@@ -211,12 +211,12 @@ public class MyPostSearchFragment extends Fragment {
     }
 
     private void updateBeginDate(){
-        bgtime = android.text.format.DateFormat.format("yyyy.M.dd", beginTime).toString();
+        bgtime = android.text.format.DateFormat.format("yyyy年MM月dd", beginTime).toString();
         mBeginTimeBtn.setText(bgtime);
     }
     private void updateEndDate(){
         if (endTime.after(beginTime)) {
-            edtime = android.text.format.DateFormat.format("yyyy.M.dd", endTime).toString();
+            edtime = android.text.format.DateFormat.format("yyyy年MM月dd", endTime).toString();
             mEndTimeBtn.setText(edtime);
         } else {
             Toast.makeText(getActivity(),
@@ -226,12 +226,12 @@ public class MyPostSearchFragment extends Fragment {
     }
 
     private void updatePostBeginDate(){
-        postbgtime = android.text.format.DateFormat.format("yyyy.M.dd", postBeginTime).toString();
+        postbgtime = android.text.format.DateFormat.format("yyyy年MM月dd", postBeginTime).toString();
         mPostBeginTimeBtn.setText(postbgtime);
     }
     private void updatePostEndDate(){
         if (postEndTime.after(postBeginTime)) {
-            postedtime = android.text.format.DateFormat.format("yyyy.M.dd", postEndTime).toString();
+            postedtime = android.text.format.DateFormat.format("yyyy年MM月dd", postEndTime).toString();
             mPostEndTimeBtn.setText(postedtime);
         } else {
             Toast.makeText(getActivity(),

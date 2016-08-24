@@ -274,7 +274,8 @@
     <string name="employer_back_endTime">回程结束时间</string>
     <string name="employer_travel_add">出差地址</string>
     <string name="employer_travel_address">出差详细地址</string>
-    <string name="employer_travel_state">状态</string>
+    <string name="employer_travel_state">出差状态</string>
+    <string name="employer_travel_reason">出差原因</string>
 
     <string name="post_submit_time">日报时间</string>
     <string name="my_post_content">日报内容</string>

@@ -10,8 +10,8 @@ public class Travel {
 
 
     private String mem_id; //员工姓名
-    private int status; //出差状态 0：等待，1：确认，2：取消
-
+    private int status; //出差状态 2：确认，3：取消
+    private String trip_id;
     private String mem_name;
     private int start_time;
     private int end_time;
@@ -21,6 +21,7 @@ public class Travel {
 
     private static final String JSON_NAME = "mem_name";
     private static final String JSON_MEM_ID = "mem_id";
+    private static final String JSON_TRIP_ID = "trip_id";
     private static final String JSON_STATUS = "status";
     private static final String JSON_ADDRESS = "address";
     private static final String JSON_DETAIL_ADDR = "detail_addr";
@@ -47,6 +48,8 @@ public class Travel {
             mem_name = json.getString(JSON_NAME);
         if (json.has(JSON_MEM_ID))
             mem_id = json.getString(JSON_MEM_ID);
+        if (json.has(JSON_TRIP_ID))
+            trip_id = json.getString(JSON_TRIP_ID);
         if (json.has(JSON_ADDRESS))
             address = json.getString(JSON_ADDRESS);
         if (json.has(JSON_STATUS))
@@ -75,15 +78,21 @@ public class Travel {
     }
 
     public String getStatus() {
-        //状态:0:等待,1:确认,2:取消
-        if (status == 0) {
-            return "等待";
-        } else if (status == 1) {
+        //状态:2:确认,3:取消
+         if (status == 2) {
             return "确认";
-        } else if (status == 2) {
+        } else if (status == 3) {
             return "取消";
         }
         return null;
+    }
+
+    public String getTrip_id() {
+        return trip_id;
+    }
+
+    public void setTrip_id(String trip_id) {
+        this.trip_id = trip_id;
     }
 
     public void setStatus(int status) {

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
@@ -21,6 +22,7 @@ import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.OverTime;
+import com.example.zxl.cloudmanager.model.User;
 import com.example.zxl.cloudmanager.overtime.leader.LeaderOvertimeSearchActivity;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -105,13 +107,16 @@ public class ManagerOvertimeListFragment extends Fragment {
 
                 keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
 
-                keyObj.put(Link.mem_id, saveInstanceState.getString(Link.mem_id));
+                keyObj.put(Link.mem_name, saveInstanceState.getString(Link.mem_name));
 
                 keyObj.put(Link.work_pm, saveInstanceState.getString(Link.work_pm));
 
                 keyObj.put("sort", "start_time desc");
                 keyObj.put("page_count", 50);
                 keyObj.put("curl_page", 1);
+                keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+                keyObj.put(Link.is_pmmaster, User.newInstance().getIs_pmmaster());
+                keyObj.put(Link.is_puncher, User.newInstance().getIs_puncher());
 
                 key = DESCryptor.Encryptor(keyObj.toString());
             } catch (Exception e) {
@@ -124,45 +129,61 @@ public class ManagerOvertimeListFragment extends Fragment {
         mHttpc.post(Link.localhost + url, mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
-                try {
-                    if (rjo.getBoolean("result")) {
-                        JSONArray array = rjo.getJSONArray("data1");
-                        Log.d(TAG, "array: " + array);
-                        for (int i = 0; i < array.length(); i++) {
-                            overTimes.add(new OverTime(array.getJSONObject(i)));
-                        }
-                        Log.d(TAG, "overtimes: " + overTimes);
-                        mRecyclerView = (RecyclerView)v.findViewById(R.id.overtime_recyclerview);
-                        mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
-                        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-                        mRecyclerView.setHasFixedSize(true);
-                        myAdapter = new MyAdapter(mFragment.getActivity(), overTimes);
-                        mRecyclerView.setAdapter(myAdapter);
-                        mCardView = (CardView) v.findViewById(R.id.fragment_my_overtime);
-                        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
-                            @Override
-                            public void onItemClick(View view, Object data) {
-                                Fragment fragment = ManagerOvertimeDetailFragment.newInstance(data);
-                                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                                if (!fragment.isAdded()) {
-                                    transaction.addToBackStack(null);
-                                    transaction.hide(mFragment);
-                                    transaction.add(R.id.blankActivity, fragment);
-                                    transaction.commit();
-                                } else {
-                                    transaction.hide(mFragment);
-                                    transaction.show(fragment);
-                                    transaction.commit();
-                                }
+                if (statusCode == 200) {
+                    try {
+                        if (rjo.getBoolean("result")) {
+                            JSONArray array = rjo.getJSONArray("data1");
+                            Log.d(TAG, "array: " + array);
+                            for (int i = 0; i < array.length(); i++) {
+                                overTimes.add(new OverTime(array.getJSONObject(i)));
                             }
-                        });
+                            Log.d(TAG, "overtimes: " + overTimes);
+                            mRecyclerView = (RecyclerView)v.findViewById(R.id.overtime_recyclerview);
+                            mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
+                            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                            mRecyclerView.setHasFixedSize(true);
+                            myAdapter = new MyAdapter(mFragment.getActivity(), overTimes);
+                            mRecyclerView.setAdapter(myAdapter);
+                            mCardView = (CardView) v.findViewById(R.id.fragment_my_overtime);
+                            myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                                @Override
+                                public void onItemClick(View view, Object data) {
+                                    Fragment fragment = ManagerOvertimeDetailFragment.newInstance(data);
+                                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                    if (!fragment.isAdded()) {
+                                        transaction.addToBackStack(null);
+                                        transaction.hide(mFragment);
+                                        transaction.add(R.id.blankActivity, fragment);
+                                        transaction.commit();
+                                    } else {
+                                        transaction.hide(mFragment);
+                                        transaction.show(fragment);
+                                        transaction.commit();
+                                    }
+                                }
+                            });
 
-                    } else {
+                        } else {
 
+                        }
+                    } catch (JSONException e) {
+                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                        try {
+                            Toast.makeText(getActivity(),
+                                    rjo.getString("msg"),
+                                    Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
                     }
-                } catch (JSONException e) {
-                    Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                 }
+
+            }
+
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
             }
 
         });
@@ -201,6 +222,8 @@ public class ManagerOvertimeListFragment extends Fragment {
             viewHolder.mOvertimeDateBegin.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mOverTime.getStart_time()));
             viewHolder.mOvertimeDateEnd.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mOverTime.getEnd_time()));
             viewHolder.mOvertimeName.setText(mOverTime.getMem_name());
+            viewHolder.mOvertimeProject.setText(mOverTime.getWork_pm());
+            viewHolder.mOvertimeReason.setText(mOverTime.getWork_resaon());
 
             viewHolder.itemView.setTag(overTimes.get(i));
         }
@@ -221,12 +244,16 @@ public class ManagerOvertimeListFragment extends Fragment {
             public TextView mOvertimeName;
             public TextView mOvertimeDateBegin;
             public TextView mOvertimeDateEnd;
+            public TextView mOvertimeProject;
+            public TextView mOvertimeReason;
 
             public ViewHolder(View v) {
                 super(v);
+                mOvertimeProject = (TextView) v.findViewById(R.id.main_fragment_overtime_project);
                 mOvertimeName = (TextView)v.findViewById(R.id.overtime_card_item_name);
                 mOvertimeDateBegin = (TextView) v.findViewById(R.id.overtime_card_item_begin_time);
                 mOvertimeDateEnd = (TextView) v.findViewById(R.id.overtime_card_item_end_time);
+                mOvertimeReason = (TextView) v.findViewById(R.id.overtime_card_item_overtime_reason);
             }
         }
 

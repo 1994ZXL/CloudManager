@@ -135,11 +135,18 @@ public class ManagerTravelListFragment extends ListFragment {
         Travel travel= ((TravelAdapter)getListAdapter()).getItem(position);
         Log.d(TAG, "item被点击");
 
+        if (mFragment.getActivity().getClass() == ManagerTravelActivity.class) {
+            mAimFragment = ManagerTravelDetailFragment.newInstance(travel);
+
+        } else if (mFragment.getActivity().getClass() == LeaderTravelSearchActivity.class) {
+            mAimFragment = MyTravelDetailFragment.newInstance(travel);
+        }
+
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (!mAimFragment.isAdded()) {
             transaction.addToBackStack(null);
             transaction.hide(mFragment);
-            transaction.add(R.id.cmTravelActivity, mAimFragment);
+            transaction.add(R.id.blankActivity, mAimFragment);
             transaction.commit();
         } else {
             transaction.hide(mFragment);
@@ -175,7 +182,7 @@ public class ManagerTravelListFragment extends ListFragment {
             Travel travel = getItem(position);
 
             TextView name = (TextView) convertView.findViewById(R.id.main_fragment_travel_name);
-            name.setText(travel.getMem_id());
+            name.setText(travel.getMem_name());
 
             TextView beginTime = (TextView) convertView.findViewById(R.id.main_fragment_travel_beginTime);
             beginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(travel.getStart_time()));

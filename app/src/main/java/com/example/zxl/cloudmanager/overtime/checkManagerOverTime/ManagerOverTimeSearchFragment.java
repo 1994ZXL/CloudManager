@@ -65,7 +65,7 @@ public class ManagerOverTimeSearchFragment extends Fragment {
     private ArrayList<String> mem_id = new ArrayList<String>(); //名字id
     private ArrayList<String> project_name = new ArrayList<String>(); //项目
     private ArrayList<String> pm_id = new ArrayList<String>(); //项目id
-    private static final String[] overtimeStatus = {"全部", "等待" ,"确认" ,"取消"}; //状态:1:等待,2:确认,3:取消，默认为等待
+    private static final String[] overtimeStatus = {"全部" ,"确认" ,"取消"}; //状态 2:确认,3:取消，默认为确认
 
     private Button mSearchBtn;
 
@@ -202,8 +202,8 @@ public class ManagerOverTimeSearchFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 state = overtimeStatus[i];
-                //状态:1:等待,2:确认,3:取消，默认为等待
-                status = i;
+                //状态 2:确认,3:取消，默认为确认
+                status = i+1;
             }
 
             @Override
@@ -229,7 +229,7 @@ public class ManagerOverTimeSearchFragment extends Fragment {
                     bundle.putInt(Link.end_time, -1);
                 }
                 bundle.putInt(Link.status, status);
-                bundle.putString(Link.mem_id, employerId);
+                bundle.putString(Link.mem_name, employerName);
                 bundle.putString(Link.work_pm, projectId);
 
                 mAimFragment.setArguments(bundle);
