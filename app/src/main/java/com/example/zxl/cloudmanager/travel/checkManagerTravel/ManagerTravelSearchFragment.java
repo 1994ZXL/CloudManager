@@ -26,6 +26,7 @@ import com.example.zxl.cloudmanager.model.Link;
 
 import java.util.Date;
 
+//被弃用
 public class ManagerTravelSearchFragment extends Fragment {
     private static final String TAG = "MTSFragment";
 

@@ -18,6 +18,7 @@ import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Travel;
+import com.example.zxl.cloudmanager.model.User;
 import com.example.zxl.cloudmanager.travel.leader.LeaderTravelSearchActivity;
 import com.example.zxl.cloudmanager.travel.myTravel.MyTravelDetailFragment;
 import com.loopj.android.http.AsyncHttpClient;
@@ -39,8 +40,10 @@ public class ManagerTravelListFragment extends ListFragment {
     private static final String TAG = "MTravelListFragment";
     private ArrayList<Travel> travels = new ArrayList<Travel>();
     private Button mSearchBtn;
+
     private Fragment mFragment;
     private Fragment mAimFragment;
+    private String url;
 
     private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
@@ -58,8 +61,15 @@ public class ManagerTravelListFragment extends ListFragment {
 
         if (mFragment.getActivity().getClass() == ManagerTravelActivity.class) {
             mAimFragment = new ManagerTravelDetailFragment();
+            try {
+                keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            url = Link.manage_trip + Link.get_list;
         } else if (mFragment.getActivity().getClass() == LeaderTravelSearchActivity.class) {
             mAimFragment = new MyTravelDetailFragment();
+            url = Link.trip_list + Link.get_list;
         }
 
         saveInstanceState = getArguments();
@@ -85,7 +95,6 @@ public class ManagerTravelListFragment extends ListFragment {
                 keyObj.put("sort", "start_time_s desc");
                 keyObj.put("page_count", 20);
                 keyObj.put("curl_page", 1);
-                //keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
 
                 key = DESCryptor.Encryptor(keyObj.toString());
             } catch (Exception e) {
@@ -95,7 +104,7 @@ public class ManagerTravelListFragment extends ListFragment {
             Log.d(TAG, "key: " + key);
         }
 
-        mHttpc.post(Link.localhost + "manage_trip&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + url, mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 try {

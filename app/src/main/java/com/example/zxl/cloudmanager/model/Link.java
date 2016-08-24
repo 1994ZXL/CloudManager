@@ -25,6 +25,9 @@ public class Link {
     //my_leave
     public static final String my_leave = "my_leave&act=";
 
+    //trip_list
+    public static final String trip_list = "trip_list&act=";
+
     //my_trip
     public static final String my_trip = "my_trip&act=";
 

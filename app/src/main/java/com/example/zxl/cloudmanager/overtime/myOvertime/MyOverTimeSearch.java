@@ -44,7 +44,7 @@ public class MyOverTimeSearch extends Fragment {
 
     private ArrayList<String> project_name = new ArrayList<String>(); //项目
     private ArrayList<String> pm_id = new ArrayList<String>(); //项目id
-    private static final String[] statusList = {"等待", "确认", "取消", };//状态:1:等待,2:确认,3:取消，默认为等待
+    private static final String[] statusList = {"全部", "等待", "确认", "取消" };//状态:1:等待,2:确认,3:取消，默认为等待
     private Button mSearchBtn;
 
     private Date beginTime;
@@ -116,15 +116,7 @@ public class MyOverTimeSearch extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //状态:1:等待,2:确认,3:取消，默认为等待
-                if (statusList[i] == "等待") {
-                    status = 1;
-                }
-                if (statusList[i] == "确认") {
-                    status = 2;
-                }
-                if (statusList[i] == "取消") {
-                    status = 3;
-                }
+                status = i;
             }
 
             @Override
