@@ -106,11 +106,13 @@
                 android:layout_marginTop="40dp">
                 <TextView
                     style="@style/font"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:text="@string/dispose_suggestion"/>
 
-                <TextView
-                    style="@style/font"
+                <EditText
+                    style="@style/editText"
+                    android:layout_width="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:id="@+id/cm_leave_deal_suggestion"/>

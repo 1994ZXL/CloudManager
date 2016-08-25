@@ -22,6 +22,7 @@ import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Leave;
 import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.model.User;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -67,8 +68,9 @@ public class ManagerLeaveListFragment extends Fragment {
     }
 
     @Override
-    public void onResume(){
-        super.onResume();
+    public void onPause() {
+        super.onPause();
+        leaves.clear();
     }
 
     @Override
@@ -101,11 +103,15 @@ public class ManagerLeaveListFragment extends Fragment {
 
                 if (-1 != saveInstanceState.getInt(Link.start_time))
                     keyObj.put(Link.start_time, saveInstanceState.getInt(Link.start_time));
+
                 if (-1 != saveInstanceState.getInt(Link.end_time))
                     keyObj.put(Link.end_time, saveInstanceState.getInt(Link.end_time));
 
                 keyObj.put(Link.leave_type, saveInstanceState.getInt(Link.leave_type));
                 keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
+                keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+                keyObj.put(Link.is_pmmaster, User.newInstance().getIs_pmmaster());
+                keyObj.put(Link.is_puncher, User.newInstance().getIs_puncher());
 
             } catch (Exception e) {
                 e.printStackTrace();

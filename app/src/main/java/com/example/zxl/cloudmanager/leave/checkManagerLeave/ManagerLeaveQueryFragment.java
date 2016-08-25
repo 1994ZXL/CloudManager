@@ -30,6 +30,8 @@ import java.util.Date;
 /**
  * Created by ZXL on 2016/7/15.
  */
+
+//被弃用
 public class ManagerLeaveQueryFragment extends ListFragment{
     private ArrayList<Leave> mLeaves;
     private static final String[] leaveTypeList={"未选择", "没有请假", "事假", "病假", "休假", "婚假", "其他"};

@@ -4,6 +4,8 @@ package com.example.zxl.cloudmanager.leave.checkManagerLeave;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +42,7 @@ import cz.msebera.android.httpclient.Header;
 public class ManagerLeaveDealFragment extends Fragment {
     private TextView name;
     private TextView leaveBeginTime,leaveEndTime,leaveKind,leaveReason,leaveApplyTime;
-    private TextView leaveSuggestion;
+    private EditText leaveSuggestion;
     private TextView leaveDealTime;
     private Spinner leaveState;
 
@@ -47,6 +50,8 @@ public class ManagerLeaveDealFragment extends Fragment {
     private String[] leaveStateList; //状态:1:待批准,2:已批准,3:拒绝
     private ArrayAdapter<String> spinnerAdapter;
     private int status;
+
+    private String suggestion;
 
     private static Leave mLeave = new Leave();
 
@@ -91,7 +96,7 @@ public class ManagerLeaveDealFragment extends Fragment {
         leaveEndTime = (TextView)view.findViewById(R.id.cm_leave_deal_end_time);
         leaveReason = (TextView)view.findViewById(R.id.cm_leave_deal_ask_reason);
         leaveApplyTime = (TextView)view.findViewById(R.id.cm_leave_deal_apply_time);
-        leaveSuggestion = (TextView) view.findViewById(R.id.cm_leave_deal_suggestion);
+        leaveSuggestion = (EditText) view.findViewById(R.id.cm_leave_deal_suggestion);
         leaveState = (Spinner) view.findViewById(R.id.cm_leave_deal_state);
         leaveDealTime = (TextView)view.findViewById(R.id.cm_leave_deal_time);
     }
@@ -103,6 +108,22 @@ public class ManagerLeaveDealFragment extends Fragment {
         Log.d(TAG, "beginTime: " + leaveBeginTime.getText());
         leaveEndTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mLeave.getEnd_time()));
         leaveSuggestion.setText(mLeave.getHandle_opinion());
+        leaveSuggestion.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                suggestion = charSequence.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         leaveReason.setText(mLeave.getLeave_reason());
         if ("null" != mLeave.getHandle_time()) {
             Log.d(TAG, "Handle_time1: " + mLeave.getHandle_time());
@@ -151,7 +172,9 @@ public class ManagerLeaveDealFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_item_edit_message:
                 try {
+                    keyObj.put(Link.handle_opinion, suggestion);
                     keyObj.put(Link.status, status);
+                    keyObj.put(Link.leave_id, mLeave.getLeave_id());
                     key = DESCryptor.Encryptor(keyObj.toString());
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -171,18 +194,18 @@ public class ManagerLeaveDealFragment extends Fragment {
                     }
 
                 });
-                Fragment fragment = new ManagerLeaveListFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.replace(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
+//                Fragment fragment = new ManagerLeaveListFragment();
+//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                if (!fragment.isAdded()) {
+//                    transaction.addToBackStack(null);
+//                    transaction.hide(mFragment);
+//                    transaction.replace(R.id.blankActivity, fragment);
+//                    transaction.commit();
+//                } else {
+//                    transaction.hide(mFragment);
+//                    transaction.show(fragment);
+//                    transaction.commit();
+//                }
                 return true;
         }
         return super.onOptionsItemSelected(item);

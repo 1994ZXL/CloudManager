@@ -203,7 +203,9 @@ public class ManagerOverTimeSearchFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 state = overtimeStatus[i];
                 //状态 2:确认,3:取消，默认为确认
-                status = i+1;
+                if (state == "全部")
+                    status = 0;
+                else status = i+1;
             }
 
             @Override

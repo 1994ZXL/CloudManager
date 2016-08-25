@@ -46,7 +46,7 @@ public class MyTravelSearchFragment extends Fragment {
     private Spinner mStateSpinner;
 
     private ArrayAdapter<String> stateAdapter;
-    private static final String[] stateList={"全部","等待","确认","取消"}; //出差状态 0：等待，1：确认，2：取消
+    private static final String[] stateList={"全部","确认","取消"}; //出差状态 2：确认，3：取消
     private static final String TAG = "MyTravelSearchFragment";
     private Button mSearchBtn;
 
@@ -64,10 +64,6 @@ public class MyTravelSearchFragment extends Fragment {
     private Fragment mFragment;
 
     private Fragment mAimFragment;
-
-    public MyTravelSearchFragment() {
-
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -132,8 +128,7 @@ public class MyTravelSearchFragment extends Fragment {
             bundle.putInt(Link.over_time_e, -1);
         }
 
-        if (state != -1)
-            bundle.putInt(Link.status, state);
+        bundle.putInt(Link.status, state);
 
         mAimFragment.setArguments(bundle);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -228,13 +223,11 @@ public class MyTravelSearchFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 //出差状态 0：等待，1：确认，2：取消
                 if (stateList[i] == "全部")
-                    state = -1;
-                if (stateList[i] == "等待")
                     state = 0;
                 if (stateList[i] == "确认")
-                    state = 1;
-                if (stateList[i] == "取消")
                     state = 2;
+                if (stateList[i] == "取消")
+                    state = 3;
             }
 
             @Override

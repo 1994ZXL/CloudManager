@@ -63,12 +63,22 @@ public class ManagerTravelListFragment extends ListFragment {
             mAimFragment = new ManagerTravelDetailFragment();
             try {
                 keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+                keyObj.put(Link.is_puncher, User.newInstance().getIs_puncher());
+                keyObj.put(Link.is_pmmaster, User.newInstance().getIs_pmmaster());
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             url = Link.manage_trip + Link.get_list;
         } else if (mFragment.getActivity().getClass() == LeaderTravelSearchActivity.class) {
             mAimFragment = new MyTravelDetailFragment();
+            try {
+                keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+                keyObj.put(Link.mem_job, User.newInstance().getMem_job());
+                keyObj.put(Link.is_pmleader, User.newInstance().getIs_pmleader());
+                keyObj.put(Link.comp_id, User.newInstance().getComp_id());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
             url = Link.trip_list + Link.get_list;
         }
 
@@ -92,8 +102,10 @@ public class ManagerTravelListFragment extends ListFragment {
                 if (-1 != saveInstanceState.getInt(Link.over_time_e)) {
                     keyObj.put(Link.over_time_e, saveInstanceState.getInt(Link.over_time_e));
                 }
-                keyObj.put("sort", "start_time_s desc");
-                keyObj.put("page_count", 20);
+                keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
+
+                keyObj.put("sort", "start_time desc");
+                keyObj.put("page_count", 50);
                 keyObj.put("curl_page", 1);
 
                 key = DESCryptor.Encryptor(keyObj.toString());

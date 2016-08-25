@@ -13,6 +13,8 @@ public class Link {
 
     public static final String is_pmmaster = "is_pmmaster"; //是否是项目主管
     public static final String is_puncher = "is_puncher"; //是否是考勤主管
+    public static final String is_pmleader = "is_pmleader"; //是否是项目领导
+    public static final String mem_job = "mem_job"; //职务
 
     //manage_leave
     public static final String manage_leave = "manage_leave&act=";
@@ -22,6 +24,9 @@ public class Link {
     public static final String start_time = "start_time";//开始时间
     public static final String end_time = "end_time";//结束时间
     public static final String leave_reson = "leave_reason"; //请假原因
+    public static final String handle_opinion = "handle_opinion"; //处理意见
+    public static final String leave_id = "leave_id"; //请假id
+
     //leave_list
     public static final String leave_list = "leave_list&act=";
 
