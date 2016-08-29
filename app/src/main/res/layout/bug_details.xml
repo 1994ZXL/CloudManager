@@ -37,24 +37,9 @@
                         style="@style/font"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:id="@+id/bug_details_functionModule"/>
+                        android:id="@+id/bug_details_projectName"/>
                 </LinearLayout>
-                <!-- bug序号-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/bug_number"/>
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_number"/>
-                </LinearLayout>
+
                 <!-- bug等级-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -95,10 +80,12 @@
                     android:layout_marginTop="40dp">
                     <TextView
                         style="@style/font"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:text="@string/bug_content" />
-                    <TextView
-                        style="@style/font"
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center"
                         android:id="@+id/bug_details_content"/>
@@ -115,59 +102,11 @@
                 android:orientation="vertical"
                 android:background="@color/white">
 
-                <!-- 用例编号-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/usecase_id"/>
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_usecase_number" />
-                </LinearLayout>
-                <!-- 操作模式-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/operation_mode"/>
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_operation_mode"/>
-                </LinearLayout>
-                <!-- 进入方式-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/entrance_mode"/>
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_entrance_mode"/>
-                </LinearLayout>
                 <!-- 发现时间-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    android:orientation="horizontal">
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
@@ -210,23 +149,12 @@
                         android:gravity="center"
                         android:id="@+id/bug_details_edit_time"/>
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <!-- 第三块-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@color/white">
-
                 <!-- 修改人-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
                     <TextView
                         style="@style/font"
                         android:layout_weight="1"
@@ -236,22 +164,6 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:id="@+id/bug_details_edit_man"/>
-                </LinearLayout>
-                <!-- 所属项目-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/under_program"/>
-                    <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_under_program"/>
                 </LinearLayout>
 
             </LinearLayout>

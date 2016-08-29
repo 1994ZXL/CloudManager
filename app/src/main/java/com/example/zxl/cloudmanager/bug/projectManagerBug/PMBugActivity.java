@@ -7,9 +7,7 @@ import com.example.zxl.cloudmanager.bug.publicSearchBug.BugSearchFragment;
 
 public class PMBugActivity extends SingleFragmentActivity {
 
-    /*public PublicSearchActivity(int i){
-        switch ()
-    }*/
+
     @Override
     protected Fragment createFragment(){
         return new BugSearchFragment();

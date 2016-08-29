@@ -8,6 +8,7 @@ import org.json.JSONObject;
  */
 public class Bug {
     private String bugNumber;
+    private String pmbug_id; //bug id
     private int level; //bug等级
     private int status; //bug状态
     private String project_name;
@@ -22,11 +23,11 @@ public class Bug {
     private int modify_time_end; //修改时间 结束
     private String modifier; //修改人
     private String underProgram;
-
-    private String functionModel;
+    private String content; //内容
 
     public Bug(){}
 
+    private static final String JSON_PMBUG_ID = "pmbug_id";
     private static final String JSON_LEVEL = "level";
     private static final String JSON_STATE = "status";
     private static final String JSON_PROJECT = "project_name";
@@ -40,24 +41,11 @@ public class Bug {
     private static final String JSON_CASE_MODE = "case_mode";
     private static final String JSON_SUBMITTER = "submitter";
     private static final String JSON_MODIFIER = "modifier" ;
-
-    public void setContent(String[] content) {
-        setFunctionModel(content[0]);
-        setBugNumber(content[1]);
-        //setLevel(content[2]);
-        //setStatus(content[3]);
-        setProject_name(content[4]);
-        setMem_name(content[5]);
-        //setCase_mode(content[6]);
-        //setSubmit_time(content[7]);
-        //setSubmit_time(content[8]);
-        setSubmitter(content[9]);
-        /*setModify_time(content[10]);*/
-        setEditMan(content[11]);
-        setUnderProgram(content[12]);
-    }
+    private static final String JSON_CONTENT = "content";
 
     public Bug(JSONObject json) throws JSONException {
+        if (json.has(JSON_PMBUG_ID))
+            pmbug_id = json.getString(JSON_PMBUG_ID);
         if (json.has(JSON_LEVEL))
             level = json.getInt(JSON_LEVEL);
         if (json.has(JSON_STATE))
@@ -84,6 +72,8 @@ public class Bug {
             submit_time = json.getInt(JSON_SUBMIT);
         if (json.has(JSON_MODIFY))
             modify_time = json.getInt(JSON_MODIFY);
+        if (json.has(JSON_CONTENT))
+            content = json.getString(JSON_CONTENT);
     }
 
     public JSONObject toJSON() throws JSONException{
@@ -103,12 +93,29 @@ public class Bug {
         json.put(JSON_MODIFY, modify_time);
         return json;
     }
-    public String getFunctionModel() {
-        return functionModel;
+
+    public String getPmbug_id() {
+        return pmbug_id;
     }
 
-    public void setFunctionModel(String functionModel) {
-        this.functionModel = functionModel;
+    public void setPmbug_id(String pmbug_id) {
+        this.pmbug_id = pmbug_id;
+    }
+
+    public String getModifier() {
+        return modifier;
+    }
+
+    public void setModifier(String modifier) {
+        this.modifier = modifier;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public String getBugNumber() {
@@ -178,17 +185,17 @@ public class Bug {
 
     public String getLevel() {
         //等级 1:一级 2:二级 3:三级 4:四级 5:五级 6:六级
-        if (status == 1) {
+        if (level == 1) {
             return "一级";
-        } else if (status == 2) {
+        } else if (level == 2) {
             return "二级";
-        } else if (status == 3) {
+        } else if (level == 3) {
             return "三级";
-        } else if (status == 4) {
+        } else if (level == 4) {
             return "四级";
-        } else if (status == 5) {
+        } else if (level == 5) {
             return "五级";
-        } else if (status == 6) {
+        } else if (level == 6) {
             return "六级";
         }
         return null;
@@ -220,7 +227,7 @@ public class Bug {
             return "待测试";
         } else if (status == 6) {
             return "已通过";
-        }else if (status == 7) {
+        } else if (status == 7) {
             return "已修改";
         }
         return null;

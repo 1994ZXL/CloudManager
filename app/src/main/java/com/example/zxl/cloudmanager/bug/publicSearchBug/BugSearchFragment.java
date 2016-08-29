@@ -38,13 +38,13 @@ import java.util.Date;
 public class BugSearchFragment extends Fragment {
     private static final String TAG = "BugSearchFragment";
 
-    private Spinner mProjectNameET;
+    private EditText mProjectNameET;
     private Button mBugBeginBtn;
     private Button mBugEndBtn;
     private Button mBugEditBeginBtn;
     private Button mBugEditEndBtn;
-    private Spinner mFinderET;
-    private Spinner mReviserET;
+    private EditText mFinderET;
+    private EditText mReviserET;
     private Spinner mBugStateSpinner;
     private Spinner mBugLevelSpinner;
 
@@ -56,17 +56,11 @@ public class BugSearchFragment extends Fragment {
 
     private ArrayAdapter<String> stateAdapter;
     private ArrayAdapter<String> levelAdapter;
-    private ArrayAdapter<String> projectNameAdapter;
-    private ArrayAdapter<String> finderAdapter;
-    private ArrayAdapter<String> reviserAdapter;
 
     private static final String stateList[] =
             {"全部","待确认","已排除","不解决","不解决","待修改","待测试","已通过","已完成"};
     private static final String levelList[] =
             {"全部","一级","二级","三级","四级","五级","六级"};
-    private ArrayList<String> project_name = new ArrayList<String>();
-    private ArrayList<String> submitter = new ArrayList<String>();
-    private ArrayList<String> modifier = new ArrayList<String>();
 
     private String projectName;
     private String finder;
@@ -92,7 +86,6 @@ public class BugSearchFragment extends Fragment {
     public BugSearchFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -141,9 +134,9 @@ public class BugSearchFragment extends Fragment {
         mBugEndBtn = (Button)v.findViewById(R.id.bug_end_time_button);
         mBugEditBeginBtn = (Button) v.findViewById(R.id.bug_edit_begin_time_button);
         mBugEditEndBtn = (Button) v.findViewById(R.id.bug_edit_end_time_button);
-        mProjectNameET = (Spinner) v.findViewById(R.id.bug_project_name_edittext);
-        mFinderET = (Spinner) v.findViewById(R.id.bug_finder_edittext);
-        mReviserET = (Spinner) v.findViewById(R.id.bug_reviser_edittext);
+        mProjectNameET = (EditText) v.findViewById(R.id.bug_project_name_edittext);
+        mFinderET = (EditText) v.findViewById(R.id.bug_finder_edittext);
+        mReviserET = (EditText) v.findViewById(R.id.bug_reviser_edittext);
         mBugStateSpinner = (Spinner) v.findViewById(R.id.bug_state_sprinner);
         mBugLevelSpinner = (Spinner) v.findViewById(R.id.bug_level_sprinner);
 
@@ -192,47 +185,53 @@ public class BugSearchFragment extends Fragment {
             }
         });
 
-        projectNameAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, project_name);
-        projectNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mProjectNameET.setAdapter(stateAdapter);
-        mProjectNameET.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mProjectNameET.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                projectName = project_name.get(i);
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                projectName = charSequence.toString();
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-
-        finderAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, submitter);
-        finderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mFinderET.setAdapter(stateAdapter);
-        mFinderET.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                finder = submitter.get(i);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void afterTextChanged(Editable editable) {
 
             }
         });
 
-        reviserAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, modifier);
-        reviserAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mReviserET.setAdapter(stateAdapter);
-        mReviserET.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        mFinderET.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                reviser = modifier.get(i);
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                finder = charSequence.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        mReviserET.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                reviser = charSequence.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
 
             }
         });
@@ -269,26 +268,25 @@ public class BugSearchFragment extends Fragment {
     }
 
     private void search() {
-        Fragment fragment = new MyBugFragment();
         Bundle bundle = new Bundle();
 
         bundle.putString(Link.project_name, projectName);
 
         if (null != bgtime)
-            bundle.putInt(Link.submit_time_t, DateForGeLingWeiZhi.toGeLinWeiZhi(bgtime));
-        else bundle.putInt(Link.submit_time_t, -1);
+            bundle.putInt(Link.submit_time_from, DateForGeLingWeiZhi.toGeLinWeiZhi(bgtime));
+        else bundle.putInt(Link.submit_time_from, -1);
 
         if (null != edtime)
-            bundle.putInt(Link.submit_time_f, DateForGeLingWeiZhi.toGeLinWeiZhi(edtime));
-        else bundle.putInt(Link.submit_time_f, -1);
+            bundle.putInt(Link.submit_time_to, DateForGeLingWeiZhi.toGeLinWeiZhi(edtime));
+        else bundle.putInt(Link.submit_time_to, -1);
 
         if (null != editbgtime)
-            bundle.putInt(Link.modify_time_t, DateForGeLingWeiZhi.toGeLinWeiZhi(editbgtime));
-        else bundle.putInt(Link.modify_time_t, -1);
+            bundle.putInt(Link.mofify_time_from, DateForGeLingWeiZhi.toGeLinWeiZhi(editbgtime));
+        else bundle.putInt(Link.mofify_time_from, -1);
 
         if (null != editedtime)
-            bundle.putInt(Link.modify_time_f, DateForGeLingWeiZhi.toGeLinWeiZhi(editedtime));
-        else bundle.putInt(Link.modify_time_f, -1);
+            bundle.putInt(Link.modify_time_to, DateForGeLingWeiZhi.toGeLinWeiZhi(editedtime));
+        else bundle.putInt(Link.modify_time_to, -1);
 
         bundle.putString(Link.submitter, finder);
 
@@ -298,16 +296,16 @@ public class BugSearchFragment extends Fragment {
 
         bundle.putInt(Link.level, bugLevel);
 
-        fragment.setArguments(bundle);
+        mAimFragment.setArguments(bundle);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        if (!fragment.isAdded()) {
+        if (!mAimFragment.isAdded()) {
             transaction.addToBackStack(null);
             transaction.hide(mFragment);
-            transaction.replace(R.id.blankActivity, fragment);
+            transaction.replace(R.id.blankActivity, mAimFragment);
             transaction.commit();
         } else {
             transaction.hide(mFragment);
-            transaction.show(fragment);
+            transaction.show(mAimFragment);
             transaction.commit();
         }
     }

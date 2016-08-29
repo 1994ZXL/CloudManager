@@ -15,6 +15,7 @@ public class Link {
     public static final String is_puncher = "is_puncher"; //是否是考勤主管
     public static final String is_pmleader = "is_pmleader"; //是否是项目领导
     public static final String mem_job = "mem_job"; //职务
+    public static final String user_id = "user_id"; //当前登录人员id
 
     //manage_leave
     public static final String manage_leave = "manage_leave&act=";
@@ -61,12 +62,13 @@ public class Link {
 
     //pm_bug
     public static final String pm_id = "pm_id";
+    public static final String pmbug_id = "pmbug_id";
 
     //my_bug
-    public static final String submit_time_t = "submit_time_t"; //发现时间 开始
-    public static final String submit_time_f = "submit_time_f"; //发现时间 结束
-    public static final String modify_time_t = "modify_time_t"; //修改时间 开始
-    public static final String modify_time_f = "modify_time_f"; //修改时间 结束
+    public static final String submit_time_from = "submit_time_from"; //发现时间 开始
+    public static final String submit_time_to = "submit_time_to"; //发现时间 结束
+    public static final String mofify_time_from = "mofify_time_from"; //修改时间 开始
+    public static final String modify_time_to = "modify_time_to"; //修改时间 结束
     public static final String submitter = "submitter"; //发现人
     public static final String modifier = "modifier"; //修改人
     public static final String level = "level"; //bug等级

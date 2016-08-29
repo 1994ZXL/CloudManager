@@ -64,9 +64,4 @@ public class BugLab {
         return mBugs;
     }
 
-    public void set(String[] content) {
-        Bug bug = new Bug();
-        bug.setContent(content);
-        mBugs.add(bug);
-    }
 }
