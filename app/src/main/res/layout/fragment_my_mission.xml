@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F0F8FF"
     android:orientation="vertical"
     tools:context=".mission.myMission.MyMissionSearchFragment">
 
@@ -16,51 +17,66 @@
             android:orientation="vertical">
             <LinearLayout
                 style="@style/linearLayoutStyle"
-                android:padding="10dp">
+                android:padding="10sp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="20sp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/my_mission_name"
-                        android:textSize="20dp"
-                        android:layout_weight="1"/>
+                        android:layout_width="200sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:layout_weight="1"
+                        android:text="@string/my_mission_name" />
 
                     <EditText
                         style="@style/editTextZ"
                         android:id="@+id/my_mission_name_edittext"
-                        android:layout_weight="7"/>
+                        android:layout_width="match_parent"
+                        android:layout_height="35sp"
+                        android:background="#87CEEB"
+                        android:layout_weight="1"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="20sp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/my_mission_time"
-                        android:layout_weight="2"
-                        android:textSize="20dp"/>
+                        android:layout_width="50sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="@string/my_mission_time" />
 
                     <Button
                         android:id="@+id/my_mission_begin_time_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/project_begin_time_textview"
-                        android:layout_weight="0.2"/>
+                        android:layout_width="80sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:background="#87CEEB"
+                        android:layout_weight="1"
+                        android:text="@string/project_begin_time_textview" />
+
+                    <TextView
+                        android:layout_width="10sp"
+                        android:layout_height="35sp"
+                        android:text=" "/>
+
                     <Button
                         android:id="@+id/my_mission_end_time_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/project_end_time_textview"
-                        android:layout_weight="0.2"/>
+                        android:layout_width="80sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:background="#87CEEB"
+                        android:layout_weight="1"
+                        android:text="@string/project_end_time_textview" />
 
                 </LinearLayout>
 
@@ -68,21 +84,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="20sp">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/my_mission_state"
-                        android:textSize="20dp"
-                        android:layout_gravity="center_vertical" />
-
-                    <Spinner
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="55dp"
-                        android:id="@+id/my_mission_state_sprinner"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/my_mission_state" />
+
+                    <Spinner
+                        android:layout_width="200sp"
+                        android:layout_height="35sp"
+                        android:background="#87CEEB"
+                        android:gravity="center"
+                        android:paddingLeft="20sp"
+                        android:layout_weight="1"
+                        android:id="@+id/my_mission_state_sprinner" />
                 </LinearLayout>
 
 
@@ -91,8 +111,9 @@
             <Button
                 android:id="@+id/my_mission_search_button"
                 style="@style/SearchButton"
-                android:text="@string/check_button"
-                />
+                android:layout_gravity="center_horizontal"
+                android:background="#87CEFA"
+                android:text="@string/check_button" />
         </LinearLayout>
     </ScrollView>
 

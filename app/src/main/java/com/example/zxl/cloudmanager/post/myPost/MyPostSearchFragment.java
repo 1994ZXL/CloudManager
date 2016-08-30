@@ -33,8 +33,6 @@ import java.util.Date;
 public class MyPostSearchFragment extends Fragment {
     private static final String TAG = "MyPostSearchFragment";
 
-    private Button mBeginTimeBtn;
-    private Button mEndTimeBtn;
     private Button mPostBeginTimeBtn;
     private Button mPostEndTimeBtn;
     private EditText mPostContent;
@@ -74,8 +72,6 @@ public class MyPostSearchFragment extends Fragment {
     }
 
     private void init(View v){
-        mBeginTimeBtn = (Button) v.findViewById(R.id.my_post_search_begintTime);
-        mEndTimeBtn = (Button) v.findViewById(R.id.my_post_search_endTime);
         mPostBeginTimeBtn = (Button) v.findViewById(R.id.my_post_search_post_begintTime);
         mPostEndTimeBtn = (Button) v.findViewById(R.id.my_post_search_post_endTime);
         mPostContent = (EditText) v.findViewById(R.id.my_post_content_edittext);
@@ -84,25 +80,6 @@ public class MyPostSearchFragment extends Fragment {
     }
 
     private void control() {
-        mBeginTimeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
-                fragment.setTargetFragment(MyPostSearchFragment.this, 12);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyPostSearchFragment");
-            }
-        });
-
-        mEndTimeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
-                fragment.setTargetFragment(MyPostSearchFragment.this, 13);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyPostSearchFragment");
-            }
-        });
         mPostBeginTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -143,35 +120,21 @@ public class MyPostSearchFragment extends Fragment {
                 Fragment fragment = new MyPostFragment();
                 Bundle bundle = new Bundle();
 
-                if (null != bgtime){
-                    bundle.putInt(Link.create_time_t, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(bgtime));
-                } else {
-                    bundle.putInt(Link.create_time_t, -1);
-                }
-
-                if (null != edtime) {
-                    bundle.putInt(Link.create_time_f, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(edtime));
-                } else {
-                    bundle.putInt(Link.create_time_f, -1);
-                }
-
                 if (null != postbgtime){
-                    bundle.putInt(Link.report_time_t, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(postbgtime));
+                    bundle.putInt(Link.daily_time_from, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(postbgtime));
                 } else {
-                    bundle.putInt(Link.report_time_t, -1);
+                    bundle.putInt(Link.daily_time_from, -1);
                 }
 
                 if (null != postedtime) {
-                    bundle.putInt(Link.report_time_f, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(postedtime));
+                    bundle.putInt(Link.daily_time_to, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(postedtime));
                 } else {
-                    bundle.putInt(Link.report_time_f, -1);
+                    bundle.putInt(Link.daily_time_to, -1);
                 }
 
                 bundle.putString(Link.content, postContent);
 
                 Log.d(TAG, "选择条件："
-                        + " start_time: " + bgtime
-                        + " over_time: " + edtime
                         + " post_start_time: " + postbgtime
                         + " post_over_time: " + postedtime
                         + " content: " + mPostContent);
@@ -195,33 +158,12 @@ public class MyPostSearchFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK){
             return;
-        } else if (requestCode == 12) {
-            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateBeginDate();
-        } else if (requestCode == 13) {
-            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateEndDate();
-        } else if (requestCode == 14) {
+        }  else if (requestCode == 14) {
             postBeginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             updatePostBeginDate();
         } else if (requestCode == 15) {
             postEndTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             updatePostEndDate();
-        }
-    }
-
-    private void updateBeginDate(){
-        bgtime = android.text.format.DateFormat.format("yyyy年MM月dd", beginTime).toString();
-        mBeginTimeBtn.setText(bgtime);
-    }
-    private void updateEndDate(){
-        if (endTime.after(beginTime)) {
-            edtime = android.text.format.DateFormat.format("yyyy年MM月dd", endTime).toString();
-            mEndTimeBtn.setText(edtime);
-        } else {
-            Toast.makeText(getActivity(),
-                    R.string.time_erro,
-                    Toast.LENGTH_SHORT).show();
         }
     }
 

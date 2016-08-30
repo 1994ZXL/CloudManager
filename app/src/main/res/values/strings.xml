@@ -78,7 +78,7 @@
     <string name="overtime_status">加班状态</string>
 
     <!-- 项目主管-->
-    <string name="project_manager">项目系统</string>
+    <string name="project_manager">项目</string>
     <string name="project_manage">项目管理</string>
     <string name="project_memo">通讯录</string>
     <string name="project_member_manage">成员管理</string>
@@ -279,9 +279,12 @@
 
     <string name="post_submit_time">日报时间</string>
     <string name="my_post_content">日报内容</string>
+    <string name="post_date">日报日期</string>
     <string name="my_post_create_time_hit">日报创建时间</string>
     <string name="my_post_post_time_hit">日报提交时间</string>
-
+    <string name="post_state">日报状态</string>
+    <string name="post_level">日报评分</string>
+    <string name="post_opinion">日报评价</string>
 
     <!--主页底部导航栏底部-->
     <string name="company_list_bar">公司通讯录</string>

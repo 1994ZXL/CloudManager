@@ -116,6 +116,10 @@ public class MyCheckFragment extends Fragment {
                     keyObj.put(Link.att_date_from, saveInstanceState.getInt(Link.att_date_from));
                 if (-1 != saveInstanceState.getInt(Link.att_date_to))
                     keyObj.put(Link.att_date_to, saveInstanceState.getInt(Link.att_date_to));
+                if (-1 != saveInstanceState.getInt(Link.att_date_start))
+                    keyObj.put(Link.att_date_start, saveInstanceState.getInt(Link.att_date_start));
+                if (-1 != saveInstanceState.getInt(Link.att_date_end))
+                    keyObj.put(Link.att_date_end, saveInstanceState.getInt(Link.att_date_end));
             } catch (Exception e) {
                 e.printStackTrace();
             }

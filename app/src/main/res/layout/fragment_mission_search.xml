@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F0F8FF"
     android:orientation="vertical"
     tools:context=".mission.projectManagerMission.MissionSearchFragment">
 
@@ -14,7 +15,7 @@
             android:orientation="vertical">
             <LinearLayout
                 style="@style/linearLayoutStyle"
-                android:padding="10dp">
+                android:padding="10sp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -24,13 +25,18 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/mission_name"
                         android:layout_weight="1"
-                        android:textSize="20dp"/>
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/mission_name" />
 
                     <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="200sp"
+                        android:layout_height="35sp"
+                        android:background="#87CEEB"
+                        android:gravity="center"
+                        android:paddingLeft="20sp"
                         android:layout_weight="1"
                         android:id="@+id/pm_mission_projectName">
 
@@ -41,18 +47,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="20sp">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/name"
                         android:layout_weight="1"
-                        android:textSize="20dp"/>
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/name" />
 
                     <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="200sp"
+                        android:layout_height="35sp"
+                        android:background="#87CEEB"
+                        android:gravity="center"
+                        android:paddingLeft="20sp"
                         android:layout_weight="1"
                         android:id="@+id/pm_mission_memName">
 
@@ -63,20 +74,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="20sp">
 
                     <TextView
                         android:id="@+id/project_mission_state_textview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/project_mission_state"
                         android:layout_weight="1"
-                        android:textSize="20dp"
-                        android:layout_gravity="center_vertical" />
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/project_mission_state" />
 
                     <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="200sp"
+                        android:layout_height="35sp"
+                        android:background="#87CEEB"
+                        android:gravity="center"
+                        android:paddingLeft="20sp"
                         android:layout_weight="1"
                         android:id="@+id/pm_mission_state">
 
@@ -87,36 +102,49 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    android:layout_marginTop="20sp">
 
                     <TextView
                         android:id="@+id/plan_create_time_textview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/project_mission_time"
+                        android:layout_width="50sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
                         android:layout_weight="1"
-                        android:textSize="20dp"/>
+                        android:textSize="20sp"
+                        android:text="@string/project_mission_time" />
 
                     <Button
                         android:id="@+id/pm_mission_begin_time_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/project_begin_time_textview"
-                        android:layout_weight="0.3"/>
+                        android:layout_width="80sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:background="#87CEEB"
+                        android:layout_weight="1"
+                        android:text="@string/project_begin_time_textview" />
+
+                    <TextView
+                        android:layout_width="10sp"
+                        android:layout_height="35sp"
+                        android:text=" "/>
+
                     <Button
                         android:id="@+id/pm_mission_end_time_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/project_end_time_textview"
-                        android:layout_weight="0.3"/>
+                        android:layout_width="80sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:background="#87CEEB"
+                        android:layout_weight="1"
+                        android:text="@string/project_end_time_textview" />
                 </LinearLayout>
             </LinearLayout>
 
             <Button
                 android:id="@+id/pm_mission_search_button"
                 style="@style/SearchButton"
+                android:layout_gravity="center_horizontal"
+                android:background="#87CEFA"
                 android:text="@string/check_button"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
     </ScrollView>

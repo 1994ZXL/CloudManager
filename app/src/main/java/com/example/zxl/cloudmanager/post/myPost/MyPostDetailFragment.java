@@ -41,7 +41,10 @@ public class MyPostDetailFragment extends Fragment {
     private TextView mName;
     private EditText mContent;
     private TextView mSubmitTime;
-    private TextView mCreateTime;
+    private TextView mDailyDate;
+    private TextView mState;
+    private TextView mLevel;
+    private TextView mOpinion;
 
     private static Post sPost = new Post();
 
@@ -87,11 +90,17 @@ public class MyPostDetailFragment extends Fragment {
         mName = (TextView) view.findViewById(R.id.post_details_name);
         mContent = (EditText) view.findViewById(R.id.post_details_content);
         mSubmitTime = (TextView) view.findViewById(R.id.post_details_submit_time);
-        mCreateTime = (TextView) view.findViewById(R.id.post_details_create_time);
+        mDailyDate = (TextView) view.findViewById(R.id.post_details_date);
+        mState = (TextView) view.findViewById(R.id.post_details_state);
+        mLevel = (TextView) view.findViewById(R.id.post_details_level);
+        mOpinion = (TextView) view.findViewById(R.id.post_details_opinion);
     }
 
     private void control() {
         mName.setText(sPost.getMem_name());
+        mState.setText(sPost.getState());
+        mLevel.setText(sPost.getLevel());
+        mOpinion.setText(sPost.getOpinion());
         mContent.setText(sPost.getContent());
         mContent.addTextChangedListener(new TextWatcher() {
             @Override
@@ -114,8 +123,8 @@ public class MyPostDetailFragment extends Fragment {
         } else {
             mSubmitTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sPost.getReport_time()));
         }
+        mDailyDate.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sPost.getDaily_date()));
 
-        mCreateTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sPost.getCreate_time()));
     }
 
     @Override

@@ -14,7 +14,6 @@ import java.util.Date;
 
 /**
  * Created by ZQQ on 2015/10/12.
- * 工厂方法newInstance（）的主要作用——new一个自己的实例，使用时只需要调用这个方法
  */
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener{
     private Date mDate;
@@ -71,6 +70,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 
         int requestCode = (Integer)getArguments().getSerializable(EXTRA_CODE);
 
-        getTargetFragment().onActivityResult(requestCode, Activity.RESULT_OK,intent);
+        getTargetFragment().onActivityResult(requestCode, Activity.RESULT_OK, intent);
     }
 }

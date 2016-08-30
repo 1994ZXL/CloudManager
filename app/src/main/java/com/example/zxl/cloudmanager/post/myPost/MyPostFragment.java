@@ -46,7 +46,7 @@ public class MyPostFragment extends ListFragment {
 
     private ArrayList<Post> mPosts = new ArrayList<Post>();
 
-    private TextView mName, mCreateTime, mPostTime;
+    private TextView mName, mPostTime, mPostDate;
 
 
     private Fragment mFragment;
@@ -71,20 +71,14 @@ public class MyPostFragment extends ListFragment {
         saveInstanceState = getArguments();
         if (null != saveInstanceState) {
             try {
-                if (-1 != saveInstanceState.getInt(Link.create_time_t)) {
-                    keyObj.put(Link.create_time_t, saveInstanceState.getInt(Link.create_time_t));
+                if (-1 != saveInstanceState.getInt(Link.daily_time_from)) {
+                    keyObj.put(Link.daily_time_from, saveInstanceState.getInt(Link.daily_time_from));
                 }
-                if (-1 != saveInstanceState.getInt(Link.create_time_f)) {
-                    keyObj.put(Link.create_time_f, saveInstanceState.getInt(Link.create_time_f));
-                }
-                if (-1 != saveInstanceState.getInt(Link.report_time_t)) {
-                    keyObj.put(Link.report_time_t, saveInstanceState.getInt(Link.report_time_t));
-                }
-                if (-1 != saveInstanceState.getInt(Link.report_time_f)) {
-                    keyObj.put(Link.report_time_f, saveInstanceState.getInt(Link.report_time_f));
+                if (-1 != saveInstanceState.getInt(Link.daily_time_to)) {
+                    keyObj.put(Link.daily_time_to, saveInstanceState.getInt(Link.daily_time_to));
                 }
                 if (null != saveInstanceState.getString(Link.content)) {
-                    keyObj.put(Link.content, saveInstanceState.getInt(Link.content));
+                    keyObj.put(Link.content, saveInstanceState.getString(Link.content));
                 }
 
             } catch (Exception e) {
@@ -94,8 +88,8 @@ public class MyPostFragment extends ListFragment {
         }
 
         try {
-            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
-            keyObj.put("sort", "create_time desc");
+            keyObj.put(Link.user_id, User.newInstance().getUser_id());
+            keyObj.put("sort", "daily_date desc");
             keyObj.put("page_count", 20);
             keyObj.put("curl_page", 1);
             key = DESCryptor.Encryptor(keyObj.toString());
@@ -184,7 +178,7 @@ public class MyPostFragment extends ListFragment {
 
             mName = (TextView) convertView.findViewById(R.id.main_fragment_my_post_name);
             mPostTime = (TextView) convertView.findViewById(R.id.main_fragment_my_post_post_time);
-            mCreateTime = (TextView) convertView.findViewById(R.id.main_fragment_my_post_create_time);
+            mPostDate = (TextView) convertView.findViewById(R.id.main_fragment_my_post_post_date);
 
             mName.setText(p.getMem_name());
 
@@ -193,7 +187,7 @@ public class MyPostFragment extends ListFragment {
             }else {
                 mPostTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(p.getReport_time()));
             }
-            mCreateTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(p.getCreate_time()));
+            mPostDate.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(p.getDaily_date()));
 
             return convertView;
         }

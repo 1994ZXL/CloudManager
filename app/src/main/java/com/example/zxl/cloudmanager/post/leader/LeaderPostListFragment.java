@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.zxl.cloudmanager.model.User;
 import com.example.zxl.cloudmanager.post.myPost.MyPostDetailFragment;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
@@ -42,7 +43,7 @@ public class LeaderPostListFragment extends ListFragment {
 
     private ArrayList<Post> mPosts = new ArrayList<Post>();
 
-    private TextView mName, mCreateTime, mPostTime, mNameHit, mCreateTimeHit, mPostTimeHit;
+    private TextView mName, mPostTime, mDailyDate;
 
 
     private Fragment mFragment;
@@ -72,21 +73,18 @@ public class LeaderPostListFragment extends ListFragment {
                 if (null != saveInstanceState.getString(Link.mem_name)) {
                     keyObj.put(Link.mem_name, saveInstanceState.getString(Link.mem_name));
                 }
-                if (-1 != saveInstanceState.getInt(Link.create_time_t)) {
-                    keyObj.put(Link.create_time_t, saveInstanceState.getInt(Link.create_time_t));
+                if (-1 != saveInstanceState.getInt(Link.daily_time_from)) {
+                    keyObj.put(Link.daily_time_from, saveInstanceState.getInt(Link.daily_time_from));
                 }
-                if (-1 != saveInstanceState.getInt(Link.create_time_f)) {
-                    keyObj.put(Link.create_time_f, saveInstanceState.getInt(Link.create_time_f));
-                }
-                if (-1 != saveInstanceState.getInt(Link.report_time_t)) {
-                    keyObj.put(Link.report_time_t, saveInstanceState.getInt(Link.report_time_t));
-                }
-                if (-1 != saveInstanceState.getInt(Link.report_time_f)) {
-                    keyObj.put(Link.report_time_f, saveInstanceState.getInt(Link.report_time_f));
+                if (-1 != saveInstanceState.getInt(Link.daily_time_to)) {
+                    keyObj.put(Link.daily_time_to, saveInstanceState.getInt(Link.daily_time_to));
                 }
                 if (null != saveInstanceState.getString(Link.content)) {
                     keyObj.put(Link.content, saveInstanceState.getString(Link.content));
                 }
+
+                keyObj.put(Link.user_id, User.newInstance().getUser_id());
+                keyObj.put(Link.is_pmleader, User.newInstance().getIs_pmleader());
                 keyObj.put("sort", "create_time desc");
                 keyObj.put("page_count", 100);
                 keyObj.put("curl_page", 1);
@@ -183,8 +181,8 @@ public class LeaderPostListFragment extends ListFragment {
             }else {
                 mPostTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(p.getReport_time()));
             }
-            mCreateTime = (TextView) convertView.findViewById(R.id.main_fragment_my_post_create_time);
-            mCreateTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(p.getCreate_time()));
+            mDailyDate = (TextView) convertView.findViewById(R.id.main_fragment_my_post_post_date);
+            mDailyDate.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(p.getDaily_date()));
 
             return convertView;
         }

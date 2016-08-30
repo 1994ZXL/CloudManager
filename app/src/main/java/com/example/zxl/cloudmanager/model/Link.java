@@ -74,16 +74,14 @@ public class Link {
     public static final String level = "level"; //bug等级
 
     //find_daily
-    public static final String report_time_t = "report_time_t"; //日报的提交时间 开始
-    public static final String report_time_f = "report_time_f"; //日报的提交时间 结束
+    public static final String daily_time_from = "daily_time_from"; //日报日期 开始
+    public static final String daily_time_to = "daily_time_to"; //日报日期 结束
     public static final String content = "content"; //日报内容
     public static final String sort = "sort"; //排序
     public static final String page_count = "page_count"; //每页显示数量
     public static final String curl_page = "curl_page"; //当前页
 
     //my_daily
-    public static final String create_time_t = "create_time_t"; //日报的创建时间 开始
-    public static final String create_time_f = "create_time_f"; //日报的创建时间 结束
     public static final String state = "state"; //日报状态
     public static final String daily_id = "daily_id"; //日报的提交时间 开始
 

@@ -32,8 +32,6 @@ import java.util.Date;
 public class LeaderPostSearchFragment extends Fragment {
 
     private EditText mEmployerName;
-    private Button mBeginTimeBtn;
-    private Button mEndTimeBtn;
     private Button mPostBeginTimeBtn;
     private Button mPostEndTimeBtn;
     private EditText mPostContent;
@@ -94,24 +92,6 @@ public class LeaderPostSearchFragment extends Fragment {
 
             }
         });
-        mBeginTimeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
-                fragment.setTargetFragment(LeaderPostSearchFragment.this, 12);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "LeaderPostSearchFragment");
-            }
-        });
-        mEndTimeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
-                fragment.setTargetFragment(LeaderPostSearchFragment.this, 13);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "LeaderPostSearchFragment");
-            }
-        });
         mPostBeginTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,36 +135,22 @@ public class LeaderPostSearchFragment extends Fragment {
 
                 bundle.putString(Link.mem_name, name);
 
-                if (null != bgtime){
-                    bundle.putInt(Link.create_time_t, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi2(bgtime));
-                } else {
-                    bundle.putInt(Link.create_time_t, -1);
-                }
-
-                if (null != edtime) {
-                    bundle.putInt(Link.create_time_f, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi2(edtime));
-                } else {
-                    bundle.putInt(Link.create_time_f, -1);
-                }
-
                 if (null != postbgtime){
-                    bundle.putInt(Link.report_time_t, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(postbgtime));
+                    bundle.putInt(Link.daily_time_from, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(postbgtime));
                 } else {
-                    bundle.putInt(Link.report_time_t, -1);
+                    bundle.putInt(Link.daily_time_from, -1);
                 }
 
                 if (null != postedtime) {
-                    bundle.putInt(Link.report_time_f, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(postedtime));
+                    bundle.putInt(Link.daily_time_to, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(postedtime));
                 } else {
-                    bundle.putInt(Link.report_time_f, -1);
+                    bundle.putInt(Link.daily_time_to, -1);
                 }
 
                 bundle.putString(Link.content, content);
 
                 Log.d(TAG, "选择条件："
                         + " mem_name: " + name
-                        + " start_time: " + bgtime
-                        + " over_time: " + edtime
                         + " post_start_time: " + postbgtime
                         + " post_over_time: " + postedtime
                         + " content: " + mPostContent);
@@ -201,8 +167,6 @@ public class LeaderPostSearchFragment extends Fragment {
     }
 
     private void init(View v){
-        mBeginTimeBtn = (Button) v.findViewById(R.id.leader_post_begin_time_button);
-        mEndTimeBtn = (Button) v.findViewById(R.id.leader_post_end_time_button);
         mPostBeginTimeBtn = (Button) v.findViewById(R.id.leader_post_post_begin_time_button);
         mPostEndTimeBtn = (Button) v.findViewById(R.id.leader_post_post_end_time_button);
         mPostContent = (EditText) v.findViewById(R.id.leader_post_content_edittext);
@@ -215,13 +179,7 @@ public class LeaderPostSearchFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode != Activity.RESULT_OK){
             return;
-        } else if (requestCode == 12) {
-            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateBeginDate();
-        } else if (requestCode == 13) {
-            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateEndDate();
-        } else if (requestCode == 14) {
+        }  else if (requestCode == 14) {
             postBeginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
             updatePostBeginDate();
         } else if (requestCode == 15) {
@@ -230,20 +188,7 @@ public class LeaderPostSearchFragment extends Fragment {
         }
     }
 
-    private void updateBeginDate(){
-        bgtime = android.text.format.DateFormat.format("yyyy.M.dd", beginTime).toString();
-        mBeginTimeBtn.setText(bgtime);
-    }
-    private void updateEndDate(){
-        if (endTime.after(beginTime)) {
-            edtime = android.text.format.DateFormat.format("yyyy.M.dd", endTime).toString();
-            mEndTimeBtn.setText(edtime);
-        } else {
-            Toast.makeText(getActivity(),
-                    R.string.time_erro,
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
+
     private void updatePostBeginDate(){
         postbgtime = android.text.format.DateFormat.format("yyyy.M.dd", postBeginTime).toString();
         mPostBeginTimeBtn.setText(postbgtime);
