@@ -1,8 +1,11 @@
 package com.example.zxl.cloudmanager.mission.projectManagerMission;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -18,9 +21,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.Edit;
@@ -39,6 +44,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
@@ -55,6 +61,7 @@ public class MissionManagerEditFragment extends Fragment {
     private Button mEndTimeButton;
     private EditText mEvaluate;
     private Spinner mState;
+    private EditText mPercent;
 
     private Fragment mFragment;
 
@@ -64,13 +71,14 @@ public class MissionManagerEditFragment extends Fragment {
     private ArrayAdapter<String> stateAdapter;
 
     private Date beginTime;
-    private String bgtime;
+    private StringBuilder bgtime;
     private Date endTime;
-    private String edtime;
+    private StringBuilder edtime;
 
     private String title;
     private String content;
     private String evaluate;
+    private String percent;
     private int state;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
@@ -107,6 +115,9 @@ public class MissionManagerEditFragment extends Fragment {
         mEndTimeButton = (Button) view.findViewById(R.id.pm_mission_end_time);
         mEvaluate = (EditText) view.findViewById(R.id.pm_mission_evaluate);
         mState = (Spinner) view.findViewById(R.id.pm_mission_state);
+        mPercent = (EditText) view.findViewById(R.id.pm_mission_progress);
+        bgtime = new StringBuilder(DateForGeLingWeiZhi.fromGeLinWeiZhi2(sMission.getStart_time()));
+        edtime = new StringBuilder(DateForGeLingWeiZhi.fromGeLinWeiZhi2(sMission.getEnd_time()));
     }
 
     private void contorl() {
@@ -149,30 +160,64 @@ public class MissionManagerEditFragment extends Fragment {
         if (sMission.getStart_time() == 0) {
             mBeginTimeButton.setText("——");
         } else {
-            mBeginTimeButton.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sMission.getStart_time()));
+            mBeginTimeButton.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi2(sMission.getStart_time()));
         }
         mBeginTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
-                fragment.setTargetFragment(MissionManagerEditFragment.this, 12);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MissionManagerEditFragment");
+                Calendar calendar = Calendar.getInstance();
+                Dialog dateDialog = new DatePickerDialog(mFragment.getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        bgtime.setLength(0);
+                        bgtime.append(i + "年" + (i1 + 1) + "月" + i2 + " ");
+                        Calendar time = Calendar.getInstance();
+                        Dialog timeDialog = new TimePickerDialog(mFragment.getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                                bgtime.append(i + ":" + i1);
+                                mBeginTimeButton.setText(bgtime);
+                                Log.d(TAG, "mS_time" + bgtime);
+                            }
+                        }, time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), true);
+                        timeDialog.setTitle("请选择时间");
+                        timeDialog.show();
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                dateDialog.setTitle("请选择日期");
+                dateDialog.show();
             }
         });
 
-        if (sMission.getStart_time() == 0) {
+        if (sMission.getEnd_time() == 0) {
             mEndTimeButton.setText("——");
         } else {
-            mEndTimeButton.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sMission.getEnd_time()));
+            mEndTimeButton.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi2(sMission.getEnd_time()));
         }
         mEndTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
-                fragment.setTargetFragment(MissionManagerEditFragment.this, 13);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MissionManagerEditFragment");
+                Calendar calendar = Calendar.getInstance();
+                Dialog dateDialog = new DatePickerDialog(mFragment.getActivity(), new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        edtime.setLength(0);
+                        edtime.append(i + "年" + (i1 + 1) + "月" + i2 + " ");
+                        Calendar time = Calendar.getInstance();
+                        Dialog timeDialog = new TimePickerDialog(mFragment.getActivity(), new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                                edtime.append(i + ":" + i1);
+                                mEndTimeButton.setText(edtime);
+                                Log.d(TAG, "mEndTimeButton" + edtime);
+                            }
+                        }, time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), true);
+                        timeDialog.setTitle("请选择时间");
+                        timeDialog.show();
+                    }
+                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                dateDialog.setTitle("请选择日期");
+                dateDialog.show();
             }
         });
 
@@ -217,41 +262,58 @@ public class MissionManagerEditFragment extends Fragment {
 
             }
         });
+        mPercent.setText(String.valueOf(sMission.getPercent()));
+        mPercent.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                percent = charSequence.toString();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "进入回调 " + " resultCode:" + requestCode);
-        if (resultCode != Activity.RESULT_OK){
-            Log.d(TAG, "未进入判断");
-            return;
-        } else if (requestCode == 12) {
-            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateBeginDate();
-        } else if (requestCode == 13) {
-            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateEndDate();
-        }
-    }
-
-    private void updateBeginDate(){
-        bgtime = android.text.format.DateFormat.format("yyyy年MM月dd", beginTime).toString();
-        Log.d(TAG, "bgtime: " + bgtime);
-        mBeginTimeButton.setText(bgtime);
-        Log.d(TAG, "beginTimeButton: " + mBeginTimeButton.getText());
-    }
-    private void updateEndDate(){
-        if (endTime.after(beginTime)) {
-            edtime = android.text.format.DateFormat.format("yyyy年MM月dd", endTime).toString();
-            Log.d(TAG, "edtime: " + edtime);
-            mEndTimeButton.setText(edtime);
-            Log.d(TAG, "endTimeButton: " + mEndTimeButton.getText());
-        } else {
-            Toast.makeText(getActivity(),
-                    R.string.time_erro,
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        Log.d(TAG, "进入回调 " + " resultCode:" + requestCode);
+//        if (resultCode != Activity.RESULT_OK){
+//            Log.d(TAG, "未进入判断");
+//            return;
+//        } else if (requestCode == 12) {
+//            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+//            updateBeginDate();
+//        } else if (requestCode == 13) {
+//            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+//            updateEndDate();
+//        }
+//    }
+//
+//    private void updateBeginDate(){
+//        bgtime = android.text.format.DateFormat.format("yyyy年MM月dd", beginTime).toString();
+//        Log.d(TAG, "bgtime: " + bgtime);
+//        mBeginTimeButton.setText(bgtime);
+//        Log.d(TAG, "beginTimeButton: " + mBeginTimeButton.getText());
+//    }
+//    private void updateEndDate(){
+//        if (endTime.after(beginTime)) {
+//            edtime = android.text.format.DateFormat.format("yyyy年MM月dd", endTime).toString();
+//            Log.d(TAG, "edtime: " + edtime);
+//            mEndTimeButton.setText(edtime);
+//            Log.d(TAG, "endTimeButton: " + mEndTimeButton.getText());
+//        } else {
+//            Toast.makeText(getActivity(),
+//                    R.string.time_erro,
+//                    Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -266,18 +328,34 @@ public class MissionManagerEditFragment extends Fragment {
                 try {
                     if (null != title)
                         keyObj.put(Link.title, title);
+                    else keyObj.put(Link.title, sMission.getTitle());
+
                     if (null != content)
                         keyObj.put(Link.content, content);
+                    else keyObj.put(Link.content, sMission.getContent());
+
                     if (null != bgtime)
-                        keyObj.put(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi(bgtime));
+                        keyObj.put(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(bgtime.toString()));
+                    else keyObj.put(Link.start_time, DateForGeLingWeiZhi.fromGeLinWeiZhi2(sMission.getStart_time()));
+
                     if (null != edtime)
-                        keyObj.put(Link.over_time, DateForGeLingWeiZhi.toGeLinWeiZhi(edtime));
-                    keyObj.put(Link.status, state);
+                        keyObj.put(Link.over_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(edtime.toString()));
+                    else keyObj.put(Link.over_time, DateForGeLingWeiZhi.fromGeLinWeiZhi2(sMission.getEnd_time()));
+
                     if (null != evaluate)
                         keyObj.put(Link.evaluate, evaluate);
+                    else keyObj.put(Link.evaluate, sMission.getEvaluate());
+
+                    if (null != percent)
+                        keyObj.put(Link.percent, percent);
+                    else keyObj.put(Link.percent, sMission.getPercent());
+
+                    keyObj.put(Link.status, state);
+
+                    keyObj.put(Link.pmtask_id, sMission.getPmtask_id());
                     keyObj.put(Link.mem_id, sMission.getMem_id());
                     keyObj.put(Link.pmsch_id, sMission.getPmsch_id());
-                    keyObj.put(Link.percent, sMission.getPercent());
+
                     key = DESCryptor.Encryptor(keyObj.toString());
                 } catch (Exception e) {
                     e.printStackTrace();

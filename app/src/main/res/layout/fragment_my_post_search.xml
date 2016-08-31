@@ -74,9 +74,12 @@
             </LinearLayout>
             <Button
                 android:id="@+id/my_post_search_button"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 style="@style/SearchButton"
                 android:text="@string/check_button" />
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

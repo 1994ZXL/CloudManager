@@ -261,7 +261,7 @@ public class PMBugFragment extends Fragment {
 
             public ViewHolder(View v) {
                 super(v);
-                mProjectName = (TextView)v.findViewById(R.id.project_name_edittext);
+                mProjectName = (TextView)v.findViewById(R.id.main_fragment_my_bug_projectName);
                 mBugVersion = (TextView)v.findViewById(R.id.bug_card_item_bug_version);
                 mBugState = (TextView)v.findViewById(R.id.bug_card_item_bug_state);
                 mFoundTime = (TextView)v.findViewById(R.id.bug_card_item_found_time);

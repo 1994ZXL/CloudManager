@@ -126,6 +126,7 @@ public class MissionManagerListFragment extends Fragment {
             }
         }
         try {
+            keyObj.put(Link.user_id, User.newInstance().getUser_id());
             keyObj.put("sort", "start_time desc");
             keyObj.put("page_count", 50);
             keyObj.put("curl_page", 1);
@@ -229,8 +230,14 @@ public class MissionManagerListFragment extends Fragment {
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             Mission mission = missions.get(i);
 
-            viewHolder.mBeginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mission.getStart_time()));
-            viewHolder.mEndTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mission.getEnd_time()));
+            if (mission.getStart_time() == 0)
+                viewHolder.mBeginTime.setText("--");
+            else viewHolder.mBeginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mission.getStart_time()));
+
+            if (mission.getEnd_time() == 0)
+                viewHolder.mEndTime.setText("--");
+            else viewHolder.mEndTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mission.getEnd_time()));
+
             viewHolder.mName.setText(mission.getTitle());
             viewHolder.mState.setText(mission.getStatus());
 

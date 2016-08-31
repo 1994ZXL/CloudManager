@@ -74,8 +74,8 @@ public class Link {
     public static final String level = "level"; //bug等级
 
     //find_daily
-    public static final String daily_time_from = "daily_time_from"; //日报日期 开始
-    public static final String daily_time_to = "daily_time_to"; //日报日期 结束
+    public static final String daily_time_from = "daily_date_from"; //日报日期 开始
+    public static final String daily_time_to = "daily_date_to"; //日报日期 结束
     public static final String content = "content"; //日报内容
     public static final String sort = "sort"; //排序
     public static final String page_count = "page_count"; //每页显示数量
@@ -119,7 +119,7 @@ public class Link {
 
     //pm_task
     public static final String pmtask_id = "pmtask_id"; //项目任务ID
-    public static final String over_time = "over_time"; //结束时间
+    public static final String over_time = "end_time"; //结束时间
     public static final String title = "title";
     public static final String evaluate = "evaluate";
     public static final String pmsch_id = "pmsch_id";

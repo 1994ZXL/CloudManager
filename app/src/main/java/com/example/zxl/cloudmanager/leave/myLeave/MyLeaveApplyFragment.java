@@ -1,8 +1,11 @@
 package com.example.zxl.cloudmanager.leave.myLeave;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -19,15 +22,18 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Leave;
 import com.example.zxl.cloudmanager.model.LeaveMyLab;
 import com.example.zxl.cloudmanager.model.Link;
@@ -40,6 +46,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
@@ -60,10 +67,6 @@ public class MyLeaveApplyFragment extends Fragment {
     private Button mEndTime;
     private EditText mReson;
 
-    private Date beginTime;
-    private String bgtime;
-    private Date endTime;
-    private String edtime;
     private String reson;
 
     private Button mCommitBtn;
@@ -126,10 +129,7 @@ public class MyLeaveApplyFragment extends Fragment {
         mBeginTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
-                fragment.setTargetFragment(MyLeaveApplyFragment.this, 12);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyLeaveApplyFragment");
+                DateTimePicker.selectDateTime(mFragment, mBeginTime);
             }
         });
 
@@ -137,10 +137,7 @@ public class MyLeaveApplyFragment extends Fragment {
         mEndTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
-                fragment.setTargetFragment(MyLeaveApplyFragment.this, 13);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyLeaveApplyFragment");
+                DateTimePicker.selectDateTime(mFragment, mEndTime);
             }
         });
 
@@ -185,8 +182,8 @@ public class MyLeaveApplyFragment extends Fragment {
         try {
             keyObj.put(Link.mem_id, User.newInstance().getUser_id());
             keyObj.put(Link.leave_type, type);
-            keyObj.put(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi(bgtime));
-            keyObj.put(Link.end_time, DateForGeLingWeiZhi.toGeLinWeiZhi(edtime));
+            keyObj.put(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(mBeginTime.getText().toString()));
+            keyObj.put(Link.end_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(mEndTime.getText().toString()));
             keyObj.put(Link.leave_reson, reson);
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
@@ -222,37 +219,5 @@ public class MyLeaveApplyFragment extends Fragment {
 
         Intent intent = new Intent(mFragment.getActivity(), MyLeaveActivity.class);
         startActivity(intent);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "进入回调，未进入判断 " + " resultCode:" + requestCode);
-        if (resultCode != Activity.RESULT_OK){
-            Log.d(TAG, "进入回调");
-            return;
-        }else if (requestCode == 12) {
-            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            bgtime = android.text.format.DateFormat.format("yyyy年M月dd日", beginTime).toString();
-            leave.setStart_time(DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(bgtime));
-            updateBeginDate();
-        }else if (requestCode == 13) {
-            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            edtime = android.text.format.DateFormat.format("yyyy年M月dd日", endTime).toString();
-            leave.setEnd_time(DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(edtime));
-            updateEndDate();
-        }
-    }
-
-    private void updateBeginDate(){
-        mBeginTime.setText(bgtime);
-    }
-    private void updateEndDate(){
-        if (endTime.after(beginTime)) {
-            mEndTime.setText(edtime);
-        } else {
-            Toast.makeText(getActivity(),
-                    R.string.time_erro,
-                    Toast.LENGTH_SHORT).show();
-        }
     }
 }

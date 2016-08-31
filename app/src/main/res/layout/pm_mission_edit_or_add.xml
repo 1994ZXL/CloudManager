@@ -112,12 +112,13 @@
                     android:layout_marginTop="40dp">
                     <TextView
                         style="@style/font"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:text="@string/mission_progress"/>
-                    <TextView
-                        style="@style/font"
+                    <EditText
+                        style="@style/editText"
                         android:layout_weight="1"
-                        android:gravity="center"
+                        android:layout_width="match_parent"
                         android:id="@+id/pm_mission_progress"/>
                 </LinearLayout>
 

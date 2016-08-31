@@ -29,18 +29,15 @@
                         android:textColor="#000000"
                         android:textSize="20sp"
                         android:layout_gravity="center_vertical"
-                        android:text="@string/mission_name" />
+                        android:text="@string/name" />
 
-                    <Spinner
-                        android:layout_width="200sp"
-                        android:layout_height="35sp"
-                        android:background="#87CEEB"
-                        android:gravity="center"
-                        android:paddingLeft="20sp"
+                    <EditText
+                        android:layout_width="match_parent"
+                        style="@style/editText"
                         android:layout_weight="1"
-                        android:id="@+id/pm_mission_projectName">
+                        android:id="@+id/pm_mission_memName">
+                    </EditText>
 
-                    </Spinner>
                 </LinearLayout>
 
                 <LinearLayout
@@ -56,7 +53,7 @@
                         android:textColor="#000000"
                         android:textSize="20sp"
                         android:layout_gravity="center_vertical"
-                        android:text="@string/name" />
+                        android:text="@string/mission_name" />
 
                     <Spinner
                         android:layout_width="200sp"
@@ -65,7 +62,7 @@
                         android:gravity="center"
                         android:paddingLeft="20sp"
                         android:layout_weight="1"
-                        android:id="@+id/pm_mission_memName">
+                        android:id="@+id/pm_mission_projectName">
 
                     </Spinner>
                 </LinearLayout>

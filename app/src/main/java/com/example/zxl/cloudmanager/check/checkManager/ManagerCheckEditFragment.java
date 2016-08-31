@@ -25,6 +25,7 @@ import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -50,15 +51,6 @@ public class ManagerCheckEditFragment extends Fragment{
     private Button mE_att_time;
     private Button mE_time;
     private Button mSaveBtn;
-
-    private Date s_att_time;
-    private StringBuilder satttime;
-    private Date s_time;
-    private StringBuilder stime;
-    private Date e_att_time;
-    private StringBuilder eatttime;
-    private Date e_time;
-    private StringBuilder etime;
 
     private StringBuilder str;
 
@@ -115,132 +107,32 @@ public class ManagerCheckEditFragment extends Fragment{
             mE_att_time.setText("——");
         }
 
-        satttime = new StringBuilder(DateForGeLingWeiZhi.fromGeLinWeiZhi2(sCheck.getS_att_time()));
-        stime = new StringBuilder(DateForGeLingWeiZhi.fromGeLinWeiZhi2(sCheck.getS_time()));
-        eatttime = new StringBuilder(DateForGeLingWeiZhi.fromGeLinWeiZhi2(sCheck.getE_att_time()));
-        etime = new StringBuilder(DateForGeLingWeiZhi.fromGeLinWeiZhi2(sCheck.getE_time()));
 
         mS_att_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
-//                fragment.setTargetFragment(ManagerCheckEditFragment.this, 12);
-//                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-//                fragment.show(getFragmentManager(), "ManagerCheckEditFragment");
-                Calendar calendar = Calendar.getInstance();
-                Dialog dateDialog = new DatePickerDialog(mFragment.getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        satttime.setLength(0);
-                        satttime.append(i + "年" + (i1 + 1) + "月" + i2 + " ");
-                        Calendar time = Calendar.getInstance();
-                        Dialog timeDialog = new TimePickerDialog(mFragment.getActivity(), new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                                satttime.append(i + ":" + i1);
-                                mS_att_time.setText(satttime);
-                                Log.d(TAG, "mS_att_time" + satttime);
-                            }
-                        }, time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), true);
-                        timeDialog.setTitle("请选择时间");
-                        timeDialog.show();
-                    }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                dateDialog.setTitle("请选择日期");
-                dateDialog.show();
+                DateTimePicker.selectDateTime(mFragment, mS_att_time);
             }
         });
 
         mS_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
-//                fragment.setTargetFragment(ManagerCheckEditFragment.this, 13);
-//                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-//                fragment.show(getFragmentManager(), "ManagerCheckEditFragment");
-                Calendar calendar = Calendar.getInstance();
-                Dialog dateDialog = new DatePickerDialog(mFragment.getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        stime.setLength(0);
-                        stime.append(i + "年" + (i1 + 1) + "月" + i2 + " ");
-                        Calendar time = Calendar.getInstance();
-                        Dialog timeDialog = new TimePickerDialog(mFragment.getActivity(), new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                                stime.append(i + ":" + i1);
-                                mS_time.setText(stime);
-                                Log.d(TAG, "mS_time" + stime);
-                            }
-                        }, time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), true);
-                        timeDialog.setTitle("请选择时间");
-                        timeDialog.show();
-                    }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                dateDialog.setTitle("请选择日期");
-                dateDialog.show();
+                DateTimePicker.selectDateTime(mFragment, mS_time);
             }
         });
 
         mE_att_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 14);
-//                fragment.setTargetFragment(ManagerCheckEditFragment.this, 13);
-//                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-//                fragment.show(getFragmentManager(), "ManagerCheckEditFragment");
-                Calendar calendar = Calendar.getInstance();
-                Dialog dateDialog = new DatePickerDialog(mFragment.getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        eatttime.setLength(0);
-                        eatttime.append(i + "年" + (i1 + 1) + "月" + i2 + " ");
-                        Calendar time = Calendar.getInstance();
-                        Dialog timeDialog = new TimePickerDialog(mFragment.getActivity(), new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                                eatttime.append(i + ":" + i1);
-                                mE_att_time.setText(eatttime);
-                                Log.d(TAG, "mE_att_time" + eatttime);
-                            }
-                        }, time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), true);
-                        timeDialog.setTitle("请选择时间");
-                        timeDialog.show();
-                    }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                dateDialog.setTitle("请选择日期");
-                dateDialog.show();
+                DateTimePicker.selectDateTime(mFragment, mE_att_time);
             }
         });
 
         mE_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 15);
-//                fragment.setTargetFragment(ManagerCheckEditFragment.this, 14);
-//                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-//                fragment.show(getFragmentManager(), "ManagerCheckEditFragment");
-                Calendar calendar = Calendar.getInstance();
-                Dialog dateDialog = new DatePickerDialog(mFragment.getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        etime.setLength(0);
-                        etime.append(i + "年" + (i1 + 1) + "月" + i2 + " ");
-                        Calendar time = Calendar.getInstance();
-                        Dialog timeDialog = new TimePickerDialog(mFragment.getActivity(), new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                                etime.append(i + ":" + i1);
-                                mE_time.setText(etime);
-                                Log.d(TAG, "mE_time" + etime);
-                            }
-                        }, time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), true);
-                        timeDialog.setTitle("请选择时间");
-                        timeDialog.show();
-                    }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                dateDialog.setTitle("请选择日期");
-                dateDialog.show();
+                DateTimePicker.selectDateTime(mFragment, mE_time);
             }
         });
 
@@ -248,14 +140,22 @@ public class ManagerCheckEditFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 try {
-                    if (null != satttime)
-                        keyObj.put(Link.S_att_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(satttime.toString()));
-                    if (null != stime)
-                        keyObj.put(Link.S_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(stime.toString()));
-                    if (null != eatttime)
-                        keyObj.put(Link.E_att_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(eatttime.toString()));
-                    if (null != etime)
-                        keyObj.put(Link.E_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(etime.toString()));
+                    if (null != mS_att_time.getText())
+                        keyObj.put(Link.S_att_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mS_att_time.getText().toString()));
+                    else keyObj.put(Link.S_att_time, sCheck.getS_att_time());
+
+                    if (null != mS_time.getText())
+                        keyObj.put(Link.S_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mS_time.getText().toString()));
+                    else keyObj.put(Link.S_time, sCheck.getS_att_time());
+
+                    if (null != mE_att_time.getText())
+                        keyObj.put(Link.E_att_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mE_att_time.toString()));
+                    else keyObj.put(Link.E_att_time, sCheck.getS_att_time());
+
+                    if (null != mE_time.getText())
+                        keyObj.put(Link.E_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mE_time.toString()));
+                    else keyObj.put(Link.E_time, sCheck.getS_att_time());
+
                     keyObj.put(Link.att_id, sCheck.getAtt_id());
                     key = DESCryptor.Encryptor(keyObj.toString());
                 } catch (Exception e) {
@@ -290,61 +190,4 @@ public class ManagerCheckEditFragment extends Fragment{
 
         return view;
     }
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        Log.d(TAG, "进入回调 " + " resultCode:" + requestCode);
-//        if (resultCode != Activity.RESULT_OK){
-//            Log.d(TAG, "未进入判断");
-//            return;
-//        } else if (requestCode == 12) {
-//            s_att_time = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-//            updateSattDate();
-//        } else if (requestCode == 13) {
-//            s_time = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-//            updateSDate();
-//        } else if (requestCode == 14) {
-//            e_att_time = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-//            updateEattDate();
-//        } else if (requestCode == 15) {
-//            e_time = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-//            updateEDate();
-//        }
-//    }
-//
-//    private void updateSattDate(){
-//        satttime = android.text.format.DateFormat.format("yyyy年MM月dd", s_att_time).toString();
-//        Log.d(TAG, "satttime: " + satttime);
-//        mS_att_time.setText(satttime);
-//    }
-//    private void updateEattDate(){
-//        if (e_att_time.after(s_att_time)) {
-//            eatttime = android.text.format.DateFormat.format("yyyy年MM月dd", e_att_time).toString();
-//            Log.d(TAG, "eatttime: " + eatttime);
-//            mE_att_time.setText(eatttime);
-//            Log.d(TAG, "mE_att_time: " + mE_att_time.getText());
-//        } else {
-//            Toast.makeText(getActivity(),
-//                    R.string.time_erro,
-//                    Toast.LENGTH_SHORT).show();
-//        }
-//    }
-//
-//    private void updateSDate(){
-//        stime = android.text.format.DateFormat.format("yyyy年MM月dd", s_time).toString();
-//        Log.d(TAG, "stime: " + stime);
-//        mS_time.setText(stime);
-//    }
-//    private void updateEDate(){
-//        if (e_time.after(s_time)) {
-//            etime = android.text.format.DateFormat.format("yyyy年MM月dd", e_time).toString();
-//            Log.d(TAG, "etime: " + etime);
-//            mE_time.setText(etime);
-//            Log.d(TAG, "mE_time: " + mE_time.getText());
-//        } else {
-//            Toast.makeText(getActivity(),
-//                    R.string.time_erro,
-//                    Toast.LENGTH_SHORT).show();
-//        }
-//    }
 }

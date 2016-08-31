@@ -104,9 +104,9 @@ public class ManagerLeaveDealFragment extends Fragment {
     private void control() {
         name.setText(mLeave.getMem_name());
         leaveKind.setText(mLeave.getLeave_type());
-        leaveBeginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mLeave.getStart_time()));
+        leaveBeginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mLeave.getStart_time()));
         Log.d(TAG, "beginTime: " + leaveBeginTime.getText());
-        leaveEndTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mLeave.getEnd_time()));
+        leaveEndTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mLeave.getEnd_time()));
         leaveSuggestion.setText(mLeave.getHandle_opinion());
         leaveSuggestion.addTextChangedListener(new TextWatcher() {
             @Override
@@ -127,7 +127,7 @@ public class ManagerLeaveDealFragment extends Fragment {
         leaveReason.setText(mLeave.getLeave_reason());
         if ("null" != mLeave.getHandle_time()) {
             Log.d(TAG, "Handle_time1: " + mLeave.getHandle_time());
-            leaveDealTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(Integer.parseInt(mLeave.getHandle_time())));
+            leaveDealTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(Integer.parseInt(mLeave.getHandle_time()) + 28800));
         } else {
             Log.d(TAG, "Handle_time2: " + mLeave.getHandle_time());
             leaveDealTime.setText("——");
