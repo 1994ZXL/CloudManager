@@ -55,16 +55,13 @@
                         android:layout_gravity="center_vertical"
                         android:text="@string/mission_name" />
 
-                    <Spinner
-                        android:layout_width="200sp"
-                        android:layout_height="35sp"
-                        android:background="#87CEEB"
-                        android:gravity="center"
-                        android:paddingLeft="20sp"
+                    <EditText
+                        style="@style/editText"
+                        android:layout_width="match_parent"
                         android:layout_weight="1"
                         android:id="@+id/pm_mission_projectName">
 
-                    </Spinner>
+                    </EditText>
                 </LinearLayout>
 
                 <LinearLayout
@@ -102,13 +99,12 @@
                     android:layout_marginTop="20sp">
 
                     <TextView
-                        android:id="@+id/plan_create_time_textview"
                         android:layout_width="50sp"
                         android:layout_height="35sp"
                         android:textColor="#000000"
                         android:layout_weight="1"
                         android:textSize="20sp"
-                        android:text="@string/project_mission_time" />
+                        android:text="@string/project_begin_time_textview" />
 
                     <Button
                         android:id="@+id/pm_mission_begin_time_button"
@@ -119,11 +115,6 @@
                         android:layout_weight="1"
                         android:text="@string/project_begin_time_textview" />
 
-                    <TextView
-                        android:layout_width="10sp"
-                        android:layout_height="35sp"
-                        android:text=" "/>
-
                     <Button
                         android:id="@+id/pm_mission_end_time_button"
                         android:layout_width="80sp"
@@ -131,8 +122,46 @@
                         android:textColor="#000000"
                         android:background="#87CEEB"
                         android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
                         android:text="@string/project_end_time_textview" />
+
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20sp">
+
+                    <TextView
+                        android:layout_width="50sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="@string/project_end_time_textview" />
+
+                    <Button
+                        android:id="@+id/pm_mission_end_time_begin_button"
+                        android:layout_width="80sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:background="#87CEEB"
+                        android:layout_weight="1"
+                        android:text="@string/project_begin_time_textview" />
+
+                    <Button
+                        android:id="@+id/pm_mission_end_time_end_button"
+                        android:layout_width="80sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:background="#87CEEB"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/project_end_time_textview" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
             <Button

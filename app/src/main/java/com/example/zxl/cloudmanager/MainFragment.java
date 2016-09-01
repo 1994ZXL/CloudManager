@@ -138,6 +138,7 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.main_fragment, parent, false);
+
         getActivity().getActionBar().setTitle("企业云");
 
         init(v);

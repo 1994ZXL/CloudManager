@@ -20,7 +20,7 @@ public class Mission {
     private String pm_id; //项目id
     private String mem_id; //成员id
     private String pmsch_id; //任务进度id
-    private int percent; //任务进度
+    private String percent; //任务进度
 
 
     private static final String JSON_TITLE = "title";
@@ -61,7 +61,7 @@ public class Mission {
         if (json.has(JSON_PMSCH_ID))
             pmsch_id = json.getString(JSON_PMSCH_ID);
         if (json.has(JSON_PERCENT))
-            percent = json.getInt(JSON_PERCENT);
+            percent = json.getString(JSON_PERCENT);
     }
 
     public JSONObject toJSON() throws JSONException{
@@ -107,11 +107,11 @@ public class Mission {
         this.pmsch_id = pmsch_id;
     }
 
-    public int getPercent() {
+    public String getPercent() {
         return percent;
     }
 
-    public void setPercent(int percent) {
+    public void setPercent(String percent) {
         this.percent = percent;
     }
 

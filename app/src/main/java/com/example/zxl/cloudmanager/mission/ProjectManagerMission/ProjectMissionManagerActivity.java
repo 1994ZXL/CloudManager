@@ -5,7 +5,6 @@ import com.example.zxl.cloudmanager.SingleFragmentActivity;
 
 public class ProjectMissionManagerActivity extends SingleFragmentActivity {
 
-
     @Override
     protected Fragment createFragment(){
         return new MissionSearchFragment();

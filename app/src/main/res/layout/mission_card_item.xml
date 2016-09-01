@@ -21,17 +21,23 @@
             android:orientation="horizontal"
             android:layout_margin="16dp">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:id="@+id/mission_card_item_title"
                 android:textSize="30dp"/>
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="20dp"
                 android:id="@+id/mission_card_item_state"/>
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:id="@+id/mission_card_item_delete"
+                android:src="@android:drawable/ic_menu_delete"/>
         </LinearLayout>
 
         <!-- 开始时间-->

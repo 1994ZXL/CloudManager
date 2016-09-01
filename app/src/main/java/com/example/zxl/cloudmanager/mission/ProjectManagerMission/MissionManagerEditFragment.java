@@ -33,6 +33,7 @@ import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Mission;
 import com.loopj.android.http.AsyncHttpClient;
@@ -69,11 +70,6 @@ public class MissionManagerEditFragment extends Fragment {
 
     private String[] stateList;
     private ArrayAdapter<String> stateAdapter;
-
-    private Date beginTime;
-    private StringBuilder bgtime;
-    private Date endTime;
-    private StringBuilder edtime;
 
     private String title;
     private String content;
@@ -116,8 +112,6 @@ public class MissionManagerEditFragment extends Fragment {
         mEvaluate = (EditText) view.findViewById(R.id.pm_mission_evaluate);
         mState = (Spinner) view.findViewById(R.id.pm_mission_state);
         mPercent = (EditText) view.findViewById(R.id.pm_mission_progress);
-        bgtime = new StringBuilder(DateForGeLingWeiZhi.fromGeLinWeiZhi2(sMission.getStart_time()));
-        edtime = new StringBuilder(DateForGeLingWeiZhi.fromGeLinWeiZhi2(sMission.getEnd_time()));
     }
 
     private void contorl() {
@@ -165,27 +159,7 @@ public class MissionManagerEditFragment extends Fragment {
         mBeginTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance();
-                Dialog dateDialog = new DatePickerDialog(mFragment.getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        bgtime.setLength(0);
-                        bgtime.append(i + "年" + (i1 + 1) + "月" + i2 + " ");
-                        Calendar time = Calendar.getInstance();
-                        Dialog timeDialog = new TimePickerDialog(mFragment.getActivity(), new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                                bgtime.append(i + ":" + i1);
-                                mBeginTimeButton.setText(bgtime);
-                                Log.d(TAG, "mS_time" + bgtime);
-                            }
-                        }, time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), true);
-                        timeDialog.setTitle("请选择时间");
-                        timeDialog.show();
-                    }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                dateDialog.setTitle("请选择日期");
-                dateDialog.show();
+                DateTimePicker.selectDateTime(mFragment, mBeginTimeButton);
             }
         });
 
@@ -197,27 +171,7 @@ public class MissionManagerEditFragment extends Fragment {
         mEndTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar calendar = Calendar.getInstance();
-                Dialog dateDialog = new DatePickerDialog(mFragment.getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        edtime.setLength(0);
-                        edtime.append(i + "年" + (i1 + 1) + "月" + i2 + " ");
-                        Calendar time = Calendar.getInstance();
-                        Dialog timeDialog = new TimePickerDialog(mFragment.getActivity(), new TimePickerDialog.OnTimeSetListener() {
-                            @Override
-                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
-                                edtime.append(i + ":" + i1);
-                                mEndTimeButton.setText(edtime);
-                                Log.d(TAG, "mEndTimeButton" + edtime);
-                            }
-                        }, time.get(Calendar.HOUR_OF_DAY), time.get(Calendar.MINUTE), true);
-                        timeDialog.setTitle("请选择时间");
-                        timeDialog.show();
-                    }
-                }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-                dateDialog.setTitle("请选择日期");
-                dateDialog.show();
+                DateTimePicker.selectDateTime(mFragment, mEndTimeButton);
             }
         });
 
@@ -262,7 +216,9 @@ public class MissionManagerEditFragment extends Fragment {
 
             }
         });
-        mPercent.setText(String.valueOf(sMission.getPercent()));
+        if (sMission.getPercent() == null)
+            mPercent.setText("0");
+        else mPercent.setText(sMission.getPercent());
         mPercent.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -280,40 +236,6 @@ public class MissionManagerEditFragment extends Fragment {
             }
         });
     }
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        Log.d(TAG, "进入回调 " + " resultCode:" + requestCode);
-//        if (resultCode != Activity.RESULT_OK){
-//            Log.d(TAG, "未进入判断");
-//            return;
-//        } else if (requestCode == 12) {
-//            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-//            updateBeginDate();
-//        } else if (requestCode == 13) {
-//            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-//            updateEndDate();
-//        }
-//    }
-//
-//    private void updateBeginDate(){
-//        bgtime = android.text.format.DateFormat.format("yyyy年MM月dd", beginTime).toString();
-//        Log.d(TAG, "bgtime: " + bgtime);
-//        mBeginTimeButton.setText(bgtime);
-//        Log.d(TAG, "beginTimeButton: " + mBeginTimeButton.getText());
-//    }
-//    private void updateEndDate(){
-//        if (endTime.after(beginTime)) {
-//            edtime = android.text.format.DateFormat.format("yyyy年MM月dd", endTime).toString();
-//            Log.d(TAG, "edtime: " + edtime);
-//            mEndTimeButton.setText(edtime);
-//            Log.d(TAG, "endTimeButton: " + mEndTimeButton.getText());
-//        } else {
-//            Toast.makeText(getActivity(),
-//                    R.string.time_erro,
-//                    Toast.LENGTH_SHORT).show();
-//        }
-//    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -334,12 +256,12 @@ public class MissionManagerEditFragment extends Fragment {
                         keyObj.put(Link.content, content);
                     else keyObj.put(Link.content, sMission.getContent());
 
-                    if (null != bgtime)
-                        keyObj.put(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(bgtime.toString()));
+                    if (null != mBeginTimeButton.getText())
+                        keyObj.put(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(mBeginTimeButton.getText().toString()));
                     else keyObj.put(Link.start_time, DateForGeLingWeiZhi.fromGeLinWeiZhi2(sMission.getStart_time()));
 
-                    if (null != edtime)
-                        keyObj.put(Link.over_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(edtime.toString()));
+                    if (null != mEndTimeButton.getText())
+                        keyObj.put(Link.over_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(mEndTimeButton.getText().toString()));
                     else keyObj.put(Link.over_time, DateForGeLingWeiZhi.fromGeLinWeiZhi2(sMission.getEnd_time()));
 
                     if (null != evaluate)

@@ -5,6 +5,8 @@
     <string name="public_belong">成都川大川科网络信息有限公司  版权所有</string>
     <string name="user_hint">请输入用户名</string>
     <string name="pwd_hint">请输入密码</string>
+    <string name="delete">删除</string>
+    <string name="add">新增</string>
 
     <!--刷新加载-->
     <string name="pull_to_refresh">下拉刷新</string>
@@ -159,6 +161,7 @@
     <string name="leave_state">请假状态</string>
 
     <!-- 我的任务-->
+    <string name="mission_member">任务成员</string>
     <string name="mission_name">任务名称</string>
     <string name="mission_content">任务内容</string>
     <string name="mission_level">任务优先级</string>

@@ -124,6 +124,10 @@ public class Link {
     public static final String evaluate = "evaluate";
     public static final String pmsch_id = "pmsch_id";
     public static final String percent = "percent";
+    public static final String start_time_from = "start_time_from"; //开始时间 开始
+    public static final String start_time_to = "start_time_to"; //开始时间 结束
+    public static final String end_time_from = "end_time_from"; //结束时间 开始
+    public static final String end_time_to = "end_time_to"; //结束时间 结束
 
     //manage_pm
     public static final String project_name = "project_name"; //项目名称

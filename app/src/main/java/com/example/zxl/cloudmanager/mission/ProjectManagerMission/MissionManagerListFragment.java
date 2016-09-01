@@ -1,9 +1,11 @@
 package com.example.zxl.cloudmanager.mission.projectManagerMission;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -17,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,6 +68,11 @@ public class MissionManagerListFragment extends Fragment {
     private JSONObject keyObj = new JSONObject();
     private String key = "";
 
+    private static AsyncHttpClient mHttpcDelete = new AsyncHttpClient();
+    private RequestParams mParamsDelete = new RequestParams();
+    private JSONObject keyObjDelete = new JSONObject();
+    private String keyDelete = "";
+
     private Button mSearchBtn;
 
     @Override
@@ -77,28 +85,35 @@ public class MissionManagerListFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_search, menu);
+        inflater.inflate(R.menu.task_add_delete, menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_search:
-                Fragment fragment = null;
-                if (null == fragment) {
-                    FragmentManager fm = getFragmentManager();
-                    fragment = new MyMissionSearchFragment();
-                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+            case R.id.task_add:
+                Fragment fragment = new MissionManagerAddFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
                 }
-                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View view = layoutInflater.inflate(R.layout.main_fragment_my_mission, parent, false);
 
-        getActivity().getActionBar().setTitle("任务处理");
+//        getActivity().getActionBar().setTitle("任务处理");
 
         mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.mission_pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -112,15 +127,22 @@ public class MissionManagerListFragment extends Fragment {
                 }, REFRESH_DELAY);
             }
         });
+
         saveInstanceState = getArguments();
         if (null != saveInstanceState) {
             try {
-                keyObj.put(Link.pmtask_id, saveInstanceState.getString(Link.pmtask_id));
-                keyObj.put(Link.mem_id, saveInstanceState.getString(Link.mem_id));
-                if (-1 != saveInstanceState.getInt(Link.start_time))
-                    keyObj.put(Link.start_time, saveInstanceState.getInt(Link.start_time));
-                if (-1 != saveInstanceState.getInt(Link.over_time))
-                    keyObj.put(Link.over_time, saveInstanceState.getInt(Link.over_time));
+                if (null != saveInstanceState.getString(Link.title))
+                    keyObj.put(Link.title, saveInstanceState.getString(Link.title));
+                if (null != saveInstanceState.getString(Link.mem_name))
+                    keyObj.put(Link.mem_name, saveInstanceState.getString(Link.mem_name));
+                if (-1 != saveInstanceState.getInt(Link.start_time_from))
+                    keyObj.put(Link.start_time_from, saveInstanceState.getInt(Link.start_time_from));
+                if (-1 != saveInstanceState.getInt(Link.start_time_to))
+                    keyObj.put(Link.start_time_to, saveInstanceState.getInt(Link.start_time_to));
+                if (-1 != saveInstanceState.getInt(Link.end_time_from))
+                    keyObj.put(Link.end_time_from, saveInstanceState.getInt(Link.end_time_from));
+                if (-1 != saveInstanceState.getInt(Link.end_time_to))
+                    keyObj.put(Link.end_time_to, saveInstanceState.getInt(Link.end_time_to));
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -196,12 +218,6 @@ public class MissionManagerListFragment extends Fragment {
         return view;
     }
 
-    private Date getTime() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy.MM.dd");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-//        String date = formatter.format(curDate);
-        return curDate;
-    }
 
     public interface OnRecyclerViewItemClickListener {
         void onItemClick(View view, Object data);
@@ -227,8 +243,8 @@ public class MissionManagerListFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            Mission mission = missions.get(i);
+        public void onBindViewHolder(ViewHolder viewHolder, final int i) {
+            final Mission mission = missions.get(i);
 
             if (mission.getStart_time() == 0)
                 viewHolder.mBeginTime.setText("--");
@@ -240,6 +256,53 @@ public class MissionManagerListFragment extends Fragment {
 
             viewHolder.mName.setText(mission.getTitle());
             viewHolder.mState.setText(mission.getStatus());
+
+            viewHolder.mDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mFragment.getActivity());
+                    builder.setTitle("提示");
+                    builder.setMessage("是否要删除");
+                    builder.setNegativeButton("取消", null);
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+                        @Override
+                        public void onClick(DialogInterface dialog,int which){
+                            try {
+                                keyObjDelete.put(Link.pmtask_id, missions.get(i).getPmtask_id());
+                                keyDelete = DESCryptor.Encryptor(keyObjDelete.toString());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            mParamsDelete.put("key", keyDelete);
+                            Log.d(TAG,"key:" + keyDelete);
+
+                            mHttpcDelete.post(Link.localhost + "pm_task&act=drop", mParamsDelete, new JsonHttpResponseHandler() {
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                    try {
+                                        Toast.makeText(getActivity(),
+                                                response.getString("msg"),
+                                                Toast.LENGTH_SHORT).show();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                    Toast.makeText(getActivity(),
+                                            R.string.edit_error,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            missions.remove(i);
+                            mRecyclerView.scrollToPosition(i - 1);
+                            myAdapter.notifyDataSetChanged();
+                        }
+                    });
+                    builder.show();
+                }
+            });
 
             viewHolder.itemView.setTag(missions.get(i));
         }
@@ -260,6 +323,7 @@ public class MissionManagerListFragment extends Fragment {
             public TextView mState;
             public TextView mBeginTime;
             public TextView mEndTime;
+            public ImageButton mDelete;
 
             public ViewHolder(View v) {
                 super(v);
@@ -267,12 +331,14 @@ public class MissionManagerListFragment extends Fragment {
                 mState = (TextView)v.findViewById(R.id.mission_card_item_state);
                 mBeginTime = (TextView)v.findViewById(R.id.missoin_card_item_mission_begin_time);
                 mEndTime = (TextView)v.findViewById(R.id.mission_card_item_mission_end_time);
+                mDelete = (ImageButton)v.findViewById(R.id.mission_card_item_delete);
             }
         }
 
         public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
             mOnItemClickListener = listener;
         }
+
     }
 
 }

@@ -2,11 +2,16 @@ package com.example.zxl.cloudmanager.mission.projectManagerMission;
 
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +19,16 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -31,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import cz.msebera.android.httpclient.Header;
@@ -41,10 +50,12 @@ import cz.msebera.android.httpclient.Header;
 public class MissionSearchFragment extends Fragment {
     private static final String TAG = "MissionSearchFragment";
 
-    private Spinner mProjectName;
-    private Spinner mMemName;
-    private Button mBeginTimeButton;
-    private Button mEndTimeButton;
+    private EditText mProjectName;
+    private EditText mMemName;
+    private Button mBeginTimeBeginButton;
+    private Button mBeginTimeEndButton;
+    private Button mEndTimeBeginButton;
+    private Button mEndTimeEndButton;
     private Spinner mStateSpinner;
 
     private Button mSearchBtn;
@@ -52,25 +63,11 @@ public class MissionSearchFragment extends Fragment {
     private ArrayAdapter<String> stateAdapter;
     private int state;
 
-    private ArrayList<String> MemNameList = new ArrayList<String>();
-    private ArrayList<String> MemIdList = new ArrayList<String>();
-    private ArrayAdapter<String> MemNameAdapter;
-    private String memId;
-
-    private ArrayList<String> projecNametList = new ArrayList<String>();
-    private ArrayList<String> projectIdList = new ArrayList<String>();
-    private ArrayAdapter<String> projectNameAdapter;
-    private String projectId;
-
-    private Date beginTime;
-    private String bgtime;
-    private Date endTime;
-    private String edtime;
+    private String projecName;
+    private String name;
 
     private static AsyncHttpClient mHttpcProject = new AsyncHttpClient();
-    private static AsyncHttpClient mHttpcMem = new AsyncHttpClient();
     private RequestParams mParamsProject = new RequestParams();
-    private RequestParams mParamsMem = new RequestParams();
     private JSONObject keyObj = new JSONObject();
     private String key = "";
 
@@ -86,73 +83,42 @@ public class MissionSearchFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        getActivity().getActionBar().setTitle("项目任务查询");
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//        getActivity().getActionBar().setTitle("项目任务查询");
         View v = inflater.inflate(R.layout.fragment_mission_search, container, false);
         init(v);
 
-        mHttpcProject.post(Link.localhost + "pm_task&act=options_title", mParamsProject, new JsonHttpResponseHandler() {
+        mMemName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    JSONArray array = response.getJSONArray("data1");
-                    for (int i = 0; i < array.length(); i++) {
-                        if (array.getJSONObject(i).has("pmtask_id"))
-                            projectIdList.add(array.getJSONObject(i).getString("pmtask_id"));
-                        if (array.getJSONObject(i).has("title"))
-                            projecNametList.add(array.getJSONObject(i).getString("title"));
-                    }
-                    projectNameAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, projecNametList);
-                    projectNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    mProjectName.setAdapter(projectNameAdapter);
-                    mProjectName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            projectId = projectIdList.get(i);
-                        }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
+            }
 
-                        }
-                    });
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                name = charSequence.toString();
+            }
 
-                } catch (JSONException e) {
-                    Log.e(TAG, "ee2: " + e.getLocalizedMessage());
-                }
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
 
-        mHttpcMem.post(Link.localhost + "pm_task&act=options_member", mParamsMem, new JsonHttpResponseHandler() {
+        mProjectName.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                try {
-                    JSONArray array = response.getJSONArray("data1");
-                    for (int i = 0; i < array.length(); i++) {
-                        if (array.getJSONObject(i).has("mem_id"))
-                            MemIdList.add(array.getJSONObject(i).getString("mem_id"));
-                        if (array.getJSONObject(i).has("mem_name"))
-                            MemNameList.add(array.getJSONObject(i).getString("mem_name"));
-                    }
-                    MemNameAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, MemNameList);
-                    MemNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    mMemName.setAdapter(MemNameAdapter);
-                    mMemName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            memId = MemIdList.get(i);
-                        }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
+            }
 
-                        }
-                    });
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                projecName = charSequence.toString();
+            }
 
-                } catch (JSONException e) {
-                    Log.e(TAG, "ee2: " + e.getLocalizedMessage());
-                }
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
 
@@ -176,22 +142,28 @@ public class MissionSearchFragment extends Fragment {
         });
 
 
-        mBeginTimeButton.setOnClickListener(new View.OnClickListener(){
+        mBeginTimeBeginButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
-                fragment.setTargetFragment(MissionSearchFragment.this, 12);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MissionSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mBeginTimeBeginButton);
             }
         });
-        mEndTimeButton.setOnClickListener(new View.OnClickListener(){
+        mBeginTimeEndButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
-                fragment.setTargetFragment(MissionSearchFragment.this, 13);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MissionSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mBeginTimeEndButton);
+            }
+        });
+        mEndTimeBeginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DateTimePicker.selectDateTime(mFragment, mEndTimeBeginButton);
+            }
+        });
+        mEndTimeEndButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DateTimePicker.selectDateTime(mFragment, mEndTimeEndButton);
             }
         });
         mSearchBtn.setOnClickListener(new View.OnClickListener(){
@@ -200,17 +172,34 @@ public class MissionSearchFragment extends Fragment {
                 Fragment fragment = new MissionManagerListFragment();
                 Bundle bundle = new Bundle();
 
-                bundle.putString(Link.pmtask_id, projectId);
-                bundle.putString(Link.mem_id, memId);
-                if (null != bgtime) {
-                    bundle.putInt(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi(bgtime));
+                if (null != projecName)
+                    bundle.putString(Link.title, projecName);
+
+                if (null != name)
+                    bundle.putString(Link.mem_name, name);
+
+                if (null != mBeginTimeBeginButton.getText()) {
+                    bundle.putInt(Link.start_time_from, DateForGeLingWeiZhi.toGeLinWeiZhi3(mBeginTimeBeginButton.getText().toString()));
                 } else {
-                    bundle.putInt(Link.start_time, -1);
+                    bundle.putInt(Link.start_time_from, -1);
                 }
-                if (null != edtime) {
-                    bundle.putInt(Link.over_time, DateForGeLingWeiZhi.toGeLinWeiZhi(edtime));
+
+                if (null != mBeginTimeEndButton.getText()) {
+                    bundle.putInt(Link.start_time_to, DateForGeLingWeiZhi.toGeLinWeiZhi3(mBeginTimeEndButton.getText().toString()));
                 } else {
-                    bundle.putInt(Link.over_time, -1);
+                    bundle.putInt(Link.start_time_to, -1);
+                }
+
+                if (null != mEndTimeBeginButton.getText()) {
+                    bundle.putInt(Link.end_time_from, DateForGeLingWeiZhi.toGeLinWeiZhi3(mEndTimeBeginButton.getText().toString()));
+                } else {
+                    bundle.putInt(Link.end_time_from, -1);
+                }
+
+                if (null != mEndTimeEndButton.getText()) {
+                    bundle.putInt(Link.end_time_to, DateForGeLingWeiZhi.toGeLinWeiZhi3(mEndTimeEndButton.getText().toString()));
+                } else {
+                    bundle.putInt(Link.end_time_to, -1);
                 }
 
                 fragment.setArguments(bundle);
@@ -231,44 +220,14 @@ public class MissionSearchFragment extends Fragment {
     }
 
     private void init(View v){
-        mBeginTimeButton = (Button)v.findViewById(R.id.pm_mission_begin_time_button);
-        mEndTimeButton = (Button)v.findViewById(R.id.pm_mission_end_time_button);
-        mProjectName = (Spinner) v.findViewById(R.id.pm_mission_projectName);
+        mBeginTimeBeginButton = (Button)v.findViewById(R.id.pm_mission_begin_time_button);
+        mBeginTimeEndButton = (Button)v.findViewById(R.id.pm_mission_end_time_button);
+        mEndTimeBeginButton = (Button) v.findViewById(R.id.pm_mission_end_time_begin_button);
+        mEndTimeEndButton = (Button) v.findViewById(R.id.pm_mission_end_time_end_button);
+        mProjectName = (EditText) v.findViewById(R.id.pm_mission_projectName);
         mStateSpinner = (Spinner) v.findViewById(R.id.pm_mission_state);
-        mMemName = (Spinner) v.findViewById(R.id.pm_mission_memName);
+        mMemName = (EditText) v.findViewById(R.id.pm_mission_memName);
         mSearchBtn = (Button) v.findViewById(R.id.pm_mission_search_button);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "进入回调 " + " resultCode:" + requestCode);
-        if (resultCode != Activity.RESULT_OK){
-            Log.d(TAG, "未进入判断");
-            return;
-        } else if (requestCode == 12) {
-            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateBeginDate();
-        } else if (requestCode == 13) {
-            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateEndDate();
-        }
-    }
-    private void updateBeginDate(){
-        bgtime = android.text.format.DateFormat.format("yyyy年MM月dd", beginTime).toString();
-        Log.d(TAG, "bgtime: " + bgtime);
-        mBeginTimeButton.setText(bgtime);
-        Log.d(TAG, "beginTimeButton: " + mBeginTimeButton.getText());
-    }
-    private void updateEndDate(){
-        if (endTime.after(beginTime)) {
-            edtime = android.text.format.DateFormat.format("yyyy年MM月dd", endTime).toString();
-            Log.d(TAG, "edtime: " + edtime);
-            mEndTimeButton.setText(edtime);
-            Log.d(TAG, "endTimeButton: " + mEndTimeButton.getText());
-        } else {
-            Toast.makeText(getActivity(),
-                    R.string.time_erro,
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
 }
