@@ -72,7 +72,7 @@ public class ManagerOvertimeListFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
        final View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
 
-        getActivity().getActionBar().setTitle("加班列表");
+
 
         saveInstanceState = getArguments();
 

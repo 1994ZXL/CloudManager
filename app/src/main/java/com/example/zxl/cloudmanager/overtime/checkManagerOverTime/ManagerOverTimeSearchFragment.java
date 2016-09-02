@@ -96,7 +96,7 @@ public class ManagerOverTimeSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_my_over_time, container, false);
-        getActivity().getActionBar().setTitle("加班查询");
+
 
         init(v);
 

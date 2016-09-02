@@ -67,7 +67,7 @@ public class ManagerCheckListFragment extends Fragment {
 
         Log.d(TAG, "调用了一次");
 
-        getActivity().getActionBar().setTitle("考勤主管");
+
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {

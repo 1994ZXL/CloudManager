@@ -92,7 +92,7 @@ public class ManagerLeaveListFragment extends Fragment {
         });
         Log.d(TAG, "调用了一次");
 
-        getActivity().getActionBar().setTitle("请假处理");
+
 
         if (null == saveInstanceState) {
             Log.d(TAG, "没有选择条件");

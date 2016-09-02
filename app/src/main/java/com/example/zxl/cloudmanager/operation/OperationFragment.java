@@ -28,7 +28,7 @@ public class OperationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_operation, container, false);
-        getActivity().getActionBar().setTitle("运维查询");
+
         init(v);
         return v;
     }

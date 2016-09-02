@@ -91,7 +91,6 @@ public class MyMessageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.main_fragment_my_message, parent, false);
-        getActivity().getActionBar().setTitle("我的信息");
 
         init(v);
 

@@ -4,11 +4,12 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 /**
  * Created by ZXL on 2016/7/11.
  */
-public abstract class SingleFragmentActivity extends Activity {
+public abstract class SingleFragmentActivity extends AppCompatActivity {
     protected abstract Fragment createFragment();
 
     @Override
@@ -16,7 +17,7 @@ public abstract class SingleFragmentActivity extends Activity {
         super.onCreate(saveInstanceState);
         setContentView(R.layout.blank_activity);
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
+
         Fragment fragment;
         FragmentManager fm = getFragmentManager();
         fragment = fm.findFragmentById(R.id.blankActivity);

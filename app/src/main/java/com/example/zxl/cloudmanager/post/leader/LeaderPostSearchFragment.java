@@ -72,7 +72,7 @@ public class LeaderPostSearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v =  inflater.inflate(R.layout.leader_post_search, container, false);
-        getActivity().getActionBar().setTitle("日报查询");
+
 
         init(v);
         //查询条件

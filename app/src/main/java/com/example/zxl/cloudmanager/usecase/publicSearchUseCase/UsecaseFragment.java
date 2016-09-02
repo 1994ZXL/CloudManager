@@ -63,7 +63,7 @@ public class UsecaseFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        getActivity().getActionBar().setTitle("用例查询");
+
         View v = inflater.inflate(R.layout.fragment_usecase_public, container, false);
         init(v);
         contorl();

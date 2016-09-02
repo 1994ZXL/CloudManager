@@ -66,8 +66,9 @@ public class ProjectManagerSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_project_manager_search, container, false);
-        getActivity().getActionBar().setTitle("项目管理");
+
         init(v);
+
         mProjectName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

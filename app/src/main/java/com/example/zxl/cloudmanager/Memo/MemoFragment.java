@@ -48,7 +48,7 @@ public class MemoFragment extends Fragment {
         View v = layoutInflater.inflate(R.layout.main_fragment_my_memo, parent, false);
 
         memos.add(new Memo("第一条", "p1"));
-        getActivity().getActionBar().setTitle("我的备忘录");
+
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_memo_pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {

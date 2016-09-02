@@ -63,7 +63,7 @@ public class LeaderCheckSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.leader_check_search, container, false);
-        getActivity().getActionBar().setTitle("考勤查询");
+
         init(v);
 
         mName.addTextChangedListener(new TextWatcher() {

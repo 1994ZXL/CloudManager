@@ -63,7 +63,7 @@ public class MyPostSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v =  inflater.inflate(R.layout.fragment_my_post_search, container, false);
 
-        getActivity().getActionBar().setTitle("日报查询");
+
 
         init(v);
         control();

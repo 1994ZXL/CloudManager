@@ -72,7 +72,7 @@ public class ManagerTravelDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_travel_detail, container, false);
 
-        getActivity().getActionBar().setTitle("出差处理");
+
 
         init(v);
         control();

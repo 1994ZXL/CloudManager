@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
@@ -39,8 +40,8 @@ public class MyLeaveSearchFragment extends Fragment {
     private static final String TAG = "MyLeaveSearchFragment";
 
     private EditText mName;
-    private Button mLeaveBeginBtn;
-    private Button mLeaveEndBtn;
+    private TextView mLeaveBeginBtn;
+    private TextView mLeaveEndBtn;
     private Spinner mLeaveKindSpinner;
     private Spinner mLeaveStateSpinner;
     private LinearLayout mNameLinearLayout;
@@ -90,7 +91,7 @@ public class MyLeaveSearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_leavesearch, container, false);
-        getActivity().getActionBar().setTitle("请假查询");
+
 
         init(v);
 
@@ -245,8 +246,8 @@ public class MyLeaveSearchFragment extends Fragment {
     private void init(View v){
         mNameLinearLayout = (LinearLayout) v.findViewById(R.id.leave_search_nameLinearLayout);
         mName = (EditText) v.findViewById(R.id.my_leave_name);
-        mLeaveBeginBtn = (Button) v.findViewById(R.id.my_leave_begin_time_button);
-        mLeaveEndBtn = (Button) v.findViewById(R.id.my_leave_end_time_button);
+        mLeaveBeginBtn = (TextView) v.findViewById(R.id.my_leave_begin_time_button);
+        mLeaveEndBtn = (TextView) v.findViewById(R.id.my_leave_end_time_button);
         mLeaveKindSpinner = (Spinner) v.findViewById(R.id.my_leave_kind_sprinner);
         mLeaveStateSpinner = (Spinner) v.findViewById(R.id.my_leave_state_sprinner);
 

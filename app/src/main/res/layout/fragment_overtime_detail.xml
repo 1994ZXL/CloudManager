@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F0F8FF"
     android:orientation="vertical"
     tools:context=".overtime.checkManagerOverTime.ManagerOvertimeDetailFragment">
 
@@ -14,7 +15,7 @@
             android:orientation="vertical">
             <LinearLayout
                 style="@style/linearLayoutStyle"
-                android:padding="10dp">
+                android:padding="10sp">
 
 
                 <!-- 姓名-->
@@ -26,15 +27,18 @@
 
                     <TextView
                         style="@style/font"
-                        android:layout_width="match_parent"
-                        android:text="@string/name"
-                        android:textSize="20dp"
-                        android:layout_weight="1"/>
+                        android:layout_width="200sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:layout_weight="1"
+                        android:text="@string/name" />
                     <TextView
                         android:layout_width="match_parent"
-                        style="@style/font"
+                        android:layout_height="35sp"
+                        android:background="#87CEEB"
                         android:layout_weight="1"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:gravity="center"
                         android:id="@+id/manager_employer_name_spinner" />
 
@@ -45,20 +49,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    android:layout_marginTop="20sp">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="200sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:layout_weight="1"
                         style="@style/font"
                         android:text="@string/project_name_edittext"
-                        android:layout_weight="1"
-                        android:layout_gravity="center_vertical"
-                        android:textSize="20dp"/>
+                        android:layout_gravity="center_vertical" />
                     <TextView
                         android:layout_width="match_parent"
-                        style="@style/font"
+                        android:layout_height="35sp"
+                        android:background="#87CEEB"
                         android:layout_weight="1"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:gravity="center"
                         android:id="@+id/manager_overtime_project_spinner" />
 
@@ -69,22 +76,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    android:layout_marginTop="20sp">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="200sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:layout_weight="1"
                         style="@style/font"
                         android:text="@string/my_overtime_time"
-                        android:layout_weight="1"
-                        android:textSize="20dp"
                         android:layout_gravity="center_vertical"/>
 
                     <TextView
-                        style="@style/font"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35sp"
+                        android:background="#87CEEB"
                         android:layout_weight="1"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:gravity="center"
                         android:id="@+id/manager_overtime_detail_beginTime"/>
 
@@ -95,22 +104,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    android:layout_marginTop="20sp">
 
                     <TextView
-                        android:layout_width="match_parent"
+                        android:layout_width="200sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:layout_weight="1"
                         style="@style/font"
                         android:text="@string/my_overtime_time"
-                        android:layout_weight="1"
-                        android:textSize="20dp"
                         android:layout_gravity="center_vertical"/>
 
                     <TextView
-                        style="@style/font"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="35sp"
+                        android:background="#87CEEB"
                         android:layout_weight="1"
-                        android:textSize="20dp"
+                        android:textSize="20sp"
                         android:gravity="center"
                         android:id="@+id/manager_overtime_detail_endTime"/>
 
@@ -121,17 +132,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    android:layout_marginTop="20sp">
 
                     <TextView
-                        style="@style/font"
                         android:text="@string/manager_overtime_reason"
-                        android:layout_weight="1" />
+                        android:layout_width="200sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:layout_weight="1"/>
                     <TextView
                         android:id="@+id/manager_overtime_reason_edittext"
-                        style="@style/font"
-                        android:gravity="center"
-                        android:layout_weight="1" />
+                        android:layout_width="match_parent"
+                        android:layout_height="35sp"
+                        android:background="#87CEEB"
+                        android:layout_weight="1"
+                        android:gravity="center" />
 
                 </LinearLayout>
 
@@ -140,18 +156,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    android:layout_marginTop="20sp">
 
                     <TextView
                         style="@style/font"
                         android:layout_width="match_parent"
-                        android:text="@string/overtime_status"
-                        android:textSize="20dp"
-                        android:layout_weight="1" />
-                    <Spinner
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
+                        android:textColor="#000000"
+                        android:textSize="20sp"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/overtime_status" />
+                    <Spinner
+                        android:layout_width="200sp"
+                        android:layout_height="35sp"
+                        android:background="#87CEEB"
+                        android:gravity="center"
+                        android:paddingLeft="20sp"
+                        android:layout_weight="1"
                         android:id="@+id/manager_overtime_status_spinner" />
 
                 </LinearLayout>

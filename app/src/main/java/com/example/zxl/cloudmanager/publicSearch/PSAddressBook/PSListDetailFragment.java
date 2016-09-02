@@ -48,7 +48,7 @@ public class PSListDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.ps_project_list, parent, false);
-        getActivity().getActionBar().setTitle("项目通讯录详情");
+
 
         init(v);
         adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, list);

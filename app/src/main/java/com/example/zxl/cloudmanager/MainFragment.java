@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -128,6 +129,8 @@ public class MainFragment extends Fragment {
 
     private Fragment mFragment;
 
+    private Toolbar toolbar;
+
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -139,9 +142,11 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.main_fragment, parent, false);
 
-        getActivity().getActionBar().setTitle("企业云");
 
         init(v);
+
+        Toolbar toolbar = (Toolbar) v.findViewById(R.id.main_fragment_toolbar);
+
 
         //职位(1.领导 2.项目负责人 3.一般员工)
         if (User.newInstance().getMem_job().equals("1")) {

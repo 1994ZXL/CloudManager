@@ -50,7 +50,7 @@ public class MyLeaveFragment extends Fragment implements RadioGroup.OnCheckedCha
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View view = layoutInflater.inflate(R.layout.main_fragment_my_leave, parent, false);
 
-        getActivity().getActionBar().setTitle("我的请假");
+
 
         initController(view);
         initListener();

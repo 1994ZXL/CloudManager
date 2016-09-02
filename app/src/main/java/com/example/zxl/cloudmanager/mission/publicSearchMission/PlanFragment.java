@@ -39,7 +39,7 @@ public class PlanFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().getActionBar().setTitle("任务查询");
+
         View v = inflater.inflate(R.layout.fragment_plan_public, container, false);
         init(v);
 

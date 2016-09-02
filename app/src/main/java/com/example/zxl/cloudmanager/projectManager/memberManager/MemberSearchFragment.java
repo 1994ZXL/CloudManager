@@ -28,7 +28,7 @@ public class MemberSearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().getActionBar().setTitle("项目成员查询");
+
         View v = inflater.inflate(R.layout.fragment_member_search, container, false);
         init(v);
         mSearchBtn.setOnClickListener(new View.OnClickListener(){

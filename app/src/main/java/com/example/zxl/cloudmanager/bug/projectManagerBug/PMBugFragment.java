@@ -95,7 +95,7 @@ public class PMBugFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View v = layoutInflater.inflate(R.layout.main_fragment_my_bug, parent, false);
 
-        getActivity().getActionBar().setTitle("bug列表");
+
 
         saveInstanceState = getArguments();
 

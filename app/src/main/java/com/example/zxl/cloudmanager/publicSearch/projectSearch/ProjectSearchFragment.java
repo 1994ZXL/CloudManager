@@ -38,7 +38,7 @@ public class ProjectSearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().getActionBar().setTitle("项目查询");
+
         View v = inflater.inflate(R.layout.fragment_project_search_public, container, false);
 
         init(v);

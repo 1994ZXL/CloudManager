@@ -95,7 +95,7 @@ public class MyMissionFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View view = layoutInflater.inflate(R.layout.main_fragment_my_mission, parent, false);
 
-        getActivity().getActionBar().setTitle("我的任务");
+
 
         saveInstanceState = getArguments();
 

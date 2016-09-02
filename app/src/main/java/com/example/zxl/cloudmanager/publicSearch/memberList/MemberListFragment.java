@@ -24,7 +24,7 @@ public class MemberListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().getActionBar().setTitle("成员查询");
+
         View v = inflater.inflate(R.layout.fragment_member_list_public, container, false);
         init(v);
         return v;

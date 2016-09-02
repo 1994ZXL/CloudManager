@@ -74,7 +74,7 @@ public class ProjectManagerListFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View view = layoutInflater.inflate(R.layout.pm_manager_list, parent, false);
 
-        getActivity().getActionBar().setTitle("项目管理");
+
         mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pm_manager_pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
