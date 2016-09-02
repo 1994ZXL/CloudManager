@@ -21,7 +21,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.DateTimePicker;
+import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Mission;
 import com.example.zxl.cloudmanager.model.MissionLab;
 
@@ -33,8 +36,10 @@ import java.util.Date;
  */
 public class MyMissionSearchFragment extends Fragment {
     private EditText mMisiionNameET;
-    private Button mMissionBeginBtn;
-    private Button mMissionEndBtn;
+    private Button mMissionBeginBeginBtn;
+    private Button mMissionBeginEndBtn;
+    private Button mMissionEndBeginBtn;
+    private Button mMissionEndEndBtn;
     private Spinner mMissionStateSpinner;
 
     private Button mSearchBtn;
@@ -44,11 +49,7 @@ public class MyMissionSearchFragment extends Fragment {
     private static final String TAG = "MyMissionSearchFragment";
 
     private String name;
-    private Date beginTime;
-    private String bgtime;
-    private Date endTime;
-    private String edtime;
-    private String state;
+    private int state;
 
 
     private Fragment mFragment;
@@ -68,23 +69,31 @@ public class MyMissionSearchFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_my_mission, container, false);
 
         init(v);
-        mMissionBeginBtn.setOnClickListener(new View.OnClickListener() {
+        mMissionBeginBeginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
-                fragment.setTargetFragment(MyMissionSearchFragment.this, 12);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyMissionSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mMissionBeginBeginBtn);
             }
         });
 
-        mMissionEndBtn.setOnClickListener(new View.OnClickListener(){
+        mMissionBeginEndBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
-                fragment.setTargetFragment(MyMissionSearchFragment.this, 13);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyMissionSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mMissionBeginEndBtn);
+            }
+        });
+
+        mMissionEndBeginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DateTimePicker.selectDateTime(mFragment, mMissionEndBeginBtn);
+            }
+        });
+
+        mMissionEndEndBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DateTimePicker.selectDateTime(mFragment, mMissionEndEndBtn);
             }
         });
 
@@ -94,7 +103,7 @@ public class MyMissionSearchFragment extends Fragment {
         mMissionStateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                state = list[i];
+                state = i;
             }
 
             @Override
@@ -132,52 +141,44 @@ public class MyMissionSearchFragment extends Fragment {
 
     private void init(View v){
         mMisiionNameET = (EditText) v.findViewById(R.id.my_mission_name_edittext);
-        mMissionBeginBtn = (Button) v.findViewById(R.id.my_mission_begin_time_button);
-        mMissionEndBtn = (Button) v.findViewById(R.id.my_mission_end_time_button);
+        mMissionBeginBeginBtn = (Button) v.findViewById(R.id.my_mission_begin_time_button);
+        mMissionBeginEndBtn = (Button) v.findViewById(R.id.my_mission_end_time_button);
+        mMissionEndBeginBtn = (Button) v.findViewById(R.id.my_mission_end_begin_time_button);
+        mMissionEndEndBtn = (Button) v.findViewById(R.id.my_mission_end_end_time_button);
         mMissionStateSpinner = (Spinner) v.findViewById(R.id.my_mission_state_sprinner);
 
         mSearchBtn = (Button) v.findViewById(R.id.my_mission_search_button);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "进入回调 " + " resultCode:" + requestCode);
-        if (resultCode != Activity.RESULT_OK){
-            Log.d(TAG, "未进入判断");
-            return;
-        } else if (requestCode == 12) {
-            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateBeginDate();
-        } else if (requestCode == 13) {
-            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateEndDate();
-        }
-    }
-
-    private void updateBeginDate(){
-        bgtime = android.text.format.DateFormat.format("yyyy.M.dd", beginTime).toString();
-        mMissionBeginBtn.setText(bgtime);
-    }
-    private void updateEndDate(){
-        if (endTime.after(beginTime)) {
-            edtime = android.text.format.DateFormat.format("yyyy.M.dd", endTime).toString();
-            mMissionEndBtn.setText(edtime);
-        } else {
-            Toast.makeText(getActivity(),
-                    R.string.time_erro,
-                    Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void search() {
         Fragment fragment = new MyMissionFragment();
         Bundle bundle = new Bundle();
 
+        bundle.putString(Link.title, name);
+
+        if (null != mMissionBeginBeginBtn.getText())
+            bundle.putInt(Link.start_time_from, DateForGeLingWeiZhi.toGeLinWeiZhi3(mMissionBeginBeginBtn.getText().toString()));
+        else bundle.putInt(Link.start_time_from, -1);
+
+        if (null != mMissionBeginEndBtn.getText())
+            bundle.putInt(Link.start_time_to, DateForGeLingWeiZhi.toGeLinWeiZhi3(mMissionBeginEndBtn.getText().toString()));
+        else bundle.putInt(Link.start_time_to, -1);
+
+        if (null != mMissionEndBeginBtn.getText())
+            bundle.putInt(Link.end_time_from, DateForGeLingWeiZhi.toGeLinWeiZhi3(mMissionEndBeginBtn.getText().toString()));
+        else bundle.putInt(Link.end_time_from, -1);
+
+        if (null != mMissionEndEndBtn.getText())
+            bundle.putInt(Link.end_time_to, DateForGeLingWeiZhi.toGeLinWeiZhi3(mMissionEndEndBtn.getText().toString()));
+        else bundle.putInt(Link.end_time_to, -1);
+
+        bundle.putInt(Link.status, state);
+
         fragment.setArguments(bundle);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         if (!fragment.isAdded()) {
             transaction.hide(mFragment);
-            transaction.replace(R.id.blankActivity, fragment);
+            transaction.add(R.id.blankActivity, fragment);
             transaction.commit();
         } else {
             transaction.hide(mFragment);

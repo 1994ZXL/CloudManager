@@ -18,7 +18,7 @@ public class User {
     private String email; //邮箱
     private String mem_region; //地址
     private String mem_addr; // 详细地址
-    private String card; //身份证号
+    private String card_id; //身份证号
     private String mem_state; //在职状态 0在职 1休假 2离职
     private String puncher_name; //考勤地址
     private String puncher_master; //考勤主管
@@ -42,7 +42,7 @@ public class User {
     private static final String JSON_EMAIL = "email";
     private static final String JSON_MEM_REGION = "mem_region";
     private static final String JSON_MEM_ADDR = "mem_addr";
-    private static final String JSON_CARD = "card";
+    private static final String JSON_CARD = "card_id";
     private static final String JSON_MEM_STATE = "mem_state";
     private static final String JSON_PUNCHER_NAME = "puncher_name";
     private static final String JSON_PUNCHER_MASTER = "puncher_master";
@@ -90,7 +90,7 @@ public class User {
         if (json.has(JSON_MEM_ADDR))
             mem_addr = json.getString(JSON_MEM_ADDR);
         if (json.has(JSON_CARD))
-            card = json.getString(JSON_CARD);
+            card_id = json.getString(JSON_CARD);
         if (json.has(JSON_MEM_STATE))
             mem_state = json.getString(JSON_MEM_STATE);
         if (json.has(JSON_PUNCHER_NAME))
@@ -185,11 +185,11 @@ public class User {
 
 
     public String getCard() {
-        return card;
+        return card_id;
     }
 
     public void setCard(String card) {
-        this.card = card;
+        this.card_id = card;
     }
 
     public String getUser_name() {

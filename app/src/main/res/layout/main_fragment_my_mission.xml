@@ -1,19 +1,40 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.zxl.cloudmanager.Refresh.PullToRefreshView
-        android:id="@+id/mission_pull_to_refresh"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/mission_recyclerview"
-            android:dividerHeight="10dp"
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/font"
+            android:id="@+id/manager_mission_add"
+            android:layout_gravity="right"
+            android:text="新增"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            style="@style/font"
+            android:text="搜索"
+            android:id="@+id/manager_mission_search"
+            android:layout_gravity="right"/>
+
+        <com.example.zxl.cloudmanager.Refresh.PullToRefreshView
+            android:id="@+id/mission_pull_to_refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"/>
+            android:layout_height="match_parent">
 
-    </com.example.zxl.cloudmanager.Refresh.PullToRefreshView>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mission_recyclerview"
+                android:dividerHeight="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"/>
 
-</RelativeLayout>
+        </com.example.zxl.cloudmanager.Refresh.PullToRefreshView>
+
+    </LinearLayout>
+
+</LinearLayout>

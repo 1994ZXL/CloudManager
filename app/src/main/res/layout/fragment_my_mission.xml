@@ -41,6 +41,8 @@
                         android:background="#87CEEB"
                         android:layout_weight="1"/>
                 </LinearLayout>
+
+                <!--开始时间-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -53,7 +55,7 @@
                         android:textColor="#000000"
                         android:layout_weight="1"
                         android:textSize="20sp"
-                        android:text="@string/my_mission_time" />
+                        android:text="@string/project_begin_time_textview" />
 
                     <Button
                         android:id="@+id/my_mission_begin_time_button"
@@ -71,6 +73,46 @@
 
                     <Button
                         android:id="@+id/my_mission_end_time_button"
+                        android:layout_width="80sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:background="#87CEEB"
+                        android:layout_weight="1"
+                        android:text="@string/project_end_time_textview" />
+
+                </LinearLayout>
+
+                <!--结束时间-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20sp">
+
+                    <TextView
+                        android:layout_width="50sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:text="@string/project_end_time_textview" />
+
+                    <Button
+                        android:id="@+id/my_mission_end_begin_time_button"
+                        android:layout_width="80sp"
+                        android:layout_height="35sp"
+                        android:textColor="#000000"
+                        android:background="#87CEEB"
+                        android:layout_weight="1"
+                        android:text="@string/project_begin_time_textview" />
+
+                    <TextView
+                        android:layout_width="10sp"
+                        android:layout_height="35sp"
+                        android:text=" "/>
+
+                    <Button
+                        android:id="@+id/my_mission_end_end_time_button"
                         android:layout_width="80sp"
                         android:layout_height="35sp"
                         android:textColor="#000000"

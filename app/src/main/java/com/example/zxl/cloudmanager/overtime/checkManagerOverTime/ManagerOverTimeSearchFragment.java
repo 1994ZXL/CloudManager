@@ -131,37 +131,39 @@ public class ManagerOverTimeSearchFragment extends Fragment {
                                 mem_id.add(memArray.getJSONObject(j).getString("mem_id"));
                         }
 
-                        projectAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, project_name);
-                        projectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        mEmployerProjectSpinner.setAdapter(projectAdapter);
-                        mEmployerProjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                projectName = project_name.get(i);
-                                projectId = pm_id.get(i);
-                            }
+                        if (null != mFragment.getActivity()){
+                            projectAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, project_name);
+                            projectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            mEmployerProjectSpinner.setAdapter(projectAdapter);
+                            mEmployerProjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                    projectName = project_name.get(i);
+                                    projectId = pm_id.get(i);
+                                }
 
-                            @Override
-                            public void onNothingSelected(AdapterView<?> adapterView) {
+                                @Override
+                                public void onNothingSelected(AdapterView<?> adapterView) {
 
-                            }
-                        });
+                                }
+                            });
 
-                        nameAdapter= new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, mem_name);
-                        nameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                        mEmployerNameSpinner.setAdapter(nameAdapter);
-                        mEmployerNameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                            @Override
-                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                employerName = mem_name.get(i);
-                                employerId = mem_id.get(i);
-                            }
+                            nameAdapter= new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, mem_name);
+                            nameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            mEmployerNameSpinner.setAdapter(nameAdapter);
+                            mEmployerNameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                @Override
+                                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                    employerName = mem_name.get(i);
+                                    employerId = mem_id.get(i);
+                                }
 
-                            @Override
-                            public void onNothingSelected(AdapterView<?> adapterView) {
+                                @Override
+                                public void onNothingSelected(AdapterView<?> adapterView) {
 
-                            }
-                        });
+                                }
+                            });
+                        }
 
                     } else {
 

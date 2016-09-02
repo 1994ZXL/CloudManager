@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
@@ -50,6 +51,8 @@ public class MissionManagerAddFragment extends Fragment {
     private Button mEndTime;
     private Spinner mStatus;
     private EditText mEvaluate;
+
+    private TextView mSaveTextView;
 
     private String missionName;
     private String missionContent;
@@ -183,6 +186,7 @@ public class MissionManagerAddFragment extends Fragment {
         mEndTime = (Button) v.findViewById(R.id.pm_task_add_endTime);
         mStatus = (Spinner) v.findViewById(R.id.pm_task_add_missionState);
         mEvaluate = (EditText) v.findViewById(R.id.pm_task_add_evaluate);
+        mSaveTextView = (TextView) v.findViewById(R.id.pm_task_add_save);
     }
 
     public void control() {
@@ -346,6 +350,67 @@ public class MissionManagerAddFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable editable) {
 
+            }
+        });
+
+        mSaveTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (null == projectId || null == missionName || null == mBeginTime.getText()
+                        || null == memberId || null == mEndTime.getText()) {
+                    Toast.makeText(getActivity(),
+                            "条件不全",
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    try {
+
+                        keyObjAdd.put(Link.pm_id, projectId);
+
+                        if (null != missionContent)
+                            keyObjAdd.put(Link.content, missionContent);
+
+                        keyObjAdd.put(Link.mem_id, memberId);
+
+                        keyObjAdd.put(Link.title, missionName);
+
+
+                        keyObjAdd.put(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(mBeginTime.getText().toString()));
+
+
+                        keyObjAdd.put(Link.over_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(mEndTime.getText().toString()));
+
+                        if (null != evaluate)
+                            keyObjAdd.put(Link.evaluate, evaluate);
+
+                        keyObjAdd.put(Link.status, status);
+
+                        keyAdd = DESCryptor.Encryptor(keyObjAdd.toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    mParamsAdd.put("key", keyAdd);
+                    Log.d(TAG,"key:" + keyAdd);
+
+                    mHttpcAdd.post(Link.localhost + "pm_task&act=add", mParamsAdd, new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                            try {
+                                Toast.makeText(getActivity(),
+                                        response.getString("msg"),
+                                        Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                            Toast.makeText(getActivity(),
+                                    R.string.edit_error,
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
     }

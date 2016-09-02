@@ -48,6 +48,8 @@ public class MyBugDetailFragment extends Fragment {
     private TextView mEditTime;
     private TextView mEditMan;
 
+    private TextView mEditTextView;
+
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
     private JSONObject keyObj = new JSONObject();
@@ -87,7 +89,7 @@ public class MyBugDetailFragment extends Fragment {
         mFoundMan = (TextView) view.findViewById(R.id.bug_details_found_man);
         mEditTime = (TextView) view.findViewById(R.id.bug_details_edit_time);
         mEditMan = (TextView) view.findViewById(R.id.bug_details_edit_man);
-
+        mEditTextView = (TextView) view.findViewById(R.id.bug_details_edit);
     }
 
     private void contorl() {
@@ -118,6 +120,45 @@ public class MyBugDetailFragment extends Fragment {
             mEditTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sBug.getModify_time()));
         mFoundMan.setText(sBug.getSubmitter());
         mEditMan.setText(sBug.getEditMan());
+        mEditTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    keyObj.put(Link.pmbug_id, sBug.getPmbug_id());
+                    keyObj.put(Link.content, content);
+                    key = DESCryptor.Encryptor(keyObj.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mParams.put("key", key);
+                Log.d(TAG,"key:" + key);
+                mHttpc.post(Link.localhost + "my_bug&act=edit", mParams, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            Toast.makeText(getActivity(),
+                                    response.getString("msg"),
+                                    Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                        }
+                    }
+
+                });
+                Fragment fragment = new MyBugFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.replace(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
+            }
+        });
     }
 
     @Override

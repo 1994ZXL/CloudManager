@@ -95,7 +95,7 @@ public class MyMessageFragment extends Fragment {
         init(v);
 
         try {
-            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+            keyObj.put(Link.user_id, User.newInstance().getUser_id());
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();

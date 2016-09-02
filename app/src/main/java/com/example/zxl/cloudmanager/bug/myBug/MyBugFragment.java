@@ -71,6 +71,12 @@ public class MyBugFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        bugs.clear();
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_search, menu);

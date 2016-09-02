@@ -57,6 +57,7 @@ public class MissionManagerListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private List<Mission> missions = new ArrayList<Mission>();
     private MyAdapter myAdapter;
+    private TextView mAddTextView;
 
     private Fragment mFragment;
 
@@ -113,7 +114,6 @@ public class MissionManagerListFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View view = layoutInflater.inflate(R.layout.main_fragment_my_mission, parent, false);
 
-//        getActivity().getActionBar().setTitle("任务处理");
 
         mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.mission_pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -125,6 +125,25 @@ public class MissionManagerListFragment extends Fragment {
                         mPullToRefreshView.setRefreshing(false);
                     }
                 }, REFRESH_DELAY);
+            }
+        });
+
+        mAddTextView = (TextView) view.findViewById(R.id.manager_mission_add);
+        mAddTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new MissionManagerAddFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
             }
         });
 

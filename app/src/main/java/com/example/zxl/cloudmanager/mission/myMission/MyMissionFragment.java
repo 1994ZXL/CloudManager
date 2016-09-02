@@ -52,6 +52,8 @@ public class MyMissionFragment extends Fragment {
     private ArrayList<Mission> missions = new ArrayList<Mission>();
     private MyAdapter myAdapter;
 
+    private TextView mSearch;
+
     private Fragment mFragment;
 
     private PullToRefreshView mPullToRefreshView;
@@ -95,10 +97,44 @@ public class MyMissionFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View view = layoutInflater.inflate(R.layout.main_fragment_my_mission, parent, false);
 
-
+        mSearch = (TextView) view.findViewById(R.id.manager_mission_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new MyMissionSearchFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+            }
+        });
 
         saveInstanceState = getArguments();
+        if (null != saveInstanceState) {
+            try {
+                if (null != saveInstanceState.getString(Link.title))
+                    keyObj.put(Link.title, saveInstanceState.get(Link.title));
 
+                if (-1 != saveInstanceState.getInt(Link.start_time_from))
+                    keyObj.put(Link.start_time_from, saveInstanceState.getInt(Link.start_time_from));
+
+                if (-1 != saveInstanceState.getInt(Link.start_time_to))
+                    keyObj.put(Link.start_time_to, saveInstanceState.getInt(Link.start_time_to));
+
+                if (-1 != saveInstanceState.getInt(Link.end_time_from))
+                    keyObj.put(Link.end_time_from, saveInstanceState.getInt(Link.end_time_from));
+
+                if (-1 != saveInstanceState.getInt(Link.end_time_to))
+                    keyObj.put(Link.end_time_to, saveInstanceState.getInt(Link.end_time_to));
+
+                keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
+
+                key = DESCryptor.Encryptor(keyObj.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         try {
             keyObj.put(Link.mem_id, User.newInstance().getUser_id());
             keyObj.put("sort", "start_time desc");
