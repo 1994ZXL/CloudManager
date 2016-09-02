@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -52,10 +53,10 @@ public class MissionSearchFragment extends Fragment {
 
     private EditText mProjectName;
     private EditText mMemName;
-    private Button mBeginTimeBeginButton;
-    private Button mBeginTimeEndButton;
-    private Button mEndTimeBeginButton;
-    private Button mEndTimeEndButton;
+    private TextView mBeginTimeBeginButton;
+    private TextView mBeginTimeEndButton;
+    private TextView mEndTimeBeginButton;
+    private TextView mEndTimeEndButton;
     private Spinner mStateSpinner;
 
     private Button mSearchBtn;
@@ -220,10 +221,10 @@ public class MissionSearchFragment extends Fragment {
     }
 
     private void init(View v){
-        mBeginTimeBeginButton = (Button)v.findViewById(R.id.pm_mission_begin_time_button);
-        mBeginTimeEndButton = (Button)v.findViewById(R.id.pm_mission_end_time_button);
-        mEndTimeBeginButton = (Button) v.findViewById(R.id.pm_mission_end_time_begin_button);
-        mEndTimeEndButton = (Button) v.findViewById(R.id.pm_mission_end_time_end_button);
+        mBeginTimeBeginButton = (TextView)v.findViewById(R.id.pm_mission_begin_time_button);
+        mBeginTimeEndButton = (TextView)v.findViewById(R.id.pm_mission_end_time_button);
+        mEndTimeBeginButton = (TextView) v.findViewById(R.id.pm_mission_end_time_begin_button);
+        mEndTimeEndButton = (TextView) v.findViewById(R.id.pm_mission_end_time_end_button);
         mProjectName = (EditText) v.findViewById(R.id.pm_mission_projectName);
         mStateSpinner = (Spinner) v.findViewById(R.id.pm_mission_state);
         mMemName = (EditText) v.findViewById(R.id.pm_mission_memName);

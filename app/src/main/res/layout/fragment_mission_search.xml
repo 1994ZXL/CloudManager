@@ -106,7 +106,7 @@
                         android:textSize="20sp"
                         android:text="@string/project_begin_time_textview" />
 
-                    <Button
+                    <TextView
                         android:id="@+id/pm_mission_begin_time_button"
                         android:layout_width="80sp"
                         android:layout_height="35sp"
@@ -115,7 +115,7 @@
                         android:layout_weight="1"
                         android:text="@string/project_begin_time_textview" />
 
-                    <Button
+                    <TextView
                         android:id="@+id/pm_mission_end_time_button"
                         android:layout_width="80sp"
                         android:layout_height="35sp"
@@ -141,7 +141,7 @@
                         android:textSize="20sp"
                         android:text="@string/project_end_time_textview" />
 
-                    <Button
+                    <TextView
                         android:id="@+id/pm_mission_end_time_begin_button"
                         android:layout_width="80sp"
                         android:layout_height="35sp"
@@ -150,7 +150,7 @@
                         android:layout_weight="1"
                         android:text="@string/project_begin_time_textview" />
 
-                    <Button
+                    <TextView
                         android:id="@+id/pm_mission_end_time_end_button"
                         android:layout_width="80sp"
                         android:layout_height="35sp"

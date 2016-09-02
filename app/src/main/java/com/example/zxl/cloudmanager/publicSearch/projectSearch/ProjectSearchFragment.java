@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 
@@ -19,8 +20,8 @@ import com.example.zxl.cloudmanager.R;
 public class ProjectSearchFragment extends Fragment {
 
     private EditText mProjectName;
-    private Button mBeginTimeBtn;
-    private Button mEndTimeBtn;
+    private TextView mBeginTimeBtn;
+    private TextView mEndTimeBtn;
     private EditText mProjectManager;
 
     private Button mSearchBtn;
@@ -53,8 +54,8 @@ public class ProjectSearchFragment extends Fragment {
     }
 
     private void init(View v){
-        mBeginTimeBtn = (Button)v.findViewById(R.id.project_begin_time_button);
-        mEndTimeBtn = (Button)v.findViewById(R.id.project_end_time_button);
+        mBeginTimeBtn = (TextView)v.findViewById(R.id.project_begin_time_button);
+        mEndTimeBtn = (TextView)v.findViewById(R.id.project_end_time_button);
         mProjectName = (EditText) v.findViewById(R.id.project_name_edittext);
         mProjectManager = (EditText) v.findViewById(R.id.project_manager_edittext);
 

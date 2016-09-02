@@ -48,14 +48,14 @@
                         android:layout_weight="1"
                         android:textSize="20dp"/>
 
-                    <Button
+                    <TextView
                         android:id="@+id/pm_begin_time_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/project_begin_time_textview"
                         android:layout_weight="0.2"/>
 
-                    <Button
+                    <TextView
                         android:id="@+id/pm_end_time_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

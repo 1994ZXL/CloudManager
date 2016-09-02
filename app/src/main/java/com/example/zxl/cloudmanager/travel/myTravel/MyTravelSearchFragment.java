@@ -18,12 +18,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.Edit;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Travel;
 import com.example.zxl.cloudmanager.model.TravelLab;
@@ -37,10 +39,10 @@ import java.util.Date;
 public class MyTravelSearchFragment extends Fragment {
 
     private EditText mName;
-    private Button mBeginTimeBtn;
-    private Button mEndTimeBtn;
-    private Button mComeBeginBtn;
-    private Button mComeEndBtn;
+    private TextView mBeginTimeBtn;
+    private TextView mEndTimeBtn;
+    private TextView mComeBeginBtn;
+    private TextView mComeEndBtn;
     private LinearLayout mNameEditText;
 
     private Spinner mStateSpinner;
@@ -51,14 +53,7 @@ public class MyTravelSearchFragment extends Fragment {
     private Button mSearchBtn;
 
     private String name;
-    private Date beginTime;
-    private String bgtime;
-    private Date endTime;
-    private String edtime;
-    private Date comeBeginTime;
-    private String cbgtime;
-    private Date comeEndTime;
-    private String cedtime;
+
     private int state;
 
     private Fragment mFragment;
@@ -104,26 +99,26 @@ public class MyTravelSearchFragment extends Fragment {
         if (null != name)
             bundle.putString(Link.mem_name, name);
 
-        if (null != bgtime) {
-            bundle.putInt(Link.start_time_s, DateForGeLingWeiZhi.toGeLinWeiZhi(bgtime));
+        if (null != mBeginTimeBtn.getText()) {
+            bundle.putInt(Link.start_time_s, DateForGeLingWeiZhi.toGeLinWeiZhi3(mBeginTimeBtn.getText().toString()));
         } else {
             bundle.putInt(Link.start_time_s, -1);
         }
 
-        if (null != edtime) {
-            bundle.putInt(Link.start_time_e, DateForGeLingWeiZhi.toGeLinWeiZhi(edtime));
+        if (null != mEndTimeBtn.getText()) {
+            bundle.putInt(Link.start_time_e, DateForGeLingWeiZhi.toGeLinWeiZhi3(mEndTimeBtn.getText().toString()));
         } else {
             bundle.putInt(Link.start_time_e, -1);
         }
 
-        if (null != cbgtime) {
-            bundle.putInt(Link.over_time_s, DateForGeLingWeiZhi.toGeLinWeiZhi(cbgtime));
+        if (null != mComeBeginBtn.getText()) {
+            bundle.putInt(Link.over_time_s, DateForGeLingWeiZhi.toGeLinWeiZhi3(mComeBeginBtn.getText().toString()));
         } else {
             bundle.putInt(Link.over_time_s, -1);
         }
 
-        if (null != cedtime) {
-            bundle.putInt(Link.over_time_e, DateForGeLingWeiZhi.toGeLinWeiZhi(cedtime));
+        if (null != mComeEndBtn.getText()) {
+            bundle.putInt(Link.over_time_e, DateForGeLingWeiZhi.toGeLinWeiZhi3(mComeEndBtn.getText().toString()));
         } else {
             bundle.putInt(Link.over_time_e, -1);
         }
@@ -146,10 +141,10 @@ public class MyTravelSearchFragment extends Fragment {
     private void init(View v){
         mNameEditText = (LinearLayout) v.findViewById(R.id.fragment_travel_nameEditText);
         mName = (EditText) v.findViewById(R.id.cm_employer_name_edittext);
-        mBeginTimeBtn = (Button) v.findViewById(R.id.employer_travel_begin_time_button);
-        mEndTimeBtn = (Button) v.findViewById(R.id.employer_travel_end_time_button);
-        mComeBeginBtn = (Button) v.findViewById(R.id.employer_back_begin_time_button);
-        mComeEndBtn = (Button) v.findViewById(R.id.employer_back_end_time_button);
+        mBeginTimeBtn = (TextView) v.findViewById(R.id.employer_travel_begin_time_button);
+        mEndTimeBtn = (TextView) v.findViewById(R.id.employer_travel_end_time_button);
+        mComeBeginBtn = (TextView) v.findViewById(R.id.employer_back_begin_time_button);
+        mComeEndBtn = (TextView) v.findViewById(R.id.employer_back_end_time_button);
         mStateSpinner = (Spinner) v.findViewById(R.id.employer_travel_state_spinner);
 
         mSearchBtn = (Button) v.findViewById(R.id.my_travel_search_button);
@@ -176,10 +171,7 @@ public class MyTravelSearchFragment extends Fragment {
         mBeginTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
-                fragment.setTargetFragment(MyTravelSearchFragment.this, 12);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyTravelSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mBeginTimeBtn);
             }
         });
 
@@ -187,20 +179,14 @@ public class MyTravelSearchFragment extends Fragment {
         mEndTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
-                fragment.setTargetFragment(MyTravelSearchFragment.this, 13);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyTravelSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mEndTimeBtn);
             }
         });
 
         mComeBeginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 14);
-                fragment.setTargetFragment(MyTravelSearchFragment.this, 14);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyTravelSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mComeBeginBtn);
             }
         });
 
@@ -208,10 +194,7 @@ public class MyTravelSearchFragment extends Fragment {
         mComeEndBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 15);
-                fragment.setTargetFragment(MyTravelSearchFragment.this, 15);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyTravelSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mComeEndBtn);
             }
         });
 
@@ -235,57 +218,5 @@ public class MyTravelSearchFragment extends Fragment {
 
             }
         });
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "进入回调 " + " resultCode:" + requestCode);
-        if (resultCode != Activity.RESULT_OK){
-            Log.d(TAG, "未进入判断");
-            return;
-        } else if (requestCode == 12) {
-            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateBeginDate();
-        } else if (requestCode == 13) {
-            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateEndDate();
-        } else if (requestCode == 14) {
-            comeBeginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateComeBeginTime();
-        } else if (requestCode == 15) {
-            comeEndTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateComneEndDate();
-        }
-    }
-
-    private void updateBeginDate(){
-        bgtime = android.text.format.DateFormat.format("yyyy年MM月dd", beginTime).toString();
-        Log.d(TAG, "bgtime: " + bgtime);
-        mBeginTimeBtn.setText(bgtime);
-    }
-    private void updateEndDate(){
-        if (endTime.after(beginTime)) {
-            edtime = android.text.format.DateFormat.format("yyyy年MM月dd", endTime).toString();
-            Log.d(TAG, "edtime: " + edtime);
-            mEndTimeBtn.setText(edtime);
-        } else {
-            Toast.makeText(getActivity(),
-                    R.string.time_erro,
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
-    private void updateComeBeginTime() {
-        cbgtime = android.text.format.DateFormat.format("yyyy年MM月dd", comeBeginTime).toString();
-        mComeBeginBtn.setText(cbgtime);
-    }
-    private void updateComneEndDate(){
-        if (comeEndTime.after(comeBeginTime)) {
-            cedtime = android.text.format.DateFormat.format("yyyy年MM月dd", comeEndTime).toString();
-            mComeEndBtn.setText(cedtime);
-        } else {
-            Toast.makeText(getActivity(),
-                    R.string.time_erro,
-                    Toast.LENGTH_SHORT).show();
-        }
     }
 }

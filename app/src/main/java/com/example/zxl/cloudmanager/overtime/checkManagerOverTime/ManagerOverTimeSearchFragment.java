@@ -16,11 +16,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.overtime.myOvertime.MyOverTimeActivity;
 import com.example.zxl.cloudmanager.overtime.myOvertime.MyOverTimeFragment;
@@ -44,8 +46,8 @@ import cz.msebera.android.httpclient.Header;
 public class ManagerOverTimeSearchFragment extends Fragment {
 
     private static final String TAG = "MOTSearchFragment";
-    private Button mOvertimeBeginBtn;
-    private Button mOvertimeEndBtn;
+    private TextView mOvertimeBeginBtn;
+    private TextView mOvertimeEndBtn;
     private Spinner mEmployerNameSpinner;
     private Spinner mEmployerProjectSpinner;
     private Spinner mOvertimeStatusSpinner;
@@ -68,12 +70,6 @@ public class ManagerOverTimeSearchFragment extends Fragment {
     private static final String[] overtimeStatus = {"全部" ,"确认" ,"取消"}; //状态 2:确认,3:取消，默认为确认
 
     private Button mSearchBtn;
-
-    private Date beginTime;
-    private String bgtime;
-
-    private Date endTime;
-    private String edtime;
 
     private String employerName;
     private String employerId;
@@ -179,20 +175,14 @@ public class ManagerOverTimeSearchFragment extends Fragment {
         mOvertimeEndBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
-                fragment.setTargetFragment(ManagerOverTimeSearchFragment.this, 13);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "ManagerOverTimeSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mOvertimeEndBtn);
             }
         });
 
         mOvertimeBeginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
-                fragment.setTargetFragment(ManagerOverTimeSearchFragment.this, 12);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "ManagerOverTimeSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mOvertimeBeginBtn);
             }
         });
 
@@ -222,13 +212,13 @@ public class ManagerOverTimeSearchFragment extends Fragment {
 
                 Bundle bundle = new Bundle();
 
-                if (null != bgtime) {
-                    bundle.putInt(Link.start_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(bgtime));
+                if (null != mOvertimeEndBtn.getText()) {
+                    bundle.putInt(Link.start_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mOvertimeEndBtn.getText().toString()));
                 } else {
                     bundle.putInt(Link.start_time, -1);
                 }
-                if (null != edtime) {
-                    bundle.putInt(Link.end_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(edtime));
+                if (null != mOvertimeBeginBtn.getText()) {
+                    bundle.putInt(Link.end_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mOvertimeBeginBtn.getText().toString()));
                 } else {
                     bundle.putInt(Link.end_time, -1);
                 }
@@ -249,47 +239,13 @@ public class ManagerOverTimeSearchFragment extends Fragment {
 
     private void init(View v){
         mNameLinearLayout = (LinearLayout) v.findViewById(R.id.fragment_my_overtime_nameLinearLayout);
-        mOvertimeBeginBtn = (Button) v.findViewById(R.id.employer_overtime_begin_time_button);
-        mOvertimeEndBtn = (Button) v.findViewById(R.id.employer_overtime_end_time_button);
+        mOvertimeBeginBtn = (TextView) v.findViewById(R.id.employer_overtime_begin_time_button);
+        mOvertimeEndBtn = (TextView) v.findViewById(R.id.employer_overtime_end_time_button);
         mEmployerProjectSpinner = (Spinner) v.findViewById(R.id.employer_project_spinner);
         mOvertimeStatusSpinner = (Spinner) v.findViewById(R.id.overtime_status_spinner);
         mEmployerNameSpinner = (Spinner) v.findViewById(R.id.employer_name_spinner);
 
         mSearchBtn = (Button) v.findViewById(R.id.my_overtime_search_button);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "进入回调 " + " resultCode:" + requestCode);
-        if (resultCode != Activity.RESULT_OK){
-            Log.d(TAG, "未进入判断");
-            return;
-        } else if (requestCode == 12) {
-            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateBeginDate();
-        } else if (requestCode == 13) {
-            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateEndDate();
-        }
-    }
-
-    private void updateBeginDate(){
-        bgtime = android.text.format.DateFormat.format("yyyy年MM月dd", beginTime).toString();
-        Log.d(TAG, "bgtime: " + bgtime);
-        mOvertimeBeginBtn.setText(bgtime);
-        Log.d(TAG, "beginTimeButton: " + mOvertimeBeginBtn.getText());
-    }
-    private void updateEndDate(){
-        if (endTime.after(beginTime)) {
-            edtime = android.text.format.DateFormat.format("yyyy年MM月dd", endTime).toString();
-            Log.d(TAG, "edtime: " + edtime);
-            mOvertimeEndBtn.setText(edtime);
-            Log.d(TAG, "endTimeButton: " + mOvertimeEndBtn.getText());
-        } else {
-            Toast.makeText(getActivity(),
-                    R.string.time_erro,
-                    Toast.LENGTH_SHORT).show();
-        }
     }
 
 }

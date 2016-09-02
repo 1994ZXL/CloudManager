@@ -126,6 +126,9 @@ public class LSCheckFragment extends Fragment {
         }
         try {
             keyObj.put(Link.comp_id, User.newInstance().getComp_id());
+            keyObj.put("sort", "att_date desc");
+            keyObj.put("page_count", 20);
+            keyObj.put("curl_page", 1);
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();

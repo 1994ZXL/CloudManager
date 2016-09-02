@@ -119,14 +119,14 @@
                         android:layout_weight="1"
                         android:textSize="20dp"/>
 
-                    <Button
+                    <TextView
                         android:id="@+id/project_mission_begin_time_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingRight="20dp"
                         android:text="@string/project_begin_time_textview"
                         android:layout_weight="0.3"/>
-                    <Button
+                    <TextView
                         android:id="@+id/project_mission_end_time_button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

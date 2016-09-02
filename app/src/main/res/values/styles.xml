@@ -5,6 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="android:actionMenuTextAppearance">@style/MenuTextStyle</item>
     </style>
+
     <style name="LoginTitle" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
     </style>
@@ -32,6 +33,7 @@
         <item name="android:layout_marginLeft">16dp</item>
         <item name="android:background">@drawable/shape</item>
     </style>
+
     <style name="editTextZ">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -39,27 +41,115 @@
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:background">@drawable/shape</item>
     </style>
-    <style name="linearLayoutStyle">
+
+    <style name="SearchButton"><!-- 查询按钮样式 -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:text">@string/check_button</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/buttun_background</item>
+    </style>
+
+    <style name="toptextview_left"><!-- 标题栏左边位置样式 -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:text">@string/text_return</item>
+        <item name="android:gravity">left</item>
+        <item name="android:background">@color/buttun_background</item>
+    </style>
+
+    <style name="toptextview_center"><!-- 标题栏中间位置样式 -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_weight">0.5</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">@color/buttun_background</item>
+    </style>
+
+    <style name="topview_right"><!-- 标题栏右边位置样式 -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">right</item>
+        <item name="android:background">@color/buttun_background</item>
+    </style>
+
+    <style name="Text_view_Style"><!-- 常用textview文字样式 -->
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#747474</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="EditText_Style"><!-- 文本编辑样式 -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#747474</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="Spinner_Style"><!-- 下拉选择框样式 -->
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">#747474</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:typeface">sans</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="Parent_LayoutStyle"><!-- 父类linearLayout样式 -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@color/search_background</item>
+    </style>
+
+    <style name="linearLayoutStyle"><!-- 标准linearLayout样式 -->
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:layout_margin">20dp</item>
         <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="Toptitle_LayoutStyle"><!-- 标题栏linearLayout样式 -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@color/buttun_background</item>
+    </style>
+
+    <style name="Viewline_LayoutStyle"><!-- 行显示linearLayout -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_marginTop">10dp</item>
     </style>
 
     <style name="SearchTextViewStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">20sp</item>
-    </style>
-    <style name="SearchButton">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">40dp</item>
-        <item name="android:textSize">20sp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:text">@string/check_button</item>
-        <item name="android:gravity">center</item>
-        <item name="android:background">@color/buttun_background</item>
     </style>
 
     <style name="MenuTextStyle">

@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.bug.myBug.MyBugActivity;
@@ -39,10 +40,10 @@ public class BugSearchFragment extends Fragment {
     private static final String TAG = "BugSearchFragment";
 
     private EditText mProjectNameET;
-    private Button mBugBeginBtn;
-    private Button mBugEndBtn;
-    private Button mBugEditBeginBtn;
-    private Button mBugEditEndBtn;
+    private TextView mBugBeginBtn;
+    private TextView mBugEndBtn;
+    private TextView mBugEditBeginBtn;
+    private TextView mBugEditEndBtn;
     private EditText mFinderET;
     private EditText mReviserET;
     private Spinner mBugStateSpinner;
@@ -67,18 +68,6 @@ public class BugSearchFragment extends Fragment {
     private String reviser;
     private int bugState;
     private int bugLevel;
-
-    private Date beginTime;
-    private String bgtime;
-
-    private Date endTime;
-    private String edtime;
-
-    private Date editBeginTime;
-    private String editbgtime;
-
-    private Date editEndTime;
-    private String editedtime;
 
     private Fragment mFragment;
     private Fragment mAimFragment;
@@ -130,10 +119,10 @@ public class BugSearchFragment extends Fragment {
         mFinderLinearLayout = (LinearLayout) v.findViewById(R.id.bug_finder_linearLayout);
         mReviserLinearLayout = (LinearLayout) v.findViewById(R.id.bug_reviser_linearLayout);
         mEditTimeLinearLayout = (LinearLayout) v.findViewById(R.id.bug_editTime_linearLayout);
-        mBugBeginBtn = (Button)v.findViewById(R.id.bug_begin_time_button);
-        mBugEndBtn = (Button)v.findViewById(R.id.bug_end_time_button);
-        mBugEditBeginBtn = (Button) v.findViewById(R.id.bug_edit_begin_time_button);
-        mBugEditEndBtn = (Button) v.findViewById(R.id.bug_edit_end_time_button);
+        mBugBeginBtn = (TextView)v.findViewById(R.id.bug_begin_time_button);
+        mBugEndBtn = (TextView)v.findViewById(R.id.bug_end_time_button);
+        mBugEditBeginBtn = (TextView) v.findViewById(R.id.bug_edit_begin_time_button);
+        mBugEditEndBtn = (TextView) v.findViewById(R.id.bug_edit_end_time_button);
         mProjectNameET = (EditText) v.findViewById(R.id.bug_project_name_edittext);
         mFinderET = (EditText) v.findViewById(R.id.bug_finder_edittext);
         mReviserET = (EditText) v.findViewById(R.id.bug_reviser_edittext);
@@ -272,20 +261,20 @@ public class BugSearchFragment extends Fragment {
 
         bundle.putString(Link.project_name, projectName);
 
-        if (null != bgtime)
-            bundle.putInt(Link.submit_time_from, DateForGeLingWeiZhi.toGeLinWeiZhi(bgtime));
+        if (null != mBugBeginBtn.getText())
+            bundle.putInt(Link.submit_time_from, DateForGeLingWeiZhi.toGeLinWeiZhi3(mBugBeginBtn.getText().toString()));
         else bundle.putInt(Link.submit_time_from, -1);
 
-        if (null != edtime)
-            bundle.putInt(Link.submit_time_to, DateForGeLingWeiZhi.toGeLinWeiZhi(edtime));
+        if (null != mBugEndBtn.getText())
+            bundle.putInt(Link.submit_time_to, DateForGeLingWeiZhi.toGeLinWeiZhi3(mBugEndBtn.getText().toString()));
         else bundle.putInt(Link.submit_time_to, -1);
 
-        if (null != editbgtime)
-            bundle.putInt(Link.mofify_time_from, DateForGeLingWeiZhi.toGeLinWeiZhi(editbgtime));
+        if (null != mBugEditBeginBtn.getText())
+            bundle.putInt(Link.mofify_time_from, DateForGeLingWeiZhi.toGeLinWeiZhi3(mBugEditBeginBtn.getText().toString()));
         else bundle.putInt(Link.mofify_time_from, -1);
 
-        if (null != editedtime)
-            bundle.putInt(Link.modify_time_to, DateForGeLingWeiZhi.toGeLinWeiZhi(editedtime));
+        if (null != mBugEditEndBtn.getText())
+            bundle.putInt(Link.modify_time_to, DateForGeLingWeiZhi.toGeLinWeiZhi3(mBugEditEndBtn.getText().toString()));
         else bundle.putInt(Link.modify_time_to, -1);
 
         bundle.putString(Link.submitter, finder);
@@ -307,65 +296,6 @@ public class BugSearchFragment extends Fragment {
             transaction.hide(mFragment);
             transaction.show(mAimFragment);
             transaction.commit();
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "进入回调 " + " resultCode:" + requestCode);
-        if (resultCode != Activity.RESULT_OK){
-            Log.d(TAG, "未进入判断");
-            return;
-        } else if (requestCode == 12) {
-            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateBeginDate();
-        } else if (requestCode == 13) {
-            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateEndDate();
-        } else if (requestCode == 14) {
-            editBeginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateEditBeginDate();
-        } else if (requestCode == 15) {
-            editEndTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateEditEndDate();
-        }
-    }
-
-    private void updateBeginDate(){
-        bgtime = android.text.format.DateFormat.format("yyyy年MM月dd", beginTime).toString();
-        Log.d(TAG, "bgtime: " + bgtime);
-        mBugBeginBtn.setText(bgtime);
-        Log.d(TAG, "beginTimeButton: " + mBugBeginBtn.getText());
-    }
-    private void updateEndDate(){
-        if (endTime.after(beginTime)) {
-            edtime = android.text.format.DateFormat.format("yyyy年MM月dd", endTime).toString();
-            Log.d(TAG, "edtime: " + edtime);
-            mBugEndBtn.setText(edtime);
-            Log.d(TAG, "endTimeButton: " + mBugEndBtn.getText());
-        } else {
-            Toast.makeText(getActivity(),
-                    R.string.time_erro,
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    private void updateEditBeginDate(){
-        editbgtime = android.text.format.DateFormat.format("yyyy年MM月dd", editBeginTime).toString();
-        Log.d(TAG, "editbgtime: " + editbgtime);
-        mBugEditBeginBtn.setText(editbgtime);
-        Log.d(TAG, "mBugEditBeginBtn: " + mBugEditBeginBtn.getText());
-    }
-    private void updateEditEndDate(){
-        if (editEndTime.after(editBeginTime)) {
-            editedtime = android.text.format.DateFormat.format("yyyy年MM月dd", editEndTime).toString();
-            Log.d(TAG, "editEndTime: " + editedtime);
-            mBugEditEndBtn.setText(editedtime);
-            Log.d(TAG, "endTimeButton: " + mBugEditEndBtn.getText());
-        } else {
-            Toast.makeText(getActivity(),
-                    R.string.time_erro,
-                    Toast.LENGTH_SHORT).show();
         }
     }
 }

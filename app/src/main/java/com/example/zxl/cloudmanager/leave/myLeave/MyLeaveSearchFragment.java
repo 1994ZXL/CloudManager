@@ -27,6 +27,7 @@ import com.example.zxl.cloudmanager.leave.checkManagerLeave.ManagerLeaveListFrag
 import com.example.zxl.cloudmanager.leave.leader.LeaderLeaveSearchActivity;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
@@ -63,11 +64,6 @@ public class MyLeaveSearchFragment extends Fragment {
     private RequestParams mParams = new RequestParams();
     private JSONObject keyObj = new JSONObject();
     private String key = "";
-
-    private Date beginTime;
-    private String bgtime;
-    private Date endTime;
-    private String edtime;
 
     private String name;
 
@@ -127,20 +123,14 @@ public class MyLeaveSearchFragment extends Fragment {
         mLeaveBeginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
-                fragment.setTargetFragment(MyLeaveSearchFragment.this, 12);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyLeaveSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mLeaveBeginBtn);
             }
         });
 
         mLeaveEndBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
-                fragment.setTargetFragment(MyLeaveSearchFragment.this, 13);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyLeaveSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mLeaveEndBtn);
             }
         });
 
@@ -209,12 +199,12 @@ public class MyLeaveSearchFragment extends Fragment {
         if (null != name)
             bundle.putString(Link.mem_name, name);
 
-        if (null != bgtime)
-            bundle.putInt(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi(bgtime));
+        if (null != mLeaveBeginBtn.getText())
+            bundle.putInt(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(mLeaveBeginBtn.getText().toString()));
         else bundle.putInt(Link.start_time, -1);
 
-        if (null != edtime)
-            bundle.putInt(Link.end_time, DateForGeLingWeiZhi.toGeLinWeiZhi(edtime));
+        if (null != mLeaveEndBtn.getText())
+            bundle.putInt(Link.end_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(mLeaveEndBtn.getText().toString()));
         else bundle.putInt(Link.end_time, -1);
 
         if (mType == 0) {
@@ -252,40 +242,6 @@ public class MyLeaveSearchFragment extends Fragment {
         mLeaveStateSpinner = (Spinner) v.findViewById(R.id.my_leave_state_sprinner);
 
         mSearchBtn = (Button) v.findViewById(R.id.my_leave_search_button);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "进入回调 " + " resultCode:" + requestCode);
-        if (resultCode != Activity.RESULT_OK){
-            Log.d(TAG, "未进入判断");
-            return;
-        } else if (requestCode == 12) {
-            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateBeginDate();
-        } else if (requestCode == 13) {
-            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateEndDate();
-        }
-    }
-
-    private void updateBeginDate(){
-        bgtime = android.text.format.DateFormat.format("yyyy年MM月dd", beginTime).toString();
-        Log.d(TAG, "bgtime: " + bgtime);
-        mLeaveBeginBtn.setText(bgtime);
-        Log.d(TAG, "beginTimeButton: " + mLeaveBeginBtn.getText());
-    }
-    private void updateEndDate(){
-        if (endTime.after(beginTime)) {
-            edtime = android.text.format.DateFormat.format("yyyy年MM月dd", endTime).toString();
-            Log.d(TAG, "edtime: " + edtime);
-            mLeaveEndBtn.setText(edtime);
-            Log.d(TAG, "endTimeButton: " + mLeaveEndBtn.getText());
-        } else {
-            Toast.makeText(getActivity(),
-                    R.string.time_erro,
-                    Toast.LENGTH_SHORT).show();
-        }
     }
 
 }

@@ -15,11 +15,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
 
@@ -32,30 +34,17 @@ import java.util.Date;
 public class LeaderPostSearchFragment extends Fragment {
 
     private EditText mEmployerName;
-    private Button mPostBeginTimeBtn;
-    private Button mPostEndTimeBtn;
+    private TextView mPostBeginTimeBtn;
+    private TextView mPostEndTimeBtn;
     private EditText mPostContent;
 
     private Button mSearchBtn;
 
     private Fragment mFragment;
 
-    private Date beginTime;
-    private String bgtime;
-    private Date endTime;
-    private String edtime;
-    private Date postBeginTime;
-    private String postbgtime;
-    private Date postEndTime;
-    private String postedtime;
     private String name;
     private String content;
 
-    private ArrayList<Post> mPosts = new ArrayList<Post>();
-    private int index;
-    private ArrayList<Integer> sum = new ArrayList<Integer>();
-    private static final String SEARCH_KEY = "search_key";
-    private static final String WHERE = "where";
     private static final String TAG = "LPSearchFragment";
 
     @Override
@@ -95,19 +84,13 @@ public class LeaderPostSearchFragment extends Fragment {
         mPostBeginTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 14);
-                fragment.setTargetFragment(LeaderPostSearchFragment.this, 14);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "LeaderPostSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mPostBeginTimeBtn);
             }
         });
         mPostEndTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 15);
-                fragment.setTargetFragment(LeaderPostSearchFragment.this, 15);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "LeaderPostSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mPostEndTimeBtn);
             }
         });
         mPostContent.addTextChangedListener(new TextWatcher() {
@@ -135,14 +118,14 @@ public class LeaderPostSearchFragment extends Fragment {
 
                 bundle.putString(Link.mem_name, name);
 
-                if (null != postbgtime){
-                    bundle.putInt(Link.daily_time_from, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(postbgtime));
+                if (null != mPostBeginTimeBtn.getText()){
+                    bundle.putInt(Link.daily_time_from, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mPostBeginTimeBtn.getText().toString()));
                 } else {
                     bundle.putInt(Link.daily_time_from, -1);
                 }
 
-                if (null != postedtime) {
-                    bundle.putInt(Link.daily_time_to, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(postedtime));
+                if (null != mPostEndTimeBtn.getText()) {
+                    bundle.putInt(Link.daily_time_to, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mPostEndTimeBtn.getText().toString()));
                 } else {
                     bundle.putInt(Link.daily_time_to, -1);
                 }
@@ -151,8 +134,8 @@ public class LeaderPostSearchFragment extends Fragment {
 
                 Log.d(TAG, "选择条件："
                         + " mem_name: " + name
-                        + " post_start_time: " + postbgtime
-                        + " post_over_time: " + postedtime
+                        + " post_start_time: " + mPostBeginTimeBtn.getText()
+                        + " post_over_time: " + mPostEndTimeBtn.getText()
                         + " content: " + mPostContent);
 
                 fragment.setArguments(bundle);
@@ -167,48 +150,12 @@ public class LeaderPostSearchFragment extends Fragment {
     }
 
     private void init(View v){
-        mPostBeginTimeBtn = (Button) v.findViewById(R.id.leader_post_post_begin_time_button);
-        mPostEndTimeBtn = (Button) v.findViewById(R.id.leader_post_post_end_time_button);
+        mPostBeginTimeBtn = (TextView) v.findViewById(R.id.leader_post_post_begin_time_button);
+        mPostEndTimeBtn = (TextView) v.findViewById(R.id.leader_post_post_end_time_button);
         mPostContent = (EditText) v.findViewById(R.id.leader_post_content_edittext);
         mEmployerName = (EditText) v.findViewById(R.id.leader_search_name_edittext);
 
         mSearchBtn = (Button) v.findViewById(R.id.leader_post_search_button);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != Activity.RESULT_OK){
-            return;
-        }  else if (requestCode == 14) {
-            postBeginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updatePostBeginDate();
-        } else if (requestCode == 15) {
-            postEndTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updatePostEndDate();
-        }
-    }
-
-
-    private void updatePostBeginDate(){
-        postbgtime = android.text.format.DateFormat.format("yyyy.M.dd", postBeginTime).toString();
-        mPostBeginTimeBtn.setText(postbgtime);
-    }
-    private void updatePostEndDate(){
-        if (postEndTime.after(postBeginTime)) {
-            postedtime = android.text.format.DateFormat.format("yyyy.M.dd", postEndTime).toString();
-            mPostEndTimeBtn.setText(postedtime);
-        } else {
-            Toast.makeText(getActivity(),
-                    R.string.time_erro,
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
-
-
-
-    public static Date ConverToDate(String strDate) throws Exception
-    {
-        DateFormat df = new SimpleDateFormat("yyyy.MM.dd");
-        return df.parse(strDate);
-    }
 }

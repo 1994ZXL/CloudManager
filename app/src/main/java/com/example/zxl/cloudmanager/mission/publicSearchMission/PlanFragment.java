@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 
@@ -19,8 +20,8 @@ import com.example.zxl.cloudmanager.R;
 public class PlanFragment extends Fragment {
 
     private EditText mProjectPlanName;
-    private Button mPlanBeginTimeBtn;
-    private Button mPlanEndTimeBtn;
+    private TextView mPlanBeginTimeBtn;
+    private TextView mPlanEndTimeBtn;
     private EditText mProjectPlanManager;
     private Spinner mPrioritySpinner;
     private Spinner mStateSpinner;
@@ -68,8 +69,8 @@ public class PlanFragment extends Fragment {
     }
 
     private void init(View v){
-        mPlanBeginTimeBtn = (Button)v.findViewById(R.id.project_mission_begin_time_button);
-        mPlanEndTimeBtn = (Button)v.findViewById(R.id.project_mission_end_time_button);
+        mPlanBeginTimeBtn = (TextView)v.findViewById(R.id.project_mission_begin_time_button);
+        mPlanEndTimeBtn = (TextView)v.findViewById(R.id.project_mission_end_time_button);
         mProjectPlanManager = (EditText) v.findViewById(R.id.project_plan_name_edittext);
         mProjectPlanName = (EditText) v.findViewById(R.id.project_plan_manager_name_edittext);
         mPrioritySpinner = (Spinner) v.findViewById(R.id.project_plan_priority_sprinner);

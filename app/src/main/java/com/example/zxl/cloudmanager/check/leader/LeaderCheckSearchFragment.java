@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.Edit;
@@ -23,6 +24,7 @@ import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.CheckLab;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.User;
 import com.example.zxl.cloudmanager.model.UserLab;
@@ -37,15 +39,11 @@ public class LeaderCheckSearchFragment extends Fragment {
     private Check check;
 
     private EditText mName;
-    private Button beginTimeButton;
-    private Button endTimeButton;
+    private TextView beginTimeButton;
+    private TextView endTimeButton;
     private Button mSearchBtn;
 
     private String name;
-    private Date beginTime;
-    private String bgtime;
-    private Date endTime;
-    private String edtime;
 
     private static final String TAG = "LCSearchFragment";
 
@@ -85,19 +83,13 @@ public class LeaderCheckSearchFragment extends Fragment {
         beginTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
-                fragment.setTargetFragment(LeaderCheckSearchFragment.this, 12);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyLeaveApplyFragment");
+                DateTimePicker.selectDateTime(mFragment, beginTimeButton);
             }
         });
         endTimeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
-                fragment.setTargetFragment(LeaderCheckSearchFragment.this, 13);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyLeaveApplyFragment");
+                DateTimePicker.selectDateTime(mFragment, endTimeButton);
             }
         });
 
@@ -119,13 +111,13 @@ public class LeaderCheckSearchFragment extends Fragment {
         if (null != name) {
             bundle.putString(Link.mem_name, name);
         }
-        if (null != bgtime) {
-            bundle.putInt(Link.att_date_from, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(bgtime));
+        if (null != beginTimeButton.getText()) {
+            bundle.putInt(Link.att_date_from, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(beginTimeButton.getText().toString()));
         } else {
             bundle.putInt(Link.att_date_from, -1);
         }
-        if (null != edtime) {
-            bundle.putInt(Link.att_date_to, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(edtime));
+        if (null != endTimeButton.getText()) {
+            bundle.putInt(Link.att_date_to, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(endTimeButton.getText().toString()));
         } else {
             bundle.putInt(Link.att_date_to, -1);
         }
@@ -148,42 +140,9 @@ public class LeaderCheckSearchFragment extends Fragment {
 
     private void init(View v){
         mName = (EditText) v.findViewById(R.id.leader_check_search_name);
-        beginTimeButton = (Button)v.findViewById(R.id.leader_check_search_beginTime);
-        endTimeButton = (Button) v.findViewById(R.id.leader_check_search_endTime);
+        beginTimeButton = (TextView)v.findViewById(R.id.leader_check_search_beginTime);
+        endTimeButton = (TextView) v.findViewById(R.id.leader_check_search_endTime);
         mSearchBtn = (Button) v.findViewById(R.id.leader_check_search_button);
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "进入回调 " + " resultCode:" + requestCode);
-        if (resultCode != Activity.RESULT_OK){
-            Log.d(TAG, "未进入判断");
-            return;
-        } else if (requestCode == 12) {
-            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateBeginDate();
-        } else if (requestCode == 13) {
-            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateEndDate();
-        }
-    }
-
-    private void updateBeginDate(){
-        bgtime = android.text.format.DateFormat.format("yyyy年MM月dd", beginTime).toString();
-        Log.d(TAG, "bgtime: " + bgtime);
-        beginTimeButton.setText(bgtime);
-        Log.d(TAG, "beginTimeButton: " + beginTimeButton.getText());
-    }
-    private void updateEndDate(){
-        if (endTime.after(beginTime)) {
-            edtime = android.text.format.DateFormat.format("yyyy年MM月dd", endTime).toString();
-            Log.d(TAG, "edtime: " + edtime);
-            endTimeButton.setText(edtime);
-            Log.d(TAG, "endTimeButton: " + endTimeButton.getText());
-        } else {
-            Toast.makeText(getActivity(),
-                    R.string.time_erro,
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
 }

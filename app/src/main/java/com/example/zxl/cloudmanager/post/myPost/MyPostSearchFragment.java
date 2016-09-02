@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
@@ -33,8 +34,8 @@ import java.util.Date;
 public class MyPostSearchFragment extends Fragment {
     private static final String TAG = "MyPostSearchFragment";
 
-    private Button mPostBeginTimeBtn;
-    private Button mPostEndTimeBtn;
+    private TextView mPostBeginTimeBtn;
+    private TextView mPostEndTimeBtn;
     private EditText mPostContent;
 
     private Button mSearchBtn;
@@ -72,8 +73,8 @@ public class MyPostSearchFragment extends Fragment {
     }
 
     private void init(View v){
-        mPostBeginTimeBtn = (Button) v.findViewById(R.id.my_post_search_post_begintTime);
-        mPostEndTimeBtn = (Button) v.findViewById(R.id.my_post_search_post_endTime);
+        mPostBeginTimeBtn = (TextView) v.findViewById(R.id.my_post_search_post_begintTime);
+        mPostEndTimeBtn = (TextView) v.findViewById(R.id.my_post_search_post_endTime);
         mPostContent = (EditText) v.findViewById(R.id.my_post_content_edittext);
 
         mSearchBtn = (Button) v.findViewById(R.id.my_post_search_button);
@@ -148,11 +149,6 @@ public class MyPostSearchFragment extends Fragment {
         });
     }
 
-    public static Date ConverToDate(String strDate) throws Exception
-    {
-        DateFormat df = new SimpleDateFormat("yyyy.MM.dd");
-        return df.parse(strDate);
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {

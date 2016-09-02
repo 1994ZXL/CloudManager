@@ -32,7 +32,7 @@
                         android:layout_weight="1"
                         android:textSize="20dp"/>
 
-                    <Button
+                    <TextView
                         android:id="@+id/check_begin_time_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                         android:text="@string/dutytime"
                         android:layout_weight="1"/>
 
-                    <Button
+                    <TextView
                         android:id="@+id/check_end_time_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

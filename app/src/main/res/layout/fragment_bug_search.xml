@@ -57,7 +57,7 @@
                        android:layout_weight="1"
                        android:textSize="20sp"/>
 
-                   <Button
+                   <TextView
                        android:id="@+id/bug_begin_time_button"
                        android:layout_width="80dp"
                        android:layout_height="35dp"
@@ -71,7 +71,7 @@
                        android:layout_height="35dp"
                        android:text=" "/>
 
-                   <Button
+                   <TextView
                        android:id="@+id/bug_end_time_button"
                        android:layout_width="80dp"
                        android:layout_height="35dp"
@@ -97,7 +97,7 @@
                        android:layout_weight="1"
                        android:textSize="20sp"/>
 
-                   <Button
+                   <TextView
                        android:id="@+id/bug_edit_begin_time_button"
                        android:layout_width="80dp"
                        android:layout_height="35dp"
@@ -111,7 +111,7 @@
                        android:layout_height="35dp"
                        android:text=" "/>
 
-                   <Button
+                   <TextView
                        android:id="@+id/bug_edit_end_time_button"
                        android:layout_width="80dp"
                        android:layout_height="35dp"

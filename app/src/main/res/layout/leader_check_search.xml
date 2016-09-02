@@ -51,7 +51,7 @@
                         android:layout_weight="1"
                         android:textSize="20dp"/>
 
-                    <Button
+                    <TextView
                         android:id="@+id/leader_check_search_beginTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
                         android:text="@string/dutytime"
                         android:layout_weight="1"/>
 
-                    <Button
+                    <TextView
                         android:id="@+id/leader_check_search_endTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

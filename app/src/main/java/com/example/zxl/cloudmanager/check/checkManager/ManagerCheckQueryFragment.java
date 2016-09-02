@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.Edit;
@@ -24,6 +25,7 @@ import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
 
 import java.text.DateFormat;
@@ -37,15 +39,11 @@ import java.util.Date;
 public class ManagerCheckQueryFragment extends Fragment {
     private static final String TAG = "MCQFragment";
 
-    private Button mBeginTimeBtn;
-    private Button mEndTimeBtn;
+    private TextView mBeginTimeBtn;
+    private TextView mEndTimeBtn;
     private EditText mName;
     private Button mQueryButton;
 
-    private Date beginTime;
-    private String bgtime;
-    private Date endTime;
-    private String edtime;
     private String name;
 
     private Fragment mFragment;
@@ -84,19 +82,13 @@ public class ManagerCheckQueryFragment extends Fragment {
         mBeginTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
-                fragment.setTargetFragment(ManagerCheckQueryFragment.this, 12);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "ManagerCheckQueryFragment");
+                DateTimePicker.selectDateTime(mFragment, mBeginTimeBtn);
             }
         });
         mEndTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
-                fragment.setTargetFragment(ManagerCheckQueryFragment.this, 13);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "ManagerCheckQueryFragment");
+                DateTimePicker.selectDateTime(mFragment, mEndTimeBtn);
             }
         });
 
@@ -108,14 +100,14 @@ public class ManagerCheckQueryFragment extends Fragment {
 
                 bundle.putString(Link.mem_name, name);
 
-                if (null != bgtime) {
-                    bundle.putInt(Link.att_date_from, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(bgtime));
+                if (null != mBeginTimeBtn.getText()) {
+                    bundle.putInt(Link.att_date_from, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mBeginTimeBtn.getText().toString()));
                 } else {
                     bundle.putInt(Link.att_date_from, -1);
                 }
 
-                if (null != edtime) {
-                    bundle.putInt(Link.att_date_to, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(edtime));
+                if (null != mEndTimeBtn.getText()) {
+                    bundle.putInt(Link.att_date_to, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mEndTimeBtn.getText().toString()));
                 } else {
                     bundle.putInt(Link.att_date_to, -1);
                 }
@@ -132,43 +124,9 @@ public class ManagerCheckQueryFragment extends Fragment {
     }
 
     private void init(View v){
-        mBeginTimeBtn = (Button)v.findViewById(R.id.check_begin_time_button);
-        mEndTimeBtn = (Button) v.findViewById(R.id.check_end_time_button);
+        mBeginTimeBtn = (TextView)v.findViewById(R.id.check_begin_time_button);
+        mEndTimeBtn = (TextView) v.findViewById(R.id.check_end_time_button);
         mName = (EditText) v.findViewById(R.id.manager_check_name_edittext);
         mQueryButton = (Button) v.findViewById(R.id.main_fragment_manager_check_query_button);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "进入回调 " + " resultCode:" + requestCode);
-        if (resultCode != Activity.RESULT_OK){
-            Log.d(TAG, "未进入判断");
-            return;
-        } else if (requestCode == 12) {
-            beginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateBeginDate();
-        } else if (requestCode == 13) {
-            endTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updateEndDate();
-        }
-    }
-
-    private void updateBeginDate(){
-        bgtime = android.text.format.DateFormat.format("yyyy年MM月dd", beginTime).toString();
-        Log.d(TAG, "bgtime: " + bgtime);
-        mBeginTimeBtn.setText(bgtime);
-        Log.d(TAG, "beginTimeButton: " + mBeginTimeBtn.getText());
-    }
-    private void updateEndDate(){
-        if (endTime.after(beginTime)) {
-            edtime = android.text.format.DateFormat.format("yyyy年MM月dd", endTime).toString();
-            Log.d(TAG, "edtime: " + edtime);
-            mEndTimeBtn.setText(edtime);
-            Log.d(TAG, "endTimeButton: " + mEndTimeBtn.getText());
-        } else {
-            Toast.makeText(getActivity(),
-                    R.string.time_erro,
-                    Toast.LENGTH_SHORT).show();
-        }
     }
 }

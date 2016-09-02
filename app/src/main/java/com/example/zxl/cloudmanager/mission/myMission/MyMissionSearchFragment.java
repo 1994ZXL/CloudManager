@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
@@ -36,10 +37,10 @@ import java.util.Date;
  */
 public class MyMissionSearchFragment extends Fragment {
     private EditText mMisiionNameET;
-    private Button mMissionBeginBeginBtn;
-    private Button mMissionBeginEndBtn;
-    private Button mMissionEndBeginBtn;
-    private Button mMissionEndEndBtn;
+    private TextView mMissionBeginBeginBtn;
+    private TextView mMissionBeginEndBtn;
+    private TextView mMissionEndBeginBtn;
+    private TextView mMissionEndEndBtn;
     private Spinner mMissionStateSpinner;
 
     private Button mSearchBtn;
@@ -141,10 +142,10 @@ public class MyMissionSearchFragment extends Fragment {
 
     private void init(View v){
         mMisiionNameET = (EditText) v.findViewById(R.id.my_mission_name_edittext);
-        mMissionBeginBeginBtn = (Button) v.findViewById(R.id.my_mission_begin_time_button);
-        mMissionBeginEndBtn = (Button) v.findViewById(R.id.my_mission_end_time_button);
-        mMissionEndBeginBtn = (Button) v.findViewById(R.id.my_mission_end_begin_time_button);
-        mMissionEndEndBtn = (Button) v.findViewById(R.id.my_mission_end_end_time_button);
+        mMissionBeginBeginBtn = (TextView) v.findViewById(R.id.my_mission_begin_time_button);
+        mMissionBeginEndBtn = (TextView) v.findViewById(R.id.my_mission_end_time_button);
+        mMissionEndBeginBtn = (TextView) v.findViewById(R.id.my_mission_end_begin_time_button);
+        mMissionEndEndBtn = (TextView) v.findViewById(R.id.my_mission_end_end_time_button);
         mMissionStateSpinner = (Spinner) v.findViewById(R.id.my_mission_state_sprinner);
 
         mSearchBtn = (Button) v.findViewById(R.id.my_mission_search_button);

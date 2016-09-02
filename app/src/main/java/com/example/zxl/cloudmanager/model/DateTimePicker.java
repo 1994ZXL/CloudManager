@@ -7,6 +7,7 @@ import android.app.TimePickerDialog;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
@@ -19,7 +20,7 @@ public class DateTimePicker {
 
     private static StringBuilder str = new StringBuilder("");
 
-    public static void  selectDateTime(final Fragment mFragment, final Button button) {
+    public static void  selectDateTime(final Fragment mFragment, final TextView button) {
         Calendar calendar = Calendar.getInstance();
         Dialog dateDialog = new DatePickerDialog(mFragment.getActivity(), new DatePickerDialog.OnDateSetListener() {
             @Override
