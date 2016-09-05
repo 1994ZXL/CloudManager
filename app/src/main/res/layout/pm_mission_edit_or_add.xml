@@ -16,6 +16,12 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <TextView
+                style="@style/font"
+                android:id="@+id/pm_mission_edit_or_add_edit"
+                android:text="修改"
+                android:layout_gravity="right"/>
+
             <!-- 第一块-->
             <LinearLayout
                 android:layout_width="match_parent"

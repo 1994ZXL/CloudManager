@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mission_details"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray2">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/font"
+                android:id="@+id/pm_schedule_edit"
+                android:text="修改"
+                android:layout_gravity="right"/>
+
+            <!-- 第一块-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:orientation="vertical"
+                android:background="@color/white">
+
+                <!-- 任务姓名-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        style="@style/font"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/mission_name"/>
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/pm_schedule_name"/>
+                </LinearLayout>
+
+                <!-- 任务生成时间-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/pmsch_time" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/pm_schedule_pmsch_time"/>
+                </LinearLayout>
+
+                <!-- 任务提交时间-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/submit_time" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:id="@+id/pm_schedule_submit_time"/>
+                </LinearLayout>
+
+                <!-- 任务进度-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="40dp">
+                    <TextView
+                        style="@style/font"
+                        android:layout_width="match_parent"
+                        android:layout_weight="1"
+                        android:text="@string/schedule" />
+                    <EditText
+                        android:layout_height="wrap_content"
+                        style="@style/editText"
+                        android:layout_weight="1"
+                        android:id="@+id/pm_schedule_schedule"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

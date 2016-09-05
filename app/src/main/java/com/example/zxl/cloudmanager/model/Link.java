@@ -123,11 +123,19 @@ public class Link {
     public static final String title = "title";
     public static final String evaluate = "evaluate";
     public static final String pmsch_id = "pmsch_id";
-    public static final String percent = "percent";
     public static final String start_time_from = "start_time_from"; //开始时间 开始
     public static final String start_time_to = "start_time_to"; //开始时间 结束
     public static final String end_time_from = "end_time_from"; //结束时间 开始
     public static final String end_time_to = "end_time_to"; //结束时间 结束
+
+    //pm_schedule
+    public static final String pm_schedule = "pm_schedule&act=";
+    public static final String report_time_from = "report_time_from"; //提交时间开始
+    public static final String report_time_to = "report_time_to"; //提交时间结束
+    public static final String percent_from = "percent_from"; //进度 开始
+    public static final String percent_to = "percent_to"; //进度 结束
+    public static final String percent = "percent"; //进度
+    public static final String report_time = "report_time"; //提交时间
 
     //manage_pm
     public static final String project_name = "project_name"; //项目名称

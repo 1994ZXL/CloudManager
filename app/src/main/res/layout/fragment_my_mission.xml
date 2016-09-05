@@ -1,162 +1,108 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F0F8FF"
-    android:orientation="vertical"
+    style="@style/Parent_LayoutStyle"
     tools:context=".mission.myMission.MyMissionSearchFragment">
 
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        style="@style/ScrollView_Style">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            style="@style/linearLayoutStyle">
+
             <LinearLayout
-                style="@style/linearLayoutStyle"
-                android:padding="10sp">
+                style="@style/Toptitle_LayoutStyle">
+
+                <TextView
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return"/>
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/my_mission_choose"/>
+
+                <TextView
+                    style="@style/topview_right"
+                    android:text="@string/text_clean"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linearLayoutStyle">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20sp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        android:layout_width="200sp"
-                        android:layout_height="35sp"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/my_mission_name" />
 
                     <EditText
-                        style="@style/editTextZ"
-                        android:id="@+id/my_mission_name_edittext"
-                        android:layout_width="match_parent"
-                        android:layout_height="35sp"
-                        android:background="#87CEEB"
-                        android:layout_weight="1"/>
+                        style="@style/EditText_Style"
+                        android:text="@string/input_mission_name"
+                        android:id="@+id/my_mission_name_edittext" />
                 </LinearLayout>
 
                 <!--开始时间-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20sp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        android:layout_width="50sp"
-                        android:layout_height="35sp"
-                        android:textColor="#000000"
-                        android:layout_weight="1"
-                        android:textSize="20sp"
+                        style="@style/Text_view_Style"
                         android:text="@string/project_begin_time_textview" />
 
                     <TextView
                         android:id="@+id/my_mission_begin_time_button"
-                        android:layout_width="80sp"
-                        android:layout_height="35sp"
-                        android:textColor="#000000"
-                        android:background="#87CEEB"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/project_begin_time_textview" />
 
                     <TextView
-                        android:layout_width="10sp"
-                        android:layout_height="35sp"
-                        android:text=" "/>
-
-                    <TextView
                         android:id="@+id/my_mission_end_time_button"
-                        android:layout_width="80sp"
-                        android:layout_height="35sp"
-                        android:textColor="#000000"
-                        android:background="#87CEEB"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/project_end_time_textview" />
 
                 </LinearLayout>
 
                 <!--结束时间-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20sp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        android:layout_width="50sp"
-                        android:layout_height="35sp"
-                        android:textColor="#000000"
-                        android:layout_weight="1"
-                        android:textSize="20sp"
+                        style="@style/Text_view_Style"
                         android:text="@string/project_end_time_textview" />
 
                     <TextView
                         android:id="@+id/my_mission_end_begin_time_button"
-                        android:layout_width="80sp"
-                        android:layout_height="35sp"
-                        android:textColor="#000000"
-                        android:background="#87CEEB"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/project_begin_time_textview" />
 
                     <TextView
-                        android:layout_width="10sp"
-                        android:layout_height="35sp"
-                        android:text=" "/>
-
-                    <TextView
                         android:id="@+id/my_mission_end_end_time_button"
-                        android:layout_width="80sp"
-                        android:layout_height="35sp"
-                        android:textColor="#000000"
-                        android:background="#87CEEB"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/project_end_time_textview" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20sp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:layout_gravity="center_vertical"
+                        style="@style/Text_view_Style"
                         android:text="@string/my_mission_state" />
 
                     <Spinner
-                        android:layout_width="200sp"
-                        android:layout_height="35sp"
-                        android:background="#87CEEB"
-                        android:gravity="center"
-                        android:paddingLeft="20sp"
-                        android:layout_weight="1"
+                        style="@style/Spinner_Style"
                         android:id="@+id/my_mission_state_sprinner" />
                 </LinearLayout>
 
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/my_mission_search_button"
-                style="@style/SearchButton"
-                android:layout_gravity="center_horizontal"
-                android:background="#87CEFA"
-                android:text="@string/check_button" />
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/my_mission_search_button"
+        style="@style/SearchButton"/>
 
 </LinearLayout>

@@ -32,6 +32,8 @@ public class LeaderPostDetailFragment extends Fragment {
     private TextView mLevel;
     private TextView mOpinion;
 
+    private TextView mEdit;
+
     private static Post sPost = new Post();
 
     private Fragment mFragment;
@@ -67,9 +69,11 @@ public class LeaderPostDetailFragment extends Fragment {
         mState = (TextView) view.findViewById(R.id.post_details_state);
         mLevel = (TextView) view.findViewById(R.id.post_details_level);
         mOpinion = (TextView) view.findViewById(R.id.post_details_opinion);
+        mEdit = (TextView) view.findViewById(R.id.post_details_save);
     }
 
     private void control() {
+        mEdit.setVisibility(View.GONE);
         mName.setText(sPost.getMem_name());
         mState.setText(sPost.getState());
         mLevel.setText(sPost.getLevel());

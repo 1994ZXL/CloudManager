@@ -46,6 +46,8 @@ public class MyPostDetailFragment extends Fragment {
     private TextView mLevel;
     private TextView mOpinion;
 
+    private TextView mSave;
+
     private static Post sPost = new Post();
 
     private static final String MYPOST_CONTENT = "日报内容";
@@ -94,6 +96,8 @@ public class MyPostDetailFragment extends Fragment {
         mState = (TextView) view.findViewById(R.id.post_details_state);
         mLevel = (TextView) view.findViewById(R.id.post_details_level);
         mOpinion = (TextView) view.findViewById(R.id.post_details_opinion);
+
+        mSave = (TextView) view.findViewById(R.id.post_details_save);
     }
 
     private void control() {
@@ -124,7 +128,45 @@ public class MyPostDetailFragment extends Fragment {
             mSubmitTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sPost.getReport_time()));
         }
         mDailyDate.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sPost.getDaily_date()));
+        mSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    keyObj.put(Link.daily_id, sPost.getDaily_id());
+                    keyObj.put(Link.content, content);
+                    key = DESCryptor.Encryptor(keyObj.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mParams.put("key", key);
+                Log.d(TAG,"key:" + key);
+                mHttpc.post(Link.localhost + "my_daily&act=edit", mParams, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            Toast.makeText(getActivity(),
+                                    response.getString("msg"),
+                                    Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                        }
+                    }
 
+                });
+                Fragment fragment = new MyPostFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.replace(R.id.postActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
+            }
+        });
     }
 
     @Override

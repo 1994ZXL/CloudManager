@@ -1,0 +1,104 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="#F0F8FF"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:orientation="vertical">
+
+            <!--提交时间-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35sp"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="35sp"
+                    android:text="@string/submit_time"
+                    android:textColor="#000000"
+                    android:layout_weight="1"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/pm_schedule_search_beginTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="35sp"
+                    android:background="#87CEEB"
+                    android:layout_weight="1"
+                    android:text="@string/project_begin_time_textview"/>
+
+                <TextView
+                    android:id="@+id/pm_schedule_search_endTime"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="35sp"
+                    android:background="#87CEEB"
+                    android:text="@string/project_end_time_textview"
+                    android:layout_weight="1"/>
+
+            </LinearLayout>
+
+            <!--进度-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/check_begin_time_textview"
+                    android:layout_width="50sp"
+                    android:layout_height="35sp"
+                    android:text="@string/schedule"
+                    android:textColor="#000000"
+                    android:layout_weight="1"
+                    android:textSize="20sp"/>
+
+                <EditText
+                    android:id="@+id/pm_schedule_percent_from"
+                    android:layout_width="80sp"
+                    android:layout_height="35sp"
+                    android:background="#87CEEB"
+                    android:layout_weight="1"/>
+
+                <TextView
+                    android:layout_width="10sp"
+                    android:layout_height="35sp"
+                    android:text="—"/>
+
+                <EditText
+                    android:id="@+id/pm_schedule_percent_to"
+                    android:layout_width="80sp"
+                    android:layout_height="35sp"
+                    android:background="#87CEEB"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+
+            <Button
+                android:layout_width="180sp"
+                android:layout_height="40sp"
+                android:layout_margin="30sp"
+                android:text="查询"
+                android:textColor="#000000"
+                android:background="#87CEFA"
+                android:id="@+id/pm_schedule_percent_searchBtn"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
+

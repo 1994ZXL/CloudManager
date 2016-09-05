@@ -1,4 +1,4 @@
-package com.example.zxl.cloudmanager.check.checkManager;
+package com.example.zxl.cloudmanager.schedule.PMSchedule;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -16,11 +16,10 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
-import com.example.zxl.cloudmanager.check.myCheck.MyCheckDetailFragment;
-import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.model.Schedule;
 import com.example.zxl.cloudmanager.model.User;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -36,12 +35,12 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 
 /**
- * Created by ZXL on 2016/7/15.
+ * Created by ZXL on 2016/9/5.
  */
-public class ManagerCheckListFragment extends Fragment {
+public class PMScheduleListFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
-    private List<Check> checks = new ArrayList<Check>();
+    private List<Schedule> schedules = new ArrayList<Schedule>();
     private MyAdapter myAdapter;
 
     public static final int REFRESH_DELAY = 4000;
@@ -64,11 +63,7 @@ public class ManagerCheckListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        final View v = layoutInflater.inflate(R.layout.main_fragment_manager_check_list, parent, false);
-
-        Log.d(TAG, "调用了一次");
-
-
+        final View v = layoutInflater.inflate(R.layout.pm_schedule_list, parent, false);
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -87,19 +82,19 @@ public class ManagerCheckListFragment extends Fragment {
         if (null != saveInstanceState) {
 
             try {
-                if (null != saveInstanceState.getString(Link.mem_name))
-                    keyObj.put(Link.mem_name, saveInstanceState.getString(Link.mem_name));
-                if (-1 != saveInstanceState.getInt(Link.att_date_from))
-                    keyObj.put(Link.att_date_from, saveInstanceState.getInt(Link.att_date_from));
-                if (-1 != saveInstanceState.getInt(Link.att_date_to))
-                    keyObj.put(Link.att_date_to, saveInstanceState.getInt(Link.att_date_to));
+                if (-1 != saveInstanceState.getInt(Link.report_time_from))
+                    keyObj.put(Link.report_time_from, saveInstanceState.getInt(Link.report_time_from));
+                if (-1 != saveInstanceState.getInt(Link.report_time_to))
+                    keyObj.put(Link.report_time_to, saveInstanceState.getInt(Link.report_time_to));
+                keyObj.put(Link.percent_from, saveInstanceState.getInt(Link.percent_from));
+                keyObj.put(Link.percent_to, saveInstanceState.getInt(Link.percent_to));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
         try {
-            keyObj.put(Link.comp_id, User.newInstance().getComp_id());
-            keyObj.put("sort", "att_date desc");
+            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+            keyObj.put("sort", "pmsch_time desc");
             keyObj.put("page_count", 20);
             keyObj.put("curl_page", 1);
             key = DESCryptor.Encryptor(keyObj.toString());
@@ -109,7 +104,7 @@ public class ManagerCheckListFragment extends Fragment {
         mParams.put("key", key);
         Log.d(TAG, "key: " + key);
 
-        mHttpc.post(Link.localhost + Link.manage_punch, mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + Link.pm_schedule + Link.get_list, mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 if (statusCode == 200) {
@@ -118,21 +113,21 @@ public class ManagerCheckListFragment extends Fragment {
                             JSONArray array = rjo.getJSONArray("data1");
                             Log.d(TAG, "array: " + array);
                             for (int i = 0; i < array.length(); i++) {
-                                checks.add(new Check(array.getJSONObject(i)));
+                                schedules.add(new Schedule(array.getJSONObject(i)));
                             }
-                            Log.d(TAG, "checks: " + checks);
+                            Log.d(TAG, "schedules: " + schedules);
 
-                            mRecyclerView = (RecyclerView)v.findViewById(R.id.manager_check_recyclerview);
+                            mRecyclerView = (RecyclerView)v.findViewById(R.id.pm_schedule_list);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                             mRecyclerView.setHasFixedSize(true);
-                            myAdapter = new MyAdapter(mFragment.getActivity(), checks);
+                            myAdapter = new MyAdapter(mFragment.getActivity(), schedules);
                             mRecyclerView.setAdapter(myAdapter);
-                            mCardView = (CardView)v.findViewById(R.id.fragment_manager_check);
+                            mCardView = (CardView)v.findViewById(R.id.pm_schedule_card_item);
                             myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
-                                    Fragment fragment = ManagerCheckDetailFragment.newInstance(data);
+                                    Fragment fragment = PMScheduleEditFragment.newInstance(data);
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     if (!fragment.isAdded()) {
                                         transaction.addToBackStack(null);
@@ -168,17 +163,17 @@ public class ManagerCheckListFragment extends Fragment {
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
-        private List<Check> checks;
+        private List<Schedule> schedules;
         private Context mContext;
 
-        public MyAdapter (Context context, List<Check> checks) {
-            this.checks = checks;
+        public MyAdapter (Context context, List<Schedule> schedules) {
+            this.schedules = schedules;
             this.mContext = context;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.manager_check_card_item, viewGroup,false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pm_schedule_card_item, viewGroup,false);
             ViewHolder viewHolder = new ViewHolder(v);
             v.setOnClickListener(this);
             return viewHolder;
@@ -186,17 +181,19 @@ public class ManagerCheckListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            Check check = checks.get(i);
-            viewHolder.mName.setText(check.getMem_name());
-            viewHolder.mCheckLocation.setText(check.getPuncher_name());
-            viewHolder.mState.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(check.getAtt_date()));
-            viewHolder.mCheckManager.setText(check.getMaster_name());
-            viewHolder.itemView.setTag(checks.get(i));
+            Schedule schedule = schedules.get(i);
+
+            viewHolder.mTitle.setText(schedule.getTitle());
+            viewHolder.mPmschTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi2(schedule.getPmsch_time()));
+            viewHolder.mSubmitTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi2(schedule.getReport_time()));
+            viewHolder.mPercent.setText(String.valueOf(schedule.getPercent()));
+
+            viewHolder.itemView.setTag(schedules.get(i));
         }
 
         @Override
         public int getItemCount() {
-            return checks == null ? 0 : checks.size();
+            return schedules == null ? 0 : schedules.size();
         }
 
         @Override
@@ -207,17 +204,17 @@ public class ManagerCheckListFragment extends Fragment {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder{
-            public TextView mName;
-            public TextView mState;
-            public TextView mCheckLocation;
-            public TextView mCheckManager;
+            public TextView mTitle;
+            public TextView mPmschTime;
+            public TextView mSubmitTime;
+            public TextView mPercent;
 
             public ViewHolder(View v) {
                 super(v);
-                mName = (TextView) v.findViewById(R.id.manager_check_card_item_name);
-                mState = (TextView)v.findViewById(R.id.manager_check_card_item_state);
-                mCheckLocation = (TextView)v.findViewById(R.id.manager_check_card_item_check_location);
-                mCheckManager = (TextView)v.findViewById(R.id.manager_check_card_item_check_manager);
+                mTitle = (TextView) v.findViewById(R.id.pm_schedule_card_item_title);
+                mPmschTime = (TextView) v.findViewById(R.id.pm_schedule_card_item_pmsch_time);
+                mSubmitTime = (TextView) v.findViewById(R.id.pm_schedule_card_item_submit_time);
+                mPercent = (TextView) v.findViewById(R.id.pm_schedule_card_item_percent);
 
             }
         }

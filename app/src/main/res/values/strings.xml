@@ -58,11 +58,11 @@
     <string name="query_erro">查询失败</string>
     <string name="work_sign">上班考勤</string>
     <string name="work_off_sign">下班考勤</string>
-    
+
     <!--登录-->
     <string name="user_name_not_exist">用户名不存在</string>
     <string name="password_error">密码错误</string>
-    
+
     <!-- 我是领导-->
     <string name="leader">我是领导</string>
     <string name="post_query">日报查询</string>
@@ -98,6 +98,8 @@
 
     <!--备忘录-->
     <string name="memo_title_textview">标题</string>
+    <string name="input_memo_title">请输入备忘录标题</string>
+    <string name="memo_choose">备忘录筛选</string>
     <string name="memo_date_textview">xx年xx月xx日</string>
     <string name="memo_content_textview">备忘录内容</string>
     <string name="new_memo">新增备忘录</string>
@@ -133,6 +135,7 @@
     <string name="duty">上班</string>
     <string name="offduty">下班</string>
     <string name="check_time">考勤时间</string>
+    <string name="check_detail">考勤详情</string>
     <string name="dutytime">上班时间</string>
     <string name="offdutytime">下班时间</string>
     <string name="project">项目</string>
@@ -153,6 +156,7 @@
 
     <!-- 我的请假-->
     <string name="leave_record_query">请假查询</string>
+    <string name="leave_record_detail">请假详情</string>
     <string name="apply_time">申请时间</string>
     <string name="apply_leave">申请请假</string>
     <string name="leave_time">请假时间</string>
@@ -163,12 +167,15 @@
     <string name="commit_apply">提交申请</string>
     <string name="time_erro">请重新选择结束时间</string>
     <string name="dispose_suggestion">处理意见</string>
+    <string name="input_dispose_suggestion">请输入处理意见</string>
     <string name="dispose_time">处理时间</string>
     <string name="leave_state">请假状态</string>
 
     <!-- 我的任务-->
     <string name="mission_member">任务成员</string>
     <string name="mission_name">任务名称</string>
+    <string name="mission_choose">我的任务筛选</string>
+    <string name="input_mission_name">请输入任务名称</string>
     <string name="mission_content">任务内容</string>
     <string name="mission_level">任务优先级</string>
     <string name="mission_content_details">任务内容说明</string>
@@ -178,12 +185,14 @@
     <string name="mission_state">任务状态</string>
     <string name="evaluate">评价</string>
     <string name="edit_error">修改失败</string>
-    
+    <string name="schedule">进度</string>
+    <string name="pmsch_time">生成时间</string>
+
     <!--我的出差-->
     <string name="trip_status">出差状态</string>
     <string name="trip_addr">出差地址</string>
     <string name="trip_detail_addr">出差详细地址</string>
-    
+
     <!-- 我的用例-->
     <string name="usecase_number">用例编号：</string>
     <string name="version_number">程序版本：</string>
@@ -194,10 +203,12 @@
     <!-- 我的bug-->
     <string name="functionModule">功能模块</string>
     <string name="bug_version">bug等级</string>
+    <string name="bug_search">bug筛选</string>
     <string name="bug_state">bug状态</string>
     <string name="found_time">发现时间</string>
     <string name="bug_number">bug序号</string>
     <string name="bug_content">bug内容</string>
+    <string name="input_bug_content">请输入bug内容</string>
     <string name="operation_mode">操作模式</string>
     <string name="entrance_mode">进入方式</string>
     <string name="found_man">发现人</string>
@@ -214,6 +225,8 @@
 
     <!--公共查询-->
     <string name="project_name_edittext">项目名称</string>
+    <string name="input_project_name">请输入项目名称</string>
+    <string name="project_choose">项目筛选</string>
     <string name="project_manager_edittext">项目主管</string>
     <string name="project_begin_time_textview">开始时间</string>
     <string name="project_end_time_textview">结束时间</string>
@@ -252,8 +265,11 @@
 
     <string name="bug_find_time">发现时间</string>
     <string name="bug_finder">发现人</string>
+    <string name="bug_finder_name">请输入发现人姓名</string>
     <string name="bug_reviser">修改人</string>
+    <string name="bug_reviser_name">请输入修改人姓名</string>
     <string name="my_bug_state">bug状态</string>
+    <string name="my_bug_detail">bug详情</string>
     <string name="bug_level">bug等级</string>
 
     <!--员工查询-->
@@ -262,10 +278,13 @@
     <string name="my_leave_sate">假条状态</string>
 
     <string name="my_mission_name">任务名称</string>
+    <string name="my_mission_choose">员工任务筛选</string>
     <string name="my_mission_time">安排时间</string>
     <string name="my_mission_state">任务状态</string>
 
     <string name="my_overtime_time">加班时间</string>
+    <string name="my_overtime_detail">加班详情</string>
+    <string name="my_overtime_time_choose">员工加班筛选</string>
     <string name="overtime_begin_time">加班开始时间</string>
     <string name="overtime_end_time">加班结束时间</string>
     <string name="manager_overtime_total">加班时间小计</string>
@@ -287,7 +306,9 @@
     <string name="employer_travel_reason">出差原因</string>
 
     <string name="post_submit_time">日报时间</string>
+    <string name="my_post_choose">日报筛选</string>
     <string name="my_post_content">日报内容</string>
+    <string name="input_my_post_content">请输入日报内容</string>
     <string name="post_date">日报日期</string>
     <string name="my_post_create_time_hit">日报创建时间</string>
     <string name="my_post_post_time_hit">日报提交时间</string>

@@ -24,6 +24,7 @@ import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.User;
+import com.example.zxl.cloudmanager.schedule.PMSchedule.PMScheduleActivity;
 import com.example.zxl.cloudmanager.usecase.myUseCase.MyUseCaseActivity;
 import com.example.zxl.cloudmanager.overtime.checkManagerOverTime.ManagerOvertimeActivity;
 import com.example.zxl.cloudmanager.travel.checkManagerTravel.ManagerTravelActivity;
@@ -116,6 +117,7 @@ public class MainFragment extends Fragment {
     private ImageView pmMemberManagerImage;
     private ImageView pmListImage;
     private ImageView pmMissionImage;
+    private ImageView pmScheduleImage;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
@@ -128,8 +130,6 @@ public class MainFragment extends Fragment {
     private String mMem_name;
 
     private Fragment mFragment;
-
-    private Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -144,8 +144,6 @@ public class MainFragment extends Fragment {
 
 
         init(v);
-
-        Toolbar toolbar = (Toolbar) v.findViewById(R.id.main_fragment_toolbar);
 
 
         //职位(1.领导 2.项目负责人 3.一般员工)
@@ -199,6 +197,7 @@ public class MainFragment extends Fragment {
         onClickListener(pmListImage, new ProjectConnectionListActivity());
         onClickListener(pmMemberManagerImage, new ProjectMemberManagerActivity());
         onClickListener(pmMissionImage, new ProjectMissionManagerActivity());
+        onClickListener(pmScheduleImage, new PMScheduleActivity());
         onClickListener(pmUsecaseImage, new ProjectManagerUsecaseActivity());
 
 
@@ -324,6 +323,7 @@ public class MainFragment extends Fragment {
         pmMemberManagerImage = (ImageView) v.findViewById(R.id.main_fragment_project_member_manage);
         pmBugDealImage = (ImageView) v.findViewById(R.id.main_fragment_bug_manage_image);
         pmMissionImage = (ImageView) v.findViewById(R.id.main_fragment_project_mission_manage);
+        pmScheduleImage = (ImageView) v.findViewById(R.id.main_fragment_project_mission_schedule_manage);
         pmUsecaseImage = (ImageView) v.findViewById(R.id.main_fragment_usecase_manage_image);
     }
 

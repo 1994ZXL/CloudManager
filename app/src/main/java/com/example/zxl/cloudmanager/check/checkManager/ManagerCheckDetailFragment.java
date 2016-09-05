@@ -23,6 +23,8 @@ public class ManagerCheckDetailFragment extends Fragment{
     private TextView chekdate,stipulationOnDuty,stipulaitonOffDuty,onDuty,offDuty,earlyMin, lateMin;
     private TextView leave, overTime, travel;
 
+    private TextView mEdit;
+
     private static Check mCheck = new Check();
 
     private Fragment mFragment;
@@ -90,6 +92,8 @@ public class ManagerCheckDetailFragment extends Fragment{
         leave = (TextView)view.findViewById(R.id.manager_check_details_leave);
         overTime = (TextView)view.findViewById(R.id.manager_check_details_work_overtime);
         travel = (TextView)view.findViewById(R.id.manager_check_details_work_travel);
+
+        mEdit = (TextView)view.findViewById(R.id.manager_check_edit);
     }
 
     private void control() {
@@ -156,5 +160,23 @@ public class ManagerCheckDetailFragment extends Fragment{
         } else {
             travel.setText("否");
         }
+
+        mEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = ManagerCheckEditFragment.newInstance(mCheck);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
+            }
+        });
     }
 }

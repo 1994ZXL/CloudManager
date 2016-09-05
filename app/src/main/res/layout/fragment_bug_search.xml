@@ -1,237 +1,144 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#F0F8FF"
-    android:orientation="vertical"
+    style="@style/Parent_LayoutStyle"
     tools:context=".bug.publicSearchBug.BugSearchFragment">
 
-   <ScrollView
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content">
+    <ScrollView style="@style/ScrollView_Style">
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="vertical">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-           <LinearLayout
-               style="@style/linearLayoutStyle">
+            <LinearLayout
+                style="@style/Toptitle_LayoutStyle">
 
-               <!--项目名-->
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:layout_marginTop="20dp">
+                <TextView
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return"/>
 
-                   <TextView
-                       android:layout_width="200dp"
-                       android:layout_height="35dp"
-                       android:layout_weight="1"
-                       android:textColor="#000000"
-                       android:textSize="20sp"
-                       android:text="@string/project_name_edittext"/>
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/bug_search"/>
 
-                   <EditText
-                       style="@style/editText"
-                       android:id="@+id/bug_project_name_edittext"
-                       android:layout_width="match_parent"
-                       android:layout_height="35dp"
-                       android:background="#87CEEB"
-                       android:layout_weight="1"/>
-               </LinearLayout>
+                <TextView
+                    style="@style/topview_right"
+                    android:text="@string/text_clean"/>
 
-               <!--发现时间-->
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:layout_marginTop="20dp">
+            </LinearLayout>
 
-                   <TextView
-                       android:layout_width="50dp"
-                       android:layout_height="35dp"
-                       android:text="@string/bug_find_time"
-                       android:textColor="#000000"
-                       android:layout_weight="1"
-                       android:textSize="20sp"/>
+            <!--项目名-->
+            <LinearLayout
+                style="@style/Viewline_LayoutStyle">
 
-                   <TextView
-                       android:id="@+id/bug_begin_time_button"
-                       android:layout_width="80dp"
-                       android:layout_height="35dp"
-                       android:text="@string/project_begin_time_textview"
-                       android:textColor="#000000"
-                       android:background="#87CEEB"
-                       android:layout_weight="1"/>
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/project_name_edittext" />
 
-                   <TextView
-                       android:layout_width="10dp"
-                       android:layout_height="35dp"
-                       android:text=" "/>
+                <EditText
+                    android:id="@+id/bug_project_name_edittext"
+                    style="@style/EditText_Style"
+                    android:hint="@string/input_project_name"/>
+            </LinearLayout>
 
-                   <TextView
-                       android:id="@+id/bug_end_time_button"
-                       android:layout_width="80dp"
-                       android:layout_height="35dp"
-                       android:text="@string/project_end_time_textview"
-                       android:textColor="#000000"
-                       android:background="#87CEEB"
-                       android:layout_weight="1"/>
-               </LinearLayout>
+            <!--发现时间-->
+            <LinearLayout
+                style="@style/Viewline_LayoutStyle">
 
-               <!--修改时间-->
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:layout_marginTop="20dp"
-                   android:id="@+id/bug_editTime_linearLayout">
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/bug_find_time" />
 
-                   <TextView
-                       android:layout_width="50dp"
-                       android:layout_height="35dp"
-                       android:text="@string/edit_time"
-                       android:textColor="#000000"
-                       android:layout_weight="1"
-                       android:textSize="20sp"/>
+                <Button
+                    android:id="@+id/bug_begin_time_button"
+                    style="@style/Text_view_Style"
+                    android:text="@string/project_begin_time_textview" />
 
-                   <TextView
-                       android:id="@+id/bug_edit_begin_time_button"
-                       android:layout_width="80dp"
-                       android:layout_height="35dp"
-                       android:text="@string/project_begin_time_textview"
-                       android:textColor="#000000"
-                       android:background="#87CEEB"
-                       android:layout_weight="1"/>
+                <Button
+                    android:id="@+id/bug_end_time_button"
+                    style="@style/Text_view_Style"
+                    android:text="@string/project_end_time_textview" />
+            </LinearLayout>
 
-                   <TextView
-                       android:layout_width="10dp"
-                       android:layout_height="35dp"
-                       android:text=" "/>
+            <!--修改时间-->
+            <LinearLayout
+                style="@style/Viewline_LayoutStyle"
+                android:id="@+id/bug_editTime_linearLayout">
 
-                   <TextView
-                       android:id="@+id/bug_edit_end_time_button"
-                       android:layout_width="80dp"
-                       android:layout_height="35dp"
-                       android:text="@string/project_end_time_textview"
-                       android:textColor="#000000"
-                       android:background="#87CEEB"
-                       android:layout_weight="1"/>
-               </LinearLayout>
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/edit_time" />
 
-               <!--发现人-->
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:layout_marginTop="20dp"
-                   android:id="@+id/bug_finder_linearLayout">
+                <Button
+                    android:id="@+id/bug_edit_begin_time_button"
+                    style="@style/Text_view_Style"
+                    android:text="@string/project_begin_time_textview" />
 
-                   <TextView
-                       android:layout_width="200dp"
-                       android:layout_height="35dp"
-                       android:text="@string/bug_finder"
-                       android:textColor="#000000"
-                       android:layout_weight="1"
-                       android:textSize="20sp"/>
+                <Button
+                    android:id="@+id/bug_edit_end_time_button"
+                    style="@style/Text_view_Style"
+                    android:text="@string/project_end_time_textview" />
+            </LinearLayout>
 
-                   <EditText
-                       style="@style/editText"
-                       android:id="@+id/bug_finder_edittext"
-                       android:layout_width="match_parent"
-                       android:layout_height="35dp"
-                       android:background="#87CEEB"
-                       android:layout_weight="1"/>
-               </LinearLayout>
+            <!--发现人-->
+            <LinearLayout
+                style="@style/Viewline_LayoutStyle"
+                android:id="@+id/bug_finder_linearLayout">
 
-               <!--修改人-->
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:layout_marginTop="20dp"
-                   android:id="@+id/bug_reviser_linearLayout">
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/bug_finder" />
 
-                   <TextView
-                       android:layout_width="200dp"
-                       android:layout_height="35dp"
-                       android:text="@string/bug_reviser"
-                       android:textColor="#000000"
-                       android:layout_weight="1"
-                       android:textSize="20sp"/>
+                <EditText
+                    android:id="@+id/bug_finder_edittext"
+                    style="@style/EditText_Style"
+                    android:hint="@string/bug_finder_name"/>
+            </LinearLayout>
 
-                   <EditText
-                       style="@style/editText"
-                       android:id="@+id/bug_reviser_edittext"
-                       android:layout_width="match_parent"
-                       android:layout_height="35dp"
-                       android:background="#87CEEB"
-                       android:layout_weight="1"/>
-               </LinearLayout>
+            <!--修改人-->
+            <LinearLayout
+                style="@style/Viewline_LayoutStyle"
+                android:id="@+id/bug_reviser_linearLayout">
 
-               <!--bug状态-->
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:layout_marginTop="20dp">
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/bug_reviser" />
 
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:layout_weight="1"
-                       android:text="@string/bug_state"
-                       android:textColor="#000000"
-                       android:textSize="20sp"
-                       android:layout_gravity="center_vertical" />
+                <EditText
+                    android:id="@+id/bug_reviser_edittext"
+                    style="@style/EditText_Style"
+                    android:hint="@string/bug_reviser_name"/>
+            </LinearLayout>
 
-                   <Spinner
-                       android:layout_width="200dp"
-                       android:layout_height="35dp"
-                       android:id="@+id/bug_state_sprinner"
-                       android:background="#87CEEB"
-                       android:gravity="center"
-                       android:paddingLeft="20dp"
-                       android:layout_weight="1"/>
-               </LinearLayout>
+            <!--bug状态-->
+            <LinearLayout
+                style="@style/Viewline_LayoutStyle">
 
-               <!--bug等级-->
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:layout_marginTop="20dp">
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/bug_state" />
 
-                   <TextView
-                       android:layout_width="match_parent"
-                       android:layout_height="wrap_content"
-                       android:text="@string/bug_version"
-                       android:textColor="#000000"
-                       android:textSize="20sp"
-                       android:layout_gravity="center_vertical"
-                       android:layout_weight="1" />
+                <Spinner
+                    android:id="@+id/bug_state_sprinner"
+                    style="@style/Spinner_Style" />
+            </LinearLayout>
 
-                   <Spinner
-                       android:layout_width="200dp"
-                       android:layout_height="35dp"
-                       android:id="@+id/bug_level_sprinner"
-                       android:background="#87CEEB"
-                       android:textAlignment="center"
-                       android:paddingLeft="20dp"
-                       android:layout_weight="1"/>
-               </LinearLayout>
-       </LinearLayout>
+            <!--bug等级-->
+            <LinearLayout
+                style="@style/Viewline_LayoutStyle">
+
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/bug_version" />
+
+                <Spinner
+                    android:id="@+id/bug_level_sprinner"
+                    style="@style/Spinner_Style"/>
+            </LinearLayout>
+        </LinearLayout>
 
 
-           <Button
-               android:id="@+id/bug_search_button"
-               style="@style/SearchButton"
-               android:layout_gravity="center_horizontal"
-               android:background="#87CEFA"
-               android:text="@string/check_button" />
-       </LinearLayout>
-   </ScrollView>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/bug_search_button"
+        style="@style/SearchButton" />
 
 </LinearLayout>

@@ -1,179 +1,110 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F0F8FF"
-    android:orientation="vertical"
+    style="@style/Parent_LayoutStyle"
     tools:context=".overtime.checkManagerOverTime.ManagerOvertimeDetailFragment">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        style="@style/ScrollView_Style">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            style="@style/linearLayoutStyle">
+
             <LinearLayout
-                style="@style/linearLayoutStyle"
-                android:padding="10sp">
+                style="@style/Toptitle_LayoutStyle">
+
+                <TextView
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return"/>
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/my_overtime_detail"/>
+
+                <TextView
+                    style="@style/topview_right"
+                    android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linearLayoutStyle">
 
 
                 <!-- 姓名-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center_vertical">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/font"
-                        android:layout_width="200sp"
-                        android:layout_height="35sp"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/name" />
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="35sp"
-                        android:background="#87CEEB"
-                        android:layout_weight="1"
-                        android:textSize="20sp"
-                        android:gravity="center"
+                        style="@style/Text_view_Style"
                         android:id="@+id/manager_employer_name_spinner" />
 
                 </LinearLayout>
 
                 <!--加班项目-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20sp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        android:layout_width="200sp"
-                        android:layout_height="35sp"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:layout_weight="1"
-                        style="@style/font"
-                        android:text="@string/project_name_edittext"
-                        android:layout_gravity="center_vertical" />
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_name_edittext" />
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="35sp"
-                        android:background="#87CEEB"
-                        android:layout_weight="1"
-                        android:textSize="20sp"
-                        android:gravity="center"
+                        style="@style/Text_view_Style"
                         android:id="@+id/manager_overtime_project_spinner" />
 
                 </LinearLayout>
 
                 <!--加班开始时间-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20sp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        android:layout_width="200sp"
-                        android:layout_height="35sp"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:layout_weight="1"
-                        style="@style/font"
-                        android:text="@string/my_overtime_time"
-                        android:layout_gravity="center_vertical"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/my_overtime_time" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="35sp"
-                        android:background="#87CEEB"
-                        android:layout_weight="1"
-                        android:textSize="20sp"
-                        android:gravity="center"
+                        style="@style/Text_view_Style"
                         android:id="@+id/manager_overtime_detail_beginTime"/>
 
                 </LinearLayout>
 
                 <!--加班结束时间-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20sp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        android:layout_width="200sp"
-                        android:layout_height="35sp"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:layout_weight="1"
-                        style="@style/font"
-                        android:text="@string/my_overtime_time"
-                        android:layout_gravity="center_vertical"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/my_overtime_time" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="35sp"
-                        android:background="#87CEEB"
-                        android:layout_weight="1"
-                        android:textSize="20sp"
-                        android:gravity="center"
+                        style="@style/Text_view_Style"
                         android:id="@+id/manager_overtime_detail_endTime"/>
 
                 </LinearLayout>
 
                 <!--加班原因-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20sp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         android:text="@string/manager_overtime_reason"
-                        android:layout_width="200sp"
-                        android:layout_height="35sp"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:layout_weight="1"/>
+                        style="@style/Text_view_Style"/>
                     <TextView
                         android:id="@+id/manager_overtime_reason_edittext"
-                        android:layout_width="match_parent"
-                        android:layout_height="35sp"
-                        android:background="#87CEEB"
-                        android:layout_weight="1"
-                        android:gravity="center" />
+                        style="@style/Text_view_Style"/>
 
                 </LinearLayout>
 
                 <!--加班状态-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20sp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/font"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textColor="#000000"
-                        android:textSize="20sp"
-                        android:layout_gravity="center_vertical"
+                        style="@style/Text_view_Style"
                         android:text="@string/overtime_status" />
                     <Spinner
-                        android:layout_width="200sp"
-                        android:layout_height="35sp"
-                        android:background="#87CEEB"
-                        android:gravity="center"
-                        android:paddingLeft="20sp"
-                        android:layout_weight="1"
+                        style="@style/Spinner_Style"
                         android:id="@+id/manager_overtime_status_spinner" />
 
                 </LinearLayout>

@@ -224,6 +224,12 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
+        <activity android:name=".schedule.PMSchedule.PMScheduleActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".projectManager.projectList.ProjectConnectionListActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data

@@ -8,13 +8,6 @@
     android:orientation="vertical"
     android:background="@color/gray">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/main_fragment_toolbar"
-        android:layout_height="?attr/actionBarSize"
-        android:layout_width="match_parent" >
-
-    </android.support.v7.widget.Toolbar>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -271,6 +264,7 @@
                             android:text="@string/travel_record_query"
                             android:id="@+id/textView6" />-->
                     </LinearLayout>
+
                 </LinearLayout>
 
             </LinearLayout>
@@ -382,7 +376,9 @@
                             android:text="@string/travel_deal"
                             android:id="@+id/main_fragment_travel_deal"/>-->
                     </LinearLayout>
+
                 </LinearLayout>
+
             </LinearLayout>
 
             <!-- 项目主管-->
@@ -500,13 +496,36 @@
 
                 </LinearLayout>
 
-                <!-- bug处理-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center">
 
+                    <!--项目任务进度-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="12dp"
+                        android:layout_weight="1">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="75dp"
+                            android:src="@drawable/demo"
+                            android:id="@+id/main_fragment_project_mission_schedule_manage"
+                            android:layout_gravity="center" />
+
+                        <!--<TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_gravity="center"
+                               android:text="@string/bug_manage"
+                               android:id="@+id/textView7" />-->
+                    </LinearLayout>
+
+                    <!-- bug处理-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -520,11 +539,11 @@
                             android:id="@+id/main_fragment_bug_manage_image"
                             android:layout_gravity="center"/>
                         <!--<TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/bug_manage"
-                            android:id="@+id/main_fragment_bug_manage"/>-->
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_gravity="center"
+                               android:text="@string/bug_manage"
+                               android:id="@+id/main_fragment_bug_manage"/>-->
                     </LinearLayout>
 
                     <LinearLayout
@@ -542,33 +561,10 @@
                             android:layout_gravity="center" />
 
                         <!--<TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/project_usecase" />-->
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_margin="12dp"
-                        android:layout_weight="1"
-                        android:visibility="invisible">
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="75dp"
-                            android:src="@drawable/bug_manage_icon"
-                            android:id="@+id/imageView7"
-                            android:layout_gravity="center" />
-
-                        <!--<TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/bug_manage"
-                            android:id="@+id/textView7" />-->
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_gravity="center"
+                               android:text="@string/project_usecase" />-->
                     </LinearLayout>
 
                     <LinearLayout
@@ -587,11 +583,11 @@
                             android:layout_gravity="center" />
 
                         <!--<TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="@string/bug_manage"
-                            android:id="@+id/textView8" />-->
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_gravity="center"
+                               android:text="@string/bug_manage"
+                               android:id="@+id/textView8" />-->
                     </LinearLayout>
 
                 </LinearLayout>
@@ -614,6 +610,7 @@
                     android:id="@+id/main_fragment_my_job"
                     android:text="@string/my_job"
                     android:textSize="25dp"/>
+
                 <!-- 我的工作第一排功能列表-->
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -705,7 +702,6 @@
                             android:id="@+id/main_fragment_my_mission"/>-->
                     </LinearLayout>
                 </LinearLayout>
-
 
                 <!-- 我的工作第二排功能列表-->
                 <LinearLayout
