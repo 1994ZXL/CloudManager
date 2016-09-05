@@ -84,11 +84,11 @@ public class Post {
 
     public String getLevel() {
         if (level == 1)
-            return "好";
+            return "很满意";
         if (level == 2)
-            return "中";
+            return "满意";
         if (level == 3)
-            return "差";
+            return "一般";
         return null;
     }
 

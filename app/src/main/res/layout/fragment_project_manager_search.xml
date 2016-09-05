@@ -1,118 +1,99 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    style="@style/Parent_LayoutStyle"
     tools:context=".projectManager.PMAdressBook.ProjectManagerSearchFragment">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        style="@style/ScrollView_Style">
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            style="@style/linearLayoutStyle">
+
             <LinearLayout
-                style="@style/linearLayoutStyle"
-                android:padding="10dp">
+                style="@style/Toptitle_LayoutStyle">
+
+                <TextView
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return"/>
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/project_choose"/>
+
+                <TextView
+                    style="@style/topview_right"
+                    android:text="@string/text_clean"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linearLayoutStyle">
+
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/project_name_edittext"
-                        android:layout_weight="1"
-                        android:textSize="20dp"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_name_edittext" />
 
                     <EditText
                         android:id="@+id/pm_name_edittext"
-                        style="@style/editTextZ"
-                        android:layout_weight="8"/>
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_name"/>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp"
-                    >
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/plan_create_time"
-                        android:layout_weight="1"
-                        android:textSize="20dp"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/plan_create_time" />
 
                     <TextView
                         android:id="@+id/pm_begin_time_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/project_begin_time_textview"
-                        android:layout_weight="0.2"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_begin_time_textview" />
 
                     <TextView
                         android:id="@+id/pm_end_time_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/project_end_time_textview"
-                        android:layout_weight="0.2"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_end_time_textview" />
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         android:id="@+id/project_manager_textview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/project_manager_edittext"
-                        android:layout_weight="1"
-                        android:textSize="20dp"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_manager_edittext" />
 
                     <EditText
                         android:id="@+id/pm_manager_edittext"
-                        style="@style/editTextZ"
-                        android:layout_weight="8"/>
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_name"/>
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/project_mission_state"
-                        android:textSize="20dp"
-                        android:layout_gravity="center_vertical" />
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_mission_state" />
 
                     <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="55dp"
                         android:id="@+id/pm_state_sprinner"
-                        android:layout_weight="1"/>
+                        style="@style/Spinner_Style" />
                 </LinearLayout>
 
             </LinearLayout>
-            <Button
-                android:id="@+id/project_manager_search_button"
-                style="@style/SearchButton"
-                android:layout_marginTop="70dp"
-                android:text="@string/check_button" />
 
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/project_manager_search_button"
+        style="@style/SearchButton" />
 
 </LinearLayout>

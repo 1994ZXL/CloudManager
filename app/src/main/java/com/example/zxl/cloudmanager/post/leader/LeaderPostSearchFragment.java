@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.example.zxl.cloudmanager.model.DatePickerFragment;
 import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
+import com.example.zxl.cloudmanager.post.projectManagerPost.PMPostActivtiy;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -37,6 +39,8 @@ public class LeaderPostSearchFragment extends Fragment {
     private TextView mPostBeginTimeBtn;
     private TextView mPostEndTimeBtn;
     private EditText mPostContent;
+
+    private LinearLayout mContentLinearLayout;
 
     private Button mSearchBtn;
 
@@ -62,8 +66,12 @@ public class LeaderPostSearchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v =  inflater.inflate(R.layout.leader_post_search, container, false);
 
-
         init(v);
+
+        if (mFragment.getActivity().getClass() == PMPostActivtiy.class)
+            mContentLinearLayout.setVisibility(View.GONE);
+
+
         //查询条件
         mEmployerName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -156,6 +164,8 @@ public class LeaderPostSearchFragment extends Fragment {
         mEmployerName = (EditText) v.findViewById(R.id.leader_search_name_edittext);
 
         mSearchBtn = (Button) v.findViewById(R.id.leader_post_search_button);
+
+        mContentLinearLayout = (LinearLayout) v.findViewById(R.id.leader_post_contentLinearLayout);
     }
 
 }

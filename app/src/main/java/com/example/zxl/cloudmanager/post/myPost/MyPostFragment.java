@@ -48,7 +48,6 @@ public class MyPostFragment extends ListFragment {
 
     private TextView mName, mPostTime, mPostDate;
 
-
     private Fragment mFragment;
 
     private static final String TAG = "MyPostFragment";
@@ -66,6 +65,7 @@ public class MyPostFragment extends ListFragment {
         super.onCreate(saveInstanceState);
         setHasOptionsMenu(true);
         mFragment = this;
+
 
 
         saveInstanceState = getArguments();

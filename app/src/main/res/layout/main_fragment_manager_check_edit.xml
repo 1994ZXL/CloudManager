@@ -2,118 +2,93 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_manager_check_edit"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+    style="@style/Parent_LayoutStyle"
+    tools:context=".MainActivity">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <!-- 规定上班签到时间-->
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp" >
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return" />
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/check_manager" />
+
+                <TextView
+                    style="@style/topview_right"
+                    android:text="" />
+
+            </LinearLayout>
+
+            <!-- 规定上班签到时间-->
+            <LinearLayout style="@style/Viewline_LayoutStyle">
+
+                <TextView
                     android:id="@+id/textView14"
-                    android:layout_weight="1"
-                    android:text="@string/stipulate_dutytime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    style="@style/Text_view_Style"
+                    android:text="@string/stipulate_dutytime" />
 
                 <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/main_fragment_manager_check_edit_stipulate_dutytime"
-                    android:layout_weight="1" />
+                    style="@style/Text_view_Style"
+                    android:text="@string/choose_time" />
             </LinearLayout>
 
             <!-- 上班签到时间-->
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp" >
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
                     android:id="@+id/textView15"
-                    android:layout_weight="1"
-                    android:text="@string/duty_sign_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    style="@style/Text_view_Style"
+                    android:text="@string/duty_sign_time" />
 
                 <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/main_fragment_manager_check_edit_duty_sign_time"
-                    android:layout_weight="1" />
+                    style="@style/Text_view_Style"
+                    android:text="@string/choose_time"/>
             </LinearLayout>
 
             <!-- 规定下班时间-->
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp" >
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
                     android:id="@+id/textView16"
-                    android:layout_weight="1"
-                    android:text="@string/stipulate_offdutytime"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    style="@style/Text_view_Style"
+                    android:text="@string/stipulate_offdutytime" />
 
                 <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/main_fragment_manager_check_edit_stipulate_offdutytime"
-                    android:layout_weight="1" />
+                    style="@style/Text_view_Style"
+                    android:text="@string/choose_time"/>
             </LinearLayout>
 
             <!-- 下班签到时间-->
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp" >
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
                     android:id="@+id/textView17"
-                    android:layout_weight="1"
-                    android:text="@string/offduty_sign_time"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    style="@style/Text_view_Style"
+                    android:text="@string/offduty_sign_time" />
 
                 <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/main_fragment_manager_check_edit_offduty_sign_time"
-                    android:layout_weight="1" />
+                    style="@style/Text_view_Style"
+                    android:text="@string/choose_time" />
             </LinearLayout>
-
-            <!-- 确认按钮-->
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:id="@+id/main_fragment_manager_check_edit_save_edit_button"
-                android:text="@string/save_edit"/>
 
         </LinearLayout>
 
     </ScrollView>
+
+    <!-- 确认按钮-->
+    <Button
+        android:id="@+id/main_fragment_manager_check_edit_save_edit_button"
+        style="@style/SearchButton"
+        android:text="@string/save_edit" />
 
 </LinearLayout>

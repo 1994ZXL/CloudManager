@@ -24,6 +24,7 @@ import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
 import com.example.zxl.cloudmanager.post.myPost.MyPostSearchFragment;
+import com.example.zxl.cloudmanager.post.projectManagerPost.PMPostActivtiy;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -49,8 +50,6 @@ public class LeaderPostListFragment extends ListFragment {
     private Fragment mFragment;
 
     private static final String TAG = "LeaderPostListFragment";
-    private static final String SEARCH_KEY = "search_key";
-    private static final String WHERE = "where";
 
     private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
@@ -59,6 +58,7 @@ public class LeaderPostListFragment extends ListFragment {
     private RequestParams mParams = new RequestParams();
     private JSONObject keyObj = new JSONObject();
     private String key = "";
+    private String url;
 
     @Override
     public void onCreate(Bundle saveInstanceState){
@@ -66,6 +66,10 @@ public class LeaderPostListFragment extends ListFragment {
         setHasOptionsMenu(true);
         mFragment = this;
 
+        if (mFragment.getActivity().getClass() == PMPostActivtiy.class)
+            url = Link.manage_daily + Link.get_list;
+        else if (mFragment.getActivity().getClass() == LeaderPostSearchActivity.class)
+            url = Link.find_daily + Link.get_list;
 
         saveInstanceState = getArguments();
         if (null != saveInstanceState) {
@@ -98,7 +102,7 @@ public class LeaderPostListFragment extends ListFragment {
             Log.d(TAG, "key: " + key);
 
 
-        mHttpc.post(Link.localhost + "find_daily&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + url, mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 try {

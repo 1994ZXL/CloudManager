@@ -19,7 +19,7 @@
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/my_mission_choose"/>
+                    android:text="@string/mission_choose"/>
 
                 <TextView
                     style="@style/topview_right"

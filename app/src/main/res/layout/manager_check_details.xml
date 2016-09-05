@@ -1,262 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/manager_check_details"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/gray2">
+    style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <TextView
-                android:layout_width="wrap_content"
-                style="@style/font"
-                android:layout_gravity="right"
-                android:text="修改"
-                android:id="@+id/manager_check_edit"/>
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+                <TextView
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return" />
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/check_detail" />
+
+                <TextView
+                    android:id="@+id/manager_check_edit"
+                    style="@style/topview_right"
+                    android:text="修改" />
+            </LinearLayout>
 
             <!-- 第一块-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@color/white">
+                style="@style/linearLayoutStyle">>
 
                 <!-- 姓名-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/name"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/name" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/manager_check_details_name"/>
+                        android:id="@+id/manager_check_details_name"
+                        style="@style/Text_view_Style"/>
+
                 </LinearLayout>
                 <!-- 考勤点-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/check_location" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/manager_check_details_check_location"/>
+                        android:id="@+id/manager_check_details_check_location"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 考勤主管-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/puncher_master" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/manager_check_details_check_manager"/>
+                        android:id="@+id/manager_check_details_check_manager"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
 
             </LinearLayout>
 
             <!-- 第二块-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@color/white">
+                style="@style/linearLayoutStyle">
                 <!-- 考勤日期-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/check_date"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/check_date" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/manager_check_details_check_date" />
+                        android:id="@+id/manager_check_details_check_date"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- 规定上班时间-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/stipulate_dutytime"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/stipulate_dutytime" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/manager_check_details_stipulate_dutytime" />
+                        android:id="@+id/manager_check_details_stipulate_dutytime"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 规定下班时间-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/stipulate_offdutytime"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/stipulate_offdutytime" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/manager_check_details_stipulate_offdutytime"/>
+                        android:id="@+id/manager_check_details_stipulate_offdutytime"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- 上班签到时间-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/duty_sign_time"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/duty_sign_time" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/manager_check_details_duty_sign_time"/>
+                        android:id="@+id/manager_check_details_duty_sign_time"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- 下班签到时间-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/offduty_sign_time"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/offduty_sign_time" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/manager_check_details_offduty_sign_time"/>
+                        android:id="@+id/manager_check_details_offduty_sign_time"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- 迟到分钟数-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/late_min"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/late_min" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/manager_check_details_late_min"/>
+                        android:id="@+id/manager_check_details_late_min"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 早退分钟数-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/early_min"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/early_min" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/manager_check_details_early_min"/>
+                        android:id="@+id/manager_check_details_early_min"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <!-- 第三块-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@color/white">
+                style="@style/linearLayoutStyle">
                 <!-- 请假-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/leave"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/leave" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/manager_check_details_leave"/>
+                        android:id="@+id/manager_check_details_leave"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- 加班-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/work_overtime"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/work_overtime" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/manager_check_details_work_overtime"/>
+                        android:id="@+id/manager_check_details_work_overtime"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- 出差-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/work_travel"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/work_travel" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/manager_check_details_work_travel"/>
+                        android:id="@+id/manager_check_details_work_travel"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
 
             </LinearLayout>

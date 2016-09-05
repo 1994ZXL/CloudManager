@@ -1,63 +1,61 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".check.myCheck.SearchCheckFragment"
-    android:orientation="vertical">
+    style="@style/Parent_LayoutStyle"
+    tools:context=".check.myCheck.SearchCheckFragment">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        style="@style/ScrollView_Style">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            style="@style/linearLayoutStyle">
 
             <LinearLayout
-                style="@style/linearLayoutStyle"
-                android:padding="10dp">
+                style="@style/Toptitle_LayoutStyle">
+
+                <TextView
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return"/>
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/check_choose"/>
+
+                <TextView
+                    style="@style/topview_right"
+                    android:text="@string/text_clean"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linearLayoutStyle">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         android:id="@+id/check_begin_time_textview"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/check_time"
-                        android:layout_weight="1"
-                        android:textSize="20dp"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/check_time" />
 
                     <TextView
                         android:id="@+id/check_begin_time_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="20dp"
-                        android:text="@string/dutytime"
-                        android:layout_weight="1"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/dutytime" />
 
                     <TextView
                         android:id="@+id/check_end_time_button"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingRight="20dp"
-                        android:text="@string/offdutytime"
-                        android:layout_weight="1"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/offdutytime" />
                 </LinearLayout>
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/search_check_search_button"
-                style="@style/SearchButton"
-                android:layout_marginTop="70dp"
-                android:text="@string/check_button" />
         </LinearLayout>
 
     </ScrollView>
+
+    <Button
+        android:id="@+id/search_check_search_button"
+        style="@style/SearchButton" />
 
 </LinearLayout>

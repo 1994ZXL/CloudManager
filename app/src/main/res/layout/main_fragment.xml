@@ -546,6 +546,7 @@
                                android:id="@+id/main_fragment_bug_manage"/>-->
                     </LinearLayout>
 
+                    <!--项目用例-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -567,19 +568,19 @@
                                android:text="@string/project_usecase" />-->
                     </LinearLayout>
 
+                    <!--日报管理-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:layout_margin="12dp"
-                        android:layout_weight="1"
-                        android:visibility="invisible">
+                        android:layout_weight="1">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="75dp"
-                            android:src="@drawable/bug_manage_icon"
-                            android:id="@+id/imageView8"
+                            android:src="@drawable/demo"
+                            android:id="@+id/main_fragment_post_manage_image"
                             android:layout_gravity="center" />
 
                         <!--<TextView

@@ -1,169 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/check_details"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/gray2"
-    android:padding="16dp">
+    style="@style/Parent_LayoutStyle">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        style="@style/ScrollView_Style">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginTop="30dp">
+            style="@style/linearLayoutStyle">
+
+            <LinearLayout
+                style="@style/Toptitle_LayoutStyle">
+
+                <TextView
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return"/>
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/leave_record_detail"/>
+
+                <TextView
+                    style="@style/topview_right"
+                    android:text=""/>
+
+            </LinearLayout>
 
             <!-- 姓名-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                style="@style/Viewline_LayoutStyle">
+
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:text="@string/name"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/name" />
+
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:id="@+id/employer_leave_name"/>
+                    android:id="@+id/employer_leave_name"
+                    style="@style/Text_view_Style" />
             </LinearLayout>
 
             <!--请假类型-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp">
+                style="@style/Viewline_LayoutStyle">
+
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:text="@string/leave_type"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/leave_type" />
+
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:id="@+id/leave_deal_type"/>
+                    android:id="@+id/leave_deal_type"
+                    style="@style/Text_view_Style" />
             </LinearLayout>
             <!-- 请假开始时间-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp">
+                style="@style/Viewline_LayoutStyle">
+
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:text="@string/leave_begin_time"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/leave_begin_time" />
+
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:id="@+id/leave_deal_begin_time" />
+                    android:id="@+id/leave_deal_begin_time"
+                    style="@style/Text_view_Style"/>
             </LinearLayout>
             <!-- 请假结束时间-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp">
+                style="@style/Viewline_LayoutStyle">
+
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:text="@string/leave_end_time"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/leave_end_time" />
+
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:id="@+id/leave_deal_end_time"/>
+                    android:id="@+id/leave_deal_end_time"
+                    style="@style/Text_view_Style"/>
             </LinearLayout>
             <!-- 请假原因-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp">
+                style="@style/Viewline_LayoutStyle">
+
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:text="@string/leave_reason"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/leave_reason" />
+
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:id="@+id/leave_deal_ask_reason"/>
+                    android:id="@+id/leave_deal_ask_reason"
+                    style="@style/Text_view_Style" />
             </LinearLayout>
             <!-- 处理意见-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp">
-                <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:text="@string/dispose_suggestion"/>
+                style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:id="@+id/leave_deal_suggestion"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/dispose_suggestion" />
+
+                <TextView
+                    android:id="@+id/leave_deal_suggestion"
+                    style="@style/Text_view_Style" />
 
             </LinearLayout>
 
             <!-- 申请时间-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp">
+                style="@style/Viewline_LayoutStyle">
+
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:text="@string/apply_time"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/apply_time" />
+
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:id="@+id/leave_deal_apply_time"/>
+                    android:id="@+id/leave_deal_apply_time"
+                    style="@style/Text_view_Style" />
             </LinearLayout>
             <!-- 处理时间-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp">
+                style="@style/Viewline_LayoutStyle">
+
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:text="@string/dispose_time"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/dispose_time" />
+
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:id="@+id/leave_deal_time"/>
+                    android:id="@+id/leave_deal_time"
+                    style="@style/Text_view_Style"/>
             </LinearLayout>
             <!-- 请假状态-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="40dp">
+                style="@style/Viewline_LayoutStyle">
+
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:text="@string/leave_state"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/leave_state" />
+
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:id="@+id/leave_deal_state"/>
+                    android:id="@+id/leave_deal_state"
+                    style="@style/Text_view_Style"/>
             </LinearLayout>
 
         </LinearLayout>

@@ -1,175 +1,127 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    style="@style/Parent_LayoutStyle"
     tools:context=".travel.checkManagerTravel.ManagerTravelDetailFragment">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        style="@style/ScrollView_Style">
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            style="@style/linearLayoutStyle">
+
             <LinearLayout
-                style="@style/linearLayoutStyle"
-                android:padding="10dp">
+                style="@style/Toptitle_LayoutStyle">
+
+                <TextView
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return"/>
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/employer_travel_detail"/>
+
+                <TextView
+                    style="@style/topview_right"
+                    android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linearLayoutStyle">
 
                 <!-- 姓名-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center_vertical">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/font"
-                        android:layout_width="match_parent"
-                        android:text="@string/name"
-                        android:textSize="20dp"
-                        android:layout_weight="1"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/name" />
+
                     <TextView
-                        android:layout_width="match_parent"
-                        style="@style/font"
-                        android:textSize="20dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/manager_travel_employer_name_spinner" />
+                        android:id="@+id/manager_travel_employer_name_spinner"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!--出差开始时间-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        style="@style/font"
-                        android:text="@string/employer_travel_begin_time"
-                        android:layout_weight="1"
-                        android:textSize="20dp"
-                        android:layout_gravity="center_vertical"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/employer_travel_begin_time" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textSize="20dp"
-                        android:id="@+id/employer_travel_beginTime"/>
+                        android:id="@+id/employer_travel_beginTime"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
 
                 <!--出差结束时间-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        style="@style/font"
-                        android:text="@string/employer_travel_begin_time"
-                        android:layout_weight="1"
-                        android:textSize="20dp"
-                        android:layout_gravity="center_vertical"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/employer_travel_begin_time" />
 
                     <TextView
-                        android:layout_width="match_parent"
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textSize="20dp"
-                        android:id="@+id/employer_travel_endTime"/>
+                        android:id="@+id/employer_travel_endTime"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
                 <!--出差原因-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/font"
-                        android:text="@string/employer_travel_reason"
-                        android:layout_weight="1"
-                        android:textSize="20dp"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/employer_travel_reason" />
+
                     <TextView
                         android:id="@+id/manager_travel_reason"
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:textSize="20dp"
-                        android:gravity="center" />
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!--出差地址-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/font"
-                        android:text="@string/employer_travel_add"
-                        android:layout_weight="1"
-                        android:textSize="20dp"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/employer_travel_add" />
+
                     <TextView
                         android:id="@+id/manager_travel_add"
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:textSize="20dp"
-                        android:gravity="center" />
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!--出差详细地址-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/font"
-                        android:text="@string/employer_travel_address"
-                        android:layout_weight="1"
-                        android:textSize="20dp"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/employer_travel_address" />
+
                     <TextView
                         android:id="@+id/manager_travel_address"
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:textSize="20dp"
-                        android:gravity="center" />
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!--出差状态-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/font"
-                        android:text="@string/employer_travel_state"
-                        android:layout_weight="1"
-                        android:layout_width="match_parent"
-                        android:textSize="20dp"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/employer_travel_state" />
 
                     <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:textSize="20dp"
-                        android:id="@+id/manager_travel_state" />
+                        android:id="@+id/manager_travel_state"
+                        style="@style/Spinner_Style" />
 
                 </LinearLayout>
 

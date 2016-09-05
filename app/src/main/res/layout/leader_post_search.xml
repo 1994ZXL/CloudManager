@@ -1,99 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/linearLayoutStyle"
-                android:padding="10dp">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                <TextView
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return" />
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/my_post_choose" />
+
+                <TextView
+                    style="@style/topview_right"
+                    android:text="@string/text_clean" />
+
+            </LinearLayout>
+
+            <LinearLayout style="@style/linearLayoutStyle">
+
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/employer_name"
-                        android:layout_weight="1"
-                        android:textSize="20dp"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/employer_name" />
 
                     <EditText
                         android:id="@+id/leader_search_name_edittext"
-                        style="@style/editTextZ"
-                        android:layout_weight="8"/>
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_name" />
+
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/my_post_post_time_hit"
-                        android:layout_weight="1"
-                        android:textSize="20dp"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/my_post_post_time_hit" />
 
                     <TextView
                         android:id="@+id/leader_post_post_begin_time_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/project_begin_time_textview"
-                        android:layout_weight="0.3"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_begin_time_textview" />
+
                     <TextView
                         android:id="@+id/leader_post_post_end_time_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/project_end_time_textview"
-                        android:layout_weight="0.3"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_end_time_textview" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                <LinearLayout style="@style/Viewline_LayoutStyle"                    android:id="@+id/leader_post_contentLinearLayout">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/my_post_content"
-                        android:layout_weight="5"
-                        android:textSize="20dp"/>
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="150dp"
-                        android:layout_weight="3"
-                        android:background="@color/content"
-                        >
+                        style="@style/Viewline_LayoutStyle"
+                        android:layout_height="150dp">
+
                         <EditText
                             android:id="@+id/leader_post_content_edittext"
-                            android:layout_width="match_parent"
+                            style="@style/EditText_Style"
                             android:layout_height="wrap_content"
-                            android:background="@null"
-                            />
-                    </LinearLayout>
+                            android:hint="@string/input_my_post_content" />
 
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-            <Button
-                android:id="@+id/leader_post_search_button"
-                style="@style/SearchButton"
-                android:text="@string/check_button" />
         </LinearLayout>
     </ScrollView>
+
+    <Button
+        android:id="@+id/leader_post_search_button"
+        style="@style/SearchButton" />
+
 </LinearLayout>

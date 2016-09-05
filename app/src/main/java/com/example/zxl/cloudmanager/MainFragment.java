@@ -24,6 +24,7 @@ import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.User;
+import com.example.zxl.cloudmanager.post.projectManagerPost.PMPostActivtiy;
 import com.example.zxl.cloudmanager.schedule.PMSchedule.PMScheduleActivity;
 import com.example.zxl.cloudmanager.usecase.myUseCase.MyUseCaseActivity;
 import com.example.zxl.cloudmanager.overtime.checkManagerOverTime.ManagerOvertimeActivity;
@@ -118,6 +119,7 @@ public class MainFragment extends Fragment {
     private ImageView pmListImage;
     private ImageView pmMissionImage;
     private ImageView pmScheduleImage;
+    private ImageView pmPostImage;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
@@ -199,6 +201,7 @@ public class MainFragment extends Fragment {
         onClickListener(pmMissionImage, new ProjectMissionManagerActivity());
         onClickListener(pmScheduleImage, new PMScheduleActivity());
         onClickListener(pmUsecaseImage, new ProjectManagerUsecaseActivity());
+        onClickListener(pmPostImage, new PMPostActivtiy());
 
 
         try {
@@ -325,6 +328,7 @@ public class MainFragment extends Fragment {
         pmMissionImage = (ImageView) v.findViewById(R.id.main_fragment_project_mission_manage);
         pmScheduleImage = (ImageView) v.findViewById(R.id.main_fragment_project_mission_schedule_manage);
         pmUsecaseImage = (ImageView) v.findViewById(R.id.main_fragment_usecase_manage_image);
+        pmPostImage = (ImageView) v.findViewById(R.id.main_fragment_post_manage_image);
     }
 
     private void onClickListener(ImageView imageView,final Activity activity) {

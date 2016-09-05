@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +46,9 @@ public class MyPostDetailFragment extends Fragment {
     private TextView mDailyDate;
     private TextView mState;
     private TextView mLevel;
-    private TextView mOpinion;
+    private EditText mOpinion;
+
+    private LinearLayout mLevelSpinnerLinearLayout;
 
     private TextView mSave;
 
@@ -95,16 +99,20 @@ public class MyPostDetailFragment extends Fragment {
         mDailyDate = (TextView) view.findViewById(R.id.post_details_date);
         mState = (TextView) view.findViewById(R.id.post_details_state);
         mLevel = (TextView) view.findViewById(R.id.post_details_level);
-        mOpinion = (TextView) view.findViewById(R.id.post_details_opinion);
+        mOpinion = (EditText) view.findViewById(R.id.post_details_opinion);
 
         mSave = (TextView) view.findViewById(R.id.post_details_save);
+
+        mLevelSpinnerLinearLayout = (LinearLayout) view.findViewById(R.id.post_level_spinnerLinearLayout);
     }
 
     private void control() {
+        mLevelSpinnerLinearLayout.setVisibility(View.GONE);
         mName.setText(sPost.getMem_name());
         mState.setText(sPost.getState());
         mLevel.setText(sPost.getLevel());
         mOpinion.setText(sPost.getOpinion());
+        mOpinion.setFocusable(false);
         mContent.setText(sPost.getContent());
         mContent.addTextChangedListener(new TextWatcher() {
             @Override

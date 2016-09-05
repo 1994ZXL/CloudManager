@@ -1,146 +1,125 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    style="@style/Parent_LayoutStyle"
     tools:context=".publicSearch.PSAddressBook.ListSearchFragment">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        style="@style/ScrollView_Style">
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            style="@style/linearLayoutStyle">
 
             <LinearLayout
-                style="@style/linearLayoutStyle"
-                android:padding="10dp">
+                style="@style/Toptitle_LayoutStyle">
+
+                <TextView
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return"/>
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/project_choose"/>
+
+                <TextView
+                    style="@style/topview_right"
+                    android:text="@string/text_clean"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linearLayoutStyle">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         android:id="@+id/list_project_name_textview"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/project_name_edittext"
-                        android:layout_weight="1"
-                        android:textSize="20dp"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_name_edittext" />
 
                     <EditText
                         android:id="@+id/list_project_name_edittext"
-                        style="@style/editTextZ"
-                        android:layout_weight="6"/>
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_project_name"/>
                 </LinearLayout>
 
                 <!-- 姓名-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/SearchTextViewStyle"
-                        android:text="@string/project_customer_name"
-                        android:layout_weight="1"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_customer_name" />
 
                     <EditText
-                        style="@style/editTextZ"
-                        android:layout_weight="12"
-                        android:id="@+id/list_customer_name_EditText"/>
+                        android:id="@+id/list_customer_name_EditText"
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_project_customer_name"/>
 
                 </LinearLayout>
 
                 <!-- 性别-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/SearchTextViewStyle"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:text="@string/sex"
-                        android:layout_gravity="center_vertical" />
+                        style="@style/Text_view_Style"
+                        android:text="@string/sex" />
+
                     <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:id="@+id/list_customer_sex_sprinner">
+                        android:id="@+id/list_customer_sex_sprinner"
+                        style="@style/Spinner_Style">
 
                     </Spinner>
                 </LinearLayout>
 
                 <!-- 手机-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/SearchTextViewStyle"
-                        android:text="@string/phone"
-                        android:layout_weight="2"
-                        />
+                        style="@style/Text_view_Style"
+                        android:text="@string/phone" />
+
                     <EditText
-                        style="@style/editTextZ"
                         android:id="@+id/list_customer_phone_editText"
-                        android:layout_weight="5"
-                        />
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_phone"/>
                 </LinearLayout>
 
                 <!-- QQ-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/SearchTextViewStyle"
-                        android:text="@string/qq"
-                        android:layout_weight="2"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/qq" />
+
                     <EditText
-                        style="@style/editTextZ"
                         android:id="@+id/list_cutomer_qq_editText"
-                        android:layout_weight="4"/>
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_qq"/>
                 </LinearLayout>
 
                 <!-- 微信-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="20dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/SearchTextViewStyle"
-                        android:text="@string/wechat"
-                        android:layout_weight="2"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/wechat" />
+
                     <EditText
-                        style="@style/editTextZ"
                         android:id="@+id/list_customer_wechat_editText"
-                        android:layout_weight="5"/>
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_wechat"/>
                 </LinearLayout>
             </LinearLayout>
-
-            <Button
-                android:id="@+id/project_list_check_button"
-                style="@style/SearchButton"
-                android:text="@string/check_button"
-                 />
         </LinearLayout>
     </ScrollView>
 
-
-
+    <Button
+        android:id="@+id/project_list_check_button"
+        style="@style/SearchButton" />
 
 </LinearLayout>
