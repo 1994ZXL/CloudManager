@@ -38,8 +38,8 @@ public class MemoSearchFragment extends Fragment {
 
     private void init(View v){
         mMemoTitle = (EditText) v.findViewById(R.id.my_memo_title_edittext);
-        mBeginTimeBtn = (Button) v.findViewById(R.id.employer_travel_begin_time_button);
-        mEndTimeBtn = (Button) v.findViewById(R.id.employer_travel_end_time_button);
+//        mBeginTimeBtn = (Button) v.findViewById(R.id.employer_travel_begin_time_button);
+//        mEndTimeBtn = (Button) v.findViewById(R.id.employer_travel_end_time_button);
 
         mSearchBtn = (Button) v.findViewById(R.id.my_memo_search_button);
     }
