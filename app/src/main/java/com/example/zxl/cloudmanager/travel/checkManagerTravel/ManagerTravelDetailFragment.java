@@ -92,7 +92,6 @@ public class ManagerTravelDetailFragment extends Fragment {
             statusList = new String[] {"确认" ,"取消"};
         if (mTravel.getStatus() == "取消")
             statusList = new String[] {"取消" ,"确认"};
-
     }
 
     private void control() {

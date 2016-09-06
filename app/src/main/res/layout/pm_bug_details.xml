@@ -1,257 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/bug_details"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/gray2">
+    style="@style/Parent_LayoutStyle">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        style="@style/ScrollView_Style">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            style="@style/linearLayoutStyle">
+
+            <LinearLayout
+                style="@style/Toptitle_LayoutStyle">
+
+                <TextView
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return"/>
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/my_bug_detail"/>
+
+                <TextView
+                    style="@style/topview_right"
+                    android:text=""/>
+
+            </LinearLayout>
 
             <!-- 第一块-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@color/white">
+                style="@style/linearLayoutStyle">
 
                 <!-- 项目名称-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/project_name_edittext"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_name_edittext" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_functionModule"/>
+                        android:id="@+id/bug_details_functionModule"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- bug序号-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/bug_number"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/bug_number" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_number"/>
+                        android:id="@+id/bug_details_number"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- bug等级-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/bug_level" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_level"/>
+                        android:id="@+id/bug_details_level"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- bug状态-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/bug_state" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_state"/>
+                        android:id="@+id/bug_details_state"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- bug内容-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/bug_content" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_content"/>
+                        android:id="@+id/bug_details_content"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
 
             </LinearLayout>
 
             <!-- 第二块-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@color/white">
+                style="@style/linearLayoutStyle">
 
                 <!-- 用例编号-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/usecase_id"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/usecase_id" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_usecase_number" />
+                        android:id="@+id/bug_details_usecase_number"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 操作模式-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/operation_mode"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/operation_mode" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_operation_mode"/>
+                        android:id="@+id/bug_details_operation_mode"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- 进入方式-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/entrance_mode"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/entrance_mode" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_entrance_mode"/>
+                        android:id="@+id/bug_details_entrance_mode"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 发现时间-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/found_time"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/found_time" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_found_time"/>
+                        android:id="@+id/bug_details_found_time"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 发现人-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/found_man"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/found_man" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_found_man"/>
+                        android:id="@+id/bug_details_found_man"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- 修改时间-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/edit_time"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/edit_time" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_edit_time"/>
+                        android:id="@+id/bug_details_edit_time"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
 
             </LinearLayout>
 
             <!-- 第三块-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@color/white">
+                style="@style/linearLayoutStyle">
 
                 <!-- 修改人-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/edit_man"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/edit_man" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_edit_man"/>
+                        android:id="@+id/bug_details_edit_man"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- 所属项目-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/under_program"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/under_program" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/bug_details_under_program"/>
+                        android:id="@+id/bug_details_under_program"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
             </LinearLayout>

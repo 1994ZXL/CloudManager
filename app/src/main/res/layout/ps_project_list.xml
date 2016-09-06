@@ -1,157 +1,127 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
+    style="@style/Parent_LayoutStyle"
     tools:context=".publicSearch.PSAddressBook.ListSearchFragment">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        style="@style/ScrollView_Style">
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            style="@style/linearLayoutStyle">
 
             <LinearLayout
-                style="@style/linearLayoutStyle"
-                android:padding="10dp">
+                style="@style/Toptitle_LayoutStyle">
+
+                <TextView
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return"/>
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/project_detail"/>
+
+                <TextView
+                    style="@style/topview_right"
+                    android:text=""/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/linearLayoutStyle">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         android:id="@+id/list_project_name_textview"
-                        style="@style/font"
-                        android:text="@string/project_name_edittext"
-                        android:layout_weight="1" />
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_name_edittext" />
 
                     <TextView
                         android:id="@+id/ps_deatail_project_name"
-                        style="@style/font"
-                        android:gravity="center"
-                        android:layout_weight="1"/>
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
 
                 <!-- 姓名-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/font"
-                        android:text="@string/project_customer_name"
-                        android:layout_weight="1"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_customer_name" />
 
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/ps_detail_customer_name"/>
+                        android:id="@+id/ps_detail_customer_name"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 性别-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/font"
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:text="@string/sex"
-                        android:layout_gravity="center_vertical" />
+                        style="@style/Text_view_Style"
+                        android:text="@string/sex" />
+
                     <Spinner
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:id="@+id/ps_detail_customer_sex">
+                        android:id="@+id/ps_detail_customer_sex"
+                        style="@style/Spinner_Style">
 
                     </Spinner>
                 </LinearLayout>
 
                 <!-- 职务-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/job"
-                        android:layout_gravity="center_vertical" />
+                        style="@style/Text_view_Style"
+                        android:text="@string/job" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/ps_detail_customer_job">
+                        android:id="@+id/ps_detail_customer_job"
+                        style="@style/Text_view_Style">
 
                     </TextView>
                 </LinearLayout>
                 <!-- 手机-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/font"
-                        android:text="@string/phone"
-                        android:layout_weight="2"
-                        />
+                        style="@style/Text_view_Style"
+                        android:text="@string/phone" />
+
                     <TextView
-                        style="@style/font"
-                        android:gravity="center"
                         android:id="@+id/ps_detail_customer_phone"
-                        android:layout_weight="1"
-                        />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
                 <!-- QQ-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/font"
-                        android:text="@string/qq"
-                        android:layout_weight="1"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/qq" />
+
                     <TextView
-                        style="@style/font"
-                        android:gravity="center"
                         android:id="@+id/ps_detail_cutomer_qq"
-                        android:layout_weight="1"/>
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
 
                 <!-- 微信-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        style="@style/font"
-                        android:text="@string/wechat"
-                        android:layout_weight="1"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/wechat" />
+
                     <TextView
-                        style="@style/font"
-                        android:gravity="center"
                         android:id="@+id/ps_detail_customer_wechat"
-                        android:layout_weight="1"/>
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
             </LinearLayout>
 

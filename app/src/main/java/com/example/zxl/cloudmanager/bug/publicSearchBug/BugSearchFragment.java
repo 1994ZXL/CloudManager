@@ -30,6 +30,7 @@ import com.example.zxl.cloudmanager.model.Bug;
 import com.example.zxl.cloudmanager.model.BugLab;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
 
 import java.util.ArrayList;
@@ -137,40 +138,28 @@ public class BugSearchFragment extends Fragment {
         mBugBeginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
-                fragment.setTargetFragment(BugSearchFragment.this, 12);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "BugSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mBugBeginBtn);
             }
         });
 
         mBugEndBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
-                fragment.setTargetFragment(BugSearchFragment.this, 13);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "BugSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mBugEndBtn);
             }
         });
 
         mBugEditBeginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 14);
-                fragment.setTargetFragment(BugSearchFragment.this, 14);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "BugSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mBugEditBeginBtn);
             }
         });
 
         mBugEditEndBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 15);
-                fragment.setTargetFragment(BugSearchFragment.this, 15);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "BugSearchFragment");
+                DateTimePicker.selectDateTime(mFragment, mBugEditEndBtn);
             }
         });
 

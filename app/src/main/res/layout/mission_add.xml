@@ -1,192 +1,135 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <TextView
-                android:layout_width="wrap_content"
-                style="@style/font"
-                android:text="保存"
-                android:layout_gravity="right"
-                android:id="@+id/pm_task_add_save"/>
-
-            <!--项目名称-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="20dp">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:text="@string/my_mission_name"/>
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return" />
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/mission_add" />
+
+                <TextView
+                    android:id="@+id/pm_task_add_save"
+                    style="@style/topview_right"
+                    android:text="@string/save" />
+
+            </LinearLayout>
+
+            <!--项目名称-->
+            <LinearLayout style="@style/Viewline_LayoutStyle">
+
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/my_mission_name" />
 
                 <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/pm_task_add_projectName"/>
+                    android:id="@+id/pm_task_add_projectName"
+                    style="@style/Spinner_Style" />
 
             </LinearLayout>
 
             <!--任务名称-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="20dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:text="@string/my_mission_name"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/my_mission_name" />
 
                 <EditText
-                    android:layout_width="match_parent"
-                    style="@style/editText"
-                    android:layout_weight="1"
-                    android:id="@+id/pm_task_add_missionName"/>
+                    android:id="@+id/pm_task_add_missionName"
+                    style="@style/EditText_Style"
+                    android:hint="@string/input_mission_name" />
 
             </LinearLayout>
 
             <!--任务内容-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="20dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/mission_content"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/mission_content" />
 
                 <EditText
-                    style="@style/editText"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:id="@+id/pm_task_add_missionContent"/>
+                    android:id="@+id/pm_task_add_missionContent"
+                    style="@style/EditText_Style"
+                    android:hint="@string/input_mission_content" />
 
             </LinearLayout>
 
             <!--成员名-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="20dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:text="@string/mission_member"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/mission_member" />
 
                 <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/pm_task_add_memberName"/>
+                    android:id="@+id/pm_task_add_memberName"
+                    style="@style/Spinner_Style" />
 
             </LinearLayout>
 
             <!--开始时间-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="20dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/mission_begin_time"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/mission_begin_time" />
 
                 <Button
-                    style="@style/editText"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
                     android:id="@+id/pm_task_add_beginTime"
-                    android:text="@string/mission_begin_time"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/mission_begin_time" />
 
             </LinearLayout>
 
             <!--开始时间-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="20dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/mission_end_time"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/mission_end_time" />
 
                 <Button
-                    style="@style/editText"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
                     android:id="@+id/pm_task_add_endTime"
-                    android:text="@string/mission_end_time"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/mission_end_time" />
 
             </LinearLayout>
 
             <!--状态-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="20dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:text="@string/mission_state"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/mission_state" />
 
                 <Spinner
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/pm_task_add_missionState"/>
+                    android:id="@+id/pm_task_add_missionState"
+                    style="@style/Spinner_Style" />
 
             </LinearLayout>
 
             <!--状态-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="20dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:text="@string/evaluate"/>
+                <LinearLayout
+                    style="@style/Viewline_LayoutStyle"
+                    android:layout_height="150dp">
 
-                <EditText
-                    android:layout_width="match_parent"
-                    style="@style/editText"
-                    android:layout_weight="1"
-                    android:id="@+id/pm_task_add_evaluate"/>
+                    <EditText
+                        android:id="@+id/pm_task_add_evaluate"
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_evaluate" />
+                </LinearLayout>
 
             </LinearLayout>
 

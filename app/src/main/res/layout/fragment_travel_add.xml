@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/mission_details"
     style="@style/Parent_LayoutStyle">
 
     <ScrollView
@@ -18,92 +17,94 @@
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/mission_detail"/>
+                    android:text="@string/employer_travel_choose"/>
 
                 <TextView
                     style="@style/topview_right"
-                    android:text=""/>
+                    android:text="@string/add"
+                    android:id="@+id/fragment_travel_add_add"/>
 
             </LinearLayout>
 
-            <!-- 第一块-->
             <LinearLayout
                 style="@style/linearLayoutStyle">
 
-                <!-- 任务姓名-->
                 <LinearLayout
+                    android:id="@+id/fragment_travel_nameEditText"
                     style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/mission_name" />
+                        android:text="@string/employer_name" />
 
-                    <TextView
-                        android:id="@+id/mission_details_name"
-                        style="@style/Text_view_Style"/>
-                </LinearLayout>
-                <!-- 任务内容-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                    <Spinner
+                        android:id="@+id/fragment_travel_memName"
+                        style="@style/Spinner_Style"/>
 
-                    <TextView
-                        style="@style/Text_view_Style"
-                        android:text="@string/mission_content" />
-
-                    <TextView
-                        android:id="@+id/mission_details_content"
-                        style="@style/Text_view_Style"/>
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <!-- 第二块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
-
-                <!-- 开始时间-->
                 <LinearLayout
                     style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/mission_begin_time" />
+                        android:text="@string/employer_travel_time" />
 
                     <TextView
-                        android:id="@+id/mission_details_begin_time"
-                        style="@style/Text_view_Style" />
+                        android:id="@+id/fragment_travel_beginTime"
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_begin_time_textview" />
+
                 </LinearLayout>
 
-                <!-- 任务结束时间-->
                 <LinearLayout
                     style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/mission_end_time" />
+                        android:text="@string/employer_back_time" />
 
                     <TextView
-                        android:id="@+id/mission_details_end_time"
-                        style="@style/Text_view_Style"/>
+                        android:id="@+id/fragment_travel_endTime"
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_end_time_textview" />
+
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <!-- 第三块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
-
-                <!-- 任务状态-->
                 <LinearLayout
                     style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/mission_state" />
+                        android:text="@string/employer_travel_add" />
+
+                    <EditText
+                        android:id="@+id/fragment_travel_address"
+                        style="@style/EditText_Style" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        android:id="@+id/mission_details_state"
-                        style="@style/Text_view_Style" />
+                        style="@style/Text_view_Style"
+                        android:text="@string/employer_travel_address" />
+
+                    <EditText
+                        android:id="@+id/fragment_travel_detail_addr"
+                        style="@style/EditText_Style" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/Viewline_LayoutStyle">
+
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:text="@string/employer_travel_reason" />
+
+                    <EditText
+                        android:id="@+id/fragment_travel_reason"
+                        style="@style/EditText_Style" />
                 </LinearLayout>
 
             </LinearLayout>

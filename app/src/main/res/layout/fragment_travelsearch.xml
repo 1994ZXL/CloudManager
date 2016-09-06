@@ -21,7 +21,8 @@
 
                 <TextView
                     style="@style/topview_right"
-                    android:text="@string/text_clean"/>
+                    android:text="@string/add"
+                    android:id="@+id/manager_travel_add"/>
 
             </LinearLayout>
 

@@ -7,6 +7,7 @@
     <string name="pwd_hint">请输入密码</string>
     <string name="delete">删除</string>
     <string name="add">新增</string>
+    <string name="search">搜索</string>
     <string name="text_return">返回</string>
     <string name="text_clean">重置</string>
 
@@ -168,6 +169,8 @@
     <string name="leave_begin_time">请假开始时间</string>
     <string name="leave_end_time">请假结束时间</string>
     <string name="leave_reason">请假原因</string>
+    <string name="input_leave_reason">请输入请假原因</string>
+    <string name="leave_apply">请假申请</string>
     <string name="commit_apply">提交申请</string>
     <string name="time_erro">请重新选择结束时间</string>
     <string name="dispose_suggestion">处理意见</string>
@@ -178,16 +181,22 @@
     <!-- 我的任务-->
     <string name="mission_member">任务成员</string>
     <string name="mission_name">任务名称</string>
+    <string name="mission_detail">任务详情</string>
+    <string name="mission_add">任务新增</string>
+    <string name="mission_edit">任务编辑</string>
     <string name="mission_choose">任务筛选</string>
     <string name="input_mission_name">请输入任务名称</string>
     <string name="mission_content">任务内容</string>
+    <string name="input_mission_content">请输入任务内容</string>
     <string name="mission_level">任务优先级</string>
     <string name="mission_content_details">任务内容说明</string>
     <string name="mission_begin_time">任务开始时间</string>
     <string name="mission_end_time">任务结束时间</string>
     <string name="mission_progress">任务完成进度</string>
+    <string name="input_mission_progress">请输入任务进度</string>
     <string name="mission_state">任务状态</string>
     <string name="evaluate">评价</string>
+    <string name="input_evaluate">请输入评价内容</string>
     <string name="edit_error">修改失败</string>
     <string name="schedule">进度</string>
     <string name="pmsch_time">生成时间</string>
@@ -219,6 +228,11 @@
     <string name="edit_time">修改时间</string>
     <string name="edit_man">修改人</string>
     <string name="under_program">所属项目</string>
+    <string name="usecase_model">用例模型</string>
+    <string name="modular">模板</string>
+    <string name="remark">备注</string>
+    <string name="usecase_content">用例内容</string>
+    <string name="bug_add">新增bug</string>
 
     <string name="check_button">查询</string>
     <string name="submit_button">提交</string>
@@ -231,6 +245,8 @@
     <string name="project_name_edittext">项目名称</string>
     <string name="input_project_name">请输入项目名称</string>
     <string name="project_choose">项目筛选</string>
+    <string name="project_edit">项目编辑</string>
+    <string name="project_detail">项目详情</string>
     <string name="project_manager_edittext">项目主管</string>
     <string name="project_begin_time_textview">开始时间</string>
     <string name="project_end_time_textview">结束时间</string>
@@ -246,7 +262,11 @@
     <string name="input_project_customer_name">请输入甲方负责人名称</string>
 
     <string name="usecase_id">用例编号</string>
+    <string name="usecase_detail">用例详情</string>
+    <string name="input_usecase_id">请输入用例编号</string>
+    <string name="usecase_choose">用例筛选</string>
     <string name="usecase_program_number">程序版本</string>
+    <string name="input_usecase_program_number">请输入程序版本号</string>
     <string name="usecase_tester">测试人员</string>
     <string name="usecase_developer">开发人员</string>
     <string name="usecase_formation_time">编制时间</string>

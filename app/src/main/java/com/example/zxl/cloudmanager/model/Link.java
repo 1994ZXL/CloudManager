@@ -47,6 +47,10 @@ public class Link {
     public static final String over_time_s = "over_time_s";//回归时间（小）
     public static final String over_time_e = "over_time_e";//回归时间（大）
     public static final String trip_id = "trip_id"; //出差id
+    public static final String address = "address"; //出差地址
+    public static final String detail_addr = "detail_addr"; //详细地址
+    public static final String trip_reason = "trip_reason"; //出差原因
+    public static final String over_time_trip_add = "over_time"; //回程时间
 
     //manage_work
     public static final String manage_work = "manage_work&act=";
@@ -72,6 +76,10 @@ public class Link {
     public static final String submitter = "submitter"; //发现人
     public static final String modifier = "modifier"; //修改人
     public static final String level = "level"; //bug等级
+    public static final String into_way = "into_way"; //进入方式
+    public static final String case_mode = "case_mode"; //用例模型
+    public static final String modular = "modular"; //模板
+    public static final String remark = "remark"; //备注
 
     //find_daily
     public static final String find_daily = "find_daily&act=";

@@ -109,7 +109,6 @@ public class LeaderPostDetailFragment extends Fragment {
     }
 
     private void control() {
-        mEdit.setVisibility(View.INVISIBLE);
         mName.setText(sPost.getMem_name());
         mState.setText(sPost.getState());
 
@@ -198,6 +197,7 @@ public class LeaderPostDetailFragment extends Fragment {
             });
 
         } else if (mFragment.getActivity().getClass() == LeaderPostSearchActivity.class) {
+            mEdit.setVisibility(View.INVISIBLE);
             mLevelSpinnerLinearLayout.setVisibility(View.GONE);
             mEdit.setVisibility(View.GONE);
             mLevelTextView.setText(sPost.getLevel());

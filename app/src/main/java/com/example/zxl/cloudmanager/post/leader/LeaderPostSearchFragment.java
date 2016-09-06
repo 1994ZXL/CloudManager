@@ -92,13 +92,13 @@ public class LeaderPostSearchFragment extends Fragment {
         mPostBeginTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DateTimePicker.selectDateTime(mFragment, mPostBeginTimeBtn);
+                DateTimePicker.selectDate(mFragment, mPostBeginTimeBtn);
             }
         });
         mPostEndTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DateTimePicker.selectDateTime(mFragment, mPostEndTimeBtn);
+                DateTimePicker.selectDate(mFragment, mPostEndTimeBtn);
             }
         });
         mPostContent.addTextChangedListener(new TextWatcher() {
@@ -127,13 +127,13 @@ public class LeaderPostSearchFragment extends Fragment {
                 bundle.putString(Link.mem_name, name);
 
                 if (null != mPostBeginTimeBtn.getText()){
-                    bundle.putInt(Link.daily_time_from, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mPostBeginTimeBtn.getText().toString()));
+                    bundle.putInt(Link.daily_time_from, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(mPostBeginTimeBtn.getText().toString()));
                 } else {
                     bundle.putInt(Link.daily_time_from, -1);
                 }
 
                 if (null != mPostEndTimeBtn.getText()) {
-                    bundle.putInt(Link.daily_time_to, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mPostEndTimeBtn.getText().toString()));
+                    bundle.putInt(Link.daily_time_to, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(mPostEndTimeBtn.getText().toString()));
                 } else {
                     bundle.putInt(Link.daily_time_to, -1);
                 }

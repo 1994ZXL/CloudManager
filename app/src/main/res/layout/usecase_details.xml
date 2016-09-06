@@ -1,409 +1,316 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/mission_details"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/gray2">
+    style="@style/Parent_LayoutStyle">
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        style="@style/ScrollView_Style">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            style="@style/linearLayoutStyle">
+
+            <LinearLayout
+                style="@style/Toptitle_LayoutStyle">
+
+                <TextView
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return"/>
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/usecase_detail"/>
+
+                <TextView
+                    style="@style/topview_right"
+                    android:text=""/>
+
+            </LinearLayout>
 
             <!-- 第一块-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@color/white">
+                style="@style/linearLayoutStyle">
 
                 <!-- 项目/软件-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:text="@string/usecase_project_soft"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/usecase_project_soft" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_project_soft"/>
+                        android:id="@+id/usecase_details_project_soft"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- 功能模块-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/functionModule" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_functionModule"/>
+                        android:id="@+id/usecase_details_functionModule"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 用例编号-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_id" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_id"/>
+                        android:id="@+id/usecase_details_id"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 程序版本-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_program_number" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_program_number"/>
+                        android:id="@+id/usecase_details_program_number"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <!-- 第二块-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@color/white">
+                style="@style/linearLayoutStyle">
                 <!-- 编制人-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_autorized_strength" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_autorized_strength"/>
+                        android:id="@+id/usecase_details_autorized_strength"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 编制时间-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_formation_time" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_formation_time"/>
+                        android:id="@+id/usecase_details_formation_time"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- 相关用例-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_correlation_usecase" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_correlation_usecase"/>
+                        android:id="@+id/usecase_details_correlation_usecase"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- 功能特性-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_function_character" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_function_character"/>
+                        android:id="@+id/usecase_details_function_character"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 测试目的-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_text_aim" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_text_aim"/>
+                        android:id="@+id/usecase_details_text_aim"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 预置条件-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_presetValue" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_presetValue"/>
+                        android:id="@+id/usecase_details_presetValue"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 参考信息-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_referenceInformation" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_referenceInformation"/>
+                        android:id="@+id/usecase_details_referenceInformation"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- 测试数据-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_textDate" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_textDate"/>
+                        android:id="@+id/usecase_details_textDate"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 场景-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_Scene" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_Scene"/>
+                        android:id="@+id/usecase_details_Scene"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <!-- 第三块-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@color/white">
+                style="@style/linearLayoutStyle">
                 <!-- 操作步骤-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_operationSequence" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_operationSequence"/>
+                        android:id="@+id/usecase_details_operationSequence"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 操作描述-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_operationDescription" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_operationDescription"/>
+                        android:id="@+id/usecase_details_operationDescription"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 数据-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_data" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_data"/>
+                        android:id="@+id/usecase_details_data"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <!-- 第四块-->
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:padding="16dp"
-                android:orientation="vertical"
-                android:background="@color/white">
+                style="@style/linearLayoutStyle">
                 <!-- 期望结果-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_expectedOutcome" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_expectedOutcome"/>
+                        android:id="@+id/usecase_details_expectedOutcome"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- 实际结果-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_particalOutcome" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_particalOutcome"/>
+                        android:id="@+id/usecase_details_particalOutcome"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 测试状态-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_textState" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_textState"/>
+                        android:id="@+id/usecase_details_textState"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
                 <!-- 测试人员-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_testMan" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_testMan"/>
+                        android:id="@+id/usecase_details_testMan"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 开发人员-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_exploitMan" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_exploitMan"/>
+                        android:id="@+id/usecase_details_exploitMan"
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 负责人-->
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="40dp">
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
+                        style="@style/Text_view_Style"
                         android:text="@string/usecase_principal" />
+
                     <TextView
-                        style="@style/font"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:id="@+id/usecase_details_principal"/>
+                        android:id="@+id/usecase_details_principal"
+                        style="@style/Text_view_Style"/>
                 </LinearLayout>
             </LinearLayout>
 

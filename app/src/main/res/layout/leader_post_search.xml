@@ -54,7 +54,9 @@
                         android:text="@string/project_end_time_textview" />
                 </LinearLayout>
 
-                <LinearLayout style="@style/Viewline_LayoutStyle"                    android:id="@+id/leader_post_contentLinearLayout">
+                <LinearLayout
+                    android:id="@+id/leader_post_contentLinearLayout"
+                    style="@style/Viewline_LayoutStyle">
 
                     <LinearLayout
                         style="@style/Viewline_LayoutStyle"

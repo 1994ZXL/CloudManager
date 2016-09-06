@@ -52,6 +52,8 @@ public class MyBugFragment extends Fragment {
     private List<Bug> bugs = new ArrayList<Bug>();
     private MyAdapter myAdapter;
 
+    private TextView mAddTextView;
+
     private Fragment mFragment;
     private Button mSearchBtn;
 
@@ -101,6 +103,24 @@ public class MyBugFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View v = layoutInflater.inflate(R.layout.main_fragment_my_bug, parent, false);
 
+        mAddTextView = (TextView) v.findViewById(R.id.my_bug_add);
+        mAddTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new MyBugAddFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
+            }
+        });
 
         saveInstanceState = getArguments();
         if (null != saveInstanceState) {
