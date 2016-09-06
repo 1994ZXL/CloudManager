@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
 
@@ -39,15 +40,8 @@ public class MyPostSearchFragment extends Fragment {
     private EditText mPostContent;
 
     private Button mSearchBtn;
-
-    private Date beginTime;
-    private String bgtime;
-    private Date endTime;
-    private String edtime;
-    private Date postBeginTime;
-    private String postbgtime;
-    private Date postEndTime;
-    private String postedtime;
+    private TextView mClean;
+    private TextView mBack;
 
     private String postContent;
 
@@ -57,8 +51,6 @@ public class MyPostSearchFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFragment = this;
-        ImageButton mBtn = (ImageButton) getActivity().findViewById(R.id.my_post_activity_searchBtn);
-        mBtn.setVisibility(View.INVISIBLE);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -78,25 +70,21 @@ public class MyPostSearchFragment extends Fragment {
         mPostContent = (EditText) v.findViewById(R.id.my_post_content_edittext);
 
         mSearchBtn = (Button) v.findViewById(R.id.my_post_search_button);
+        mClean = (TextView) v.findViewById(R.id.fragment_my_post_search_clean);
+        mBack = (TextView) v.findViewById(R.id.fragment_my_post_search_back);
     }
 
     private void control() {
         mPostBeginTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 14);
-                fragment.setTargetFragment(MyPostSearchFragment.this, 14);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyPostSearchFragment");
+                DateTimePicker.selectDate(mFragment, mPostBeginTimeBtn);
             }
         });
         mPostEndTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 15);
-                fragment.setTargetFragment(MyPostSearchFragment.this, 15);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyPostSearchFragment");
+                DateTimePicker.selectDate(mFragment, mPostEndTimeBtn);
             }
         });
         mPostContent.addTextChangedListener(new TextWatcher() {
@@ -121,14 +109,14 @@ public class MyPostSearchFragment extends Fragment {
                 Fragment fragment = new MyPostFragment();
                 Bundle bundle = new Bundle();
 
-                if (null != postbgtime){
-                    bundle.putInt(Link.daily_time_from, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(postbgtime));
+                if (null != mPostBeginTimeBtn.getText()){
+                    bundle.putInt(Link.daily_time_from, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(mPostBeginTimeBtn.getText().toString()));
                 } else {
                     bundle.putInt(Link.daily_time_from, -1);
                 }
 
-                if (null != postedtime) {
-                    bundle.putInt(Link.daily_time_to, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(postedtime));
+                if (null != mPostEndTimeBtn.getText()) {
+                    bundle.putInt(Link.daily_time_to, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(mPostEndTimeBtn.getText().toString()));
                 } else {
                     bundle.putInt(Link.daily_time_to, -1);
                 }
@@ -136,52 +124,29 @@ public class MyPostSearchFragment extends Fragment {
                 bundle.putString(Link.content, postContent);
 
                 Log.d(TAG, "选择条件："
-                        + " post_start_time: " + postbgtime
-                        + " post_over_time: " + postedtime
+                        + " post_start_time: " + mPostBeginTimeBtn.getText()
+                        + " post_over_time: " + mPostEndTimeBtn.getText()
                         + " content: " + mPostContent);
 
                 fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.addToBackStack(null);
-                transaction.replace(R.id.postActivity, fragment);
+                transaction.replace(R.id.blankActivity, fragment);
                 transaction.commit();
             }
         });
-    }
 
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode != Activity.RESULT_OK){
-            return;
-        }  else if (requestCode == 14) {
-            postBeginTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updatePostBeginDate();
-        } else if (requestCode == 15) {
-            postEndTime = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            updatePostEndDate();
-        }
-    }
-
-    private void updatePostBeginDate(){
-        postbgtime = android.text.format.DateFormat.format("yyyy年MM月dd", postBeginTime).toString();
-        mPostBeginTimeBtn.setText(postbgtime);
-    }
-    private void updatePostEndDate(){
-        if (postEndTime.after(postBeginTime)) {
-            postedtime = android.text.format.DateFormat.format("yyyy年MM月dd", postEndTime).toString();
-            mPostEndTimeBtn.setText(postedtime);
-        } else {
-            Toast.makeText(getActivity(),
-                    R.string.time_erro,
-                    Toast.LENGTH_SHORT).show();
-        }
+        mClean.setVisibility(View.INVISIBLE);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        ImageButton mBtn = (ImageButton) getActivity().findViewById(R.id.my_post_activity_searchBtn);
-        mBtn.setVisibility(View.INVISIBLE);
     }
 }

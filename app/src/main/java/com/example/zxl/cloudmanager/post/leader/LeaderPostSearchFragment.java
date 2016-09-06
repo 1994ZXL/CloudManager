@@ -43,6 +43,8 @@ public class LeaderPostSearchFragment extends Fragment {
     private LinearLayout mContentLinearLayout;
 
     private Button mSearchBtn;
+    private TextView mBack;
+    private TextView mClean;
 
     private Fragment mFragment;
 
@@ -56,11 +58,6 @@ public class LeaderPostSearchFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mFragment = this;
     }
-
-    public LeaderPostSearchFragment() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -154,6 +151,15 @@ public class LeaderPostSearchFragment extends Fragment {
             }
         });
 
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        mClean.setVisibility(View.INVISIBLE);
+
         return v;
     }
 
@@ -164,6 +170,8 @@ public class LeaderPostSearchFragment extends Fragment {
         mEmployerName = (EditText) v.findViewById(R.id.leader_search_name_edittext);
 
         mSearchBtn = (Button) v.findViewById(R.id.leader_post_search_button);
+        mBack = (TextView) v.findViewById(R.id.leader_post_search_back);
+        mClean = (TextView) v.findViewById(R.id.leader_post_search_clean);
 
         mContentLinearLayout = (LinearLayout) v.findViewById(R.id.leader_post_contentLinearLayout);
     }

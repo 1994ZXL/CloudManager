@@ -10,15 +10,17 @@
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return" />
+                    android:text="@string/text_return"
+                    android:id="@+id/leader_post_search_back"/>
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/my_post_choose" />
+                    android:text="@string/post_query" />
 
                 <TextView
                     style="@style/topview_right"
-                    android:text="@string/text_clean" />
+                    android:text="@string/text_clean"
+                    android:id="@+id/leader_post_search_clean"/>
 
             </LinearLayout>
 

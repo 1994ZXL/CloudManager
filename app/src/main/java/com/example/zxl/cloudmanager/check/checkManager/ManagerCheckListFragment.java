@@ -101,7 +101,7 @@ public class ManagerCheckListFragment extends Fragment {
             keyObj.put(Link.comp_id, User.newInstance().getComp_id());
             keyObj.put("sort", "att_date desc");
             keyObj.put("page_count", 20);
-            keyObj.put("curl_page", 1);
+            keyObj.put("curl_page", 0);
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();

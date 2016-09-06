@@ -51,6 +51,7 @@ public class MyPostDetailFragment extends Fragment {
     private LinearLayout mLevelSpinnerLinearLayout;
 
     private TextView mSave;
+    private TextView mBack;
 
     private static Post sPost = new Post();
 
@@ -102,6 +103,7 @@ public class MyPostDetailFragment extends Fragment {
         mOpinion = (EditText) view.findViewById(R.id.post_details_opinion);
 
         mSave = (TextView) view.findViewById(R.id.post_details_save);
+        mBack = (TextView) view.findViewById(R.id.post_details_back);
 
         mLevelSpinnerLinearLayout = (LinearLayout) view.findViewById(R.id.post_level_spinnerLinearLayout);
     }
@@ -166,13 +168,20 @@ public class MyPostDetailFragment extends Fragment {
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
                     transaction.hide(mFragment);
-                    transaction.replace(R.id.postActivity, fragment);
+                    transaction.replace(R.id.blankActivity, fragment);
                     transaction.commit();
                 } else {
                     transaction.hide(mFragment);
                     transaction.show(fragment);
                     transaction.commit();
                 }
+            }
+        });
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
             }
         });
     }
@@ -221,7 +230,7 @@ public class MyPostDetailFragment extends Fragment {
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
                     transaction.hide(mFragment);
-                    transaction.replace(R.id.postActivity, fragment);
+                    transaction.replace(R.id.blankActivity, fragment);
                     transaction.commit();
                 } else {
                     transaction.hide(mFragment);

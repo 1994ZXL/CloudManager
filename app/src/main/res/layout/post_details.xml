@@ -15,7 +15,8 @@
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return"
+                    android:id="@+id/post_details_back"/>
 
                 <TextView
                     style="@style/toptextview_center"

@@ -128,7 +128,7 @@ public class MyCheckFragment extends Fragment {
             keyObj.put(Link.mem_id, User.newInstance().getUser_id());
             keyObj.put("sort", "att_date desc");
             keyObj.put("page_count", 20);
-            keyObj.put("curl_page", 1);
+            keyObj.put("curl_page", 0);
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();

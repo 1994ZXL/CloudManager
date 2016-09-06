@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -46,6 +47,9 @@ public class LeaderPostListFragment extends ListFragment {
 
     private TextView mName, mPostTime, mDailyDate;
 
+    private TextView mBack;
+    private TextView mTitle;
+    private TextView mSearch;
 
     private Fragment mFragment;
 
@@ -133,6 +137,35 @@ public class LeaderPostListFragment extends ListFragment {
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.leader_post, container, false);
+
+        mBack = (TextView) v.findViewById(R.id.leader_post_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+        mTitle = (TextView) v.findViewById(R.id.leader_post_title);
+        mTitle.setText("日报");
+        mSearch = (TextView) v.findViewById(R.id.leader_post_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new MyPostSearchFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+            }
+        });
+
+        return v;
+    }
+
+    @Override
     public void onListItemClick(ListView l, View v, int position, long id){
         Post post= ((PostAdapter)getListAdapter()).getItem(position);
 
@@ -183,33 +216,12 @@ public class LeaderPostListFragment extends ListFragment {
             if(p.getReport_time() == 0) {
                 mPostTime.setText("——");
             }else {
-                mPostTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(p.getReport_time()));
+                mPostTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(p.getReport_time() + 28800));
             }
             mDailyDate = (TextView) convertView.findViewById(R.id.main_fragment_my_post_post_date);
-            mDailyDate.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(p.getDaily_date()));
+            mDailyDate.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(p.getDaily_date() + 28800));
 
             return convertView;
         }
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_search, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_search:
-                Fragment fragment = null;
-                if (null == fragment) {
-                    FragmentManager fm = getFragmentManager();
-                    fragment = new MyPostSearchFragment();
-                    fm.beginTransaction().replace(R.id.postActivity, fragment).commit();
-                }
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

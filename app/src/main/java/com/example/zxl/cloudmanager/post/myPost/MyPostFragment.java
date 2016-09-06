@@ -7,6 +7,7 @@ import android.app.ListFragment;
 import android.os.Bundle;
 
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -47,6 +48,9 @@ public class MyPostFragment extends ListFragment {
     private ArrayList<Post> mPosts = new ArrayList<Post>();
 
     private TextView mName, mPostTime, mPostDate;
+
+    private TextView mSearch;
+    private TextView mBack;
 
     private Fragment mFragment;
 
@@ -129,7 +133,33 @@ public class MyPostFragment extends ListFragment {
         });
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.leader_post, container, false);
 
+        mSearch = (TextView) view.findViewById(R.id.leader_post_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new MyPostSearchFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+            }
+        });
+
+        mBack = (TextView) view.findViewById(R.id.leader_post_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        return view;
+    }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id){
@@ -140,7 +170,7 @@ public class MyPostFragment extends ListFragment {
         if (!fragment.isAdded()) {
             transaction.addToBackStack(null);
             transaction.hide(mFragment);
-            transaction.add(R.id.postActivity, fragment);
+            transaction.add(R.id.blankActivity, fragment);
             transaction.commit();
         } else {
             transaction.hide(mFragment);
@@ -185,32 +215,12 @@ public class MyPostFragment extends ListFragment {
             if(p.getReport_time() == 0) {
                 mPostTime.setText("——");
             }else {
-                mPostTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(p.getReport_time()));
+                mPostTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(p.getReport_time() + 28800));
             }
-            mPostDate.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(p.getDaily_date()));
+            mPostDate.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(p.getDaily_date() + 28800));
 
             return convertView;
         }
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_search, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_search:
-                Fragment fragment = null;
-                if (null == fragment) {
-                    FragmentManager fm = getFragmentManager();
-                    fragment = new MyPostSearchFragment();
-                    fm.beginTransaction().replace(R.id.postActivity, fragment).commit();
-                }
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

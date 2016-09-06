@@ -54,6 +54,7 @@ public class LeaderPostDetailFragment extends Fragment {
     private LinearLayout mLevelLinearLayout;
 
     private TextView mEdit;
+    private TextView mBack;
 
     private static Post sPost = new Post();
 
@@ -106,6 +107,8 @@ public class LeaderPostDetailFragment extends Fragment {
 
         mLevelSpinnerLinearLayout = (LinearLayout) view.findViewById(R.id.post_level_spinnerLinearLayout);
         mLevelLinearLayout = (LinearLayout) view.findViewById(R.id.post_level_linearLayout);
+
+        mBack = (TextView) view.findViewById(R.id.post_details_back);
     }
 
     private void control() {
@@ -199,9 +202,17 @@ public class LeaderPostDetailFragment extends Fragment {
         } else if (mFragment.getActivity().getClass() == LeaderPostSearchActivity.class) {
             mEdit.setVisibility(View.INVISIBLE);
             mLevelSpinnerLinearLayout.setVisibility(View.GONE);
-            mEdit.setVisibility(View.GONE);
+            mEdit.setVisibility(View.INVISIBLE);
             mLevelTextView.setText(sPost.getLevel());
             mOpinion.setFocusable(false);
         }
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
     }
+
 }
