@@ -61,6 +61,7 @@ public class ManagerOverTimeSearchFragment extends Fragment {
     private String key = "";
 
     private TextView mBack;
+    private TextView mAdd;
 
     private Fragment mFragment;
     private Fragment mAimFragment;
@@ -265,6 +266,25 @@ public class ManagerOverTimeSearchFragment extends Fragment {
             }
         });
 
+        mAdd.setText(R.string.add);
+        mAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new ManagerOverTimeAddFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
+            }
+        });
+
         return v;
     }
 
@@ -278,6 +298,7 @@ public class ManagerOverTimeSearchFragment extends Fragment {
 
         mSearchBtn = (Button) v.findViewById(R.id.my_overtime_search_button);
         mBack = (TextView) v.findViewById(R.id.overtime_search_back);
+        mAdd = (TextView) v.findViewById(R.id.overtime_search_add);
     }
 
 }

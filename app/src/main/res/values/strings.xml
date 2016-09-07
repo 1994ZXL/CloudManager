@@ -10,6 +10,7 @@
     <string name="search">搜索</string>
     <string name="text_return">返回</string>
     <string name="text_clean">重置</string>
+    <string name="select_time">请选择时间</string>
     <string name="text">—</string>
 
 
@@ -318,6 +319,7 @@
     <string name="manager_overtime_project">加班项目</string>
     <string name="manager_overtime_alltime">加班总时间</string>
     <string name="my_join_project">项目</string>
+    <string name="add_overtime">加班安排</string>
 
     <string name="employer_travel_time">出差时间</string>
     <string name="employer_travel_choose">出差筛选</string>

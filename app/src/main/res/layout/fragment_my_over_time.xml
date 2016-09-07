@@ -21,7 +21,8 @@
 
                 <TextView
                     style="@style/topview_right"
-                    android:text=""/>
+                    android:text=""
+                    android:id="@+id/overtime_search_add"/>
 
             </LinearLayout>
 

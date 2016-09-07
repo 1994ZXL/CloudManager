@@ -58,6 +58,7 @@ public class Link {
     public static final String mem_id = "mem_id";//加班员工ID
     public static final String work_pm = "work_pm";//加班项目名
     public static final String work_id = "work_id"; //加班id
+    public static final String work_reason = "work_reason"; //加班原因
 
     //my_work
     public static final String my_work = "my_work&act=";

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bug_details"
+    style="@style/Parent_LayoutStyle">
+
+    <ScrollView
+        style="@style/ScrollView_Style">
+
+        <LinearLayout
+            style="@style/linearLayoutStyle">
+
+            <LinearLayout
+                style="@style/Toptitle_LayoutStyle">
+
+                <TextView
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return"
+                    android:id="@+id/overtime_add_back"/>
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/add_overtime"/>
+
+                <TextView
+                    style="@style/topview_right"
+                    android:text="@string/add"
+                    android:id="@+id/overtime_add_add"/>
+
+            </LinearLayout>
+
+            <!-- 第一块-->
+            <LinearLayout
+                style="@style/linearLayoutStyle">
+
+                <!-- 员工名-->
+                <LinearLayout
+                    style="@style/Viewline_LayoutStyle">
+
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:text="@string/employer_name"/>
+
+                    <Spinner
+                        style="@style/Spinner_Style"
+                        android:id="@+id/overtime_add_mem_name"/>
+
+                </LinearLayout>
+
+                <!-- 项目名-->
+                <LinearLayout
+                    style="@style/Viewline_LayoutStyle">
+
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_name_edittext" />
+
+                    <Spinner
+                        style="@style/Spinner_Style"
+                        android:id="@+id/overtime_add_project_name"/>
+
+                </LinearLayout>
+
+                <!-- 开始时间-->
+                <LinearLayout
+                    style="@style/Viewline_LayoutStyle">
+
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_begin_time_textview" />
+
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:hint="@string/select_time"
+                        android:id="@+id/overtime_add_begin_time"/>
+
+                </LinearLayout>
+
+                <!-- 回归时间-->
+                <LinearLayout
+                    style="@style/Viewline_LayoutStyle">
+
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_end_time_textview" />
+
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:hint="@string/select_time"
+                        android:id="@+id/overtime_add_end_time"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 第二块-->
+            <LinearLayout
+                style="@style/linearLayoutStyle">
+
+                <!-- 加班原因-->
+                <LinearLayout
+                    style="@style/Viewline_LayoutStyle">
+
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:text="@string/manager_overtime_reason"/>
+
+                    <EditText
+                        style="@style/EditText_Style"
+                        android:id="@+id/overtime_add_reason"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
