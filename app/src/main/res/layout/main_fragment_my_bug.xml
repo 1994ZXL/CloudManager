@@ -7,12 +7,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            style="@style/font"
-            android:text="新增"
-            android:id="@+id/my_bug_add"
-            android:layout_gravity="right"/>
+        <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+            <TextView
+                style="@style/toptextview_left"
+                android:text="@string/text_return"
+                android:id="@+id/my_bug_back"/>
+
+            <TextView
+                style="@style/toptextview_center"
+                android:text="@string/my_bug"/>
+
+            <TextView
+                style="@style/topview_right"
+                android:text="@string/search"
+                android:id="@+id/my_bug_search"/>
+
+        </LinearLayout>
 
         <com.example.zxl.cloudmanager.Refresh.PullToRefreshView
             android:id="@+id/my_bug_pull_to_refresh"
@@ -27,5 +38,11 @@
         </com.example.zxl.cloudmanager.Refresh.PullToRefreshView>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/my_bug_add"
+        style="@style/SearchButton"
+        android:text="@string/add"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

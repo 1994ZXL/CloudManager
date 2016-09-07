@@ -20,10 +20,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
 import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.model.User;
 import com.example.zxl.cloudmanager.overtime.myOvertime.MyOverTimeActivity;
 import com.example.zxl.cloudmanager.overtime.myOvertime.MyOverTimeFragment;
 import com.loopj.android.http.AsyncHttpClient;
@@ -55,6 +57,10 @@ public class ManagerOverTimeSearchFragment extends Fragment {
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
+    private JSONObject keyObj = new JSONObject();
+    private String key = "";
+
+    private TextView mBack;
 
     private Fragment mFragment;
     private Fragment mAimFragment;
@@ -89,6 +95,15 @@ public class ManagerOverTimeSearchFragment extends Fragment {
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        mem_name.clear();
+        mem_id.clear();
+        project_name.clear();
+        pm_id.clear();
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_my_over_time, container, false);
@@ -96,12 +111,28 @@ public class ManagerOverTimeSearchFragment extends Fragment {
 
         init(v);
 
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
         if (mFragment.getActivity().getClass() == MyOverTimeActivity.class) {
             mNameLinearLayout.setVisibility(View.GONE);
             mAimFragment = new MyOverTimeFragment();
         } else {
             mAimFragment = new ManagerOvertimeListFragment();
         }
+
+        try {
+            keyObj.put(Link.comp_id, User.newInstance().getComp_id());
+            key = DESCryptor.Encryptor(keyObj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mParams.put("key", key);
+        Log.d(TAG, "key: " + key);
 
         mHttpc.post(Link.localhost + "manage_work&act=get_options", mParams, new JsonHttpResponseHandler() {
             @Override
@@ -246,6 +277,7 @@ public class ManagerOverTimeSearchFragment extends Fragment {
         mEmployerNameSpinner = (Spinner) v.findViewById(R.id.employer_name_spinner);
 
         mSearchBtn = (Button) v.findViewById(R.id.my_overtime_search_button);
+        mBack = (TextView) v.findViewById(R.id.overtime_search_back);
     }
 
 }

@@ -1,10 +1,12 @@
 package com.example.zxl.cloudmanager.travel.checkManagerTravel;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -21,6 +23,7 @@ import com.example.zxl.cloudmanager.model.Travel;
 import com.example.zxl.cloudmanager.model.User;
 import com.example.zxl.cloudmanager.travel.leader.LeaderTravelSearchActivity;
 import com.example.zxl.cloudmanager.travel.myTravel.MyTravelDetailFragment;
+import com.example.zxl.cloudmanager.travel.myTravel.MyTravelSearchFragment;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -39,7 +42,10 @@ import cz.msebera.android.httpclient.Header;
 public class ManagerTravelListFragment extends ListFragment {
     private static final String TAG = "MTravelListFragment";
     private ArrayList<Travel> travels = new ArrayList<Travel>();
-    private Button mSearchBtn;
+
+    private TextView mBack;
+    private TextView mSearch;
+    private TextView mTitle;
 
     private Fragment mFragment;
     private Fragment mAimFragment;
@@ -139,6 +145,37 @@ public class ManagerTravelListFragment extends ListFragment {
             }
 
         });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.main_fragment_travel_list, container, false);
+
+        mBack = (TextView) v.findViewById(R.id.my_travel_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        mTitle = (TextView) v.findViewById(R.id.my_travel_title);
+        mTitle.setText("出差");
+
+        mSearch = (TextView) v.findViewById(R.id.my_travel_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new MyTravelSearchFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+            }
+        });
+
+        return v;
     }
 
     @Override

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -52,7 +53,7 @@ public class ManagerCheckEditFragment extends Fragment{
     private Button mE_time;
     private Button mSaveBtn;
 
-    private StringBuilder str;
+    private TextView mBack;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
@@ -82,6 +83,14 @@ public class ManagerCheckEditFragment extends Fragment{
         mE_time = (Button) view.findViewById(R.id.main_fragment_manager_check_edit_stipulate_offdutytime);
         mE_att_time = (Button) view.findViewById(R.id.main_fragment_manager_check_edit_offduty_sign_time);
         mSaveBtn = (Button) view.findViewById(R.id.main_fragment_manager_check_edit_save_edit_button);
+        mBack = (TextView) view.findViewById(R.id.main_fragment_manager_check_edit_back);
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
 
         if (sCheck.getS_time() != 0){
             mS_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getS_time()+28800));

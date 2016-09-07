@@ -20,7 +20,7 @@ public class Mission {
     private String pm_id; //项目id
     private String mem_id; //成员id
     private String pmsch_id; //任务进度id
-    private String percent; //任务进度
+    private String percent; //任务务进度
 
 
     private static final String JSON_TITLE = "title";

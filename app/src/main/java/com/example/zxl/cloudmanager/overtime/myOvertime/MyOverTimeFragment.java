@@ -53,7 +53,9 @@ public class MyOverTimeFragment extends Fragment {
     private MyAdapter myAdapter;
 
     private Fragment mFragment;
-    private Button searchBtn;
+
+    private TextView mBack;
+    private TextView mSearch;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
@@ -70,30 +72,29 @@ public class MyOverTimeFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_search, menu);
-    }
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
+        final View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_search:
+        mBack = (TextView) v.findViewById(R.id.my_overtime_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        mSearch = (TextView) v.findViewById(R.id.my_overtime_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Fragment fragment = null;
                 if (null == fragment) {
                     FragmentManager fm = getFragmentManager();
                     fragment = new ManagerOverTimeSearchFragment();
                     fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
                 }
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-    @Override
-    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        final View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
-
-
+            }
+        });
 
         saveInstanceState = getArguments();
         if (null != saveInstanceState) {

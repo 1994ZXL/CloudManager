@@ -25,6 +25,15 @@ public class MyTravelDetailFragment extends Fragment {
     private TextView address;
     private TextView status;
 
+    private TextView mBack;
+
+    private Fragment mFragment;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mFragment = this;
+    }
 
     public static MyTravelDetailFragment newInstance(Travel travel){
         sTravel = travel;
@@ -51,6 +60,8 @@ public class MyTravelDetailFragment extends Fragment {
         detail_addr = (TextView) view.findViewById(R.id.travel_details_add);
         address = (TextView) view.findViewById(R.id.travel_details_address);
         status = (TextView) view.findViewById(R.id.travel_details_state);
+
+        mBack = (TextView) view.findViewById(R.id.travel_details_back);
     }
 
     private void control() {
@@ -61,5 +72,12 @@ public class MyTravelDetailFragment extends Fragment {
         detail_addr.setText(sTravel.getDetail_addr());
         address.setText(sTravel.getAddress());
         status.setText(sTravel.getStatus());
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
     }
 }

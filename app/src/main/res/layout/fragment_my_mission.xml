@@ -57,6 +57,10 @@
                         android:text="@string/project_begin_time_textview" />
 
                     <TextView
+                        style="@style/Text_Style"
+                        android:text="@string/text" />
+
+                    <TextView
                         android:id="@+id/my_mission_end_time_button"
                         style="@style/Text_view_Style"
                         android:text="@string/project_end_time_textview" />
@@ -75,6 +79,10 @@
                         android:id="@+id/my_mission_end_begin_time_button"
                         style="@style/Text_view_Style"
                         android:text="@string/project_begin_time_textview" />
+
+                    <TextView
+                        style="@style/Text_Style"
+                        android:text="@string/text" />
 
                     <TextView
                         android:id="@+id/my_mission_end_end_time_button"

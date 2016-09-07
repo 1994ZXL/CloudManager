@@ -86,18 +86,18 @@ public class MyLeaveQueryFragment extends Fragment {
         final View v = layoutInflater.inflate(R.layout.main_fragment_my_leave_query, parent, false);
 
 
-        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_leave_pull_to_refresh);
-        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullToRefreshView.setRefreshing(false);
-                    }
-                }, REFRESH_DELAY);
-            }
-        });
+//        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_leave_pull_to_refresh);
+//        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                mPullToRefreshView.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        mPullToRefreshView.setRefreshing(false);
+//                    }
+//                }, REFRESH_DELAY);
+//            }
+//        });
 
         saveInstanceState = getArguments();
         if (null != saveInstanceState) {

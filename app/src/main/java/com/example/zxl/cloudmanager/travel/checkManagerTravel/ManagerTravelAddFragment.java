@@ -48,6 +48,7 @@ public class ManagerTravelAddFragment extends Fragment{
     private EditText mReason;
 
     private TextView mAddTextView;
+    private TextView mBack;
 
     private ArrayList<String> memNameList = new ArrayList<String>();
     private ArrayList<String> memIdList = new ArrayList<String>();
@@ -96,6 +97,7 @@ public class ManagerTravelAddFragment extends Fragment{
         mDetailAddr = (EditText) v.findViewById(R.id.fragment_travel_detail_addr);
         mReason = (EditText) v.findViewById(R.id.fragment_travel_reason);
         mAddTextView = (TextView) v.findViewById(R.id.fragment_travel_add_add);
+        mBack = (TextView) v.findViewById(R.id.fragment_travel_add_back);
     }
 
     private void control() {
@@ -254,6 +256,13 @@ public class ManagerTravelAddFragment extends Fragment{
                         }
                     });
                 }
+            }
+        });
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
             }
         });
     }

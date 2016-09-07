@@ -19,12 +19,12 @@ public class MyCheckDetailFragment extends Fragment{
     private TextView chekdate,stipulationOnDuty,stipulaitonOffDuty,onDuty,offDuty,earlyMin, lateMin;
     private TextView leave, overTime, travel;
 
-    private static final String EXTRA_OBJECT = "check";
+    private TextView mBack;
 
     private static Check mCheck = new Check();
 
     private Fragment mFragment;
-    private String where;
+
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -64,6 +64,8 @@ public class MyCheckDetailFragment extends Fragment{
         leave = (TextView)view.findViewById(R.id.check_details_leave);
         overTime = (TextView)view.findViewById(R.id.check_details_work_overtime);
         travel = (TextView)view.findViewById(R.id.check_details_work_travel);
+
+        mBack = (TextView) view.findViewById(R.id.check_details_back);
     }
 
     private void control() {
@@ -130,5 +132,12 @@ public class MyCheckDetailFragment extends Fragment{
         } else {
             travel.setText("否");
         }
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
     }
 }

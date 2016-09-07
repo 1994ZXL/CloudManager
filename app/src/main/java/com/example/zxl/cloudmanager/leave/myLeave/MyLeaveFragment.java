@@ -21,8 +21,11 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -39,6 +42,9 @@ public class MyLeaveFragment extends Fragment implements RadioGroup.OnCheckedCha
     private ViewPager mViewPager;
     private ArrayList<View> mViews;
     private Fragment mFragment;
+
+    private TextView mBack;
+    private TextView mSearch;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -61,24 +67,22 @@ public class MyLeaveFragment extends Fragment implements RadioGroup.OnCheckedCha
         mViewPager.setCurrentItem(0);
         mCurrentCheckedRadioLeft = getCurrentCheckedRadioLeft();
 
-        return view;
-    }
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_search, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_search:
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Intent intent = new Intent(mFragment.getActivity(), MyLeaveSearchActivity.class);
                 startActivity(intent);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+            }
+        });
+
+        return view;
     }
 
     public void initPager(FragmentManager fragmentManager) {
@@ -166,6 +170,8 @@ public class MyLeaveFragment extends Fragment implements RadioGroup.OnCheckedCha
 
         mViewPager = (ViewPager)v.findViewById(R.id.main_fragment_my_leave_viewPager);
 
+        mBack = (TextView) v.findViewById(R.id.my_leave_back);
+        mSearch = (TextView) v.findViewById(R.id.my_leave_search);
     }
 
     private class MyPagerAdapter extends PagerAdapter {

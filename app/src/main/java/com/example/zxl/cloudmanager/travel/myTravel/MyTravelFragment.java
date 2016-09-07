@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -44,10 +45,11 @@ import cz.msebera.android.httpclient.Header;
  */
 public class MyTravelFragment extends ListFragment {
     private ArrayList<Travel> travels = new ArrayList<Travel>();
-    private Button searchBtn;
-    private WebView webView;
 
     private static final String TAG = "MyTravelFragment";
+
+    private TextView mBack;
+    private TextView mSearch;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
@@ -116,6 +118,34 @@ public class MyTravelFragment extends ListFragment {
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v = inflater.inflate(R.layout.main_fragment_travel_list, container, false);
+
+        mBack = (TextView) v.findViewById(R.id.my_travel_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        mSearch = (TextView) v.findViewById(R.id.my_travel_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new MyTravelSearchFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+            }
+        });
+
+        return v;
+    }
+
+    @Override
     public void onListItemClick(ListView l, View v, int position, long id){
         Travel travel= ((TravelAdapter)getListAdapter()).getItem(position);
         Log.d(TAG, "item被点击");
@@ -162,25 +192,5 @@ public class MyTravelFragment extends ListFragment {
 
             return convertView;
         }
-    }
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_search, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_search:
-                Fragment fragment = null;
-                if (null == fragment) {
-                    FragmentManager fm = getFragmentManager();
-                    fragment = new MyTravelSearchFragment();
-                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
-                }
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

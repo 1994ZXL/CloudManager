@@ -49,6 +49,7 @@ public class MyTravelSearchFragment extends Fragment {
     private Spinner mStateSpinner;
 
     private TextView mAddTextView;
+    private TextView mBack;
 
     private ArrayAdapter<String> stateAdapter;
     private static final String[] stateList={"全部","确认","取消"}; //出差状态 2：确认，3：取消
@@ -171,6 +172,7 @@ public class MyTravelSearchFragment extends Fragment {
 
         mAddTextView = (TextView) v.findViewById(R.id.manager_travel_add);
         mSearchBtn = (Button) v.findViewById(R.id.my_travel_search_button);
+        mBack = (TextView) v.findViewById(R.id.travel_search_back);
     }
 
     private void contorl() {
@@ -239,6 +241,13 @@ public class MyTravelSearchFragment extends Fragment {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
             }
         });
     }

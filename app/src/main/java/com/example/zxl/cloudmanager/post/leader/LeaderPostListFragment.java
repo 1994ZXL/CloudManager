@@ -90,21 +90,24 @@ public class LeaderPostListFragment extends ListFragment {
                 if (null != saveInstanceState.getString(Link.content)) {
                     keyObj.put(Link.content, saveInstanceState.getString(Link.content));
                 }
-
-                keyObj.put(Link.user_id, User.newInstance().getUser_id());
-                keyObj.put(Link.is_pmleader, User.newInstance().getIs_pmleader());
-                keyObj.put("sort", "create_time desc");
-                keyObj.put("page_count", 100);
-                keyObj.put("curl_page", 1);
-
-                key = DESCryptor.Encryptor(keyObj.toString());
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            mParams.put("key", key);
         }
-            Log.d(TAG, "key: " + key);
 
+        try {
+            keyObj.put(Link.user_id, User.newInstance().getUser_id());
+            keyObj.put(Link.is_pmleader, User.newInstance().getIs_pmleader());
+            keyObj.put("sort", "daily_date desc");
+            keyObj.put("page_count", 100);
+            keyObj.put("curl_page", 1);
+
+            key = DESCryptor.Encryptor(keyObj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mParams.put("key", key);
+        Log.d(TAG, "key: " + key);
 
         mHttpc.post(Link.localhost + url, mParams, new JsonHttpResponseHandler() {
             @Override

@@ -8,22 +8,6 @@
 
         <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout style="@style/Toptitle_LayoutStyle">
-
-                <TextView
-                    style="@style/toptextview_left"
-                    android:text="@string/text_return" />
-
-                <TextView
-                    style="@style/toptextview_center"
-                    android:text="@string/leave_apply" />
-
-                <TextView
-                    style="@style/topview_right"
-                    android:text="@string/text_clean" />
-
-            </LinearLayout>
-
             <!-- 姓名-->
             <LinearLayout style="@style/Viewline_LayoutStyle">
 
@@ -58,7 +42,7 @@
                     style="@style/Text_view_Style"
                     android:text="@string/leave_begin_time" />
 
-                <Button
+                <TextView
                     android:id="@+id/main_fragment_my_leave_begin_time"
                     style="@style/Text_view_Style"
                     android:text="@string/choose_time" />
@@ -71,7 +55,7 @@
                     style="@style/Text_view_Style"
                     android:text="@string/leave_end_time" />
 
-                <Button
+                <TextView
                     android:id="@+id/main_fragment_my_leave_end_time"
                     style="@style/Text_view_Style"
                     android:text="@string/choose_time" />

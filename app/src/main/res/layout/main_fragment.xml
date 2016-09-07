@@ -366,7 +366,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="75dp"
-                            android:src="@drawable/my_travel_icon"
+                            android:src="@drawable/overtime_manage"
                             android:id="@+id/main_fragment_travel_deal_image"
                             android:layout_gravity="center"/>
                         <!--<TextView
@@ -513,7 +513,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="75dp"
-                            android:src="@drawable/demo"
+                            android:src="@drawable/missioschedule"
                             android:id="@+id/main_fragment_project_mission_schedule_manage"
                             android:layout_gravity="center" />
 
@@ -579,7 +579,7 @@
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="75dp"
-                            android:src="@drawable/demo"
+                            android:src="@drawable/post_edit_icon"
                             android:id="@+id/main_fragment_post_manage_image"
                             android:layout_gravity="center" />
 

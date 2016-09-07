@@ -12,7 +12,8 @@
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return"
+                    android:id="@+id/overtime_search_back"/>
 
                 <TextView
                     style="@style/toptextview_center"
@@ -20,7 +21,7 @@
 
                 <TextView
                     style="@style/topview_right"
-                    android:text="@string/text_clean"/>
+                    android:text=""/>
 
             </LinearLayout>
 
@@ -38,6 +39,10 @@
                         android:id="@+id/employer_overtime_begin_time_button"
                         style="@style/Text_view_Style"
                         android:text="@string/project_begin_time_textview" />
+
+                    <TextView
+                        style="@style/Text_Style"
+                        android:text="@string/text" />
 
                     <TextView
                         android:id="@+id/employer_overtime_end_time_button"

@@ -52,6 +52,8 @@ public class MyLeaveSearchFragment extends Fragment {
 
     private Button mSearchBtn;
 
+    private TextView mBack;
+
     private ArrayAdapter<String> stateAdapter;
     //状态:1:待批准,2:已批准,3:拒绝
     private static final String[] stateList={"全部", "待批准","已批准","拒绝"};
@@ -90,6 +92,13 @@ public class MyLeaveSearchFragment extends Fragment {
 
 
         init(v);
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
 
         if (mFragment.getActivity().getClass() == MyLeaveSearchActivity.class) {
             mNameLinearLayout.setVisibility(View.GONE);
@@ -242,6 +251,7 @@ public class MyLeaveSearchFragment extends Fragment {
         mLeaveStateSpinner = (Spinner) v.findViewById(R.id.my_leave_state_sprinner);
 
         mSearchBtn = (Button) v.findViewById(R.id.my_leave_search_button);
+        mBack = (TextView) v.findViewById(R.id.leave_search_back);
     }
 
 }

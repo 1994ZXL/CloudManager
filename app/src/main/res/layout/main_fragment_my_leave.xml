@@ -7,6 +7,24 @@
     android:layout_height="match_parent"
     android:background="@android:color/darker_gray">
 
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+        <TextView
+            style="@style/toptextview_left"
+            android:text="@string/text_return"
+            android:id="@+id/my_leave_back"/>
+
+        <TextView
+            style="@style/toptextview_center"
+            android:text="@string/my_leave" />
+
+        <TextView
+            style="@style/topview_right"
+            android:text="@string/search"
+            android:id="@+id/my_leave_search"/>
+
+    </LinearLayout>
+
     <!-- 上部滑动栏-->
     <HorizontalScrollView
         android:layout_width="match_parent"

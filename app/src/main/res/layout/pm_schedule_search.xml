@@ -35,6 +35,10 @@
                     android:text="@string/project_begin_time_textview" />
 
                 <TextView
+                    style="@style/Text_Style"
+                    android:text="@string/text" />
+
+                <TextView
                     android:id="@+id/pm_schedule_search_endTime"
                     style="@style/Text_view_Style"
                     android:text="@string/project_end_time_textview" />
@@ -55,9 +59,8 @@
                     style="@style/Text_view_Style"/>
 
                 <TextView
-                    android:layout_width="10sp"
-                    android:layout_height="35sp"
-                    android:text="—" />
+                    style="@style/Text_Style"
+                    android:text="@string/text" />
 
                 <EditText
                     android:id="@+id/pm_schedule_percent_to"

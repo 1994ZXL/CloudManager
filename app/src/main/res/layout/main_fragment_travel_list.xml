@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+        <TextView
+            style="@style/toptextview_left"
+            android:text="@string/text_return"
+            android:id="@+id/my_travel_back"/>
+
+        <TextView
+            style="@style/toptextview_center"
+            android:text="@string/travel"
+            android:id="@+id/my_travel_title"/>
+
+        <TextView
+            style="@style/topview_right"
+            android:text="@string/search"
+            android:id="@+id/my_travel_search" />
+
+    </LinearLayout>
+
+    <ListView android:id="@id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"/>
+
+</LinearLayout>

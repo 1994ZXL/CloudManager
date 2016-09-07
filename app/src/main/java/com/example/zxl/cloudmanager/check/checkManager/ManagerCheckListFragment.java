@@ -1,6 +1,7 @@
 package com.example.zxl.cloudmanager.check.checkManager;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
@@ -44,6 +45,9 @@ public class ManagerCheckListFragment extends Fragment {
     private List<Check> checks = new ArrayList<Check>();
     private MyAdapter myAdapter;
 
+    private TextView mBack;
+    private TextView mSearch;
+
     public static final int REFRESH_DELAY = 4000;
     private PullToRefreshView mPullToRefreshView;
     private static final String TAG = "MCListFragment";
@@ -68,7 +72,26 @@ public class ManagerCheckListFragment extends Fragment {
 
         Log.d(TAG, "调用了一次");
 
+        mBack = (TextView) v.findViewById(R.id.main_fragment_manager_check_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
 
+        mSearch = (TextView) v.findViewById(R.id.main_fragment_manager_check_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new ManagerCheckQueryFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+            }
+        });
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {

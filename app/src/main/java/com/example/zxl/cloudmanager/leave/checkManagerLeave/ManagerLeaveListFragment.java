@@ -1,6 +1,7 @@
 package com.example.zxl.cloudmanager.leave.checkManagerLeave;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.leave.leader.LeaderLeaveSearchActivity;
 import com.example.zxl.cloudmanager.leave.myLeave.MyLeaveDetailFragment;
+import com.example.zxl.cloudmanager.leave.myLeave.MyLeaveSearchFragment;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Leave;
@@ -48,6 +50,9 @@ public class ManagerLeaveListFragment extends Fragment {
     private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
 
+    private TextView mBack;
+    private TextView mSearch;
+
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
     private String key = "";
@@ -77,6 +82,27 @@ public class ManagerLeaveListFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View v = layoutInflater.inflate(R.layout.main_fragment_manager_check_list, parent, false);
         saveInstanceState = getArguments();
+
+        mBack = (TextView) v.findViewById(R.id.main_fragment_manager_check_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        mSearch = (TextView) v.findViewById(R.id.main_fragment_manager_check_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new MyLeaveSearchFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+            }
+        });
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
@@ -110,8 +136,11 @@ public class ManagerLeaveListFragment extends Fragment {
                 keyObj.put(Link.leave_type, saveInstanceState.getInt(Link.leave_type));
                 keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
                 keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+                keyObj.put(Link.mem_job, User.newInstance().getMem_job());
+                keyObj.put(Link.comp_id, User.newInstance().getComp_id());
                 keyObj.put(Link.is_pmmaster, User.newInstance().getIs_pmmaster());
                 keyObj.put(Link.is_puncher, User.newInstance().getIs_puncher());
+                keyObj.put(Link.is_pmleader, User.newInstance().getIs_pmleader());
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -264,19 +293,4 @@ public class ManagerLeaveListFragment extends Fragment {
             mOnItemClickListener = listener;
         }
     }
-
-//    private class LoadLeaveByServerTask extends AsyncTask<Void, Void, ArrayList<Leave>> {
-//
-//        @Override
-//        protected ArrayList<Leave> doInBackground(Void... params) {
-//            return new HttpClient().getJSONArray();
-//        }
-//
-//        @Override
-//        protected void onPostExecute(ArrayList<Leave> leave){
-//            LeaveQueryLab.newInstance(getActivity()).setLeaves(leave);
-//            leaves = leave;
-//            Log.d(TAG, "leave: " + leave);
-//        }
-//    }
 }

@@ -14,15 +14,17 @@
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return"
+                    android:id="@+id/fragment_search_check_back"/>
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/check_choose"/>
+                    android:text="@string/check_query"/>
 
                 <TextView
                     style="@style/topview_right"
-                    android:text="@string/text_clean"/>
+                    android:text="@string/text_clean"
+                    android:id="@+id/fragment_search_check_clean"/>
 
             </LinearLayout>
 
@@ -41,6 +43,10 @@
                         android:id="@+id/check_begin_time_button"
                         style="@style/Text_view_Style"
                         android:text="@string/dutytime" />
+
+                    <TextView
+                        style="@style/Text_Style"
+                        android:text="@string/text" />
 
                     <TextView
                         android:id="@+id/check_end_time_button"

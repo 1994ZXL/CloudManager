@@ -24,8 +24,14 @@ public class MyOvertimeDetailFragment extends Fragment {
     private TextView mWorkTime;
     private TextView mWorkStatus;
 
-    public MyOvertimeDetailFragment() {
-        // Required empty public constructor
+    private TextView mBack;
+
+    private Fragment mFragment;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mFragment = this;
     }
 
     public static MyOvertimeDetailFragment newInstance(Object data) {
@@ -52,6 +58,8 @@ public class MyOvertimeDetailFragment extends Fragment {
         mOvertimeReasonTV = (TextView) v.findViewById(R.id.manager_overtime_reason_textview);
         mWorkTime = (TextView) v.findViewById(R.id.manager_overtime_this_time_textview);
         mWorkStatus = (TextView) v.findViewById(R.id.manager_overtime_status);
+
+        mBack = (TextView) v.findViewById(R.id.my_overtime_details_back);
     }
 
     private void control() {
@@ -62,5 +70,12 @@ public class MyOvertimeDetailFragment extends Fragment {
         mOvertimeReasonTV.setText(sOverTime.getWork_resaon());
         mWorkTime.setText(sOverTime.getWork_time());
         mWorkStatus.setText(sOverTime.getStatus());
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
     }
 }

@@ -43,6 +43,9 @@ public class LeaderCheckSearchFragment extends Fragment {
     private TextView endTimeButton;
     private Button mSearchBtn;
 
+    private TextView mBack;
+    private TextView mClean;
+
     private String name;
 
     private static final String TAG = "LCSearchFragment";
@@ -63,6 +66,15 @@ public class LeaderCheckSearchFragment extends Fragment {
         View v = inflater.inflate(R.layout.leader_check_search, container, false);
 
         init(v);
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        mClean.setVisibility(View.INVISIBLE);
 
         mName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -143,6 +155,9 @@ public class LeaderCheckSearchFragment extends Fragment {
         beginTimeButton = (TextView)v.findViewById(R.id.leader_check_search_beginTime);
         endTimeButton = (TextView) v.findViewById(R.id.leader_check_search_endTime);
         mSearchBtn = (Button) v.findViewById(R.id.leader_check_search_button);
+
+        mBack = (TextView) v.findViewById(R.id.leader_check_search_back);
+        mClean = (TextView) v.findViewById(R.id.leader_check_search_clean);
     }
 
 }

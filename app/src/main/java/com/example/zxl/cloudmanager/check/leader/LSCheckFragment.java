@@ -50,7 +50,9 @@ public class LSCheckFragment extends Fragment {
     private ArrayList<Check> checks = new ArrayList<Check>();
     private MyAdapter myAdapter;
 
-    private Button mSearchBtn;
+    private TextView mBack;
+    private TextView mTitle;
+    private TextView mSearch;
 
     private static final String TAG = "MyCheckFragment";
 
@@ -72,30 +74,32 @@ public class LSCheckFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_search, menu);
-    }
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
+        final View v = layoutInflater.inflate(R.layout.main_fragment_my_check, parent, false);
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_search:
+        mBack = (TextView) v.findViewById(R.id.main_fragment_my_check_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        mTitle = (TextView) v.findViewById(R.id.main_fragment_my_check_title);
+        mTitle.setText("考勤");
+
+        mSearch = (TextView) v.findViewById(R.id.main_fragment_my_check_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Fragment fragment = null;
                 if (null == fragment) {
                     FragmentManager fm = getFragmentManager();
                     fragment = new LeaderCheckSearchFragment();
                     fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
                 }
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        final View v = layoutInflater.inflate(R.layout.main_fragment_my_check, parent, false);
-
+            }
+        });
 
         mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_check_pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {

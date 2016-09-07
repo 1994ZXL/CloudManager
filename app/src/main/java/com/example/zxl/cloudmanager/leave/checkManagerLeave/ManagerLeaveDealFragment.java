@@ -46,6 +46,9 @@ public class ManagerLeaveDealFragment extends Fragment {
     private TextView leaveDealTime;
     private Spinner leaveState;
 
+    private TextView mBack;
+    private TextView mEdit;
+
     private static final String EXTRA_OBJECT = "leave";
     private String[] leaveStateList; //状态:1:待批准,2:已批准,3:拒绝
     private ArrayAdapter<String> spinnerAdapter;
@@ -99,9 +102,48 @@ public class ManagerLeaveDealFragment extends Fragment {
         leaveSuggestion = (EditText) view.findViewById(R.id.cm_leave_deal_suggestion);
         leaveState = (Spinner) view.findViewById(R.id.cm_leave_deal_state);
         leaveDealTime = (TextView)view.findViewById(R.id.cm_leave_deal_time);
+
+        mBack = (TextView) view.findViewById(R.id.cm_leave_deal_back);
+        mEdit = (TextView) view.findViewById(R.id.cm_leave_deal_edit);
     }
 
     private void control() {
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        mEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    keyObj.put(Link.handle_opinion, suggestion);
+                    keyObj.put(Link.status, status);
+                    keyObj.put(Link.leave_id, mLeave.getLeave_id());
+                    key = DESCryptor.Encryptor(keyObj.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mParams.put("key", key);
+                Log.d(TAG,"key:" + key);
+                mHttpc.post(Link.localhost + Link.manage_leave + Link.edit, mParams, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            Toast.makeText(getActivity(),
+                                    response.getString("msg"),
+                                    Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                        }
+                    }
+
+                });
+            }
+        });
+
         name.setText(mLeave.getMem_name());
         leaveKind.setText(mLeave.getLeave_type());
         leaveBeginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mLeave.getStart_time()));
@@ -159,55 +201,5 @@ public class ManagerLeaveDealFragment extends Fragment {
 
             }
         });
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.message_save, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_edit_message:
-                try {
-                    keyObj.put(Link.handle_opinion, suggestion);
-                    keyObj.put(Link.status, status);
-                    keyObj.put(Link.leave_id, mLeave.getLeave_id());
-                    key = DESCryptor.Encryptor(keyObj.toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                mParams.put("key", key);
-                Log.d(TAG,"key:" + key);
-                mHttpc.post(Link.localhost + Link.manage_leave + Link.edit, mParams, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        try {
-                            Toast.makeText(getActivity(),
-                                    response.getString("msg"),
-                                    Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            Log.e(TAG, "ee2: " + e.getLocalizedMessage());
-                        }
-                    }
-
-                });
-//                Fragment fragment = new ManagerLeaveListFragment();
-//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                if (!fragment.isAdded()) {
-//                    transaction.addToBackStack(null);
-//                    transaction.hide(mFragment);
-//                    transaction.replace(R.id.blankActivity, fragment);
-//                    transaction.commit();
-//                } else {
-//                    transaction.hide(mFragment);
-//                    transaction.show(fragment);
-//                    transaction.commit();
-//                }
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -13,16 +13,17 @@
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return"
+                    android:id="@+id/travel_search_back"/>
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/employer_travel_choose"/>
+                    android:text="@string/travel_record_query"/>
 
                 <TextView
                     style="@style/topview_right"
                     android:text="@string/add"
-                    android:id="@+id/manager_travel_add"/>
+                    android:id="@+id/manager_travel_add" />
 
             </LinearLayout>
 
@@ -56,6 +57,10 @@
                         android:text="@string/project_begin_time_textview" />
 
                     <TextView
+                        style="@style/Text_Style"
+                        android:text="@string/text" />
+
+                    <TextView
                         android:id="@+id/employer_travel_end_time_button"
                         style="@style/Text_view_Style"
                         android:text="@string/project_end_time_textview" />
@@ -72,6 +77,10 @@
                         android:id="@+id/employer_back_begin_time_button"
                         style="@style/Text_view_Style"
                         android:text="@string/project_begin_time_textview" />
+
+                    <TextView
+                        style="@style/Text_Style"
+                        android:text="@string/text" />
 
                     <TextView
                         android:id="@+id/employer_back_end_time_button"

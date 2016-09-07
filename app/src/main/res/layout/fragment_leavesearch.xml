@@ -13,15 +13,17 @@
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return"
+                    android:id="@+id/leave_search_back"/>
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/leave_search"/>
+                    android:text="@string/leave_record_query"/>
 
                 <TextView
                     style="@style/topview_right"
-                    android:text="@string/text_clean"/>
+                    android:text=""
+                    android:id="@+id/leave_search_clean"/>
 
             </LinearLayout>
 

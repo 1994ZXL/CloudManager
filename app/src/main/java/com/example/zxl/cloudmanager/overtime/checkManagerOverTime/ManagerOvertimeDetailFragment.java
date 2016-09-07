@@ -46,6 +46,11 @@ public class ManagerOvertimeDetailFragment extends Fragment {
     private TextView mOvertimeReasonET;
     private Spinner mStatus;
 
+    private TextView mBack;
+    private TextView mEdit;
+
+    private Fragment mFragemtn;
+
     private static OverTime mOverTime = new OverTime();
 
     private ArrayAdapter<String> statusAdapter;
@@ -67,6 +72,7 @@ public class ManagerOvertimeDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        mFragemtn = this;
     }
 
     @Override
@@ -93,9 +99,42 @@ public class ManagerOvertimeDetailFragment extends Fragment {
         if (mOverTime.getStatus() == "取消")
             statusList = new String[] {"取消" ,"确认"};
 
+        mBack = (TextView) v.findViewById(R.id.overtime_details_back);
+        mEdit = (TextView) v.findViewById(R.id.overtime_details_edit);
     }
 
     private void control() {
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragemtn.getActivity().finish();
+            }
+        });
+
+        mEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    keyObj.put(Link.work_id, mOverTime.getWork_id());
+                    keyObj.put(Link.status, status);
+                    key = DESCryptor.Encryptor(keyObj.toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mParams.put("key", key);
+                Log.d(TAG,"key:" + key);
+                mHttpc.post(Link.localhost + Link.manage_work + Link.edit, mParams, new JsonHttpResponseHandler() {
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+
+                    }
+                });
+
+                FragmentManager fm = getFragmentManager();
+                fm.popBackStack();
+            }
+        });
+
         mBeginTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mOverTime.getStart_time()));
         mEndTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mOverTime.getEnd_time()));
         mEmployer.setText(mOverTime.getMem_name());
@@ -120,39 +159,4 @@ public class ManagerOvertimeDetailFragment extends Fragment {
             }
         });
     }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.message_save, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_edit_message:
-                try {
-                    keyObj.put(Link.work_id, mOverTime.getWork_id());
-                    keyObj.put(Link.status, status);
-                    key = DESCryptor.Encryptor(keyObj.toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                mParams.put("key", key);
-                Log.d(TAG,"key:" + key);
-                mHttpc.post(Link.localhost + Link.manage_work + Link.edit, mParams, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
-                    }
-                });
-
-                FragmentManager fm = getFragmentManager();
-                fm.popBackStack();
-
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 }

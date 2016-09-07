@@ -1,6 +1,7 @@
 package com.example.zxl.cloudmanager.overtime.checkManagerOverTime;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
@@ -48,16 +49,18 @@ public class ManagerOvertimeListFragment extends Fragment {
     private MyAdapter myAdapter;
 
     private Fragment mFragment;
-    private Fragment fragment;
-    private Button mSearchBtn;
+
+    private TextView mTitle;
+    private TextView mBack;
+    private TextView mSearch;
 
     private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
-    private String key = "";
     private JSONObject keyObj = new JSONObject();
+    private String key = "";
 
     private String url;
 
@@ -72,7 +75,27 @@ public class ManagerOvertimeListFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
        final View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
 
-
+        mBack = (TextView) v.findViewById(R.id.my_overtime_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+        mTitle = (TextView) v.findViewById(R.id.my_overtime_title);
+        mTitle.setText("加班");
+        mSearch = (TextView) v.findViewById(R.id.my_overtime_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new ManagerOverTimeSearchFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+            }
+        });
 
         saveInstanceState = getArguments();
 
@@ -117,6 +140,7 @@ public class ManagerOvertimeListFragment extends Fragment {
                 keyObj.put(Link.mem_id, User.newInstance().getUser_id());
                 keyObj.put(Link.is_pmmaster, User.newInstance().getIs_pmmaster());
                 keyObj.put(Link.is_puncher, User.newInstance().getIs_puncher());
+                keyObj.put(Link.is_pmleader, User.newInstance().getIs_pmleader());
 
                 key = DESCryptor.Encryptor(keyObj.toString());
             } catch (Exception e) {

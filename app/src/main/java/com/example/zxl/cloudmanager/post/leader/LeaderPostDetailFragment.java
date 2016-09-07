@@ -1,6 +1,7 @@
 package com.example.zxl.cloudmanager.post.leader;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -191,6 +192,18 @@ public class LeaderPostDetailFragment extends Fragment {
                                 }
                             }
                         });
+                        Fragment fragment = new LeaderPostListFragment();
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        if (!fragment.isAdded()) {
+                            transaction.addToBackStack(null);
+                            transaction.hide(mFragment);
+                            transaction.replace(R.id.blankActivity, fragment);
+                            transaction.commit();
+                        } else {
+                            transaction.hide(mFragment);
+                            transaction.show(fragment);
+                            transaction.commit();
+                        }
                     } else {
                         Toast.makeText(getActivity(),
                                 "并没有任何修改内容哦",

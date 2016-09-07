@@ -63,8 +63,8 @@ public class MyLeaveApplyFragment extends Fragment {
 
     private TextView mName;
     private Spinner mTypeSpinner;
-    private Button mBeginTime;
-    private Button mEndTime;
+    private TextView mBeginTime;
+    private TextView mEndTime;
     private EditText mReson;
 
     private String reson;
@@ -171,53 +171,62 @@ public class MyLeaveApplyFragment extends Fragment {
     public void initVariable(View view) {
         mName = (TextView) view.findViewById(R.id.main_fragment_my_leave_apply_name);
         mTypeSpinner = (Spinner)view.findViewById(R.id.main_fragment_my_leave_typeSprinner);
-        mBeginTime = (Button)view.findViewById(R.id.main_fragment_my_leave_begin_time);
-        mEndTime = (Button)view.findViewById(R.id.main_fragment_my_leave_end_time);
+        mBeginTime = (TextView)view.findViewById(R.id.main_fragment_my_leave_begin_time);
+        mEndTime = (TextView)view.findViewById(R.id.main_fragment_my_leave_end_time);
         mCommitBtn = (Button)view.findViewById(R.id.main_fragment_my_leave_apply_commitButton);
         mReson = (EditText)view.findViewById(R.id.main_fragment_my_leave_resonEditText);
     }
 
     public void commit() {
 
-        try {
-            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
-            keyObj.put(Link.leave_type, type);
-            keyObj.put(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(mBeginTime.getText().toString()));
-            keyObj.put(Link.end_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(mEndTime.getText().toString()));
-            keyObj.put(Link.leave_reson, reson);
-            key = DESCryptor.Encryptor(keyObj.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        mParams.put("key", key);
-        Log.d(TAG,"key:" + key);
-        mHttpc.post(Link.localhost + "my_leave&act=add", mParams, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                if (statusCode == 200) {
-                    try {
-                        if (response.getBoolean("result")) {
-                            Intent intent = new Intent(mFragment.getActivity(), MyLeaveActivity.class);
-                            startActivity(intent);
+        if (0 == type
+                || null == mBeginTime.getText()
+                || null == mEndTime.getText()
+                || null == reson) {
+            Toast.makeText(getActivity(),
+                    "填写信息不全哦",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            try {
+                keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+                keyObj.put(Link.leave_type, type);
+                keyObj.put(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(mBeginTime.getText().toString()));
+                keyObj.put(Link.end_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(mEndTime.getText().toString()));
+                keyObj.put(Link.leave_reson, reson);
+                key = DESCryptor.Encryptor(keyObj.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            mParams.put("key", key);
+            Log.d(TAG,"key:" + key);
+            mHttpc.post(Link.localhost + "my_leave&act=add", mParams, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                    if (statusCode == 200) {
+                        try {
+                            if (response.getBoolean("result")) {
+                                Intent intent = new Intent(mFragment.getActivity(), MyLeaveActivity.class);
+                                startActivity(intent);
+                            }
+                        } catch (JSONException e) {
+                            Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                         }
-                    } catch (JSONException e) {
-                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                    } else if (statusCode == 400) {
+                        try {
+                            Toast.makeText(getActivity(),
+                                    response.getString("msg"),
+                                    Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
+                            Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                        }
                     }
-                } else if (statusCode == 400) {
-                    try {
-                        Toast.makeText(getActivity(),
-                                response.getString("msg"),
-                                Toast.LENGTH_SHORT).show();
-                    } catch (JSONException e) {
-                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
-                    }
+
                 }
 
-            }
+            });
 
-        });
-
-        Intent intent = new Intent(mFragment.getActivity(), MyLeaveActivity.class);
-        startActivity(intent);
+            Intent intent = new Intent(mFragment.getActivity(), MyLeaveActivity.class);
+            startActivity(intent);
+        }
     }
 }

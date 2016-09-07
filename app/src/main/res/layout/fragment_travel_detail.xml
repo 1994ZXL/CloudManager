@@ -14,7 +14,8 @@
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return"
+                    android:id="@+id/manager_travel_detail_back"/>
 
                 <TextView
                     style="@style/toptextview_center"
@@ -22,7 +23,8 @@
 
                 <TextView
                     style="@style/topview_right"
-                    android:text=""/>
+                    android:text="@string/edit"
+                    android:id="@+id/manager_travel_detail_edit"/>
 
             </LinearLayout>
 

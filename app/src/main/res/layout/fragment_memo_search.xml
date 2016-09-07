@@ -53,6 +53,10 @@
                         style="@style/Text_view_Style"
                         android:text="@string/project_begin_time_textview" />
 
+                    <TextView
+                        style="@style/Text_Style"
+                        android:text="@string/text" />
+
                     <Button
                         android:id="@+id/memo_submit_end_time_button"
                         style="@style/Text_view_Style"

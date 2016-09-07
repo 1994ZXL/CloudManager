@@ -10,6 +10,7 @@
     <string name="search">搜索</string>
     <string name="text_return">返回</string>
     <string name="text_clean">重置</string>
+    <string name="text">—</string>
 
 
     <!--刷新加载-->

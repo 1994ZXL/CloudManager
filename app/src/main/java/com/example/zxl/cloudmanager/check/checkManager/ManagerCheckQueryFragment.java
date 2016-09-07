@@ -46,6 +46,9 @@ public class ManagerCheckQueryFragment extends Fragment {
 
     private String name;
 
+    private TextView mBack;
+    private TextView mClean;
+
     private Fragment mFragment;
 
     @Override
@@ -61,6 +64,15 @@ public class ManagerCheckQueryFragment extends Fragment {
         View v = inflater.inflate(R.layout.main_fragment_manager_check_query, container, false);
 
         init(v);
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        mClean.setVisibility(View.INVISIBLE);
 
         mName.addTextChangedListener(new TextWatcher() {
             @Override
@@ -128,5 +140,8 @@ public class ManagerCheckQueryFragment extends Fragment {
         mEndTimeBtn = (TextView) v.findViewById(R.id.check_end_time_button);
         mName = (EditText) v.findViewById(R.id.manager_check_name_edittext);
         mQueryButton = (Button) v.findViewById(R.id.main_fragment_manager_check_query_button);
+
+        mBack = (TextView) v.findViewById(R.id.main_fragment_manager_check_query_back);
+        mClean = (TextView) v.findViewById(R.id.main_fragment_manager_check_query_clean);
     }
 }

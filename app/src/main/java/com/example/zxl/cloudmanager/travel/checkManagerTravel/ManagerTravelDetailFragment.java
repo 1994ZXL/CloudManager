@@ -47,6 +47,9 @@ public class ManagerTravelDetailFragment extends Fragment {
     private TextView mTravelAddress;
     private Spinner mStatus;
 
+    private TextView mBack;
+    private TextView mEdit;
+
     private ArrayAdapter<String> statusAdapter;
     private String[] statusList;
     private int status;
@@ -55,6 +58,8 @@ public class ManagerTravelDetailFragment extends Fragment {
     private RequestParams mParams = new RequestParams();
     private JSONObject keyObj = new JSONObject();
     private String key = "";
+
+    private Fragment mFragment;
 
     public static ManagerTravelDetailFragment newInstance(Object data) {
         mTravel = (Travel) data;
@@ -66,6 +71,7 @@ public class ManagerTravelDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+        mFragment = this;
     }
 
     @Override
@@ -92,6 +98,9 @@ public class ManagerTravelDetailFragment extends Fragment {
             statusList = new String[] {"确认" ,"取消"};
         if (mTravel.getStatus() == "取消")
             statusList = new String[] {"取消" ,"确认"};
+
+        mBack = (TextView) v.findViewById(R.id.manager_travel_detail_back);
+        mEdit = (TextView) v.findViewById(R.id.manager_travel_detail_edit);
     }
 
     private void control() {
@@ -120,18 +129,17 @@ public class ManagerTravelDetailFragment extends Fragment {
 
             }
         });
-    }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.message_save, menu);
-    }
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_edit_message:
+        mEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 try {
                     keyObj.put(Link.trip_id, mTravel.getTrip_id());
                     keyObj.put(Link.status, status);
@@ -150,9 +158,7 @@ public class ManagerTravelDetailFragment extends Fragment {
 
                 FragmentManager fm = getFragmentManager();
                 fm.popBackStack();
-
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+            }
+        });
     }
 }

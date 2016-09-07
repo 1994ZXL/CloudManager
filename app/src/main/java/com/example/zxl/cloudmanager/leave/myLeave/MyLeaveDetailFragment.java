@@ -22,6 +22,8 @@ public class MyLeaveDetailFragment extends Fragment {
     private TextView leaveDealTime;
     private TextView leaveState;
 
+    private TextView mBack;
+
     private static final String EXTRA_OBJECT = "leave";
 
     private static Leave mLeave = new Leave();
@@ -63,6 +65,7 @@ public class MyLeaveDetailFragment extends Fragment {
         leaveState = (TextView) view.findViewById(R.id.leave_deal_state);
         leaveDealTime = (TextView)view.findViewById(R.id.leave_deal_time);
 
+        mBack = (TextView) view.findViewById(R.id.leave_details_back);
     }
 
     private void control() {
@@ -74,5 +77,11 @@ public class MyLeaveDetailFragment extends Fragment {
         leaveState.setText(mLeave.getStatus());
         leaveReason.setText(mLeave.getLeave_reason());
         leaveDealTime.setText(mLeave.getHandle_time());
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
     }
 }

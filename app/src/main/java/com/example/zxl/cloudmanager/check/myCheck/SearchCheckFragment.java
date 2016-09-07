@@ -34,7 +34,8 @@ public class SearchCheckFragment extends Fragment {
     private TextView endTimeButton;
 
     private Button mSearchBtn;
-
+    private TextView mBack;
+    private TextView mClean;
 
     private static final String TAG = "SearchCheckFragment";
 
@@ -54,6 +55,15 @@ public class SearchCheckFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_search_check, container, false);
 
         init(v);
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        mClean.setVisibility(View.INVISIBLE);
 
         beginTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +130,9 @@ public class SearchCheckFragment extends Fragment {
         beginTimeButton = (TextView)v.findViewById(R.id.check_begin_time_button);
         endTimeButton = (TextView) v.findViewById(R.id.check_end_time_button);
         mSearchBtn = (Button) v.findViewById(R.id.search_check_search_button);
+
+        mBack = (TextView) v.findViewById(R.id.fragment_search_check_back);
+        mClean = (TextView) v.findViewById(R.id.fragment_search_check_clean);
     }
 
 }
