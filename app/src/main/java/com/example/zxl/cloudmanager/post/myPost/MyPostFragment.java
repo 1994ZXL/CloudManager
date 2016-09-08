@@ -64,6 +64,7 @@ public class MyPostFragment extends Fragment {
     private static int mCurl_page;
 
     private PullToRefreshLayout mPullToRefreshLayout;
+
     private Fragment mFragment;
 
     private static final String TAG = "MyPostFragment";
@@ -112,7 +113,7 @@ public class MyPostFragment extends Fragment {
             keyObj.put(Link.user_id, User.newInstance().getUser_id());
             keyObj.put(Link.is_pmleader, User.newInstance().getIs_pmleader());
             keyObj.put("sort", "daily_date desc");
-            keyObj.put("page_count", 20);
+            keyObj.put("page_count", 7);
             keyObj.put("curl_page", curl_page);
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
@@ -138,7 +139,7 @@ public class MyPostFragment extends Fragment {
                                 mRecyclerView.setHasFixedSize(true);
                                 myAdapter = new MyAdapter(mFragment.getActivity(), mPosts);
                                 mRecyclerView.setAdapter(myAdapter);
-                                mCardView = (CardView)v.findViewById(R.id.fragment_my_check);
+                                mCardView = (CardView)v.findViewById(R.id.my_post_card_item);
                                 myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                                     @Override
                                     public void onItemClick(View view, Object data) {
@@ -201,10 +202,11 @@ public class MyPostFragment extends Fragment {
                 new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
+                        mPosts.clear();
                         loadDate(saveInstanceState, mCurl_page, view);
                         pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1000);
             }
 
             @Override
@@ -217,7 +219,7 @@ public class MyPostFragment extends Fragment {
                         loadDate(saveInstanceState, mCurl_page, view);
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1000);
             }
         });
 

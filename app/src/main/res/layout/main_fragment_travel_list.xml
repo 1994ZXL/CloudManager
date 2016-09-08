@@ -1,31 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/travel_card_item"
+    style="@style/CardView_LayoutStyle">
 
-    <LinearLayout style="@style/Toptitle_LayoutStyle">
+    <LinearLayout style="@style/linearLayoutStyle">
 
-        <TextView
-            style="@style/toptextview_left"
-            android:text="@string/text_return"
-            android:id="@+id/my_travel_back"/>
+        <!--第一排-->
+        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+            <!--姓名-->
+            <TextView
+                android:id="@+id/my_travel_name"
+                style="@style/Text_view_Style"
+                android:layout_weight="1"
+                android:gravity="left" />
 
-        <TextView
-            style="@style/toptextview_center"
-            android:text="@string/travel"
-            android:id="@+id/my_travel_title"/>
 
-        <TextView
-            style="@style/topview_right"
-            android:text="@string/search"
-            android:id="@+id/my_travel_search" />
+            <!--状态-->
+            <TextView
+                android:id="@+id/my_travel_status"
+                style="@style/Text_view_Style"
+                android:layout_weight="1"
+                android:gravity="right" />
+
+        </LinearLayout>
+
+        <!--第二排-->
+        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+
+            <TextView
+                style="@style/Text_view_Style"
+                android:text="@string/employer_travel_reason" />
+
+            <!--内容-->
+            <TextView
+                android:id="@+id/my_travel_reason"
+                style="@style/Text_view_Style"
+                android:layout_marginLeft="6dp"
+                android:maxLength="10" />
+        </LinearLayout>
+
+        <!--第三排-->
+        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+
+            <LinearLayout style="@style/CardView_Viewline_LayoutStyle"
+                android:layout_weight="1">
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/project_begin_time_textview" />
+
+                <!--评价-->
+                <TextView
+                    android:id="@+id/my_travel_beginTime"
+                    style="@style/Text_view_Style"
+                    android:layout_marginLeft="6dp"
+                    android:maxLength="10" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/CardView_Viewline_LayoutStyle"
+                android:layout_weight="1">
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/project_end_time_textview" />
+
+                <!--评价-->
+                <TextView
+                    android:id="@+id/my_travel_endTime"
+                    style="@style/Text_view_Style"
+                    android:layout_marginLeft="6dp"
+                    android:maxLength="10" />
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <ListView android:id="@id/android:list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"/>
-
-</LinearLayout>
+</android.support.v7.widget.CardView>

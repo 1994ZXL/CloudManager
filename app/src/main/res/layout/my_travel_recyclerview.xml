@@ -9,22 +9,22 @@
         <TextView
             style="@style/toptextview_left"
             android:text="@string/text_return"
-            android:id="@+id/main_fragment_my_check_back"/>
+            android:id="@+id/my_travel_back"/>
 
         <TextView
             style="@style/toptextview_center"
-            android:text="@string/my_check"
-            android:id="@+id/main_fragment_my_check_title"/>
+            android:text="@string/travel"
+            android:id="@+id/leader_post_title" />
 
         <TextView
             style="@style/topview_right"
             android:text="@string/search"
-            android:id="@+id/main_fragment_my_check_search"/>
+            android:id="@+id/my_travel_search"/>
 
     </LinearLayout>
 
     <com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout
-        android:id="@+id/my_check_refresh"
+        android:id="@+id/travel_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
 
@@ -40,7 +40,7 @@
                 android:layout_height="match_parent">
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/check_recyclerview"
+                    android:id="@+id/travel_recyclerView"
                     android:dividerHeight="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -55,7 +55,3 @@
     </com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout>
 
 </LinearLayout>
-
-
-
-

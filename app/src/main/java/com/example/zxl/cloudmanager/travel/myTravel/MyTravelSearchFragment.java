@@ -19,23 +19,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.zxl.cloudmanager.Edit;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
-import com.example.zxl.cloudmanager.model.DatePickerFragment;
 import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
-import com.example.zxl.cloudmanager.model.Travel;
-import com.example.zxl.cloudmanager.model.TravelLab;
 import com.example.zxl.cloudmanager.travel.checkManagerTravel.ManagerTravelActivity;
 import com.example.zxl.cloudmanager.travel.checkManagerTravel.ManagerTravelAddFragment;
-import com.example.zxl.cloudmanager.travel.checkManagerTravel.ManagerTravelListFragment;
 import com.example.zxl.cloudmanager.travel.leader.LeaderTravelSearchActivity;
-
-import java.util.ArrayList;
-import java.util.Date;
 
 public class MyTravelSearchFragment extends Fragment {
 
@@ -82,7 +73,7 @@ public class MyTravelSearchFragment extends Fragment {
             mAddTextView.setVisibility(View.INVISIBLE);
             mAimFragment = new MyTravelFragment();
         } else if (mFragment.getActivity().getClass() == ManagerTravelActivity.class) {
-            mAimFragment = new ManagerTravelListFragment();
+            mAimFragment = new MyTravelFragment();
             mAddTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -100,7 +91,7 @@ public class MyTravelSearchFragment extends Fragment {
                 }
             });
         } else if (mFragment.getActivity().getClass() == LeaderTravelSearchActivity.class) {
-            mAimFragment = new ManagerTravelListFragment();
+            mAimFragment = new MyTravelFragment();
             mAddTextView.setVisibility(View.INVISIBLE);
         }
 

@@ -161,6 +161,7 @@ public class LSCheckFragment extends Fragment {
                 new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
+                        checks.clear();
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     }

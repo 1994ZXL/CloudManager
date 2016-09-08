@@ -4,6 +4,8 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,6 +24,8 @@ import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Leave;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.User;
+import com.example.zxl.cloudmanager.pulltorefresh.MyListener;
+import com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -50,6 +54,10 @@ public class MyLeaveQueryFragment extends Fragment {
     private Fragment mFragment;
     private static final String TAG = "MyLeaveQueryFragment";
 
+    private static int mCurl_page;
+
+    private PullToRefreshLayout mPullToRefreshLayout;
+
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
     private JSONObject keyObj = new JSONObject();
@@ -61,6 +69,7 @@ public class MyLeaveQueryFragment extends Fragment {
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
         mFragment = this;
+        mCurl_page = 1;
     }
 
     @Override
@@ -69,32 +78,7 @@ public class MyLeaveQueryFragment extends Fragment {
         leaves.clear();
     }
 
-    private String getTime() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日");
-        Date curDate = new Date(System.currentTimeMillis());//获取当前时间
-        String date = formatter.format(curDate);
-        return date;
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        final View v = layoutInflater.inflate(R.layout.main_fragment_my_leave_query, parent, false);
-
-
-//        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_leave_pull_to_refresh);
-//        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                mPullToRefreshView.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        mPullToRefreshView.setRefreshing(false);
-//                    }
-//                }, REFRESH_DELAY);
-//            }
-//        });
-
-        saveInstanceState = getArguments();
+    private void loadDate(final Bundle saveInstanceState, int curl_page,final View v) {
         if (null != saveInstanceState) {
             try {
                 if (0 != saveInstanceState.getInt(Link.leave_type))
@@ -113,11 +97,10 @@ public class MyLeaveQueryFragment extends Fragment {
                 e.printStackTrace();
             }
         }
-
         try {
             keyObj.put(Link.mem_id, User.newInstance().getUser_id());
             keyObj.put(Link.page_count, 20);
-            keyObj.put(Link.curl_page, 1);
+            keyObj.put(Link.curl_page, curl_page);
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -148,7 +131,6 @@ public class MyLeaveQueryFragment extends Fragment {
                                     Fragment fragment = MyLeaveDetailFragment.newInstance(data);
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     if (!fragment.isAdded()) {
-//                                        transaction.addToBackStack(null);
                                         transaction.hide(mFragment);
                                         transaction.replace(R.id.blankActivity, fragment);
                                         transaction.commit();
@@ -167,6 +149,42 @@ public class MyLeaveQueryFragment extends Fragment {
 
             }
 
+        });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceStates) {
+        final View v = layoutInflater.inflate(R.layout.main_fragment_my_leave_query, parent, false);
+
+        saveInstanceStates = getArguments();
+        final Bundle saveInstanceState = saveInstanceStates;
+        loadDate(saveInstanceState, mCurl_page, v);
+        mPullToRefreshLayout = (PullToRefreshLayout) v.findViewById(R.id.my_leave_refresh);
+        mPullToRefreshLayout.setOnRefreshListener(new MyListener() {
+            @Override
+            public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
+                new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        leaves.clear();
+                        loadDate(saveInstanceState, mCurl_page, v);
+                        pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+                    }
+                }.sendEmptyMessageDelayed(0, 5000);
+            }
+
+            @Override
+            public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout) {
+                new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        leaves.clear();
+                        mCurl_page++;
+                        loadDate(saveInstanceState, mCurl_page, v);
+                        pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                    }
+                }.sendEmptyMessageDelayed(0, 5000);
+            }
         });
 
         return v;

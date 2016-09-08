@@ -35,8 +35,8 @@ public class MyTravelDetailFragment extends Fragment {
         mFragment = this;
     }
 
-    public static MyTravelDetailFragment newInstance(Travel travel){
-        sTravel = travel;
+    public static MyTravelDetailFragment newInstance(Object travel){
+        sTravel = (Travel) travel;
         MyTravelDetailFragment fragment = new MyTravelDetailFragment();
         return fragment;
     }

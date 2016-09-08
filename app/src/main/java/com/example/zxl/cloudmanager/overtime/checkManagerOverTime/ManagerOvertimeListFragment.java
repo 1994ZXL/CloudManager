@@ -5,6 +5,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +25,8 @@ import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.OverTime;
 import com.example.zxl.cloudmanager.model.User;
 import com.example.zxl.cloudmanager.overtime.leader.LeaderOvertimeSearchActivity;
+import com.example.zxl.cloudmanager.pulltorefresh.MyListener;
+import com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -48,6 +52,10 @@ public class ManagerOvertimeListFragment extends Fragment {
 
     private Fragment mFragment;
 
+    private static int mCurl_page;
+
+    private PullToRefreshLayout mPullToRefreshLayout;
+
     private TextView mTitle;
     private TextView mBack;
     private TextView mSearch;
@@ -66,36 +74,10 @@ public class ManagerOvertimeListFragment extends Fragment {
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
         mFragment = this;
+        mCurl_page = 1;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-       final View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
-
-        mBack = (TextView) v.findViewById(R.id.my_overtime_back);
-        mBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mFragment.getActivity().finish();
-            }
-        });
-        mTitle = (TextView) v.findViewById(R.id.my_overtime_title);
-        mTitle.setText("加班");
-        mSearch = (TextView) v.findViewById(R.id.my_overtime_search);
-        mSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = null;
-                if (null == fragment) {
-                    FragmentManager fm = getFragmentManager();
-                    fragment = new ManagerOverTimeSearchFragment();
-                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
-                }
-            }
-        });
-
-        saveInstanceState = getArguments();
-
+    private void loadDate(final Bundle saveInstanceState, int curl_page, final View v) {
         if (mFragment.getActivity().getClass() == LeaderOvertimeSearchActivity.class)
             url = Link.work_list + Link.get_list;
         else url = Link.manage_work + Link.get_list;
@@ -119,8 +101,8 @@ public class ManagerOvertimeListFragment extends Fragment {
                 keyObj.put(Link.work_pm, saveInstanceState.getString(Link.work_pm));
 
                 keyObj.put("sort", "start_time desc");
-                keyObj.put("page_count", 50);
-                keyObj.put("curl_page", 1);
+                keyObj.put("page_count", 20);
+                keyObj.put("curl_page", curl_page);
                 keyObj.put(Link.mem_id, User.newInstance().getUser_id());
                 keyObj.put(Link.is_pmmaster, User.newInstance().getIs_pmmaster());
                 keyObj.put(Link.is_puncher, User.newInstance().getIs_puncher());
@@ -195,7 +177,64 @@ public class ManagerOvertimeListFragment extends Fragment {
             }
 
         });
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle savedInstanceState) {
+       final View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
+
+        mBack = (TextView) v.findViewById(R.id.my_overtime_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+        mTitle = (TextView) v.findViewById(R.id.my_overtime_title);
+        mTitle.setText("加班");
+        mSearch = (TextView) v.findViewById(R.id.my_overtime_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new ManagerOverTimeSearchFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+            }
+        });
+
+        savedInstanceState = getArguments();
+        final Bundle saveInstanceState = savedInstanceState;
+        loadDate(saveInstanceState, mCurl_page, v);
+        mPullToRefreshLayout = (PullToRefreshLayout) v.findViewById(R.id.my_overtime_refresh);
+        mPullToRefreshLayout.setOnRefreshListener(new MyListener() {
+            @Override
+            public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
+                new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        overTimes.clear();
+                        loadDate(saveInstanceState, mCurl_page, v);
+                        pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+                    }
+                }.sendEmptyMessageDelayed(0, 5000);
+            }
+
+            @Override
+            public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout) {
+                new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        overTimes.clear();
+                        mCurl_page++;
+                        loadDate(saveInstanceState, mCurl_page, v);
+                        pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                    }
+                }.sendEmptyMessageDelayed(0, 5000);
+            }
+        });
 
         return v;
     }

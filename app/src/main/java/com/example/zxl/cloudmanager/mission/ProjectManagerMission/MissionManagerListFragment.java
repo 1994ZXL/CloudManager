@@ -6,6 +6,8 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -28,6 +30,8 @@ import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Mission;
 import com.example.zxl.cloudmanager.model.User;
+import com.example.zxl.cloudmanager.pulltorefresh.MyListener;
+import com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -51,11 +55,19 @@ public class MissionManagerListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private List<Mission> missions = new ArrayList<Mission>();
     private MyAdapter myAdapter;
+
     private TextView mAddTextView;
+    private TextView mTitle;
+    private TextView mSearch;
+    private TextView mBack;
 
     private Fragment mFragment;
 
     public static final int REFRESH_DELAY = 4000;
+
+    private static int mCurl_page;
+
+    private PullToRefreshLayout mPullToRefreshLayout;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
@@ -74,59 +86,10 @@ public class MissionManagerListFragment extends Fragment {
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
         mFragment = this;
+
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.task_add_delete, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.task_add:
-                Fragment fragment = new MissionManagerAddFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        final View view = layoutInflater.inflate(R.layout.main_fragment_my_mission, parent, false);
-
-        mAddTextView = (TextView) view.findViewById(R.id.manager_mission_add);
-        mAddTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new MissionManagerAddFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
-            }
-        });
-
-        saveInstanceState = getArguments();
+    private void loadDate(final Bundle saveInstanceState, int curl_page,final View view) {
         if (null != saveInstanceState) {
             try {
                 if (null != saveInstanceState.getString(Link.title))
@@ -148,8 +111,8 @@ public class MissionManagerListFragment extends Fragment {
         try {
             keyObj.put(Link.user_id, User.newInstance().getUser_id());
             keyObj.put("sort", "start_time desc");
-            keyObj.put("page_count", 50);
-            keyObj.put("curl_page", 1);
+            keyObj.put("page_count", 20);
+            keyObj.put("curl_page", curl_page);
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -213,6 +176,92 @@ public class MissionManagerListFragment extends Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceStates) {
+        final View view = layoutInflater.inflate(R.layout.main_fragment_my_mission, parent, false);
+        mCurl_page = 1;
+        mAddTextView = (TextView) view.findViewById(R.id.manager_mission_add);
+        mAddTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new MissionManagerAddFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
+            }
+        });
+
+        mBack = (TextView) view.findViewById(R.id.my_mission_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        mTitle = (TextView) view.findViewById(R.id.my_mission_title);
+        mTitle.setText("任务管理");
+
+        mSearch = (TextView) view.findViewById(R.id.manager_mission_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new MissionSearchFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
+            }
+        });
+
+        saveInstanceStates = getArguments();
+        final Bundle saveInstanceState = saveInstanceStates;
+        loadDate(saveInstanceState, mCurl_page, view);
+        mPullToRefreshLayout = (PullToRefreshLayout) view.findViewById(R.id.my_mission_refresh);
+        mPullToRefreshLayout.setOnRefreshListener(new MyListener() {
+            @Override
+            public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
+                new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        missions.clear();
+                        loadDate(saveInstanceState, mCurl_page, view);
+                        pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+                    }
+                }.sendEmptyMessageDelayed(0, 5000);
+            }
+
+            @Override
+            public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout) {
+                new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        missions.clear();
+                        mCurl_page++;
+                        loadDate(saveInstanceState, mCurl_page, view);
+                        pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                    }
+                }.sendEmptyMessageDelayed(0, 5000);
+            }
+        });
+
         return view;
     }
 

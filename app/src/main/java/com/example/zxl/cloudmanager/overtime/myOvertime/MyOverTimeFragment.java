@@ -5,6 +5,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -27,6 +29,8 @@ import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.OverTime;
 import com.example.zxl.cloudmanager.model.User;
 import com.example.zxl.cloudmanager.overtime.checkManagerOverTime.ManagerOverTimeSearchFragment;
+import com.example.zxl.cloudmanager.pulltorefresh.MyListener;
+import com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -57,6 +61,10 @@ public class MyOverTimeFragment extends Fragment {
     private TextView mBack;
     private TextView mSearch;
 
+    private static int mCurl_page;
+
+    private PullToRefreshLayout mPullToRefreshLayout;
+
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
     private JSONObject keyObj = new JSONObject();
@@ -69,34 +77,10 @@ public class MyOverTimeFragment extends Fragment {
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
         mFragment = this;
+        mCurl_page = 1;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        final View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
-
-        mBack = (TextView) v.findViewById(R.id.my_overtime_back);
-        mBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mFragment.getActivity().finish();
-            }
-        });
-
-        mSearch = (TextView) v.findViewById(R.id.my_overtime_search);
-        mSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = null;
-                if (null == fragment) {
-                    FragmentManager fm = getFragmentManager();
-                    fragment = new ManagerOverTimeSearchFragment();
-                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
-                }
-            }
-        });
-
-        saveInstanceState = getArguments();
+    private void loadDate(final Bundle saveInstanceState, int curl_page, final View v) {
         if (null != saveInstanceState) {
 
             try {
@@ -124,8 +108,8 @@ public class MyOverTimeFragment extends Fragment {
                 url = Link.manage_work + Link.get_list;
             }
             keyObj.put("sort", "start_time desc");
-            keyObj.put("page_count", 50);
-            keyObj.put("curl_page", 1);
+            keyObj.put("page_count", 20);
+            keyObj.put("curl_page", curl_page);
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -179,6 +163,64 @@ public class MyOverTimeFragment extends Fragment {
             @Override
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 return;
+            }
+        });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle savedInstanceState) {
+        final View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
+
+        mBack = (TextView) v.findViewById(R.id.my_overtime_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        mSearch = (TextView) v.findViewById(R.id.my_overtime_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new ManagerOverTimeSearchFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+            }
+        });
+
+        savedInstanceState = getArguments();
+        final Bundle saveInstanceState = savedInstanceState;
+
+        loadDate(saveInstanceState, mCurl_page, v);
+        mPullToRefreshLayout = (PullToRefreshLayout) v.findViewById(R.id.my_overtime_refresh);
+        mPullToRefreshLayout.setOnRefreshListener(new MyListener() {
+            @Override
+            public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
+                new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        overTimes.clear();
+                        loadDate(saveInstanceState, mCurl_page, v);
+                        pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+                    }
+                }.sendEmptyMessageDelayed(0, 5000);
+            }
+
+            @Override
+            public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout) {
+                new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        overTimes.clear();
+                        mCurl_page++;
+                        loadDate(saveInstanceState, mCurl_page, v);
+                        pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                    }
+                }.sendEmptyMessageDelayed(0, 5000);
             }
         });
 
