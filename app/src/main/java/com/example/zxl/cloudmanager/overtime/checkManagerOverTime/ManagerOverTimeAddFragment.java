@@ -1,6 +1,8 @@
 package com.example.zxl.cloudmanager.overtime.checkManagerOverTime;
 
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -254,6 +256,15 @@ public class ManagerOverTimeAddFragment extends Fragment {
                             }
                         }
                     });
+                }
+                Fragment fragment;
+                FragmentManager fm = getFragmentManager();
+                fragment = fm.findFragmentById(R.id.blankActivity);
+                if(null == fragment){
+                    fragment = new ManagerOvertimeListFragment();
+                    fm.beginTransaction().add(R.id.blankActivity, fragment).commit();
+                } else {
+                    //什么都不做
                 }
             }
         });

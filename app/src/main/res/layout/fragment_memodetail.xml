@@ -1,30 +1,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#F0F8FF"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    tools:context=".memo.MemoDetailFragment"
-    android:orientation="vertical">
+    style="@style/Parent_LayoutStyle"
+    tools:context=".memo.MemoDetailFragment">
 
     <EditText
         android:id="@+id/memo_detail_title_edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/memo_title_textview"
+        style="@style/EditText_Style"
         android:gravity="center"
-        android:textSize="25dp"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:hint="@string/memo_title_textview"
+        android:textSize="25dp" />
+
+    <TextView
         android:id="@+id/memo_detail_date_button"
-        android:background="#F1FFFF"
+        style="@style/Text_view_Style"
         android:layout_gravity="center" />
-    <EditText
-        android:id="@+id/memo_detail_content_edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/memo_content_textview"/>
+
+    <LinearLayout
+        style="@style/Viewline_LayoutStyle"
+        android:layout_height="150dp">
+
+        <EditText
+            android:id="@+id/memo_detail_content_edittext"
+            style="@style/EditText_Style"
+            android:hint="@string/memo_content_textview" />
+    </LinearLayout>
 
 </LinearLayout>

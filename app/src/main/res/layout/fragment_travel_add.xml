@@ -54,7 +54,7 @@
                     <TextView
                         android:id="@+id/fragment_travel_beginTime"
                         style="@style/Text_view_Style"
-                        android:text="@string/project_begin_time_textview" />
+                        android:hint="@string/select_time" />
 
                 </LinearLayout>
 
@@ -68,7 +68,7 @@
                     <TextView
                         android:id="@+id/fragment_travel_endTime"
                         style="@style/Text_view_Style"
-                        android:text="@string/project_end_time_textview" />
+                        android:hint="@string/select_time" />
 
                 </LinearLayout>
 

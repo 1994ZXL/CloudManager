@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 
@@ -17,8 +18,8 @@ import com.example.zxl.cloudmanager.R;
 public class MemoSearchFragment extends Fragment {
 
     private EditText mMemoTitle;
-    private Button mBeginTimeBtn;
-    private Button mEndTimeBtn;
+    private TextView mBeginTimeBtn;
+    private TextView mEndTimeBtn;
 
     private Button mSearchBtn;
 
@@ -38,8 +39,8 @@ public class MemoSearchFragment extends Fragment {
 
     private void init(View v){
         mMemoTitle = (EditText) v.findViewById(R.id.my_memo_title_edittext);
-//        mBeginTimeBtn = (Button) v.findViewById(R.id.employer_travel_begin_time_button);
-//        mEndTimeBtn = (Button) v.findViewById(R.id.employer_travel_end_time_button);
+//        mBeginTimeBtn = (TextView) v.findViewById(R.id.memo_submit_begin_time_button);
+//        mEndTimeBtn = (TextView) v.findViewById(R.id.memo_submit_end_time_button);
 
         mSearchBtn = (Button) v.findViewById(R.id.my_memo_search_button);
     }

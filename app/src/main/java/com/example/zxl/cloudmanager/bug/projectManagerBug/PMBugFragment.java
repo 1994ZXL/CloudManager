@@ -20,7 +20,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
-import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.Bug;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
@@ -55,7 +54,6 @@ public class PMBugFragment extends Fragment {
 
     private static final String TAG = "PMBugFragment";
 
-    private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
@@ -98,19 +96,6 @@ public class PMBugFragment extends Fragment {
 
 
         saveInstanceState = getArguments();
-
-        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_bug_pull_to_refresh);
-        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullToRefreshView.setRefreshing(false);
-                    }
-                }, REFRESH_DELAY);
-            }
-        });
 
         if (null != saveInstanceState) {
             try {

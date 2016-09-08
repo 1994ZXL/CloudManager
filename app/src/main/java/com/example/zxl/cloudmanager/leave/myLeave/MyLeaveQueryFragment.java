@@ -3,7 +3,6 @@ package com.example.zxl.cloudmanager.leave.myLeave;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -15,15 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.example.zxl.cloudmanager.R;
-import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Leave;
-import com.example.zxl.cloudmanager.model.LeaveMyLab;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.User;
 import com.loopj.android.http.AsyncHttpClient;
@@ -50,7 +46,6 @@ public class MyLeaveQueryFragment extends Fragment {
     private ArrayList<Leave> leaves = new ArrayList<Leave>();
     private MyAdapter myAdapter;
 
-    private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
     private Fragment mFragment;
     private static final String TAG = "MyLeaveQueryFragment";

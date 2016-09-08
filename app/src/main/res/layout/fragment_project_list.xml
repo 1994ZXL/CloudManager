@@ -84,6 +84,7 @@
                     <EditText
                         android:id="@+id/list_customer_phone_editText"
                         style="@style/EditText_Style"
+                        android:inputType="phone"
                         android:hint="@string/input_phone"/>
                 </LinearLayout>
 
@@ -98,6 +99,7 @@
                     <EditText
                         android:id="@+id/list_cutomer_qq_editText"
                         style="@style/EditText_Style"
+                        android:inputType="number"
                         android:hint="@string/input_qq"/>
                 </LinearLayout>
 
@@ -112,6 +114,7 @@
                     <EditText
                         android:id="@+id/list_customer_wechat_editText"
                         style="@style/EditText_Style"
+                        android:inputType="number"
                         android:hint="@string/input_wechat"/>
                 </LinearLayout>
             </LinearLayout>

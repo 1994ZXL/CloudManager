@@ -71,7 +71,7 @@
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:hint="@string/select_time"
+                        android:text="@string/choose_time"
                         android:id="@+id/overtime_add_begin_time"/>
 
                 </LinearLayout>
@@ -86,7 +86,7 @@
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:hint="@string/select_time"
+                        android:text="@string/choose_time"
                         android:id="@+id/overtime_add_end_time"/>
 
                 </LinearLayout>

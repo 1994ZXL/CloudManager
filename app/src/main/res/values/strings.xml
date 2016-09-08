@@ -100,11 +100,11 @@
     <string name="pm_customer_contactor_phone">联系电话</string>
 
     <!--备忘录-->
-    <string name="memo_title_textview">标题</string>
+    <string name="memo_title_textview">请输入标题</string>
     <string name="input_memo_title">请输入备忘录标题</string>
     <string name="memo_choose">备忘录筛选</string>
     <string name="memo_date_textview">xx年xx月xx日</string>
-    <string name="memo_content_textview">备忘录内容</string>
+    <string name="memo_content_textview">请输入备忘录内容</string>
     <string name="new_memo">新增备忘录</string>
     <string name="delete_memo">删除备忘录</string>
     <string name="submit_time">提交时间</string>

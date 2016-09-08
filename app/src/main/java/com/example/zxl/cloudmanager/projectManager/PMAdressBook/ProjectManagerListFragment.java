@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
-import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
@@ -47,7 +46,6 @@ public class ProjectManagerListFragment extends Fragment {
 
     private Fragment mFragment;
 
-    private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
 
     private static final String SEARCH_KEY = "search_key";
@@ -73,20 +71,6 @@ public class ProjectManagerListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View view = layoutInflater.inflate(R.layout.pm_manager_list, parent, false);
-
-
-        mPullToRefreshView = (PullToRefreshView) view.findViewById(R.id.pm_manager_pull_to_refresh);
-        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullToRefreshView.setRefreshing(false);
-                    }
-                }, REFRESH_DELAY);
-            }
-        });
 
         saveInstanceState = getArguments();
         if (null != saveInstanceState) {

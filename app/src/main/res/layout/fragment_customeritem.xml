@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginTop="2dp"
-    android:background="#FFFFFF"
-    android:padding="15dp">
+    style="@style/CardView_Viewline_LayoutStyle">
 
     <TextView
         android:id="@+id/customer_id"
-        android:layout_height="0dp"
+        style="@style/Text_view_Style"
         android:layout_width="0dp"
-        android:visibility="invisible"/>
+        android:layout_height="0dp"
+        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/customer_name"
-        style="@style/font"
-        android:layout_width="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_weight="3"/>
+        style="@style/Text_view_Style" />
 
     <TextView
         android:id="@+id/customer_phone_number"
-        style="@style/font"
-        android:layout_width="wrap_content"
-        android:layout_weight="1"/>
+        style="@style/Text_view_Style"/>
 </LinearLayout>

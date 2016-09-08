@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
@@ -23,7 +24,7 @@ public class MemoDetailFragment extends Fragment {
 
     private Memo memo = new Memo();
     private EditText mDetailTitleET;
-    private Button mDetailDateBtn;
+    private TextView mDetailDateBtn;
     private EditText mDetailContentET;
 
     @Override
@@ -46,7 +47,7 @@ public class MemoDetailFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_memodetail, container, false);
         mDetailTitleET = (EditText)v.findViewById(R.id.memo_detail_title_edittext);
 
-        mDetailDateBtn = (Button)v.findViewById(R.id.memo_detail_date_button);
+        mDetailDateBtn = (TextView)v.findViewById(R.id.memo_detail_date_button);
         mDetailDateBtn.setEnabled(true);//设置按钮可点
         mDetailDateBtn.setText(android.text.format.DateFormat.format("yyyy.MM.dd", getTime()));
         mDetailDateBtn.setOnClickListener(new View.OnClickListener() {

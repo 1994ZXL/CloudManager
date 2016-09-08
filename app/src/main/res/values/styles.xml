@@ -88,16 +88,15 @@
 
     <style name="Text_view_Style"><!-- 常用textview文字样式 -->
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:background">@color/white</item>
         <item name="android:padding">10dp</item>
     </style>
 
-    <style name="Text_Style"><!-- 常用textview文字样式 -->
+    <style name="Text_Style"><!-- 文字样式 -->
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:background">@color/white</item>
@@ -105,7 +104,7 @@
 
     <style name="EditText_Style"><!-- 文本编辑样式 -->
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:background">@color/white</item>
@@ -128,11 +127,19 @@
         <item name="android:background">@color/search_background</item>
     </style>
 
+    <style name="CardView_LayoutStyle"><!-- CardView类linearLayout样式 -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cardCornerRadius">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="cardBackgroundColor">@color/memo_background</item>
+    </style>
+
     <style name="linearLayoutStyle"><!-- 标准linearLayout样式 -->
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:orientation">vertical</item>
-        <item name="android:gravity">center_horizontal</item>
     </style>
 
     <style name="Toptitle_LayoutStyle"><!-- 标题栏linearLayout样式 -->
@@ -146,6 +153,12 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@color/white</item>
         <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <style name="CardView_Viewline_LayoutStyle"><!-- CardView行显示linearLayout -->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
     </style>
 
     <style name="ScrollView_Style"><!-- 列表视图样式 -->

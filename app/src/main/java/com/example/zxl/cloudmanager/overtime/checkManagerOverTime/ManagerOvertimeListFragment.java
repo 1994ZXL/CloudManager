@@ -13,12 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
-import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
@@ -54,7 +52,6 @@ public class ManagerOvertimeListFragment extends Fragment {
     private TextView mBack;
     private TextView mSearch;
 
-    private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
@@ -102,19 +99,6 @@ public class ManagerOvertimeListFragment extends Fragment {
         if (mFragment.getActivity().getClass() == LeaderOvertimeSearchActivity.class)
             url = Link.work_list + Link.get_list;
         else url = Link.manage_work + Link.get_list;
-
-        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
-        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullToRefreshView.setRefreshing(false);
-                    }
-                }, REFRESH_DELAY);
-            }
-        });
 
         if (null == saveInstanceState) {
             Log.d(TAG, "没有选择条件");

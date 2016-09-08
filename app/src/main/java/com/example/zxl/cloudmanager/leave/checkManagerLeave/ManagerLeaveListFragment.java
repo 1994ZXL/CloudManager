@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
-import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.leave.leader.LeaderLeaveSearchActivity;
 import com.example.zxl.cloudmanager.leave.myLeave.MyLeaveDetailFragment;
 import com.example.zxl.cloudmanager.leave.myLeave.MyLeaveSearchFragment;
@@ -47,7 +46,6 @@ public class ManagerLeaveListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private ArrayList<Leave> leaves = new ArrayList<Leave>();
     private MyAdapter myAdapter;
-    private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
 
     private TextView mBack;
@@ -104,21 +102,7 @@ public class ManagerLeaveListFragment extends Fragment {
             }
         });
 
-        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
-        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullToRefreshView.setRefreshing(false);
-                    }
-                }, REFRESH_DELAY);
-            }
-        });
         Log.d(TAG, "调用了一次");
-
-
 
         if (null == saveInstanceState) {
             Log.d(TAG, "没有选择条件");

@@ -5,6 +5,8 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,13 +18,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
-import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
-import com.example.zxl.cloudmanager.check.myCheck.MyCheckDetailFragment;
 import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.User;
+import com.example.zxl.cloudmanager.pulltorefresh.MyListener;
+import com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -49,8 +51,11 @@ public class ManagerCheckListFragment extends Fragment {
     private TextView mSearch;
 
     public static final int REFRESH_DELAY = 4000;
-    private PullToRefreshView mPullToRefreshView;
     private static final String TAG = "MCListFragment";
+
+    private static int mCurl_page;
+
+    private PullToRefreshLayout mPullToRefreshLayout;
 
     private Fragment mFragment;
 
@@ -64,49 +69,10 @@ public class ManagerCheckListFragment extends Fragment {
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
         mFragment = this;
+        mCurl_page = 0;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        final View v = layoutInflater.inflate(R.layout.main_fragment_manager_check_list, parent, false);
-
-        Log.d(TAG, "调用了一次");
-
-        mBack = (TextView) v.findViewById(R.id.main_fragment_manager_check_back);
-        mBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mFragment.getActivity().finish();
-            }
-        });
-
-        mSearch = (TextView) v.findViewById(R.id.main_fragment_manager_check_search);
-        mSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = null;
-                if (null == fragment) {
-                    FragmentManager fm = getFragmentManager();
-                    fragment = new ManagerCheckQueryFragment();
-                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
-                }
-            }
-        });
-
-        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
-        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullToRefreshView.setRefreshing(false);
-                    }
-                }, REFRESH_DELAY);
-            }
-        });
-
-        saveInstanceState = getArguments();
+    private void loadDate(final Bundle saveInstanceState, int curl_page,final View v) {
         if (null != saveInstanceState) {
 
             try {
@@ -181,6 +147,64 @@ public class ManagerCheckListFragment extends Fragment {
             }
 
         });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceStates) {
+        final View v = layoutInflater.inflate(R.layout.main_fragment_manager_check_list, parent, false);
+        Log.d(TAG, "调用了一次");
+
+        saveInstanceStates = getArguments();
+        final Bundle saveInstanceState = saveInstanceStates;
+        loadDate(saveInstanceState, mCurl_page, v);
+        mPullToRefreshLayout = (PullToRefreshLayout) v.findViewById(R.id.manager_check_refresh);
+        mPullToRefreshLayout.setOnRefreshListener(new MyListener() {
+            @Override
+            public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
+                new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        loadDate(saveInstanceState, mCurl_page, v);
+                        pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+                    }
+                }.sendEmptyMessageDelayed(0, 5000);
+            }
+
+            @Override
+            public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout) {
+                new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        checks.clear();
+                        mCurl_page++;
+                        loadDate(saveInstanceState, mCurl_page, v);
+                        pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                    }
+                }.sendEmptyMessageDelayed(0, 5000);
+            }
+        });
+
+        mBack = (TextView) v.findViewById(R.id.main_fragment_manager_check_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        mSearch = (TextView) v.findViewById(R.id.main_fragment_manager_check_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new ManagerCheckQueryFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+            }
+        });
+
         return v;
     }
 
@@ -212,7 +236,7 @@ public class ManagerCheckListFragment extends Fragment {
             Check check = checks.get(i);
             viewHolder.mName.setText(check.getMem_name());
             viewHolder.mCheckLocation.setText(check.getPuncher_name());
-            viewHolder.mState.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(check.getAtt_date()));
+            viewHolder.mState.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(check.getAtt_date() + 28800));
             viewHolder.mCheckManager.setText(check.getMaster_name());
             viewHolder.itemView.setTag(checks.get(i));
         }

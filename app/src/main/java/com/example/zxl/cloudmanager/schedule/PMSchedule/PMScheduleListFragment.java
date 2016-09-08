@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
-import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
@@ -44,7 +43,6 @@ public class PMScheduleListFragment extends Fragment {
     private MyAdapter myAdapter;
 
     public static final int REFRESH_DELAY = 4000;
-    private PullToRefreshView mPullToRefreshView;
     private static final String TAG = "MCListFragment";
 
     private Fragment mFragment;
@@ -64,19 +62,6 @@ public class PMScheduleListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View v = layoutInflater.inflate(R.layout.pm_schedule_list, parent, false);
-
-        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.pull_to_refresh);
-        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullToRefreshView.setRefreshing(false);
-                    }
-                }, REFRESH_DELAY);
-            }
-        });
 
         saveInstanceState = getArguments();
         if (null != saveInstanceState) {

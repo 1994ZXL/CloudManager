@@ -68,8 +68,8 @@ public class MyPostDetailFragment extends Fragment {
 
     private String content;
 
-    public static MyPostDetailFragment newInstance(Post post) {
-        sPost = post;
+    public static MyPostDetailFragment newInstance(Object post) {
+        sPost = (Post) post;
         MyPostDetailFragment fragment = new MyPostDetailFragment();
         return fragment;
     }
@@ -135,9 +135,9 @@ public class MyPostDetailFragment extends Fragment {
         if (sPost.getReport_time() == 0) {
             mSubmitTime.setText("——");
         } else {
-            mSubmitTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sPost.getReport_time()));
+            mSubmitTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sPost.getReport_time() + 28800));
         }
-        mDailyDate.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sPost.getDaily_date()));
+        mDailyDate.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sPost.getDaily_date() + 28800));
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -189,8 +189,7 @@ public class MyPostDetailFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        /*ImageButton mBtn = (ImageButton) getActivity().findViewById(R.id.my_post_activity_searchBtn);
-        mBtn.setVisibility(View.VISIBLE);*/
+
     }
 
     @Override

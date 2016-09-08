@@ -97,6 +97,7 @@ public class Link {
     public static final String opinion = "opinion";
 
     //my_daily
+    public static final String my_daily = "my_daily&act=";
     public static final String state = "state"; //日报状态
     public static final String daily_id = "daily_id"; //日报的提交时间 开始
 

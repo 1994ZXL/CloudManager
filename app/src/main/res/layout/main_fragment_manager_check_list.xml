@@ -1,35 +1,40 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/manager_check_refresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
-    <LinearLayout
+    <include layout="@layout/refresh_head" />
+    <!-- 支持所有实现Pullable接口的View -->
+
+    <com.example.zxl.cloudmanager.pulltorefresh.pullableview.PullableScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <LinearLayout style="@style/Toptitle_LayoutStyle">
-
-            <TextView
-                style="@style/toptextview_left"
-                android:text="@string/text_return"
-                android:id="@+id/main_fragment_manager_check_back"/>
-
-            <TextView
-                style="@style/toptextview_center"
-                android:text="@string/check_manager"
-                android:id="@+id/main_fragment_manager_check_title"/>
-
-            <TextView
-                style="@style/topview_right"
-                android:text="@string/search"
-                android:id="@+id/main_fragment_manager_check_search"/>
-
-        </LinearLayout>
-
-        <com.example.zxl.cloudmanager.Refresh.PullToRefreshView
-            android:id="@+id/pull_to_refresh"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+                <TextView
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return"
+                    android:id="@+id/main_fragment_manager_check_back"/>
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/check_manager"
+                    android:id="@+id/main_fragment_manager_check_title"/>
+
+                <TextView
+                    style="@style/topview_right"
+                    android:text="@string/search"
+                    android:id="@+id/main_fragment_manager_check_search"/>
+
+            </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/manager_check_recyclerview"
@@ -38,8 +43,12 @@
                 android:layout_height="match_parent"
                 android:background="@color/white"/>
 
-        </com.example.zxl.cloudmanager.Refresh.PullToRefreshView>
+        </LinearLayout>
 
-    </LinearLayout>
+    </com.example.zxl.cloudmanager.pulltorefresh.pullableview.PullableScrollView>
 
-</RelativeLayout>
+    <include layout="@layout/load_more" />
+
+</com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout>
+
+

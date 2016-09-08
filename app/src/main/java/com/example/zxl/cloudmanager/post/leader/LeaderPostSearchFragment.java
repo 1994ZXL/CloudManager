@@ -25,6 +25,7 @@ import com.example.zxl.cloudmanager.model.DatePickerFragment;
 import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
+import com.example.zxl.cloudmanager.post.myPost.MyPostFragment;
 import com.example.zxl.cloudmanager.post.projectManagerPost.PMPostActivtiy;
 
 import java.text.DateFormat;
@@ -118,7 +119,7 @@ public class LeaderPostSearchFragment extends Fragment {
         mSearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Fragment fragment = new LeaderPostListFragment();
+                Fragment fragment = new MyPostFragment();
                 Bundle bundle = new Bundle();
 
                 bundle.putString(Link.mem_name, name);

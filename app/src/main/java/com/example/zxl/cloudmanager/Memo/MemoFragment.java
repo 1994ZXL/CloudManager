@@ -19,7 +19,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
-import com.example.zxl.cloudmanager.Refresh.PullToRefreshView;
 import com.example.zxl.cloudmanager.model.Memo;
 
 import java.util.ArrayList;
@@ -40,7 +39,6 @@ public class MemoFragment extends Fragment {
     private Fragment mFragment;
     private Button mBtn;
 
-    private PullToRefreshView mPullToRefreshView;
     public static final int REFRESH_DELAY = 4000;
 
     @Override
@@ -48,20 +46,6 @@ public class MemoFragment extends Fragment {
         View v = layoutInflater.inflate(R.layout.main_fragment_my_memo, parent, false);
 
         memos.add(new Memo("第一条", "p1"));
-
-
-        mPullToRefreshView = (PullToRefreshView) v.findViewById(R.id.my_memo_pull_to_refresh);
-        mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullToRefreshView.setRefreshing(false);
-                    }
-                }, REFRESH_DELAY);
-            }
-        });
 
         mRecyclerView = (RecyclerView)v.findViewById(R.id.memo_recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));

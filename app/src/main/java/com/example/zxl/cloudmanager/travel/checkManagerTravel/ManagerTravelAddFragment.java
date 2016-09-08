@@ -229,6 +229,7 @@ public class ManagerTravelAddFragment extends Fragment{
                             "填写信息不全哦",
                             Toast.LENGTH_SHORT).show();
                 } else {
+
                     try {
                         keyObjAdd.put(Link.mem_id, memid);
                         keyObjAdd.put(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi(mBeginTime.getText().toString()));
@@ -243,6 +244,7 @@ public class ManagerTravelAddFragment extends Fragment{
                     }
                     mParamsAdd.put("key", keyAdd);
                     Log.d(TAG, "key: " + keyAdd);
+
                     mHttpcAdd.post(Link.localhost + "manage_trip&act=add", mParamsAdd, new JsonHttpResponseHandler() {
                         @Override
                         public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

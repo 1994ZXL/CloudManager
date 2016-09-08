@@ -25,6 +25,7 @@ import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
 import com.example.zxl.cloudmanager.model.User;
+import com.example.zxl.cloudmanager.post.myPost.MyPostFragment;
 import com.example.zxl.cloudmanager.post.projectManagerPost.PMPostActivtiy;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -121,9 +122,9 @@ public class LeaderPostDetailFragment extends Fragment {
         if (sPost.getReport_time() == 0) {
             mSubmitTime.setText("——");
         } else {
-            mSubmitTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sPost.getReport_time()));
+            mSubmitTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(sPost.getReport_time() + 28800));
         }
-        mDailyDate.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sPost.getDaily_date()));
+        mDailyDate.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sPost.getDaily_date() + 28800));
 
         if (mFragment.getActivity().getClass() == PMPostActivtiy.class){
             mLevelLinearLayout.setVisibility(View.GONE);
@@ -192,7 +193,7 @@ public class LeaderPostDetailFragment extends Fragment {
                                 }
                             }
                         });
-                        Fragment fragment = new LeaderPostListFragment();
+                        Fragment fragment = new MyPostFragment();
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         if (!fragment.isAdded()) {
                             transaction.addToBackStack(null);
