@@ -34,7 +34,7 @@
                     style="@style/Text_view_Style"
                     android:text="@string/stipulate_dutytime" />
 
-                <Button
+                <TextView
                     android:id="@+id/main_fragment_manager_check_edit_stipulate_dutytime"
                     style="@style/Text_view_Style"
                     android:text="@string/choose_time" />
@@ -48,7 +48,7 @@
                     style="@style/Text_view_Style"
                     android:text="@string/duty_sign_time" />
 
-                <Button
+                <TextView
                     android:id="@+id/main_fragment_manager_check_edit_duty_sign_time"
                     style="@style/Text_view_Style"
                     android:text="@string/choose_time"/>
@@ -62,7 +62,7 @@
                     style="@style/Text_view_Style"
                     android:text="@string/stipulate_offdutytime" />
 
-                <Button
+                <TextView
                     android:id="@+id/main_fragment_manager_check_edit_stipulate_offdutytime"
                     style="@style/Text_view_Style"
                     android:text="@string/choose_time"/>
@@ -76,7 +76,7 @@
                     style="@style/Text_view_Style"
                     android:text="@string/offduty_sign_time" />
 
-                <Button
+                <TextView
                     android:id="@+id/main_fragment_manager_check_edit_offduty_sign_time"
                     style="@style/Text_view_Style"
                     android:text="@string/choose_time" />

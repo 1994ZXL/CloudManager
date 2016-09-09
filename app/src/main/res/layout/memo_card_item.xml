@@ -9,8 +9,13 @@
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
             <TextView
+                style="@style/Text_view_Style"
+                android:text="@string/memo_title" />
+
+            <TextView
                 android:id="@+id/memo_title_textview"
                 style="@style/Text_view_Style"
+                android:layout_width="180dp"
                 android:text="@string/memo_title_textview" />
 
             <TextView
@@ -21,14 +26,15 @@
 
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
-        </LinearLayout>
-
-        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+            <TextView
+                style="@style/Text_view_Style"
+                android:text="@string/memo_content" />
 
             <TextView
                 android:id="@+id/memo_content_textview"
                 style="@style/Text_view_Style"
-                android:text="@string/memo_content_textview" />
+                android:maxLength="15"
+                android:text="@string/memo_content" />
         </LinearLayout>
 
     </LinearLayout>

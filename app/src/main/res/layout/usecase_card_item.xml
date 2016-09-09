@@ -1,115 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_my_usecase"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    card_view:cardCornerRadius="4dp"
-    card_view:cardBackgroundColor="@color/memo_background"
-    android:layout_margin="10dp">
+    style="@style/CardView_LayoutStyle">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+    <LinearLayout style="@style/linearLayoutStyle">
 
         <!-- 项目/软件-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:id="@+id/usecase_card_item_project_soft"
-            android:textSize="30dp"/>
 
         <!-- 功能模块-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="12dp"
-            android:layout_marginBottom="12dp">
+        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/functionModule"/>
+                android:id="@+id/usecase_card_item_project_soft"
+                style="@style/Text_view_Style"
+                android:layout_width="164dp" />
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:id="@+id/usecase_card_item_usecase_number"/>
+                style="@style/Text_view_Style"
+                android:text="@string/functionModule" />
+
+            <TextView
+                android:id="@+id/usecase_card_item_usecase_number"
+                android:maxLength="10"
+                style="@style/Text_view_Style"
+                android:layout_width="130dp" />
         </LinearLayout>
 
         <!-- 项目主管-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="12dp"
-            android:layout_marginBottom="12dp">
+        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/project_manager_edittext"/>
+                style="@style/Text_view_Style"
+                android:text="@string/project_manager_edittext" />
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:id="@+id/usecase_card_item_version_number"/>
+                android:id="@+id/usecase_card_item_version_number"
+                style="@style/Text_view_Style"
+                android:layout_width="80dp" />
+
+            <TextView
+                style="@style/Text_view_Style"
+                android:text="@string/autorized_time" />
+
+            <TextView
+                android:id="@+id/usecase_card_item_autorized_time"
+                style="@style/Text_view_Style" />
         </LinearLayout>
 
         <!-- 测试人员-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="12dp"
-            android:layout_marginBottom="12dp">
+        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/text_man"/>
+                style="@style/Text_view_Style"
+                android:text="@string/exploit_man" />
+
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:id="@+id/usecase_card_item_text_man"/>
+                android:id="@+id/usecase_card_item_exploit_man"
+                style="@style/Text_view_Style"
+                android:layout_width="80dp" />
+
+            <TextView
+                style="@style/Text_view_Style"
+                android:text="@string/text_man" />
+
+            <TextView
+                android:id="@+id/usecase_card_item_text_man"
+                style="@style/Text_view_Style"
+                android:layout_width="130dp" />
         </LinearLayout>
 
         <!-- 开发人员-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="12dp"
-            android:layout_marginBottom="12dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/exploit_man"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:id="@+id/usecase_card_item_exploit_man"/>
+        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+
         </LinearLayout>
 
         <!-- 编制时间-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="12dp"
-            android:layout_marginBottom="12dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/autorized_time"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:id="@+id/usecase_card_item_autorized_time"/>
+        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+
         </LinearLayout>
 
     </LinearLayout>

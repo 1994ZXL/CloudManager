@@ -14,7 +14,8 @@
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return"
+                    android:id="@+id/pm_schedule_edit_back"/>
 
                 <TextView
                     style="@style/toptextview_center"
@@ -23,7 +24,7 @@
                 <TextView
                     android:id="@+id/pm_schedule_edit"
                     style="@style/topview_right"
-                    android:text="@string/save"/>
+                    android:text="@string/save" />
 
             </LinearLayout>
 

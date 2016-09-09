@@ -15,7 +15,8 @@
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return"
+                    android:id="@+id/my_bug_add_back"/>
 
                 <TextView
                     style="@style/toptextview_center"

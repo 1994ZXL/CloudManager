@@ -15,7 +15,8 @@
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return"
+                    android:id="@+id/my_bug_details_back"/>
 
                 <TextView
                     style="@style/toptextview_center"
@@ -24,7 +25,7 @@
                 <TextView
                     style="@style/topview_right"
                     android:text="@string/edit"
-                    android:id="@+id/bug_details_edit"/>
+                    android:id="@+id/bug_details_edit" />
 
             </LinearLayout>
 

@@ -26,6 +26,7 @@ import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Leave;
 import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.model.User;
 import com.example.zxl.cloudmanager.post.myPost.MyPostFragment;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -122,6 +123,7 @@ public class ManagerLeaveDealFragment extends Fragment {
                     keyObj.put(Link.handle_opinion, suggestion);
                     keyObj.put(Link.status, status);
                     keyObj.put(Link.leave_id, mLeave.getLeave_id());
+                    keyObj.put(Link.mem_id, User.newInstance().getUser_id());
                     key = DESCryptor.Encryptor(keyObj.toString());
                 } catch (Exception e) {
                     e.printStackTrace();

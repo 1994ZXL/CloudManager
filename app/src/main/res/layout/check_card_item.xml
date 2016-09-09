@@ -10,13 +10,15 @@
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
             <TextView
-                android:id="@+id/ls_check_card_item_time"
+                android:id="@+id/ls_check_card_item_location"
                 style="@style/Text_view_Style"
+                android:layout_width="210dp"
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/ls_check_card_item_location"
+                android:id="@+id/ls_check_card_item_time"
                 style="@style/Text_view_Style"
+                android:gravity="left"
                 android:textSize="20sp" />
 
             <ImageView
@@ -45,7 +47,7 @@
 
             <TextView
                 android:id="@+id/ls_check_card_item_offdutytime"
-                style="@style/Text_view_Style"/>
+                style="@style/Text_view_Style" />
         </LinearLayout>
 
     </LinearLayout>

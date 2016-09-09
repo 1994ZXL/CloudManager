@@ -22,6 +22,16 @@ public class MyMissionDetailFragment extends Fragment {
     private TextView mState;
     private static Mission sMission = new Mission();
 
+    private TextView mBack;
+
+    private Fragment mFrgment;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mFrgment = this;
+    }
+
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View view = layoutInflater.inflate(R.layout.mission_details, parent, false);
@@ -44,6 +54,7 @@ public class MyMissionDetailFragment extends Fragment {
         mBeginTime = (TextView) view.findViewById(R.id.mission_details_begin_time);
         mEndTime = (TextView) view.findViewById(R.id.mission_details_end_time);
         mState = (TextView) view.findViewById(R.id.mission_details_state);
+        mBack = (TextView) view.findViewById(R.id.mission_details_back);
     }
 
     private void contorl() {
@@ -61,6 +72,12 @@ public class MyMissionDetailFragment extends Fragment {
             mEndTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sMission.getEnd_time()));
         }
         mState.setText(sMission.getStatus());
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFrgment.getActivity().finish();
+            }
+        });
     }
 
 }

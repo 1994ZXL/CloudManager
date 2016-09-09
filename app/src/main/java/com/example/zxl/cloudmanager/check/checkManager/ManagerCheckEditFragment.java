@@ -47,10 +47,10 @@ public class ManagerCheckEditFragment extends Fragment{
 
     private static Check sCheck;
 
-    private Button mS_att_time;
-    private Button mS_time;
-    private Button mE_att_time;
-    private Button mE_time;
+    private TextView mS_att_time;
+    private TextView mS_time;
+    private TextView mE_att_time;
+    private TextView mE_time;
     private Button mSaveBtn;
 
     private TextView mBack;
@@ -78,10 +78,10 @@ public class ManagerCheckEditFragment extends Fragment{
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View view = layoutInflater.inflate(R.layout.main_fragment_manager_check_edit, parent, false);
 
-        mS_time = (Button) view.findViewById(R.id.main_fragment_manager_check_edit_stipulate_dutytime);
-        mS_att_time = (Button) view.findViewById(R.id.main_fragment_manager_check_edit_duty_sign_time);
-        mE_time = (Button) view.findViewById(R.id.main_fragment_manager_check_edit_stipulate_offdutytime);
-        mE_att_time = (Button) view.findViewById(R.id.main_fragment_manager_check_edit_offduty_sign_time);
+        mS_time = (TextView) view.findViewById(R.id.main_fragment_manager_check_edit_stipulate_dutytime);
+        mS_att_time = (TextView) view.findViewById(R.id.main_fragment_manager_check_edit_duty_sign_time);
+        mE_time = (TextView) view.findViewById(R.id.main_fragment_manager_check_edit_stipulate_offdutytime);
+        mE_att_time = (TextView) view.findViewById(R.id.main_fragment_manager_check_edit_offduty_sign_time);
         mSaveBtn = (Button) view.findViewById(R.id.main_fragment_manager_check_edit_save_edit_button);
         mBack = (TextView) view.findViewById(R.id.main_fragment_manager_check_edit_back);
 

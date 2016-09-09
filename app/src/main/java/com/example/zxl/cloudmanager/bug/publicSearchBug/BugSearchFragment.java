@@ -1,14 +1,10 @@
 package com.example.zxl.cloudmanager.bug.publicSearchBug;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,22 +15,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.bug.myBug.MyBugActivity;
 import com.example.zxl.cloudmanager.bug.myBug.MyBugFragment;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.bug.projectManagerBug.PMBugActivity;
-import com.example.zxl.cloudmanager.bug.projectManagerBug.PMBugFragment;
-import com.example.zxl.cloudmanager.model.Bug;
-import com.example.zxl.cloudmanager.model.BugLab;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
-import com.example.zxl.cloudmanager.model.DatePickerFragment;
 import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
-
-import java.util.ArrayList;
-import java.util.Date;
 
 
 public class BugSearchFragment extends Fragment {
@@ -95,11 +83,11 @@ public class BugSearchFragment extends Fragment {
             mFinderLinearLayout.setVisibility(View.GONE);
             mReviserLinearLayout.setVisibility(View.GONE);
             mEditTimeLinearLayout.setVisibility(View.GONE);
-            mAimFragment = new PMBugFragment();
+            mAimFragment = new MyBugFragment();
         } else if (mFragment.getActivity().getClass() == PMBugActivity.class) {
             mFinderLinearLayout.setVisibility(View.GONE);
             mReviserLinearLayout.setVisibility(View.GONE);
-            mAimFragment = new PMBugFragment();
+            mAimFragment = new MyBugFragment();
         } else if (mFragment.getActivity().getClass() == MyBugActivity.class) {
             mAimFragment = new MyBugFragment();
         }

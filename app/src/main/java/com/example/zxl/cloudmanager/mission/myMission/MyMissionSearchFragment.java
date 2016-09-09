@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.opengl.ETC1;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
@@ -44,6 +45,7 @@ public class MyMissionSearchFragment extends Fragment {
     private Spinner mMissionStateSpinner;
 
     private Button mSearchBtn;
+    private TextView mBack;
 
     private ArrayAdapter<String> adapter;
     private static final String[] list={"全部","待完成", "待审核","已完成","未完成"};
@@ -136,6 +138,12 @@ public class MyMissionSearchFragment extends Fragment {
                 search();
             }
         });
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
 
         return v;
     }
@@ -149,6 +157,7 @@ public class MyMissionSearchFragment extends Fragment {
         mMissionStateSpinner = (Spinner) v.findViewById(R.id.my_mission_state_sprinner);
 
         mSearchBtn = (Button) v.findViewById(R.id.my_mission_search_button);
+        mBack = (TextView) v.findViewById(R.id.my_mission_back);
     }
 
     private void search() {

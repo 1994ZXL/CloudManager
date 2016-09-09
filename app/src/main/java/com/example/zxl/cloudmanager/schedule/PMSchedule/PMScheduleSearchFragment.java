@@ -29,6 +29,7 @@ public class PMScheduleSearchFragment extends Fragment {
     private EditText mScheduleFrom;
     private EditText mScheduleTo;
     private Button mSearchBtn;
+    private TextView mBack;
 
     private String percentFrom;
     private String percentTo;
@@ -58,6 +59,7 @@ public class PMScheduleSearchFragment extends Fragment {
         mScheduleFrom = (EditText) view.findViewById(R.id.pm_schedule_percent_from);
         mScheduleTo = (EditText) view.findViewById(R.id.pm_schedule_percent_to);
         mSearchBtn = (Button) view.findViewById(R.id.pm_schedule_percent_searchBtn);
+        mBack = (TextView) view.findViewById(R.id.pm_schedule_search_back);
     }
 
     private void control() {
@@ -134,6 +136,13 @@ public class PMScheduleSearchFragment extends Fragment {
                 transaction.addToBackStack(null);
                 transaction.replace(R.id.blankActivity, fragment);
                 transaction.commit();
+            }
+        });
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
             }
         });
     }

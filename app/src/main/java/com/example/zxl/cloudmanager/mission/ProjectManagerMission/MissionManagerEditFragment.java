@@ -58,13 +58,14 @@ public class MissionManagerEditFragment extends Fragment {
 
     private EditText mTitle;
     private EditText mContent;
-    private Button mBeginTimeButton;
-    private Button mEndTimeButton;
+    private TextView mBeginTimeButton;
+    private TextView mEndTimeButton;
     private EditText mEvaluate;
     private Spinner mState;
     private EditText mPercent;
 
     private TextView mEdit;
+    private TextView mBack;
 
     private Fragment mFragment;
 
@@ -109,12 +110,13 @@ public class MissionManagerEditFragment extends Fragment {
     private void init(View view) {
         mTitle = (EditText) view.findViewById(R.id.pm_mission_name);
         mContent = (EditText) view.findViewById(R.id.pm_mission_content);
-        mBeginTimeButton = (Button) view.findViewById(R.id.pm_mission_begin_time);
-        mEndTimeButton = (Button) view.findViewById(R.id.pm_mission_end_time);
+        mBeginTimeButton = (TextView) view.findViewById(R.id.pm_mission_begin_time);
+        mEndTimeButton = (TextView) view.findViewById(R.id.pm_mission_end_time);
         mEvaluate = (EditText) view.findViewById(R.id.pm_mission_evaluate);
         mState = (Spinner) view.findViewById(R.id.pm_mission_state);
         mPercent = (EditText) view.findViewById(R.id.pm_mission_progress);
         mEdit = (TextView) view.findViewById(R.id.pm_mission_edit_or_add_edit);
+        mBack = (TextView) view.findViewById(R.id.pm_mission_edit_back);
     }
 
     private void contorl() {
@@ -301,79 +303,12 @@ public class MissionManagerEditFragment extends Fragment {
                 });
             }
         });
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
     }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.message_save, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_edit_message:
-                try {
-                    if (null != title)
-                        keyObj.put(Link.title, title);
-                    else keyObj.put(Link.title, sMission.getTitle());
-
-                    if (null != content)
-                        keyObj.put(Link.content, content);
-                    else keyObj.put(Link.content, sMission.getContent());
-
-                    if (null != mBeginTimeButton.getText())
-                        keyObj.put(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(mBeginTimeButton.getText().toString()));
-                    else keyObj.put(Link.start_time, DateForGeLingWeiZhi.fromGeLinWeiZhi2(sMission.getStart_time()));
-
-                    if (null != mEndTimeButton.getText())
-                        keyObj.put(Link.over_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(mEndTimeButton.getText().toString()));
-                    else keyObj.put(Link.over_time, DateForGeLingWeiZhi.fromGeLinWeiZhi2(sMission.getEnd_time()));
-
-                    if (null != evaluate)
-                        keyObj.put(Link.evaluate, evaluate);
-                    else keyObj.put(Link.evaluate, sMission.getEvaluate());
-
-                    if (null != percent)
-                        keyObj.put(Link.percent, percent);
-                    else keyObj.put(Link.percent, sMission.getPercent());
-
-                    keyObj.put(Link.status, state);
-
-                    keyObj.put(Link.pmtask_id, sMission.getPmtask_id());
-                    keyObj.put(Link.mem_id, sMission.getMem_id());
-                    keyObj.put(Link.pmsch_id, sMission.getPmsch_id());
-
-                    key = DESCryptor.Encryptor(keyObj.toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                mParams.put("key", key);
-                Log.d(TAG,"key:" + key);
-
-                mHttpc.post(Link.localhost + "pm_task&act=edit", mParams, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        try {
-                            Toast.makeText(getActivity(),
-                                    response.getString("msg"),
-                                    Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                        Toast.makeText(getActivity(),
-                                R.string.edit_error,
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 }

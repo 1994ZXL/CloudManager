@@ -26,6 +26,16 @@ public class PMBugDetailFragment extends Fragment {
     private TextView mEditTime;
     private TextView mEditMan;
 
+    private TextView mBack;
+    private TextView mEdit;
+
+    private Fragment mFragment;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mFragment = this;
+    }
 
     public static PMBugDetailFragment newInstance(Object data) {
         sBug = (Bug) data;
@@ -50,7 +60,8 @@ public class PMBugDetailFragment extends Fragment {
         mFoundMan = (TextView) view.findViewById(R.id.bug_details_found_man);
         mEditTime = (TextView) view.findViewById(R.id.bug_details_edit_time);
         mEditMan = (TextView) view.findViewById(R.id.bug_details_edit_man);
-
+        mBack = (TextView) view.findViewById(R.id.my_bug_details_back);
+        mEdit = (TextView) view.findViewById(R.id.bug_details_edit);
     }
 
     private void contorl() {
@@ -65,6 +76,12 @@ public class PMBugDetailFragment extends Fragment {
             mEditTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sBug.getModify_time()));
         mFoundMan.setText(sBug.getSubmitter());
         mEditMan.setText(sBug.getEditMan());
-
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+        mEdit.setVisibility(View.INVISIBLE);
     }
 }

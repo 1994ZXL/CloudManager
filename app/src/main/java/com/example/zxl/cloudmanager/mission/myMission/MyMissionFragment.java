@@ -58,8 +58,6 @@ public class MyMissionFragment extends Fragment {
 
     private Fragment mFragment;
 
-    public static final int REFRESH_DELAY = 4000;
-
     private static int mCurl_page;
 
     private PullToRefreshLayout mPullToRefreshLayout;
@@ -198,6 +196,7 @@ public class MyMissionFragment extends Fragment {
 
         saveInstanceStates = getArguments();
         final Bundle saveInstanceState = saveInstanceStates;
+
         loadDate(saveInstanceState, mCurl_page, view);
         mPullToRefreshLayout = (PullToRefreshLayout) view.findViewById(R.id.my_mission_refresh);
         mPullToRefreshLayout.setOnRefreshListener(new MyListener() {

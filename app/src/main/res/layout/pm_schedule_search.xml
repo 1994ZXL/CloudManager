@@ -10,7 +10,8 @@
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return" />
+                    android:text="@string/text_return"
+                    android:id="@+id/pm_schedule_search_back"/>
 
                 <TextView
                     style="@style/toptextview_center"
@@ -18,7 +19,7 @@
 
                 <TextView
                     style="@style/topview_right"
-                    android:text="@string/text_clean" />
+                    android:text="" />
 
             </LinearLayout>
 

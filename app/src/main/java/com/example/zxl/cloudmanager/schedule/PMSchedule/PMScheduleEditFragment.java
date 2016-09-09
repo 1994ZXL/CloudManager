@@ -40,6 +40,7 @@ public class PMScheduleEditFragment extends Fragment {
     private TextView mPmscheduleTime;
     private EditText mPercentEdit;
     private TextView mEdit;
+    private TextView mBack;
 
     private String percent;
 
@@ -79,6 +80,8 @@ public class PMScheduleEditFragment extends Fragment {
         mPmscheduleTime = (TextView) v.findViewById(R.id.pm_schedule_pmsch_time);
         mPercentEdit = (EditText) v.findViewById(R.id.pm_schedule_schedule);
         mEdit = (TextView) v.findViewById(R.id.pm_schedule_edit);
+        mBack = (TextView) v.findViewById(R.id.pm_schedule_edit_back);
+
     }
 
     private void control() {
@@ -148,6 +151,13 @@ public class PMScheduleEditFragment extends Fragment {
                     transaction.show(fragment);
                     transaction.commit();
                 }
+            }
+        });
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
             }
         });
     }

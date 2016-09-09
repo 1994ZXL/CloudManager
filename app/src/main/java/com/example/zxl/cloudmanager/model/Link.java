@@ -67,10 +67,12 @@ public class Link {
     public static final String work_list = "work_list&act=";
 
     //pm_bug
+    public static final String pm_bug = "pm_bug&act=";
     public static final String pm_id = "pm_id";
     public static final String pmbug_id = "pmbug_id";
 
     //my_bug
+    public static final String my_bug = "my_bug&act=";
     public static final String submit_time_from = "submit_time_from"; //发现时间 开始
     public static final String submit_time_to = "submit_time_to"; //发现时间 结束
     public static final String mofify_time_from = "mofify_time_from"; //修改时间 开始

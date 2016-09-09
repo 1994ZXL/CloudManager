@@ -1,74 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_my_leave"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    card_view:cardCornerRadius="4dp"
-    card_view:cardBackgroundColor="@color/memo_background"
-    android:layout_margin="10dp">
+    style="@style/CardView_LayoutStyle">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="20dp">
+    <LinearLayout style="@style/linearLayoutStyle">
 
         <!-- 第一排-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+
             <TextView
-                style="@style/font"
-                android:layout_width="wrap_content"
                 android:id="@+id/leave_card_item_name"
-                android:text="@string/name"/>
+                style="@style/Text_view_Style"
+                android:layout_width="150dp"
+                android:gravity="left" />
+
             <TextView
-                style="@style/font"
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:id="@+id/leave_card_item_illness" />
+                android:id="@+id/leave_card_item_illness"
+                style="@style/Text_view_Style"
+                android:layout_width="130dp"
+                android:gravity="left" />
+
+            <TextView
+                android:id="@+id/leave_card_item_state"
+                style="@style/Text_view_Style"
+                android:layout_width="100dp"
+                android:gravity="left"
+                android:textColor="#FF4040" />
         </LinearLayout>
         <!-- 第二排-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+
             <TextView
-                style="@style/font"
-                android:layout_width="wrap_content"
+                style="@style/Text_view_Style"
                 android:text="@string/leave_begin_time" />
+
             <TextView
-                style="@style/font"
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:id="@+id/leave_card_item_begin_time" />
+                android:id="@+id/leave_card_item_begin_time"
+                style="@style/Text_view_Style" />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
+
+        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+
             <TextView
-                style="@style/font"
-                android:layout_width="wrap_content"
+                style="@style/Text_view_Style"
                 android:text="@string/leave_end_time" />
+
             <TextView
-                style="@style/font"
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:id="@+id/leave_card_item_end_time" />
+                android:id="@+id/leave_card_item_end_time"
+                style="@style/Text_view_Style" />
         </LinearLayout>
-        <!-- 第三排-->
-        <TextView
-            style="@style/font"
-            android:layout_width="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textColor="#FF4040"
-            android:id="@+id/leave_card_item_state" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

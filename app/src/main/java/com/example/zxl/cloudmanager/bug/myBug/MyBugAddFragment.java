@@ -49,6 +49,7 @@ public class MyBugAddFragment extends Fragment {
     private EditText mContent;
 
     private TextView mAddTextView;
+    private TextView mBack;
 
     private ArrayList<String> projectNameList = new ArrayList<String>();
     private ArrayList<String> projectIdList = new ArrayList<String>();
@@ -106,6 +107,7 @@ public class MyBugAddFragment extends Fragment {
         mContent = (EditText) v.findViewById(R.id.bug_add_usecase_content);
 
         mAddTextView = (TextView) v.findViewById(R.id.bug_add_add);
+        mBack = (TextView) v.findViewById(R.id.my_bug_add_back);
     }
 
     private void control() {
@@ -320,6 +322,13 @@ public class MyBugAddFragment extends Fragment {
                         }
                     });
                 }
+            }
+        });
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
             }
         });
     }

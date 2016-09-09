@@ -60,6 +60,8 @@ public class MissionSearchFragment extends Fragment {
     private Spinner mStateSpinner;
 
     private Button mSearchBtn;
+    private TextView mBack;
+
     private static final String[] stateList={"待完成", "已完成"};
     private ArrayAdapter<String> stateAdapter;
     private int state;
@@ -217,6 +219,12 @@ public class MissionSearchFragment extends Fragment {
                 }
             }
         });
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
         return v;
     }
 
@@ -229,6 +237,7 @@ public class MissionSearchFragment extends Fragment {
         mStateSpinner = (Spinner) v.findViewById(R.id.pm_mission_state);
         mMemName = (EditText) v.findViewById(R.id.pm_mission_memName);
         mSearchBtn = (Button) v.findViewById(R.id.pm_mission_search_button);
+        mBack = (TextView) v.findViewById(R.id.pm_mission_search_back);
     }
 
 }

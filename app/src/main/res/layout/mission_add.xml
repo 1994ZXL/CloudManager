@@ -10,7 +10,8 @@
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return" />
+                    android:text="@string/text_return"
+                    android:id="@+id/pm_task_add_back"/>
 
                 <TextView
                     style="@style/toptextview_center"
@@ -84,7 +85,7 @@
                     style="@style/Text_view_Style"
                     android:text="@string/mission_begin_time" />
 
-                <Button
+                <TextView
                     android:id="@+id/pm_task_add_beginTime"
                     style="@style/Text_view_Style"
                     android:text="@string/mission_begin_time" />
@@ -98,7 +99,7 @@
                     style="@style/Text_view_Style"
                     android:text="@string/mission_end_time" />
 
-                <Button
+                <TextView
                     android:id="@+id/pm_task_add_endTime"
                     style="@style/Text_view_Style"
                     android:text="@string/mission_end_time" />

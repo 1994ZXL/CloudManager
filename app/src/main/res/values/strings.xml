@@ -11,6 +11,7 @@
     <string name="text_return">返回</string>
     <string name="text_clean">重置</string>
     <string name="select_time">请选择时间</string>
+    <string name="start_stop_time">起止时间</string>
     <string name="text">—</string>
 
 
@@ -100,10 +101,12 @@
     <string name="pm_customer_contactor_phone">联系电话</string>
 
     <!--备忘录-->
+    <string name="memo_title">标题</string>
     <string name="memo_title_textview">请输入标题</string>
     <string name="input_memo_title">请输入备忘录标题</string>
     <string name="memo_choose">备忘录筛选</string>
     <string name="memo_date_textview">xx年xx月xx日</string>
+    <string name="memo_content">内容</string>
     <string name="memo_content_textview">请输入备忘录内容</string>
     <string name="new_memo">新增备忘录</string>
     <string name="delete_memo">删除备忘录</string>
@@ -201,6 +204,7 @@
     <string name="input_evaluate">请输入评价内容</string>
     <string name="edit_error">修改失败</string>
     <string name="schedule">进度</string>
+    <string name="mission_schedlue">任务进度</string>
     <string name="pmsch_time">生成时间</string>
 
     <!--我的出差-->
@@ -209,11 +213,11 @@
     <string name="trip_detail_addr">出差详细地址</string>
 
     <!-- 我的用例-->
-    <string name="usecase_number">用例编号：</string>
-    <string name="version_number">程序版本：</string>
-    <string name="text_man">测试人员：</string>
-    <string name="exploit_man">开发人员：</string>
-    <string name="autorized_time">编制时间：</string>
+    <string name="usecase_number">用例编号</string>
+    <string name="version_number">程序版本</string>
+    <string name="text_man">测试人员</string>
+    <string name="exploit_man">开发人员</string>
+    <string name="autorized_time">编制时间</string>
 
     <!-- 我的bug-->
     <string name="functionModule">功能模块</string>
@@ -240,7 +244,7 @@
     <string name="submit_button">提交</string>
 
     <!-- 加班-->
-    <string name="overtime_time">加班时间：</string>
+    <string name="overtime_time">加班时间</string>
     <string name="overtime_project">项目</string>
 
     <!--公共查询-->

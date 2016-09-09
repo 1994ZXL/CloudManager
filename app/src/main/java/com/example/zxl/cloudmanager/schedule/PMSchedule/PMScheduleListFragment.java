@@ -4,6 +4,8 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +22,8 @@ import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Schedule;
 import com.example.zxl.cloudmanager.model.User;
+import com.example.zxl.cloudmanager.pulltorefresh.MyListener;
+import com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -42,8 +46,14 @@ public class PMScheduleListFragment extends Fragment {
     private List<Schedule> schedules = new ArrayList<Schedule>();
     private MyAdapter myAdapter;
 
-    public static final int REFRESH_DELAY = 4000;
+    private TextView mBack;
+    private TextView mAdd;
+
     private static final String TAG = "MCListFragment";
+
+    private static int mCurl_page;
+
+    private PullToRefreshLayout mPullToRefreshLayout;
 
     private Fragment mFragment;
 
@@ -57,13 +67,10 @@ public class PMScheduleListFragment extends Fragment {
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
         mFragment = this;
+        mCurl_page = 1;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        final View v = layoutInflater.inflate(R.layout.pm_schedule_list, parent, false);
-
-        saveInstanceState = getArguments();
+    private void loadDate(final Bundle saveInstanceState, int curl_page,final View view) {
         if (null != saveInstanceState) {
 
             try {
@@ -81,7 +88,7 @@ public class PMScheduleListFragment extends Fragment {
             keyObj.put(Link.mem_id, User.newInstance().getUser_id());
             keyObj.put("sort", "pmsch_time desc");
             keyObj.put("page_count", 20);
-            keyObj.put("curl_page", 1);
+            keyObj.put("curl_page", curl_page);
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,13 +109,13 @@ public class PMScheduleListFragment extends Fragment {
                             }
                             Log.d(TAG, "schedules: " + schedules);
 
-                            mRecyclerView = (RecyclerView)v.findViewById(R.id.pm_schedule_list);
+                            mRecyclerView = (RecyclerView)view.findViewById(R.id.pm_schedule_list);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                             mRecyclerView.setHasFixedSize(true);
                             myAdapter = new MyAdapter(mFragment.getActivity(), schedules);
                             mRecyclerView.setAdapter(myAdapter);
-                            mCardView = (CardView)v.findViewById(R.id.pm_schedule_card_item);
+                            mCardView = (CardView)view.findViewById(R.id.pm_schedule_card_item);
                             myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
@@ -138,6 +145,60 @@ public class PMScheduleListFragment extends Fragment {
             }
 
         });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceStates) {
+        final View v = layoutInflater.inflate(R.layout.pm_schedule_list, parent, false);
+
+        saveInstanceStates = getArguments();
+        final Bundle saveInstanceState = saveInstanceStates;
+
+        loadDate(saveInstanceState, mCurl_page, v);
+        mPullToRefreshLayout = (PullToRefreshLayout) v.findViewById(R.id.pm_schedule_list_refresh);
+        mPullToRefreshLayout.setOnRefreshListener(new MyListener() {
+            @Override
+            public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
+                new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        schedules.clear();
+                        loadDate(saveInstanceState, mCurl_page, v);
+                        pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+                    }
+                }.sendEmptyMessageDelayed(0, 1500);
+            }
+
+            @Override
+            public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout) {
+                new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        schedules.clear();
+                        mCurl_page++;
+                        loadDate(saveInstanceState, mCurl_page, v);
+                        pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                    }
+                }.sendEmptyMessageDelayed(0, 1500);
+            }
+        });
+
+        mBack = (TextView) v.findViewById(R.id.pm_schedule_list_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        mAdd = (TextView) v.findViewById(R.id.pm_schedule_list_add);
+        mAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         return v;
     }
 

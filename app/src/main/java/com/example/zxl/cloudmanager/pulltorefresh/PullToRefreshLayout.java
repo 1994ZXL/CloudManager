@@ -22,7 +22,7 @@ import com.example.zxl.cloudmanager.pulltorefresh.pullableview.Pullable;
 /**
  * �Զ���Ĳ��֣�������������ӿؼ�������һ��������ͷ��һ���ǰ����ݵ�pullableView��������ʵ��Pullable�ӿڵĵ��κ�View����
  * ����һ������ͷ����������http://blog.csdn.net/zhongkejingwang/article/details/38868463
- * 
+ *
  * @author �¾�
  */
 public class PullToRefreshLayout extends RelativeLayout
@@ -246,7 +246,7 @@ public class PullToRefreshLayout extends RelativeLayout
 
 	/**
 	 * ������ϣ���ʾ���ؽ��ע�⣺������ɺ�һ��Ҫ�����������
-	 * 
+	 *
 	 * @param refreshResult
 	 *            PullToRefreshLayout.SUCCEED���ɹ���PullToRefreshLayout.FAIL���ʧ��
 	 */
@@ -342,7 +342,7 @@ public class PullToRefreshLayout extends RelativeLayout
 
 	/*
 	 * ���� Javadoc���ɸ��ؼ������Ƿ�ַ��¼�����ֹ�¼���ͻ
-	 * 
+	 *
 	 * @see android.view.ViewGroup#dispatchTouchEvent(android.view.MotionEvent)
 	 */
 	@Override
@@ -562,9 +562,9 @@ public class PullToRefreshLayout extends RelativeLayout
 
 	/**
 	 * ˢ�¼��ػص��ӿ�
-	 * 
+	 *
 	 * @author chenjing
-	 * 
+	 *
 	 */
 	public interface OnRefreshListener
 	{

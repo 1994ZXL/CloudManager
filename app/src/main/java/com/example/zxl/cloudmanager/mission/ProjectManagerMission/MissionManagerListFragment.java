@@ -164,7 +164,7 @@ public class MissionManagerListFragment extends Fragment {
                     } catch (JSONException e) {
                         Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                         try {
-                            Toast.makeText(getActivity(),
+                            Toast.makeText(mFragment.getActivity(),
                                     rjo.getString("msg"),
                                     Toast.LENGTH_SHORT).show();
                         } catch (JSONException e1) {

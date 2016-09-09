@@ -1,75 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/fragment_manager_check"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    card_view:cardCornerRadius="4dp"
-    card_view:cardBackgroundColor="@color/memo_background"
-    android:layout_margin="10dp">
+    style="@style/CardView_LayoutStyle">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="20dp">
+    <LinearLayout style="@style/linearLayoutStyle">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/manager_check_card_item_name"
-                android:text="@string/name"
-                android:textSize="30dp"
-                android:layout_weight="1" />
+                style="@style/Text_view_Style"
+                android:text="@string/name" />
 
             <TextView
-                style="@style/font"
-                android:layout_width="match_parent"
                 android:id="@+id/manager_check_card_item_state"
-                android:layout_weight="1" />
+                style="@style/Text_view_Style" />
+
         </LinearLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
             <TextView
-                style="@style/font"
-                android:text="@string/check_location"
-                android:layout_width="wrap_content"/>
+                style="@style/Text_view_Style"
+                android:text="@string/check_location" />
 
             <TextView
-                style="@style/font"
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:id="@+id/manager_check_card_item_check_location"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
+                android:id="@+id/manager_check_card_item_check_location"
+                style="@style/Text_view_Style"
+                android:layout_width="120dp"
+                android:gravity="left" />
 
             <TextView
-                style="@style/font"
-                android:text="@string/puncher_master"
-                android:layout_width="wrap_content" />
+                style="@style/Text_view_Style"
+                android:text="@string/puncher_master" />
 
             <TextView
-                style="@style/font"
-                android:layout_width="wrap_content"
                 android:id="@+id/manager_check_card_item_check_manager"
-                android:layout_marginLeft="16dp" />
+                style="@style/Text_view_Style" />
 
         </LinearLayout>
 

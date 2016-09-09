@@ -47,12 +47,13 @@ public class MissionManagerAddFragment extends Fragment {
     private EditText mMissionName;
     private EditText mMissionContent;
     private Spinner mMemberName;
-    private Button mBeginTime;
-    private Button mEndTime;
+    private TextView mBeginTime;
+    private TextView mEndTime;
     private Spinner mStatus;
     private EditText mEvaluate;
 
     private TextView mSaveTextView;
+    private TextView mBack;
 
     private String missionName;
     private String missionContent;
@@ -182,11 +183,12 @@ public class MissionManagerAddFragment extends Fragment {
         mMissionName = (EditText) v.findViewById(R.id.pm_task_add_missionName);
         mMissionContent = (EditText) v.findViewById(R.id.pm_task_add_missionContent);
         mMemberName = (Spinner) v.findViewById(R.id.pm_task_add_memberName);
-        mBeginTime = (Button) v.findViewById(R.id.pm_task_add_beginTime);
-        mEndTime = (Button) v.findViewById(R.id.pm_task_add_endTime);
+        mBeginTime = (TextView) v.findViewById(R.id.pm_task_add_beginTime);
+        mEndTime = (TextView) v.findViewById(R.id.pm_task_add_endTime);
         mStatus = (Spinner) v.findViewById(R.id.pm_task_add_missionState);
         mEvaluate = (EditText) v.findViewById(R.id.pm_task_add_evaluate);
         mSaveTextView = (TextView) v.findViewById(R.id.pm_task_add_save);
+        mBack = (TextView) v.findViewById(R.id.pm_task_add_back);
     }
 
     public void control() {
@@ -411,6 +413,12 @@ public class MissionManagerAddFragment extends Fragment {
                         }
                     });
                 }
+            }
+        });
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
             }
         });
     }
