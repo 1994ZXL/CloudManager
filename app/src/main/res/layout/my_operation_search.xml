@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Parent_LayoutStyle"
-    tools:context=".operation.OperationFragment">
+    tools:context=".operation.MyOperationListFragment">
 
     <ScrollView
         style="@style/ScrollView_Style">
@@ -14,15 +14,16 @@
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return"
+                    android:id="@+id/my_operation_search_back"/>
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/project_choose"/>
+                    android:text="@string/my_maintain"/>
 
                 <TextView
                     style="@style/topview_right"
-                    android:text="@string/text_clean"/>
+                    android:text=""/>
 
             </LinearLayout>
 
@@ -36,10 +37,10 @@
                         style="@style/Text_view_Style"
                         android:text="@string/project_name_edittext" />
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/my_operation_name_edittext"
                         android:hint="@string/input_project_name"
-                        style="@style/EditText_Style" />
+                        style="@style/Spinner_Style" />
 
                 </LinearLayout>
             </LinearLayout>

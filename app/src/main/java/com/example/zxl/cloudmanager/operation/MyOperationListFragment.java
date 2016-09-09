@@ -1,4 +1,5 @@
-package com.example.zxl.cloudmanager.overtime.checkManagerOverTime;
+package com.example.zxl.cloudmanager.operation;
+
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -7,6 +8,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,9 +24,11 @@ import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.model.Operation;
 import com.example.zxl.cloudmanager.model.OverTime;
 import com.example.zxl.cloudmanager.model.User;
-import com.example.zxl.cloudmanager.overtime.leader.LeaderOvertimeSearchActivity;
+import com.example.zxl.cloudmanager.overtime.checkManagerOverTime.ManagerOvertimeDetailFragment;
+import com.example.zxl.cloudmanager.overtime.myOvertime.MyOvertimeDetailFragment;
 import com.example.zxl.cloudmanager.pulltorefresh.MyListener;
 import com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout;
 import com.loopj.android.http.AsyncHttpClient;
@@ -40,14 +44,16 @@ import java.util.List;
 
 import cz.msebera.android.httpclient.Header;
 
-//考勤主管查询列表
 
-public class ManagerOvertimeListFragment extends Fragment {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class MyOperationListFragment extends Fragment {
+    private static final String TAG = "MyOperationList";
 
-    private static final String TAG = "ManagerOvertimeList";
     private CardView mCardView;
     private RecyclerView mRecyclerView;
-    private List<OverTime> overTimes = new ArrayList<OverTime>();
+    private ArrayList<Operation> operations = new ArrayList<Operation>();
     private MyAdapter myAdapter;
 
     private Fragment mFragment;
@@ -56,11 +62,8 @@ public class ManagerOvertimeListFragment extends Fragment {
 
     private PullToRefreshLayout mPullToRefreshLayout;
 
-    private TextView mTitle;
     private TextView mBack;
     private TextView mSearch;
-
-    public static final int REFRESH_DELAY = 4000;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
@@ -78,35 +81,16 @@ public class ManagerOvertimeListFragment extends Fragment {
     }
 
     private void loadDate(final Bundle saveInstanceState, int curl_page, final View v) {
-        if (mFragment.getActivity().getClass() == LeaderOvertimeSearchActivity.class)
-            url = Link.work_list + Link.get_list;
-        else url = Link.manage_work + Link.get_list;
-
         if (null == saveInstanceState) {
             Log.d(TAG, "没有选择条件");
         } else {
             try {
-                if (-1 != saveInstanceState.getInt(Link.start_time)) {
-                    keyObj.put(Link.start_time, saveInstanceState.getInt(Link.start_time));
-                }
+                keyObj.put(Link.user_id, User.newInstance().getUser_id());
+                keyObj.put(Link.pm_id, saveInstanceState.getString(Link.pm_id));
 
-                if (-1 != saveInstanceState.getInt(Link.end_time)) {
-                    keyObj.put(Link.end_time, saveInstanceState.getInt(Link.end_time));
-                }
-
-                keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
-
-                keyObj.put(Link.mem_name, saveInstanceState.getString(Link.mem_name));
-
-                keyObj.put(Link.work_pm, saveInstanceState.getString(Link.work_pm));
-
-                keyObj.put("sort", "start_time desc");
+                keyObj.put("sort", "goon_time desc");
                 keyObj.put("page_count", 20);
                 keyObj.put("curl_page", curl_page);
-                keyObj.put(Link.mem_id, User.newInstance().getUser_id());
-                keyObj.put(Link.is_pmmaster, User.newInstance().getIs_pmmaster());
-                keyObj.put(Link.is_puncher, User.newInstance().getIs_puncher());
-                keyObj.put(Link.is_pmleader, User.newInstance().getIs_pmleader());
 
                 key = DESCryptor.Encryptor(keyObj.toString());
             } catch (Exception e) {
@@ -125,20 +109,20 @@ public class ManagerOvertimeListFragment extends Fragment {
                             JSONArray array = rjo.getJSONArray("data1");
                             Log.d(TAG, "array: " + array);
                             for (int i = 0; i < array.length(); i++) {
-                                overTimes.add(new OverTime(array.getJSONObject(i)));
+                                operations.add(new Operation(array.getJSONObject(i)));
                             }
-                            Log.d(TAG, "overtimes: " + overTimes);
-                            mRecyclerView = (RecyclerView)v.findViewById(R.id.overtime_recyclerview);
+                            Log.d(TAG, "operations: " + operations);
+                            mRecyclerView = (RecyclerView)v.findViewById(R.id.my_operation_recycler);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                             mRecyclerView.setHasFixedSize(true);
-                            myAdapter = new MyAdapter(mFragment.getActivity(), overTimes);
+                            myAdapter = new MyAdapter(mFragment.getActivity(), operations);
                             mRecyclerView.setAdapter(myAdapter);
-                            mCardView = (CardView) v.findViewById(R.id.fragment_my_overtime);
+                            mCardView = (CardView) v.findViewById(R.id.my_operation_card_item);
                             myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
-                                    Fragment fragment = ManagerOvertimeDetailFragment.newInstance(data);
+                                    Fragment fragment = MyOperationDetailsFragment.newInstance(data);
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     if (!fragment.isAdded()) {
                                         transaction.addToBackStack(null);
@@ -179,48 +163,28 @@ public class ManagerOvertimeListFragment extends Fragment {
         });
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle savedInstanceState) {
-       final View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
-
-        mBack = (TextView) v.findViewById(R.id.my_overtime_back);
-        mBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mFragment.getActivity().finish();
-            }
-        });
-        mTitle = (TextView) v.findViewById(R.id.my_overtime_title);
-        mTitle.setText("加班");
-        mSearch = (TextView) v.findViewById(R.id.my_overtime_search);
-        mSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = null;
-                if (null == fragment) {
-                    FragmentManager fm = getFragmentManager();
-                    fragment = new ManagerOverTimeSearchFragment();
-                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
-                }
-            }
-        });
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final View v = inflater.inflate(R.layout.my_operation_list, container, false);
 
         savedInstanceState = getArguments();
         final Bundle saveInstanceState = savedInstanceState;
 
+        url = Link.my_operation + Link.get_list;
         loadDate(saveInstanceState, mCurl_page, v);
-        mPullToRefreshLayout = (PullToRefreshLayout) v.findViewById(R.id.my_overtime_refresh);
+        mPullToRefreshLayout = (PullToRefreshLayout) v.findViewById(R.id.my_operation_refresh);
         mPullToRefreshLayout.setOnRefreshListener(new MyListener() {
             @Override
             public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
                 new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
-                        overTimes.clear();
+                        operations.clear();
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1500);
             }
 
             @Override
@@ -228,12 +192,33 @@ public class ManagerOvertimeListFragment extends Fragment {
                 new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
-                        overTimes.clear();
+                        operations.clear();
                         mCurl_page++;
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1500);
+            }
+        });
+
+        mBack = (TextView) v.findViewById(R.id.my_operation_list_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        mSearch = (TextView) v.findViewById(R.id.my_operation_list_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new MyOperationSearchFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
             }
         });
 
@@ -247,17 +232,17 @@ public class ManagerOvertimeListFragment extends Fragment {
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
-        private List<OverTime> overTimes;
+        private List<Operation> operations;
         private Context mContext;
 
-        public MyAdapter (Context context, List<OverTime> overTimes) {
-            this.overTimes = overTimes;
+        public MyAdapter (Context context, List<Operation> operations) {
+            this.operations = operations;
             this.mContext = context;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.overtime_card_item, viewGroup, false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.my_operation_card_item, viewGroup, false);
             ViewHolder viewHolder = new ViewHolder(v);
             v.setOnClickListener(this);
             return viewHolder;
@@ -265,20 +250,19 @@ public class ManagerOvertimeListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            OverTime mOverTime = overTimes.get(i);
+            Operation mOperation = operations.get(i);
 
-            viewHolder.mOvertimeDateBegin.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mOverTime.getStart_time()));
-            viewHolder.mOvertimeDateEnd.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mOverTime.getEnd_time()));
-            viewHolder.mOvertimeName.setText(mOverTime.getMem_name());
-            viewHolder.mOvertimeProject.setText(mOverTime.getWork_pm());
-            viewHolder.mOvertimeReason.setText(mOverTime.getWork_resaon());
+            viewHolder.mProjectName.setText(mOperation.getProject_name());
+            viewHolder.mContactName.setText(mOperation.getContact_name());
+            viewHolder.mStatus.setText(mOperation.getProject_state());
+            viewHolder.mGoonTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mOperation.getGoon_time()));
 
-            viewHolder.itemView.setTag(overTimes.get(i));
+            viewHolder.itemView.setTag(operations.get(i));
         }
 
         @Override
         public int getItemCount() {
-            return overTimes == null ? 0 : overTimes.size();
+            return operations == null ? 0 : operations.size();
         }
 
         @Override
@@ -289,19 +273,17 @@ public class ManagerOvertimeListFragment extends Fragment {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder{
-            public TextView mOvertimeName;
-            public TextView mOvertimeDateBegin;
-            public TextView mOvertimeDateEnd;
-            public TextView mOvertimeProject;
-            public TextView mOvertimeReason;
+            private TextView mProjectName;
+            private TextView mContactName;
+            private TextView mStatus;
+            private TextView mGoonTime;
 
             public ViewHolder(View v) {
                 super(v);
-                mOvertimeProject = (TextView) v.findViewById(R.id.main_fragment_overtime_project);
-                mOvertimeName = (TextView)v.findViewById(R.id.overtime_card_item_name);
-                mOvertimeDateBegin = (TextView) v.findViewById(R.id.overtime_card_item_begin_time);
-                mOvertimeDateEnd = (TextView) v.findViewById(R.id.overtime_card_item_end_time);
-                mOvertimeReason = (TextView) v.findViewById(R.id.overtime_card_item_overtime_reason);
+                mProjectName = (TextView) v.findViewById(R.id.my_operation_card_projectname);
+                mContactName = (TextView) v.findViewById(R.id.my_operation_card_contact_name);
+                mStatus = (TextView) v.findViewById(R.id.my_operation_card_status);
+                mGoonTime = (TextView) v.findViewById(R.id.my_operation_card_goon_time);
             }
         }
 

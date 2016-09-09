@@ -11,6 +11,6 @@ import com.example.zxl.cloudmanager.SingleFragmentActivity;
 public class MyOperationActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment(){
-        return new OperationFragment();
+        return new MyOperationSearchFragment();
     }
 }

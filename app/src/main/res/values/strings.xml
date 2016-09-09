@@ -219,6 +219,17 @@
     <string name="exploit_man">开发人员</string>
     <string name="autorized_time">编制时间</string>
 
+    <!--我的运维-->
+    <string name="contact_name">甲方姓名</string>
+    <string name="project_state">运维状态</string>
+    <string name="operation_details">运维详情</string>
+    <string name="contact_mob">联系电话</string>
+    <string name="goon_technical">运维技术负责人</string>
+    <string name="goon_business">运维客服负责人</string>
+    <string name="goon_time">运维开始时间</string>
+    <string name="goon_actual_start_time">运维实际开始时间</string>
+    <string name="goon_actual_end_time">运维实际结束时间</string>
+
     <!-- 我的bug-->
     <string name="functionModule">功能模块</string>
     <string name="bug_version">bug等级</string>

@@ -28,6 +28,7 @@ import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
 import com.example.zxl.cloudmanager.model.User;
+import com.example.zxl.cloudmanager.post.leader.LeaderPostDetailFragment;
 import com.example.zxl.cloudmanager.post.leader.LeaderPostSearchActivity;
 import com.example.zxl.cloudmanager.post.projectManagerPost.PMPostActivtiy;
 import com.example.zxl.cloudmanager.pulltorefresh.MyListener;
@@ -143,7 +144,12 @@ public class MyPostFragment extends Fragment {
                                 myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                                     @Override
                                     public void onItemClick(View view, Object data) {
-                                        Fragment fragment = MyPostDetailFragment.newInstance(data);
+                                        Fragment fragment;
+                                        if (mFragment.getActivity().getClass() != MyPostActivity.class) {
+                                            fragment = LeaderPostDetailFragment.newInstance(data);
+                                        } else {
+                                            fragment = MyPostDetailFragment.newInstance(data);
+                                        }
                                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                         if (!fragment.isAdded()) {
                                             transaction.addToBackStack(null);

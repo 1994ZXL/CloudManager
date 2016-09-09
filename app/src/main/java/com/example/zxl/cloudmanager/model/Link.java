@@ -162,4 +162,7 @@ public class Link {
     public static final String project_state = "project_state"; //项目状态
     public static final String header = "header"; //项目负责人
 
+    //my_operation
+    public static final String my_operation = "my_operation&act=";
+
 }

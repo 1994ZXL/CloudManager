@@ -73,8 +73,8 @@ public class LeaderPostDetailFragment extends Fragment {
 
     private Fragment mFragment;
 
-    public static LeaderPostDetailFragment newInstance(Post post) {
-        sPost = post;
+    public static LeaderPostDetailFragment newInstance(Object post) {
+        sPost = (Post)post;
         LeaderPostDetailFragment fragment = new LeaderPostDetailFragment();
         return fragment;
     }
@@ -119,6 +119,7 @@ public class LeaderPostDetailFragment extends Fragment {
 
         mOpinion.setText(sPost.getOpinion());
         mContent.setText(sPost.getContent());
+        mContent.setFocusable(false);
         if (sPost.getReport_time() == 0) {
             mSubmitTime.setText("——");
         } else {
