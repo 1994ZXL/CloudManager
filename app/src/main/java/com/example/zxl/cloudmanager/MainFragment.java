@@ -41,15 +41,15 @@ import com.example.zxl.cloudmanager.post.myPost.MyPostActivity;
 import com.example.zxl.cloudmanager.operation.MyOperationActivity;
 import com.example.zxl.cloudmanager.overtime.myOvertime.MyOverTimeActivity;
 import com.example.zxl.cloudmanager.bug.projectManagerBug.PMBugActivity;
-import com.example.zxl.cloudmanager.projectManager.PMAdressBook.ProjectManagerActivity;
-import com.example.zxl.cloudmanager.projectManager.memberManager.ProjectMemberManagerActivity;
-import com.example.zxl.cloudmanager.projectManager.projectList.ProjectConnectionListActivity;
+import com.example.zxl.cloudmanager.manageProject.projectManagerProjectManage.PMManageProjectActivity;
+import com.example.zxl.cloudmanager.manageMember.projectManagerManageMember.PMManageMemberActivity;
+import com.example.zxl.cloudmanager.contact.projectManagerContact.PMContactActivity;
 import com.example.zxl.cloudmanager.usecase.projectManagerUseCase.ProjectManagerUsecaseActivity;
 import com.example.zxl.cloudmanager.bug.publicSearchBug.PublicBugSearchActivity;
-import com.example.zxl.cloudmanager.publicSearch.PSAddressBook.ProjectListSearchActivity;
-import com.example.zxl.cloudmanager.publicSearch.memberList.MemberListActivity;
+import com.example.zxl.cloudmanager.contact.publicSearchContact.ProjectListSearchActivity;
+import com.example.zxl.cloudmanager.manageMember.publicSearchManageMember.PSManageMemberActivity;
 import com.example.zxl.cloudmanager.mission.publicSearchMission.MissionSearchActivity;
-import com.example.zxl.cloudmanager.publicSearch.projectSearch.PublicSearchActivity;
+import com.example.zxl.cloudmanager.manageProject.publicSearchProjectManage.PSManageProjectActivity;
 import com.example.zxl.cloudmanager.usecase.publicSearchUseCase.UsecaseSearchActivity;
 import com.example.zxl.cloudmanager.travel.myTravel.MyTravelActivity;
 import com.loopj.android.http.AsyncHttpClient;
@@ -177,10 +177,10 @@ public class MainFragment extends Fragment {
         onClickListener(managerTravelImage, new ManagerTravelActivity());
 
         //公共查询
-        onClickListener(myProjectImage,new PublicSearchActivity());
+        onClickListener(myProjectImage,new PSManageProjectActivity());
         onClickListener(myPlanImage,new MissionSearchActivity());
         onClickListener(myListImage,new ProjectListSearchActivity());
-        onClickListener(myMemberListImage,new MemberListActivity());
+        onClickListener(myMemberListImage,new PSManageMemberActivity());
         onClickListener(myUseCaseImage,new UsecaseSearchActivity());
         onClickListener(myBugImage,new PublicBugSearchActivity());
         onClickListener(mManageCheck, new ManagerCheckAcitvity());
@@ -194,10 +194,10 @@ public class MainFragment extends Fragment {
         onClickListener(leaderTravelImage, new LeaderTravelSearchActivity());
 
         //项目主管
-        onClickListener(projectManagmentImage, new ProjectManagerActivity());
+        onClickListener(projectManagmentImage, new PMManageProjectActivity());
         onClickListener(pmBugDealImage, new PMBugActivity());
-        onClickListener(pmListImage, new ProjectConnectionListActivity());
-        onClickListener(pmMemberManagerImage, new ProjectMemberManagerActivity());
+        onClickListener(pmListImage, new PMContactActivity());
+        onClickListener(pmMemberManagerImage, new PMManageMemberActivity());
         onClickListener(pmMissionImage, new ProjectMissionManagerActivity());
         onClickListener(pmScheduleImage, new PMScheduleActivity());
         onClickListener(pmUsecaseImage, new ProjectManagerUsecaseActivity());

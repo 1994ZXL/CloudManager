@@ -1,8 +1,10 @@
 package com.example.zxl.cloudmanager.schedule.PMSchedule;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,7 +16,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DESCryptor;
@@ -47,7 +53,8 @@ public class PMScheduleListFragment extends Fragment {
     private MyAdapter myAdapter;
 
     private TextView mBack;
-    private TextView mAdd;
+    private Button mAdd;
+    private TextView mSearch;
 
     private static final String TAG = "MCListFragment";
 
@@ -61,6 +68,11 @@ public class PMScheduleListFragment extends Fragment {
     private RequestParams mParams = new RequestParams();
     private JSONObject keyObj = new JSONObject();
     private String key = "";
+
+    private static AsyncHttpClient mHttpcDelete = new AsyncHttpClient();
+    private RequestParams mParamsDelete = new RequestParams();
+    private JSONObject keyObjDelete = new JSONObject();
+    private String keyDelete = "";
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
@@ -191,11 +203,27 @@ public class PMScheduleListFragment extends Fragment {
             }
         });
 
-        mAdd = (TextView) v.findViewById(R.id.pm_schedule_list_add);
+        mSearch = (TextView) v.findViewById(R.id.pm_schedule_list_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new PMScheduleSearchFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.addToBackStack(null);
+                transaction.replace(R.id.blankActivity, fragment);
+                transaction.commit();
+            }
+        });
+
+        mAdd = (Button) v.findViewById(R.id.pm_schedule_list_add);
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Fragment fragment = new PMScheduleAddFrament();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.addToBackStack(null);
+                transaction.replace(R.id.blankActivity, fragment);
+                transaction.commit();
             }
         });
 
@@ -226,13 +254,59 @@ public class PMScheduleListFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder viewHolder, int i) {
+        public void onBindViewHolder(ViewHolder viewHolder, final int i) {
             Schedule schedule = schedules.get(i);
 
             viewHolder.mTitle.setText(schedule.getTitle());
             viewHolder.mPmschTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi2(schedule.getPmsch_time()));
             viewHolder.mSubmitTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi2(schedule.getReport_time()));
             viewHolder.mPercent.setText(String.valueOf(schedule.getPercent()));
+            viewHolder.mDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mFragment.getActivity());
+                    builder.setTitle("提示");
+                    builder.setMessage("是否要删除");
+                    builder.setNegativeButton("取消", null);
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+                        @Override
+                        public void onClick(DialogInterface dialog,int which){
+                            try {
+                                keyObjDelete.put(Link.pmsch_id, schedules.get(i).getPmsch_id());
+                                keyDelete = DESCryptor.Encryptor(keyObjDelete.toString());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            mParamsDelete.put("key", keyDelete);
+                            Log.d(TAG,"key:" + keyDelete);
+
+                            mHttpcDelete.post(Link.localhost + "pm_schedule&act=drop", mParamsDelete, new JsonHttpResponseHandler() {
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                    try {
+                                        Toast.makeText(getActivity(),
+                                                response.getString("msg"),
+                                                Toast.LENGTH_SHORT).show();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                    Toast.makeText(getActivity(),
+                                            R.string.edit_error,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            schedules.remove(i);
+                            mRecyclerView.scrollToPosition(i - 1);
+                            myAdapter.notifyDataSetChanged();
+                        }
+                    });
+                    builder.show();
+                }
+            });
 
             viewHolder.itemView.setTag(schedules.get(i));
         }
@@ -254,6 +328,7 @@ public class PMScheduleListFragment extends Fragment {
             public TextView mPmschTime;
             public TextView mSubmitTime;
             public TextView mPercent;
+            public ImageButton mDelete;
 
             public ViewHolder(View v) {
                 super(v);
@@ -261,7 +336,7 @@ public class PMScheduleListFragment extends Fragment {
                 mPmschTime = (TextView) v.findViewById(R.id.pm_schedule_card_item_pmsch_time);
                 mSubmitTime = (TextView) v.findViewById(R.id.pm_schedule_card_item_submit_time);
                 mPercent = (TextView) v.findViewById(R.id.pm_schedule_card_item_percent);
-
+                mDelete = (ImageButton) v.findViewById(R.id.pm_schedule_card_item_delete);
             }
         }
 

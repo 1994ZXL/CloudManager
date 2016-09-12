@@ -211,6 +211,7 @@
     <string name="input_evaluate">请输入评价内容</string>
     <string name="edit_error">修改失败</string>
     <string name="schedule">进度</string>
+    <string name="schedule_add">任务进度新增</string>
     <string name="mission_schedlue">任务进度</string>
     <string name="pmsch_time">生成时间</string>
 

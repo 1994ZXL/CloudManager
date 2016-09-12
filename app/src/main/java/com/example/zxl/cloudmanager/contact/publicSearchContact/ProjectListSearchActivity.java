@@ -1,17 +1,16 @@
-package com.example.zxl.cloudmanager.publicSearch.PSAddressBook;
+package com.example.zxl.cloudmanager.contact.publicSearchContact;
 
 import android.app.Fragment;
 
 import com.example.zxl.cloudmanager.SingleFragmentActivity;
+import com.example.zxl.cloudmanager.contact.projectManagerContact.ContactSearchFragment;
 
 public class ProjectListSearchActivity extends SingleFragmentActivity {
 
-    /*public PublicSearchActivity(int i){
-        switch ()
-    }*/
+
     @Override
     protected Fragment createFragment(){
-        return new ListSearchFragment();
+        return new ContactSearchFragment();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.zxl.cloudmanager.publicSearch.PSAddressBook;
+package com.example.zxl.cloudmanager.contact.projectManagerContact;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -17,7 +17,7 @@ import com.example.zxl.cloudmanager.model.User;
 /**
  * Created by ZXL on 2016/7/11.
  */
-public class PSListDetailFragment extends Fragment {
+public class PMContactDetailFragment extends Fragment {
     private Spinner sexSpinner;
     private TextView mProjectName;
     private TextView mCustomerName;

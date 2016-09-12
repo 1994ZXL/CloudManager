@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Parent_LayoutStyle"
-    tools:context=".projectManager.PMAdressBook.ProjectManagerSearchFragment">
+    tools:context=".manageProject.projectManagerProjectManage.ManageProjectSearchFragment">
 
     <ScrollView
         style="@style/ScrollView_Style">

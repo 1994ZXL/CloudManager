@@ -1,4 +1,4 @@
-package com.example.zxl.cloudmanager.projectManager.PMAdressBook;
+package com.example.zxl.cloudmanager.manageProject.projectManagerProjectManage;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -10,14 +10,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
-import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Project;
 
 /**
  * Created by ZXL on 2016/7/21.
  */
-public class ProjectManagerDetailFragment extends Fragment {
+public class PMManageProjectDetailFragment extends Fragment {
 
 
     private TextView mProjectName;
@@ -36,9 +35,9 @@ public class ProjectManagerDetailFragment extends Fragment {
     private Fragment mFragment;
 
     private static Project mProject = new Project();
-    public static ProjectManagerDetailFragment newInstance(Object data) {
+    public static PMManageProjectDetailFragment newInstance(Object data) {
         mProject = (Project) data;
-        ProjectManagerDetailFragment fragment = new ProjectManagerDetailFragment();
+        PMManageProjectDetailFragment fragment = new PMManageProjectDetailFragment();
         return fragment;
     }
     @Override

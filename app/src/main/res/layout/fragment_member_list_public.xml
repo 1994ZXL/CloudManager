@@ -1,7 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Parent_LayoutStyle"
-    tools:context=".publicSearch.memberList.MemberListFragment">
+    style="@style/Parent_LayoutStyle">
 
     <ScrollView
         style="@style/ScrollView_Style">

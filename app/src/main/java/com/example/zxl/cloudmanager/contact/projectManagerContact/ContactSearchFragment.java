@@ -1,4 +1,4 @@
-package com.example.zxl.cloudmanager.publicSearch.PSAddressBook;
+package com.example.zxl.cloudmanager.contact.projectManagerContact;
 
 
 import android.app.Fragment;
@@ -17,7 +17,7 @@ import com.example.zxl.cloudmanager.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListSearchFragment extends Fragment {
+public class ContactSearchFragment extends Fragment {
 
     private EditText mProjectNameET;
     private EditText mCustomerNameET;
@@ -31,7 +31,7 @@ public class ListSearchFragment extends Fragment {
     private ArrayAdapter<String> adapter;
     private static final String[] list={"男", "女"};
 
-    public ListSearchFragment() {
+    public ContactSearchFragment() {
         // Required empty public constructor
     }
     private Fragment mFragment;
@@ -55,7 +55,7 @@ public class ListSearchFragment extends Fragment {
         mSearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Fragment fragment = new PSListDetailFragment();
+                Fragment fragment = new PMContactDetailFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);

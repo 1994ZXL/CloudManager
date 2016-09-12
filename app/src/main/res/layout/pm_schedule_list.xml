@@ -22,9 +22,9 @@
                 android:text="@string/mission_schedlue" />
 
             <TextView
-                android:id="@+id/pm_schedule_list_add"
+                android:id="@+id/pm_schedule_list_search"
                 style="@style/topview_right"
-                android:text="新增" />
+                android:text="@string/search" />
 
         </LinearLayout>
 
@@ -63,5 +63,11 @@
         </com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/pm_schedule_list_add"
+        style="@style/SearchButton"
+        android:layout_alignParentBottom="true"
+        android:text="@string/add" />
 
 </RelativeLayout>

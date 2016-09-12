@@ -109,7 +109,7 @@
         </activity>
 
         <!--公共查询-->
-        <activity android:name=".publicSearch.PSAddressBook.ProjectListSearchActivity"
+        <activity android:name=".contact.publicSearchContact.ProjectListSearchActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -121,13 +121,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".publicSearch.memberList.MemberListActivity"
+        <activity android:name=".manageMember.publicSearchManageMember.PSManageMemberActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".publicSearch.projectSearch.PublicSearchActivity"
+        <activity android:name=".manageProject.publicSearchProjectManage.PSManageProjectActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -206,13 +206,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".projectManager.PMAdressBook.ProjectManagerActivity"
+        <activity android:name=".manageProject.projectManagerProjectManage.PMManageProjectActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".projectManager.memberManager.ProjectMemberManagerActivity"
+        <activity android:name=".manageMember.projectManagerManageMember.PMManageMemberActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -236,7 +236,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".projectManager.projectList.ProjectConnectionListActivity"
+        <activity android:name=".contact.projectManagerContact.PMContactActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

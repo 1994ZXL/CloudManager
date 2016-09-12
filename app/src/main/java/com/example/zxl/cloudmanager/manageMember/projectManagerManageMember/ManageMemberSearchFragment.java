@@ -1,4 +1,4 @@
-package com.example.zxl.cloudmanager.projectManager.memberManager;
+package com.example.zxl.cloudmanager.manageMember.projectManagerManageMember;
 
 
 import android.app.Fragment;
@@ -14,13 +14,13 @@ import com.example.zxl.cloudmanager.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MemberSearchFragment extends Fragment {
+public class ManageMemberSearchFragment extends Fragment {
 
     private EditText mProjectNameET;
 
     private Button mSearchBtn;
 
-    public MemberSearchFragment() {
+    public ManageMemberSearchFragment() {
         // Required empty public constructor
     }
 

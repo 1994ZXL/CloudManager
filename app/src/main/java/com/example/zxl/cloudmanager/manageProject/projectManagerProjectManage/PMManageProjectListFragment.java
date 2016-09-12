@@ -1,4 +1,4 @@
-package com.example.zxl.cloudmanager.projectManager.PMAdressBook;
+package com.example.zxl.cloudmanager.manageProject.projectManagerProjectManage;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
@@ -18,9 +18,7 @@ import android.widget.TextView;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.Link;
-import com.example.zxl.cloudmanager.model.Post;
 import com.example.zxl.cloudmanager.model.Project;
-import com.example.zxl.cloudmanager.model.ProjectLab;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -37,7 +35,7 @@ import cz.msebera.android.httpclient.Header;
 /**
  * Created by ZXL on 2016/7/12.
  */
-public class ProjectManagerListFragment extends Fragment {
+public class PMManageProjectListFragment extends Fragment {
 
     private CardView mCardView;
     private RecyclerView mRecyclerView;
@@ -45,11 +43,6 @@ public class ProjectManagerListFragment extends Fragment {
     private MyAdapter myAdapter;
 
     private Fragment mFragment;
-
-    public static final int REFRESH_DELAY = 4000;
-
-    private static final String SEARCH_KEY = "search_key";
-    private int searchKey;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
@@ -120,7 +113,7 @@ public class ProjectManagerListFragment extends Fragment {
                         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                             @Override
                             public void onItemClick(View view, Object data) {
-                                Fragment fragment = ProjectManagerDetailFragment.newInstance(data);
+                                Fragment fragment = PMManageProjectDetailFragment.newInstance(data);
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                 if (!fragment.isAdded()) {
                                     transaction.addToBackStack(null);

@@ -5,8 +5,8 @@ package com.example.zxl.cloudmanager.model;
  */
 public class Link {
 //    public static final String localhost = "http://192.168.3.119:8099/yunmgr_v1.0/api/uc.php?app=";
-    public static final String localhost = "http://192.168.1.105/yunmgr_v1.0/api/uc.php?app=";
-//    public static final String localhost = "http://192.168.0.109/yunmgr_v1.0/api/uc.php?app=";
+//    public static final String localhost = "http://192.168.1.105/yunmgr_v1.0/api/uc.php?app=";
+    public static final String localhost = "http://192.168.0.102/yunmgr_v1.0/api/uc.php?app=";
     public static final String API = "http://localhost/yunmgr_v1.0/api/uc.php?app=";
 
     public static final String get_list = "get_list";

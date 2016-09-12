@@ -1,15 +1,11 @@
-package com.example.zxl.cloudmanager.projectManager.PMAdressBook;
+package com.example.zxl.cloudmanager.manageProject.projectManagerProjectManage;
 
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,21 +14,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
-import com.example.zxl.cloudmanager.check.checkManager.ManagerCheckListFragment;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
-import com.example.zxl.cloudmanager.model.DatePickerFragment;
 import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
-
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProjectManagerSearchFragment extends Fragment {
+public class ManageProjectSearchFragment extends Fragment {
 
     private static final String TAG = "PMSearchFragment";
     private EditText mProjectName;
@@ -56,7 +47,7 @@ public class ProjectManagerSearchFragment extends Fragment {
         mFragment = this;
     }
 
-    public ProjectManagerSearchFragment() {
+    public ManageProjectSearchFragment() {
         // Required empty public constructor
     }
 
@@ -117,7 +108,7 @@ public class ProjectManagerSearchFragment extends Fragment {
         mSearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Fragment fragment = new ProjectManagerListFragment();
+                Fragment fragment = new PMManageProjectListFragment();
                 Bundle bundle = new Bundle();
 
                 bundle.putString(Link.project_name, project_name);

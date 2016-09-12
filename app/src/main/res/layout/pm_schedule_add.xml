@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mission_details"
+    style="@style/Parent_LayoutStyle">
+
+    <ScrollView style="@style/ScrollView_Style">
+
+        <LinearLayout style="@style/linearLayoutStyle">
+
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+                <TextView
+                    android:id="@+id/pm_schedule_add_back"
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return" />
+
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/schedule_add" />
+
+                <TextView
+                    android:id="@+id/pm_schedule_add_add"
+                    style="@style/topview_right"
+                    android:text="@string/add" />
+
+            </LinearLayout>
+
+            <!-- 第一块-->
+            <LinearLayout style="@style/linearLayoutStyle">
+
+                <!-- 任务姓名-->
+                <LinearLayout style="@style/Viewline_LayoutStyle">
+
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:text="@string/mission_name" />
+
+                    <Spinner
+                        android:id="@+id/pm_schedule_add_title"
+                        style="@style/Spinner_Style" />
+                </LinearLayout>
+
+                <!-- 任务生成时间-->
+                <LinearLayout style="@style/Viewline_LayoutStyle">
+
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:text="@string/pmsch_time" />
+
+                    <TextView
+                        android:id="@+id/pm_schedule_add_create_time"
+                        style="@style/Text_view_Style" />
+                </LinearLayout>
+
+                <!-- 任务提交时间-->
+                <LinearLayout style="@style/Viewline_LayoutStyle">
+
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:text="@string/submit_time" />
+
+                    <TextView
+                        android:id="@+id/pm_schedule_add_submit_time"
+                        style="@style/Text_view_Style" />
+                </LinearLayout>
+
+                <!-- 任务进度-->
+                <LinearLayout style="@style/Viewline_LayoutStyle">
+
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:text="@string/submit_time" />
+
+                    <EditText
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_mission_progress"
+                        android:id="@+id/pm_schedule_add_percent"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
