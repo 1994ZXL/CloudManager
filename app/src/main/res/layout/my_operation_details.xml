@@ -1,162 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/post_details"
     style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/operation_details_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/operation_details_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/operation_details"/>
+                    android:text="@string/operation_details" />
 
                 <TextView
                     style="@style/topview_right"
-                    android:text=""/>
+                    android:text="" />
 
             </LinearLayout>
 
             <!-- 第一块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 项目名称-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/project_name_edittext"/>
+                        android:text="@string/project_name_edittext" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/operation_details_project_name"/>
+                        android:id="@+id/operation_details_project_name"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 甲方名称-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/contact_name" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/operation_details_contact_name"/>
+                        android:id="@+id/operation_details_contact_name"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 联系电话-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/contact_mob" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/operation_details_contact_mob"/>
+                        android:id="@+id/operation_details_contact_mob"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 运维技术负责人-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/goon_technical" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/operation_details_goon_technical"/>
+                        android:id="@+id/operation_details_goon_technical"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 运维客服负责人-->
                 <LinearLayout
-                    style="@style/Viewline_LayoutStyle"
-                    android:id="@+id/post_level_spinnerLinearLayout">
+                    android:id="@+id/post_level_spinnerLinearLayout"
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/goon_business" />
+
                     <TextView
-                        style="@style/Text_Style"
-                        android:id="@+id/operation_details_goon_business"/>
+                        android:id="@+id/operation_details_goon_business"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 项目状态-->
                 <LinearLayout
-                    style="@style/Viewline_LayoutStyle"
-                    android:id="@+id/post_level_linearLayout">
+                    android:id="@+id/post_level_linearLayout"
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/project_mission_state" />
+
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/operation_details_porject_status"/>
+                        android:id="@+id/operation_details_porject_status"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 运维开始时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/goon_time" />
 
                     <TextView
-                        style="@style/Text_Style"
-                        android:layout_width="match_parent"
-                        android:id="@+id/operation_details_goon_time"/>
+                        android:id="@+id/operation_details_goon_time"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 运维实际开始时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/goon_actual_start_time" />
 
                     <TextView
-                        style="@style/Text_Style"
-                        android:layout_width="match_parent"
-                        android:id="@+id/operation_details_goon_actual_start_time"/>
+                        android:id="@+id/operation_details_goon_actual_start_time"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 运维实际结束时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/goon_actual_end_time" />
 
                     <TextView
-                        style="@style/Text_Style"
-                        android:layout_width="match_parent"
-                        android:id="@+id/operation_details_goon_actual_end_time"/>
+                        android:id="@+id/operation_details_goon_actual_end_time"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 

@@ -36,8 +36,7 @@
 
                     <TextView
                         android:id="@+id/mission_details_name"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 任务内容-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -48,8 +47,7 @@
 
                     <TextView
                         android:id="@+id/mission_details_content"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -66,8 +64,7 @@
 
                     <TextView
                         android:id="@+id/mission_details_begin_time"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
                 <!-- 任务结束时间-->
@@ -79,8 +76,7 @@
 
                     <TextView
                         android:id="@+id/mission_details_end_time"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -97,8 +93,7 @@
 
                     <TextView
                         android:id="@+id/mission_details_state"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
             </LinearLayout>

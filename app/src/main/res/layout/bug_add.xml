@@ -108,8 +108,8 @@
 
                     <EditText
                         android:id="@+id/bug_add_usecase_model"
-                        android:hint="@string/input_name"
-                        style="@style/EditText_Style" />
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_usecase_model" />
 
                 </LinearLayout>
 
@@ -122,8 +122,8 @@
 
                     <EditText
                         android:id="@+id/bug_add_modular"
-                        android:hint="@string/input_name"
-                        style="@style/EditText_Style" />
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_modular" />
 
                 </LinearLayout>
 
@@ -136,8 +136,8 @@
 
                     <EditText
                         android:id="@+id/bug_add_remark"
-                        android:hint="@string/input_name"
-                        style="@style/EditText_Style" />
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_remark" />
 
                 </LinearLayout>
 
@@ -150,8 +150,8 @@
 
                     <EditText
                         android:id="@+id/bug_add_usecase_content"
-                        android:hint="@string/input_name"
-                        style="@style/EditText_Style" />
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_usecase_content" />
 
                 </LinearLayout>
 

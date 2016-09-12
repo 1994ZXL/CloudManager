@@ -37,8 +37,7 @@
 
             <TextView
                 android:id="@+id/ls_check_card_item_dutytime"
-                style="@style/Text_view_Style"
-                android:text="@string/text_two" />
+                style="@style/Text_view_Style" />
         </LinearLayout>
 
         <!-- 下班时间-->
@@ -50,8 +49,7 @@
 
             <TextView
                 android:id="@+id/ls_check_card_item_offdutytime"
-                style="@style/Text_view_Style"
-                android:text="@string/text_two" />
+                style="@style/Text_view_Style" />
         </LinearLayout>
 
     </LinearLayout>

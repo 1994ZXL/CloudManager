@@ -33,8 +33,7 @@
 
             <TextView
                 android:id="@+id/overtime_card_item_begin_time"
-                style="@style/Text_view_Style"
-                android:text="@string/text_two" />
+                style="@style/Text_view_Style" />
 
             <TextView
                 style="@style/Text_view_Style"
@@ -42,8 +41,7 @@
 
             <TextView
                 android:id="@+id/overtime_card_item_end_time"
-                style="@style/Text_view_Style"
-                android:text="@string/text_two" />
+                style="@style/Text_view_Style" />
         </LinearLayout>
         <!-- 结束加班时间-->
 
@@ -57,8 +55,7 @@
             <TextView
                 android:id="@+id/overtime_card_item_overtime_reason"
                 style="@style/Text_view_Style"
-                android:maxLength="12"
-                android:text="@string/text_two" />
+                android:maxLength="12" />
         </LinearLayout>
 
     </LinearLayout>

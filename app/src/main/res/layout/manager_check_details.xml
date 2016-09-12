@@ -36,8 +36,7 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_name"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
                 <!-- 考勤点-->
@@ -49,8 +48,7 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_check_location"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 考勤主管-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -61,8 +59,7 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_check_manager"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -78,8 +75,7 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_check_date"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 规定上班时间-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -90,8 +86,7 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_stipulate_dutytime"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 规定下班时间-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -102,8 +97,7 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_stipulate_offdutytime"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 上班签到时间-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -114,8 +108,7 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_duty_sign_time"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 下班签到时间-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -126,8 +119,7 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_offduty_sign_time"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 迟到分钟数-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -138,8 +130,7 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_late_min"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 早退分钟数-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -150,8 +141,7 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_early_min"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -167,8 +157,7 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_leave"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 加班-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -179,8 +168,7 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_work_overtime"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 出差-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -191,8 +179,7 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_work_travel"
-                        style="@style/Text_view_Style"
-                        android:text="@string/text_two" />
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
             </LinearLayout>

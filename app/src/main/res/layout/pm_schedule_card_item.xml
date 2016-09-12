@@ -24,8 +24,7 @@
 
                 <TextView
                     android:id="@+id/pm_schedule_card_item_percent"
-                    style="@style/Text_view_Style"
-                    android:text="@string/text_two" />
+                    style="@style/Text_view_Style" />
             </LinearLayout>
         </LinearLayout>
 
@@ -38,8 +37,7 @@
 
             <TextView
                 android:id="@+id/pm_schedule_card_item_pmsch_time"
-                style="@style/Text_view_Style"
-                android:text="@string/text_two" />
+                style="@style/Text_view_Style" />
         </LinearLayout>
 
         <!--提交时间-->
@@ -51,8 +49,7 @@
 
             <TextView
                 android:id="@+id/pm_schedule_card_item_submit_time"
-                style="@style/Text_view_Style"
-                android:text="@string/text_two" />
+                style="@style/Text_view_Style" />
 
         </LinearLayout>
 

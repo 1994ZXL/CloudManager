@@ -33,8 +33,7 @@
 
                 <TextView
                     android:id="@+id/main_fragment_manager_leave_dispose_name"
-                    style="@style/Text_view_Style"
-                    android:text="@string/text_two" />
+                    style="@style/Text_view_Style" />
 
             </LinearLayout>
 
@@ -48,8 +47,7 @@
 
                 <TextView
                     android:id="@+id/main_fragment_manager_leave_dispose_leave_type"
-                    style="@style/Text_view_Style"
-                    android:text="@string/text_two" />
+                    style="@style/Text_view_Style" />
 
             </LinearLayout>
 
@@ -62,8 +60,7 @@
 
                 <TextView
                     android:id="@+id/main_fragment_manager_leave_dispose_leave_begin_time"
-                    style="@style/Text_view_Style"
-                    android:text="@string/text_two" />
+                    style="@style/Text_view_Style" />
 
             </LinearLayout>
 
@@ -77,8 +74,7 @@
 
                 <TextView
                     android:id="@+id/main_fragment_manager_leave_dispose_leave_end_time"
-                    style="@style/Text_view_Style"
-                    android:text="@string/text_two" />
+                    style="@style/Text_view_Style" />
 
             </LinearLayout>
 
@@ -91,8 +87,7 @@
 
                 <TextView
                     android:id="@+id/main_fragment_manager_leave_dispose_leave_reason"
-                    style="@style/Text_view_Style"
-                    android:text="@string/text_two" />
+                    style="@style/Text_view_Style" />
 
             </LinearLayout>
 
@@ -105,8 +100,7 @@
 
                 <TextView
                     android:id="@+id/main_fragment_manager_leave_dispose_dispose_suggestion"
-                    style="@style/Text_view_Style"
-                    android:text="@string/text_two" />
+                    style="@style/Text_view_Style" />
             </LinearLayout>
 
             <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -118,8 +112,7 @@
 
                 <TextView
                     android:id="@+id/main_fragment_manager_leave_dispose_apply_time"
-                    style="@style/Text_view_Style"
-                    android:text="@string/text_two" />
+                    style="@style/Text_view_Style" />
             </LinearLayout>
 
             <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -131,8 +124,7 @@
 
                 <TextView
                     android:id="@+id/main_fragment_manager_leave_dispose_dispose_time"
-                    style="@style/Text_view_Style"
-                    android:text="@string/text_two" />
+                    style="@style/Text_view_Style" />
             </LinearLayout>
 
             <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -144,8 +136,7 @@
 
                 <TextView
                     android:id="@+id/main_fragment_manager_leave_dispose_leave_state"
-                    style="@style/Text_view_Style"
-                    android:text="@string/text_two" />
+                    style="@style/Text_view_Style" />
             </LinearLayout>
 
         </LinearLayout>

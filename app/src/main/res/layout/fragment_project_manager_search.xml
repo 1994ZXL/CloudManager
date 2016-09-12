@@ -39,7 +39,7 @@
                     <EditText
                         android:id="@+id/pm_name_edittext"
                         style="@style/EditText_Style"
-                        android:hint="@string/input_name"/>
+                        android:hint="@string/input_project_name"/>
                 </LinearLayout>
 
                 <LinearLayout

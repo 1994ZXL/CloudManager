@@ -33,8 +33,7 @@
 
                 <TextView
                     android:id="@+id/manager_check_card_item_check_location"
-                    style="@style/Text_view_Style"
-                    android:text="@string/text_two" />
+                    style="@style/Text_view_Style" />
             </LinearLayout>
 
             <LinearLayout style="@style/CardView_line_LayoutStyle">
@@ -45,8 +44,7 @@
 
                 <TextView
                     android:id="@+id/manager_check_card_item_check_manager"
-                    style="@style/Text_view_Style"
-                    android:text="@string/text_two" />
+                    style="@style/Text_view_Style" />
             </LinearLayout>
         </LinearLayout>
 

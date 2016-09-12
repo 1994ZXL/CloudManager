@@ -3,34 +3,29 @@
     style="@style/Parent_LayoutStyle"
     tools:context=".publicSearch.PSAddressBook.ListSearchFragment">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/project_choose"/>
+                    android:text="@string/project_choose" />
 
                 <TextView
                     style="@style/topview_right"
-                    android:text="@string/text_clean"/>
+                    android:text="@string/text_clean" />
 
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         android:id="@+id/list_project_name_textview"
@@ -40,12 +35,11 @@
                     <EditText
                         android:id="@+id/list_project_name_edittext"
                         style="@style/EditText_Style"
-                        android:hint="@string/input_project_name"/>
+                        android:hint="@string/input_project_name" />
                 </LinearLayout>
 
                 <!-- 姓名-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -54,13 +48,12 @@
                     <EditText
                         android:id="@+id/list_customer_name_EditText"
                         style="@style/EditText_Style"
-                        android:hint="@string/input_project_customer_name"/>
+                        android:hint="@string/input_name" />
 
                 </LinearLayout>
 
                 <!-- 性别-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -74,8 +67,7 @@
                 </LinearLayout>
 
                 <!-- 手机-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -84,13 +76,12 @@
                     <EditText
                         android:id="@+id/list_customer_phone_editText"
                         style="@style/EditText_Style"
-                        android:inputType="phone"
-                        android:hint="@string/input_phone"/>
+                        android:hint="@string/input_phone"
+                        android:inputType="phone" />
                 </LinearLayout>
 
                 <!-- QQ-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -99,13 +90,12 @@
                     <EditText
                         android:id="@+id/list_cutomer_qq_editText"
                         style="@style/EditText_Style"
-                        android:inputType="number"
-                        android:hint="@string/input_qq"/>
+                        android:hint="@string/input_qq"
+                        android:inputType="number" />
                 </LinearLayout>
 
                 <!-- 微信-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -114,8 +104,8 @@
                     <EditText
                         android:id="@+id/list_customer_wechat_editText"
                         style="@style/EditText_Style"
-                        android:inputType="number"
-                        android:hint="@string/input_wechat"/>
+                        android:hint="@string/input_wechat"
+                        android:inputType="number" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

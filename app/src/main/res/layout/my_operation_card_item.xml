@@ -11,8 +11,7 @@
                 android:id="@+id/my_operation_card_projectname"
                 style="@style/Text_view_Style"
                 android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:gravity="left" />
+                android:layout_weight="1" />
 
             <!--运维状态-->
             <TextView

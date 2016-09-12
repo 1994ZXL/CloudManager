@@ -3,36 +3,31 @@
     android:id="@+id/check_details"
     style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/leave_record_detail"/>
+                    android:text="@string/leave_record_detail" />
 
                 <TextView
                     style="@style/topview_right"
-                    android:text=""/>
+                    android:text="" />
 
             </LinearLayout>
 
             <!-- 第一块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 姓名-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -40,17 +35,15 @@
 
                     <TextView
                         android:id="@+id/my_leave_details_name"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
             </LinearLayout>
 
             <!-- 第二块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!--请假类型-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -61,8 +54,7 @@
                         style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 请假开始时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -70,11 +62,10 @@
 
                     <TextView
                         android:id="@+id/leave_begin_time"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 请假结束时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -88,11 +79,9 @@
             </LinearLayout>
 
             <!-- 第三块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
                 <!-- 请假原因-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -103,8 +92,7 @@
                         style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 处理意见-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -112,17 +100,15 @@
 
                     <TextView
                         android:id="@+id/leave_details_suggestion"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
             </LinearLayout>
 
             <!-- 第四块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 申请时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -133,8 +119,7 @@
                         style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 处理时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -142,11 +127,10 @@
 
                     <TextView
                         android:id="@+id/leave_details_deal_time"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 请假状态-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -154,7 +138,7 @@
 
                     <TextView
                         android:id="@+id/leave_details_state"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
             </LinearLayout>

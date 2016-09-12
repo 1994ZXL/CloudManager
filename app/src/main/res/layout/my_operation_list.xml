@@ -11,18 +11,18 @@
         <LinearLayout style="@style/Toptitle_LayoutStyle">
 
             <TextView
+                android:id="@+id/my_operation_list_back"
                 style="@style/toptextview_left"
-                android:text="@string/text_return"
-                android:id="@+id/my_operation_list_back"/>
+                android:text="@string/text_return" />
 
             <TextView
                 style="@style/toptextview_center"
-                android:text="@string/my_maintain"/>
+                android:text="@string/my_maintain" />
 
             <TextView
+                android:id="@+id/my_operation_list_search"
                 style="@style/topview_right"
-                android:text="@string/search"
-                android:id="@+id/my_operation_list_search"/>
+                android:text="@string/search" />
 
         </LinearLayout>
 
@@ -39,18 +39,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <ScrollView style="@style/ScrollView_Style">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/my_operation_recycler"
-                        android:dividerHeight="10dp"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"/>
+                        android:layout_height="match_parent">
 
-                </RelativeLayout>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/my_operation_recycler"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:dividerHeight="10dp" />
+
+                    </RelativeLayout>
+                </ScrollView>
 
             </com.example.zxl.cloudmanager.pulltorefresh.pullableview.PullableScrollView>
 

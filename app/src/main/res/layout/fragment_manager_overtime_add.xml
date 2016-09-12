@@ -1,114 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/bug_details"
     style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/overtime_add_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/overtime_add_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/add_overtime"/>
+                    android:text="@string/add_overtime" />
 
                 <TextView
+                    android:id="@+id/overtime_add_add"
                     style="@style/topview_right"
-                    android:text="@string/add"
-                    android:id="@+id/overtime_add_add"/>
+                    android:text="@string/add" />
 
             </LinearLayout>
 
             <!-- 第一块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 员工名-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/employer_name"/>
+                        android:text="@string/employer_name" />
 
                     <Spinner
-                        style="@style/Spinner_Style"
-                        android:id="@+id/overtime_add_mem_name"/>
+                        android:id="@+id/overtime_add_mem_name"
+                        style="@style/Spinner_Style" />
 
                 </LinearLayout>
 
                 <!-- 项目名-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/project_name_edittext" />
 
                     <Spinner
-                        style="@style/Spinner_Style"
-                        android:id="@+id/overtime_add_project_name"/>
+                        android:id="@+id/overtime_add_project_name"
+                        style="@style/Spinner_Style" />
 
                 </LinearLayout>
 
                 <!-- 开始时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/project_begin_time_textview" />
 
                     <TextView
+                        android:id="@+id/overtime_add_begin_time"
                         style="@style/Text_view_Style"
-                        android:text="@string/choose_time"
-                        android:id="@+id/overtime_add_begin_time"/>
+                        android:text="@string/choose_time" />
 
                 </LinearLayout>
 
                 <!-- 回归时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/project_end_time_textview" />
 
                     <TextView
+                        android:id="@+id/overtime_add_end_time"
                         style="@style/Text_view_Style"
-                        android:text="@string/choose_time"
-                        android:id="@+id/overtime_add_end_time"/>
+                        android:text="@string/choose_time" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
             <!-- 第二块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 加班原因-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
-                    <TextView
-                        style="@style/Text_view_Style"
-                        android:text="@string/manager_overtime_reason"/>
+                    <LinearLayout
+                        style="@style/Viewline_LayoutStyle"
+                        android:layout_height="150dp">
 
-                    <EditText
-                        style="@style/EditText_Style"
-                        android:id="@+id/overtime_add_reason"/>
-
+                        <EditText
+                            android:id="@+id/overtime_add_reason"
+                            style="@style/EditText_Style"
+                            android:hint="@string/input_manager_overtime_reason" />
+                    </LinearLayout>
                 </LinearLayout>
 
 

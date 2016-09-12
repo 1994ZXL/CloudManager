@@ -254,9 +254,13 @@
     <string name="edit_man">修改人</string>
     <string name="under_program">所属项目</string>
     <string name="usecase_model">用例模型</string>
+    <string name="input_usecase_model">请输入用例模型</string>
     <string name="modular">模板</string>
+    <string name="input_modular">请输入模板</string>
     <string name="remark">备注</string>
+    <string name="input_remark">请输入备注信息</string>
     <string name="usecase_content">用例内容</string>
+    <string name="input_usecase_content">请输入用例信息</string>
     <string name="bug_add">新增bug</string>
 
     <string name="check_button">查询</string>
@@ -278,13 +282,11 @@
     <string name="project_create_time">项目时间</string>
     <string name="plan_create_time">创建时间</string>
     <string name="plan_manager_name_edittext">安排人员</string>
-    <string name="input_plan_manager_name">请输入安排人员名称</string>
     <string name="project_mission_priority">优先级</string>
     <string name="project_mission_state">项目状态</string>
     <string name="project_mission_time">任务时间</string>
 
     <string name="project_customer_name">甲方负责人</string>
-    <string name="input_project_customer_name">请输入甲方负责人名称</string>
 
     <string name="usecase_id">用例编号</string>
     <string name="usecase_detail">用例详情</string>
@@ -316,9 +318,7 @@
 
     <string name="bug_find_time">发现时间</string>
     <string name="bug_finder">发现人</string>
-    <string name="bug_finder_name">请输入发现人姓名</string>
     <string name="bug_reviser">修改人</string>
-    <string name="bug_reviser_name">请输入修改人姓名</string>
     <string name="my_bug_state">bug状态</string>
     <string name="my_bug_detail">bug详情</string>
     <string name="bug_level">bug等级</string>
@@ -339,6 +339,7 @@
     <string name="overtime_end_time">加班结束时间</string>
     <string name="manager_overtime_total">加班时间小计</string>
     <string name="manager_overtime_reason">加班原因</string>
+    <string name="input_manager_overtime_reason">请输入加班原因</string>
     <string name="manager_overtime_project">加班项目</string>
     <string name="manager_overtime_alltime">加班总时间</string>
     <string name="my_join_project">项目</string>

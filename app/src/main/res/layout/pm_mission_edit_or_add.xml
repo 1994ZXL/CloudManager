@@ -10,9 +10,9 @@
             <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/pm_mission_edit_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/pm_mission_edit_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"

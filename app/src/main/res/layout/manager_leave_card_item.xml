@@ -39,8 +39,7 @@
 
             <TextView
                 android:id="@+id/manager_leave_card_item_leave_begin_time"
-                style="@style/Text_view_Style"
-                android:text="@string/text_two" />
+                style="@style/Text_view_Style" />
         </LinearLayout>
 
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
@@ -51,8 +50,7 @@
 
             <TextView
                 android:id="@+id/manager_leave_card_item_leave_end_time"
-                style="@style/Text_view_Style"
-                android:text="@string/text_two" />
+                style="@style/Text_view_Style" />
 
         </LinearLayout>
 

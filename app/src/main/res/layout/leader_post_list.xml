@@ -38,8 +38,7 @@
             <TextView
                 android:id="@+id/leader_post_list_content"
                 style="@style/Text_view_Style"
-                android:maxLength="10"
-                android:text="@string/text_two" />
+                android:maxLength="10" />
         </LinearLayout>
 
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
@@ -52,8 +51,7 @@
             <TextView
                 android:id="@+id/leader_post_list_opinion"
                 style="@style/Text_view_Style"
-                android:maxLength="10"
-                android:text="@string/text_two" />
+                android:maxLength="10" />
         </LinearLayout>
 
     </LinearLayout>

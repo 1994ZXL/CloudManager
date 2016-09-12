@@ -7,26 +7,24 @@
 
         <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/bug_search"/>
+                    android:text="@string/bug_search" />
 
                 <TextView
                     style="@style/topview_right"
-                    android:text="@string/text_clean"/>
+                    android:text="@string/text_clean" />
 
             </LinearLayout>
 
             <!--项目名-->
-            <LinearLayout
-                style="@style/Viewline_LayoutStyle">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
                     style="@style/Text_view_Style"
@@ -35,12 +33,11 @@
                 <EditText
                     android:id="@+id/bug_project_name_edittext"
                     style="@style/EditText_Style"
-                    android:hint="@string/input_project_name"/>
+                    android:hint="@string/input_project_name" />
             </LinearLayout>
 
             <!--发现时间-->
-            <LinearLayout
-                style="@style/Viewline_LayoutStyle">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
                     style="@style/Text_view_Style"
@@ -63,8 +60,8 @@
 
             <!--修改时间-->
             <LinearLayout
-                style="@style/Viewline_LayoutStyle"
-                android:id="@+id/bug_editTime_linearLayout">
+                android:id="@+id/bug_editTime_linearLayout"
+                style="@style/Viewline_LayoutStyle">
 
                 <TextView
                     style="@style/Text_view_Style"
@@ -87,8 +84,8 @@
 
             <!--发现人-->
             <LinearLayout
-                style="@style/Viewline_LayoutStyle"
-                android:id="@+id/bug_finder_linearLayout">
+                android:id="@+id/bug_finder_linearLayout"
+                style="@style/Viewline_LayoutStyle">
 
                 <TextView
                     style="@style/Text_view_Style"
@@ -97,13 +94,13 @@
                 <EditText
                     android:id="@+id/bug_finder_edittext"
                     style="@style/EditText_Style"
-                    android:hint="@string/bug_finder_name"/>
+                    android:hint="@string/input_name" />
             </LinearLayout>
 
             <!--修改人-->
             <LinearLayout
-                style="@style/Viewline_LayoutStyle"
-                android:id="@+id/bug_reviser_linearLayout">
+                android:id="@+id/bug_reviser_linearLayout"
+                style="@style/Viewline_LayoutStyle">
 
                 <TextView
                     style="@style/Text_view_Style"
@@ -112,12 +109,11 @@
                 <EditText
                     android:id="@+id/bug_reviser_edittext"
                     style="@style/EditText_Style"
-                    android:hint="@string/bug_reviser_name"/>
+                    android:hint="@string/input_name" />
             </LinearLayout>
 
             <!--bug状态-->
-            <LinearLayout
-                style="@style/Viewline_LayoutStyle">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
                     style="@style/Text_view_Style"
@@ -129,8 +125,7 @@
             </LinearLayout>
 
             <!--bug等级-->
-            <LinearLayout
-                style="@style/Viewline_LayoutStyle">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
                     style="@style/Text_view_Style"
@@ -138,7 +133,7 @@
 
                 <Spinner
                     android:id="@+id/bug_level_sprinner"
-                    style="@style/Spinner_Style"/>
+                    style="@style/Spinner_Style" />
             </LinearLayout>
         </LinearLayout>
 

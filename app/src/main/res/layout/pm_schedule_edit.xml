@@ -3,23 +3,20 @@
     android:id="@+id/mission_details"
     style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/pm_schedule_edit_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/pm_schedule_edit_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/mission_edit"/>
+                    android:text="@string/mission_edit" />
 
                 <TextView
                     android:id="@+id/pm_schedule_edit"
@@ -29,12 +26,10 @@
             </LinearLayout>
 
             <!-- 第一块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 任务姓名-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -46,8 +41,7 @@
                 </LinearLayout>
 
                 <!-- 任务生成时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -55,12 +49,11 @@
 
                     <TextView
                         android:id="@+id/pm_schedule_pmsch_time"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
                 <!-- 任务提交时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -68,21 +61,21 @@
 
                     <TextView
                         android:id="@+id/pm_schedule_submit_time"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
                 <!-- 任务进度-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
-                    <TextView
-                        style="@style/Text_view_Style"
-                        android:text="@string/schedule" />
+                    <LinearLayout
+                        style="@style/Viewline_LayoutStyle"
+                        android:layout_height="150dp">
 
-                    <EditText
-                        android:id="@+id/pm_schedule_schedule"
-                        style="@style/EditText_Style"
-                        android:hint="@string/input_mission_progress" />
+                        <EditText
+                            android:id="@+id/pm_schedule_schedule"
+                            style="@style/EditText_Style"
+                            android:hint="@string/input_mission_progress" />
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>

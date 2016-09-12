@@ -3,36 +3,31 @@
     android:id="@+id/bug_details"
     style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/my_bug_detail"/>
+                    android:text="@string/my_bug_detail" />
 
                 <TextView
                     style="@style/topview_right"
-                    android:text=""/>
+                    android:text="" />
 
             </LinearLayout>
 
             <!-- 第一块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 项目名称-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -43,8 +38,7 @@
                         style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- bug序号-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -52,11 +46,10 @@
 
                     <TextView
                         android:id="@+id/bug_details_number"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- bug等级-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -64,11 +57,10 @@
 
                     <TextView
                         android:id="@+id/bug_details_level"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- bug状态-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -79,8 +71,7 @@
                         style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- bug内容-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -88,18 +79,16 @@
 
                     <TextView
                         android:id="@+id/bug_details_content"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <!-- 第二块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 用例编号-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -110,8 +99,7 @@
                         style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 操作模式-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -119,11 +107,10 @@
 
                     <TextView
                         android:id="@+id/bug_details_operation_mode"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 进入方式-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -134,8 +121,7 @@
                         style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 发现时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -146,8 +132,7 @@
                         style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 发现人-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -155,11 +140,10 @@
 
                     <TextView
                         android:id="@+id/bug_details_found_man"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 修改时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -167,18 +151,16 @@
 
                     <TextView
                         android:id="@+id/bug_details_edit_time"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <!-- 第三块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 修改人-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -186,11 +168,10 @@
 
                     <TextView
                         android:id="@+id/bug_details_edit_man"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 所属项目-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"

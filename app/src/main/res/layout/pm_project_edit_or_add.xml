@@ -3,36 +3,31 @@
     android:id="@+id/mission_details"
     style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/project_edit"/>
+                    android:text="@string/project_edit" />
 
                 <TextView
                     style="@style/topview_right"
-                    android:text="@string/text_clean"/>
+                    android:text="@string/text_clean" />
 
             </LinearLayout>
 
             <!-- 第一块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 项目名称-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -43,8 +38,7 @@
                         style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!--项目主管-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -52,11 +46,10 @@
 
                     <TextView
                         android:id="@+id/pm_manager_name"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 项目内容-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -64,18 +57,16 @@
 
                     <TextView
                         android:id="@+id/pm_content"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <!-- 第二块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 甲方单位名称-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -87,8 +78,7 @@
                 </LinearLayout>
 
                 <!-- 甲方负责人-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -96,11 +86,10 @@
 
                     <TextView
                         android:id="@+id/pm_customer_contacter"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 联系电话-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -108,18 +97,16 @@
 
                     <TextView
                         android:id="@+id/pm_contactor_phone"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <!-- 第三块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 开始时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -130,8 +117,7 @@
                         style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 任务结束时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -142,8 +128,7 @@
                         style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 项目状态-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -151,7 +136,7 @@
 
                     <Spinner
                         android:id="@+id/pm_state"
-                        style="@style/Spinner_Style"/>
+                        style="@style/Spinner_Style" />
                 </LinearLayout>
 
             </LinearLayout>
