@@ -89,6 +89,7 @@ public class LSCheckFragment extends Fragment {
             }
         }
         try {
+            keyObj.put(Link.mem_job, User.newInstance().getMem_job());
             keyObj.put(Link.comp_id, User.newInstance().getComp_id());
             keyObj.put("sort", "att_date desc");
             keyObj.put("page_count", 20);

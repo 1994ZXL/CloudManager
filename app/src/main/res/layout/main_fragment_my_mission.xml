@@ -4,35 +4,33 @@
     android:layout_height="match_parent">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
-            style="@style/Toptitle_LayoutStyle">
+        <LinearLayout style="@style/Toptitle_LayoutStyle">
 
             <TextView
+                android:id="@+id/my_mission_back"
                 style="@style/toptextview_left"
-                android:text="@string/text_return"
-                android:id="@+id/my_mission_back"/>
+                android:text="@string/text_return" />
 
             <TextView
+                android:id="@+id/my_mission_title"
                 style="@style/toptextview_center"
-                android:text="@string/my_mission"
-                android:id="@+id/my_mission_title"/>
+                android:text="@string/my_mission" />
 
             <TextView
-                style="@style/topview_right"
                 android:id="@+id/manager_mission_search"
-                android:text="@string/search"/>
+                style="@style/topview_right"
+                android:text="@string/search" />
 
         </LinearLayout>
 
-        <com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/my_mission_refresh"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <include layout="@layout/refresh_head" />
             <!-- 支持所有实现Pullable接口的View -->
@@ -41,18 +39,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <ScrollView style="@style/ScrollView_Style">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/mission_recyclerview"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:dividerHeight="10dp" />
+                        android:layout_height="match_parent">
 
-                </RelativeLayout>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/mission_recyclerview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:dividerHeight="10dp" />
+
+                    </RelativeLayout>
+                </ScrollView>
 
             </com.example.zxl.cloudmanager.pulltorefresh.pullableview.PullableScrollView>
 
@@ -65,7 +66,7 @@
     <TextView
         android:id="@+id/manager_mission_add"
         style="@style/SearchButton"
-        android:text="@string/add"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:text="@string/add" />
 
 </RelativeLayout>

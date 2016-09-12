@@ -37,8 +37,6 @@ public class MyUseCaseFragment extends Fragment {
 
     private Fragment mFragment;
 
-    public static final int REFRESH_DELAY = 4000;
-
     private static final String SEARCH_KEY = "search_key";
     private static final String TAG = "MyUseCaseFragment";
     private int searchKey;

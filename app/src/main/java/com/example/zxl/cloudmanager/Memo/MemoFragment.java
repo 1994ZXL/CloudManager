@@ -1,14 +1,19 @@
 package com.example.zxl.cloudmanager.Memo;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,106 +21,237 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.DESCryptor;
+import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
+import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Memo;
+import com.example.zxl.cloudmanager.model.User;
+import com.example.zxl.cloudmanager.pulltorefresh.MyListener;
+import com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by ZXL on 2016/7/7.
  */
 public class MemoFragment extends Fragment {
+    private static final String TAG = "MemoFragment";
 
     private CardView mCardView;
     private RecyclerView mRecyclerView;
     private MyAdapter myAdapter;
     private List<Memo> memos = new ArrayList<Memo>();
-    private String[] titles = {"第一条", "第二条", "第三条", "第四条", "第五条"};
-    private String[] content = {"p1", "p2", "p3", "p4", "p5"};
+
+    private static int mCurl_page;
+
+    private PullToRefreshLayout mPullToRefreshLayout;
+
+    private TextView mBack;
+    private TextView mSearch;
+    private Button mAdd;
+
+    private static AsyncHttpClient mHttpc = new AsyncHttpClient();
+    private RequestParams mParams = new RequestParams();
+    private JSONObject keyObj = new JSONObject();
+    private String key = "";
+    private String url;
+
+    private static AsyncHttpClient mHttpcDelete = new AsyncHttpClient();
+    private RequestParams mParamsDelete = new RequestParams();
+    private JSONObject keyObjDelete = new JSONObject();
+    private String keyDelete = "";
 
     private Fragment mFragment;
-    private Button mBtn;
-
-    public static final int REFRESH_DELAY = 4000;
-
-    @Override
-    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        View v = layoutInflater.inflate(R.layout.main_fragment_my_memo, parent, false);
-
-        memos.add(new Memo("第一条", "p1"));
-
-        mRecyclerView = (RecyclerView)v.findViewById(R.id.memo_recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setHasFixedSize(true);
-        myAdapter = new MyAdapter(this.getActivity(), memos);
-        mRecyclerView.setAdapter(myAdapter);
-        mCardView = (CardView)v.findViewById(R.id.fragment_my_memo);
-        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
-            @Override
-            public void onItemClick(View view, Object data) {
-                Fragment fragment = new MemoDetailFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
-            }
-        });
-
-        return v;
-    }
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
         mFragment = this;
+        mCurl_page = 1;
     }
 
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.memo, menu);
-    }
+    private void loadDate(final Bundle saveInstanceState, int curl_page, final View v) {
+        if (null == saveInstanceState) {
+            Log.d(TAG, "没有选择条件");
+        } else {
+            try {
+                if (null != saveInstanceState.getString(Link.title))
+                    keyObj.put(Link.title, saveInstanceState.getString(Link.title));
+                if (-1 != saveInstanceState.getInt(Link.start_time))
+                    keyObj.put(Link.start_time, saveInstanceState.getInt(Link.start_time));
+                if (-1 != saveInstanceState.getInt(Link.my_note_over_time))
+                    keyObj.put(Link.my_note_over_time, saveInstanceState.getInt(Link.my_note_over_time));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            keyObj.put(Link.user_id, User.newInstance().getUser_id());
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_new_memo:
-               if (myAdapter.getItemCount() != titles.length) {
-                   memos.add(new Memo(titles[myAdapter.getItemCount()], content[myAdapter.getItemCount()]));
-                   mRecyclerView.scrollToPosition(myAdapter.getItemCount() - 1);
-                   myAdapter.notifyDataSetChanged();
-               }
-                return true;
-            case R.id.menu_item_delete_memo:
-                if (myAdapter.getItemCount() != 0) {
-                    memos.remove(myAdapter.getItemCount() -1);
-                    mRecyclerView.scrollToPosition(myAdapter.getItemCount() - 1);
-                    myAdapter.notifyDataSetChanged();
+            keyObj.put("sort", "create_time desc");
+            keyObj.put("page_count", 20);
+            keyObj.put("curl_page", curl_page);
+
+            key = DESCryptor.Encryptor(keyObj.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        mParams.put("key", key);
+        Log.d(TAG, "key: " + key);
+
+        mHttpc.post(Link.localhost + url, mParams, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
+                if (statusCode == 200) {
+                    try {
+                        if (rjo.getBoolean("result")) {
+                            JSONArray array = rjo.getJSONArray("data1");
+                            Log.d(TAG, "array: " + array);
+                            for (int i = 0; i < array.length(); i++) {
+                                memos.add(new Memo(array.getJSONObject(i)));
+                            }
+
+                            mRecyclerView = (RecyclerView)v.findViewById(R.id.memo_recyclerview);
+                            mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
+                            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+                            mRecyclerView.setHasFixedSize(true);
+                            myAdapter = new MyAdapter(mFragment.getActivity(), memos);
+                            mRecyclerView.setAdapter(myAdapter);
+                            mCardView = (CardView)v.findViewById(R.id.fragment_my_memo);
+                            myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                                @Override
+                                public void onItemClick(View view, Object data) {
+                                    Fragment fragment = MemoDetailFragment.newInstance(data);
+                                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                    if (!fragment.isAdded()) {
+                                        transaction.addToBackStack(null);
+                                        transaction.hide(mFragment);
+                                        transaction.add(R.id.blankActivity, fragment);
+                                        transaction.commit();
+                                    } else {
+                                        transaction.hide(mFragment);
+                                        transaction.show(fragment);
+                                        transaction.commit();
+                                    }
+                                }
+                            });
+
+                        } else {
+
+                        }
+                    } catch (JSONException e) {
+                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                        try {
+                            Toast.makeText(getActivity(),
+                                    rjo.getString("msg"),
+                                    Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
                 }
-            case R.id.action_memo_search:
+
+            }
+
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+
+            }
+
+        });
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle savedInstanceState) {
+        final View v = layoutInflater.inflate(R.layout.main_fragment_my_memo, parent, false);
+
+        savedInstanceState = getArguments();
+        final Bundle saveInstanceState = savedInstanceState;
+
+        url = Link.my_note + Link.get_list;
+        loadDate(saveInstanceState, mCurl_page, v);
+        mPullToRefreshLayout = (PullToRefreshLayout) v.findViewById(R.id.my_memo_refresh);
+        mPullToRefreshLayout.setOnRefreshListener(new MyListener() {
+            @Override
+            public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
+                new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        memos.clear();
+                        loadDate(saveInstanceState, mCurl_page, v);
+                        pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
+                    }
+                }.sendEmptyMessageDelayed(0, 1500);
+            }
+
+            @Override
+            public void onLoadMore(final PullToRefreshLayout pullToRefreshLayout) {
+                new Handler() {
+                    @Override
+                    public void handleMessage(Message msg) {
+                        memos.clear();
+                        mCurl_page++;
+                        loadDate(saveInstanceState, mCurl_page, v);
+                        pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                    }
+                }.sendEmptyMessageDelayed(0, 1500);
+            }
+        });
+
+        mBack = (TextView) v.findViewById(R.id.my_memo_back);
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
+        mSearch = (TextView) v.findViewById(R.id.my_memo_search);
+        mSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 Fragment fragment = null;
                 if (null == fragment) {
                     FragmentManager fm = getFragmentManager();
                     fragment = new MemoSearchFragment();
                     fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
                 }
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+            }
+        });
 
+        mAdd = (Button) v.findViewById(R.id.memo_add);
+        mAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = null;
+                if (null == fragment) {
+                    FragmentManager fm = getFragmentManager();
+                    fragment = new MemoAddFragment();
+                    fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
+                }
+            }
+        });
+
+        return v;
+    }
 
     public interface OnRecyclerViewItemClickListener {
         void onItemClick(View view, Object data);
@@ -142,10 +278,59 @@ public class MemoFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder viewHolder, int i) {
+        public void onBindViewHolder(ViewHolder viewHolder, final int i) {
             Memo m = memos.get(i);
-            viewHolder.mTitle.setText(m.getmMemoTitle());
-            viewHolder.mContent.setText(m.getmContent());
+
+            viewHolder.mTitle.setText(m.getTitle());
+            viewHolder.mCreateTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(m.getCreate_time()));
+            viewHolder.mContent.setText(m.getContent());
+            viewHolder.mDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mFragment.getActivity());
+                    builder.setTitle("提示");
+                    builder.setMessage("是否要删除");
+                    builder.setNegativeButton("取消", null);
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+                        @Override
+                        public void onClick(DialogInterface dialog,int which){
+                            try {
+                                keyObjDelete.put(Link.note_id, memos.get(i).getNote_id());
+                                keyDelete = DESCryptor.Encryptor(keyObjDelete.toString());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            mParamsDelete.put("key", keyDelete);
+                            Log.d(TAG,"key:" + keyDelete);
+
+                            mHttpcDelete.post(Link.localhost + "my_note&act=drop", mParamsDelete, new JsonHttpResponseHandler() {
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                    try {
+                                        Toast.makeText(getActivity(),
+                                                response.getString("msg"),
+                                                Toast.LENGTH_SHORT).show();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                    Toast.makeText(getActivity(),
+                                            R.string.edit_error,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            memos.remove(i);
+                            mRecyclerView.scrollToPosition(i - 1);
+                            myAdapter.notifyDataSetChanged();
+                        }
+                    });
+                    builder.show();
+                }
+            });
+
             viewHolder.itemView.setTag(memos.get(i));
         }
 
@@ -162,12 +347,17 @@ public class MemoFragment extends Fragment {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder{
-            public TextView mTitle;
-            public TextView mContent;
+            private TextView mTitle;
+            private TextView mCreateTime;
+            private TextView mContent;
+            private ImageButton mDelete;
+
             public ViewHolder(View v) {
                 super(v);
-                mTitle = (TextView)v.findViewById(R.id.memo_title_textview);
-                mContent = (TextView)v.findViewById(R.id.memo_content_textview);
+                mTitle = (TextView) v.findViewById(R.id.memo_card_title);
+                mCreateTime = (TextView) v.findViewById(R.id.memo_card_create_time);
+                mContent = (TextView) v.findViewById(R.id.memo_card_content);
+                mDelete = (ImageButton) v.findViewById(R.id.memo_card_delete);
             }
         }
 

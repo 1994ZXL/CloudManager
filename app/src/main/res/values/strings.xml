@@ -11,8 +11,10 @@
     <string name="text_return">返回</string>
     <string name="text_clean">重置</string>
     <string name="select_time">请选择时间</string>
+    <string name="time">时间</string>
     <string name="start_stop_time">起止时间</string>
     <string name="text">—</string>
+    <string name="text_two">——</string>
 
 
     <!--刷新加载-->
@@ -101,8 +103,10 @@
     <string name="pm_customer_contactor_phone">联系电话</string>
 
     <!--备忘录-->
+    <string name="memo">我的备忘录</string>
     <string name="memo_title">标题</string>
     <string name="memo_title_textview">请输入标题</string>
+    <string name="memo_hint_content">请输入内容</string>
     <string name="input_memo_title">请输入备忘录标题</string>
     <string name="memo_choose">备忘录筛选</string>
     <string name="memo_date_textview">xx年xx月xx日</string>
@@ -129,8 +133,11 @@
     <string name="wechat">微信</string>
     <string name="input_wechat">请输入微信号</string>
     <string name="email">邮箱</string>
+    <string name="input_email">请输入邮箱</string>
     <string name="location">地址</string>
+    <string name="input_location">请输入所在城市</string>
     <string name="detail_location">详细地址</string>
+    <string name="input_detail_location">请输入详细地址</string>
     <string name="idcard">身份证号码</string>
     <string name="comp_name">公司名称</string>
     <string name="punch_address">考勤地址</string>
@@ -241,6 +248,7 @@
     <string name="input_bug_content">请输入bug内容</string>
     <string name="operation_mode">操作模式</string>
     <string name="entrance_mode">进入方式</string>
+    <string name="input_entrance_mode">请输入bug产生条件</string>
     <string name="found_man">发现人</string>
     <string name="edit_time">修改时间</string>
     <string name="edit_man">修改人</string>
@@ -338,6 +346,7 @@
 
     <string name="employer_travel_time">出差时间</string>
     <string name="employer_travel_choose">出差筛选</string>
+    <string name="travel_add">出差安排</string>
     <string name="employer_travel_detail">出差详情</string>
     <string name="employer_travel_begin_time">出差开始时间</string>
     <string name="employer_travel_end_time">出差结束时间</string>
@@ -349,6 +358,7 @@
     <string name="employer_travel_address">出差详细地址</string>
     <string name="employer_travel_state">出差状态</string>
     <string name="employer_travel_reason">出差原因</string>
+    <string name="input_travel_reason">请输入出差原因</string>
 
     <string name="post_submit_time">日报时间</string>
     <string name="my_post_choose">日报筛选</string>

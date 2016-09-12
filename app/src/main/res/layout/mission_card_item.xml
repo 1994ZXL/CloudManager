@@ -12,34 +12,44 @@
             <TextView
                 android:id="@+id/mission_card_item_title"
                 style="@style/Text_view_Style"
-                android:layout_width="260dp" />
+                android:layout_weight="1"
+                android:width="350dp" />
 
             <TextView
                 android:id="@+id/mission_card_item_state"
                 style="@style/Text_view_Style"
-                android:layout_width="120dp" />
+                android:layout_weight="1"
+                android:width="200dp" />
 
         </LinearLayout>
 
         <!-- 开始时间-->
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
-            <TextView
-                style="@style/Text_view_Style"
-                android:text="@string/mission_begin_time" />
+            <LinearLayout
+                style="@style/CardView_line_LayoutStyle"
+                android:layout_width="450dp">
 
-            <TextView
-                android:id="@+id/missoin_card_item_mission_begin_time"
-                style="@style/Text_view_Style"
-                android:layout_width="180dp" />
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/mission_begin_time" />
 
-            <ImageButton
-                android:id="@+id/mission_card_item_delete"
-                style="@style/Text_view_Style"
-                android:layout_width="80dp"
-                android:layout_height="40dp"
-                android:background="@color/memo_background"
-                android:src="@android:drawable/ic_menu_delete" />
+                <TextView
+                    android:id="@+id/missoin_card_item_mission_begin_time"
+                    style="@style/Text_view_Style"
+                    android:text="@string/text_two" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
+
+                <ImageButton
+                    android:id="@+id/mission_card_item_delete"
+                    style="@style/Text_view_Style"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@color/memo_background"
+                    android:src="@android:drawable/ic_menu_delete" />
+            </LinearLayout>
         </LinearLayout>
         <!-- 完成时间-->
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
@@ -51,7 +61,7 @@
             <TextView
                 android:id="@+id/mission_card_item_mission_end_time"
                 style="@style/Text_view_Style"
-                android:layout_width="180dp" />
+                android:text="@string/text_two" />
         </LinearLayout>
 
     </LinearLayout>

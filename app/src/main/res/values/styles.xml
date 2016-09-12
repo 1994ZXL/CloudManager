@@ -92,6 +92,7 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:padding">10dp</item>
+        <item name="android:text">@string/text_two</item>
     </style>
 
     <style name="Text_Style"><!-- 文字样式 -->
@@ -161,6 +162,12 @@
         <item name="android:orientation">horizontal</item>
     </style>
 
+    <style name="CardView_line_LayoutStyle"><!-- CardView行内分段显示linearLayout -->
+        <item name="android:layout_width">200dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
     <style name="ScrollView_Style"><!-- 列表视图样式 -->
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -177,6 +184,7 @@
         <item name="android:textColor">@android:color/black</item>
         <item name="android:textSize">20sp</item>
     </style>
+
     <style name="ButtonStyle">
         <item name="android:background">@drawable/shape</item>
     </style>

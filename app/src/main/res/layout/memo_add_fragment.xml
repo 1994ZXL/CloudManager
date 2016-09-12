@@ -16,7 +16,7 @@
                 <TextView
                     style="@style/toptextview_left"
                     android:text="@string/text_return"
-                    android:id="@+id/memo_details_back"/>
+                    android:id="@+id/memo_add_back"/>
 
                 <TextView
                     style="@style/toptextview_center"
@@ -24,8 +24,8 @@
 
                 <TextView
                     style="@style/topview_right"
-                    android:text="修改"
-                    android:id="@+id/memo_details_save"/>
+                    android:text="新增"
+                    android:id="@+id/memo_add_add"/>
 
             </LinearLayout>
 
@@ -43,21 +43,8 @@
 
                     <EditText
                         style="@style/EditText_Style"
-                        android:id="@+id/memo_details_title"/>
-
-                </LinearLayout>
-
-                <!-- 创建时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
-
-                    <TextView
-                        style="@style/Text_view_Style"
-                        android:text="@string/plan_create_time" />
-
-                    <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/memo_details_create_time"/>
+                        android:hint="@string/memo_title_textview"
+                        android:id="@+id/memo_add_title"/>
 
                 </LinearLayout>
 
@@ -71,7 +58,8 @@
 
                     <EditText
                         style="@style/EditText_Style"
-                        android:id="@+id/memo_details_content"/>
+                        android:hint="@string/memo_hint_content"
+                        android:id="@+id/memo_add_content"/>
 
                 </LinearLayout>
 

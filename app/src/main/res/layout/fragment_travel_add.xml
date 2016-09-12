@@ -2,33 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/fragment_travel_add_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/fragment_travel_add_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/employer_travel_choose"/>
+                    android:text="@string/travel_add" />
 
                 <TextView
+                    android:id="@+id/fragment_travel_add_add"
                     style="@style/topview_right"
-                    android:text="@string/add"
-                    android:id="@+id/fragment_travel_add_add"/>
+                    android:text="@string/add" />
 
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <LinearLayout
                     android:id="@+id/fragment_travel_nameEditText"
@@ -40,12 +36,11 @@
 
                     <Spinner
                         android:id="@+id/fragment_travel_memName"
-                        style="@style/Spinner_Style"/>
+                        style="@style/Spinner_Style" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -54,12 +49,11 @@
                     <TextView
                         android:id="@+id/fragment_travel_beginTime"
                         style="@style/Text_view_Style"
-                        android:hint="@string/select_time" />
+                        android:text="@string/select_time" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -68,12 +62,11 @@
                     <TextView
                         android:id="@+id/fragment_travel_endTime"
                         style="@style/Text_view_Style"
-                        android:hint="@string/select_time" />
+                        android:text="@string/select_time" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -81,11 +74,11 @@
 
                     <EditText
                         android:id="@+id/fragment_travel_address"
-                        style="@style/EditText_Style" />
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_location" />
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -93,11 +86,11 @@
 
                     <EditText
                         android:id="@+id/fragment_travel_detail_addr"
-                        style="@style/EditText_Style" />
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_detail_location" />
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -105,7 +98,8 @@
 
                     <EditText
                         android:id="@+id/fragment_travel_reason"
-                        style="@style/EditText_Style" />
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_travel_reason" />
                 </LinearLayout>
 
             </LinearLayout>

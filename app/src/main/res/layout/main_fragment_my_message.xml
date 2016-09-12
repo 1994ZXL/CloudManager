@@ -1,357 +1,221 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_my_message"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp">
+    style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <LinearLayout style="@style/linearLayoutStyle">
 
             <!-- 头像-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_weight="1"
-                    android:text="@string/head"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/head" />
+
                 <ImageView
+                    android:id="@+id/main_fragment_my_message_head_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:src="@drawable/demo"
-                    android:id="@+id/main_fragment_my_message_head_icon" />
+                    android:src="@drawable/demo" />
 
             </LinearLayout>
 
             <!-- 用户名-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
+                    style="@style/Text_view_Style"
                     android:text="@string/user_name" />
+
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:id="@+id/main_fragment_my_message_user_name"/>
+                    android:id="@+id/main_fragment_my_message_user_name"
+                    style="@style/Text_view_Style" />
 
             </LinearLayout>
 
             <!-- 姓名-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
+                    style="@style/Text_view_Style"
                     android:text="@string/name" />
+
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
                     android:id="@+id/main_fragment_my_message_name"
-                    android:text="张三"/>
+                    style="@style/Text_view_Style" />
 
             </LinearLayout>
 
             <!-- 性别-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
+                    style="@style/Text_view_Style"
                     android:text="@string/sex" />
+
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:id="@+id/main_fragment_my_message_sex"/>
+                    android:id="@+id/main_fragment_my_message_sex"
+                    style="@style/Text_view_Style" />
 
             </LinearLayout>
 
             <!-- 手机-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
+                    style="@style/Text_view_Style"
                     android:text="@string/phone" />
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
                     android:id="@+id/main_fragment_my_message_phone"
-                    android:text="12345678987"/>
+                    style="@style/EditText_Style"
+                    android:hint="@string/input_phone"
+                    android:inputType="phone" />
             </LinearLayout>
 
             <!-- QQ-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
+                    style="@style/Text_view_Style"
                     android:text="@string/qq" />
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:id="@+id/main_fragment_my_message_qq"/>
+                    android:id="@+id/main_fragment_my_message_qq"
+                    style="@style/EditText_Style"
+                    android:hint="@string/input_qq"
+                    android:inputType="number" />
             </LinearLayout>
 
             <!-- 微信-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
+                    style="@style/Text_view_Style"
                     android:text="@string/wechat" />
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:id="@+id/main_fragment_my_message_wechat"/>
+                    android:id="@+id/main_fragment_my_message_wechat"
+                    style="@style/EditText_Style"
+                    android:hint="@string/input_wechat"
+                    android:inputType="number" />
             </LinearLayout>
 
             <!-- 邮箱-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
+                    style="@style/Text_view_Style"
                     android:text="@string/email" />
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:id="@+id/main_fragment_my_message_email"/>
+                    android:id="@+id/main_fragment_my_message_email"
+                    style="@style/EditText_Style"
+                    android:hint="@string/input_email"
+                    android:inputType="textEmailAddress" />
             </LinearLayout>
 
             <!-- 地址-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/location"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/location" />
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:id="@+id/main_fragment_my_message_location"/>
+                    android:id="@+id/main_fragment_my_message_location"
+                    style="@style/EditText_Style"
+                    android:hint="@string/input_location"
+                    android:inputType="text" />
             </LinearLayout>
 
             <!-- 详细地址-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/detail_location"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/detail_location" />
+
                 <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:id="@+id/main_fragment_my_message_detail_location"/>
+                    android:id="@+id/main_fragment_my_message_detail_location"
+                    style="@style/EditText_Style"
+                    android:hint="@string/detail_location"
+                    android:inputType="text" />
             </LinearLayout>
 
             <!-- 身份证号码-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/idcard"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/idcard" />
+
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:id="@+id/main_fragment_my_message_idcard"/>
+                    android:id="@+id/main_fragment_my_message_idcard"
+                    style="@style/Text_view_Style" />
             </LinearLayout>
 
             <!-- 在职状态-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/service_state"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/service_state" />
+
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:id="@+id/main_fragment_my_message_service_state"/>
+                    android:id="@+id/main_fragment_my_message_service_state"
+                    style="@style/Text_view_Style" />
             </LinearLayout>
 
             <!-- 公司名-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/comp_name"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/comp_name" />
+
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:id="@+id/main_fragment_my_message_comp_name"/>
+                    android:id="@+id/main_fragment_my_message_comp_name"
+                    style="@style/Text_view_Style" />
             </LinearLayout>
 
             <!-- 考勤地址-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/punch_address"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/punch_address" />
+
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:id="@+id/main_fragment_my_message_punch_address"/>
+                    android:id="@+id/main_fragment_my_message_punch_address"
+                    style="@style/Text_view_Style" />
             </LinearLayout>
 
             <!-- 考勤主管-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/puncher_master"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/puncher_master" />
+
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:id="@+id/main_fragment_my_message_puncher_master"/>
+                    android:id="@+id/main_fragment_my_message_puncher_master"
+                    style="@style/Text_view_Style" />
             </LinearLayout>
 
             <!-- 入职时间-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="30dp">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
-                    style="@style/font"
-                    android:layout_width="match_parent"
-                    android:layout_weight="1"
-                    android:text="@string/join_time"/>
+                    style="@style/Text_view_Style"
+                    android:text="@string/join_time" />
+
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:id="@+id/main_fragment_my_message_join_time"/>
+                    android:id="@+id/main_fragment_my_message_join_time"
+                    style="@style/Text_view_Style" />
             </LinearLayout>
 
         </LinearLayout>

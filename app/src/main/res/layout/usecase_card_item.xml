@@ -6,80 +6,90 @@
 
     <LinearLayout style="@style/linearLayoutStyle">
 
-        <!-- 项目/软件-->
-
-        <!-- 功能模块-->
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
-            <TextView
-                android:id="@+id/usecase_card_item_project_soft"
-                style="@style/Text_view_Style"
-                android:layout_width="164dp" />
+            <LinearLayout
+                style="@style/CardView_line_LayoutStyle"
+                android:layout_width="120dp">
 
-            <TextView
-                style="@style/Text_view_Style"
-                android:text="@string/functionModule" />
+                <TextView
+                    android:id="@+id/usecase_card_item_project_soft"
+                    style="@style/Text_view_Style" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/usecase_card_item_usecase_number"
-                android:maxLength="10"
-                style="@style/Text_view_Style"
-                android:layout_width="130dp" />
-        </LinearLayout>
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
 
-        <!-- 项目主管-->
-        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/functionModule" />
 
-            <TextView
-                style="@style/Text_view_Style"
-                android:text="@string/project_manager_edittext" />
-
-            <TextView
-                android:id="@+id/usecase_card_item_version_number"
-                style="@style/Text_view_Style"
-                android:layout_width="80dp" />
-
-            <TextView
-                style="@style/Text_view_Style"
-                android:text="@string/autorized_time" />
-
-            <TextView
-                android:id="@+id/usecase_card_item_autorized_time"
-                style="@style/Text_view_Style" />
+                <TextView
+                    android:id="@+id/usecase_card_item_usecase_number"
+                    style="@style/Text_view_Style"
+                    android:maxLength="10"
+                    android:text="@string/text_two" />
+            </LinearLayout>
         </LinearLayout>
 
         <!-- 测试人员-->
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
-            <TextView
-                style="@style/Text_view_Style"
-                android:text="@string/exploit_man" />
+            <LinearLayout
+                style="@style/CardView_line_LayoutStyle"
+                android:layout_width="120dp">
 
-            <TextView
-                android:id="@+id/usecase_card_item_exploit_man"
-                style="@style/Text_view_Style"
-                android:layout_width="80dp" />
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/exploit_man" />
 
-            <TextView
-                style="@style/Text_view_Style"
-                android:text="@string/text_man" />
+                <TextView
+                    android:id="@+id/usecase_card_item_exploit_man"
+                    style="@style/Text_view_Style"
+                    android:text="@string/text_two" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/usecase_card_item_text_man"
-                style="@style/Text_view_Style"
-                android:layout_width="130dp" />
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
+
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/text_man" />
+
+                <TextView
+                    android:id="@+id/usecase_card_item_text_man"
+                    style="@style/Text_view_Style"
+                    android:text="@string/text_two" />
+            </LinearLayout>
         </LinearLayout>
 
-        <!-- 开发人员-->
+        <!-- 项目主管-->
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
+            <LinearLayout
+                style="@style/CardView_line_LayoutStyle"
+                android:layout_width="120dp">
+
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/project_manager_edittext" />
+
+                <TextView
+                    android:id="@+id/usecase_card_item_version_number"
+                    style="@style/Text_view_Style"
+                    android:text="@string/text_two" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
+
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/autorized_time" />
+
+                <TextView
+                    android:id="@+id/usecase_card_item_autorized_time"
+                    style="@style/Text_view_Style"
+                    android:text="@string/text_two" />
+            </LinearLayout>
         </LinearLayout>
-
-        <!-- 编制时间-->
-        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
-
-        </LinearLayout>
-
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.zxl.cloudmanager.Memo.MemoActivity;
 import com.example.zxl.cloudmanager.bug.myBug.MyBugActivity;
 import com.example.zxl.cloudmanager.check.checkManager.ManagerCheckAcitvity;
 import com.example.zxl.cloudmanager.check.myCheck.MyCheckActivity;

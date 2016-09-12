@@ -17,7 +17,8 @@
 
                 <TextView
                     android:id="@+id/main_fragment_my_leave_apply_name"
-                    style="@style/Text_view_Style" />
+                    style="@style/Text_view_Style"
+                    android:hint="@string/input_name" />
 
             </LinearLayout>
 

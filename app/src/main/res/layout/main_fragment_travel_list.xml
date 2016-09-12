@@ -7,20 +7,27 @@
 
         <!--第一排-->
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
-            <!--姓名-->
-            <TextView
-                android:id="@+id/my_travel_name"
-                style="@style/Text_view_Style"
-                android:layout_width="210dp"/>
 
-            <TextView
-                style="@style/Text_view_Style"
-                android:text="@string/trip_status" />
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
 
-            <!--状态-->
-            <TextView
-                android:id="@+id/my_travel_status"
-                style="@style/Text_view_Style" />
+                <!--姓名-->
+                <TextView
+                    android:id="@+id/my_travel_name"
+                    style="@style/Text_view_Style" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
+
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/trip_status" />
+
+                <!--状态-->
+                <TextView
+                    android:id="@+id/my_travel_status"
+                    style="@style/Text_view_Style"
+                    android:gravity="left" />
+            </LinearLayout>
 
         </LinearLayout>
 

@@ -85,6 +85,9 @@ public class MyOperationListFragment extends Fragment {
             Log.d(TAG, "没有选择条件");
         } else {
             try {
+                if (null != saveInstanceState.getString(Link.project_name))
+                    keyObj.put(Link.project_name, saveInstanceState.getString(Link.project_name));
+
                 keyObj.put(Link.user_id, User.newInstance().getUser_id());
                 keyObj.put(Link.pm_id, saveInstanceState.getString(Link.pm_id));
 

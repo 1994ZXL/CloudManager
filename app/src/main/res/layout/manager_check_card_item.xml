@@ -11,34 +11,43 @@
             <TextView
                 android:id="@+id/manager_check_card_item_name"
                 style="@style/Text_view_Style"
+                android:layout_weight="1"
+                android:width="200dp"
                 android:text="@string/name" />
 
             <TextView
                 android:id="@+id/manager_check_card_item_state"
-                style="@style/Text_view_Style" />
+                style="@style/Text_view_Style"
+                android:layout_weight="1"
+                android:width="200dp" />
 
         </LinearLayout>
 
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
-            <TextView
-                style="@style/Text_view_Style"
-                android:text="@string/check_location" />
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
 
-            <TextView
-                android:id="@+id/manager_check_card_item_check_location"
-                style="@style/Text_view_Style"
-                android:layout_width="120dp"
-                android:gravity="left" />
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/check_location" />
 
-            <TextView
-                style="@style/Text_view_Style"
-                android:text="@string/puncher_master" />
+                <TextView
+                    android:id="@+id/manager_check_card_item_check_location"
+                    style="@style/Text_view_Style"
+                    android:text="@string/text_two" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/manager_check_card_item_check_manager"
-                style="@style/Text_view_Style" />
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
 
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/puncher_master" />
+
+                <TextView
+                    android:id="@+id/manager_check_card_item_check_manager"
+                    style="@style/Text_view_Style"
+                    android:text="@string/text_two" />
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

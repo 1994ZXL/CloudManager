@@ -10,8 +10,7 @@
             <TextView
                 android:id="@+id/leader_post_list_name"
                 style="@style/Text_view_Style"
-                android:layout_width="110dp"
-                android:gravity="left" />
+                android:layout_width="110dp" />
 
             <!--日期-->
             <TextView
@@ -39,7 +38,8 @@
             <TextView
                 android:id="@+id/leader_post_list_content"
                 style="@style/Text_view_Style"
-                android:maxLength="10" />
+                android:maxLength="10"
+                android:text="@string/text_two" />
         </LinearLayout>
 
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
@@ -52,7 +52,8 @@
             <TextView
                 android:id="@+id/leader_post_list_opinion"
                 style="@style/Text_view_Style"
-                android:maxLength="10" />
+                android:maxLength="10"
+                android:text="@string/text_two" />
         </LinearLayout>
 
     </LinearLayout>

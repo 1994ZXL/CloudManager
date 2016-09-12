@@ -9,21 +9,23 @@
         <!-- 第一排-->
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
-            <TextView
-                android:id="@+id/ls_check_card_item_location"
-                style="@style/Text_view_Style"
-                android:layout_width="210dp"
-                android:textSize="20sp" />
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
 
-            <TextView
-                android:id="@+id/ls_check_card_item_time"
-                style="@style/Text_view_Style"
-                android:gravity="left"
-                android:textSize="20sp" />
+                <TextView
+                    android:id="@+id/ls_check_card_item_location"
+                    style="@style/Text_view_Style" />
+            </LinearLayout>
 
-            <ImageView
-                android:id="@+id/check_card_item_map"
-                style="@style/Text_view_Style" />
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
+
+                <TextView
+                    android:id="@+id/ls_check_card_item_time"
+                    style="@style/Text_view_Style" />
+
+                <ImageView
+                    android:id="@+id/check_card_item_map"
+                    style="@style/Text_view_Style" />
+            </LinearLayout>
         </LinearLayout>
 
         <!-- 上班时间-->
@@ -35,7 +37,8 @@
 
             <TextView
                 android:id="@+id/ls_check_card_item_dutytime"
-                style="@style/Text_view_Style" />
+                style="@style/Text_view_Style"
+                android:text="@string/text_two" />
         </LinearLayout>
 
         <!-- 下班时间-->
@@ -47,7 +50,8 @@
 
             <TextView
                 android:id="@+id/ls_check_card_item_offdutytime"
-                style="@style/Text_view_Style" />
+                style="@style/Text_view_Style"
+                android:text="@string/text_two" />
         </LinearLayout>
 
     </LinearLayout>

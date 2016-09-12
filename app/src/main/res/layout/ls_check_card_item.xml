@@ -9,42 +9,61 @@
         <!-- 第一排-->
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
-            <TextView
-                android:id="@+id/ls_check_card_item_name"
-                android:layout_width="120dp"
-                android:gravity="left"
-                style="@style/Text_view_Style" />
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
 
-            <TextView
-                android:id="@+id/ls_check_card_item_time"
-                android:layout_width="140dp"
-                android:gravity="left"
-                style="@style/Text_view_Style"/>
+                <TextView
+                    android:id="@+id/ls_check_card_item_name"
+                    style="@style/Text_view_Style"
+                    android:layout_weight="1"
+                    android:width="120dp" />
 
-            <TextView
-                android:id="@+id/ls_check_card_item_location"
-                android:layout_width="120dp"
-                android:gravity="left"
-                style="@style/Text_view_Style" />
+                <TextView
+                    android:id="@+id/ls_check_card_item_location"
+                    style="@style/Text_view_Style"
+                    android:layout_weight="1"
+                    android:width="150dp"
+                    android:gravity="left" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
+
+                <TextView
+                    android:id="@+id/ls_check_card_item_time"
+                    style="@style/Text_view_Style"
+                    android:gravity="left" />
+            </LinearLayout>
 
         </LinearLayout>
 
         <!-- 上班时间-->
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
-            <TextView
-                style="@style/Text_view_Style"
-                android:text="@string/dutytime" />
+            <LinearLayout
+                style="@style/CardView_line_LayoutStyle"
+                android:layout_width="350dp">
 
-            <TextView
-                android:id="@+id/ls_check_card_item_dutytime"
-                android:layout_width="250dp"
-                android:gravity="left"
-                style="@style/Text_view_Style" />
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/dutytime" />
 
-            <ImageView
-                android:id="@+id/check_card_item_map"
-                style="@style/Text_view_Style" />
+                <TextView
+                    android:id="@+id/ls_check_card_item_dutytime"
+                    style="@style/Text_view_Style"
+                    android:layout_width="50dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:text="@string/text_two" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/CardView_line_LayoutStyle"
+                android:layout_height="40dp">
+
+                <ImageView
+                    android:id="@+id/check_card_item_map"
+                    style="@style/Text_view_Style"
+                    android:layout_gravity="center" />
+            </LinearLayout>
         </LinearLayout>
 
         <!-- 下班时间-->
@@ -56,7 +75,8 @@
 
             <TextView
                 android:id="@+id/ls_check_card_item_offdutytime"
-                style="@style/Text_view_Style" />
+                style="@style/Text_view_Style"
+                android:text="@string/text_two" />
         </LinearLayout>
 
     </LinearLayout>

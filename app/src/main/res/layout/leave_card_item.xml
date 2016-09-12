@@ -12,19 +12,21 @@
             <TextView
                 android:id="@+id/leave_card_item_name"
                 style="@style/Text_view_Style"
-                android:layout_width="150dp"
-                android:gravity="left" />
+                android:layout_weight="1"
+                android:width="200dp" />
 
             <TextView
                 android:id="@+id/leave_card_item_illness"
                 style="@style/Text_view_Style"
-                android:layout_width="130dp"
+                android:layout_weight="1"
+                android:width="200dp"
                 android:gravity="left" />
 
             <TextView
                 android:id="@+id/leave_card_item_state"
                 style="@style/Text_view_Style"
-                android:layout_width="100dp"
+                android:layout_weight="1"
+                android:width="200dp"
                 android:gravity="left"
                 android:textColor="#FF4040" />
         </LinearLayout>
@@ -37,7 +39,8 @@
 
             <TextView
                 android:id="@+id/leave_card_item_begin_time"
-                style="@style/Text_view_Style" />
+                style="@style/Text_view_Style"
+                android:text="@string/text_two" />
         </LinearLayout>
 
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
@@ -48,7 +51,8 @@
 
             <TextView
                 android:id="@+id/leave_card_item_end_time"
-                style="@style/Text_view_Style" />
+                style="@style/Text_view_Style"
+                android:text="@string/text_two" />
         </LinearLayout>
     </LinearLayout>
 </android.support.v7.widget.CardView>

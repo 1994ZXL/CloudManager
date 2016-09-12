@@ -10,9 +10,9 @@
             <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/manager_check_details_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/manager_check_details_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
@@ -25,8 +25,7 @@
             </LinearLayout>
 
             <!-- 第一块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">>
+            <LinearLayout style="@style/linearLayoutStyle">>
 
                 <!-- 姓名-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -37,7 +36,8 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_name"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/text_two" />
 
                 </LinearLayout>
                 <!-- 考勤点-->
@@ -49,7 +49,8 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_check_location"
-                        style="@style/Text_view_Style" />
+                        style="@style/Text_view_Style"
+                        android:text="@string/text_two" />
                 </LinearLayout>
                 <!-- 考勤主管-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -60,17 +61,16 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_check_manager"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/text_two" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <!-- 第二块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
                 <!-- 考勤日期-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -78,11 +78,11 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_check_date"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/text_two" />
                 </LinearLayout>
                 <!-- 规定上班时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -90,11 +90,11 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_stipulate_dutytime"
-                        style="@style/Text_view_Style" />
+                        style="@style/Text_view_Style"
+                        android:text="@string/text_two" />
                 </LinearLayout>
                 <!-- 规定下班时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -102,11 +102,11 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_stipulate_offdutytime"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/text_two" />
                 </LinearLayout>
                 <!-- 上班签到时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -114,11 +114,11 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_duty_sign_time"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/text_two" />
                 </LinearLayout>
                 <!-- 下班签到时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -126,11 +126,11 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_offduty_sign_time"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/text_two" />
                 </LinearLayout>
                 <!-- 迟到分钟数-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -138,11 +138,11 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_late_min"
-                        style="@style/Text_view_Style" />
+                        style="@style/Text_view_Style"
+                        android:text="@string/text_two" />
                 </LinearLayout>
                 <!-- 早退分钟数-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -150,17 +150,16 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_early_min"
-                        style="@style/Text_view_Style" />
+                        style="@style/Text_view_Style"
+                        android:text="@string/text_two" />
                 </LinearLayout>
 
             </LinearLayout>
 
             <!-- 第三块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
                 <!-- 请假-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -168,11 +167,11 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_leave"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/text_two" />
                 </LinearLayout>
                 <!-- 加班-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -180,11 +179,11 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_work_overtime"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/text_two" />
                 </LinearLayout>
                 <!-- 出差-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -192,7 +191,8 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_work_travel"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/text_two" />
                 </LinearLayout>
 
             </LinearLayout>

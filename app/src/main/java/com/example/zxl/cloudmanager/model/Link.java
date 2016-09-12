@@ -11,6 +11,7 @@ public class Link {
 
     public static final String get_list = "get_list";
     public static final String edit = "edit";
+    public static final String add = "add";
 
     public static final String is_pmmaster = "is_pmmaster"; //是否是项目主管
     public static final String is_puncher = "is_puncher"; //是否是考勤主管
@@ -165,4 +166,8 @@ public class Link {
     //my_operation
     public static final String my_operation = "my_operation&act=";
 
+    //my_note
+    public static final String my_note = "my_note&act=";
+    public static final String my_note_over_time = "over_time";
+    public static final String note_id = "note_id";
 }

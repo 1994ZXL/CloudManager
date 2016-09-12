@@ -16,9 +16,9 @@
                 android:text="@string/text_return" />
 
             <TextView
+                android:id="@+id/bug_title"
                 style="@style/toptextview_center"
-                android:text="@string/my_bug"
-                android:id="@+id/bug_title"/>
+                android:text="@string/my_bug" />
 
             <TextView
                 android:id="@+id/my_bug_search"
@@ -39,18 +39,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <ScrollView style="@style/ScrollView_Style">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/bug_recyclerview"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:dividerHeight="10dp" />
+                        android:layout_height="match_parent">
 
-                </RelativeLayout>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/bug_recyclerview"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:dividerHeight="10dp" />
+
+                    </RelativeLayout>
+                </ScrollView>
 
             </com.example.zxl.cloudmanager.pulltorefresh.pullableview.PullableScrollView>
 

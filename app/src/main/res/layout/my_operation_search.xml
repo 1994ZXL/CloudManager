@@ -37,10 +37,10 @@
                         style="@style/Text_view_Style"
                         android:text="@string/project_name_edittext" />
 
-                    <Spinner
+                    <EditText
                         android:id="@+id/my_operation_name_edittext"
                         android:hint="@string/input_project_name"
-                        style="@style/Spinner_Style" />
+                        style="@style/EditText_Style" />
 
                 </LinearLayout>
             </LinearLayout>

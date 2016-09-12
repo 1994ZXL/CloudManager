@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/my_leave_refresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <include layout="@layout/refresh_head" />
     <!-- 支持所有实现Pullable接口的View -->
@@ -12,18 +11,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <ScrollView style="@style/ScrollView_Style">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/leave_recyclerview"
-                android:dividerHeight="10dp"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"/>
+                android:layout_height="match_parent">
 
-        </RelativeLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/leave_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:dividerHeight="10dp" />
+
+            </RelativeLayout>
+        </ScrollView>
 
     </com.example.zxl.cloudmanager.pulltorefresh.pullableview.PullableScrollView>
 

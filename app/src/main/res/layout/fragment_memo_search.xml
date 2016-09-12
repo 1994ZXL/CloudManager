@@ -13,7 +13,8 @@
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return"
+                    android:id="@+id/my_memo_search_back"/>
 
                 <TextView
                     style="@style/toptextview_center"
@@ -21,7 +22,7 @@
 
                 <TextView
                     style="@style/topview_right"
-                    android:text="@string/text_clean"/>
+                    android:text=""/>
 
             </LinearLayout>
 
@@ -36,7 +37,7 @@
                         android:text="@string/memo_title_textview" />
 
                     <EditText
-                        android:id="@+id/my_memo_title_edittext"
+                        android:id="@+id/my_memo_search_title"
                         android:hint="@string/input_memo_title"
                         style="@style/EditText_Style"/>
 
@@ -49,7 +50,7 @@
                         android:text="@string/submit_time" />
 
                     <TextView
-                        android:id="@+id/memo_submit_begin_time_button"
+                        android:id="@+id/my_memo_search_begin_time"
                         style="@style/Text_view_Style"
                         android:text="@string/project_begin_time_textview" />
 
@@ -58,7 +59,7 @@
                         android:text="@string/text" />
 
                     <TextView
-                        android:id="@+id/memo_submit_end_time_button"
+                        android:id="@+id/my_memo_search_end_time"
                         style="@style/Text_view_Style"
                         android:text="@string/project_end_time_textview" />
                 </LinearLayout>

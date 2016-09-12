@@ -12,62 +12,68 @@
             <TextView
                 android:id="@+id/main_fragment_my_bug_projectName"
                 style="@style/Text_view_Style"
-                android:text="@string/project_name_edittext"
-                android:textSize="20sp" />
+                android:text="@string/project_name_edittext" />
         </LinearLayout>
 
         <!-- bug等级-->
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
-            <TextView
-                style="@style/Text_view_Style"
-                android:text="@string/bug_version" />
+            <LinearLayout
+                style="@style/CardView_line_LayoutStyle"
+                android:layout_width="150dp">
 
-            <TextView
-                android:id="@+id/bug_card_item_bug_version"
-                style="@style/Text_view_Style"
-                android:layout_width="80dp" />
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/bug_version" />
 
-            <TextView
-                style="@style/Text_view_Style"
-                android:text="@string/found_time" />
+                <TextView
+                    android:id="@+id/bug_card_item_bug_version"
+                    android:text="@string/text_two"
+                    style="@style/Text_view_Style" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/bug_card_item_found_time"
-                style="@style/Text_view_Style" />
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
+
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/found_time" />
+
+                <TextView
+                    android:id="@+id/bug_card_item_found_time"
+                    android:text="@string/text_two"
+                    style="@style/Text_view_Style" />
+            </LinearLayout>
         </LinearLayout>
 
         <!-- bug状态-->
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
-            <TextView
-                style="@style/Text_view_Style"
-                android:text="@string/my_bug_state" />
+            <LinearLayout
+                style="@style/CardView_line_LayoutStyle"
+                android:layout_width="150dp">
 
-            <TextView
-                android:id="@+id/bug_card_item_bug_state"
-                style="@style/Text_view_Style"
-                android:layout_width="80dp" />
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/my_bug_state" />
 
-            <TextView
-                style="@style/Text_view_Style"
-                android:text="@string/edit_time" />
+                <TextView
+                    android:id="@+id/bug_card_item_bug_state"
+                    android:text="@string/text_two"
+                    style="@style/Text_view_Style" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/bug_card_item_edit_time"
-                style="@style/Text_view_Style" />
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
+
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/edit_time" />
+
+                <TextView
+                    android:id="@+id/bug_card_item_edit_time"
+                    android:text="@string/text_two"
+                    style="@style/Text_view_Style" />
+            </LinearLayout>
         </LinearLayout>
-
-        <!-- 发现时间-->
-        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
-
-        </LinearLayout>
-
-        <!-- 修改时间-->
-        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
-
-        </LinearLayout>
-
     </LinearLayout>
 
 </android.support.v7.widget.CardView>
