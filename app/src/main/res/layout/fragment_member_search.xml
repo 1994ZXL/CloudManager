@@ -16,18 +16,31 @@
 
                     <TextView
                         style="@style/toptextview_left"
-                        android:text="@string/text_return" />
+                        android:text="@string/text_return"
+                        android:id="@+id/manage_member_search_back"/>
 
                     <TextView
                         style="@style/toptextview_center"
-                        android:text="@string/project_choose" />
+                        android:text="@string/manage_member" />
 
                     <TextView
                         style="@style/topview_right"
-                        android:text="@string/text_clean" />
+                        android:text="" />
 
                 </LinearLayout>
 
+                <!--项目名称-->
+                <LinearLayout style="@style/Viewline_LayoutStyle">
+
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:text="@string/project_name_edittext" />
+
+                    <Spinner
+                        android:id="@+id/manage_member_search_project_name"
+                        style="@style/Spinner_Style" />
+                </LinearLayout>
+                <!--员工名-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
@@ -35,18 +48,19 @@
                         android:text="@string/project_name_edittext" />
 
                     <EditText
-                        android:id="@+id/pm_project_name_edittext"
+                        android:id="@+id/manage_member_search_member_name"
                         style="@style/EditText_Style"
-                        android:hint="@string/input_project_name" />
+                        android:hint="@string/member_name_hint"/>
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
+
     </ScrollView>
 
     <Button
-        android:id="@+id/pm_member_search_button"
+        android:id="@+id/manage_member_search_search"
         style="@style/SearchButton" />
 
 </LinearLayout>

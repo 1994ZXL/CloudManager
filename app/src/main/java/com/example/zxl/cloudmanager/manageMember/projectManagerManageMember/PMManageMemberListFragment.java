@@ -1,4 +1,4 @@
-package com.example.zxl.cloudmanager.contact.projectManagerContact;
+package com.example.zxl.cloudmanager.manageMember.projectManagerManageMember;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -23,10 +23,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
-import com.example.zxl.cloudmanager.contact.publicSearchContact.PSContactActivity;
-import com.example.zxl.cloudmanager.model.Contact;
+import com.example.zxl.cloudmanager.manageMember.publicSearchManageMember.PSManageMemberActivity;
+import com.example.zxl.cloudmanager.manageProject.projectManagerProjectManage.PMManageProjectDetailFragment;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.Link;
+import com.example.zxl.cloudmanager.model.PMMember;
 import com.example.zxl.cloudmanager.model.User;
 import com.example.zxl.cloudmanager.pulltorefresh.MyListener;
 import com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout;
@@ -44,22 +45,19 @@ import java.util.List;
 import cz.msebera.android.httpclient.Header;
 
 /**
- * Created by ZXL on 2016/9/12.
+ * Created by ZXL on 2016/9/13.
  */
-public class PMContactListFragment extends Fragment {
-    private static final String TAG = "PMContactList";
+public class PMManageMemberListFragment extends Fragment {
+    private static final String TAG = "PMListFragment";
+    private static int mCurl_page;
 
     private CardView mCardView;
     private RecyclerView mRecyclerView;
-    private List<Contact> contacts = new ArrayList<Contact>();
+    private List<PMMember> pmMembers = new ArrayList<PMMember>();
     private MyAdapter myAdapter;
 
     private Fragment mFragment;
-
-    private static int mCurl_page;
-
     private PullToRefreshLayout mPullToRefreshLayout;
-
     private TextView mBack;
     private TextView mSearch;
     private Button mAdd;
@@ -68,6 +66,11 @@ public class PMContactListFragment extends Fragment {
     private RequestParams mParams = new RequestParams();
     private JSONObject keyObj = new JSONObject();
     private String key = "";
+
+    private static AsyncHttpClient mHttpcDelete = new AsyncHttpClient();
+    private RequestParams mParamsDelete = new RequestParams();
+    private JSONObject keyObjDelete = new JSONObject();
+    private String keyDelete = "";
     private String url;
 
     @Override
@@ -81,18 +84,29 @@ public class PMContactListFragment extends Fragment {
     private void loadDate(final Bundle saveInstanceState, int curl_page, final View v) {
         if (null != saveInstanceState) {
             try {
-                if (null != saveInstanceState.getString(Link.contact_name))
-                    keyObj.put(Link.contact_name, saveInstanceState.getString(Link.contact_name));
-                if (null != saveInstanceState.getString(Link.contact_phone))
-                    keyObj.put(Link.contact_phone, saveInstanceState.getInt(Link.contact_phone));
-                keyObj.put(Link.pm_id, saveInstanceState.getInt(Link.pm_id));
+                if (null != saveInstanceState.getString(Link.project_name)) {
+                    keyObj.put(Link.project_name, saveInstanceState.getString(Link.project_name));
+                }
+                if (-1 != saveInstanceState.getInt(Link.ready_time)) {
+                    keyObj.put(Link.ready_time, saveInstanceState.getInt(Link.ready_time));
+                }
+                if (-1 != saveInstanceState.getInt(Link.finshed_time)) {
+                    keyObj.put(Link.finshed_time, saveInstanceState.getInt(Link.finshed_time));
+                }
+                keyObj.put(Link.project_state, saveInstanceState.getInt(Link.project_state));
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
         try {
-            keyObj.put("sort", "project_name desc");
+            keyObj.put(Link.user_id, User.newInstance().getUser_id());
+            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+            keyObj.put(Link.is_pmmaster, User.newInstance().getIs_pmmaster());
+            keyObj.put(Link.user_type, User.newInstance().getUser_type());
+            keyObj.put(Link.comp_id, User.newInstance().getComp_id());
+            keyObj.put("sort", "ready_time desc");
             keyObj.put("page_count", 20);
             keyObj.put("curl_page", curl_page);
 
@@ -112,21 +126,21 @@ public class PMContactListFragment extends Fragment {
                         JSONArray array = rjo.getJSONArray("data1");
                         Log.d(TAG, "array: " + array);
                         for (int i = 0; i < array.length(); i++) {
-                            contacts.add(new Contact(array.getJSONObject(i)));
+                            pmMembers.add(new PMMember(array.getJSONObject(i)));
                         }
-                        Log.d(TAG, "contacts: " + contacts);
+                        Log.d(TAG, "pmMembers: " + pmMembers);
 
-                        mRecyclerView = (RecyclerView) v.findViewById(R.id.pm_contact_list_recyclerview);
+                        mRecyclerView = (RecyclerView)v.findViewById(R.id.pm_manage_member_list_recyclerview);
                         mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                         mRecyclerView.setHasFixedSize(true);
-                        myAdapter = new MyAdapter(mFragment.getActivity(), contacts);
+                        myAdapter = new MyAdapter(mFragment.getActivity(), pmMembers);
                         mRecyclerView.setAdapter(myAdapter);
-                        mCardView = (CardView) v.findViewById(R.id.pm_contact_card_item);
+                        mCardView = (CardView)v.findViewById(R.id.pm_manage_member_card_item);
                         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                             @Override
                             public void onItemClick(View view, Object data) {
-                                Fragment fragment = PMContactDetailFragment.newInstance(data);
+                                Fragment fragment = PMManageProjectDetailFragment.newInstance(data);
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                 if (!fragment.isAdded()) {
                                     transaction.addToBackStack(null);
@@ -158,25 +172,25 @@ public class PMContactListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle savedInstanceState) {
-        final View v = layoutInflater.inflate(R.layout.pm_contact_list, parent, false);
+        final View v = layoutInflater.inflate(R.layout.pm_manage_member_list, parent, false);
 
-        if (mFragment.getActivity().getClass() == PMContactActivity.class)
-            url = Link.pm_contact + Link.get_list;
-        else if (mFragment.getActivity().getClass() == PSContactActivity.class)
-            url = Link.pmcontact + Link.get_list;
+        if (mFragment.getActivity().getClass() == PMManageMemberActivity.class)
+            url = Link.pm_manage_member + Link.get_list;
+        else if (mFragment.getActivity().getClass() == PSManageMemberActivity.class)
+            url = Link.pm_member + Link.get_list;
 
         savedInstanceState = getArguments();
         final Bundle saveInstanceState = savedInstanceState;
 
         loadDate(saveInstanceState, mCurl_page, v);
-        mPullToRefreshLayout = (PullToRefreshLayout) v.findViewById(R.id.pm_contact_list_refresh);
+        mPullToRefreshLayout = (PullToRefreshLayout) v.findViewById(R.id.pm_manage_member_list_refresh);
         mPullToRefreshLayout.setOnRefreshListener(new MyListener() {
             @Override
             public void onRefresh(final PullToRefreshLayout pullToRefreshLayout) {
                 new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
-                        contacts.clear();
+                        pmMembers.clear();
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     }
@@ -188,7 +202,7 @@ public class PMContactListFragment extends Fragment {
                 new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
-                        contacts.clear();
+                        pmMembers.clear();
                         mCurl_page++;
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
@@ -197,7 +211,7 @@ public class PMContactListFragment extends Fragment {
             }
         });
 
-        mBack = (TextView) v.findViewById(R.id.pm_contact_list_back);
+        mBack = (TextView) v.findViewById(R.id.pm_manage_member_list_back);
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -205,24 +219,24 @@ public class PMContactListFragment extends Fragment {
             }
         });
 
-        mSearch = (TextView) v.findViewById(R.id.pm_contact_list_search);
+        mSearch = (TextView) v.findViewById(R.id.pm_manage_member_list_search);
         mSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Fragment fragment = null;
                 if (null == fragment) {
                     FragmentManager fm = getFragmentManager();
-                    fragment = new ContactSearchFragment();
+                    fragment = new ManageMemberSearchFragment();
                     fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
                 }
             }
         });
 
-        mAdd = (Button) v.findViewById(R.id.pm_contact_list_add);
+        mAdd = (Button) v.findViewById(R.id.pm_add);
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Fragment fragment = new PMContactDetailFragment();
+                Fragment fragment = new PMManageMemberDetailFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString("ADD", "ADD");
                 fragment.setArguments(bundle);
@@ -249,18 +263,18 @@ public class PMContactListFragment extends Fragment {
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener {
-        private List<Contact> contacts;
+    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
+        private List<PMMember> pmMembers;
         private Context mContext;
 
-        public MyAdapter(Context context, List<Contact> contacts) {
-            this.contacts = contacts;
+        public MyAdapter (Context context, List<PMMember> pmMembers) {
+            this.pmMembers = pmMembers;
             this.mContext = context;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pm_contact_card_item, viewGroup, false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pm_manage_member_card_item, viewGroup,false);
             ViewHolder viewHolder = new ViewHolder(v);
             v.setOnClickListener(this);
             return viewHolder;
@@ -268,17 +282,65 @@ public class PMContactListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-            Contact contact = contacts.get(i);
+            PMMember pmMember = pmMembers.get(i);
 
-            viewHolder.mName.setText(contact.getContact_name());
-            viewHolder.mPhone.setText(contact.getPhone());
+            viewHolder.mMemberName.setText(pmMember.getMem_name());
+            viewHolder.mProjectName.setText(pmMember.getProject_name());
+            viewHolder.mRole.setText(pmMember.getRole());
+            viewHolder.mMemberRes.setText(pmMember.getMember_res());
+            viewHolder.mDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mFragment.getActivity());
+                    builder.setTitle("提示");
+                    builder.setMessage("是否要删除");
+                    builder.setNegativeButton("取消", null);
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+                        @Override
+                        public void onClick(DialogInterface dialog,int which){
+                            try {
+                                keyObjDelete.put(Link.pmmem_id, pmMembers.get(i).getPmmem_id());
+                                keyDelete = DESCryptor.Encryptor(keyObjDelete.toString());
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            mParamsDelete.put("key", keyDelete);
+                            Log.d(TAG,"key:" + keyDelete);
 
-            viewHolder.itemView.setTag(contacts.get(i));
+                            mHttpcDelete.post(Link.localhost + "pm_manage_member&act=drop", mParamsDelete, new JsonHttpResponseHandler() {
+                                @Override
+                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                    try {
+                                        Toast.makeText(getActivity(),
+                                                response.getString("msg"),
+                                                Toast.LENGTH_SHORT).show();
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                    Toast.makeText(getActivity(),
+                                            R.string.edit_error,
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            pmMembers.remove(i);
+                            mRecyclerView.scrollToPosition(i - 1);
+                            myAdapter.notifyDataSetChanged();
+                        }
+                    });
+                    builder.show();
+                }
+            });
+
+            viewHolder.itemView.setTag(pmMembers.get(i));
         }
 
         @Override
         public int getItemCount() {
-            return contacts == null ? 0 : contacts.size();
+            return pmMembers == null ? 0 : pmMembers.size();
         }
 
         @Override
@@ -288,15 +350,20 @@ public class PMContactListFragment extends Fragment {
             }
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder {
-
-            private TextView mName;
-            private TextView mPhone;
+        public class ViewHolder extends RecyclerView.ViewHolder{
+            private TextView mMemberName;
+            private TextView mProjectName;
+            private TextView mRole;
+            private TextView mMemberRes;
+            private ImageButton mDelete;
 
             public ViewHolder(View v) {
                 super(v);
-                mName = (TextView) v.findViewById(R.id.pm_contact_card_item_name);
-                mPhone = (TextView) v.findViewById(R.id.pm_contact_card_item_phone);
+                mMemberName = (TextView) v.findViewById(R.id.pm_manage_member_card_item_member_name);
+                mProjectName = (TextView) v.findViewById(R.id.pm_manage_member_card_item_project_name);
+                mRole = (TextView) v.findViewById(R.id.pm_manage_member_card_item_role);
+                mMemberRes = (TextView) v.findViewById(R.id.pm_manage_member_card_item_member_res);
+                mDelete = (ImageButton) v.findViewById(R.id.pm_manage_member_card_item_delete);
             }
         }
 

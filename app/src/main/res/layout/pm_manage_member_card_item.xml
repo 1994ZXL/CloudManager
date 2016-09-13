@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/pm_manage_member_card_item"
+    style="@style/CardView_LayoutStyle">
+
+    <LinearLayout style="@style/linearLayoutStyle">
+
+        <!--任务名/进度-->
+        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+
+            <!--姓名-->
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
+
+                <TextView
+                    android:id="@+id/pm_manage_member_card_item_member_name"
+                    style="@style/Text_view_Style" />
+            </LinearLayout>
+            <!--所属项目-->
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
+
+                <TextView
+                    android:id="@+id/pm_manage_member_card_item_project_name"
+                    style="@style/Text_view_Style" />
+            </LinearLayout>
+            <!--删除-->
+            <ImageButton
+                android:id="@+id/pm_manage_member_card_item_delete"
+                style="@style/Text_view_Style"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:background="@color/memo_background"
+                android:src="@android:drawable/ic_menu_delete" />
+        </LinearLayout>
+
+        <!--身份-->
+        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+
+            <TextView
+                style="@style/Text_view_Style"
+                android:text="@string/role" />
+
+            <TextView
+                android:id="@+id/pm_manage_member_card_item_role"
+                style="@style/Text_view_Style" />
+        </LinearLayout>
+
+        <!--职责-->
+        <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+
+            <TextView
+                style="@style/Text_view_Style"
+                android:text="@string/member_res" />
+
+            <TextView
+                android:id="@+id/pm_manage_member_card_item_member_res"
+                style="@style/Text_view_Style" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

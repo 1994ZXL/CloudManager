@@ -11,15 +11,16 @@
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return" />
+                    android:text="@string/text_return"
+                    android:id="@+id/contact_search_back"/>
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/project_choose" />
+                    android:text="@string/pm_contact" />
 
                 <TextView
                     style="@style/topview_right"
-                    android:text="@string/text_clean" />
+                    android:text="" />
 
             </LinearLayout>
 
@@ -32,9 +33,9 @@
                         style="@style/Text_view_Style"
                         android:text="@string/project_name_edittext" />
 
-                    <EditText
-                        android:id="@+id/list_project_name_edittext"
-                        style="@style/EditText_Style"
+                    <Spinner
+                        android:id="@+id/contact_search_project_name"
+                        style="@style/Spinner_Style"
                         android:hint="@string/input_project_name" />
                 </LinearLayout>
 
@@ -46,10 +47,9 @@
                         android:text="@string/project_customer_name" />
 
                     <EditText
-                        android:id="@+id/list_customer_name_EditText"
+                        android:id="@+id/contact_search_contact_name"
                         style="@style/EditText_Style"
                         android:hint="@string/input_name" />
-
                 </LinearLayout>
 
                 <!-- 手机-->
@@ -60,7 +60,7 @@
                         android:text="@string/phone" />
 
                     <EditText
-                        android:id="@+id/list_customer_phone_editText"
+                        android:id="@+id/contact_search_phone"
                         style="@style/EditText_Style"
                         android:hint="@string/input_phone"
                         android:inputType="phone" />

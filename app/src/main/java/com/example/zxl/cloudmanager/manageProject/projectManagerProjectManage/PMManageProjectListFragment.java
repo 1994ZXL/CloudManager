@@ -48,6 +48,8 @@ import cz.msebera.android.httpclient.Header;
  * Created by ZXL on 2016/7/12.
  */
 public class PMManageProjectListFragment extends Fragment {
+    private static final String TAG = "PMListFragment";
+    private static int mCurl_page;
 
     private CardView mCardView;
     private RecyclerView mRecyclerView;
@@ -55,11 +57,7 @@ public class PMManageProjectListFragment extends Fragment {
     private MyAdapter myAdapter;
 
     private Fragment mFragment;
-
-    private static int mCurl_page;
-
     private PullToRefreshLayout mPullToRefreshLayout;
-
     private TextView mBack;
     private TextView mSearch;
     private Button mAdd;
@@ -74,10 +72,6 @@ public class PMManageProjectListFragment extends Fragment {
     private JSONObject keyObjDelete = new JSONObject();
     private String keyDelete = "";
     private String url;
-
-    private static final String TAG = "PMListFragment";
-
-    private Button mSearchBtn;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {

@@ -12,5 +12,4 @@ public class PSContactActivity extends SingleFragmentActivity {
     protected Fragment createFragment(){
         return new ContactSearchFragment();
     }
-
 }

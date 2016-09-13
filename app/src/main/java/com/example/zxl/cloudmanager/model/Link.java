@@ -5,8 +5,8 @@ package com.example.zxl.cloudmanager.model;
  */
 public class Link {
 //    public static final String localhost = "http://192.168.3.119:8099/yunmgr_v1.0/api/uc.php?app=";
-    public static final String localhost = "http://192.168.1.105/yunmgr_v1.0/api/uc.php?app=";
-//    public static final String localhost = "http://192.168.0.102/yunmgr_v1.0/api/uc.php?app=";
+//    public static final String localhost = "http://192.168.1.105/yunmgr_v1.0/api/uc.php?app=";
+    public static final String localhost = "http://192.168.0.102/yunmgr_v1.0/api/uc.php?app=";
     public static final String API = "http://localhost/yunmgr_v1.0/api/uc.php?app=";
 
     public static final String get_list = "get_list";
@@ -190,9 +190,19 @@ public class Link {
     public static final String pm_contact = "pm_contact&act=";
     public static final String pmcon_id = "pmcon_id"; //项目通讯录ID
     public static final String contact_name = "contact_name";
+    public static final String contact_phone = "contact_phone";
     public static final String contact_position = "contact_position";
     public static final String contact_company = "contact_company";
 
     //pmcontact 公共查询
     public static final String pmcontact = "pmcontact&act=";
+
+    //pm_manage_member
+    public static final String pm_manage_member = "pm_manage_member&act=";
+    public static final String pmmem_id = "pmmem_id"; //项目成员ID
+    public static final String role = "role"; //身份（1领导；2项目负责人；3一般成员）
+    public static final String member_res = "member_res"; //职责说明
+
+    //pm_member 公共查询
+    public static final String pm_member = "pm_member&act=";
 }

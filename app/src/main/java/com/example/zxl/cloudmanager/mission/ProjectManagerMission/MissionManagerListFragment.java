@@ -89,7 +89,7 @@ public class MissionManagerListFragment extends Fragment {
 
     }
 
-    private void loadDate(final Bundle saveInstanceState, int curl_page,final View view) {
+    private void loadDate(final Bundle saveInstanceState, int curl_page, final View view) {
         if (null != saveInstanceState) {
             try {
                 if (null != saveInstanceState.getString(Link.title))
@@ -133,13 +133,13 @@ public class MissionManagerListFragment extends Fragment {
                             }
                             Log.d(TAG, "missions: " + missions);
 
-                            mRecyclerView = (RecyclerView)view.findViewById(R.id.mission_recyclerview);
+                            mRecyclerView = (RecyclerView) view.findViewById(R.id.mission_recyclerview);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                             mRecyclerView.setHasFixedSize(true);
                             myAdapter = new MyAdapter(mFragment.getActivity(), missions);
                             mRecyclerView.setAdapter(myAdapter);
-                            mCardView = (CardView)view.findViewById(R.id.fragment_my_check);
+                            mCardView = (CardView) view.findViewById(R.id.fragment_my_check);
                             myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
@@ -245,7 +245,7 @@ public class MissionManagerListFragment extends Fragment {
                         loadDate(saveInstanceState, mCurl_page, view);
                         pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1000);
             }
 
             @Override
@@ -258,7 +258,7 @@ public class MissionManagerListFragment extends Fragment {
                         loadDate(saveInstanceState, mCurl_page, view);
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1000);
             }
         });
 
@@ -272,18 +272,18 @@ public class MissionManagerListFragment extends Fragment {
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
+    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener {
         private List<Mission> missions;
         private Context mContext;
 
-        public MyAdapter (Context context, List<Mission> missions) {
+        public MyAdapter(Context context, List<Mission> missions) {
             this.missions = missions;
             this.mContext = context;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mission_card_item, viewGroup,false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mission_card_item, viewGroup, false);
             ViewHolder viewHolder = new ViewHolder(v);
             v.setOnClickListener(this);
             return viewHolder;
@@ -295,11 +295,13 @@ public class MissionManagerListFragment extends Fragment {
 
             if (mission.getStart_time() == 0)
                 viewHolder.mBeginTime.setText("--");
-            else viewHolder.mBeginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mission.getStart_time()));
+            else
+                viewHolder.mBeginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mission.getStart_time()));
 
             if (mission.getEnd_time() == 0)
                 viewHolder.mEndTime.setText("--");
-            else viewHolder.mEndTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mission.getEnd_time()));
+            else
+                viewHolder.mEndTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mission.getEnd_time()));
 
             viewHolder.mName.setText(mission.getTitle());
             viewHolder.mState.setText(mission.getStatus());
@@ -311,9 +313,9 @@ public class MissionManagerListFragment extends Fragment {
                     builder.setTitle("提示");
                     builder.setMessage("是否要删除");
                     builder.setNegativeButton("取消", null);
-                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog,int which){
+                        public void onClick(DialogInterface dialog, int which) {
                             try {
                                 keyObjDelete.put(Link.pmtask_id, missions.get(i).getPmtask_id());
                                 keyDelete = DESCryptor.Encryptor(keyObjDelete.toString());
@@ -321,7 +323,7 @@ public class MissionManagerListFragment extends Fragment {
                                 e.printStackTrace();
                             }
                             mParamsDelete.put("key", keyDelete);
-                            Log.d(TAG,"key:" + keyDelete);
+                            Log.d(TAG, "key:" + keyDelete);
 
                             mHttpcDelete.post(Link.localhost + "pm_task&act=drop", mParamsDelete, new JsonHttpResponseHandler() {
                                 @Override
@@ -365,7 +367,8 @@ public class MissionManagerListFragment extends Fragment {
                 mOnItemClickListener.onItemClick(v, v.getTag());
             }
         }
-        public class ViewHolder extends RecyclerView.ViewHolder{
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
             public TextView mName;
             public TextView mState;
             public TextView mBeginTime;
@@ -375,10 +378,10 @@ public class MissionManagerListFragment extends Fragment {
             public ViewHolder(View v) {
                 super(v);
                 mName = (TextView) v.findViewById(R.id.mission_card_item_title);
-                mState = (TextView)v.findViewById(R.id.mission_card_item_state);
-                mBeginTime = (TextView)v.findViewById(R.id.missoin_card_item_mission_begin_time);
-                mEndTime = (TextView)v.findViewById(R.id.mission_card_item_mission_end_time);
-                mDelete = (ImageButton)v.findViewById(R.id.mission_card_item_delete);
+                mState = (TextView) v.findViewById(R.id.mission_card_item_state);
+                mBeginTime = (TextView) v.findViewById(R.id.missoin_card_item_mission_begin_time);
+                mEndTime = (TextView) v.findViewById(R.id.mission_card_item_mission_end_time);
+                mDelete = (ImageButton) v.findViewById(R.id.mission_card_item_delete);
             }
         }
 
