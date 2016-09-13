@@ -109,7 +109,7 @@
         </activity>
 
         <!--公共查询-->
-        <activity android:name=".contact.publicSearchContact.ProjectListSearchActivity"
+        <activity android:name=".contact.publicSearchContact.PSContactActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

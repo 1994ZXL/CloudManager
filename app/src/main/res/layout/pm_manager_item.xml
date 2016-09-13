@@ -2,7 +2,7 @@
 <android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fragment_my_mission"
+    android:id="@+id/pm_manager_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     card_view:cardCornerRadius="4dp"
@@ -21,29 +21,35 @@
             android:orientation="horizontal"
             android:layout_margin="16dp">
 
-            <!-- 项目名称-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+                <!-- 项目名称-->
                 <TextView
                     style="@style/font"
                     android:layout_weight="1"
                     android:textSize="30dp"
-                    android:id="@+id/pm_item_name"
-                    android:text="@string/project_name_edittext"/>
+                    android:id="@+id/pm_item_name"/>
+                <!--状态-->
                 <TextView
                     style="@style/font"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="@string/project_mission_state"
                     android:textSize="20dp"
                     android:id="@+id/pm_item_state"/>
+                <ImageButton
+                    android:id="@+id/pm_item_delete"
+                    style="@style/Text_view_Style"
+                    android:layout_width="80dp"
+                    android:layout_height="40dp"
+                    android:background="@color/memo_background"
+                    android:src="@android:drawable/ic_menu_delete" />
             </LinearLayout>
 
         </LinearLayout>
 
-        <!-- 项目负责人-->
+        <!-- 技术负责人-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -52,11 +58,11 @@
             <TextView
                 style="@style/font"
                 android:layout_weight="1"
-                android:text="@string/project_manager" />
+                android:text="@string/goon_technical" />
             <TextView
                 style="@style/font"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="left"
                 android:id="@+id/pm_item_manager"/>
         </LinearLayout>
 
@@ -73,7 +79,7 @@
             <TextView
                 style="@style/font"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="left"
                 android:id="@+id/pm_item_company"/>
         </LinearLayout>
 
@@ -90,7 +96,7 @@
             <TextView
                 style="@style/font"
                 android:layout_weight="1"
-                android:gravity="center"
+                android:gravity="left"
                 android:id="@+id/pm_item_contactor" />
         </LinearLayout>
 

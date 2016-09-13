@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,15 +30,16 @@ public class ManageProjectSearchFragment extends Fragment {
     private EditText mProjectName;
     private TextView mBeginTimeBtn;
     private TextView mEndTimeBtn;
-    private EditText mProjectManager;
     private Spinner mProjectStateSpinner;
 
     private Button mSearchBtn;
     private ArrayAdapter<String> adapter;
     private static final String[] list={"取消", "准备","开发","维护","结束"};
 
+    private int state;
     private String project_name;
-    private String header;
+
+    private TextView mBack;
 
     private Fragment mFragment;
 
@@ -75,22 +77,6 @@ public class ManageProjectSearchFragment extends Fragment {
 
             }
         });
-        mProjectManager.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                header = charSequence.toString();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
         mBeginTimeBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -120,10 +106,12 @@ public class ManageProjectSearchFragment extends Fragment {
                 }
 
                 if (null != mEndTimeBtn.getText()) {
-                    bundle.putInt(Link.finished_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mEndTimeBtn.getText().toString()));
+                    bundle.putInt(Link.finshed_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mEndTimeBtn.getText().toString()));
                 } else {
-                    bundle.putInt(Link.finished_time, -1);
+                    bundle.putInt(Link.finshed_time, -1);
                 }
+
+                bundle.putInt(Link.project_state, state);
 
                 fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -136,6 +124,24 @@ public class ManageProjectSearchFragment extends Fragment {
         adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mProjectStateSpinner.setAdapter(adapter);
+        mProjectStateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                state = i;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
         return v;
     }
 
@@ -143,9 +149,8 @@ public class ManageProjectSearchFragment extends Fragment {
         mBeginTimeBtn = (TextView)v.findViewById(R.id.pm_begin_time_button);
         mEndTimeBtn = (TextView)v.findViewById(R.id.pm_end_time_button);
         mProjectName = (EditText) v.findViewById(R.id.pm_name_edittext);
-        mProjectManager = (EditText) v.findViewById(R.id.pm_manager_edittext);
         mProjectStateSpinner = (Spinner) v.findViewById(R.id.pm_state_sprinner);
-
+        mBack = (TextView) v.findViewById(R.id.manage_project_search_back);
         mSearchBtn = (Button) v.findViewById(R.id.project_manager_search_button);
     }
 

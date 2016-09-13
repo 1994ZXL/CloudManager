@@ -9,9 +9,9 @@
             <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/pm_schedule_search_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/pm_schedule_search_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
@@ -56,8 +56,9 @@
 
                 <EditText
                     android:id="@+id/pm_schedule_percent_from"
-                    android:hint="@string/input_mission_progress"
-                    style="@style/Text_view_Style"/>
+                    style="@style/EditText_Style"
+                    android:layout_width="wrap_content"
+                    android:hint="@string/input_mission_progress" />
 
                 <TextView
                     style="@style/Text_Style"
@@ -65,8 +66,9 @@
 
                 <EditText
                     android:id="@+id/pm_schedule_percent_to"
-                    android:hint="@string/input_mission_progress"
-                    style="@style/Text_view_Style" />
+                    style="@style/EditText_Style"
+                    android:layout_width="wrap_content"
+                    android:hint="@string/input_mission_progress" />
             </LinearLayout>
 
         </LinearLayout>

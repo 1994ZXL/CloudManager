@@ -19,21 +19,8 @@ import com.example.zxl.cloudmanager.R;
  */
 public class ContactSearchFragment extends Fragment {
 
-    private EditText mProjectNameET;
-    private EditText mCustomerNameET;
-    private Spinner mCustomerSexSpinner;
-    private EditText mCustomerPhoneET;
-    private EditText mCustomerQqET;
-    private EditText mCustomerWechatET;
-
     private Button mSearchBtn;
 
-    private ArrayAdapter<String> adapter;
-    private static final String[] list={"男", "女"};
-
-    public ContactSearchFragment() {
-        // Required empty public constructor
-    }
     private Fragment mFragment;
 
     @Override
@@ -43,19 +30,15 @@ public class ContactSearchFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_project_list, container, false);
+
         init(v);
 
-        adapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, list);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mCustomerSexSpinner.setAdapter(adapter);
         mSearchBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Fragment fragment = new PMContactDetailFragment();
+                Fragment fragment = new PMContactListFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
@@ -74,13 +57,6 @@ public class ContactSearchFragment extends Fragment {
     }
 
     private void init(View v){
-        mProjectNameET = (EditText) v.findViewById(R.id.list_project_name_edittext);
-        mCustomerNameET= (EditText) v.findViewById(R.id.list_customer_name_EditText);
-        mCustomerPhoneET = (EditText) v.findViewById(R.id.list_customer_phone_editText);
-        mCustomerQqET = (EditText) v.findViewById(R.id.list_cutomer_qq_editText);
-        mCustomerWechatET = (EditText) v.findViewById(R.id.list_customer_wechat_editText);
-        mCustomerSexSpinner = (Spinner) v.findViewById(R.id.list_customer_sex_sprinner);
-
         mSearchBtn = (Button) v.findViewById(R.id.project_list_check_button);
     }
 }

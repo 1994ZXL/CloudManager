@@ -1,19 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+<LinearLayout
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.zxl.cloudmanager.Refresh.PullToRefreshView
-        android:id="@+id/pm_manager_pull_to_refresh"
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+        <TextView
+            style="@style/toptextview_left"
+            android:text="@string/text_return"
+            android:id="@+id/pm_manage_project_back"/>
+
+        <TextView
+            style="@style/toptextview_center"
+            android:text="@string/project_manage"/>
+
+        <TextView
+            style="@style/topview_right"
+            android:text="@string/search"
+            android:id="@+id/pm_manage_project_search"/>
+
+    </LinearLayout>
+
+    <com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout
+        android:id="@+id/pm_manage_project_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" >
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/pm_list_recyclerview"
-            android:dividerHeight="10dp"
+        <include layout="@layout/refresh_head" />
+        <!-- 支持所有实现Pullable接口的View -->
+
+        <com.example.zxl.cloudmanager.pulltorefresh.pullableview.PullableScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white"/>
+            android:layout_height="match_parent">
 
-    </com.example.zxl.cloudmanager.Refresh.PullToRefreshView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/pm_list_recyclerview"
+                    android:dividerHeight="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"/>
+
+            </RelativeLayout>
+
+        </com.example.zxl.cloudmanager.pulltorefresh.pullableview.PullableScrollView>
+
+        <include layout="@layout/load_more" />
+
+    </com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout>
+
+</LinearLayout>
+
+    <Button
+        android:id="@+id/pm_add"
+        style="@style/SearchButton"
+        android:layout_alignParentBottom="true"
+        android:text="@string/add" />
 
 </RelativeLayout>

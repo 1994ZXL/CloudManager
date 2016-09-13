@@ -14,15 +14,16 @@
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return"
+                    android:id="@+id/manage_project_search_back"/>
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/project_choose"/>
+                    android:text="@string/project_query"/>
 
                 <TextView
                     style="@style/topview_right"
-                    android:text="@string/text_clean"/>
+                    android:text=""/>
 
             </LinearLayout>
 
@@ -65,19 +66,6 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
-
-                    <TextView
-                        android:id="@+id/project_manager_textview"
-                        style="@style/Text_view_Style"
-                        android:text="@string/project_manager_edittext" />
-
-                    <EditText
-                        android:id="@+id/pm_manager_edittext"
-                        style="@style/EditText_Style"
-                        android:hint="@string/input_name"/>
-                </LinearLayout>
 
                 <LinearLayout
                     style="@style/Viewline_LayoutStyle">

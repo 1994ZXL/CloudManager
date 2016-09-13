@@ -5,7 +5,7 @@ import android.app.Fragment;
 import com.example.zxl.cloudmanager.SingleFragmentActivity;
 import com.example.zxl.cloudmanager.contact.projectManagerContact.ContactSearchFragment;
 
-public class ProjectListSearchActivity extends SingleFragmentActivity {
+public class PSContactActivity extends SingleFragmentActivity {
 
 
     @Override

@@ -94,6 +94,7 @@
     <string name="project_manager">项目</string>
     <string name="project_manage">项目管理</string>
     <string name="project_memo">通讯录</string>
+    <string name="pm_contact">项目通讯录</string>
     <string name="project_member_manage">成员管理</string>
     <string name="project_mission_manage">计划管理</string>
     <string name="bug_manage">bug处理</string>
@@ -237,6 +238,9 @@
     <string name="goon_time">运维开始时间</string>
     <string name="goon_actual_start_time">运维实际开始时间</string>
     <string name="goon_actual_end_time">运维实际结束时间</string>
+    <string name="todo_time">开发开始时间</string>
+    <string name="contact_posistion">联系人职务</string>
+    <string name="contact_company">联系人公司</string>
 
     <!-- 我的bug-->
     <string name="functionModule">功能模块</string>
@@ -286,6 +290,9 @@
     <string name="project_mission_priority">优先级</string>
     <string name="project_mission_state">项目状态</string>
     <string name="project_mission_time">任务时间</string>
+    <string name="cancel_time">取消时间</string>
+    <string name="finished_time">结束时间</string>
+    <string name="ready_time">准备开始时间</string>
 
     <string name="project_customer_name">甲方负责人</string>
 

@@ -46,7 +46,7 @@ import com.example.zxl.cloudmanager.manageMember.projectManagerManageMember.PMMa
 import com.example.zxl.cloudmanager.contact.projectManagerContact.PMContactActivity;
 import com.example.zxl.cloudmanager.usecase.projectManagerUseCase.ProjectManagerUsecaseActivity;
 import com.example.zxl.cloudmanager.bug.publicSearchBug.PublicBugSearchActivity;
-import com.example.zxl.cloudmanager.contact.publicSearchContact.ProjectListSearchActivity;
+import com.example.zxl.cloudmanager.contact.publicSearchContact.PSContactActivity;
 import com.example.zxl.cloudmanager.manageMember.publicSearchManageMember.PSManageMemberActivity;
 import com.example.zxl.cloudmanager.mission.publicSearchMission.MissionSearchActivity;
 import com.example.zxl.cloudmanager.manageProject.publicSearchProjectManage.PSManageProjectActivity;
@@ -179,7 +179,7 @@ public class MainFragment extends Fragment {
         //公共查询
         onClickListener(myProjectImage,new PSManageProjectActivity());
         onClickListener(myPlanImage,new MissionSearchActivity());
-        onClickListener(myListImage,new ProjectListSearchActivity());
+        onClickListener(myListImage,new PSContactActivity());
         onClickListener(myMemberListImage,new PSManageMemberActivity());
         onClickListener(myUseCaseImage,new UsecaseSearchActivity());
         onClickListener(myBugImage,new PublicBugSearchActivity());

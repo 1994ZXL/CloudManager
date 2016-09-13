@@ -52,20 +52,6 @@
 
                 </LinearLayout>
 
-                <!-- 性别-->
-                <LinearLayout style="@style/Viewline_LayoutStyle">
-
-                    <TextView
-                        style="@style/Text_view_Style"
-                        android:text="@string/sex" />
-
-                    <Spinner
-                        android:id="@+id/list_customer_sex_sprinner"
-                        style="@style/Spinner_Style">
-
-                    </Spinner>
-                </LinearLayout>
-
                 <!-- 手机-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
 
@@ -80,35 +66,10 @@
                         android:inputType="phone" />
                 </LinearLayout>
 
-                <!-- QQ-->
-                <LinearLayout style="@style/Viewline_LayoutStyle">
-
-                    <TextView
-                        style="@style/Text_view_Style"
-                        android:text="@string/qq" />
-
-                    <EditText
-                        android:id="@+id/list_cutomer_qq_editText"
-                        style="@style/EditText_Style"
-                        android:hint="@string/input_qq"
-                        android:inputType="number" />
-                </LinearLayout>
-
-                <!-- 微信-->
-                <LinearLayout style="@style/Viewline_LayoutStyle">
-
-                    <TextView
-                        style="@style/Text_view_Style"
-                        android:text="@string/wechat" />
-
-                    <EditText
-                        android:id="@+id/list_customer_wechat_editText"
-                        style="@style/EditText_Style"
-                        android:hint="@string/input_wechat"
-                        android:inputType="number" />
-                </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
+
     </ScrollView>
 
     <Button

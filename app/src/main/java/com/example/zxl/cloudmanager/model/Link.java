@@ -5,8 +5,8 @@ package com.example.zxl.cloudmanager.model;
  */
 public class Link {
 //    public static final String localhost = "http://192.168.3.119:8099/yunmgr_v1.0/api/uc.php?app=";
-//    public static final String localhost = "http://192.168.1.105/yunmgr_v1.0/api/uc.php?app=";
-    public static final String localhost = "http://192.168.0.102/yunmgr_v1.0/api/uc.php?app=";
+    public static final String localhost = "http://192.168.1.105/yunmgr_v1.0/api/uc.php?app=";
+//    public static final String localhost = "http://192.168.0.102/yunmgr_v1.0/api/uc.php?app=";
     public static final String API = "http://localhost/yunmgr_v1.0/api/uc.php?app=";
 
     public static final String get_list = "get_list";
@@ -69,7 +69,6 @@ public class Link {
 
     //pm_bug
     public static final String pm_bug = "pm_bug&act=";
-    public static final String pm_id = "pm_id";
     public static final String pmbug_id = "pmbug_id";
 
     //my_bug
@@ -157,11 +156,27 @@ public class Link {
     public static final String report_time = "report_time"; //提交时间
 
     //manage_pm
+    public static final String manage_pm = "manage_pm&act=";
+    public static final String pm_id = "pm_id"; //项目id
+    public static final String pm_master_name = "pm_master"; //项目主管
     public static final String project_name = "project_name"; //项目名称
+    public static final String goon_technical = "goon_technical"; //技术负责人
+    public static final String goon_business = "goon_business"; //客服
+    public static final String project_summary = "project_summary"; //项目内容
+    public static final String belong_unit = "belong_unit"; //客户单位
+    public static final String custom_name = "custom_name"; //客户联系人
+    public static final String custom_phone = "custom_phone"; //客户手机
     public static final String ready_time = "ready_time"; //准备开始时间
-    public static final String finished_time = "finished_time"; //结束时间
-    public static final String project_state = "project_state"; //项目状态
-    public static final String header = "header"; //项目负责人
+    public static final String goon_time = "goon_time"; //运维开始时间
+    public static final String todo_time = "todo_time"; //开发开始时间
+    public static final String cancel_time = "cancel_time"; //取消时间
+    public static final String finshed_time = "finshed_time"; //结束时间
+    public static final String goon_actual_start_time = "goon_actual_start_time"; //运维实际开始时间
+    public static final String goon_actual_end_time = "goon_actual_end_time"; //运维实际结束时间
+    public static final String project_state = "project_state"; //项目状态(0:取消，1:准备，2:开发，3:维护，4:结束)
+
+    //pm_list
+    public static final String pm_list = "pm_list&act=";
 
     //my_operation
     public static final String my_operation = "my_operation&act=";
@@ -170,4 +185,14 @@ public class Link {
     public static final String my_note = "my_note&act=";
     public static final String my_note_over_time = "over_time";
     public static final String note_id = "note_id";
+
+    //pm_contact
+    public static final String pm_contact = "pm_contact&act=";
+    public static final String pmcon_id = "pmcon_id"; //项目通讯录ID
+    public static final String contact_name = "contact_name";
+    public static final String contact_position = "contact_position";
+    public static final String contact_company = "contact_company";
+
+    //pmcontact 公共查询
+    public static final String pmcontact = "pmcontact&act=";
 }
