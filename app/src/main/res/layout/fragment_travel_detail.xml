@@ -3,37 +3,32 @@
     style="@style/Parent_LayoutStyle"
     tools:context=".travel.checkManagerTravel.ManagerTravelDetailFragment">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/manager_travel_detail_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/manager_travel_detail_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/employer_travel_detail"/>
+                    android:text="@string/employer_travel_detail" />
 
                 <TextView
+                    android:id="@+id/manager_travel_detail_edit"
                     style="@style/topview_right"
-                    android:text="@string/edit"
-                    android:id="@+id/manager_travel_detail_edit"/>
+                    android:text="@string/edit" />
 
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 姓名-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -46,8 +41,7 @@
                 </LinearLayout>
 
                 <!--出差开始时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -55,12 +49,11 @@
 
                     <TextView
                         android:id="@+id/employer_travel_beginTime"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
                 </LinearLayout>
 
                 <!--出差结束时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -72,8 +65,7 @@
                 </LinearLayout>
 
                 <!--出差原因-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -86,8 +78,7 @@
                 </LinearLayout>
 
                 <!--出差地址-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -100,8 +91,7 @@
                 </LinearLayout>
 
                 <!--出差详细地址-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -114,8 +104,7 @@
                 </LinearLayout>
 
                 <!--出差状态-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"

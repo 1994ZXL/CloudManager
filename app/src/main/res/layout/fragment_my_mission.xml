@@ -4,49 +4,43 @@
     tools:context=".mission.myMission.MyMissionSearchFragment">
 
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/my_mission_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/my_mission_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/mission_choose"/>
+                    android:text="@string/mission_choose" />
 
                 <TextView
                     style="@style/topview_right"
-                    android:text=""/>
+                    android:text="" />
 
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/my_mission_name" />
 
                     <EditText
+                        android:id="@+id/my_mission_name_edittext"
                         style="@style/EditText_Style"
-                        android:text="@string/input_mission_name"
-                        android:id="@+id/my_mission_name_edittext" />
+                        android:hint="@string/input_mission_name" />
                 </LinearLayout>
 
                 <!--开始时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -69,8 +63,7 @@
                 </LinearLayout>
 
                 <!--结束时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -92,16 +85,15 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/my_mission_state" />
 
                     <Spinner
-                        style="@style/Spinner_Style"
-                        android:id="@+id/my_mission_state_sprinner" />
+                        android:id="@+id/my_mission_state_sprinner"
+                        style="@style/Spinner_Style" />
                 </LinearLayout>
 
 
@@ -112,6 +104,6 @@
 
     <Button
         android:id="@+id/my_mission_search_button"
-        style="@style/SearchButton"/>
+        style="@style/SearchButton" />
 
 </LinearLayout>

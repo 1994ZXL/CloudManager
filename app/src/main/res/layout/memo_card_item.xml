@@ -8,16 +8,15 @@
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
             <TextView
-                style="@style/Text_view_Style"
                 android:id="@+id/memo_card_title"
-                android:layout_weight="1"
-                android:gravity="left"/>
+                style="@style/Text_view_Style"
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/memo_card_create_time"
                 style="@style/Text_view_Style"
                 android:layout_weight="1"
-                android:gravity="left"/>
+                android:gravity="left" />
 
             <ImageButton
                 android:id="@+id/memo_card_delete"
@@ -30,6 +29,7 @@
         </LinearLayout>
 
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
+
             <TextView
                 android:id="@+id/memo_card_content"
                 style="@style/Text_view_Style"

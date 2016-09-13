@@ -1,69 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_my_leave"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/darker_gray">
+    style="@style/Parent_LayoutStyle">
 
     <LinearLayout style="@style/Toptitle_LayoutStyle">
 
         <TextView
+            android:id="@+id/my_leave_back"
             style="@style/toptextview_left"
-            android:text="@string/text_return"
-            android:id="@+id/my_leave_back"/>
+            android:text="@string/text_return" />
 
         <TextView
             style="@style/toptextview_center"
             android:text="@string/my_leave" />
 
         <TextView
+            android:id="@+id/my_leave_search"
             style="@style/topview_right"
-            android:text="@string/search"
-            android:id="@+id/my_leave_search"/>
+            android:text="@string/search" />
 
     </LinearLayout>
 
     <!-- 上部滑动栏-->
     <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:scrollbars="none"
         android:background="@color/white"
-        android:id="@+id/horizontalScrollView">
+        android:scrollbars="none">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <RadioGroup
+                android:id="@+id/main_fragment_my_leave_radioGroup"
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
-                android:orientation="horizontal"
                 android:layout_alignParentTop="true"
                 android:background="@color/black"
-                android:id="@+id/main_fragment_my_leave_radioGroup">
+                android:orientation="horizontal">
 
                 <RadioButton
-                    style="@style/radioButton"
-                    android:text="@string/leave_record_query"
                     android:id="@+id/main_fragment_my_leave_query"
-                    android:layout_weight="1"/>
-                <RadioButton
                     style="@style/radioButton"
-                    android:text="@string/apply_leave"
+                    android:layout_weight="1"
+                    android:text="@string/leave_record_query" />
+
+                <RadioButton
                     android:id="@+id/main_fragment_my_leave_apply"
-                    android:layout_weight="1" />
+                    style="@style/radioButton"
+                    android:layout_weight="1"
+                    android:text="@string/apply_leave" />
 
             </RadioGroup>
 
             <ImageView
+                android:id="@+id/main_fragment_my_leave_image"
                 android:layout_width="100dp"
                 android:layout_height="4dp"
-                android:background="#33b5e5"
                 android:layout_alignParentBottom="true"
-                android:id="@+id/main_fragment_my_leave_image"/>
+                android:background="#33b5e5" />
 
         </RelativeLayout>
 
@@ -71,10 +68,10 @@
 
     <!-- 中间ViewPager-->
     <android.support.v4.view.ViewPager
+        android:id="@+id/main_fragment_my_leave_viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
-        android:id="@+id/main_fragment_my_leave_viewPager">
+        android:background="@color/white">
 
     </android.support.v4.view.ViewPager>
 

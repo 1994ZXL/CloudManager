@@ -3,111 +3,106 @@
     style="@style/Parent_LayoutStyle"
     tools:context=".overtime.checkManagerOverTime.ManagerOvertimeDetailFragment">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+    <ScrollView style="@style/ScrollView_Style">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
+
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/overtime_details_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/overtime_details_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/my_overtime_detail"/>
+                    android:text="@string/my_overtime_detail" />
 
                 <TextView
+                    android:id="@+id/overtime_details_edit"
                     style="@style/topview_right"
-                    android:text="@string/edit"
-                    android:id="@+id/overtime_details_edit"/>
+                    android:text="@string/edit" />
 
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
 
                 <!-- 姓名-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/name" />
+
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/manager_employer_name_spinner" />
+                        android:id="@+id/manager_employer_name_spinner"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!--加班项目-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/project_name_edittext" />
+
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/manager_overtime_project_spinner" />
+                        android:id="@+id/manager_overtime_project_spinner"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!--加班开始时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/my_overtime_time" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/manager_overtime_detail_beginTime"/>
+                        android:id="@+id/manager_overtime_detail_beginTime"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!--加班结束时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/my_overtime_time" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/manager_overtime_detail_endTime"/>
+                        android:id="@+id/manager_overtime_detail_endTime"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!--加班原因-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
-                        android:text="@string/manager_overtime_reason"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style"
+                        android:text="@string/manager_overtime_reason" />
+
                     <TextView
                         android:id="@+id/manager_overtime_reason_edittext"
-                        style="@style/Text_view_Style"/>
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!--加班状态-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/overtime_status" />
+
                     <Spinner
-                        style="@style/Spinner_Style"
-                        android:id="@+id/manager_overtime_status_spinner" />
+                        android:id="@+id/manager_overtime_status_spinner"
+                        style="@style/Spinner_Style" />
 
                 </LinearLayout>
 

@@ -26,8 +26,7 @@
                 <TextView
                     android:id="@+id/usecase_card_item_usecase_number"
                     style="@style/Text_view_Style"
-                    android:maxLength="10"
-                    android:text="@string/text_two" />
+                    android:maxLength="10" />
             </LinearLayout>
         </LinearLayout>
 
@@ -44,8 +43,7 @@
 
                 <TextView
                     android:id="@+id/usecase_card_item_exploit_man"
-                    style="@style/Text_view_Style"
-                    android:text="@string/text_two" />
+                    style="@style/Text_view_Style" />
             </LinearLayout>
 
             <LinearLayout style="@style/CardView_line_LayoutStyle">
@@ -56,8 +54,7 @@
 
                 <TextView
                     android:id="@+id/usecase_card_item_text_man"
-                    style="@style/Text_view_Style"
-                    android:text="@string/text_two" />
+                    style="@style/Text_view_Style" />
             </LinearLayout>
         </LinearLayout>
 
@@ -74,8 +71,7 @@
 
                 <TextView
                     android:id="@+id/usecase_card_item_version_number"
-                    style="@style/Text_view_Style"
-                    android:text="@string/text_two" />
+                    style="@style/Text_view_Style" />
             </LinearLayout>
 
             <LinearLayout style="@style/CardView_line_LayoutStyle">
@@ -86,8 +82,7 @@
 
                 <TextView
                     android:id="@+id/usecase_card_item_autorized_time"
-                    style="@style/Text_view_Style"
-                    android:text="@string/text_two" />
+                    style="@style/Text_view_Style" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

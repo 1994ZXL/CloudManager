@@ -9,18 +9,18 @@
             <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/leader_check_search_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/leader_check_search_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
                     android:text="@string/check_query" />
 
                 <TextView
+                    android:id="@+id/leader_check_search_clean"
                     style="@style/topview_right"
-                    android:text="@string/text_clean"
-                    android:id="@+id/leader_check_search_clean"/>
+                    android:text="@string/text_clean" />
 
             </LinearLayout>
 
@@ -35,7 +35,7 @@
                     <EditText
                         android:id="@+id/leader_check_search_name"
                         style="@style/EditText_Style"
-                        android:hint="@string/input_name"/>
+                        android:hint="@string/input_name" />
 
                 </LinearLayout>
 
@@ -68,6 +68,6 @@
 
     <Button
         android:id="@+id/leader_check_search_button"
-        style="@style/SearchButton"/>
+        style="@style/SearchButton" />
 
 </LinearLayout>

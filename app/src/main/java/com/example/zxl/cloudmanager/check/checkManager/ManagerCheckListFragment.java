@@ -72,7 +72,7 @@ public class ManagerCheckListFragment extends Fragment {
         mCurl_page = 0;
     }
 
-    private void loadDate(final Bundle saveInstanceState, int curl_page,final View v) {
+    private void loadDate(final Bundle saveInstanceState, int curl_page, final View v) {
         if (null != saveInstanceState) {
 
             try {
@@ -111,13 +111,13 @@ public class ManagerCheckListFragment extends Fragment {
                             }
                             Log.d(TAG, "checks: " + checks);
 
-                            mRecyclerView = (RecyclerView)v.findViewById(R.id.manager_check_recyclerview);
+                            mRecyclerView = (RecyclerView) v.findViewById(R.id.manager_check_recyclerview);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                             mRecyclerView.setHasFixedSize(true);
                             myAdapter = new MyAdapter(mFragment.getActivity(), checks);
                             mRecyclerView.setAdapter(myAdapter);
-                            mCardView = (CardView)v.findViewById(R.id.fragment_manager_check);
+                            mCardView = (CardView) v.findViewById(R.id.fragment_manager_check);
                             myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
@@ -168,7 +168,7 @@ public class ManagerCheckListFragment extends Fragment {
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1000);
             }
 
             @Override
@@ -181,7 +181,7 @@ public class ManagerCheckListFragment extends Fragment {
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1000);
             }
         });
 
@@ -215,18 +215,18 @@ public class ManagerCheckListFragment extends Fragment {
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
+    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener {
         private List<Check> checks;
         private Context mContext;
 
-        public MyAdapter (Context context, List<Check> checks) {
+        public MyAdapter(Context context, List<Check> checks) {
             this.checks = checks;
             this.mContext = context;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.manager_check_card_item, viewGroup,false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.manager_check_card_item, viewGroup, false);
             ViewHolder viewHolder = new ViewHolder(v);
             v.setOnClickListener(this);
             return viewHolder;
@@ -254,7 +254,7 @@ public class ManagerCheckListFragment extends Fragment {
             }
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder{
+        public class ViewHolder extends RecyclerView.ViewHolder {
             public TextView mName;
             public TextView mState;
             public TextView mCheckLocation;
@@ -263,9 +263,9 @@ public class ManagerCheckListFragment extends Fragment {
             public ViewHolder(View v) {
                 super(v);
                 mName = (TextView) v.findViewById(R.id.manager_check_card_item_name);
-                mState = (TextView)v.findViewById(R.id.manager_check_card_item_state);
-                mCheckLocation = (TextView)v.findViewById(R.id.manager_check_card_item_check_location);
-                mCheckManager = (TextView)v.findViewById(R.id.manager_check_card_item_check_manager);
+                mState = (TextView) v.findViewById(R.id.manager_check_card_item_state);
+                mCheckLocation = (TextView) v.findViewById(R.id.manager_check_card_item_check_location);
+                mCheckManager = (TextView) v.findViewById(R.id.manager_check_card_item_check_manager);
 
             }
         }

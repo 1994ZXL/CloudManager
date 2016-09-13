@@ -1,152 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/check_details"
     style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/cm_leave_deal_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/cm_leave_deal_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/leave_record_detail"/>
+                    android:text="@string/leave_record_detail" />
 
                 <TextView
+                    android:id="@+id/cm_leave_deal_edit"
                     style="@style/topview_right"
-                    android:text="@string/edit"
-                    android:id="@+id/cm_leave_deal_edit"/>
+                    android:text="@string/edit" />
 
             </LinearLayout>
 
             <!-- 姓名-->
-            <LinearLayout
-                style="@style/Viewline_LayoutStyle">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
                     style="@style/Text_view_Style"
-                    android:text="@string/name"/>
+                    android:text="@string/name" />
 
                 <TextView
-                    style="@style/Text_view_Style"
-                    android:id="@+id/cm_employer_leave_name"/>
+                    android:id="@+id/cm_employer_leave_name"
+                    style="@style/Text_view_Style" />
 
             </LinearLayout>
 
             <!--请假类型-->
-            <LinearLayout
-                style="@style/Viewline_LayoutStyle">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
                     style="@style/Text_view_Style"
-                    android:text="@string/leave_type"/>
+                    android:text="@string/leave_type" />
 
                 <TextView
-                    style="@style/Text_view_Style"
-                    android:id="@+id/cm_leave_deal_type"/>
+                    android:id="@+id/cm_leave_deal_type"
+                    style="@style/Text_view_Style" />
 
             </LinearLayout>
             <!-- 请假开始时间-->
-            <LinearLayout
-                style="@style/Viewline_LayoutStyle">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
                     style="@style/Text_view_Style"
-                    android:text="@string/leave_begin_time"/>
+                    android:text="@string/leave_begin_time" />
 
                 <TextView
-                    style="@style/Text_view_Style"
-                    android:id="@+id/cm_leave_deal_begin_time" />
+                    android:id="@+id/cm_leave_deal_begin_time"
+                    style="@style/Text_view_Style" />
 
             </LinearLayout>
             <!-- 请假结束时间-->
-            <LinearLayout
-                style="@style/Viewline_LayoutStyle">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
                     style="@style/Text_view_Style"
-                    android:text="@string/leave_end_time"/>
+                    android:text="@string/leave_end_time" />
 
                 <TextView
-                    style="@style/Text_view_Style"
-                    android:id="@+id/cm_leave_deal_end_time"/>
+                    android:id="@+id/cm_leave_deal_end_time"
+                    style="@style/Text_view_Style" />
 
             </LinearLayout>
             <!-- 请假原因-->
-            <LinearLayout
-                style="@style/Viewline_LayoutStyle">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
                     style="@style/Text_view_Style"
-                    android:text="@string/leave_reason"/>
+                    android:text="@string/leave_reason" />
 
                 <TextView
-                    style="@style/Text_view_Style"
-                    android:id="@+id/cm_leave_deal_ask_reason"/>
+                    android:id="@+id/cm_leave_deal_ask_reason"
+                    style="@style/Text_view_Style" />
 
             </LinearLayout>
             <!-- 处理意见-->
-            <LinearLayout
-                style="@style/Viewline_LayoutStyle">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
                     style="@style/Text_view_Style"
-                    android:text="@string/dispose_suggestion"/>
+                    android:text="@string/dispose_suggestion" />
 
                 <EditText
+                    android:id="@+id/cm_leave_deal_suggestion"
                     style="@style/EditText_Style"
-                    android:hint="@string/input_dispose_suggestion"
-                    android:id="@+id/cm_leave_deal_suggestion"/>
+                    android:hint="@string/input_dispose_suggestion" />
 
             </LinearLayout>
 
             <!-- 申请时间-->
-            <LinearLayout
-                style="@style/Viewline_LayoutStyle">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
                     style="@style/Text_view_Style"
-                    android:text="@string/apply_time"/>
+                    android:text="@string/apply_time" />
 
                 <TextView
-                    style="@style/Text_view_Style"
-                    android:id="@+id/cm_leave_deal_apply_time"/>
+                    android:id="@+id/cm_leave_deal_apply_time"
+                    style="@style/Text_view_Style" />
 
             </LinearLayout>
             <!-- 处理时间-->
-            <LinearLayout
-                style="@style/Viewline_LayoutStyle">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
                     style="@style/Text_view_Style"
-                    android:text="@string/dispose_time"/>
+                    android:text="@string/dispose_time" />
 
                 <TextView
-                    style="@style/Text_view_Style"
-                    android:id="@+id/cm_leave_deal_time"/>
+                    android:id="@+id/cm_leave_deal_time"
+                    style="@style/Text_view_Style" />
 
             </LinearLayout>
             <!-- 请假状态-->
-            <LinearLayout
-                style="@style/Viewline_LayoutStyle">
+            <LinearLayout style="@style/Viewline_LayoutStyle">
 
                 <TextView
                     style="@style/Text_view_Style"
-                    android:text="@string/leave_state"/>
+                    android:text="@string/leave_state" />
 
                 <Spinner
-                    style="@style/Spinner_Style"
-                    android:id="@+id/cm_leave_deal_state"/>
+                    android:id="@+id/cm_leave_deal_state"
+                    style="@style/Spinner_Style" />
 
             </LinearLayout>
 

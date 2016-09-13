@@ -77,7 +77,7 @@ public class MyMissionFragment extends Fragment {
         mCurl_page = 1;
     }
 
-    private void loadDate(final Bundle saveInstanceState, int curl_page,final View view) {
+    private void loadDate(final Bundle saveInstanceState, int curl_page, final View view) {
         if (null != saveInstanceState) {
             try {
                 if (null != saveInstanceState.getString(Link.title))
@@ -126,13 +126,13 @@ public class MyMissionFragment extends Fragment {
                                 missions.add(new Mission(array.getJSONObject(i)));
                             }
                             Log.d(TAG, "missions: " + missions);
-                            mRecyclerView = (RecyclerView)view.findViewById(R.id.mission_recyclerview);
+                            mRecyclerView = (RecyclerView) view.findViewById(R.id.mission_recyclerview);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                             mRecyclerView.setHasFixedSize(true);
                             myAdapter = new MyAdapter(mFragment.getActivity(), missions);
                             mRecyclerView.setAdapter(myAdapter);
-                            mCardView = (CardView)view.findViewById(R.id.fragment_my_check);
+                            mCardView = (CardView) view.findViewById(R.id.fragment_my_check);
                             myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
@@ -209,7 +209,7 @@ public class MyMissionFragment extends Fragment {
                         loadDate(saveInstanceState, mCurl_page, view);
                         pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1000);
             }
 
             @Override
@@ -222,7 +222,7 @@ public class MyMissionFragment extends Fragment {
                         loadDate(saveInstanceState, mCurl_page, view);
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1000);
             }
         });
 
@@ -235,18 +235,18 @@ public class MyMissionFragment extends Fragment {
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
+    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener {
         private List<Mission> missions;
         private Context mContext;
 
-        public MyAdapter (Context context, List<Mission> missions) {
+        public MyAdapter(Context context, List<Mission> missions) {
             this.missions = missions;
             this.mContext = context;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mission_card_item, viewGroup,false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mission_card_item, viewGroup, false);
             ViewHolder viewHolder = new ViewHolder(v);
             v.setOnClickListener(this);
             return viewHolder;
@@ -286,7 +286,7 @@ public class MyMissionFragment extends Fragment {
             }
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder{
+        public class ViewHolder extends RecyclerView.ViewHolder {
             public TextView mName;
             public TextView mState;
             public TextView mBeginTime;
@@ -295,9 +295,9 @@ public class MyMissionFragment extends Fragment {
             public ViewHolder(View v) {
                 super(v);
                 mName = (TextView) v.findViewById(R.id.mission_card_item_title);
-                mState = (TextView)v.findViewById(R.id.mission_card_item_state);
-                mBeginTime = (TextView)v.findViewById(R.id.missoin_card_item_mission_begin_time);
-                mEndTime = (TextView)v.findViewById(R.id.mission_card_item_mission_end_time);
+                mState = (TextView) v.findViewById(R.id.mission_card_item_state);
+                mBeginTime = (TextView) v.findViewById(R.id.missoin_card_item_mission_begin_time);
+                mEndTime = (TextView) v.findViewById(R.id.mission_card_item_mission_end_time);
             }
         }
 

@@ -45,8 +45,7 @@
             <!--运维开始时间-->
             <TextView
                 android:id="@+id/my_operation_card_goon_time"
-                style="@style/Text_view_Style"
-                android:maxLength="10" />
+                style="@style/Text_view_Style" />
         </LinearLayout>
 
     </LinearLayout>

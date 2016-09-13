@@ -2,98 +2,90 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-               style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/leave_search_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/leave_search_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/leave_record_query"/>
+                    android:text="@string/leave_record_query" />
 
                 <TextView
+                    android:id="@+id/leave_search_clean"
                     style="@style/topview_right"
-                    android:text=""
-                    android:id="@+id/leave_search_clean"/>
+                    android:text="" />
 
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <LinearLayout
-                    style="@style/Viewline_LayoutStyle"
-                    android:id="@+id/leave_search_nameLinearLayout">
+                    android:id="@+id/leave_search_nameLinearLayout"
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/name"/>
+                        android:text="@string/name" />
 
                     <EditText
+                        android:id="@+id/my_leave_name"
                         style="@style/EditText_Style"
-                        android:hint="@string/input_name"
-                        android:id="@+id/my_leave_name" />
+                        android:hint="@string/input_name" />
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/project_begin_time_textview"/>
+                        android:text="@string/project_begin_time_textview" />
 
                     <TextView
+                        android:id="@+id/my_leave_begin_time_button"
                         style="@style/Text_view_Style"
-                        android:text="@string/choose_time"
-                        android:id="@+id/my_leave_begin_time_button" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
-
-                    <TextView
-                        style="@style/Text_view_Style"
-                        android:text="@string/project_end_time_textview"/>
-
-                    <TextView
-                        style="@style/Text_view_Style"
-                        android:text="@string/choose_time"
-                        android:id="@+id/my_leave_end_time_button" />
+                        android:text="@string/choose_time" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/my_leave_kind"/>
+                        android:text="@string/project_end_time_textview" />
+
+                    <TextView
+                        android:id="@+id/my_leave_end_time_button"
+                        style="@style/Text_view_Style"
+                        android:text="@string/choose_time" />
+
+                </LinearLayout>
+
+                <LinearLayout style="@style/Viewline_LayoutStyle">
+
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:text="@string/my_leave_kind" />
 
                     <Spinner
-                        style="@style/Spinner_Style"
-                        android:id="@+id/my_leave_kind_sprinner"/>
+                        android:id="@+id/my_leave_kind_sprinner"
+                        style="@style/Spinner_Style" />
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/my_leave_sate" />
 
                     <Spinner
-                        style="@style/Spinner_Style"
-                        android:id="@+id/my_leave_state_sprinner" />
+                        android:id="@+id/my_leave_state_sprinner"
+                        style="@style/Spinner_Style" />
 
                 </LinearLayout>
 
@@ -104,7 +96,7 @@
     </ScrollView>
 
     <Button
-        style="@style/SearchButton"
-        android:id="@+id/my_leave_search_button"/>
+        android:id="@+id/my_leave_search_button"
+        style="@style/SearchButton" />
 
 </LinearLayout>

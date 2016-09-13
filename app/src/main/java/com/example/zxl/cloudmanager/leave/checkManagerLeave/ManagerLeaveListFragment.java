@@ -86,7 +86,7 @@ public class ManagerLeaveListFragment extends Fragment {
         leaves.clear();
     }
 
-    private void loadDate(final Bundle saveInstanceState, int curl_page,final View v) {
+    private void loadDate(final Bundle saveInstanceState, int curl_page, final View v) {
         if (null == saveInstanceState) {
             Log.d(TAG, "没有选择条件");
         } else {
@@ -132,7 +132,7 @@ public class ManagerLeaveListFragment extends Fragment {
             url = Link.localhost + Link.manage_leave + Link.get_list;
         }
         Log.d(TAG, "url: " + url);
-        mHttpc.post(url , mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(url, mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 if (statusCode == 200) {
@@ -205,7 +205,7 @@ public class ManagerLeaveListFragment extends Fragment {
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1000);
             }
 
             @Override
@@ -218,7 +218,7 @@ public class ManagerLeaveListFragment extends Fragment {
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1000);
             }
         });
 
@@ -257,18 +257,18 @@ public class ManagerLeaveListFragment extends Fragment {
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
+    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener {
         private List<Leave> leaves;
         private Context mContext;
 
-        public MyAdapter (Context context, List<Leave> leaves) {
+        public MyAdapter(Context context, List<Leave> leaves) {
             this.leaves = leaves;
             this.mContext = context;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cm_leave_card_item, viewGroup,false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cm_leave_card_item, viewGroup, false);
             ViewHolder viewHolder = new ViewHolder(v);
             v.setOnClickListener(this);
             return viewHolder;
@@ -299,7 +299,7 @@ public class ManagerLeaveListFragment extends Fragment {
             }
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder{
+        public class ViewHolder extends RecyclerView.ViewHolder {
             public TextView mType;
             public TextView mLeaveBegin;
             public TextView mLeaveEnd;
@@ -309,9 +309,9 @@ public class ManagerLeaveListFragment extends Fragment {
             public ViewHolder(View v) {
                 super(v);
                 mName = (TextView) v.findViewById(R.id.cm_leave_card_item_name);
-                mState = (TextView)v.findViewById(R.id.cm_leave_card_item_state);
-                mLeaveBegin = (TextView)v.findViewById(R.id.cm_leave_card_item_begin_time);
-                mLeaveEnd = (TextView)v.findViewById(R.id.cm_leave_card_item_end_time);
+                mState = (TextView) v.findViewById(R.id.cm_leave_card_item_state);
+                mLeaveBegin = (TextView) v.findViewById(R.id.cm_leave_card_item_begin_time);
+                mLeaveEnd = (TextView) v.findViewById(R.id.cm_leave_card_item_end_time);
                 mType = (TextView) v.findViewById(R.id.cm_leave_card_item_type);
 
             }

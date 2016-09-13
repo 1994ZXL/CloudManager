@@ -266,7 +266,7 @@
     <string name="input_remark">请输入备注信息</string>
     <string name="usecase_content">用例内容</string>
     <string name="input_usecase_content">请输入用例信息</string>
-    <string name="bug_add">新增bug</string>
+    <string name="bug_add">提交bug</string>
 
     <string name="check_button">查询</string>
     <string name="submit_button">提交</string>
@@ -380,6 +380,7 @@
     <string name="post_state">日报状态</string>
     <string name="post_level">日报评分</string>
     <string name="post_opinion">日报评价</string>
+    <string name="input_post_opinion">请输入日报评价</string>
 
     <!--主页底部导航栏底部-->
     <string name="company_list_bar">公司通讯录</string>

@@ -68,6 +68,7 @@ public class MyCheckFragment extends Fragment {
     private String url;
 
     private Fragment mFragment;
+
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -76,7 +77,7 @@ public class MyCheckFragment extends Fragment {
         mCurl_page = 0;
     }
 
-    private void loadDate(final Bundle saveInstanceState, int curl_page,final View v) {
+    private void loadDate(final Bundle saveInstanceState, int curl_page, final View v) {
         if (null != saveInstanceState) {
             try {
                 if (-1 != saveInstanceState.getInt(Link.att_date_from))
@@ -114,13 +115,13 @@ public class MyCheckFragment extends Fragment {
                             checks.add(new Check(array.getJSONObject(i)));
                         }
                         Log.d(TAG, "checks: " + checks);
-                        mRecyclerView = (RecyclerView)v.findViewById(R.id.check_recyclerview);
+                        mRecyclerView = (RecyclerView) v.findViewById(R.id.check_recyclerview);
                         mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                         mRecyclerView.setHasFixedSize(true);
                         myAdapter = new MyAdapter(mFragment.getActivity(), checks);
                         mRecyclerView.setAdapter(myAdapter);
-                        mCardView = (CardView)v.findViewById(R.id.fragment_my_check);
+                        mCardView = (CardView) v.findViewById(R.id.fragment_my_check);
                         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                             @Override
                             public void onItemClick(View view, Object data) {
@@ -189,7 +190,7 @@ public class MyCheckFragment extends Fragment {
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1000);
             }
 
             @Override
@@ -202,7 +203,7 @@ public class MyCheckFragment extends Fragment {
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1000);
             }
         });
 
@@ -215,18 +216,18 @@ public class MyCheckFragment extends Fragment {
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
+    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener {
         private ArrayList<Check> checks;
         private Context mContext;
 
-        public MyAdapter (Context context, ArrayList<Check> checks) {
+        public MyAdapter(Context context, ArrayList<Check> checks) {
             this.checks = checks;
             this.mContext = context;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.check_card_item, viewGroup,false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.check_card_item, viewGroup, false);
             ViewHolder viewHolder = new ViewHolder(v);
             v.setOnClickListener(this);
             return viewHolder;
@@ -236,14 +237,14 @@ public class MyCheckFragment extends Fragment {
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
             Check check = checks.get(i);
             viewHolder.mCheckLocation.setText(check.getPuncher_name());
-            viewHolder.mDate.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(check.getAtt_date()+28800));
+            viewHolder.mDate.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(check.getAtt_date() + 28800));
             if (check.getS_att_time() != 0) {
-                viewHolder.mDutyTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(check.getS_att_time()+28800));
+                viewHolder.mDutyTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(check.getS_att_time() + 28800));
             } else {
                 viewHolder.mDutyTime.setText("--");
             }
             if (check.getE_att_time() != 0) {
-                viewHolder.mOffDutyTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(check.getE_att_time()+28800));
+                viewHolder.mOffDutyTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(check.getE_att_time() + 28800));
             } else {
                 viewHolder.mOffDutyTime.setText("--");
             }
@@ -262,17 +263,18 @@ public class MyCheckFragment extends Fragment {
             }
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder{
+        public class ViewHolder extends RecyclerView.ViewHolder {
             public TextView mDate;
             public TextView mCheckLocation;
             public TextView mDutyTime;
             public TextView mOffDutyTime;
+
             public ViewHolder(View v) {
                 super(v);
-                mDate = (TextView)v.findViewById(R.id.ls_check_card_item_time);
-                mCheckLocation = (TextView)v.findViewById(R.id.ls_check_card_item_location);
-                mDutyTime = (TextView)v.findViewById(R.id.ls_check_card_item_dutytime);
-                mOffDutyTime = (TextView)v.findViewById(R.id.ls_check_card_item_offdutytime);
+                mDate = (TextView) v.findViewById(R.id.ls_check_card_item_time);
+                mCheckLocation = (TextView) v.findViewById(R.id.ls_check_card_item_location);
+                mDutyTime = (TextView) v.findViewById(R.id.ls_check_card_item_dutytime);
+                mOffDutyTime = (TextView) v.findViewById(R.id.ls_check_card_item_offdutytime);
             }
         }
 

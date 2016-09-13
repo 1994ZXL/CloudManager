@@ -3,36 +3,32 @@
     style="@style/Parent_LayoutStyle"
     tools:context=".manageMember.projectManagerManageMember.ManageMemberSearchFragment">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            android:orientation="vertical">
 
-                <LinearLayout
-                    style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
+
+                <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                     <TextView
                         style="@style/toptextview_left"
-                        android:text="@string/text_return"/>
+                        android:text="@string/text_return" />
 
                     <TextView
                         style="@style/toptextview_center"
-                        android:text="@string/project_choose"/>
+                        android:text="@string/project_choose" />
 
                     <TextView
                         style="@style/topview_right"
-                        android:text="@string/text_clean"/>
+                        android:text="@string/text_clean" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -40,8 +36,8 @@
 
                     <EditText
                         android:id="@+id/pm_project_name_edittext"
-                        android:hint="@string/input_project_name"
-                        style="@style/EditText_Style"/>
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_project_name" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -51,6 +47,6 @@
 
     <Button
         android:id="@+id/pm_member_search_button"
-        style="@style/SearchButton"/>
+        style="@style/SearchButton" />
 
 </LinearLayout>

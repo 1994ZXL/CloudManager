@@ -12,9 +12,9 @@
             <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/main_fragment_manager_check_edit_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/main_fragment_manager_check_edit_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
@@ -51,7 +51,7 @@
                 <TextView
                     android:id="@+id/main_fragment_manager_check_edit_duty_sign_time"
                     style="@style/Text_view_Style"
-                    android:text="@string/choose_time"/>
+                    android:text="@string/choose_time" />
             </LinearLayout>
 
             <!-- 规定下班时间-->
@@ -65,7 +65,7 @@
                 <TextView
                     android:id="@+id/main_fragment_manager_check_edit_stipulate_offdutytime"
                     style="@style/Text_view_Style"
-                    android:text="@string/choose_time"/>
+                    android:text="@string/choose_time" />
             </LinearLayout>
 
             <!-- 下班签到时间-->

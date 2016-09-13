@@ -2,48 +2,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-                <LinearLayout
-                    style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
-                    <TextView
-                        style="@style/toptextview_left"
-                        android:text="@string/text_return"/>
+                <TextView
+                    style="@style/toptextview_left"
+                    android:text="@string/text_return" />
 
-                    <TextView
-                        style="@style/toptextview_center"
-                        android:text="@string/project_choose"/>
+                <TextView
+                    style="@style/toptextview_center"
+                    android:text="@string/project_choose" />
 
-                    <TextView
-                        style="@style/topview_right"
-                        android:text="@string/text_clean"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
-
-                    <TextView
-                        style="@style/Text_view_Style"
-                        android:text="@string/project_name_edittext" />
-
-                    <EditText
-                        android:id="@+id/member_project_name_edittext"
-                        android:hint="@string/input_project_name"
-                        style="@style/EditText_Style"/>
-                </LinearLayout>
+                <TextView
+                    style="@style/topview_right"
+                    android:text="@string/text_clean" />
 
             </LinearLayout>
+
+            <LinearLayout style="@style/Viewline_LayoutStyle">
+
+                <TextView
+                    style="@style/Text_view_Style"
+                    android:text="@string/project_name_edittext" />
+
+                <EditText
+                    android:id="@+id/member_project_name_edittext"
+                    style="@style/EditText_Style"
+                    android:hint="@string/input_project_name" />
+            </LinearLayout>
+
+        </LinearLayout>
 
     </ScrollView>
 
     <Button
         android:id="@+id/member_search_button"
-        style="@style/SearchButton"/>
+        style="@style/SearchButton" />
 
 </LinearLayout>

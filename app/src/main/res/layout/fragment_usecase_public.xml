@@ -3,34 +3,29 @@
     style="@style/Parent_LayoutStyle"
     tools:context=".usecase.publicSearchUseCase.UsecaseFragment">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/usecase_choose"/>
+                    android:text="@string/usecase_choose" />
 
                 <TextView
                     style="@style/topview_right"
-                    android:text="@string/text_clean"/>
+                    android:text="@string/text_clean" />
 
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -39,11 +34,10 @@
                     <EditText
                         android:id="@+id/usecase_project_edittext"
                         style="@style/EditText_Style"
-                        android:hint="@string/input_project_name"/>
+                        android:hint="@string/input_project_name" />
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -52,11 +46,10 @@
                     <EditText
                         android:id="@+id/usecase_id_edittext"
                         style="@style/EditText_Style"
-                        android:hint="@string/input_usecase_id"/>
+                        android:hint="@string/input_usecase_id" />
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -65,11 +58,10 @@
                     <EditText
                         android:id="@+id/usecase_program_number"
                         style="@style/EditText_Style"
-                        android:hint="@string/input_usecase_program_number"/>
+                        android:hint="@string/input_usecase_program_number" />
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -81,8 +73,7 @@
                         android:hint="@string/input_name" />
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -91,11 +82,10 @@
                     <EditText
                         android:id="@+id/usecase_developer"
                         style="@style/EditText_Style"
-                        android:hint="@string/input_name"/>
+                        android:hint="@string/input_name" />
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"

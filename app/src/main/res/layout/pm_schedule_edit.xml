@@ -67,15 +67,15 @@
                 <!-- 任务进度-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
 
-                    <LinearLayout
-                        style="@style/Viewline_LayoutStyle"
-                        android:layout_height="150dp">
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:text="@string/mission_schedlue" />
 
-                        <EditText
-                            android:id="@+id/pm_schedule_schedule"
-                            style="@style/EditText_Style"
-                            android:hint="@string/input_mission_progress" />
-                    </LinearLayout>
+                    <EditText
+                        android:id="@+id/pm_schedule_schedule"
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_mission_progress" />
+
                 </LinearLayout>
 
             </LinearLayout>

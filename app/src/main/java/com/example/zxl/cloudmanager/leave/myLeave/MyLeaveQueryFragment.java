@@ -64,6 +64,7 @@ public class MyLeaveQueryFragment extends Fragment {
     private String key = "";
 
     private Button mSearchBtn;
+
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
@@ -78,7 +79,7 @@ public class MyLeaveQueryFragment extends Fragment {
         leaves.clear();
     }
 
-    private void loadDate(final Bundle saveInstanceState, int curl_page,final View v) {
+    private void loadDate(final Bundle saveInstanceState, int curl_page, final View v) {
         if (null != saveInstanceState) {
             try {
                 if (0 != saveInstanceState.getInt(Link.leave_type))
@@ -106,7 +107,7 @@ public class MyLeaveQueryFragment extends Fragment {
             e.printStackTrace();
         }
         mParams.put("key", key);
-        Log.d(TAG,"key:" + key);
+        Log.d(TAG, "key:" + key);
         mHttpc.post(Link.localhost + "my_leave&act=get_list", mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -118,13 +119,13 @@ public class MyLeaveQueryFragment extends Fragment {
                                 leaves.add(new Leave(array.getJSONObject(i)));
                             }
 
-                            mRecyclerView = (RecyclerView)v.findViewById(R.id.leave_recyclerview);
+                            mRecyclerView = (RecyclerView) v.findViewById(R.id.leave_recyclerview);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                             mRecyclerView.setHasFixedSize(true);
                             myAdapter = new MyAdapter(mFragment.getActivity(), leaves);
                             mRecyclerView.setAdapter(myAdapter);
-                            mCardView = (CardView)v.findViewById(R.id.fragment_my_leave);
+                            mCardView = (CardView) v.findViewById(R.id.fragment_my_leave);
                             myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
@@ -170,7 +171,7 @@ public class MyLeaveQueryFragment extends Fragment {
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1000);
             }
 
             @Override
@@ -183,7 +184,7 @@ public class MyLeaveQueryFragment extends Fragment {
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1000);
             }
         });
 
@@ -196,18 +197,18 @@ public class MyLeaveQueryFragment extends Fragment {
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
+    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener {
         private List<Leave> leaves;
         private Context mContext;
 
-        public MyAdapter (Context context, List<Leave> leaves) {
+        public MyAdapter(Context context, List<Leave> leaves) {
             this.leaves = leaves;
             this.mContext = context;
         }
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.leave_card_item, viewGroup,false);
+            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.leave_card_item, viewGroup, false);
             ViewHolder viewHolder = new ViewHolder(v);
             v.setOnClickListener(this);
             return viewHolder;
@@ -238,7 +239,7 @@ public class MyLeaveQueryFragment extends Fragment {
             }
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder{
+        public class ViewHolder extends RecyclerView.ViewHolder {
 
             public TextView mLeaveName;
             public TextView mLeaveType;

@@ -15,5 +15,5 @@
 
     <TextView
         android:id="@+id/customer_phone_number"
-        style="@style/Text_view_Style"/>
+        style="@style/Text_view_Style" />
 </LinearLayout>

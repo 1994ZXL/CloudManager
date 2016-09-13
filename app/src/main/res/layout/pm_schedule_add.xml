@@ -72,9 +72,9 @@
                         android:text="@string/submit_time" />
 
                     <EditText
+                        android:id="@+id/pm_schedule_add_percent"
                         style="@style/EditText_Style"
-                        android:hint="@string/input_mission_progress"
-                        android:id="@+id/pm_schedule_add_percent"/>
+                        android:hint="@string/input_mission_progress" />
 
                 </LinearLayout>
 

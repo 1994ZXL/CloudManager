@@ -1,154 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/bug_details"
     style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/my_bug_details_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/my_bug_details_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/my_bug_detail"/>
+                    android:text="@string/my_bug_detail" />
 
                 <TextView
+                    android:id="@+id/bug_details_edit"
                     style="@style/topview_right"
-                    android:text="@string/edit"
-                    android:id="@+id/bug_details_edit" />
+                    android:text="@string/edit" />
 
             </LinearLayout>
 
             <!-- 第一块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 项目名称-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/project_name_edittext"/>
+                        android:text="@string/project_name_edittext" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/bug_details_projectName"/>
+                        android:id="@+id/bug_details_projectName"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- bug等级-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/bug_level" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/bug_details_level"/>
+                        android:id="@+id/bug_details_level"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- bug状态-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/bug_state" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/bug_details_state"/>
+                        android:id="@+id/bug_details_state"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- bug内容-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/bug_content" />
 
                     <EditText
+                        android:id="@+id/bug_details_content"
                         style="@style/EditText_Style"
-                        android:hint="@string/input_bug_content"
-                        android:id="@+id/bug_details_content"/>
+                        android:hint="@string/input_bug_content" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
             <!-- 第二块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 发现时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/found_time"/>
+                        android:text="@string/found_time" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/bug_details_found_time"/>
+                        android:id="@+id/bug_details_found_time"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 发现人-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/found_man"/>
+                        android:text="@string/found_man" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/bug_details_found_man"/>
+                        android:id="@+id/bug_details_found_man"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 修改时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/edit_time"/>
+                        android:text="@string/edit_time" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/bug_details_edit_time"/>
+                        android:id="@+id/bug_details_edit_time"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 修改人-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/edit_man"/>
+                        android:text="@string/edit_man" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/bug_details_edit_man"/>
+                        android:id="@+id/bug_details_edit_man"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 

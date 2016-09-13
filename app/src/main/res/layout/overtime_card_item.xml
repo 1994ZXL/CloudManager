@@ -20,7 +20,8 @@
                 android:id="@+id/main_fragment_overtime_project"
                 style="@style/Text_view_Style"
                 android:layout_weight="1"
-                android:width="200dp" />
+                android:width="200dp"
+                android:gravity="left" />
 
         </LinearLayout>
 

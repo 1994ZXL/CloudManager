@@ -1,77 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/post_details"
     style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/memo_details_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/memo_details_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/my_memo"/>
+                    android:text="@string/my_memo" />
 
                 <TextView
+                    android:id="@+id/memo_details_save"
                     style="@style/topview_right"
-                    android:text="修改"
-                    android:id="@+id/memo_details_save"/>
+                    android:text="修改" />
 
             </LinearLayout>
 
             <!-- 第一块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 标题-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/memo_title"/>
+                        android:text="@string/memo_title" />
 
                     <EditText
+                        android:id="@+id/memo_details_title"
                         style="@style/EditText_Style"
-                        android:id="@+id/memo_details_title"/>
+                        android:hint="@string/memo_title_textview" />
 
                 </LinearLayout>
 
                 <!-- 创建时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/plan_create_time" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/memo_details_create_time"/>
+                        android:id="@+id/memo_details_create_time"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 内容-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/memo_content" />
 
                     <EditText
+                        android:id="@+id/memo_details_content"
                         style="@style/EditText_Style"
-                        android:id="@+id/memo_details_content"/>
+                        android:hint="@string/memo_content_textview" />
 
                 </LinearLayout>
 

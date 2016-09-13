@@ -2,35 +2,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+    <ScrollView style="@style/ScrollView_Style">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
+
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/overtime_search_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/overtime_search_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/my_overtime_time_choose"/>
+                    android:text="@string/my_overtime_time_choose" />
 
                 <TextView
+                    android:id="@+id/overtime_search_add"
                     style="@style/topview_right"
-                    android:text=""
-                    android:id="@+id/overtime_search_add"/>
+                    android:text="" />
 
             </LinearLayout>
 
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -52,42 +48,40 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    style="@style/Viewline_LayoutStyle"
-                    android:id="@+id/fragment_my_overtime_nameLinearLayout">
+                    android:id="@+id/fragment_my_overtime_nameLinearLayout"
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/employer_name" />
 
                     <Spinner
-                        style="@style/Spinner_Style"
-                        android:id="@+id/employer_name_spinner" />
+                        android:id="@+id/employer_name_spinner"
+                        style="@style/Spinner_Style" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/my_join_project" />
 
                     <Spinner
-                        style="@style/Spinner_Style"
-                        android:id="@+id/employer_project_spinner" />
+                        android:id="@+id/employer_project_spinner"
+                        style="@style/Spinner_Style" />
 
                 </LinearLayout>
 
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/overtime_status" />
 
                     <Spinner
-                        style="@style/Spinner_Style"
-                        android:id="@+id/overtime_status_spinner" />
+                        android:id="@+id/overtime_status_spinner"
+                        style="@style/Spinner_Style" />
 
                 </LinearLayout>
 
@@ -97,6 +91,6 @@
 
     <Button
         android:id="@+id/my_overtime_search_button"
-        style="@style/SearchButton"/>
+        style="@style/SearchButton" />
 
 </LinearLayout>

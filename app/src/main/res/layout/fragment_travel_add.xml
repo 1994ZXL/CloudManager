@@ -92,14 +92,15 @@
 
                 <LinearLayout style="@style/Viewline_LayoutStyle">
 
-                    <TextView
-                        style="@style/Text_view_Style"
-                        android:text="@string/employer_travel_reason" />
+                    <LinearLayout
+                        style="@style/Viewline_LayoutStyle"
+                        android:layout_height="150dp">
 
-                    <EditText
-                        android:id="@+id/fragment_travel_reason"
-                        style="@style/EditText_Style"
-                        android:hint="@string/input_travel_reason" />
+                        <EditText
+                            android:id="@+id/fragment_travel_reason"
+                            style="@style/EditText_Style"
+                            android:hint="@string/input_travel_reason" />
+                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>

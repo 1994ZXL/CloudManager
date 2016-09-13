@@ -10,91 +10,100 @@
         android:id="@+id/bottom_menu_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
         android:background="#FFFFFF"
-        android:layout_alignParentBottom="true">
+        android:orientation="horizontal">
 
         <LinearLayout
+            android:id="@+id/bottom_menu_home_bar"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:layout_weight="1"
-            android:id="@+id/bottom_menu_home_bar"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:paddingTop="8dp"
-                android:src="@drawable/tab_menu_home"/>
+                android:src="@drawable/tab_menu_home" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:text="@string/bottom_menu_home_bar"
-                android:textSize="10dp"
-                android:textColor="@drawable/tab_menu_text" />
+                android:textColor="@drawable/tab_menu_text"
+                android:textSize="10dp" />
         </LinearLayout>
+
         <LinearLayout
+            android:id="@+id/bottom_menu_addresslist_bar"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/bottom_menu_addresslist_bar"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
+
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:paddingTop="8dp"
-                android:src="@drawable/tab_menu_addresslist"/>
+                android:src="@drawable/tab_menu_addresslist" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:text="@string/bottom_menu_addresslist_bar"
-                android:textSize="10dp"
-                android:textColor="@drawable/tab_menu_text" />
+                android:textColor="@drawable/tab_menu_text"
+                android:textSize="10dp" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/bottom_menu_customer_bar"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/bottom_menu_customer_bar"
             android:gravity="center"
             android:orientation="vertical">
+
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@drawable/tab_menu_customer"
-                android:paddingTop="8dp" />
+                android:paddingTop="8dp"
+                android:src="@drawable/tab_menu_customer" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:text="@string/bottom_menu_custom_bar"
-                android:textSize="10dp"
-                android:textColor="@drawable/tab_menu_text" />
+                android:textColor="@drawable/tab_menu_text"
+                android:textSize="10dp" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/bottom_menu_about_bar"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:id="@+id/bottom_menu_about_bar"
             android:gravity="center"
             android:orientation="vertical">
+
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:src="@drawable/tab_menu_about"
-                android:paddingTop="8dp"/>
+                android:paddingTop="8dp"
+                android:src="@drawable/tab_menu_about" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
                 android:text="@string/bottom_menu_about_bar"
-                android:textSize="10dp"
-                android:textColor="@drawable/tab_menu_text" />
+                android:textColor="@drawable/tab_menu_text"
+                android:textSize="10dp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -103,15 +112,15 @@
         android:id="@+id/div_tab_bar"
         android:layout_width="match_parent"
         android:layout_height="2px"
-        android:background="@color/gray"
-        android:layout_above="@id/bottom_menu_bar"/>
+        android:layout_above="@id/bottom_menu_bar"
+        android:background="@color/gray" />
 
     <LinearLayout
+        android:id="@+id/bottom_menu_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/bottom_menu_bar"
         android:layout_above="@id/div_tab_bar"
-        android:id="@+id/bottom_menu_content"
+        android:layout_below="@id/bottom_menu_bar"
         android:orientation="vertical">
 
     </LinearLayout>

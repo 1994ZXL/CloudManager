@@ -128,7 +128,7 @@ public class ManagerOvertimeListFragment extends Fragment {
                                 overTimes.add(new OverTime(array.getJSONObject(i)));
                             }
                             Log.d(TAG, "overtimes: " + overTimes);
-                            mRecyclerView = (RecyclerView)v.findViewById(R.id.overtime_recyclerview);
+                            mRecyclerView = (RecyclerView) v.findViewById(R.id.overtime_recyclerview);
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                             mRecyclerView.setHasFixedSize(true);
@@ -181,7 +181,7 @@ public class ManagerOvertimeListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle savedInstanceState) {
-       final View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
+        final View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
 
         mBack = (TextView) v.findViewById(R.id.my_overtime_back);
         mBack.setOnClickListener(new View.OnClickListener() {
@@ -220,7 +220,7 @@ public class ManagerOvertimeListFragment extends Fragment {
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1000);
             }
 
             @Override
@@ -233,7 +233,7 @@ public class ManagerOvertimeListFragment extends Fragment {
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                     }
-                }.sendEmptyMessageDelayed(0, 5000);
+                }.sendEmptyMessageDelayed(0, 1000);
             }
         });
 
@@ -246,11 +246,11 @@ public class ManagerOvertimeListFragment extends Fragment {
 
     private OnRecyclerViewItemClickListener mOnItemClickListener = null;
 
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
+    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener {
         private List<OverTime> overTimes;
         private Context mContext;
 
-        public MyAdapter (Context context, List<OverTime> overTimes) {
+        public MyAdapter(Context context, List<OverTime> overTimes) {
             this.overTimes = overTimes;
             this.mContext = context;
         }
@@ -288,7 +288,7 @@ public class ManagerOvertimeListFragment extends Fragment {
             }
         }
 
-        public class ViewHolder extends RecyclerView.ViewHolder{
+        public class ViewHolder extends RecyclerView.ViewHolder {
             public TextView mOvertimeName;
             public TextView mOvertimeDateBegin;
             public TextView mOvertimeDateEnd;
@@ -298,7 +298,7 @@ public class ManagerOvertimeListFragment extends Fragment {
             public ViewHolder(View v) {
                 super(v);
                 mOvertimeProject = (TextView) v.findViewById(R.id.main_fragment_overtime_project);
-                mOvertimeName = (TextView)v.findViewById(R.id.overtime_card_item_name);
+                mOvertimeName = (TextView) v.findViewById(R.id.overtime_card_item_name);
                 mOvertimeDateBegin = (TextView) v.findViewById(R.id.overtime_card_item_begin_time);
                 mOvertimeDateEnd = (TextView) v.findViewById(R.id.overtime_card_item_end_time);
                 mOvertimeReason = (TextView) v.findViewById(R.id.overtime_card_item_overtime_reason);

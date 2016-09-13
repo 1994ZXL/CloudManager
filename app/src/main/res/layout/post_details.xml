@@ -1,149 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/post_details"
     style="@style/Parent_LayoutStyle">
 
-    <ScrollView
-        style="@style/ScrollView_Style">
+    <ScrollView style="@style/ScrollView_Style">
 
-        <LinearLayout
-            style="@style/linearLayoutStyle">
+        <LinearLayout style="@style/linearLayoutStyle">
 
-            <LinearLayout
-                style="@style/Toptitle_LayoutStyle">
+            <LinearLayout style="@style/Toptitle_LayoutStyle">
 
                 <TextView
+                    android:id="@+id/post_details_back"
                     style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/post_details_back"/>
+                    android:text="@string/text_return" />
 
                 <TextView
                     style="@style/toptextview_center"
-                    android:text="@string/my_post_detail"/>
+                    android:text="@string/my_post_detail" />
 
                 <TextView
+                    android:id="@+id/post_details_save"
                     style="@style/topview_right"
-                    android:text="修改"
-                    android:id="@+id/post_details_save"/>
+                    android:text="修改" />
 
             </LinearLayout>
 
             <!-- 第一块-->
-            <LinearLayout
-                style="@style/linearLayoutStyle">
+            <LinearLayout style="@style/linearLayoutStyle">
 
                 <!-- 姓名-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/name"/>
+                        android:text="@string/name" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/post_details_name"/>
+                        android:id="@+id/post_details_name"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 日报日期-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/post_date" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/post_details_date"/>
+                        android:id="@+id/post_details_date"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 提交时间-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/my_post_post_time_hit" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/post_details_submit_time"/>
+                        android:id="@+id/post_details_submit_time"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 日报状态-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/post_state" />
 
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/post_details_state"/>
+                        android:id="@+id/post_details_state"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 日报评分(manage_daily)-->
                 <LinearLayout
-                    style="@style/Viewline_LayoutStyle"
-                    android:id="@+id/post_level_spinnerLinearLayout">
+                    android:id="@+id/post_level_spinnerLinearLayout"
+                    style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/post_level" />
+
                     <Spinner
-                        style="@style/Spinner_Style"
-                        android:id="@+id/post_details_level_spinner"/>
+                        android:id="@+id/post_details_level_spinner"
+                        style="@style/Spinner_Style" />
 
                 </LinearLayout>
 
                 <!-- 日报评分-->
                 <LinearLayout
-                    style="@style/Viewline_LayoutStyle"
-                    android:id="@+id/post_level_linearLayout">
+                    android:id="@+id/post_level_linearLayout"
+                    style="@style/Viewline_LayoutStyle">
+
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/post_level" />
+
                     <TextView
-                        style="@style/Text_view_Style"
-                        android:id="@+id/post_details_level"/>
+                        android:id="@+id/post_details_level"
+                        style="@style/Text_view_Style" />
 
                 </LinearLayout>
 
                 <!-- 日报评价-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/post_opinion" />
 
                     <EditText
+                        android:id="@+id/post_details_opinion"
                         style="@style/EditText_Style"
-                        android:layout_width="match_parent"
-                        android:id="@+id/post_details_opinion"/>
+                        android:hint="@string/input_post_opinion" />
 
                 </LinearLayout>
 
                 <!-- 日报内容-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
                         android:text="@string/my_post_content" />
 
                     <EditText
+                        android:id="@+id/post_details_content"
                         style="@style/EditText_Style"
-                        android:hint="@string/input_my_post_content"
-                        android:layout_width="match_parent"
-                        android:id="@+id/post_details_content"/>
+                        android:hint="@string/input_my_post_content" />
 
                 </LinearLayout>
 
