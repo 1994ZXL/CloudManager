@@ -35,8 +35,7 @@
 
                     <Spinner
                         android:id="@+id/contact_search_project_name"
-                        style="@style/Spinner_Style"
-                        android:hint="@string/input_project_name" />
+                        style="@style/Spinner_Style" />
                 </LinearLayout>
 
                 <!-- 姓名-->

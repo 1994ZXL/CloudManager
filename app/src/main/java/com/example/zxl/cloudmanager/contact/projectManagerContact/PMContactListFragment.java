@@ -85,7 +85,7 @@ public class PMContactListFragment extends Fragment {
                     keyObj.put(Link.contact_name, saveInstanceState.getString(Link.contact_name));
                 if (null != saveInstanceState.getString(Link.contact_phone))
                     keyObj.put(Link.contact_phone, saveInstanceState.getInt(Link.contact_phone));
-                keyObj.put(Link.pm_id, saveInstanceState.getInt(Link.pm_id));
+                keyObj.put(Link.pm_id, saveInstanceState.getString(Link.pm_id));
             } catch (Exception e) {
                 e.printStackTrace();
             }

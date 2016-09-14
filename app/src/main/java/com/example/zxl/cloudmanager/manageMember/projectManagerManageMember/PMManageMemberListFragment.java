@@ -84,16 +84,9 @@ public class PMManageMemberListFragment extends Fragment {
     private void loadDate(final Bundle saveInstanceState, int curl_page, final View v) {
         if (null != saveInstanceState) {
             try {
-                if (null != saveInstanceState.getString(Link.project_name)) {
-                    keyObj.put(Link.project_name, saveInstanceState.getString(Link.project_name));
-                }
-                if (-1 != saveInstanceState.getInt(Link.ready_time)) {
-                    keyObj.put(Link.ready_time, saveInstanceState.getInt(Link.ready_time));
-                }
-                if (-1 != saveInstanceState.getInt(Link.finshed_time)) {
-                    keyObj.put(Link.finshed_time, saveInstanceState.getInt(Link.finshed_time));
-                }
-                keyObj.put(Link.project_state, saveInstanceState.getInt(Link.project_state));
+                if (null != saveInstanceState.getString(Link.mem_name))
+                    keyObj.put(Link.mem_name, saveInstanceState.getString(Link.mem_name));
+                keyObj.put(Link.pm_id, saveInstanceState.getString(Link.pm_id));
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -101,12 +94,7 @@ public class PMManageMemberListFragment extends Fragment {
         }
 
         try {
-            keyObj.put(Link.user_id, User.newInstance().getUser_id());
-            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
-            keyObj.put(Link.is_pmmaster, User.newInstance().getIs_pmmaster());
-            keyObj.put(Link.user_type, User.newInstance().getUser_type());
-            keyObj.put(Link.comp_id, User.newInstance().getComp_id());
-            keyObj.put("sort", "ready_time desc");
+            keyObj.put("sort", "pmmem_id desc");
             keyObj.put("page_count", 20);
             keyObj.put("curl_page", curl_page);
 
@@ -232,7 +220,7 @@ public class PMManageMemberListFragment extends Fragment {
             }
         });
 
-        mAdd = (Button) v.findViewById(R.id.pm_add);
+        mAdd = (Button) v.findViewById(R.id.pm_manage_member_list_add);
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

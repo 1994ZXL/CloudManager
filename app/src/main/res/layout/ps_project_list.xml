@@ -76,9 +76,15 @@
 
                     <TextView
                         android:id="@+id/pm_contact_detail_project_name"
-                        style="@style/Text_Style">
+                        style="@style/Text_Style"/>
 
-                    </TextView>
+                    <Spinner
+                        style="@style/Spinner_Style"
+                        android:id="@+id/pm_contact_detail_add_project_name">
+
+                    </Spinner>
+
+
                 </LinearLayout>
                 <!-- 手机-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">

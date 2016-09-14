@@ -101,10 +101,10 @@ public class ContactSearchFragment extends Fragment {
                         Log.d(TAG, "workArray: " + workArray);
 
                         for (int i = 0; i < workArray.length(); i++) {
-                            if (workArray.getJSONObject(i).has("mem_name"))
-                                project_name_list.add(workArray.getJSONObject(i).getString("mem_name"));
-                            if (workArray.getJSONObject(i).has("mem_id"))
-                                project_name_id_list.add(workArray.getJSONObject(i).getString("mem_id"));
+                            if (workArray.getJSONObject(i).has("project_name"))
+                                project_name_list.add(workArray.getJSONObject(i).getString("project_name"));
+                            if (workArray.getJSONObject(i).has("pm_id"))
+                                project_name_id_list.add(workArray.getJSONObject(i).getString("pm_id"));
                         }
 
                         if (null != mFragment.getActivity()){

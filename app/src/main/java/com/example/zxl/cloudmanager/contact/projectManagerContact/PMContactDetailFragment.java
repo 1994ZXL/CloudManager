@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -23,9 +24,14 @@ import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.User;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -40,6 +46,7 @@ public class PMContactDetailFragment extends Fragment {
     private EditText mContactPosition;
     private EditText mContactCompany;
     private TextView mContactProjectName;
+    private Spinner mContactProjectNameSpinner;
     private EditText mQQ;
     private EditText mWchat;
     private EditText mPhone;
@@ -57,10 +64,20 @@ public class PMContactDetailFragment extends Fragment {
     private String phone;
     private String remark;
 
+    private ArrayAdapter<String> mProjectNameAdapter;
+    private ArrayList<String> project_name_list = new ArrayList<String>(); //名字
+    private ArrayList<String> project_name_id_list = new ArrayList<String>(); //名字id
+    private String project_name_id;
+
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
     private JSONObject keyObj = new JSONObject();
     private String key = "";
+
+    private static AsyncHttpClient mHttpcAdd = new AsyncHttpClient();
+    private RequestParams mParamsAdd = new RequestParams();
+    private JSONObject keyObjAdd = new JSONObject();
+    private String keyAdd = "";
 
     private Fragment mFragment;
 
@@ -93,6 +110,7 @@ public class PMContactDetailFragment extends Fragment {
         mContactPosition = (EditText) v.findViewById(R.id.pm_contact_detail_contact_posistion);
         mContactCompany = (EditText) v.findViewById(R.id.pm_contact_detail_contact_company);
         mContactProjectName = (TextView) v.findViewById(R.id.pm_contact_detail_project_name);
+        mContactProjectNameSpinner = (Spinner) v.findViewById(R.id.pm_contact_detail_add_project_name);
         mQQ = (EditText) v.findViewById(R.id.pm_contact_detail_qq);
         mWchat = (EditText) v.findViewById(R.id.pm_contact_detail_wechat);
         mPhone = (EditText) v.findViewById(R.id.pm_contact_detail_phone);
@@ -168,7 +186,7 @@ public class PMContactDetailFragment extends Fragment {
             }
         });
 
-        mContactProjectName.setText(sContact.getContact_name());
+        mContactProjectName.setText(sContact.getProject_name());
 
         mQQ.setText(sContact.getQq());
         mQQ.addTextChangedListener(new TextWatcher() {
@@ -266,7 +284,9 @@ public class PMContactDetailFragment extends Fragment {
             }
         });
 
+        //详情 else 为添加
         if (bundle == null) {
+            mContactProjectNameSpinner.setVisibility(View.GONE);
             mSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -312,8 +332,57 @@ public class PMContactDetailFragment extends Fragment {
                 }
             });
         } else {
+            mContactProjectName.setVisibility(View.GONE);
             mSave.setText("新增");
             mTitle.setText("项目通讯录新增");
+
+            try {
+                keyObjAdd.put(Link.comp_id, User.newInstance().getComp_id());
+                keyAdd = DESCryptor.Encryptor(keyObjAdd.toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            mParamsAdd.put("key", keyAdd);
+            Log.d(TAG, "key: " + keyAdd);
+
+            mHttpcAdd.post(Link.localhost + "pm_contact&act=options_pmcontact", mParamsAdd, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
+                    try {
+                        if (rjo.getBoolean("result")) {
+                            JSONArray workArray = rjo.getJSONArray("data1");
+                            Log.d(TAG, "workArray: " + workArray);
+
+                            for (int i = 0; i < workArray.length(); i++) {
+                                if (workArray.getJSONObject(i).has("project_name"))
+                                    project_name_list.add(workArray.getJSONObject(i).getString("project_name"));
+                                if (workArray.getJSONObject(i).has("pm_id"))
+                                    project_name_id_list.add(workArray.getJSONObject(i).getString("pm_id"));
+                            }
+
+                            if (null != mFragment.getActivity()){
+                                mProjectNameAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, project_name_list);
+                                mProjectNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                mContactProjectNameSpinner.setAdapter(mProjectNameAdapter);
+                                mContactProjectNameSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                        project_name_id = project_name_id_list.get(i);
+                                    }
+
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                                    }
+                                });
+                            }
+                        }
+                    } catch (JSONException e) {
+                        Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                    }
+                }
+            });
+
             mSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -325,6 +394,7 @@ public class PMContactDetailFragment extends Fragment {
                         keyObj.put(Link.wchat, wchat);
                         keyObj.put(Link.qq, qq);
                         keyObj.put(Link.remark, remark);
+                        keyObj.put(Link.pm_id, project_name_id);
 
                         keyObj.put(Link.pmcon_id, sContact.getPmcon_id());
                         key = DESCryptor.Encryptor(keyObj.toString());
