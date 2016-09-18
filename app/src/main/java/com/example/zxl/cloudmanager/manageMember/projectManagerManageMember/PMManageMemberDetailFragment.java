@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.contact.projectManagerContact.PMContactListFragment;
+import com.example.zxl.cloudmanager.manageMember.publicSearchManageMember.PSManageMemberActivity;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.PMMember;
@@ -43,7 +44,7 @@ public class PMManageMemberDetailFragment extends Fragment {
     private static final String TAG = "PMManageMemberDetail";
     private static PMMember sPmMember = new PMMember();
 
-    private EditText mMemName;
+    private TextView mMemName;
     private Spinner mMemNameSpinner;
     private EditText mProjectName;
     private Spinner mProjectNameSpinner;
@@ -110,12 +111,13 @@ public class PMManageMemberDetailFragment extends Fragment {
     }
 
     private void init(View v) {
-        mMemName = (EditText) v.findViewById(R.id.pm_manage_member_detail_mem_name);
+        mMemName = (TextView) v.findViewById(R.id.pm_manage_member_detail_mem_name);
         mMemNameSpinner = (Spinner) v.findViewById(R.id.pm_manage_member_detail_mem_name_spinner);
         mProjectName = (EditText) v.findViewById(R.id.pm_manage_member_detail_project_name);
         mProjectNameSpinner = (Spinner) v.findViewById(R.id.pm_manage_member_detail_project_name_spinner);
         mRole = (EditText) v.findViewById(R.id.pm_manage_member_detail_role);
         mMemberRes = (EditText) v.findViewById(R.id.pm_manage_member_detail_member_res);
+
         mBack = (TextView) v.findViewById(R.id.pm_manage_member_detail_back);
         mSearch = (TextView) v.findViewById(R.id.pm_manage_member_detail_search);
         mTitle = (TextView) v.findViewById(R.id.pm_manage_member_detail_title);
@@ -127,23 +129,14 @@ public class PMManageMemberDetailFragment extends Fragment {
     }
 
     private void control(Bundle bundle) {
+        if (mFragment.getActivity().getClass() == PSManageMemberActivity.class) {
+            mSave.setVisibility(View.GONE);
+            mMemberRes.setFocusable(false);
+            mRole.setFocusable(false);
+            mProjectName.setFocusable(false);
+        }
+
         mMemName.setText(sPmMember.getMem_name());
-        mMemName.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                mem_name = charSequence.toString();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
 
         mProjectName.setText(sPmMember.getProject_name());
         mProjectName.addTextChangedListener(new TextWatcher() {
@@ -252,7 +245,7 @@ public class PMManageMemberDetailFragment extends Fragment {
 
                         }
                     });
-                    Log.d(TAG, "Url: "+ Link.localhost + "pm_contact&act=edit&key="+key);
+
                     Fragment fragment = new PMContactListFragment();
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     if (!fragment.isAdded()) {

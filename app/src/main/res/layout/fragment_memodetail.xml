@@ -3,27 +3,27 @@
     android:id="@+id/post_details"
     style="@style/Parent_LayoutStyle">
 
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+        <TextView
+            android:id="@+id/memo_details_back"
+            style="@style/toptextview_left"
+            android:text="@string/text_return" />
+
+        <TextView
+            style="@style/toptextview_center"
+            android:text="@string/my_memo" />
+
+        <TextView
+            android:id="@+id/memo_details_save"
+            style="@style/topview_right"
+            android:text="修改" />
+
+    </LinearLayout>
+
     <ScrollView style="@style/ScrollView_Style">
 
         <LinearLayout style="@style/linearLayoutStyle">
-
-            <LinearLayout style="@style/Toptitle_LayoutStyle">
-
-                <TextView
-                    android:id="@+id/memo_details_back"
-                    style="@style/toptextview_left"
-                    android:text="@string/text_return" />
-
-                <TextView
-                    style="@style/toptextview_center"
-                    android:text="@string/my_memo" />
-
-                <TextView
-                    android:id="@+id/memo_details_save"
-                    style="@style/topview_right"
-                    android:text="修改" />
-
-            </LinearLayout>
 
             <!-- 第一块-->
             <LinearLayout style="@style/linearLayoutStyle">
@@ -38,7 +38,7 @@
                     <EditText
                         android:id="@+id/memo_details_title"
                         style="@style/EditText_Style"
-                        android:hint="@string/memo_title_textview" />
+                        android:hint="@string/input_memo_title" />
 
                 </LinearLayout>
 

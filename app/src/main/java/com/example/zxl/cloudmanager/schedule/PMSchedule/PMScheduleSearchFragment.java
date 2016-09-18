@@ -125,11 +125,11 @@ public class PMScheduleSearchFragment extends Fragment {
                     bundle.putInt(Link.report_time_to, DateForGeLingWeiZhi.toGeLinWeiZhi3(mEndTime.getText().toString()));
                 else bundle.putInt(Link.report_time_to, -1);
 
-                if (null != percentFrom)
-                    bundle.putInt(Link.percent_from, Integer.parseInt(percentFrom));
 
-                if (null != percentTo)
-                    bundle.putInt(Link.percent_to, Integer.parseInt(percentTo));
+                bundle.putString(Link.percent_from, percentFrom);
+
+
+                bundle.putString(Link.percent_to, percentTo);
 
                 fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();

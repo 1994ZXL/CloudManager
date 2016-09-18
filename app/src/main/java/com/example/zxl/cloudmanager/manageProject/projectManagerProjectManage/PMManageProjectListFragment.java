@@ -174,8 +174,14 @@ public class PMManageProjectListFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle savedInstanceState) {
         final View v = layoutInflater.inflate(R.layout.pm_manager_list, parent, false);
 
-        if (mFragment.getActivity().getClass() == PSManageProjectActivity.class)
+        mAdd = (Button) v.findViewById(R.id.pm_add);
+        mSearch = (TextView) v.findViewById(R.id.pm_manage_project_search);
+        mBack = (TextView) v.findViewById(R.id.pm_manage_project_back);
+
+        if (mFragment.getActivity().getClass() == PSManageProjectActivity.class) {
             url = Link.pm_list + Link.get_list;
+            mAdd.setVisibility(View.GONE);
+        }
         else if (mFragment.getActivity().getClass() == PMManageProjectActivity.class)
             url = Link.manage_pm + Link.get_list;
 
@@ -211,7 +217,6 @@ public class PMManageProjectListFragment extends Fragment {
             }
         });
 
-        mBack = (TextView) v.findViewById(R.id.pm_manage_project_back);
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -219,7 +224,6 @@ public class PMManageProjectListFragment extends Fragment {
             }
         });
 
-        mSearch = (TextView) v.findViewById(R.id.pm_manage_project_search);
         mSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -232,7 +236,6 @@ public class PMManageProjectListFragment extends Fragment {
             }
         });
 
-        mAdd = (Button) v.findViewById(R.id.pm_add);
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -285,7 +288,7 @@ public class PMManageProjectListFragment extends Fragment {
             Project project = projects.get(i);
 
             viewHolder.mProjectName.setText(project.getProject_name());
-            viewHolder.mGoonTechnical.setText(project.getGoon_technical());
+            viewHolder.mGoonTechnical.setText(project.getGoon_technical_name());
             viewHolder.mBelongUnit.setText(project.getBelong_unit());
             viewHolder.mState.setText(project.getProject_state());
             viewHolder.mCustomName.setText(project.getCustom_name());

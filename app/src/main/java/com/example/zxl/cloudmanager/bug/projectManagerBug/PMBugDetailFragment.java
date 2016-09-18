@@ -68,7 +68,7 @@ public class PMBugDetailFragment extends Fragment {
         mProjectName.setText(sBug.getProject_name());
         mBugVersion.setText(sBug.getLevel());
         mBugState.setText(sBug.getStatus());
-        mBugContent.setText(sBug.getProject_name());
+        mBugContent.setText(sBug.getContent());
         if (sBug.getSubmit_time() != 0)
             mFoundTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sBug.getSubmit_time()));
         mFoundMan.setText(sBug.getSubmitter());

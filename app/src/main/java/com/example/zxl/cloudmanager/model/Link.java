@@ -5,13 +5,14 @@ package com.example.zxl.cloudmanager.model;
  */
 public class Link {
 //    public static final String localhost = "http://192.168.3.119:8099/yunmgr_v1.0/api/uc.php?app=";
-    public static final String localhost = "http://192.168.1.105/yunmgr_v1.0/api/uc.php?app=";
+    public static final String localhost = "http://192.168.3.25/yunmgr_v1.0/api/uc.php?app=";
 //    public static final String localhost = "http://192.168.0.102/yunmgr_v1.0/api/uc.php?app=";
     public static final String API = "http://localhost/yunmgr_v1.0/api/uc.php?app=";
 
     public static final String get_list = "get_list";
     public static final String edit = "edit";
     public static final String add = "add";
+    public static final String options_pmmember = "options_pmmember";
 
     public static final String is_pmmaster = "is_pmmaster"; //是否是项目主管
     public static final String is_puncher = "is_puncher"; //是否是考勤主管
@@ -66,6 +67,9 @@ public class Link {
 
     //work_list
     public static final String work_list = "work_list&act=";
+
+    //ps_bug
+    public static final String ps_bug = "ps_bug&act=";
 
     //pm_bug
     public static final String pm_bug = "pm_bug&act=";

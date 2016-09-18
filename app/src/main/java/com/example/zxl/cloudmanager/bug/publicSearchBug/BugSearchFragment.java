@@ -43,6 +43,7 @@ public class BugSearchFragment extends Fragment {
     private LinearLayout mEditTimeLinearLayout;
 
     private Button mSearchBtn;
+    private TextView mBack;
 
     private ArrayAdapter<String> stateAdapter;
     private ArrayAdapter<String> levelAdapter;
@@ -117,12 +118,19 @@ public class BugSearchFragment extends Fragment {
         mReviserET = (EditText) v.findViewById(R.id.bug_reviser_edittext);
         mBugStateSpinner = (Spinner) v.findViewById(R.id.bug_state_sprinner);
         mBugLevelSpinner = (Spinner) v.findViewById(R.id.bug_level_sprinner);
-
+        mBack = (TextView) v.findViewById(R.id.bug_search_back);
         mSearchBtn = (Button) v.findViewById(R.id.bug_search_button);
 
     }
 
     private void contorl() {
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
+
         mBugBeginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

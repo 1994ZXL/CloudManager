@@ -160,6 +160,7 @@ public class ManagerOverTimeSearchFragment extends Fragment {
                         }
 
                         if (null != mFragment.getActivity()){
+                            Log.d(TAG,"project_name: "+project_name);
                             projectAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, project_name);
                             projectAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             mEmployerProjectSpinner.setAdapter(projectAdapter);
@@ -176,6 +177,7 @@ public class ManagerOverTimeSearchFragment extends Fragment {
                                 }
                             });
 
+                            Log.d(TAG,"mem_name: "+mem_name);
                             nameAdapter= new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, mem_name);
                             nameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             mEmployerNameSpinner.setAdapter(nameAdapter);

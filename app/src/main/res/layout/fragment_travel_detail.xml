@@ -3,27 +3,27 @@
     style="@style/Parent_LayoutStyle"
     tools:context=".travel.checkManagerTravel.ManagerTravelDetailFragment">
 
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+        <TextView
+            android:id="@+id/manager_travel_detail_back"
+            style="@style/toptextview_left"
+            android:text="@string/text_return" />
+
+        <TextView
+            style="@style/toptextview_center"
+            android:text="@string/employer_travel_detail" />
+
+        <TextView
+            android:id="@+id/manager_travel_detail_edit"
+            style="@style/topview_right"
+            android:text="@string/edit" />
+
+    </LinearLayout>
+
     <ScrollView style="@style/ScrollView_Style">
 
         <LinearLayout style="@style/linearLayoutStyle">
-
-            <LinearLayout style="@style/Toptitle_LayoutStyle">
-
-                <TextView
-                    android:id="@+id/manager_travel_detail_back"
-                    style="@style/toptextview_left"
-                    android:text="@string/text_return" />
-
-                <TextView
-                    style="@style/toptextview_center"
-                    android:text="@string/employer_travel_detail" />
-
-                <TextView
-                    android:id="@+id/manager_travel_detail_edit"
-                    style="@style/topview_right"
-                    android:text="@string/edit" />
-
-            </LinearLayout>
 
             <LinearLayout style="@style/linearLayoutStyle">
 

@@ -13,7 +13,8 @@
 
                 <TextView
                     android:id="@+id/pm_schedule_card_item_title"
-                    style="@style/Text_view_Style" />
+                    style="@style/Text_view_Style"
+                    android:maxLength="8" />
             </LinearLayout>
 
             <LinearLayout style="@style/CardView_line_LayoutStyle">
@@ -24,7 +25,8 @@
 
                 <TextView
                     android:id="@+id/pm_schedule_card_item_percent"
-                    style="@style/Text_view_Style" />
+                    style="@style/Text_view_Style"
+                    android:maxLength="5" />
             </LinearLayout>
 
             <ImageButton

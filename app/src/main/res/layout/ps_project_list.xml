@@ -3,28 +3,28 @@
     style="@style/Parent_LayoutStyle"
     tools:context=".contact.projectManagerContact.ContactSearchFragment">
 
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+        <TextView
+            android:id="@+id/pm_contact_detail_back"
+            style="@style/toptextview_left"
+            android:text="@string/text_return" />
+
+        <TextView
+            android:id="@+id/pm_contact_detail_title"
+            style="@style/toptextview_center"
+            android:text="@string/pm_contact" />
+
+        <TextView
+            android:id="@+id/pm_contact_detail_search"
+            style="@style/topview_right"
+            android:text="@string/search" />
+
+    </LinearLayout>
+
     <ScrollView style="@style/ScrollView_Style">
 
         <LinearLayout style="@style/linearLayoutStyle">
-
-            <LinearLayout style="@style/Toptitle_LayoutStyle">
-
-                <TextView
-                    style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/pm_contact_detail_back"/>
-
-                <TextView
-                    style="@style/toptextview_center"
-                    android:text="@string/pm_contact"
-                    android:id="@+id/pm_contact_detail_title"/>
-
-                <TextView
-                    style="@style/topview_right"
-                    android:text="@string/search"
-                    android:id="@+id/pm_contact_detail_search"/>
-
-            </LinearLayout>
 
             <LinearLayout style="@style/linearLayoutStyle">
 
@@ -37,7 +37,7 @@
 
                     <EditText
                         android:id="@+id/pm_contact_detail_contact_name"
-                        style="@style/EditText_Style"/>
+                        style="@style/EditText_Style" />
                 </LinearLayout>
 
                 <!-- 姓名-->
@@ -76,11 +76,11 @@
 
                     <TextView
                         android:id="@+id/pm_contact_detail_project_name"
-                        style="@style/Text_Style"/>
+                        style="@style/Text_Style" />
 
                     <Spinner
-                        style="@style/Spinner_Style"
-                        android:id="@+id/pm_contact_detail_add_project_name">
+                        android:id="@+id/pm_contact_detail_add_project_name"
+                        style="@style/Spinner_Style">
 
                     </Spinner>
 
@@ -95,7 +95,8 @@
 
                     <EditText
                         android:id="@+id/pm_contact_detail_phone"
-                        style="@style/EditText_Style" />
+                        style="@style/EditText_Style"
+                        android:inputType="phone" />
                 </LinearLayout>
 
                 <!-- QQ-->
@@ -107,7 +108,8 @@
 
                     <EditText
                         android:id="@+id/pm_contact_detail_qq"
-                        style="@style/EditText_Style"/>
+                        style="@style/EditText_Style"
+                        android:inputType="number" />
                 </LinearLayout>
 
                 <!-- 微信-->
@@ -119,12 +121,12 @@
 
                     <EditText
                         android:id="@+id/pm_contact_detail_wechat"
-                        style="@style/EditText_Style"/>
+                        style="@style/EditText_Style"
+                        android:inputType="number" />
                 </LinearLayout>
 
                 <!--备注-->
-                <LinearLayout
-                    style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
@@ -132,7 +134,7 @@
 
                     <EditText
                         android:id="@+id/pm_contact_detail_remark"
-                        style="@style/EditText_Style"/>
+                        style="@style/EditText_Style" />
                 </LinearLayout>
 
             </LinearLayout>

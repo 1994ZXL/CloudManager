@@ -81,13 +81,20 @@ public class PMManageProjectDetailFragment extends Fragment {
     private JSONObject keyObjMember = new JSONObject();
     private String keyMember = "";
 
+    private ArrayList<String> nameList = new ArrayList<String>();
+    private ArrayList<String> idList = new ArrayList<String>();
+
     private ArrayAdapter<String> goonTechnicalAdapter;
-    private ArrayList<String> goon_technical_list = new ArrayList<String>(); //名字
-    private ArrayList<String> goon_technical_id_list = new ArrayList<String>(); //名字id
+    private ArrayList<String> goon_technical_list; //名字
+    private ArrayList<String> goon_technical_id_list; //名字id
 
     private ArrayAdapter<String> goonBusinessAdapter;
+    private ArrayList<String> goon_business_list; //名字
+    private ArrayList<String> goon_business_id_list; //名字id
 
     private ArrayAdapter<String> pmMasterNameAdapter;
+    private ArrayList<String> pm_master_list; //名字
+    private ArrayList<String> pm_master_id_list; //名字id
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
@@ -264,12 +271,54 @@ public class PMManageProjectDetailFragment extends Fragment {
 
                         for (int i = 0; i < workArray.length(); i++) {
                             if (workArray.getJSONObject(i).has("mem_name"))
-                                goon_technical_list.add(workArray.getJSONObject(i).getString("mem_name"));
+                                nameList.add(workArray.getJSONObject(i).getString("mem_name"));
                             if (workArray.getJSONObject(i).has("mem_id"))
-                                goon_technical_id_list.add(workArray.getJSONObject(i).getString("mem_id"));
+                                idList.add(workArray.getJSONObject(i).getString("mem_id"));
                         }
 
+                        Log.d(TAG, "namelist: "+nameList);
+                        Log.d(TAG, "idList: "+idList);
+
                         if (null != mFragment.getActivity()){
+                            goon_technical_list = new ArrayList<String>(nameList);
+                            goon_technical_id_list = new ArrayList<String>(idList);
+
+                            pm_master_list = new ArrayList<String>(nameList);
+                            pm_master_id_list = new ArrayList<String>(idList);
+
+                            goon_business_list = new ArrayList<String>(nameList);
+                            goon_business_id_list = new ArrayList<String>(idList);
+
+                            if (!mProject.getGoon_technical_name().equals("null")) {
+                                int index = goon_technical_list.indexOf(mProject.getGoon_technical_name());
+                                goon_technical_list.remove(index);
+                                goon_technical_list.add(0, mProject.getGoon_technical_name());
+                                goon_technical_id_list.remove(index);
+                                goon_technical_id_list.add(0, mProject.getGoon_technical());
+                            }
+                            Log.d(TAG,"goon_technical_list: " + goon_technical_list);
+                            Log.d(TAG,"goon_technical_id_list: " + goon_technical_id_list);
+
+                            if (!mProject.getPm_master_name().equals("null")) {
+                                int index = pm_master_list.indexOf(mProject.getPm_master_name());
+                                pm_master_list.remove(index);
+                                pm_master_id_list.remove(index);
+                                pm_master_id_list.add(0, idList.get(index));
+                                pm_master_list.add(0, mProject.getPm_master_name());
+                            }
+                            Log.d(TAG,"pm_master_list: " + pm_master_list);
+                            Log.d(TAG,"pm_master_id_list: " + pm_master_id_list);
+
+                            if (!mProject.getGoon_business_name().equals("null")) {
+                                int index = goon_business_list.indexOf(mProject.getGoon_business_name());
+                                goon_business_list.remove(index);
+                                goon_business_list.add(0, mProject.getGoon_business_name());
+                                goon_business_id_list.remove(index);
+                                goon_business_id_list.add(0, mProject.getGoon_business());
+                            }
+                            Log.d(TAG,"goon_business_list: " + goon_business_list);
+                            Log.d(TAG,"goon_business_id_list: " + goon_business_id_list);
+
                             goonTechnicalAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, goon_technical_list);
                             goonTechnicalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             mGoon_technical.setAdapter(goonTechnicalAdapter);
@@ -285,13 +334,13 @@ public class PMManageProjectDetailFragment extends Fragment {
                                 }
                             });
 
-                            goonBusinessAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, goon_technical_list);
+                            goonBusinessAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, goon_business_list);
                             goonBusinessAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             mGoon_business.setAdapter(goonBusinessAdapter);
                             mGoon_business.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                    goon_business_id = goon_technical_id_list.get(i);
+                                    goon_business_id = goon_business_id_list.get(i);
                                 }
 
                                 @Override
@@ -300,13 +349,13 @@ public class PMManageProjectDetailFragment extends Fragment {
                                 }
                             });
 
-                            pmMasterNameAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, goon_technical_list);
+                            pmMasterNameAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, pm_master_list);
                             pmMasterNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             mPm_master_name.setAdapter(pmMasterNameAdapter);
                             mPm_master_name.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                    pm_master_name_id = goon_technical_id_list.get(i);
+                                    pm_master_name_id = pm_master_id_list.get(i);
                                 }
 
                                 @Override
@@ -455,7 +504,6 @@ public class PMManageProjectDetailFragment extends Fragment {
 
                         }
                     });
-                    Log.d(TAG, "Url: "+ Link.localhost + "manage_pm&act=edit&key="+key);
                     Fragment fragment = new PMManageProjectListFragment();
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     if (!fragment.isAdded()) {

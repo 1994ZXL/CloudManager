@@ -90,7 +90,7 @@ public class ManagerCheckListFragment extends Fragment {
             keyObj.put(Link.comp_id, User.newInstance().getComp_id());
             keyObj.put("sort", "att_date desc");
             keyObj.put("page_count", 20);
-            keyObj.put("curl_page", 0);
+            keyObj.put("curl_page", curl_page);
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -177,7 +177,7 @@ public class ManagerCheckListFragment extends Fragment {
                     @Override
                     public void handleMessage(Message msg) {
                         checks.clear();
-                        mCurl_page++;
+                        mCurl_page = mCurl_page + 10;
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                     }

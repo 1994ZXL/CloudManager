@@ -10,11 +10,14 @@
             <TextView
                 android:id="@+id/memo_card_title"
                 style="@style/Text_view_Style"
-                android:layout_weight="1" />
+                android:layout_width="200dp"
+                android:layout_weight="1"
+                android:maxLength="8" />
 
             <TextView
                 android:id="@+id/memo_card_create_time"
                 style="@style/Text_view_Style"
+                android:layout_width="200dp"
                 android:layout_weight="1"
                 android:gravity="left" />
 

@@ -12,6 +12,7 @@
             <TextView
                 android:id="@+id/main_fragment_my_bug_projectName"
                 style="@style/Text_view_Style"
+                android:maxLength="20"
                 android:text="@string/project_name_edittext" />
         </LinearLayout>
 
@@ -28,7 +29,8 @@
 
                 <TextView
                     android:id="@+id/bug_card_item_bug_version"
-                    style="@style/Text_view_Style" />
+                    style="@style/Text_view_Style"
+                    android:maxLength="4" />
             </LinearLayout>
 
             <LinearLayout style="@style/CardView_line_LayoutStyle">
@@ -56,7 +58,8 @@
 
                 <TextView
                     android:id="@+id/bug_card_item_bug_state"
-                    style="@style/Text_view_Style" />
+                    style="@style/Text_view_Style"
+                    android:maxLength="4" />
             </LinearLayout>
 
             <LinearLayout style="@style/CardView_line_LayoutStyle">

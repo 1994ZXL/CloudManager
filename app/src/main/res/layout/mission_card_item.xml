@@ -13,14 +13,16 @@
                 android:id="@+id/mission_card_item_title"
                 style="@style/Text_view_Style"
                 android:layout_weight="1"
-                android:width="350dp" />
+                android:width="350dp"
+                android:maxLength="14" />
 
             <TextView
                 android:id="@+id/mission_card_item_state"
                 style="@style/Text_view_Style"
                 android:layout_weight="1"
                 android:width="200dp"
-                android:gravity="left" />
+                android:gravity="left"
+                android:maxLength="6" />
 
         </LinearLayout>
 

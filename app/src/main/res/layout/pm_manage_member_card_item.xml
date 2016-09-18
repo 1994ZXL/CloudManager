@@ -14,23 +14,17 @@
 
                 <TextView
                     android:id="@+id/pm_manage_member_card_item_member_name"
-                    style="@style/Text_view_Style" />
+                    style="@style/Text_view_Style"
+                    android:maxLength="10" />
             </LinearLayout>
             <!--所属项目-->
             <LinearLayout style="@style/CardView_line_LayoutStyle">
 
                 <TextView
                     android:id="@+id/pm_manage_member_card_item_project_name"
-                    style="@style/Text_view_Style" />
+                    style="@style/Text_view_Style"
+                    android:maxLength="10" />
             </LinearLayout>
-            <!--删除-->
-            <ImageButton
-                android:id="@+id/pm_manage_member_card_item_delete"
-                style="@style/Text_view_Style"
-                android:layout_width="80dp"
-                android:layout_height="40dp"
-                android:background="@color/memo_background"
-                android:src="@android:drawable/ic_menu_delete" />
         </LinearLayout>
 
         <!--身份-->
@@ -42,7 +36,18 @@
 
             <TextView
                 android:id="@+id/pm_manage_member_card_item_role"
-                style="@style/Text_view_Style" />
+                style="@style/Text_view_Style"
+                android:layout_weight="1"
+                android:maxLength="14" />
+
+            <!--删除-->
+            <ImageButton
+                android:id="@+id/pm_manage_member_card_item_delete"
+                style="@style/Text_view_Style"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:background="@color/memo_background"
+                android:src="@android:drawable/ic_menu_delete" />
         </LinearLayout>
 
         <!--职责-->
@@ -54,7 +59,8 @@
 
             <TextView
                 android:id="@+id/pm_manage_member_card_item_member_res"
-                style="@style/Text_view_Style" />
+                style="@style/Text_view_Style"
+                android:maxLength="18" />
 
         </LinearLayout>
 

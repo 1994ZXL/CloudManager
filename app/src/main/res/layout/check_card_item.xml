@@ -13,7 +13,8 @@
 
                 <TextView
                     android:id="@+id/ls_check_card_item_location"
-                    style="@style/Text_view_Style" />
+                    style="@style/Text_view_Style"
+                    android:maxLength="10" />
             </LinearLayout>
 
             <LinearLayout style="@style/CardView_line_LayoutStyle">

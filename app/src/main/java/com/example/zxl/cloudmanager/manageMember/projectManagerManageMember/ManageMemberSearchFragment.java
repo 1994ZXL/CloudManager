@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.manageMember.publicSearchManageMember.PSManageMemberActivity;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.User;
@@ -55,11 +56,19 @@ public class ManageMemberSearchFragment extends Fragment {
     private RequestParams mParams = new RequestParams();
     private JSONObject keyObj = new JSONObject();
     private String key = "";
+    private String url;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mFragment = this;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        project_name_list.clear();
+        project_name_id_list.clear();
     }
 
     @Override
@@ -80,6 +89,12 @@ public class ManageMemberSearchFragment extends Fragment {
     }
 
     private void control() {
+        if (mFragment.getActivity().getClass() == PSManageMemberActivity.class) {
+            url = Link.pm_member + Link.options_pmmember;
+        } else if (mFragment.getActivity().getClass() == PSManageMemberActivity.class) {
+            url = Link.pm_manage_member + Link.options_pmmember;
+        }
+
         try {
             keyObj.put(Link.comp_id, User.newInstance().getComp_id());
             key = DESCryptor.Encryptor(keyObj.toString());
@@ -89,7 +104,7 @@ public class ManageMemberSearchFragment extends Fragment {
         mParams.put("key", key);
         Log.d(TAG, "key: " + key);
 
-        mHttpc.post(Link.localhost + "pm_manage_member&act=options_pmmember", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + url , mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 try {
@@ -165,7 +180,7 @@ public class ManageMemberSearchFragment extends Fragment {
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
                     transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.replace(R.id.blankActivity, fragment);
                     transaction.commit();
                 } else {
                     transaction.hide(mFragment);

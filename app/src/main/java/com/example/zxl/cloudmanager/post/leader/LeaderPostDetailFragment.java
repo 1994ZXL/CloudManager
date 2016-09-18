@@ -119,6 +119,8 @@ public class LeaderPostDetailFragment extends Fragment {
 
         mOpinion.setText(sPost.getOpinion());
         mContent.setText(sPost.getContent());
+        if (sPost.getContent().equals(""))
+            mContent.setText(" ");
         mContent.setFocusable(false);
         if (sPost.getReport_time() == 0) {
             mSubmitTime.setText("——");

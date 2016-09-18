@@ -1,6 +1,7 @@
 package com.example.zxl.cloudmanager.bug.myBug;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -318,6 +319,18 @@ public class MyBugAddFragment extends Fragment {
                                         Toast.LENGTH_SHORT).show();
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                            }
+                            Fragment fragment = new MyBugFragment();
+                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                            if (!fragment.isAdded()) {
+                                transaction.addToBackStack(null);
+                                transaction.hide(mFragment);
+                                transaction.replace(R.id.blankActivity, fragment);
+                                transaction.commit();
+                            } else {
+                                transaction.hide(mFragment);
+                                transaction.show(fragment);
+                                transaction.commit();
                             }
                         }
                     });

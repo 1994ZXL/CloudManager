@@ -3,25 +3,28 @@
     style="@style/Parent_LayoutStyle"
     tools:context=".bug.publicSearchBug.BugSearchFragment">
 
-    <ScrollView style="@style/ScrollView_Style">
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
 
-        <LinearLayout style="@style/linearLayoutStyle">
+        <TextView
+            style="@style/toptextview_left"
+            android:text="@string/text_return" />
 
-            <LinearLayout style="@style/Toptitle_LayoutStyle">
+        <TextView
+            style="@style/toptextview_center"
+            android:text="@string/bug_search" />
 
                 <TextView
                     style="@style/toptextview_left"
-                    android:text="@string/text_return" />
+                    android:text="@string/text_return"
+                    android:id="@+id/bug_search_back"/>
 
-                <TextView
-                    style="@style/toptextview_center"
-                    android:text="@string/bug_search" />
+    </LinearLayout>
 
                 <TextView
                     style="@style/topview_right"
-                    android:text="@string/text_clean" />
+                    android:text="" />
 
-            </LinearLayout>
+        <LinearLayout style="@style/linearLayoutStyle">
 
             <!--项目名-->
             <LinearLayout style="@style/Viewline_LayoutStyle">

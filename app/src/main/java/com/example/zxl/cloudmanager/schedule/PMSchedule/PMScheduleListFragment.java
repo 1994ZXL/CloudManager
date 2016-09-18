@@ -90,8 +90,8 @@ public class PMScheduleListFragment extends Fragment {
                     keyObj.put(Link.report_time_from, saveInstanceState.getInt(Link.report_time_from));
                 if (-1 != saveInstanceState.getInt(Link.report_time_to))
                     keyObj.put(Link.report_time_to, saveInstanceState.getInt(Link.report_time_to));
-                keyObj.put(Link.percent_from, saveInstanceState.getInt(Link.percent_from));
-                keyObj.put(Link.percent_to, saveInstanceState.getInt(Link.percent_to));
+                keyObj.put(Link.percent_from, saveInstanceState.getString(Link.percent_from));
+                keyObj.put(Link.percent_to, saveInstanceState.getString(Link.percent_to));
             } catch (Exception e) {
                 e.printStackTrace();
             }

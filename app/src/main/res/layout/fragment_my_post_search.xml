@@ -3,27 +3,27 @@
     style="@style/Parent_LayoutStyle"
     tools:context=".post.myPost.MyPostSearchFragment">
 
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+        <TextView
+            android:id="@+id/fragment_my_post_search_back"
+            style="@style/toptextview_left"
+            android:text="@string/text_return" />
+
+        <TextView
+            style="@style/toptextview_center"
+            android:text="@string/post_query" />
+
+        <TextView
+            android:id="@+id/fragment_my_post_search_clean"
+            style="@style/topview_right"
+            android:text="@string/text_clean" />
+
+    </LinearLayout>
+
     <ScrollView style="@style/ScrollView_Style">
 
         <LinearLayout style="@style/linearLayoutStyle">
-
-            <LinearLayout style="@style/Toptitle_LayoutStyle">
-
-                <TextView
-                    android:id="@+id/fragment_my_post_search_back"
-                    style="@style/toptextview_left"
-                    android:text="@string/text_return" />
-
-                <TextView
-                    style="@style/toptextview_center"
-                    android:text="@string/post_query" />
-
-                <TextView
-                    android:id="@+id/fragment_my_post_search_clean"
-                    style="@style/topview_right"
-                    android:text="@string/text_clean" />
-
-            </LinearLayout>
 
             <LinearLayout style="@style/linearLayoutStyle">
 

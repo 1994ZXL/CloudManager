@@ -3,28 +3,28 @@
     style="@style/Parent_LayoutStyle"
     tools:context=".contact.projectManagerContact.ContactSearchFragment">
 
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+        <TextView
+            android:id="@+id/pm_manage_member_detail_back"
+            style="@style/toptextview_left"
+            android:text="@string/text_return" />
+
+        <TextView
+            android:id="@+id/pm_manage_member_detail_title"
+            style="@style/toptextview_center"
+            android:text="@string/manage_member" />
+
+        <TextView
+            android:id="@+id/pm_manage_member_detail_search"
+            style="@style/topview_right"
+            android:text="@string/search" />
+
+    </LinearLayout>
+
     <ScrollView style="@style/ScrollView_Style">
 
         <LinearLayout style="@style/linearLayoutStyle">
-
-            <LinearLayout style="@style/Toptitle_LayoutStyle">
-
-                <TextView
-                    style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/pm_manage_member_detail_back"/>
-
-                <TextView
-                    style="@style/toptextview_center"
-                    android:text="@string/manage_member"
-                    android:id="@+id/pm_manage_member_detail_title"/>
-
-                <TextView
-                    style="@style/topview_right"
-                    android:text="@string/search"
-                    android:id="@+id/pm_manage_member_detail_search"/>
-
-            </LinearLayout>
 
             <LinearLayout style="@style/linearLayoutStyle">
 
@@ -34,14 +34,13 @@
                         style="@style/Text_view_Style"
                         android:text="@string/mem_name" />
 
-                    <EditText
+                    <TextView
                         android:id="@+id/pm_manage_member_detail_mem_name"
-                        style="@style/EditText_Style"/>
+                        style="@style/Text_Style"/>
 
                     <Spinner
-                        style="@style/Spinner_Style"
-                        android:id="@+id/pm_manage_member_detail_mem_name_spinner">
-                    </Spinner>
+                        android:id="@+id/pm_manage_member_detail_mem_name_spinner"
+                        style="@style/Spinner_Style"></Spinner>
                 </LinearLayout>
 
                 <!-- 姓名-->
@@ -56,8 +55,8 @@
                         style="@style/EditText_Style" />
 
                     <Spinner
-                        style="@style/Spinner_Style"
-                        android:id="@+id/pm_manage_member_detail_project_name_spinner">
+                        android:id="@+id/pm_manage_member_detail_project_name_spinner"
+                        style="@style/Spinner_Style">
 
                     </Spinner>
                 </LinearLayout>
@@ -71,8 +70,7 @@
 
                     <EditText
                         android:id="@+id/pm_manage_member_detail_member_res"
-                        style="@style/EditText_Style">
-                    </EditText>
+                        style="@style/EditText_Style"></EditText>
                 </LinearLayout>
 
                 <!-- 项目名称-->
@@ -84,7 +82,7 @@
 
                     <EditText
                         android:id="@+id/pm_manage_member_detail_role"
-                        style="@style/EditText_Style"/>
+                        style="@style/EditText_Style" />
 
                 </LinearLayout>
 

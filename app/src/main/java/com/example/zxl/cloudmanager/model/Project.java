@@ -9,8 +9,10 @@ import org.json.JSONObject;
 public class Project {
     private String pm_id; //项目id
     private String project_name; //项目名称
-    private String goon_technical; //技术负责人
-    private String goon_business; //客服
+    private String goon_technical; //技术负责人id
+    private String goon_technical_name; //技术负责人
+    private String goon_business; //客服id
+    private String goon_business_name; //客服
     private String project_summary; //项目内容
     private String belong_unit; //客户单位
     private String custom_name; //客户联系人
@@ -32,8 +34,12 @@ public class Project {
             project_name = json.getString("project_name");
         if (json.has("goon_technical"))
             goon_technical = json.getString("goon_technical");
+        if (json.has("goon_technical_name"))
+            goon_technical_name = json.getString("goon_technical_name");
         if (json.has("goon_business"))
             goon_business = json.getString("goon_business");
+        if (json.has("goon_business_name"))
+            goon_business_name = json.getString("goon_business_name");
         if (json.has("project_summary"))
             project_summary = json.getString("project_summary");
         if (json.has("belong_unit"))
@@ -64,6 +70,22 @@ public class Project {
 
     public Project() {
 
+    }
+
+    public String getGoon_technical_name() {
+        return goon_technical_name;
+    }
+
+    public void setGoon_technical_name(String goon_technical_name) {
+        this.goon_technical_name = goon_technical_name;
+    }
+
+    public String getGoon_business_name() {
+        return goon_business_name;
+    }
+
+    public void setGoon_business_name(String goon_business_name) {
+        this.goon_business_name = goon_business_name;
     }
 
     public String getPm_master_name() {

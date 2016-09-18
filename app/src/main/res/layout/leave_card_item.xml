@@ -13,14 +13,16 @@
                 android:id="@+id/leave_card_item_name"
                 style="@style/Text_view_Style"
                 android:layout_weight="1"
-                android:width="200dp" />
+                android:width="200dp"
+                android:maxLength="6" />
 
             <TextView
                 android:id="@+id/leave_card_item_illness"
                 style="@style/Text_view_Style"
                 android:layout_weight="1"
                 android:width="200dp"
-                android:gravity="left" />
+                android:gravity="left"
+                android:maxLength="6" />
 
             <TextView
                 android:id="@+id/leave_card_item_state"
@@ -28,6 +30,7 @@
                 android:layout_weight="1"
                 android:width="200dp"
                 android:gravity="left"
+                android:maxLength="6"
                 android:textColor="#FF4040" />
         </LinearLayout>
         <!-- 第二排-->

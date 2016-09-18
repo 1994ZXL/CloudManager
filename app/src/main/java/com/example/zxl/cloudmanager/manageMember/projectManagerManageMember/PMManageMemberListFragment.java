@@ -81,19 +81,25 @@ public class PMManageMemberListFragment extends Fragment {
         mCurl_page = 1;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        pmMembers.clear();
+    }
+
     private void loadDate(final Bundle saveInstanceState, int curl_page, final View v) {
         if (null != saveInstanceState) {
             try {
                 if (null != saveInstanceState.getString(Link.mem_name))
                     keyObj.put(Link.mem_name, saveInstanceState.getString(Link.mem_name));
                 keyObj.put(Link.pm_id, saveInstanceState.getString(Link.pm_id));
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
         try {
+            keyObj.put(Link.comp_id, User.newInstance().getComp_id());
             keyObj.put("sort", "pmmem_id desc");
             keyObj.put("page_count", 20);
             keyObj.put("curl_page", curl_page);
@@ -128,12 +134,12 @@ public class PMManageMemberListFragment extends Fragment {
                         myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
                             @Override
                             public void onItemClick(View view, Object data) {
-                                Fragment fragment = PMManageProjectDetailFragment.newInstance(data);
+                                Fragment fragment = PMManageMemberDetailFragment.newInstance(data);
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                 if (!fragment.isAdded()) {
                                     transaction.addToBackStack(null);
                                     transaction.hide(mFragment);
-                                    transaction.add(R.id.blankActivity, fragment);
+                                    transaction.replace(R.id.blankActivity, fragment);
                                     transaction.commit();
                                 } else {
                                     transaction.hide(mFragment);
@@ -162,10 +168,16 @@ public class PMManageMemberListFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle savedInstanceState) {
         final View v = layoutInflater.inflate(R.layout.pm_manage_member_list, parent, false);
 
+        mAdd = (Button) v.findViewById(R.id.pm_manage_member_list_add);
+        mSearch = (TextView) v.findViewById(R.id.pm_manage_member_list_search);
+        mBack = (TextView) v.findViewById(R.id.pm_manage_member_list_back);
+
         if (mFragment.getActivity().getClass() == PMManageMemberActivity.class)
             url = Link.pm_manage_member + Link.get_list;
-        else if (mFragment.getActivity().getClass() == PSManageMemberActivity.class)
+        else if (mFragment.getActivity().getClass() == PSManageMemberActivity.class) {
             url = Link.pm_member + Link.get_list;
+            mAdd.setVisibility(View.GONE);
+        }
 
         savedInstanceState = getArguments();
         final Bundle saveInstanceState = savedInstanceState;
@@ -199,7 +211,6 @@ public class PMManageMemberListFragment extends Fragment {
             }
         });
 
-        mBack = (TextView) v.findViewById(R.id.pm_manage_member_list_back);
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -207,7 +218,6 @@ public class PMManageMemberListFragment extends Fragment {
             }
         });
 
-        mSearch = (TextView) v.findViewById(R.id.pm_manage_member_list_search);
         mSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -220,7 +230,6 @@ public class PMManageMemberListFragment extends Fragment {
             }
         });
 
-        mAdd = (Button) v.findViewById(R.id.pm_manage_member_list_add);
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

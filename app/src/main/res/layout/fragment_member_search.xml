@@ -3,6 +3,23 @@
     style="@style/Parent_LayoutStyle"
     tools:context=".manageMember.projectManagerManageMember.ManageMemberSearchFragment">
 
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+        <TextView
+            android:id="@+id/manage_member_search_back"
+            style="@style/toptextview_left"
+            android:text="@string/text_return" />
+
+        <TextView
+            style="@style/toptextview_center"
+            android:text="@string/manage_member" />
+
+        <TextView
+            style="@style/topview_right"
+            android:text="" />
+
+    </LinearLayout>
+
     <ScrollView style="@style/ScrollView_Style">
 
         <LinearLayout
@@ -11,23 +28,6 @@
             android:orientation="vertical">
 
             <LinearLayout style="@style/linearLayoutStyle">
-
-                <LinearLayout style="@style/Toptitle_LayoutStyle">
-
-                    <TextView
-                        style="@style/toptextview_left"
-                        android:text="@string/text_return"
-                        android:id="@+id/manage_member_search_back"/>
-
-                    <TextView
-                        style="@style/toptextview_center"
-                        android:text="@string/manage_member" />
-
-                    <TextView
-                        style="@style/topview_right"
-                        android:text="" />
-
-                </LinearLayout>
 
                 <!--项目名称-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -45,12 +45,12 @@
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/project_name_edittext" />
+                        android:text="@string/mem_name" />
 
                     <EditText
                         android:id="@+id/manage_member_search_member_name"
                         style="@style/EditText_Style"
-                        android:hint="@string/member_name_hint"/>
+                        android:hint="@string/member_name_hint" />
                 </LinearLayout>
 
             </LinearLayout>

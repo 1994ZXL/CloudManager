@@ -149,21 +149,21 @@ public class ManagerCheckEditFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 try {
-                    if (null != mS_att_time.getText())
+                    if (!mS_att_time.getText().equals("——"))
                         keyObj.put(Link.S_att_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mS_att_time.getText().toString()));
                     else keyObj.put(Link.S_att_time, sCheck.getS_att_time());
 
-                    if (null != mS_time.getText())
+                    if (!mS_time.getText().equals("——"))
                         keyObj.put(Link.S_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mS_time.getText().toString()));
-                    else keyObj.put(Link.S_time, sCheck.getS_att_time());
+                    else keyObj.put(Link.S_time, sCheck.getS_time());
 
-                    if (null != mE_att_time.getText())
-                        keyObj.put(Link.E_att_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mE_att_time.toString()));
-                    else keyObj.put(Link.E_att_time, sCheck.getS_att_time());
+                    if (!mE_att_time.getText().equals("——"))
+                        keyObj.put(Link.E_att_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mE_att_time.getText().toString()));
+                    else keyObj.put(Link.E_att_time, sCheck.getE_att_time());
 
-                    if (null != mE_time.getText())
-                        keyObj.put(Link.E_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mE_time.toString()));
-                    else keyObj.put(Link.E_time, sCheck.getS_att_time());
+                    if (!mE_time.getText().equals("——"))
+                        keyObj.put(Link.E_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mE_time.getText().toString()));
+                    else keyObj.put(Link.E_time, sCheck.getE_time());
 
                     keyObj.put(Link.att_id, sCheck.getAtt_id());
                     key = DESCryptor.Encryptor(keyObj.toString());

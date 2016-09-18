@@ -3,27 +3,27 @@
     android:id="@+id/check_details"
     style="@style/Parent_LayoutStyle">
 
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+        <TextView
+            android:id="@+id/cm_leave_deal_back"
+            style="@style/toptextview_left"
+            android:text="@string/text_return" />
+
+        <TextView
+            style="@style/toptextview_center"
+            android:text="@string/leave_record_detail" />
+
+        <TextView
+            android:id="@+id/cm_leave_deal_edit"
+            style="@style/topview_right"
+            android:text="@string/edit" />
+
+    </LinearLayout>
+
     <ScrollView style="@style/ScrollView_Style">
 
         <LinearLayout style="@style/linearLayoutStyle">
-
-            <LinearLayout style="@style/Toptitle_LayoutStyle">
-
-                <TextView
-                    android:id="@+id/cm_leave_deal_back"
-                    style="@style/toptextview_left"
-                    android:text="@string/text_return" />
-
-                <TextView
-                    style="@style/toptextview_center"
-                    android:text="@string/leave_record_detail" />
-
-                <TextView
-                    android:id="@+id/cm_leave_deal_edit"
-                    style="@style/topview_right"
-                    android:text="@string/edit" />
-
-            </LinearLayout>
 
             <!-- 姓名-->
             <LinearLayout style="@style/Viewline_LayoutStyle">

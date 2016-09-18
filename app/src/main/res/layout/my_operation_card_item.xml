@@ -11,7 +11,8 @@
                 android:id="@+id/my_operation_card_projectname"
                 style="@style/Text_view_Style"
                 android:layout_width="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:maxLength="10" />
 
             <!--运维状态-->
             <TextView
@@ -19,7 +20,8 @@
                 style="@style/Text_view_Style"
                 android:layout_width="match_parent"
                 android:layout_weight="1"
-                android:gravity="left" />
+                android:gravity="left"
+                android:maxLength="10" />
 
         </LinearLayout>
 

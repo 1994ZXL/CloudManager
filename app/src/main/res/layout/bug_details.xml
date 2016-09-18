@@ -3,27 +3,27 @@
     android:id="@+id/bug_details"
     style="@style/Parent_LayoutStyle">
 
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+        <TextView
+            android:id="@+id/my_bug_details_back"
+            style="@style/toptextview_left"
+            android:text="@string/text_return" />
+
+        <TextView
+            style="@style/toptextview_center"
+            android:text="@string/my_bug_detail" />
+
+        <TextView
+            android:id="@+id/bug_details_edit"
+            style="@style/topview_right"
+            android:text="@string/edit" />
+
+    </LinearLayout>
+
     <ScrollView style="@style/ScrollView_Style">
 
         <LinearLayout style="@style/linearLayoutStyle">
-
-            <LinearLayout style="@style/Toptitle_LayoutStyle">
-
-                <TextView
-                    android:id="@+id/my_bug_details_back"
-                    style="@style/toptextview_left"
-                    android:text="@string/text_return" />
-
-                <TextView
-                    style="@style/toptextview_center"
-                    android:text="@string/my_bug_detail" />
-
-                <TextView
-                    android:id="@+id/bug_details_edit"
-                    style="@style/topview_right"
-                    android:text="@string/edit" />
-
-            </LinearLayout>
 
             <!-- 第一块-->
             <LinearLayout style="@style/linearLayoutStyle">
@@ -80,6 +80,7 @@
                         android:hint="@string/input_bug_content" />
 
                 </LinearLayout>
+
 
             </LinearLayout>
 

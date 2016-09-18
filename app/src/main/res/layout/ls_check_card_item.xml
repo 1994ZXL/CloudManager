@@ -15,14 +15,16 @@
                     android:id="@+id/ls_check_card_item_name"
                     style="@style/Text_view_Style"
                     android:layout_weight="1"
-                    android:width="120dp" />
+                    android:width="100dp"
+                    android:maxLength="3" />
 
                 <TextView
                     android:id="@+id/ls_check_card_item_location"
                     style="@style/Text_view_Style"
                     android:layout_weight="1"
                     android:width="150dp"
-                    android:gravity="left" />
+                    android:gravity="left"
+                    android:maxLength="6" />
             </LinearLayout>
 
             <LinearLayout style="@style/CardView_line_LayoutStyle">

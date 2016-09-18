@@ -8,20 +8,23 @@
 
         <LinearLayout style="@style/CardView_Viewline_LayoutStyle">
 
-            <!-- 姓名-->
-            <TextView
-                android:id="@+id/overtime_card_item_name"
-                style="@style/Text_view_Style"
-                android:layout_weight="1"
-                android:width="200dp" />
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
 
-            <!--项目名-->
-            <TextView
-                android:id="@+id/main_fragment_overtime_project"
-                style="@style/Text_view_Style"
-                android:layout_weight="1"
-                android:width="200dp"
-                android:gravity="left" />
+                <!-- 姓名-->
+                <TextView
+                    android:id="@+id/overtime_card_item_name"
+                    style="@style/Text_view_Style"
+                    android:maxLength="10" />
+            </LinearLayout>
+
+            <LinearLayout style="@style/CardView_line_LayoutStyle">
+
+                <!--项目名-->
+                <TextView
+                    android:id="@+id/main_fragment_overtime_project"
+                    style="@style/Text_view_Style"
+                    android:maxLength="10" />
+            </LinearLayout>
 
         </LinearLayout>
 

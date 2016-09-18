@@ -20,7 +20,9 @@ import android.widget.TextView;
 
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.bug.projectManagerBug.PMBugActivity;
 import com.example.zxl.cloudmanager.bug.projectManagerBug.PMBugDetailFragment;
+import com.example.zxl.cloudmanager.bug.publicSearchBug.PublicBugSearchActivity;
 import com.example.zxl.cloudmanager.model.Bug;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
@@ -180,23 +182,27 @@ public class MyBugFragment extends Fragment {
         final View v = layoutInflater.inflate(R.layout.main_fragment_my_bug, parent, false);
 
         mAddTextView = (Button) v.findViewById(R.id.my_bug_add);
-        mAddTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new MyBugAddFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
+        if (mFragment.getActivity().getClass() != PMBugActivity.class) {
+            mAddTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Fragment fragment = new MyBugAddFragment();
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    if (!fragment.isAdded()) {
+                        transaction.addToBackStack(null);
+                        transaction.hide(mFragment);
+                        transaction.add(R.id.blankActivity, fragment);
+                        transaction.commit();
+                    } else {
+                        transaction.hide(mFragment);
+                        transaction.show(fragment);
+                        transaction.commit();
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            mAddTextView.setVisibility(View.GONE);
+        }
 
         mBack = (TextView) v.findViewById(R.id.my_bug_back);
         mBack.setOnClickListener(new View.OnClickListener() {
@@ -225,8 +231,11 @@ public class MyBugFragment extends Fragment {
         final Bundle saveInstanceState = saveInstanceStates;
         if (mFragment.getActivity().getClass() == MyBugActivity.class) {
             url = Link.my_bug + Link.get_list;
-        } else {
+        } else if (mFragment.getActivity().getClass() == PMBugActivity.class){
             url = Link.pm_bug + Link.get_list;
+            mTitle.setText("bug");
+        } else if (mFragment.getActivity().getClass() == PublicBugSearchActivity.class) {
+            url = Link.ps_bug + Link.get_list;
             mTitle.setText("bug");
         }
 

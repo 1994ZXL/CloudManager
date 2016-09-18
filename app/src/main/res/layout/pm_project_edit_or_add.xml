@@ -3,27 +3,27 @@
     android:id="@+id/mission_details"
     style="@style/Parent_LayoutStyle">
 
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+        <TextView
+            android:id="@+id/pm_detail_back"
+            style="@style/toptextview_left"
+            android:text="@string/text_return" />
+
+        <TextView
+            android:id="@+id/pm_detail_title"
+            style="@style/toptextview_center"
+            android:text="@string/project_edit" />
+
+        <TextView
+            style="@style/topview_right"
+            android:text="" />
+
+    </LinearLayout>
+
     <ScrollView style="@style/ScrollView_Style">
 
         <LinearLayout style="@style/linearLayoutStyle">
-
-            <LinearLayout style="@style/Toptitle_LayoutStyle">
-
-                <TextView
-                    style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/pm_detail_back"/>
-
-                <TextView
-                    style="@style/toptextview_center"
-                    android:text="@string/project_edit"
-                    android:id="@+id/pm_detail_title"/>
-
-                <TextView
-                    style="@style/topview_right"
-                    android:text=""/>
-
-            </LinearLayout>
 
             <!-- 第一块-->
             <LinearLayout style="@style/linearLayoutStyle">

@@ -2,27 +2,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Parent_LayoutStyle">
 
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+        <TextView
+            android:id="@+id/leader_check_search_back"
+            style="@style/toptextview_left"
+            android:text="@string/text_return" />
+
+        <TextView
+            style="@style/toptextview_center"
+            android:text="@string/check_query" />
+
+        <TextView
+            android:id="@+id/leader_check_search_clean"
+            style="@style/topview_right"
+            android:text="@string/text_clean" />
+
+    </LinearLayout>
+
     <ScrollView style="@style/ScrollView_Style">
 
         <LinearLayout style="@style/linearLayoutStyle">
-
-            <LinearLayout style="@style/Toptitle_LayoutStyle">
-
-                <TextView
-                    android:id="@+id/leader_check_search_back"
-                    style="@style/toptextview_left"
-                    android:text="@string/text_return" />
-
-                <TextView
-                    style="@style/toptextview_center"
-                    android:text="@string/check_query" />
-
-                <TextView
-                    android:id="@+id/leader_check_search_clean"
-                    style="@style/topview_right"
-                    android:text="@string/text_clean" />
-
-            </LinearLayout>
 
             <LinearLayout style="@style/linearLayoutStyle">
 

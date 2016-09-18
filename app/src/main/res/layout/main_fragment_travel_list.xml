@@ -13,7 +13,8 @@
                 <!--姓名-->
                 <TextView
                     android:id="@+id/my_travel_name"
-                    style="@style/Text_view_Style" />
+                    style="@style/Text_view_Style"
+                    android:maxLength="10" />
             </LinearLayout>
 
             <LinearLayout style="@style/CardView_line_LayoutStyle">
@@ -26,7 +27,8 @@
                 <TextView
                     android:id="@+id/my_travel_status"
                     style="@style/Text_view_Style"
-                    android:gravity="left" />
+                    android:gravity="left"
+                    android:maxLength="5" />
             </LinearLayout>
 
         </LinearLayout>
@@ -42,7 +44,7 @@
             <TextView
                 android:id="@+id/my_travel_reason"
                 style="@style/Text_view_Style"
-                android:maxLength="10" />
+                android:maxLength="12" />
         </LinearLayout>
 
         <!--第三排-->

@@ -13,13 +13,15 @@
                 style="@style/Text_view_Style"
                 android:layout_weight="1"
                 android:width="200dp"
+                android:maxLength="10"
                 android:text="@string/name" />
 
             <TextView
                 android:id="@+id/manager_check_card_item_state"
                 style="@style/Text_view_Style"
                 android:layout_weight="1"
-                android:width="200dp" />
+                android:width="200dp"
+                android:maxLength="10" />
 
         </LinearLayout>
 
@@ -33,7 +35,8 @@
 
                 <TextView
                     android:id="@+id/manager_check_card_item_check_location"
-                    style="@style/Text_view_Style" />
+                    style="@style/Text_view_Style"
+                    android:maxLength="6" />
             </LinearLayout>
 
             <LinearLayout style="@style/CardView_line_LayoutStyle">
@@ -44,7 +47,8 @@
 
                 <TextView
                     android:id="@+id/manager_check_card_item_check_manager"
-                    style="@style/Text_view_Style" />
+                    style="@style/Text_view_Style"
+                    android:maxLength="5" />
             </LinearLayout>
         </LinearLayout>
 

@@ -3,26 +3,26 @@
     android:id="@+id/mission_details"
     style="@style/Parent_LayoutStyle">
 
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+        <TextView
+            android:id="@+id/mission_details_back"
+            style="@style/toptextview_left"
+            android:text="@string/text_return" />
+
+        <TextView
+            style="@style/toptextview_center"
+            android:text="@string/mission_detail" />
+
+        <TextView
+            style="@style/topview_right"
+            android:text="" />
+
+    </LinearLayout>
+
     <ScrollView style="@style/ScrollView_Style">
 
         <LinearLayout style="@style/linearLayoutStyle">
-
-            <LinearLayout style="@style/Toptitle_LayoutStyle">
-
-                <TextView
-                    android:id="@+id/mission_details_back"
-                    style="@style/toptextview_left"
-                    android:text="@string/text_return" />
-
-                <TextView
-                    style="@style/toptextview_center"
-                    android:text="@string/mission_detail" />
-
-                <TextView
-                    style="@style/topview_right"
-                    android:text="" />
-
-            </LinearLayout>
 
             <!-- 第一块-->
             <LinearLayout style="@style/linearLayoutStyle">

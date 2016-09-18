@@ -3,26 +3,26 @@
     style="@style/Parent_LayoutStyle"
     tools:context=".operation.MyOperationListFragment">
 
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+        <TextView
+            android:id="@+id/my_operation_search_back"
+            style="@style/toptextview_left"
+            android:text="@string/text_return" />
+
+        <TextView
+            style="@style/toptextview_center"
+            android:text="@string/my_maintain" />
+
+        <TextView
+            style="@style/topview_right"
+            android:text="" />
+
+    </LinearLayout>
+
     <ScrollView style="@style/ScrollView_Style">
 
         <LinearLayout style="@style/linearLayoutStyle">
-
-            <LinearLayout style="@style/Toptitle_LayoutStyle">
-
-                <TextView
-                    android:id="@+id/my_operation_search_back"
-                    style="@style/toptextview_left"
-                    android:text="@string/text_return" />
-
-                <TextView
-                    style="@style/toptextview_center"
-                    android:text="@string/my_maintain" />
-
-                <TextView
-                    style="@style/topview_right"
-                    android:text="" />
-
-            </LinearLayout>
 
             <LinearLayout style="@style/linearLayoutStyle">
 
