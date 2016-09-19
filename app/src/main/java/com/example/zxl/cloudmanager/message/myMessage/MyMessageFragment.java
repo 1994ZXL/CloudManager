@@ -61,6 +61,8 @@ public class MyMessageFragment extends Fragment {
     private TextView mPunchAddress;
     private TextView mPuncherMaster;
     private TextView mJoinTime;
+    private TextView mBack;
+    private TextView mEdit;
 
     private String phoneNumber;
     private String qq;
@@ -93,7 +95,32 @@ public class MyMessageFragment extends Fragment {
         View v = layoutInflater.inflate(R.layout.main_fragment_my_message, parent, false);
 
         init(v);
+        control();
 
+        return v;
+    }
+
+    private void init(View v) {
+        mUserName = (TextView)v.findViewById(R.id.main_fragment_my_message_user_name);
+        mName = (TextView)v.findViewById(R.id.main_fragment_my_message_name);
+        mSex = (TextView)v.findViewById(R.id.main_fragment_my_message_sex);
+        mPhoneNumber = (EditText)v.findViewById(R.id.main_fragment_my_message_phone);
+        mQQ = (EditText)v.findViewById(R.id.main_fragment_my_message_qq);
+        mWeChat = (EditText)v.findViewById(R.id.main_fragment_my_message_wechat);
+        mEmail = (EditText) v.findViewById(R.id.main_fragment_my_message_email);
+        mAddress = (EditText)v.findViewById(R.id.main_fragment_my_message_location);
+        mDetailAddress = (EditText) v.findViewById(R.id.main_fragment_my_message_detail_location);
+        mIDCard = (TextView) v.findViewById(R.id.main_fragment_my_message_idcard);
+        mServiceState = (TextView) v.findViewById(R.id.main_fragment_my_message_service_state);
+        mCompany = (TextView)v.findViewById(R.id.main_fragment_my_message_comp_name);
+        mPunchAddress = (TextView)v.findViewById(R.id.main_fragment_my_message_punch_address);
+        mPuncherMaster = (TextView)v.findViewById(R.id.main_fragment_my_message_puncher_master);
+        mJoinTime = (TextView)v.findViewById(R.id.main_fragment_my_message_join_time);
+        mBack = (TextView) v.findViewById(R.id.my_message_back);
+        mEdit = (TextView) v.findViewById(R.id.my_message_edit);
+    }
+
+    private void control() {
         try {
             keyObj.put(Link.user_id, User.newInstance().getUser_id());
             key = DESCryptor.Encryptor(keyObj.toString());
@@ -244,39 +271,18 @@ public class MyMessageFragment extends Fragment {
             }
         });
 
-        return v;
-    }
+        mBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mFragment.getActivity().finish();
+            }
+        });
 
-    private void init(View v) {
-        mUserName = (TextView)v.findViewById(R.id.main_fragment_my_message_user_name);
-        mName = (TextView)v.findViewById(R.id.main_fragment_my_message_name);
-        mSex = (TextView)v.findViewById(R.id.main_fragment_my_message_sex);
-        mPhoneNumber = (EditText)v.findViewById(R.id.main_fragment_my_message_phone);
-        mQQ = (EditText)v.findViewById(R.id.main_fragment_my_message_qq);
-        mWeChat = (EditText)v.findViewById(R.id.main_fragment_my_message_wechat);
-        mEmail = (EditText) v.findViewById(R.id.main_fragment_my_message_email);
-        mAddress = (EditText)v.findViewById(R.id.main_fragment_my_message_location);
-        mDetailAddress = (EditText) v.findViewById(R.id.main_fragment_my_message_detail_location);
-        mIDCard = (TextView) v.findViewById(R.id.main_fragment_my_message_idcard);
-        mServiceState = (TextView) v.findViewById(R.id.main_fragment_my_message_service_state);
-        mCompany = (TextView)v.findViewById(R.id.main_fragment_my_message_comp_name);
-        mPunchAddress = (TextView)v.findViewById(R.id.main_fragment_my_message_punch_address);
-        mPuncherMaster = (TextView)v.findViewById(R.id.main_fragment_my_message_puncher_master);
-        mJoinTime = (TextView)v.findViewById(R.id.main_fragment_my_message_join_time);
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.message_save, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_edit_message:
+        mEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 try {
-                    keyObj2.put(Link.mem_id, User.newInstance().getUser_id());
+                    keyObj2.put(Link.user_id, User.newInstance().getUser_id());
                     if (phoneNumber != null) {
                         keyObj2.put(Link.phone, phoneNumber);
                     }
@@ -313,8 +319,7 @@ public class MyMessageFragment extends Fragment {
                         }
                     }
                 });
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
+            }
+        });
     }
 }

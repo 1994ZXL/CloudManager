@@ -3,6 +3,24 @@
     android:id="@+id/fragment_my_message"
     style="@style/Parent_LayoutStyle">
 
+    <LinearLayout style="@style/Toptitle_LayoutStyle">
+
+        <TextView
+            android:id="@+id/my_message_back"
+            style="@style/toptextview_left"
+            android:text="@string/text_return" />
+
+        <TextView
+            style="@style/toptextview_center"
+            android:text="@string/me" />
+
+        <TextView
+            style="@style/topview_right"
+            android:text="@string/edit"
+            android:id="@+id/my_message_edit"/>
+
+    </LinearLayout>
+
     <ScrollView style="@style/ScrollView_Style">
 
         <LinearLayout style="@style/linearLayoutStyle">

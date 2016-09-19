@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.DESCryptor;
@@ -27,6 +28,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
@@ -79,14 +81,13 @@ public class ManagerTravelDetailFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_travel_detail, container, false);
 
 
-
         init(v);
         control();
 
         return v;
     }
 
-    private void init(View v){
+    private void init(View v) {
         mBeginTime = (TextView) v.findViewById(R.id.employer_travel_beginTime);
         mEndTime = (TextView) v.findViewById(R.id.employer_travel_endTime);
         mEmployerName = (TextView) v.findViewById(R.id.manager_travel_employer_name_spinner);
@@ -95,9 +96,9 @@ public class ManagerTravelDetailFragment extends Fragment {
         mTravelAddress = (TextView) v.findViewById(R.id.manager_travel_address);
         mStatus = (Spinner) v.findViewById(R.id.manager_travel_state);
         if (mTravel.getStatus() == "确认")
-            statusList = new String[] {"确认" ,"取消"};
+            statusList = new String[]{"确认", "取消"};
         if (mTravel.getStatus() == "取消")
-            statusList = new String[] {"取消" ,"确认"};
+            statusList = new String[]{"取消", "确认"};
 
         mBack = (TextView) v.findViewById(R.id.manager_travel_detail_back);
         mEdit = (TextView) v.findViewById(R.id.manager_travel_detail_edit);
@@ -111,7 +112,7 @@ public class ManagerTravelDetailFragment extends Fragment {
         mTravelAdd.setText(mTravel.getAddress());
         mTravelAddress.setText(mTravel.getDetail_addr());
 
-        statusAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, statusList);
+        statusAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, statusList);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mStatus.setAdapter(statusAdapter);
         mStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -148,16 +149,27 @@ public class ManagerTravelDetailFragment extends Fragment {
                     e.printStackTrace();
                 }
                 mParams.put("key", key);
-                Log.d(TAG,"key:" + key);
+                Log.d(TAG, "key:" + key);
                 mHttpc.post(Link.localhost + Link.manage_trip + Link.edit, mParams, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
+                        try {
+                            if (response.getString("msg").equals("successed")) {
+                                Toast.makeText(getActivity(),
+                                        "修改成功！",
+                                        Toast.LENGTH_SHORT).show();
+                                FragmentManager fm = getFragmentManager();
+                                fm.popBackStack();
+                            } else {
+                                Toast.makeText(getActivity(),
+                                        "没有修改的内容！",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                        }
                     }
                 });
-
-                FragmentManager fm = getFragmentManager();
-                fm.popBackStack();
             }
         });
     }

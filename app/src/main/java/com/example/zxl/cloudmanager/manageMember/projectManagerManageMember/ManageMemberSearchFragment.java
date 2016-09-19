@@ -91,7 +91,7 @@ public class ManageMemberSearchFragment extends Fragment {
     private void control() {
         if (mFragment.getActivity().getClass() == PSManageMemberActivity.class) {
             url = Link.pm_member + Link.options_pmmember;
-        } else if (mFragment.getActivity().getClass() == PSManageMemberActivity.class) {
+        } else if (mFragment.getActivity().getClass() == PMManageMemberActivity.class) {
             url = Link.pm_manage_member + Link.options_pmmember;
         }
 

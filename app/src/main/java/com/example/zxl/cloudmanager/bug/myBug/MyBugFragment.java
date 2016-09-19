@@ -90,7 +90,7 @@ public class MyBugFragment extends Fragment {
         if (null != saveInstanceState) {
             try {
                 if (null != saveInstanceState.getString(Link.project_name))
-                    keyObj.put(Link.project_name, saveInstanceState.getInt(Link.project_name));
+                    keyObj.put(Link.project_name, saveInstanceState.getString(Link.project_name));
                 if (-1 != saveInstanceState.getInt(Link.submit_time_from))
                     keyObj.put(Link.submit_time_from, saveInstanceState.getInt(Link.submit_time_from));
                 if (-1 != saveInstanceState.getInt(Link.submit_time_to))
@@ -100,9 +100,9 @@ public class MyBugFragment extends Fragment {
                 if (null != saveInstanceState.getString(Link.modify_time_to))
                     keyObj.put(Link.modify_time_to, saveInstanceState.getInt(Link.modify_time_to));
                 if (null != saveInstanceState.getString(Link.submitter))
-                    keyObj.put(Link.submitter, saveInstanceState.getInt(Link.submitter));
+                    keyObj.put(Link.submitter, saveInstanceState.getString(Link.submitter));
                 if (null != saveInstanceState.getString(Link.modifier))
-                    keyObj.put(Link.modifier, saveInstanceState.getInt(Link.modifier));
+                    keyObj.put(Link.modifier, saveInstanceState.getString(Link.modifier));
                 keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
                 keyObj.put(Link.level, saveInstanceState.getInt(Link.level));
             } catch (Exception e) {
@@ -237,6 +237,7 @@ public class MyBugFragment extends Fragment {
         } else if (mFragment.getActivity().getClass() == PublicBugSearchActivity.class) {
             url = Link.ps_bug + Link.get_list;
             mTitle.setText("bug");
+            mAddTextView.setVisibility(View.GONE);
         }
 
         loadDate(saveInstanceState, mCurl_page, v);

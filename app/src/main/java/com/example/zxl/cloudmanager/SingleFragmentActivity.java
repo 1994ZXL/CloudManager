@@ -3,6 +3,7 @@ package com.example.zxl.cloudmanager;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -15,8 +16,8 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle saveInstanceState){
         super.onCreate(saveInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.blank_activity);
-
 
         Fragment fragment;
         FragmentManager fm = getFragmentManager();

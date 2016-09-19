@@ -48,7 +48,7 @@ import com.example.zxl.cloudmanager.usecase.projectManagerUseCase.ProjectManager
 import com.example.zxl.cloudmanager.bug.publicSearchBug.PublicBugSearchActivity;
 import com.example.zxl.cloudmanager.contact.publicSearchContact.PSContactActivity;
 import com.example.zxl.cloudmanager.manageMember.publicSearchManageMember.PSManageMemberActivity;
-import com.example.zxl.cloudmanager.mission.publicSearchMission.MissionSearchActivity;
+import com.example.zxl.cloudmanager.mission.publicSearchMission.PublicSearchMissionActivity;
 import com.example.zxl.cloudmanager.manageProject.publicSearchProjectManage.PSManageProjectActivity;
 import com.example.zxl.cloudmanager.usecase.publicSearchUseCase.UsecaseSearchActivity;
 import com.example.zxl.cloudmanager.travel.myTravel.MyTravelActivity;
@@ -178,7 +178,7 @@ public class MainFragment extends Fragment {
 
         //公共查询
         onClickListener(myProjectImage,new PSManageProjectActivity());
-        onClickListener(myPlanImage,new MissionSearchActivity());
+        onClickListener(myPlanImage,new PublicSearchMissionActivity());
         onClickListener(myListImage,new PSContactActivity());
         onClickListener(myMemberListImage,new PSManageMemberActivity());
         onClickListener(myUseCaseImage,new UsecaseSearchActivity());
@@ -231,13 +231,13 @@ public class MainFragment extends Fragment {
                             if (0 == array.getJSONObject(i).getInt(Link.s_att_time)) {
                                 mSignTime = "上班";
                             } else {
-                                mSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi3(array.getJSONObject(i).getInt(Link.s_att_time)+28800);
+                                mSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi3(array.getJSONObject(i).getInt(Link.s_att_time));
                                 mSignBtn.setClickable(false);
                             }
                             if (0 == array.getJSONObject(i).getInt(Link.e_att_time)) {
                                 mOffSignTime = "下班";
                             } else {
-                                mOffSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi3(array.getJSONObject(i).getInt(Link.e_att_time)+28800);
+                                mOffSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi3(array.getJSONObject(i).getInt(Link.e_att_time));
                                 mOffSignBtn.setClickable(false);
                             }
                         }

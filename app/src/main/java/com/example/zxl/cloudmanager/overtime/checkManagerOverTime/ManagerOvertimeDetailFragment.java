@@ -85,7 +85,7 @@ public class ManagerOvertimeDetailFragment extends Fragment {
         return v;
     }
 
-    private void init(View v){
+    private void init(View v) {
         mBeginTime = (TextView) v.findViewById(R.id.manager_overtime_detail_beginTime);
         mEndTime = (TextView) v.findViewById(R.id.manager_overtime_detail_endTime);
         mEmployer = (TextView) v.findViewById(R.id.manager_employer_name_spinner);
@@ -95,9 +95,9 @@ public class ManagerOvertimeDetailFragment extends Fragment {
 
         //状态 1:确认,2:取消，默认为确认
         if (mOverTime.getStatus() == "确认")
-            statusList = new String[] {"确认" ,"取消"};
+            statusList = new String[]{"确认", "取消"};
         if (mOverTime.getStatus() == "取消")
-            statusList = new String[] {"取消" ,"确认"};
+            statusList = new String[]{"取消", "确认"};
 
         mBack = (TextView) v.findViewById(R.id.overtime_details_back);
         mEdit = (TextView) v.findViewById(R.id.overtime_details_edit);
@@ -122,16 +122,27 @@ public class ManagerOvertimeDetailFragment extends Fragment {
                     e.printStackTrace();
                 }
                 mParams.put("key", key);
-                Log.d(TAG,"key:" + key);
+                Log.d(TAG, "key:" + key);
                 mHttpc.post(Link.localhost + Link.manage_work + Link.edit, mParams, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-
+                        try {
+                            if (response.getString("msg").equals("successed")) {
+                                Toast.makeText(getActivity(),
+                                        "修改成功！",
+                                        Toast.LENGTH_SHORT).show();
+                                FragmentManager fm = getFragmentManager();
+                                fm.popBackStack();
+                            } else {
+                                Toast.makeText(getActivity(),
+                                        "没有修改的内容！",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (JSONException e) {
+                            Log.e(TAG, "ee2: " + e.getLocalizedMessage());
+                        }
                     }
                 });
-
-                FragmentManager fm = getFragmentManager();
-                fm.popBackStack();
             }
         });
 
@@ -141,7 +152,7 @@ public class ManagerOvertimeDetailFragment extends Fragment {
         mProjectName.setText(mOverTime.getWork_pm());
         mOvertimeReasonET.setText(mOverTime.getWork_resaon());
 
-        statusAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, statusList);
+        statusAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, statusList);
         statusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mStatus.setAdapter(statusAdapter);
         mStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

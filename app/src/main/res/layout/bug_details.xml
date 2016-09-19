@@ -75,9 +75,23 @@
                         android:text="@string/bug_content" />
 
                     <EditText
-                        android:id="@+id/bug_details_content"
+                        android:id="@+id/bug_details_"
                         style="@style/EditText_Style"
                         android:hint="@string/input_bug_content" />
+
+                </LinearLayout>
+
+                <!-- 用例模型-->
+                <LinearLayout style="@style/Viewline_LayoutStyle">
+
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:text="@string/usecase_model" />
+
+                    <EditText
+                        android:id="@+id/bug_details_content"
+                        style="@style/EditText_Style"
+                        android:hint="@string/input_usecase_model" />
 
                 </LinearLayout>
 

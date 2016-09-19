@@ -88,17 +88,6 @@
                         android:id="@+id/manager_check_details_stipulate_dutytime"
                         style="@style/Text_view_Style" />
                 </LinearLayout>
-                <!-- 规定下班时间-->
-                <LinearLayout style="@style/Viewline_LayoutStyle">
-
-                    <TextView
-                        style="@style/Text_view_Style"
-                        android:text="@string/stipulate_offdutytime" />
-
-                    <TextView
-                        android:id="@+id/manager_check_details_stipulate_offdutytime"
-                        style="@style/Text_view_Style" />
-                </LinearLayout>
                 <!-- 上班签到时间-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
 
@@ -108,6 +97,17 @@
 
                     <TextView
                         android:id="@+id/manager_check_details_duty_sign_time"
+                        style="@style/Text_view_Style" />
+                </LinearLayout>
+                <!-- 规定下班时间-->
+                <LinearLayout style="@style/Viewline_LayoutStyle">
+
+                    <TextView
+                        style="@style/Text_view_Style"
+                        android:text="@string/stipulate_offdutytime" />
+
+                    <TextView
+                        android:id="@+id/manager_check_details_stipulate_offdutytime"
                         style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 下班签到时间-->

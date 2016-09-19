@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.mission.publicSearchMission.PublicSearchMissionActivity;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
@@ -63,8 +64,6 @@ public class MissionManagerListFragment extends Fragment {
 
     private Fragment mFragment;
 
-    public static final int REFRESH_DELAY = 4000;
-
     private static int mCurl_page;
 
     private PullToRefreshLayout mPullToRefreshLayout;
@@ -78,15 +77,14 @@ public class MissionManagerListFragment extends Fragment {
     private RequestParams mParamsDelete = new RequestParams();
     private JSONObject keyObjDelete = new JSONObject();
     private String keyDelete = "";
-
-    private Button mSearchBtn;
+    private String url;
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
         mFragment = this;
-
+        mCurl_page = 1;
     }
 
     private void loadDate(final Bundle saveInstanceState, int curl_page, final View view) {
@@ -120,7 +118,7 @@ public class MissionManagerListFragment extends Fragment {
         mParams.put("key", key);
         Log.d(TAG, "key: " + key);
 
-        mHttpc.post(Link.localhost + "pm_task&act=get_list", mParams, new JsonHttpResponseHandler() {
+        mHttpc.post(Link.localhost + url, mParams, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject rjo) {
                 if (statusCode == 200) {
@@ -181,7 +179,7 @@ public class MissionManagerListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceStates) {
         final View view = layoutInflater.inflate(R.layout.main_fragment_my_mission, parent, false);
-        mCurl_page = 1;
+
         mAddTextView = (TextView) view.findViewById(R.id.manager_mission_add);
         mAddTextView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -230,6 +228,14 @@ public class MissionManagerListFragment extends Fragment {
                 }
             }
         });
+
+        if (mFragment.getActivity().getClass() == PublicSearchMissionActivity.class) {
+            url = Link.pm_task_list + Link.get_list;
+            mAddTextView.setVisibility(View.GONE);
+            mTitle.setText("任务列表");
+        } else if (mFragment.getActivity().getClass() == ProjectMissionManagerActivity.class) {
+            url = Link.pm_task + Link.get_list;
+        }
 
         saveInstanceStates = getArguments();
         final Bundle saveInstanceState = saveInstanceStates;

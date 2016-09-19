@@ -13,7 +13,7 @@ public class Bug {
     private int status; //bug状态
     private String project_name;
     private String mem_name;
-    private int case_mode; //用例模型
+    private String case_mode; //用例模型
     private int submit_time;
     private int modify_time;
     private int submit_time_start; //发现时间 开始
@@ -59,7 +59,7 @@ public class Bug {
         if (json.has(JSON_MODIFY_START))
             modify_time_end = json.getInt(JSON_MODIFY_START);
         if (json.has(JSON_CASE_MODE))
-            case_mode = json.getInt(JSON_CASE_MODE);
+            case_mode = json.getString(JSON_CASE_MODE);
         if (json.has(JSON_PROJECT))
             project_name = json.getString(JSON_PROJECT);
         if (json.has(JSON_NAME))
@@ -74,24 +74,6 @@ public class Bug {
             modify_time = json.getInt(JSON_MODIFY);
         if (json.has(JSON_CONTENT))
             content = json.getString(JSON_CONTENT);
-    }
-
-    public JSONObject toJSON() throws JSONException{
-        JSONObject json = new JSONObject();
-        json.put(JSON_LEVEL, level);
-        json.put(JSON_NAME, status);
-        json.put(JSON_SUBMIT_START, submit_time_start);
-        json.put(JSON_SUBMIT_END, submit_time_end);
-        json.put(JSON_MODIFY_START, modify_time_start);
-        json.put(JSON_MODIFY_END, modify_time_end);
-        json.put(JSON_SUBMITTER, case_mode);
-        json.put(JSON_NAME, mem_name);
-        json.put(JSON_PROJECT, project_name);
-        json.put(JSON_SUBMITTER, submitter);
-        json.put(JSON_MODIFIER, modifier);
-        json.put(JSON_SUBMIT, submit_time);
-        json.put(JSON_MODIFY, modify_time);
-        return json;
     }
 
     public String getPmbug_id() {
@@ -135,11 +117,10 @@ public class Bug {
     }
 
     public String getCase_mode() {
-        String caseMode = " " + this.case_mode;
-        return caseMode;
+        return case_mode;
     }
 
-    public void setCase_mode(int case_mode) {
+    public void setCase_mode(String case_mode) {
         this.case_mode = case_mode;
     }
 

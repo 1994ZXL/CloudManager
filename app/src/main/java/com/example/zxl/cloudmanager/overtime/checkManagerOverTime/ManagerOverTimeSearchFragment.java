@@ -206,13 +206,6 @@ public class ManagerOverTimeSearchFragment extends Fragment {
 
         });
 
-        mOvertimeEndBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DateTimePicker.selectDateTime(mFragment, mOvertimeEndBtn);
-            }
-        });
-
         mOvertimeBeginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -220,6 +213,12 @@ public class ManagerOverTimeSearchFragment extends Fragment {
             }
         });
 
+        mOvertimeEndBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DateTimePicker.selectDateTime(mFragment, mOvertimeEndBtn);
+            }
+        });
 
         overTimeAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, overtimeStatus);
         overTimeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -247,12 +246,12 @@ public class ManagerOverTimeSearchFragment extends Fragment {
                 Bundle bundle = new Bundle();
 
                 if (null != mOvertimeEndBtn.getText()) {
-                    bundle.putInt(Link.start_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mOvertimeEndBtn.getText().toString()));
+                    bundle.putInt(Link.start_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mOvertimeBeginBtn.getText().toString()));
                 } else {
                     bundle.putInt(Link.start_time, -1);
                 }
                 if (null != mOvertimeBeginBtn.getText()) {
-                    bundle.putInt(Link.end_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mOvertimeBeginBtn.getText().toString()));
+                    bundle.putInt(Link.end_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mOvertimeEndBtn.getText().toString()));
                 } else {
                     bundle.putInt(Link.end_time, -1);
                 }

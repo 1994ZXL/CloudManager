@@ -139,21 +139,22 @@ public class MyBugAddFragment extends Fragment {
                                 }
                             }
 
-                            projectName = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, projectNameList);
-                            projectName.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            mProjectName.setAdapter(projectName);
-                            mProjectName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                @Override
-                                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                    projectid = projectIdList.get(i);
-                                }
+                            if (null != mFragment.getActivity()) {
+                                projectName = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, projectNameList);
+                                projectName.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                mProjectName.setAdapter(projectName);
+                                mProjectName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                    @Override
+                                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                        projectid = projectIdList.get(i);
+                                    }
 
-                                @Override
-                                public void onNothingSelected(AdapterView<?> adapterView) {
+                                    @Override
+                                    public void onNothingSelected(AdapterView<?> adapterView) {
 
-                                }
-                            });
-
+                                    }
+                                });
+                            }
                         }
                     } catch (JSONException e) {
                         Log.e(TAG, "ee2: " + e.getLocalizedMessage());

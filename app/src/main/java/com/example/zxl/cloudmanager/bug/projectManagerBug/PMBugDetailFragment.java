@@ -45,7 +45,7 @@ public class PMBugDetailFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
-        View view = layoutInflater.inflate(R.layout.bug_details, parent, false);
+        View view = layoutInflater.inflate(R.layout.pm_bug_details, parent, false);
         init(view);
         contorl();
         return view;

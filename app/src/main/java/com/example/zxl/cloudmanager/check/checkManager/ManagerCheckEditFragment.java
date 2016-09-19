@@ -93,13 +93,13 @@ public class ManagerCheckEditFragment extends Fragment{
         });
 
         if (sCheck.getS_time() != 0){
-            mS_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getS_time()+28800));
+            mS_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getS_time()));
         } else {
             mS_time.setText("——");
         }
 
         if (sCheck.getE_time() != 0) {
-            mE_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getE_time()+28800));
+            mE_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getE_time()));
         } else {
             mE_time.setText("——");
         }
@@ -107,11 +107,11 @@ public class ManagerCheckEditFragment extends Fragment{
         if (sCheck.getS_att_time() == 0) {
             mS_att_time.setText("——");
         }else {
-            mS_att_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getS_att_time()+28800));
+            mS_att_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getS_att_time()));
         }
 
         if (sCheck.getE_att_time() != 0) {
-            mE_att_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getE_att_time()+28800));
+            mE_att_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getE_att_time()));
         } else {
             mE_att_time.setText("——");
         }

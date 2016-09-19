@@ -2,6 +2,7 @@ package com.example.zxl.cloudmanager.leave.checkManagerLeave;
 
 
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.text.Editable;
@@ -42,7 +43,7 @@ import cz.msebera.android.httpclient.Header;
  */
 public class ManagerLeaveDealFragment extends Fragment {
     private TextView name;
-    private TextView leaveBeginTime,leaveEndTime,leaveKind,leaveReason,leaveApplyTime;
+    private TextView leaveBeginTime, leaveEndTime, leaveKind, leaveReason, leaveApplyTime;
     private EditText leaveSuggestion;
     private TextView leaveDealTime;
     private Spinner leaveState;
@@ -69,7 +70,7 @@ public class ManagerLeaveDealFragment extends Fragment {
 
     @Override
     public void onCreate(Bundle saveInstanceState) {
-        Log.e(EXTRA_OBJECT,"CM_leave : " + "执行");
+        Log.e(EXTRA_OBJECT, "CM_leave : " + "执行");
         super.onCreate(saveInstanceState);
         this.setHasOptionsMenu(true);
         mFragment = this;
@@ -84,7 +85,7 @@ public class ManagerLeaveDealFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.cm_leave_deal, parent, false);
-        Log.e(EXTRA_OBJECT,"CM_leave : " + "初始化View");
+        Log.e(EXTRA_OBJECT, "CM_leave : " + "初始化View");
 
         init(v);
         control();
@@ -93,16 +94,16 @@ public class ManagerLeaveDealFragment extends Fragment {
     }
 
     private void init(View view) {
-        Log.e(EXTRA_OBJECT,"CM_leave : " + "初始化控件");
-        name = (TextView)view.findViewById(R.id.cm_employer_leave_name);
-        leaveKind = (TextView)view.findViewById(R.id.cm_leave_deal_type);
-        leaveBeginTime = (TextView)view.findViewById(R.id.cm_leave_deal_begin_time);
-        leaveEndTime = (TextView)view.findViewById(R.id.cm_leave_deal_end_time);
-        leaveReason = (TextView)view.findViewById(R.id.cm_leave_deal_ask_reason);
-        leaveApplyTime = (TextView)view.findViewById(R.id.cm_leave_deal_apply_time);
+        Log.e(EXTRA_OBJECT, "CM_leave : " + "初始化控件");
+        name = (TextView) view.findViewById(R.id.cm_employer_leave_name);
+        leaveKind = (TextView) view.findViewById(R.id.cm_leave_deal_type);
+        leaveBeginTime = (TextView) view.findViewById(R.id.cm_leave_deal_begin_time);
+        leaveEndTime = (TextView) view.findViewById(R.id.cm_leave_deal_end_time);
+        leaveReason = (TextView) view.findViewById(R.id.cm_leave_deal_ask_reason);
+        leaveApplyTime = (TextView) view.findViewById(R.id.cm_leave_deal_apply_time);
         leaveSuggestion = (EditText) view.findViewById(R.id.cm_leave_deal_suggestion);
         leaveState = (Spinner) view.findViewById(R.id.cm_leave_deal_state);
-        leaveDealTime = (TextView)view.findViewById(R.id.cm_leave_deal_time);
+        leaveDealTime = (TextView) view.findViewById(R.id.cm_leave_deal_time);
 
         mBack = (TextView) view.findViewById(R.id.cm_leave_deal_back);
         mEdit = (TextView) view.findViewById(R.id.cm_leave_deal_edit);
@@ -129,14 +130,22 @@ public class ManagerLeaveDealFragment extends Fragment {
                     e.printStackTrace();
                 }
                 mParams.put("key", key);
-                Log.d(TAG,"key:" + key);
+                Log.d(TAG, "key:" + key);
                 mHttpc.post(Link.localhost + Link.manage_leave + Link.edit, mParams, new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                         try {
-                            Toast.makeText(getActivity(),
-                                    response.getString("msg"),
-                                    Toast.LENGTH_SHORT).show();
+                            if (response.getString("msg").equals("successed")) {
+                                Toast.makeText(getActivity(),
+                                        "修改成功！",
+                                        Toast.LENGTH_SHORT).show();
+                                FragmentManager fm = getFragmentManager();
+                                fm.popBackStack();
+                            } else {
+                                Toast.makeText(getActivity(),
+                                        "没有修改的内容！",
+                                        Toast.LENGTH_SHORT).show();
+                            }
                         } catch (JSONException e) {
                             Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                         }
@@ -184,7 +193,7 @@ public class ManagerLeaveDealFragment extends Fragment {
             leaveStateList = new String[]{"已批准", "待批准", "拒绝"};
         else if (mLeave.getStatus() == "拒绝")
             leaveStateList = new String[]{"拒绝", "待批准", "已批准"};
-        spinnerAdapter = new ArrayAdapter<String>(this.getActivity(),android.R.layout.simple_spinner_item, leaveStateList);
+        spinnerAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, leaveStateList);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         leaveState.setAdapter(spinnerAdapter);
         leaveState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

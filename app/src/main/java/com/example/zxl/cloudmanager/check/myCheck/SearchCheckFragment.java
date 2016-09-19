@@ -22,6 +22,7 @@ import com.example.zxl.cloudmanager.model.Check;
 import com.example.zxl.cloudmanager.model.CheckLab;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DatePickerFragment;
+import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
 
 import java.util.ArrayList;
@@ -68,19 +69,13 @@ public class SearchCheckFragment extends Fragment {
         beginTimeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 12);
-                fragment.setTargetFragment(SearchCheckFragment.this, 12);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyLeaveApplyFragment");
+                DateTimePicker.selectDate(mFragment, beginTimeButton);
             }
         });
         endTimeButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                DatePickerFragment fragment = DatePickerFragment.newInstance(new Date(), 13);
-                fragment.setTargetFragment(SearchCheckFragment.this, 13);
-                fragment.setStyle(DialogFragment.STYLE_NO_FRAME, 1);
-                fragment.show(getFragmentManager(), "MyLeaveApplyFragment");
+                DateTimePicker.selectDate(mFragment, endTimeButton);
             }
         });
 
@@ -101,12 +96,12 @@ public class SearchCheckFragment extends Fragment {
         Bundle bundle = new Bundle();
         bundle.putString("where", "SearchCheckFragment");
         if (null != beginTimeButton.getText()) {
-            bundle.putInt(Link.att_date_start, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(beginTimeButton.getText().toString()));
+            bundle.putInt(Link.att_date_start, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(beginTimeButton.getText().toString()));
         } else {
             bundle.putInt(Link.att_date_start, -1);
         }
         if (null != endTimeButton.getText()) {
-            bundle.putInt(Link.att_date_end, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(endTimeButton.getText().toString()));
+            bundle.putInt(Link.att_date_end, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(endTimeButton.getText().toString()));
         } else {
             bundle.putInt(Link.att_date_end, -1);
         }

@@ -139,7 +139,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".mission.publicSearchMission.MissionSearchActivity"
+        <activity android:name=".mission.publicSearchMission.PublicSearchMissionActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

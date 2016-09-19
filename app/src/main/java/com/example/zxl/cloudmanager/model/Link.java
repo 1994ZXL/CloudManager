@@ -140,6 +140,7 @@ public class Link {
     public static final String att_date_to = "att_date_to"; //考勤日期（晚）
 
     //pm_task
+    public static final String pm_task = "pm_task&act=";
     public static final String pmtask_id = "pmtask_id"; //项目任务ID
     public static final String over_time = "end_time"; //结束时间
     public static final String title = "title";
@@ -149,6 +150,9 @@ public class Link {
     public static final String start_time_to = "start_time_to"; //开始时间 结束
     public static final String end_time_from = "end_time_from"; //结束时间 开始
     public static final String end_time_to = "end_time_to"; //结束时间 结束
+
+    //pm_task_list
+    public static final String pm_task_list = "pm_task_list&act=";
 
     //pm_schedule
     public static final String pm_schedule = "pm_schedule&act=";

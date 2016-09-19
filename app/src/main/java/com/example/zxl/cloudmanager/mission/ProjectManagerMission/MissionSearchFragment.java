@@ -69,11 +69,6 @@ public class MissionSearchFragment extends Fragment {
     private String projecName;
     private String name;
 
-    private static AsyncHttpClient mHttpcProject = new AsyncHttpClient();
-    private RequestParams mParamsProject = new RequestParams();
-    private JSONObject keyObj = new JSONObject();
-    private String key = "";
-
     private Fragment mFragment;
     public MissionSearchFragment() {
         // Required empty public constructor

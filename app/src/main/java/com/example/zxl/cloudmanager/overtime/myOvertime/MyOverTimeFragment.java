@@ -101,12 +101,8 @@ public class MyOverTimeFragment extends Fragment {
             }
         }
         try {
-            if (null == saveInstanceState) {
-                keyObj.put(Link.mem_id, User.newInstance().getUser_id());
-                url = Link.my_work + Link.get_list;
-            } else {
-                url = Link.manage_work + Link.get_list;
-            }
+            keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+
             keyObj.put("sort", "start_time desc");
             keyObj.put("page_count", 20);
             keyObj.put("curl_page", curl_page);
@@ -170,6 +166,10 @@ public class MyOverTimeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle savedInstanceState) {
         final View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
+
+        if (mFragment.getActivity().getClass() == MyOverTimeActivity.class) {
+            url = Link.my_work + Link.get_list;
+        }
 
         mBack = (TextView) v.findViewById(R.id.my_overtime_back);
         mBack.setOnClickListener(new View.OnClickListener() {

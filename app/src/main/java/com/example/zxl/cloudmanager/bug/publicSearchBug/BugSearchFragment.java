@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.example.zxl.cloudmanager.Edit;
 import com.example.zxl.cloudmanager.bug.myBug.MyBugActivity;
 import com.example.zxl.cloudmanager.bug.myBug.MyBugFragment;
 import com.example.zxl.cloudmanager.R;

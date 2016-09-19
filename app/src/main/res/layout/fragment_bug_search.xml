@@ -6,6 +6,7 @@
     <LinearLayout style="@style/Toptitle_LayoutStyle">
 
         <TextView
+            android:id="@+id/bug_search_back"
             style="@style/toptextview_left"
             android:text="@string/text_return" />
 
@@ -13,16 +14,13 @@
             style="@style/toptextview_center"
             android:text="@string/bug_search" />
 
-                <TextView
-                    style="@style/toptextview_left"
-                    android:text="@string/text_return"
-                    android:id="@+id/bug_search_back"/>
+        <TextView
+            style="@style/topview_right"
+            android:text="" />
 
     </LinearLayout>
 
-                <TextView
-                    style="@style/topview_right"
-                    android:text="" />
+    <ScrollView style="@style/ScrollView_Style">
 
         <LinearLayout style="@style/linearLayoutStyle">
 
@@ -138,8 +136,8 @@
                     android:id="@+id/bug_level_sprinner"
                     style="@style/Spinner_Style" />
             </LinearLayout>
-        </LinearLayout>
 
+        </LinearLayout>
 
     </ScrollView>
 
