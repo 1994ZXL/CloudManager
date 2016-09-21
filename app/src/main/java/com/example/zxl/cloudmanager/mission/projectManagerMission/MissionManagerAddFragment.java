@@ -1,6 +1,7 @@
 package com.example.zxl.cloudmanager.mission.projectManagerMission;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -89,77 +90,6 @@ public class MissionManagerAddFragment extends Fragment {
     private String keyMember = "";
 
     private Fragment mFragment;
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.message_save, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_edit_message:
-                if (null == projectId || null == missionName || null == mBeginTime.getText()
-                        || null == memberId || null == mEndTime.getText()) {
-                    Toast.makeText(getActivity(),
-                            "条件不全",
-                            Toast.LENGTH_SHORT).show();
-                    break;
-                } else {
-                    try {
-
-                        keyObjAdd.put(Link.pm_id, projectId);
-
-                        if (null != missionContent)
-                            keyObjAdd.put(Link.content, missionContent);
-
-                        keyObjAdd.put(Link.mem_id, memberId);
-
-                        keyObjAdd.put(Link.title, missionName);
-
-
-                        keyObjAdd.put(Link.start_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(mBeginTime.getText().toString()));
-
-
-                        keyObjAdd.put(Link.over_time, DateForGeLingWeiZhi.toGeLinWeiZhi3(mEndTime.getText().toString()));
-
-                        if (null != evaluate)
-                            keyObjAdd.put(Link.evaluate, evaluate);
-
-                        keyObjAdd.put(Link.status, status);
-
-                        keyAdd = DESCryptor.Encryptor(keyObjAdd.toString());
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    mParamsAdd.put("key", keyAdd);
-                    Log.d(TAG,"key:" + keyAdd);
-
-                    mHttpcAdd.post(Link.localhost + "pm_task&act=add", mParamsAdd, new JsonHttpResponseHandler() {
-                        @Override
-                        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                            try {
-                                Toast.makeText(getActivity(),
-                                        response.getString("msg"),
-                                        Toast.LENGTH_SHORT).show();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                            Toast.makeText(getActivity(),
-                                    R.string.edit_error,
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
-
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -412,6 +342,18 @@ public class MissionManagerAddFragment extends Fragment {
                                     Toast.LENGTH_SHORT).show();
                         }
                     });
+                }
+                Fragment fragment = new MissionManagerListFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
                 }
             }
         });

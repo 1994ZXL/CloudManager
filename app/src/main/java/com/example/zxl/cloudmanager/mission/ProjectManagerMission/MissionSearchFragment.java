@@ -200,6 +200,8 @@ public class MissionSearchFragment extends Fragment {
                     bundle.putInt(Link.end_time_to, -1);
                 }
 
+                bundle.putInt(Link.status, state);
+
                 fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {

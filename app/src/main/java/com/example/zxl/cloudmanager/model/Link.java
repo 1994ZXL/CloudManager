@@ -5,7 +5,7 @@ package com.example.zxl.cloudmanager.model;
  */
 public class Link {
 //    public static final String localhost = "http://192.168.3.119:8099/yunmgr_v1.0/api/uc.php?app=";
-    public static final String localhost = "http://192.168.3.25/yunmgr_v1.0/api/uc.php?app=";
+    public static final String localhost = "http://192.168.3.12/yunmgr_v1.0/api/uc.php?app=";
 //    public static final String localhost = "http://192.168.0.102/yunmgr_v1.0/api/uc.php?app=";
     public static final String API = "http://localhost/yunmgr_v1.0/api/uc.php?app=";
 
@@ -74,6 +74,7 @@ public class Link {
     //pm_bug
     public static final String pm_bug = "pm_bug&act=";
     public static final String pmbug_id = "pmbug_id";
+    public static final String modify_time = "modify_time";
 
     //my_bug
     public static final String my_bug = "my_bug&act=";

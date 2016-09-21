@@ -29,7 +29,7 @@
 
                 <TextView
                     style="@style/Text_view_Style"
-                    android:text="@string/my_mission_name" />
+                    android:text="@string/project_name_edittext" />
 
                 <Spinner
                     android:id="@+id/pm_task_add_projectName"

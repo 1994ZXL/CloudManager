@@ -24,6 +24,9 @@ public class Bug {
     private String modifier; //修改人
     private String underProgram;
     private String content; //内容
+    private int pri; //优先级 1:低 2:中 3:高
+    private String into_way; //进入方式
+    private String remark; //备注
 
     public Bug(){}
 
@@ -42,6 +45,9 @@ public class Bug {
     private static final String JSON_SUBMITTER = "submitter";
     private static final String JSON_MODIFIER = "modifier" ;
     private static final String JSON_CONTENT = "content";
+    private static final String JSON_PRI = "pri";
+    private static final String JSON_INTO_WAY = "into_way";
+    private static final String JSON_REMARK = "remark";
 
     public Bug(JSONObject json) throws JSONException {
         if (json.has(JSON_PMBUG_ID))
@@ -74,6 +80,42 @@ public class Bug {
             modify_time = json.getInt(JSON_MODIFY);
         if (json.has(JSON_CONTENT))
             content = json.getString(JSON_CONTENT);
+        if (json.has(JSON_PRI))
+            pri = json.getInt(JSON_PRI);
+        if (json.has(JSON_INTO_WAY))
+            into_way = json.getString(JSON_INTO_WAY);
+        if (json.has(JSON_REMARK))
+            remark = json.getString(JSON_REMARK);
+    }
+
+    public String getPri() {
+        if (pri == 1)
+            return "低";
+        if (pri == 2)
+            return "中";
+        if (pri == 3)
+            return "高";
+        return null;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getInto_way() {
+        return into_way;
+    }
+
+    public void setInto_way(String into_way) {
+        this.into_way = into_way;
+    }
+
+    public void setPri(int pri) {
+        this.pri = pri;
     }
 
     public String getPmbug_id() {
@@ -204,12 +246,6 @@ public class Bug {
             return "不解决";
         } else if (status == 4) {
             return "待修改";
-        } else if (status == 5) {
-            return "待测试";
-        } else if (status == 6) {
-            return "已通过";
-        } else if (status == 7) {
-            return "已修改";
         }
         return null;
     }

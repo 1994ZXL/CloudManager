@@ -7,7 +7,8 @@
 
         <TextView
             style="@style/toptextview_left"
-            android:text="@string/text_return" />
+            android:text="@string/text_return"
+            android:id="@+id/pm_bug_details_back"/>
 
         <TextView
             style="@style/toptextview_center"
@@ -15,7 +16,8 @@
 
         <TextView
             style="@style/topview_right"
-            android:text="" />
+            android:text="@string/edit"
+            android:id="@+id/pm_bug_details_edit"/>
 
     </LinearLayout>
 
@@ -33,9 +35,9 @@
                         style="@style/Text_view_Style"
                         android:text="@string/project_name_edittext" />
 
-                    <TextView
+                    <Spinner
                         android:id="@+id/pm_bug_details_project_name"
-                        style="@style/Text_view_Style" />
+                        style="@style/Spinner_Style" />
                 </LinearLayout>
 
                 <!-- bug等级-->
@@ -56,9 +58,9 @@
                         style="@style/Text_view_Style"
                         android:text="@string/bug_state" />
 
-                    <TextView
+                    <Spinner
                         android:id="@+id/pm_bug_details_state"
-                        style="@style/Text_view_Style" />
+                        style="@style/Spinner_Style" />
                 </LinearLayout>
                 <!-- 优先级-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -68,7 +70,7 @@
                         android:text="@string/project_mission_priority" />
 
                     <TextView
-                        android:id="@+id/bug_details_state"
+                        android:id="@+id/pm_bug_details_pri"
                         style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- bug内容-->
@@ -79,7 +81,7 @@
                         android:text="@string/bug_content" />
 
                     <TextView
-                        android:id="@+id/bug_details_content"
+                        android:id="@+id/pm_bug_details_content"
                         style="@style/Text_view_Style" />
                 </LinearLayout>
 
@@ -96,19 +98,19 @@
                         android:text="@string/usecase_id" />
 
                     <TextView
-                        android:id="@+id/bug_details_usecase_number"
+                        android:id="@+id/pm_bug_details_usecase_number"
                         style="@style/Text_view_Style" />
                 </LinearLayout>
-                <!-- 操作模式-->
+                <!-- 用例模块-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/operation_mode" />
+                        android:text="@string/usecase_model" />
 
-                    <TextView
-                        android:id="@+id/bug_details_operation_mode"
-                        style="@style/Text_view_Style" />
+                    <Spinner
+                        android:id="@+id/pm_bug_details_usecase_model"
+                        style="@style/Spinner_Style" />
                 </LinearLayout>
                 <!-- 进入方式-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
@@ -118,7 +120,7 @@
                         android:text="@string/entrance_mode" />
 
                     <TextView
-                        android:id="@+id/bug_details_entrance_mode"
+                        android:id="@+id/pm_bug_details_entrance_mode"
                         style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 发现时间-->
@@ -129,7 +131,7 @@
                         android:text="@string/found_time" />
 
                     <TextView
-                        android:id="@+id/bug_details_found_time"
+                        android:id="@+id/pm_bug_details_found_time"
                         style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 发现人-->
@@ -140,7 +142,7 @@
                         android:text="@string/found_man" />
 
                     <TextView
-                        android:id="@+id/bug_details_found_man"
+                        android:id="@+id/pm_bug_details_found_man"
                         style="@style/Text_view_Style" />
                 </LinearLayout>
                 <!-- 修改时间-->
@@ -151,7 +153,7 @@
                         android:text="@string/edit_time" />
 
                     <TextView
-                        android:id="@+id/bug_details_edit_time"
+                        android:id="@+id/pm_bug_details_edit_time"
                         style="@style/Text_view_Style" />
                 </LinearLayout>
 
@@ -167,20 +169,20 @@
                         style="@style/Text_view_Style"
                         android:text="@string/edit_man" />
 
-                    <TextView
-                        android:id="@+id/bug_details_edit_man"
-                        style="@style/Text_view_Style" />
+                    <Spinner
+                        android:id="@+id/pm_bug_details_edit_man"
+                        style="@style/Spinner_Style" />
                 </LinearLayout>
-                <!-- 所属项目-->
+                <!-- 备注-->
                 <LinearLayout style="@style/Viewline_LayoutStyle">
 
                     <TextView
                         style="@style/Text_view_Style"
-                        android:text="@string/under_program" />
+                        android:text="@string/remark" />
 
                     <TextView
-                        android:id="@+id/bug_details_under_program"
-                        style="@style/Text_view_Style" />
+                        android:id="@+id/pm_bug_details_remark"
+                        style="@style/Spinner_Style" />
                 </LinearLayout>
 
             </LinearLayout>

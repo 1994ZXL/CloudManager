@@ -102,6 +102,7 @@ public class MissionManagerListFragment extends Fragment {
                     keyObj.put(Link.end_time_from, saveInstanceState.getInt(Link.end_time_from));
                 if (-1 != saveInstanceState.getInt(Link.end_time_to))
                     keyObj.put(Link.end_time_to, saveInstanceState.getInt(Link.end_time_to));
+                keyObj.put(Link.status, saveInstanceState.getInt(Link.status));
             } catch (Exception e) {
                 e.printStackTrace();
             }
