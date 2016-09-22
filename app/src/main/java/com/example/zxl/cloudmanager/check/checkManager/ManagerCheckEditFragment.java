@@ -93,13 +93,13 @@ public class ManagerCheckEditFragment extends Fragment{
         });
 
         if (sCheck.getS_time() != 0){
-            mS_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getS_time()));
+            mS_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getS_time()+28800));
         } else {
             mS_time.setText("——");
         }
 
         if (sCheck.getE_time() != 0) {
-            mE_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getE_time()));
+            mE_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getE_time()+28800));
         } else {
             mE_time.setText("——");
         }
@@ -107,11 +107,11 @@ public class ManagerCheckEditFragment extends Fragment{
         if (sCheck.getS_att_time() == 0) {
             mS_att_time.setText("——");
         }else {
-            mS_att_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getS_att_time()));
+            mS_att_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getS_att_time()+28800));
         }
 
         if (sCheck.getE_att_time() != 0) {
-            mE_att_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getE_att_time()));
+            mE_att_time.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(sCheck.getE_att_time()+28800));
         } else {
             mE_att_time.setText("——");
         }
@@ -150,19 +150,19 @@ public class ManagerCheckEditFragment extends Fragment{
             public void onClick(View view) {
                 try {
                     if (!mS_att_time.getText().equals("——"))
-                        keyObj.put(Link.S_att_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mS_att_time.getText().toString()));
+                        keyObj.put(Link.S_att_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mS_att_time.getText().toString())-28800);
                     else keyObj.put(Link.S_att_time, sCheck.getS_att_time());
 
                     if (!mS_time.getText().equals("——"))
-                        keyObj.put(Link.S_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mS_time.getText().toString()));
+                        keyObj.put(Link.S_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mS_time.getText().toString())-28800);
                     else keyObj.put(Link.S_time, sCheck.getS_time());
 
                     if (!mE_att_time.getText().equals("——"))
-                        keyObj.put(Link.E_att_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mE_att_time.getText().toString()));
+                        keyObj.put(Link.E_att_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mE_att_time.getText().toString())-28800);
                     else keyObj.put(Link.E_att_time, sCheck.getE_att_time());
 
                     if (!mE_time.getText().equals("——"))
-                        keyObj.put(Link.E_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mE_time.getText().toString()));
+                        keyObj.put(Link.E_time, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mE_time.getText().toString())-28800);
                     else keyObj.put(Link.E_time, sCheck.getE_time());
 
                     keyObj.put(Link.att_id, sCheck.getAtt_id());

@@ -282,7 +282,11 @@ public class MyPostFragment extends Fragment {
 
             viewHolder.mName.setText(check.getMem_name());
             viewHolder.mDate.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(check.getDaily_date() + 28800));
-            viewHolder.mOpinion.setText(check.getOpinion());
+            if ("null".equals(check.getOpinion())){
+                viewHolder.mOpinion.setText("--");
+            } else {
+                viewHolder.mOpinion.setText(check.getOpinion());
+            }
             viewHolder.mStatus.setText(check.getState());
             viewHolder.mContent.setText(check.getContent());
 

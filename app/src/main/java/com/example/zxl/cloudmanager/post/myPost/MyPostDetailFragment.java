@@ -55,8 +55,6 @@ public class MyPostDetailFragment extends Fragment {
 
     private static Post sPost = new Post();
 
-    private static final String MYPOST_CONTENT = "日报内容";
-
     private static int mPosition;
 
     private Fragment mFragment;
@@ -113,7 +111,11 @@ public class MyPostDetailFragment extends Fragment {
         mName.setText(sPost.getMem_name());
         mState.setText(sPost.getState());
         mLevel.setText(sPost.getLevel());
-        mOpinion.setText(sPost.getOpinion());
+        if ("null".equals(sPost.getOpinion())) {
+            mOpinion.setText("--");
+        } else {
+            mOpinion.setText(sPost.getOpinion());
+        }
         mOpinion.setFocusable(false);
         mContent.setText(sPost.getContent());
         mContent.addTextChangedListener(new TextWatcher() {

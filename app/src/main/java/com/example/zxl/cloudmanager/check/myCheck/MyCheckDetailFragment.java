@@ -74,19 +74,19 @@ public class MyCheckDetailFragment extends Fragment{
         checkManager.setText(mCheck.getMaster_name());
 
         if (mCheck.getAtt_date() != 0) {
-            chekdate.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mCheck.getAtt_date()));
+            chekdate.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(mCheck.getAtt_date()+28800));
         } else {
             chekdate.setText("——");
         }
 
         if (mCheck.getS_time() != 0){
-            stipulationOnDuty.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mCheck.getS_time()));
+            stipulationOnDuty.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mCheck.getS_time()+28800));
         } else {
             stipulationOnDuty.setText("——");
         }
 
         if (mCheck.getE_time() != 0) {
-            stipulaitonOffDuty.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mCheck.getE_time()));
+            stipulaitonOffDuty.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mCheck.getE_time()+28800));
         } else {
             stipulaitonOffDuty.setText("——");
         }
@@ -94,11 +94,11 @@ public class MyCheckDetailFragment extends Fragment{
         if (mCheck.getS_att_time() == 0) {
             onDuty.setText("——");
         }else {
-            onDuty.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mCheck.getS_att_time()));
+            onDuty.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mCheck.getS_att_time()+28800));
         }
 
         if (mCheck.getE_att_time() != 0) {
-            offDuty.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mCheck.getE_att_time()));
+            offDuty.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mCheck.getE_att_time()+28800));
         } else {
             offDuty.setText("——");
         }

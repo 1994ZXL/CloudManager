@@ -82,7 +82,7 @@
 
                 <TextView
                     style="@style/Text_view_Style"
-                    android:text="@string/goon_technical" />
+                    android:text="@string/operation_man" />
 
                 <TextView
                     android:id="@+id/pm_item_manager"

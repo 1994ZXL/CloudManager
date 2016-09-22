@@ -233,13 +233,13 @@ public class MainFragment extends Fragment {
                             if (0 == array.getJSONObject(i).getInt(Link.s_att_time)) {
                                 mSignTime = "上班";
                             } else {
-                                mSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi3(array.getJSONObject(i).getInt(Link.s_att_time));
+                                mSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi3(array.getJSONObject(i).getInt(Link.s_att_time)+28800);
                                 mSignBtn.setClickable(false);
                             }
                             if (0 == array.getJSONObject(i).getInt(Link.e_att_time)) {
                                 mOffSignTime = "下班";
                             } else {
-                                mOffSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi3(array.getJSONObject(i).getInt(Link.e_att_time));
+                                mOffSignTime = DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi3(array.getJSONObject(i).getInt(Link.e_att_time)+28800);
                                 mOffSignBtn.setClickable(false);
                             }
                         }
@@ -401,12 +401,6 @@ public class MainFragment extends Fragment {
     private void offSign() {
         mOffSignBtn.setText(mOffSignTime);
         mOffSignBtn.setClickable(false);
-    }
-
-    private String getTime() {
-        Date curDate = new Date(System.currentTimeMillis()); //获取当前时间
-        String date = android.text.format.DateFormat.format("yyyy年MM月dd", curDate).toString();
-        return date;
     }
 
 }

@@ -66,7 +66,7 @@ public class LeaderPostDetailFragment extends Fragment {
     private int isLevel = 1;
 
     private String opinion;
-    private boolean isOpinion = false;
+    private boolean isOpinion = true;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
@@ -114,19 +114,15 @@ public class LeaderPostDetailFragment extends Fragment {
         mLevel = (Spinner) view.findViewById(R.id.post_details_level_spinner);
         //"全部", "很满意", "满意", "一般"
         if (sPost.getLevel() == "全部"){
-            level = 0;
             levelList = new String[]{"全部", "很满意", "满意", "一般"};
         }
         if (sPost.getLevel() == "很满意"){
-            level = 1;
             levelList = new String[]{"很满意", "全部", "满意", "一般"};
         }
         if (sPost.getLevel() == "满意"){
-            level = 2;
             levelList = new String[]{"满意", "全部", "很满意", "一般"};
         }
         if (sPost.getLevel() == "一般"){
-            level = 3;
             levelList = new String[]{"一般", "全部", "很满意", "满意"};
         }
 
@@ -160,7 +156,18 @@ public class LeaderPostDetailFragment extends Fragment {
             mLevel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    level = i;
+                    if (levelList[i] == "全部"){
+                        level = 0;
+                    }
+                    if (levelList[i] == "很满意"){
+                        level = 1;
+                    }
+                    if (levelList[i] == "满意"){
+                        level = 2;
+                    }
+                    if (levelList[i] == "一般"){
+                        level = 3;
+                    }
                     if (i == 0) {
                         level = sPost.getLevel1();
                     }
@@ -182,7 +189,6 @@ public class LeaderPostDetailFragment extends Fragment {
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     opinion = charSequence.toString();
-                    isOpinion = true;
                 }
 
                 @Override

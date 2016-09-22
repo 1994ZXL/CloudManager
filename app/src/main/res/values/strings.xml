@@ -238,6 +238,7 @@
     <string name="contact_name">甲方姓名</string>
     <string name="project_state">运维状态</string>
     <string name="operation_details">运维详情</string>
+    <string name="operation_man">运维负责人</string>
     <string name="contact_mob">联系电话</string>
     <string name="contact">联系方式</string>
     <string name="goon_technical">运维技术负责人</string>

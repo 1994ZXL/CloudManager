@@ -394,7 +394,7 @@ public class PMManageProjectDetailFragment extends Fragment {
 
         if (mProject.getReady_time() != 0)
             mReady_time.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mProject.getReady_time()));
-        else mReady_time.setText("--");
+        else ;
         mReady_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -404,7 +404,7 @@ public class PMManageProjectDetailFragment extends Fragment {
 
         if (mProject.getGoon_time() != 0)
             mGoon_time.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mProject.getGoon_time()));
-        else mGoon_time.setText("--");
+        else ;
         mGoon_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -414,7 +414,7 @@ public class PMManageProjectDetailFragment extends Fragment {
 
         if (mProject.getGoon_time() != 0)
             mTodo_time.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mProject.getTodo_time()));
-        else mTodo_time.setText("--");
+        else ;
         mTodo_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -424,7 +424,7 @@ public class PMManageProjectDetailFragment extends Fragment {
 
         if (mProject.getCancel_time() != 0)
             mCancel_time.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mProject.getCancel_time()));
-        else mCancel_time.setText("--");
+        else ;
         mCancel_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -434,7 +434,7 @@ public class PMManageProjectDetailFragment extends Fragment {
 
         if (mProject.getFinshed_time() != 0)
             mFinshed_time.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mProject.getFinshed_time()));
-        else mFinshed_time.setText("--");
+        else ;
         mFinshed_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -444,7 +444,7 @@ public class PMManageProjectDetailFragment extends Fragment {
 
         if (mProject.getGoon_actual_start_time() != 0)
             mGoon_actual_start_time.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mProject.getGoon_actual_start_time()));
-        else mGoon_actual_start_time.setText("--");
+        else ;
         mGoon_actual_start_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -454,7 +454,7 @@ public class PMManageProjectDetailFragment extends Fragment {
 
         if (mProject.getGoon_actual_end_time() != 0)
             mGoon_actual_end_time.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mProject.getGoon_actual_end_time()));
-        else mGoon_actual_end_time.setText("--");
+        else ;
         mGoon_actual_end_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
