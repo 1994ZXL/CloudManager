@@ -1,7 +1,9 @@
 package com.example.zxl.cloudmanager;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -256,8 +258,19 @@ public class MainFragment extends Fragment {
             mSignBtn.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    check("start_work");
-                    sign();
+                    mSignTime = android.text.format.DateFormat.format("yyyy.M.dd   HH:mm:ss", System.currentTimeMillis()).toString();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mFragment.getActivity());
+                    builder.setTitle("提示");
+                    builder.setMessage("确认上班？\n当前时间：" + mSignTime);
+                    builder.setNegativeButton("取消", null);
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+                        @Override
+                        public void onClick(DialogInterface dialog,int which){
+                            check("start_work");
+                            sign();
+                        }
+                    });
+                    builder.show();
                 }
             });
         } else {
@@ -268,8 +281,19 @@ public class MainFragment extends Fragment {
             mOffSignBtn.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v){
-                    check("end_work");
-                    offSign();
+                    mOffSignTime = android.text.format.DateFormat.format("yyyy.M.dd   HH:mm:ss", System.currentTimeMillis()).toString();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(mFragment.getActivity());
+                    builder.setTitle("提示");
+                    builder.setMessage("确认下班？\n当前时间：" + mOffSignTime);
+                    builder.setNegativeButton("取消", null);
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+                        @Override
+                        public void onClick(DialogInterface dialog,int which){
+                            check("end_work");
+                            offSign();
+                        }
+                    });
+                    builder.show();
                 }
             });
         } else {
@@ -370,13 +394,11 @@ public class MainFragment extends Fragment {
     }
 
     private void sign() {
-        mSignTime = android.text.format.DateFormat.format("yyyy.M.dd   HH:mm:ss", System.currentTimeMillis()).toString();
         mSignBtn.setText(mSignTime);
         mSignBtn.setClickable(false);
     }
 
     private void offSign() {
-        mOffSignTime = android.text.format.DateFormat.format("yyyy.M.dd   HH:mm:ss", System.currentTimeMillis()).toString();
         mOffSignBtn.setText(mOffSignTime);
         mOffSignBtn.setClickable(false);
     }

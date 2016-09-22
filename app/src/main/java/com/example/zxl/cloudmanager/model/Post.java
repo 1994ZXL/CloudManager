@@ -92,6 +92,10 @@ public class Post {
         return null;
     }
 
+    public int getLevel1() {
+        return level;
+    }
+
     public void setLevel(int level) {
         this.level = level;
     }

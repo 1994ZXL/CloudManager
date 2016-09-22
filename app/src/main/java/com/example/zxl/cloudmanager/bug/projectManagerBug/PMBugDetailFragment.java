@@ -57,11 +57,15 @@ public class PMBugDetailFragment extends Fragment {
     private TextView mEdit;
     private Fragment mFragment;
 
+    private ArrayList<String> nameList1 = new ArrayList<String>();
+    private ArrayList<String> idList1 = new ArrayList<String>();
     private ArrayList<String> projectNameList = new ArrayList<String>();
     private ArrayList<String> projectIdList = new ArrayList<String>();
     private ArrayAdapter<String> projectNameAdapter;
     private String projectid;
 
+    private ArrayList<String> nameList2 = new ArrayList<String>();
+    private ArrayList<String> idList2 = new ArrayList<String>();
     private ArrayList<String> modifierNameList = new ArrayList<String>();
     private ArrayList<String> modifierIdList = new ArrayList<String>();
     private ArrayAdapter<String> modifierAdapter;
@@ -117,8 +121,8 @@ public class PMBugDetailFragment extends Fragment {
         mBugContent = (TextView) view.findViewById(R.id.pm_bug_details_content);
         mUseCaseNumber = (TextView) view.findViewById(R.id.pm_bug_details_usecase_number);
         mIntoWay = (TextView) view.findViewById(R.id.pm_bug_details_entrance_mode);
-        mModifyTime = (TextView) view.findViewById(R.id.pm_bug_details_found_time);
-        mSubmitTime = (TextView) view.findViewById(R.id.pm_bug_details_edit_time);
+        mModifyTime = (TextView) view.findViewById(R.id.pm_bug_details_edit_time);
+        mSubmitTime = (TextView) view.findViewById(R.id.pm_bug_details_found_time);
         mRemark = (TextView) view.findViewById(R.id.pm_bug_details_remark);
         mBack = (TextView) view.findViewById(R.id.pm_bug_details_back);
         mEdit = (TextView) view.findViewById(R.id.pm_bug_details_edit);
@@ -152,15 +156,27 @@ public class PMBugDetailFragment extends Fragment {
 
                             for (int i = 0; i < array.length(); i++) {
                                 if (array.getJSONObject(i).has("project_name")) {
-                                    projectNameList.add(array.getJSONObject(i).getString("project_name"));
+                                    nameList1.add(array.getJSONObject(i).getString("project_name"));
                                 }
 
                                 if (array.getJSONObject(i).has("pm_id")) {
-                                    projectIdList.add(array.getJSONObject(i).getString("pm_id"));
+                                    idList1.add(array.getJSONObject(i).getString("pm_id"));
                                 }
                             }
 
                             if (null != mFragment.getActivity()) {
+                                projectNameList = new ArrayList<String>(nameList1);
+                                projectIdList = new ArrayList<String>(idList1);
+
+                                if (!"null".equals(sBug.getProject_name())) {
+                                    Log.d(TAG,"存在ProjectName");
+                                    int index = projectNameList.indexOf(sBug.getProject_name());
+                                    projectNameList.remove(index);
+                                    projectNameList.add(0, sBug.getProject_name());
+                                    projectIdList.remove(index);
+                                    projectIdList.add(0, idList1.get(index));
+                                }
+
                                 projectNameAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, projectNameList);
                                 projectNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 mProjectName.setAdapter(projectNameAdapter);
@@ -194,15 +210,27 @@ public class PMBugDetailFragment extends Fragment {
 
                             for (int i = 0; i < array.length(); i++) {
                                 if (array.getJSONObject(i).has("mem_name")) {
-                                    modifierNameList.add(array.getJSONObject(i).getString("mem_name"));
+                                    nameList2.add(array.getJSONObject(i).getString("mem_name"));
                                 }
 
                                 if (array.getJSONObject(i).has("mem_id")) {
-                                    modifierIdList.add(array.getJSONObject(i).getString("mem_id"));
+                                    idList2.add(array.getJSONObject(i).getString("mem_id"));
                                 }
                             }
 
                             if (null != mFragment.getActivity()) {
+                                modifierNameList = new ArrayList<String>(nameList2);
+                                modifierIdList = new ArrayList<String>(idList2);
+
+                                if (!"null".equals(sBug.getModifier())) {
+                                    Log.d(TAG,"存在Modifier");
+                                    int index = modifierNameList.indexOf(sBug.getModifier());
+                                    modifierNameList.remove(index);
+                                    modifierNameList.add(0, sBug.getProject_name());
+                                    modifierIdList.remove(index);
+                                    modifierIdList.add(0, idList2.get(index));
+                                }
+
                                 modifierAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, modifierNameList);
                                 modifierAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                                 mModifier.setAdapter(modifierAdapter);
@@ -245,7 +273,7 @@ public class PMBugDetailFragment extends Fragment {
         mUseCaseModel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                usecasemodel = i;
+                usecasemodel = i + 1;
             }
 
             @Override
@@ -256,11 +284,13 @@ public class PMBugDetailFragment extends Fragment {
 
         mLevel.setText(sBug.getLevel());
         mPri.setText(sBug.getPri());
-        mModifier.setTag(sBug.getModifier());
+        mSubmitter.setText(sBug.getSubmitter());
         mIntoWay.setText(sBug.getInto_way());
+
         if (sBug.getSubmit_time() != 0)
             mSubmitTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sBug.getSubmit_time()));
         else mSubmitTime.setText("--");
+
         if (sBug.getModify_time() != 0)
             mModifyTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sBug.getModify_time()));
         else mModifyTime.setText("--");
@@ -270,6 +300,7 @@ public class PMBugDetailFragment extends Fragment {
                 DateTimePicker.selectDate(mFragment, mModifyTime);
             }
         });
+
         mRemark.setText(sBug.getRemark());
         mBugContent.setText(sBug.getContent());
         mUseCaseNumber.setText(sBug.getCase_mode());

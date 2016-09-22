@@ -38,52 +38,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/bottom_menu_addresslist_bar"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:paddingTop="8dp"
-                android:src="@drawable/tab_menu_addresslist" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="@string/bottom_menu_addresslist_bar"
-                android:textColor="@drawable/tab_menu_text"
-                android:textSize="10dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/bottom_menu_customer_bar"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:paddingTop="8dp"
-                android:src="@drawable/tab_menu_customer" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="@string/bottom_menu_custom_bar"
-                android:textColor="@drawable/tab_menu_text"
-                android:textSize="10dp" />
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/bottom_menu_about_bar"
             android:layout_width="0dp"
             android:layout_height="match_parent"

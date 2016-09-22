@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final String TAG = "MainActivity";
     private LinearLayout bottomHomeBar;
-    private LinearLayout bottomAddressListBar;
-    private LinearLayout bottomCustomerBar;
     private LinearLayout bottomAboutBar;
     private LinearLayout bottomContent;
     private FragmentManager fragmentManager;
@@ -42,27 +40,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fragmentManager = getFragmentManager();
 
-        //fragment = fragmentManager.findFragmentById(R.id.fragmentContiner);
-        /*
-        fragment = fragmentManager.findFragmentById(R.id.fragmentContiner);
-        if (null == fragment) {
-            fragment = new MainFragment();
-            fragmentManager.beginTransaction().replace(R.id.fragmentContiner, fragment).commit();
-        }*/
         bindViews();
         bottomHomeBar.performClick(); //模拟一次点击,使进入时就选择第一项
     }
     private void bindViews(){
         //初始化所有组件
         bottomHomeBar = (LinearLayout)findViewById(R.id.bottom_menu_home_bar);
-        bottomAddressListBar = (LinearLayout)findViewById(R.id.bottom_menu_addresslist_bar);
-        bottomCustomerBar = (LinearLayout)findViewById(R.id.bottom_menu_customer_bar);
         bottomAboutBar = (LinearLayout)findViewById(R.id.bottom_menu_about_bar);
         bottomContent = (LinearLayout)findViewById(R.id.bottom_menu_content);
 
         bottomHomeBar.setOnClickListener(this);
-        bottomAddressListBar.setOnClickListener(this);
-        bottomCustomerBar.setOnClickListener(this);
         bottomAboutBar.setOnClickListener(this);
 
     }
@@ -70,8 +57,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void setSelected(){
         //重置所有文本地选中状态
         bottomHomeBar.setSelected(false);
-        bottomAddressListBar.setSelected(false);
-        bottomCustomerBar.setSelected(false);
         bottomAboutBar.setSelected(false);
     }
 
@@ -102,28 +87,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Log.e(TAG,"mainFragment : " + "显示已有的mainFragment");
                     //fragmentManager.beginTransaction().replace(R.id.fragmentContiner, mainFragment).commit();
                     ft.show(mainFragment);
-                }
-                break;
-            case R.id.bottom_menu_addresslist_bar:
-                setSelected();
-                bottomAddressListBar.setSelected(true);
-                if(companyMemberListFragment == null){
-                    companyMemberListFragment = new CompanyContactionFragment();
-                    ft.add(R.id.fragmentContiner,companyMemberListFragment);
-                }else {
-                    //fragmentManager.beginTransaction().replace(R.id.fragmentContiner, companyMemberListFragment).commit();
-                    ft.show(companyMemberListFragment);
-                }
-                break;
-            case R.id.bottom_menu_customer_bar:
-                setSelected();
-                bottomCustomerBar.setSelected(true);
-                if(customerListFragment == null){
-                    customerListFragment = new CustomerContactionFragment();
-                    ft.add(R.id.fragmentContiner,customerListFragment);
-                }else {
-                   // fragmentManager.beginTransaction().replace(R.id.fragmentContiner, customerListFragment).commit();
-                    ft.show(customerListFragment);
                 }
                 break;
             case R.id.bottom_menu_about_bar:

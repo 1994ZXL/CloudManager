@@ -184,7 +184,7 @@ public class MyBugAddFragment extends Fragment {
         mBugStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                bugstatus = i;
+                bugstatus = i + 1;
             }
 
             @Override

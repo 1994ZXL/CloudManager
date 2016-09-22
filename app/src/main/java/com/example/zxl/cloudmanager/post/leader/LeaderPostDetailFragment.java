@@ -60,11 +60,13 @@ public class LeaderPostDetailFragment extends Fragment {
 
     private static Post sPost = new Post();
 
-    private static final String[] levelList = new String[]{"全部", "很满意", "满意", "一般"};
+    private String[] levelList = new String[]{"全部", "很满意", "满意", "一般"};
     private ArrayAdapter<String> levelAdapter;
     private int level;
+    private int isLevel = 1;
 
     private String opinion;
+    private boolean isOpinion = false;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
@@ -103,9 +105,30 @@ public class LeaderPostDetailFragment extends Fragment {
         mDailyDate = (TextView) view.findViewById(R.id.post_details_date);
         mState = (TextView) view.findViewById(R.id.post_details_state);
         mOpinion = (EditText) view.findViewById(R.id.post_details_opinion);
+        if (null != sPost.getOpinion()){
+            if (!"null".equals(sPost.getOpinion()))
+                opinion = sPost.getOpinion();
+        }
         mEdit = (TextView) view.findViewById(R.id.post_details_save);
         mLevelTextView = (TextView) view.findViewById(R.id.post_details_level);
         mLevel = (Spinner) view.findViewById(R.id.post_details_level_spinner);
+        //"全部", "很满意", "满意", "一般"
+        if (sPost.getLevel() == "全部"){
+            level = 0;
+            levelList = new String[]{"全部", "很满意", "满意", "一般"};
+        }
+        if (sPost.getLevel() == "很满意"){
+            level = 1;
+            levelList = new String[]{"很满意", "全部", "满意", "一般"};
+        }
+        if (sPost.getLevel() == "满意"){
+            level = 2;
+            levelList = new String[]{"满意", "全部", "很满意", "一般"};
+        }
+        if (sPost.getLevel() == "一般"){
+            level = 3;
+            levelList = new String[]{"一般", "全部", "很满意", "满意"};
+        }
 
         mLevelSpinnerLinearLayout = (LinearLayout) view.findViewById(R.id.post_level_spinnerLinearLayout);
         mLevelLinearLayout = (LinearLayout) view.findViewById(R.id.post_level_linearLayout);
@@ -138,6 +161,10 @@ public class LeaderPostDetailFragment extends Fragment {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     level = i;
+                    if (i == 0) {
+                        level = sPost.getLevel1();
+                    }
+                    Log.d(TAG, ""+ level);
                 }
 
                 @Override
@@ -155,6 +182,7 @@ public class LeaderPostDetailFragment extends Fragment {
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     opinion = charSequence.toString();
+                    isOpinion = true;
                 }
 
                 @Override
@@ -166,7 +194,7 @@ public class LeaderPostDetailFragment extends Fragment {
             mEdit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (0 != level || null != opinion) {
+                    if (isOpinion) {
                         try {
                             if (0 != level)
                                 keyObj.put(Link.level, level);
@@ -210,7 +238,7 @@ public class LeaderPostDetailFragment extends Fragment {
                         }
                     } else {
                         Toast.makeText(getActivity(),
-                                "并没有任何修改内容哦",
+                                "没有评分或评价哦",
                                 Toast.LENGTH_SHORT).show();
                     }
                 }

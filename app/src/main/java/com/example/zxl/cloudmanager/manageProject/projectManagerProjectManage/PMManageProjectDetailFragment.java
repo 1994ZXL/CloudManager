@@ -289,35 +289,41 @@ public class PMManageProjectDetailFragment extends Fragment {
                             goon_business_list = new ArrayList<String>(nameList);
                             goon_business_id_list = new ArrayList<String>(idList);
 
-                            if (!mProject.getGoon_technical_name().equals("null")) {
-                                int index = goon_technical_list.indexOf(mProject.getGoon_technical_name());
-                                goon_technical_list.remove(index);
-                                goon_technical_list.add(0, mProject.getGoon_technical_name());
-                                goon_technical_id_list.remove(index);
-                                goon_technical_id_list.add(0, mProject.getGoon_technical());
+                            if (null != mProject.getGoon_technical_name()) {
+                                if (!"null".equals(mProject.getGoon_technical_name())) {
+                                    int index = goon_technical_list.indexOf(mProject.getGoon_technical_name());
+                                    goon_technical_list.remove(index);
+                                    goon_technical_list.add(0, mProject.getGoon_technical_name());
+                                    goon_technical_id_list.remove(index);
+                                    goon_technical_id_list.add(0, mProject.getGoon_technical());
+                                }
+                                Log.d(TAG,"goon_technical_list: " + goon_technical_list);
+                                Log.d(TAG,"goon_technical_id_list: " + goon_technical_id_list);
                             }
-                            Log.d(TAG,"goon_technical_list: " + goon_technical_list);
-                            Log.d(TAG,"goon_technical_id_list: " + goon_technical_id_list);
 
-                            if (!mProject.getPm_master_name().equals("null")) {
-                                int index = pm_master_list.indexOf(mProject.getPm_master_name());
-                                pm_master_list.remove(index);
-                                pm_master_id_list.remove(index);
-                                pm_master_id_list.add(0, idList.get(index));
-                                pm_master_list.add(0, mProject.getPm_master_name());
+                            if (null != mProject.getPm_master_name()) {
+                                if (!mProject.getPm_master_name().equals("null")) {
+                                    int index = pm_master_list.indexOf(mProject.getPm_master_name());
+                                    pm_master_list.remove(index);
+                                    pm_master_id_list.remove(index);
+                                    pm_master_id_list.add(0, idList.get(index));
+                                    pm_master_list.add(0, mProject.getPm_master_name());
+                                }
+                                Log.d(TAG,"pm_master_list: " + pm_master_list);
+                                Log.d(TAG,"pm_master_id_list: " + pm_master_id_list);
                             }
-                            Log.d(TAG,"pm_master_list: " + pm_master_list);
-                            Log.d(TAG,"pm_master_id_list: " + pm_master_id_list);
 
-                            if (!mProject.getGoon_business_name().equals("null")) {
-                                int index = goon_business_list.indexOf(mProject.getGoon_business_name());
-                                goon_business_list.remove(index);
-                                goon_business_list.add(0, mProject.getGoon_business_name());
-                                goon_business_id_list.remove(index);
-                                goon_business_id_list.add(0, mProject.getGoon_business());
+                            if (null != mProject.getGoon_business_name()) {
+                                if (!mProject.getGoon_business_name().equals("null")) {
+                                    int index = goon_business_list.indexOf(mProject.getGoon_business_name());
+                                    goon_business_list.remove(index);
+                                    goon_business_list.add(0, mProject.getGoon_business_name());
+                                    goon_business_id_list.remove(index);
+                                    goon_business_id_list.add(0, mProject.getGoon_business());
+                                }
+                                Log.d(TAG,"goon_business_list: " + goon_business_list);
+                                Log.d(TAG,"goon_business_id_list: " + goon_business_id_list);
                             }
-                            Log.d(TAG,"goon_business_list: " + goon_business_list);
-                            Log.d(TAG,"goon_business_id_list: " + goon_business_id_list);
 
                             goonTechnicalAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, goon_technical_list);
                             goonTechnicalAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
