@@ -51,6 +51,16 @@ public class PMMember {
     }
 
     public String getRole() {
+        if (role.equals("1"))
+            return "领导";
+        if (role.equals("2"))
+            return "项目负责人";
+        if (role.equals("3"))
+            return "一般成员";
+        return null;
+    }
+
+    public String getRoleString() {
         return role;
     }
 

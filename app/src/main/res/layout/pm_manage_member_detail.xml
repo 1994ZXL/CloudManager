@@ -80,9 +80,9 @@
                         style="@style/Text_view_Style"
                         android:text="@string/role" />
 
-                    <EditText
+                    <Spinner
                         android:id="@+id/pm_manage_member_detail_role"
-                        style="@style/EditText_Style" />
+                        style="@style/Spinner_Style" />
 
                 </LinearLayout>
 

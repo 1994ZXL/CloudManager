@@ -259,7 +259,7 @@ public class MissionManagerAddFragment extends Fragment {
         mStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                status = i + 1;
+                status = i;
             }
 
             @Override

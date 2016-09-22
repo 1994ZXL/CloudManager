@@ -62,7 +62,7 @@ public class MyBugAddFragment extends Fragment {
     private ArrayAdapter<String> bugLevel;
     private int buglevel;
 
-    private String[] bugStatusList = new String[]{"待确认"};
+    private String[] bugStatusList = new String[]{"待确认", ""};
     private ArrayAdapter<String> bugStatus;
     private int bugstatus;
 

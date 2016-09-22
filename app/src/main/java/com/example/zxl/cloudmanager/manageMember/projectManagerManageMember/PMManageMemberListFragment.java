@@ -280,7 +280,6 @@ public class PMManageMemberListFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, final int i) {
             PMMember pmMember = pmMembers.get(i);
-
             viewHolder.mMemberName.setText(pmMember.getMem_name());
             viewHolder.mProjectName.setText(pmMember.getProject_name());
             viewHolder.mRole.setText(pmMember.getRole());

@@ -48,7 +48,7 @@ public class PMManageMemberDetailFragment extends Fragment {
     private Spinner mMemNameSpinner;
     private EditText mProjectName;
     private Spinner mProjectNameSpinner;
-    private EditText mRole;
+    private Spinner mRole;
     private EditText mMemberRes;
     private TextView mBack;
     private TextView mSearch;
@@ -58,7 +58,6 @@ public class PMManageMemberDetailFragment extends Fragment {
 
     private String mem_name;
     private String project_name;
-    private String role;
     private String member_res;
 
     private ArrayAdapter<String> mProjectNameAdapter;
@@ -70,6 +69,10 @@ public class PMManageMemberDetailFragment extends Fragment {
     private ArrayList<String> mem_name_list = new ArrayList<String>(); //名字
     private ArrayList<String> mem_name_id_list = new ArrayList<String>(); //名字id
     private String mem_id;
+
+    private ArrayAdapter<String> mRoleAdapter;
+    private String[] roleList = new String[3];
+    private String role;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
@@ -115,16 +118,21 @@ public class PMManageMemberDetailFragment extends Fragment {
         mMemNameSpinner = (Spinner) v.findViewById(R.id.pm_manage_member_detail_mem_name_spinner);
         mProjectName = (EditText) v.findViewById(R.id.pm_manage_member_detail_project_name);
         mProjectNameSpinner = (Spinner) v.findViewById(R.id.pm_manage_member_detail_project_name_spinner);
-        mRole = (EditText) v.findViewById(R.id.pm_manage_member_detail_role);
+        mRole = (Spinner) v.findViewById(R.id.pm_manage_member_detail_role);
         mMemberRes = (EditText) v.findViewById(R.id.pm_manage_member_detail_member_res);
-
         mBack = (TextView) v.findViewById(R.id.pm_manage_member_detail_back);
         mSearch = (TextView) v.findViewById(R.id.pm_manage_member_detail_search);
         mTitle = (TextView) v.findViewById(R.id.pm_manage_member_detail_title);
         mSave = (Button) v.findViewById(R.id.pm_manage_member_detail_save);
         mem_name = sPmMember.getMem_name();
         project_name = sPmMember.getProject_name();
-        role = sPmMember.getRole();
+        role = sPmMember.getRoleString();
+        if (role.equals("1"))
+            roleList = new String[]{"领导", "项目负责人", "一般成员"};
+        if (role.equals("2"))
+            roleList = new String[]{"项目负责人", "领导", "一般成员"};
+        if (role.equals("3"))
+            roleList = new String[]{"一般成员", "领导", "项目负责人"};
         member_res = sPmMember.getMember_res();
     }
 
@@ -156,23 +164,27 @@ public class PMManageMemberDetailFragment extends Fragment {
             }
         });
 
-        mRole.setText(sPmMember.getRole());
-        mRole.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        if (null != mFragment.getActivity()){
+            mRoleAdapter = new ArrayAdapter<String>(mFragment.getActivity(),android.R.layout.simple_spinner_item, roleList);
+            mRoleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            mRole.setAdapter(mRoleAdapter);
+            mRole.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (roleList[i] == "领导")
+                        role = "1";
+                    if (roleList[i] == "项目负责人")
+                        role = "2";
+                    if (roleList[i] == "一般成员")
+                        role = "3";
+                }
 
-            }
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                role = charSequence.toString();
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
+                }
+            });
+        }
 
         mMemberRes.setText(sPmMember.getMember_res());
         mMemberRes.addTextChangedListener(new TextWatcher() {
@@ -226,7 +238,7 @@ public class PMManageMemberDetailFragment extends Fragment {
                     try {
                         keyObj.put(Link.role, role);
                         keyObj.put(Link.member_res, member_res);
-
+                        keyObj.put(Link.pm_id, sPmMember.getPm_id());
                         keyObj.put(Link.pmmem_id, sPmMember.getPmmem_id());
                         key = DESCryptor.Encryptor(keyObj.toString());
                     } catch (Exception e) {
@@ -246,7 +258,7 @@ public class PMManageMemberDetailFragment extends Fragment {
                         }
                     });
 
-                    Fragment fragment = new PMContactListFragment();
+                    Fragment fragment = new PMManageMemberListFragment();
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     if (!fragment.isAdded()) {
                         transaction.hide(mFragment);
