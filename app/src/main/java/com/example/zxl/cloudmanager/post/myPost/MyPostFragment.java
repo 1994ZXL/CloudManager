@@ -87,7 +87,6 @@ public class MyPostFragment extends Fragment {
     }
 
     private void loadDate(final Bundle saveInstanceState, int curl_page, final View v) {
-        curl_page = mCurl_page;
 
         if (null != saveInstanceState) {
             try {
@@ -150,6 +149,7 @@ public class MyPostFragment extends Fragment {
                                         } else {
                                             fragment = MyPostDetailFragment.newInstance(data);
                                         }
+                                        fragment.setArguments(saveInstanceState);
                                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                         if (!fragment.isAdded()) {
                                             transaction.addToBackStack(null);
@@ -209,6 +209,7 @@ public class MyPostFragment extends Fragment {
                     @Override
                     public void handleMessage(Message msg) {
                         mPosts.clear();
+                        mCurl_page = 1;
                         loadDate(saveInstanceState, mCurl_page, view);
                         pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     }
@@ -220,7 +221,6 @@ public class MyPostFragment extends Fragment {
                 new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
-                        mPosts.clear();
                         mCurl_page++;
                         loadDate(saveInstanceState, mCurl_page, view);
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);

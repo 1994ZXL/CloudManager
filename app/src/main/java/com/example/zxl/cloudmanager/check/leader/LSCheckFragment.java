@@ -89,8 +89,9 @@ public class LSCheckFragment extends Fragment {
             }
         }
         try {
-            keyObj.put(Link.mem_job, User.newInstance().getMem_job());
             keyObj.put(Link.comp_id, User.newInstance().getComp_id());
+            keyObj.put(Link.is_pmleader, User.newInstance().getIs_pmleader());
+            keyObj.put(Link.mem_job, User.newInstance().getMem_job());
             keyObj.put("sort", "att_date desc");
             keyObj.put("page_count", 20);
             keyObj.put("curl_page", curl_page);
@@ -122,11 +123,16 @@ public class LSCheckFragment extends Fragment {
                             @Override
                             public void onItemClick(View view, Object data) {
                                 Fragment fragment = MyCheckDetailFragment.newInstance(data);
+
+                                if (null != saveInstanceState) {
+                                    fragment.setArguments(new Bundle(saveInstanceState));
+                                }
+
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                 if (!fragment.isAdded()) {
                                     transaction.addToBackStack(null);
                                     transaction.hide(mFragment);
-                                    transaction.add(R.id.blankActivity, fragment);
+                                    transaction.replace(R.id.blankActivity, fragment);
                                     transaction.commit();
                                 } else {
                                     transaction.hide(mFragment);
@@ -202,6 +208,9 @@ public class LSCheckFragment extends Fragment {
                 if (null == fragment) {
                     FragmentManager fm = getFragmentManager();
                     fragment = new LeaderCheckSearchFragment();
+                    if (null != saveInstanceState) {
+                        fragment.setArguments(new Bundle(saveInstanceState));
+                    }
                     fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
                 }
             }

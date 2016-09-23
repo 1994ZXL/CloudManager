@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -45,6 +46,7 @@ public class ManageMemberSearchFragment extends Fragment {
     private TextView mBack;
     private Button mSearch;
     private Fragment mFragment;
+    private LinearLayout mMemberNameLinearLayout;
 
     private ArrayAdapter<String> mProjectNameAdapter;
     private ArrayList<String> project_name_list = new ArrayList<String>(); //名字
@@ -86,11 +88,13 @@ public class ManageMemberSearchFragment extends Fragment {
         mMemberName = (EditText) v.findViewById(R.id.manage_member_search_member_name);
         mSearch = (Button) v.findViewById(R.id.manage_member_search_search);
         mBack = (TextView) v.findViewById(R.id.manage_member_search_back);
+        mMemberNameLinearLayout = (LinearLayout) v.findViewById(R.id.member_name_linearLayout);
     }
 
     private void control() {
         if (mFragment.getActivity().getClass() == PSManageMemberActivity.class) {
             url = Link.pm_member + Link.options_pmmember;
+            mMemberNameLinearLayout.setVisibility(View.GONE);
         } else if (mFragment.getActivity().getClass() == PMManageMemberActivity.class) {
             url = Link.pm_manage_member + Link.options_pmmember;
         }

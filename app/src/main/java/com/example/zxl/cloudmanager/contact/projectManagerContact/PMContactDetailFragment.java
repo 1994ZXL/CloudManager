@@ -56,13 +56,14 @@ public class PMContactDetailFragment extends Fragment {
     private TextView mSave;
     private TextView mTitle;
 
-    private String contact_name;
-    private String contact_position;
-    private String contact_company;
-    private String qq;
-    private String wchat;
-    private String phone;
-    private String remark;
+    private static boolean isDetail = false;
+    private static String contact_name;
+    private static String contact_position;
+    private static String contact_company;
+    private static String qq;
+    private static String wchat;
+    private static String phone;
+    private static String remark;
 
     private ArrayAdapter<String> mProjectNameAdapter;
     private ArrayList<String> project_name_list = new ArrayList<String>(); //名字
@@ -82,7 +83,15 @@ public class PMContactDetailFragment extends Fragment {
     private Fragment mFragment;
 
     public static PMContactDetailFragment newInstance(Object data) {
+        isDetail = true;
         sContact = (Contact) data;
+        contact_name = sContact.getContact_name();
+        contact_position = sContact.getContact_position();
+        contact_company = sContact.getContact_company();
+        qq = sContact.getQq();
+        wchat = sContact.getWchat();
+        phone = sContact.getPhone();
+        remark = sContact.getRemark();
         PMContactDetailFragment fragment = new PMContactDetailFragment();
         return fragment;
     }
@@ -121,16 +130,7 @@ public class PMContactDetailFragment extends Fragment {
         mTitle = (TextView) v.findViewById(R.id.pm_contact_detail_title);
     }
 
-    private void control(Bundle bundle) {
-        if (bundle == null) {
-            contact_name = sContact.getContact_name();
-            contact_position = sContact.getContact_position();
-            contact_company = sContact.getContact_company();
-            qq = sContact.getQq();
-            wchat = sContact.getWchat();
-            phone = sContact.getPhone();
-            remark = sContact.getRemark();
-        }
+    private void control(final Bundle bundle) {
 
         mContactName.setText(sContact.getContact_name());
         mContactName.addTextChangedListener(new TextWatcher() {
@@ -285,7 +285,7 @@ public class PMContactDetailFragment extends Fragment {
         });
 
         //详情 else 为添加
-        if (bundle == null) {
+        if (isDetail) {
             mContactProjectNameSpinner.setVisibility(View.GONE);
             mSave.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -319,6 +319,8 @@ public class PMContactDetailFragment extends Fragment {
                     });
                     Log.d(TAG, "Url: "+ Link.localhost + "pm_contact&act=edit&key="+key);
                     Fragment fragment = new PMContactListFragment();
+                    if (null != bundle)
+                        fragment.setArguments(bundle);
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     if (!fragment.isAdded()) {
                         transaction.hide(mFragment);
@@ -416,6 +418,8 @@ public class PMContactDetailFragment extends Fragment {
                     });
                     Log.d(TAG, "Url: "+ Link.localhost + "pm_contact&act=edit&key="+key);
                     Fragment fragment = new PMContactListFragment();
+                    if (null != bundle)
+                        fragment.setArguments(bundle);
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     if (!fragment.isAdded()) {
                         transaction.hide(mFragment);

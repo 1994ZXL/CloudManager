@@ -56,7 +56,7 @@ public class ManagerLeaveDealFragment extends Fragment {
     private ArrayAdapter<String> spinnerAdapter;
     private int status;
 
-    private String suggestion;
+    private static String suggestion;
 
     private static Leave mLeave = new Leave();
 
@@ -78,6 +78,7 @@ public class ManagerLeaveDealFragment extends Fragment {
 
     public static ManagerLeaveDealFragment newInstance(Object data) {
         mLeave = (Leave) data;
+        suggestion = mLeave.getHandle_opinion();
         ManagerLeaveDealFragment fragment = new ManagerLeaveDealFragment();
         return fragment;
     }
@@ -86,9 +87,10 @@ public class ManagerLeaveDealFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.cm_leave_deal, parent, false);
         Log.e(EXTRA_OBJECT, "CM_leave : " + "初始化View");
+        saveInstanceState = getArguments();
 
         init(v);
-        control();
+        control(saveInstanceState);
 
         return v;
     }
@@ -109,7 +111,7 @@ public class ManagerLeaveDealFragment extends Fragment {
         mEdit = (TextView) view.findViewById(R.id.cm_leave_deal_edit);
     }
 
-    private void control() {
+    private void control(final Bundle saveInstanceState) {
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,6 +154,18 @@ public class ManagerLeaveDealFragment extends Fragment {
                     }
 
                 });
+                Fragment fragment = new ManagerLeaveListFragment();
+                fragment.setArguments(saveInstanceState);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.hide(mFragment);
+                    transaction.replace(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
             }
         });
 

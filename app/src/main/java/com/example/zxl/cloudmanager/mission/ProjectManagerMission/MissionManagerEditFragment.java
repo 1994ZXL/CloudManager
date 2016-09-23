@@ -94,9 +94,10 @@ public class MissionManagerEditFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View view = layoutInflater.inflate(R.layout.pm_mission_edit_or_add, parent, false);
+        saveInstanceState = getArguments();
 
         init(view);
-        contorl();
+        contorl(saveInstanceState);
 
         return view;
     }
@@ -119,7 +120,7 @@ public class MissionManagerEditFragment extends Fragment {
         mBack = (TextView) view.findViewById(R.id.pm_mission_edit_back);
     }
 
-    private void contorl() {
+    private void contorl(final Bundle bundle) {
         mTitle.setText(sMission.getTitle());
         mTitle.addTextChangedListener(new TextWatcher() {
             @Override
@@ -301,6 +302,19 @@ public class MissionManagerEditFragment extends Fragment {
                                 Toast.LENGTH_SHORT).show();
                     }
                 });
+                Fragment fragment = new MissionManagerListFragment();
+                fragment.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
             }
         });
 

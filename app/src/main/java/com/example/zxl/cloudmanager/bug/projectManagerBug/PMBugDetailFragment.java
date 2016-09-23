@@ -105,8 +105,9 @@ public class PMBugDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View view = layoutInflater.inflate(R.layout.pm_bug_details, parent, false);
+        saveInstanceState = getArguments();
         init(view);
-        contorl();
+        contorl(saveInstanceState);
         return view;
     }
 
@@ -136,7 +137,7 @@ public class PMBugDetailFragment extends Fragment {
             bugStatusList = new String[]{"待修改", "待确认", "已排除", "不解决"};
     }
 
-    private void contorl() {
+    private void contorl(final Bundle saveInstanceState) {
         try {
             keyObj.put(Link.user_id, User.newInstance().getUser_id());
             key = DESCryptor.Encryptor(keyObj.toString());
@@ -367,6 +368,12 @@ public class PMBugDetailFragment extends Fragment {
                                 Log.e(TAG, "ee2: " + e.getLocalizedMessage());
                             }
                             Fragment fragment = new MyBugFragment();
+
+                            if (null != saveInstanceState) {
+                                Bundle bundle = new Bundle(saveInstanceState);
+                                fragment.setArguments(bundle);
+                            }
+
                             FragmentTransaction transaction = getFragmentManager().beginTransaction();
                             if (!fragment.isAdded()) {
                                 transaction.addToBackStack(null);

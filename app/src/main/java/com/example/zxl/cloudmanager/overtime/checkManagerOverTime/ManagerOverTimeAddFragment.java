@@ -86,9 +86,10 @@ public class ManagerOverTimeAddFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_manager_overtime_add, container, false);
+        savedInstanceState = getArguments();
 
         init(v);
-        control();
+        control(savedInstanceState);
 
         return v;
     }
@@ -104,7 +105,7 @@ public class ManagerOverTimeAddFragment extends Fragment {
         mAdd = (TextView) v.findViewById(R.id.overtime_add_add);
     }
 
-    private void control() {
+    private void control(final Bundle bundle) {
         try {
             keyObj.put(Link.comp_id, User.newInstance().getComp_id());
             key = DESCryptor.Encryptor(keyObj.toString());
@@ -262,6 +263,7 @@ public class ManagerOverTimeAddFragment extends Fragment {
                 fragment = fm.findFragmentById(R.id.blankActivity);
                 if(null == fragment){
                     fragment = new ManagerOvertimeListFragment();
+                    fragment.setArguments(bundle);
                     fm.beginTransaction().add(R.id.blankActivity, fragment).commit();
                 } else {
                     //什么都不做

@@ -94,13 +94,13 @@ public class ManagerCheckQueryFragment extends Fragment {
         mBeginTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DateTimePicker.selectDateTime(mFragment, mBeginTimeBtn);
+                DateTimePicker.selectDate(mFragment, mBeginTimeBtn);
             }
         });
         mEndTimeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DateTimePicker.selectDateTime(mFragment, mEndTimeBtn);
+                DateTimePicker.selectDate(mFragment, mEndTimeBtn);
             }
         });
 
@@ -113,13 +113,13 @@ public class ManagerCheckQueryFragment extends Fragment {
                 bundle.putString(Link.mem_name, name);
 
                 if (null != mBeginTimeBtn.getText()) {
-                    bundle.putInt(Link.att_date_from, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mBeginTimeBtn.getText().toString()));
+                    bundle.putInt(Link.att_date_from, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(mBeginTimeBtn.getText().toString()));
                 } else {
                     bundle.putInt(Link.att_date_from, -1);
                 }
 
                 if (null != mEndTimeBtn.getText()) {
-                    bundle.putInt(Link.att_date_to, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi3(mEndTimeBtn.getText().toString()));
+                    bundle.putInt(Link.att_date_to, DateForGeLingWeiZhi.newInstance().toGeLinWeiZhi(mEndTimeBtn.getText().toString()));
                 } else {
                     bundle.putInt(Link.att_date_to, -1);
                 }

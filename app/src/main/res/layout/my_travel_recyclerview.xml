@@ -1,60 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <LinearLayout style="@style/Toptitle_LayoutStyle">
-
-        <TextView
-            android:id="@+id/my_travel_back"
-            style="@style/toptextview_left"
-            android:text="@string/text_return" />
-
-        <TextView
-            android:id="@+id/leader_post_title"
-            style="@style/toptextview_center"
-            android:text="@string/travel" />
-
-        <TextView
-            android:id="@+id/my_travel_search"
-            style="@style/topview_right"
-            android:text="@string/search" />
-
-    </LinearLayout>
-
-    <com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout
-        android:id="@+id/travel_refresh"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <include layout="@layout/refresh_head" />
-        <!-- 支持所有实现Pullable接口的View -->
+        <LinearLayout style="@style/Toptitle_LayoutStyle">
 
-        <com.example.zxl.cloudmanager.pulltorefresh.pullableview.PullableScrollView
+            <TextView
+                android:id="@+id/my_travel_back"
+                style="@style/toptextview_left"
+                android:text="@string/text_return" />
+
+            <TextView
+                android:id="@+id/leader_post_title"
+                style="@style/toptextview_center"
+                android:text="@string/travel" />
+
+            <TextView
+                android:id="@+id/my_travel_search"
+                style="@style/topview_right"
+                android:text="@string/search" />
+
+        </LinearLayout>
+
+        <com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout
+            android:id="@+id/travel_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ScrollView style="@style/ScrollView_Style">
+            <include layout="@layout/refresh_head" />
+            <!-- 支持所有实现Pullable接口的View -->
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            <com.example.zxl.cloudmanager.pulltorefresh.pullableview.PullableScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/travel_recyclerView"
+                <ScrollView style="@style/ScrollView_Style">
+
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:dividerHeight="10dp" />
+                        android:layout_height="match_parent">
 
-                </RelativeLayout>
-            </ScrollView>
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/travel_recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:dividerHeight="10dp" />
 
-        </com.example.zxl.cloudmanager.pulltorefresh.pullableview.PullableScrollView>
+                    </RelativeLayout>
+                </ScrollView>
 
-        <include layout="@layout/load_more" />
+            </com.example.zxl.cloudmanager.pulltorefresh.pullableview.PullableScrollView>
 
-    </com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout>
+            <include layout="@layout/load_more" />
 
-</LinearLayout>
+        </com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout>
+
+    </LinearLayout>
+
+    <Button
+        style="@style/SearchButton"
+        android:layout_alignParentBottom="true"
+        android:text="@string/add"
+        android:id="@+id/travel_list_add"/>
+
+</RelativeLayout>

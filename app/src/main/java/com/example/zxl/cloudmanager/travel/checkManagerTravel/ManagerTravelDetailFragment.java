@@ -3,6 +3,7 @@ package com.example.zxl.cloudmanager.travel.checkManagerTravel;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.graphics.drawable.RippleDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,7 @@ import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Travel;
+import com.example.zxl.cloudmanager.travel.myTravel.MyTravelDetailFragment;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -79,10 +81,10 @@ public class ManagerTravelDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_travel_detail, container, false);
-
+        savedInstanceState = getArguments();
 
         init(v);
-        control();
+        control(savedInstanceState);
 
         return v;
     }
@@ -104,7 +106,7 @@ public class ManagerTravelDetailFragment extends Fragment {
         mEdit = (TextView) v.findViewById(R.id.manager_travel_detail_edit);
     }
 
-    private void control() {
+    private void control(final Bundle bundle) {
         mEmployerName.setText(mTravel.getMem_name());
         mBeginTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mTravel.getStart_time()));
         mEndTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mTravel.getEnd_time()));
@@ -170,6 +172,19 @@ public class ManagerTravelDetailFragment extends Fragment {
                         }
                     }
                 });
+                Fragment fragment = new MyTravelDetailFragment();
+                fragment.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
             }
         });
     }

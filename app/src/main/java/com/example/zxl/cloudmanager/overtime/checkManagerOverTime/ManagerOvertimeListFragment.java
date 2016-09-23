@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,6 +60,7 @@ public class ManagerOvertimeListFragment extends Fragment {
     private TextView mTitle;
     private TextView mBack;
     private TextView mSearch;
+    private Button mAdd;
 
     public static final int REFRESH_DELAY = 4000;
 
@@ -104,6 +106,7 @@ public class ManagerOvertimeListFragment extends Fragment {
                 keyObj.put("page_count", 20);
                 keyObj.put("curl_page", curl_page);
                 keyObj.put(Link.mem_id, User.newInstance().getUser_id());
+                keyObj.put(Link.mem_job, User.newInstance().getMem_job());
                 keyObj.put(Link.is_pmmaster, User.newInstance().getIs_pmmaster());
                 keyObj.put(Link.is_puncher, User.newInstance().getIs_puncher());
                 keyObj.put(Link.is_pmleader, User.newInstance().getIs_pmleader());
@@ -139,11 +142,12 @@ public class ManagerOvertimeListFragment extends Fragment {
                                 @Override
                                 public void onItemClick(View view, Object data) {
                                     Fragment fragment = ManagerOvertimeDetailFragment.newInstance(data);
+                                    fragment.setArguments(saveInstanceState);
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     if (!fragment.isAdded()) {
                                         transaction.addToBackStack(null);
                                         transaction.hide(mFragment);
-                                        transaction.add(R.id.blankActivity, fragment);
+                                        transaction.replace(R.id.blankActivity, fragment);
                                         transaction.commit();
                                     } else {
                                         transaction.hide(mFragment);
@@ -183,6 +187,7 @@ public class ManagerOvertimeListFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle savedInstanceState) {
         final View v = layoutInflater.inflate(R.layout.main_fragment_overtime, parent, false);
 
+        mAdd = (Button) v.findViewById(R.id.manager_overtime_list_add);
         mBack = (TextView) v.findViewById(R.id.my_overtime_back);
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -234,6 +239,25 @@ public class ManagerOvertimeListFragment extends Fragment {
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                     }
                 }.sendEmptyMessageDelayed(0, 1000);
+            }
+        });
+
+        mAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new ManagerOverTimeAddFragment();
+                fragment.setArguments(saveInstanceState);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.replace(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
             }
         });
 

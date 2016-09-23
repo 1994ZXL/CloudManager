@@ -139,6 +139,7 @@ public class MemoFragment extends Fragment {
                                 @Override
                                 public void onItemClick(View view, Object data) {
                                     Fragment fragment = MemoDetailFragment.newInstance(data);
+                                    fragment.setArguments(saveInstanceState);
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     if (!fragment.isAdded()) {
                                         transaction.addToBackStack(null);
@@ -243,6 +244,7 @@ public class MemoFragment extends Fragment {
             public void onClick(View view) {
                 Fragment fragment = null;
                 if (null == fragment) {
+                    fragment.setArguments(saveInstanceState);
                     FragmentManager fm = getFragmentManager();
                     fragment = new MemoAddFragment();
                     fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();

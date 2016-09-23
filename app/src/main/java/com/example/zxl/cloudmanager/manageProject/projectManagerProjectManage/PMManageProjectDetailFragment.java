@@ -63,15 +63,16 @@ public class PMManageProjectDetailFragment extends Fragment {
     private TextView mSave;
     private TextView mTitle;
 
-    private String project_name; //项目名称
-    private String pm_master_name_id; //项目主管
-    private String goon_technical_id; //技术负责人
-    private String goon_business_id; //客服
-    private String project_summary; //项目内容
-    private String belong_unit; //客户单位
-    private String custom_name; //客户联系人
-    private String custom_phone; //客户手机
-    private int project_state; //项目状态(0:取消，1:准备，2:开发，3:维护，4:结束)
+    private static boolean isDetail = false;
+    private static String project_name; //项目名称
+    private static String pm_master_name_id; //项目主管
+    private static String goon_technical_id; //技术负责人
+    private static String goon_business_id; //客服
+    private static String project_summary; //项目内容
+    private static String belong_unit; //客户单位
+    private static String custom_name; //客户联系人
+    private static String custom_phone; //客户手机
+    private static int project_state; //项目状态(0:取消，1:准备，2:开发，3:维护，4:结束)
 
     private ArrayAdapter<String> adapter;
     private static final String[] stateList={"取消", "准备","开发","维护","结束"};
@@ -104,7 +105,25 @@ public class PMManageProjectDetailFragment extends Fragment {
     private Fragment mFragment;
 
     public static PMManageProjectDetailFragment newInstance(Object data) {
+        isDetail = true;
         mProject = (Project) data;
+        project_name = mProject.getProject_name(); //项目名称
+        goon_technical_id = mProject.getGoon_technical(); //技术负责人
+        goon_business_id = mProject.getGoon_business(); //客服
+        project_summary = mProject.getProject_summary(); //项目内容
+        belong_unit = mProject.getBelong_unit(); //客户单位
+        custom_name = mProject.getCustom_name(); //客户联系人
+        custom_phone = mProject.getCustom_phone(); //客户手机
+        if (mProject.getProject_state().equals("取消")) //项目状态(0:取消，1:准备，2:开发，3:维护，4:结束)
+            project_state = 0;
+        if (mProject.getProject_state().equals("准备"))
+            project_state = 1;
+        if (mProject.getProject_state().equals("开发"))
+            project_state = 2;
+        if (mProject.getProject_state().equals("维护"))
+            project_state = 3;
+        if (mProject.getProject_state().equals("结束"))
+            project_state = 4;
         PMManageProjectDetailFragment fragment = new PMManageProjectDetailFragment();
         return fragment;
     }
@@ -145,26 +164,9 @@ public class PMManageProjectDetailFragment extends Fragment {
         mBack = (TextView) v.findViewById(R.id.pm_detail_back);
         mSave = (TextView) v.findViewById(R.id.pm_detail_save);
         mTitle = (TextView) v.findViewById(R.id.pm_detail_title);
-        project_name = mProject.getProject_name(); //项目名称
-        goon_technical_id = mProject.getGoon_technical(); //技术负责人
-        goon_business_id = mProject.getGoon_business(); //客服
-        project_summary = mProject.getProject_summary(); //项目内容
-        belong_unit = mProject.getBelong_unit(); //客户单位
-        custom_name = mProject.getCustom_name(); //客户联系人
-        custom_phone = mProject.getCustom_phone(); //客户手机
-        if (mProject.getProject_state().equals("取消")) //项目状态(0:取消，1:准备，2:开发，3:维护，4:结束)
-            project_state = 0;
-        if (mProject.getProject_state().equals("准备"))
-            project_state = 1;
-        if (mProject.getProject_state().equals("开发"))
-            project_state = 2;
-        if (mProject.getProject_state().equals("维护"))
-            project_state = 3;
-        if (mProject.getProject_state().equals("结束"))
-            project_state = 4;
     }
 
-    private void control(Bundle bundle) {
+    private void control(final Bundle bundle) {
         mProject_name.setText(mProject.getProject_name());
         mProject_name.addTextChangedListener(new TextWatcher() {
             @Override
@@ -469,7 +471,7 @@ public class PMManageProjectDetailFragment extends Fragment {
             }
         });
 
-        if (bundle == null) {
+        if (isDetail) {
             mSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -511,6 +513,7 @@ public class PMManageProjectDetailFragment extends Fragment {
                         }
                     });
                     Fragment fragment = new PMManageProjectListFragment();
+                    fragment.setArguments(bundle);
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     if (!fragment.isAdded()) {
                         transaction.hide(mFragment);
@@ -566,6 +569,7 @@ public class PMManageProjectDetailFragment extends Fragment {
                     });
                     Log.d(TAG, "Url: "+ Link.localhost + "manage_pm&act=add&key=" + key);
                     Fragment fragment = new PMManageProjectListFragment();
+                    fragment.setArguments(bundle);
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     if (!fragment.isAdded()) {
                         transaction.hide(mFragment);

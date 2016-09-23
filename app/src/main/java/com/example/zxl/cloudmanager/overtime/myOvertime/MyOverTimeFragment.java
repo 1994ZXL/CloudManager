@@ -136,6 +136,7 @@ public class MyOverTimeFragment extends Fragment {
                                 @Override
                                 public void onItemClick(View view, Object data) {
                                     Fragment fragment = MyOvertimeDetailFragment.newInstance(data);
+                                    fragment.setArguments(saveInstanceState);
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     if (!fragment.isAdded()) {
                                         transaction.addToBackStack(null);

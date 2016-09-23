@@ -36,10 +36,7 @@ public class MyTravelSearchFragment extends Fragment {
     private TextView mComeBeginBtn;
     private TextView mComeEndBtn;
     private LinearLayout mNameEditText;
-
     private Spinner mStateSpinner;
-
-    private TextView mAddTextView;
     private TextView mBack;
 
     private ArrayAdapter<String> stateAdapter;
@@ -70,32 +67,14 @@ public class MyTravelSearchFragment extends Fragment {
 
         if (mFragment.getActivity().getClass() == MyTravelActivity.class) {
             mNameEditText.setVisibility(View.GONE);
-            mAddTextView.setVisibility(View.INVISIBLE);
             mAimFragment = new MyTravelFragment();
         } else if (mFragment.getActivity().getClass() == ManagerTravelActivity.class) {
             mAimFragment = new MyTravelFragment();
-            mAddTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Fragment fragment = new ManagerTravelAddFragment();
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    if (!fragment.isAdded()) {
-                        transaction.hide(mFragment);
-                        transaction.replace(R.id.blankActivity, fragment);
-                        transaction.commit();
-                    } else {
-                        transaction.hide(mFragment);
-                        transaction.show(fragment);
-                        transaction.commit();
-                    }
-                }
-            });
+
         } else if (mFragment.getActivity().getClass() == LeaderTravelSearchActivity.class) {
             mAimFragment = new MyTravelFragment();
-            mAddTextView.setVisibility(View.INVISIBLE);
+
         }
-
-
 
         contorl();
         mSearchBtn.setOnClickListener(new View.OnClickListener() {
@@ -160,8 +139,6 @@ public class MyTravelSearchFragment extends Fragment {
         mComeBeginBtn = (TextView) v.findViewById(R.id.employer_back_begin_time_button);
         mComeEndBtn = (TextView) v.findViewById(R.id.employer_back_end_time_button);
         mStateSpinner = (Spinner) v.findViewById(R.id.employer_travel_state_spinner);
-
-        mAddTextView = (TextView) v.findViewById(R.id.manager_travel_add);
         mSearchBtn = (Button) v.findViewById(R.id.my_travel_search_button);
         mBack = (TextView) v.findViewById(R.id.travel_search_back);
     }

@@ -143,6 +143,7 @@ public class MissionManagerListFragment extends Fragment {
                                 @Override
                                 public void onItemClick(View view, Object data) {
                                     Fragment fragment = MissionManagerEditFragment.newInstance(data);
+                                    fragment.setArguments(saveInstanceState);
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     if (!fragment.isAdded()) {
                                         transaction.addToBackStack(null);
@@ -182,23 +183,6 @@ public class MissionManagerListFragment extends Fragment {
         final View view = layoutInflater.inflate(R.layout.main_fragment_my_mission, parent, false);
 
         mAddTextView = (TextView) view.findViewById(R.id.manager_mission_add);
-        mAddTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Fragment fragment = new MissionManagerAddFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
-            }
-        });
 
         mBack = (TextView) view.findViewById(R.id.my_mission_back);
         mBack.setOnClickListener(new View.OnClickListener() {
@@ -266,6 +250,25 @@ public class MissionManagerListFragment extends Fragment {
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                     }
                 }.sendEmptyMessageDelayed(0, 1000);
+            }
+        });
+
+        mAddTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new MissionManagerAddFragment();
+                fragment.setArguments(saveInstanceState);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
             }
         });
 

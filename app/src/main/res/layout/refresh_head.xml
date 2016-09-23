@@ -48,6 +48,7 @@
                 android:layout_toLeftOf="@id/state_tv"
                 android:visibility="gone" />
         </RelativeLayout>
+
     </RelativeLayout>
 
 </RelativeLayout>

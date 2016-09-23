@@ -59,9 +59,10 @@ public class MemoAddFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.memo_add_fragment, container, false);
+        savedInstanceState = getArguments();
 
         init(v);
-        control();
+        control(savedInstanceState);
 
         return v;
     }
@@ -74,7 +75,7 @@ public class MemoAddFragment extends Fragment {
         url = Link.my_note + Link.add;
     }
 
-    private void control() {
+    private void control(final Bundle bundle) {
         mTitle.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -145,6 +146,7 @@ public class MemoAddFragment extends Fragment {
 
                     });
                     Fragment fragment = new MemoFragment();
+                    fragment.setArguments(bundle);
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     if (!fragment.isAdded()) {
                         transaction.addToBackStack(null);

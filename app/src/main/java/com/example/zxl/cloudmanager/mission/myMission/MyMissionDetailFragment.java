@@ -35,9 +35,10 @@ public class MyMissionDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View view = layoutInflater.inflate(R.layout.mission_details, parent, false);
+        saveInstanceState = getArguments();
 
         init(view);
-        contorl();
+        contorl(saveInstanceState);
 
         return view;
     }
@@ -57,7 +58,7 @@ public class MyMissionDetailFragment extends Fragment {
         mBack = (TextView) view.findViewById(R.id.mission_details_back);
     }
 
-    private void contorl() {
+    private void contorl(final Bundle bundle) {
         mTitle.setText(sMission.getTitle());
         mContent.setText(sMission.getContent());
         if (sMission.getStart_time() == 0) {

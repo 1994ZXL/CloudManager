@@ -149,6 +149,10 @@ public class MyBugFragment extends Fragment {
                                     if (mFragment.getActivity().getClass() == MyBugActivity.class)
                                         fragment = MyBugDetailFragment.newInstance(data);
                                     else fragment = PMBugDetailFragment.newInstance(data);
+                                    if (null != saveInstanceState) {
+                                        Bundle bundle = new Bundle(saveInstanceState);
+                                        fragment.setArguments(bundle);
+                                    }
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     if (!fragment.isAdded()) {
                                         transaction.addToBackStack(null);
@@ -180,29 +184,6 @@ public class MyBugFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceStates) {
         final View v = layoutInflater.inflate(R.layout.main_fragment_my_bug, parent, false);
-
-        mAddTextView = (Button) v.findViewById(R.id.my_bug_add);
-        if (mFragment.getActivity().getClass() != PMBugActivity.class) {
-            mAddTextView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Fragment fragment = new MyBugAddFragment();
-                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                    if (!fragment.isAdded()) {
-                        transaction.addToBackStack(null);
-                        transaction.hide(mFragment);
-                        transaction.add(R.id.blankActivity, fragment);
-                        transaction.commit();
-                    } else {
-                        transaction.hide(mFragment);
-                        transaction.show(fragment);
-                        transaction.commit();
-                    }
-                }
-            });
-        } else {
-            mAddTextView.setVisibility(View.GONE);
-        }
 
         mBack = (TextView) v.findViewById(R.id.my_bug_back);
         mBack.setOnClickListener(new View.OnClickListener() {
@@ -237,6 +218,35 @@ public class MyBugFragment extends Fragment {
         } else if (mFragment.getActivity().getClass() == PublicBugSearchActivity.class) {
             url = Link.ps_bug + Link.get_list;
             mTitle.setText("bug");
+            mAddTextView.setVisibility(View.GONE);
+        }
+
+        mAddTextView = (Button) v.findViewById(R.id.my_bug_add);
+        if (mFragment.getActivity().getClass() != PMBugActivity.class) {
+            mAddTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Fragment fragment = new MyBugAddFragment();
+
+                    if (null != saveInstanceState) {
+                        Bundle bundle = new Bundle(saveInstanceState);
+                        fragment.setArguments(bundle);
+                    }
+
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    if (!fragment.isAdded()) {
+                        transaction.addToBackStack(null);
+                        transaction.hide(mFragment);
+                        transaction.replace(R.id.blankActivity, fragment);
+                        transaction.commit();
+                    } else {
+                        transaction.hide(mFragment);
+                        transaction.show(fragment);
+                        transaction.commit();
+                    }
+                }
+            });
+        } else {
             mAddTextView.setVisibility(View.GONE);
         }
 

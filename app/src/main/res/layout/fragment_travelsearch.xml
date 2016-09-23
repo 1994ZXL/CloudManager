@@ -14,9 +14,8 @@
             android:text="@string/travel_record_query" />
 
         <TextView
-            android:id="@+id/manager_travel_add"
             style="@style/topview_right"
-            android:text="@string/add" />
+            android:text="" />
 
     </LinearLayout>
 

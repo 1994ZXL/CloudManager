@@ -135,6 +135,7 @@ public class PMManageMemberListFragment extends Fragment {
                             @Override
                             public void onItemClick(View view, Object data) {
                                 Fragment fragment = PMManageMemberDetailFragment.newInstance(data);
+                                fragment.setArguments(saveInstanceState);
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                 if (!fragment.isAdded()) {
                                     transaction.addToBackStack(null);
@@ -234,9 +235,7 @@ public class PMManageMemberListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Fragment fragment = new PMManageMemberDetailFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("ADD", "ADD");
-                fragment.setArguments(bundle);
+                fragment.setArguments(saveInstanceState);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);

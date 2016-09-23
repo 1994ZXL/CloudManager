@@ -67,9 +67,10 @@ public class PMScheduleEditFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.pm_schedule_edit, container, false);
+        savedInstanceState = getArguments();
 
         init(v);
-        control();
+        control(savedInstanceState);
 
         return v;
     }
@@ -84,7 +85,7 @@ public class PMScheduleEditFragment extends Fragment {
 
     }
 
-    private void control() {
+    private void control(final Bundle bundle) {
         mTitle.setText(sSchedule.getTitle());
         mPmscheduleTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi2(sSchedule.getPmsch_time()));
         mReportTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi2(sSchedule.getReport_time()));
@@ -141,6 +142,7 @@ public class PMScheduleEditFragment extends Fragment {
                     }
                 });
                 Fragment fragment = new PMScheduleListFragment();
+                fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.hide(mFragment);

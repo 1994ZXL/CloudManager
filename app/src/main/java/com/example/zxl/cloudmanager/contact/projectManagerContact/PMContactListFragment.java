@@ -85,17 +85,17 @@ public class PMContactListFragment extends Fragment {
                     keyObj.put(Link.contact_name, saveInstanceState.getString(Link.contact_name));
                 if (null != saveInstanceState.getString(Link.contact_phone))
                     keyObj.put(Link.contact_phone, saveInstanceState.getInt(Link.contact_phone));
-                keyObj.put(Link.pm_id, saveInstanceState.getString(Link.pm_id));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
 
         try {
+            keyObj.put(Link.pm_id, saveInstanceState.getString(Link.pm_id));
+            keyObj.put(Link.comp_id, User.newInstance().getComp_id());
             keyObj.put("sort", "project_name desc");
             keyObj.put("page_count", 20);
             keyObj.put("curl_page", curl_page);
-
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,6 +127,11 @@ public class PMContactListFragment extends Fragment {
                             @Override
                             public void onItemClick(View view, Object data) {
                                 Fragment fragment = PMContactDetailFragment.newInstance(data);
+
+                                if (null != saveInstanceState) {
+                                    fragment.setArguments(new Bundle(saveInstanceState));
+                                }
+
                                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                 if (!fragment.isAdded()) {
                                     transaction.addToBackStack(null);
@@ -160,10 +165,16 @@ public class PMContactListFragment extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle savedInstanceState) {
         final View v = layoutInflater.inflate(R.layout.pm_contact_list, parent, false);
 
+        mAdd = (Button) v.findViewById(R.id.pm_contact_list_add);
+        mBack = (TextView) v.findViewById(R.id.pm_contact_list_back);
+        mSearch = (TextView) v.findViewById(R.id.pm_contact_list_search);
+
         if (mFragment.getActivity().getClass() == PMContactActivity.class)
             url = Link.pm_contact + Link.get_list;
-        else if (mFragment.getActivity().getClass() == PSContactActivity.class)
+        else if (mFragment.getActivity().getClass() == PSContactActivity.class) {
             url = Link.pmcontact + Link.get_list;
+            mAdd.setVisibility(View.GONE);
+        }
 
         savedInstanceState = getArguments();
         final Bundle saveInstanceState = savedInstanceState;
@@ -197,7 +208,6 @@ public class PMContactListFragment extends Fragment {
             }
         });
 
-        mBack = (TextView) v.findViewById(R.id.pm_contact_list_back);
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -205,7 +215,6 @@ public class PMContactListFragment extends Fragment {
             }
         });
 
-        mSearch = (TextView) v.findViewById(R.id.pm_contact_list_search);
         mSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -218,13 +227,12 @@ public class PMContactListFragment extends Fragment {
             }
         });
 
-        mAdd = (Button) v.findViewById(R.id.pm_contact_list_add);
+
         mAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Fragment fragment = new PMContactDetailFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("ADD", "ADD");
+                Bundle bundle = new Bundle(saveInstanceState);
                 fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {

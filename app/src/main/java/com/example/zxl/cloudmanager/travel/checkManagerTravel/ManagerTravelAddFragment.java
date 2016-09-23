@@ -1,6 +1,7 @@
 package com.example.zxl.cloudmanager.travel.checkManagerTravel;
 
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -22,6 +23,7 @@ import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.DateTimePicker;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.User;
+import com.example.zxl.cloudmanager.travel.myTravel.MyTravelFragment;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
@@ -82,9 +84,10 @@ public class ManagerTravelAddFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_travel_add, container, false);
+        savedInstanceState = getArguments();
 
         init(v);
-        control();
+        control(savedInstanceState);
 
         return v;
     }
@@ -100,7 +103,7 @@ public class ManagerTravelAddFragment extends Fragment{
         mBack = (TextView) v.findViewById(R.id.fragment_travel_add_back);
     }
 
-    private void control() {
+    private void control(final Bundle bundle) {
         try {
             keyObj.put(Link.comp_id, User.newInstance().getComp_id());
             key = DESCryptor.Encryptor(keyObj.toString());
@@ -257,6 +260,19 @@ public class ManagerTravelAddFragment extends Fragment{
                             }
                         }
                     });
+                    Fragment fragment = new MyTravelFragment();
+                    fragment.setArguments(bundle);
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    if (!fragment.isAdded()) {
+                        transaction.addToBackStack(null);
+                        transaction.hide(mFragment);
+                        transaction.add(R.id.blankActivity, fragment);
+                        transaction.commit();
+                    } else {
+                        transaction.hide(mFragment);
+                        transaction.show(fragment);
+                        transaction.commit();
+                    }
                 }
             }
         });

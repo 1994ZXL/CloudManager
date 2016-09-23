@@ -37,6 +37,7 @@ import com.example.zxl.cloudmanager.model.User;
 import com.example.zxl.cloudmanager.pulltorefresh.MyListener;
 import com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout;
 import com.example.zxl.cloudmanager.travel.checkManagerTravel.ManagerTravelActivity;
+import com.example.zxl.cloudmanager.travel.checkManagerTravel.ManagerTravelAddFragment;
 import com.example.zxl.cloudmanager.travel.checkManagerTravel.ManagerTravelDetailFragment;
 import com.example.zxl.cloudmanager.travel.leader.LeaderTravelSearchActivity;
 import com.loopj.android.http.AsyncHttpClient;
@@ -68,6 +69,7 @@ public class MyTravelFragment extends Fragment {
     private TextView mBack;
     private TextView mSearch;
     private TextView mTitle;
+    private Button mAdd;
 
     private static int mCurl_page;
 
@@ -154,6 +156,7 @@ public class MyTravelFragment extends Fragment {
                                     } else if (mFragment.getActivity().getClass() == MyTravelActivity.class) {
                                         fragment = MyTravelDetailFragment.newInstance(data);
                                     }
+                                    fragment.setArguments(saveInstanceState);
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     if (!fragment.isAdded()) {
                                         transaction.addToBackStack(null);
@@ -184,6 +187,7 @@ public class MyTravelFragment extends Fragment {
         savedInstanceState = getArguments();
         final Bundle saveInstanceState = savedInstanceState;
 
+        mAdd = (Button) v.findViewById(R.id.travel_list_add);
 
         mBack = (TextView) v.findViewById(R.id.my_travel_back);
         mBack.setOnClickListener(new View.OnClickListener() {
@@ -215,8 +219,10 @@ public class MyTravelFragment extends Fragment {
         } else if (mFragment.getActivity().getClass() == LeaderTravelSearchActivity.class) {
             url = Link.trip_list + Link.get_list;
             mTitle.setText("出差");
+            mAdd.setVisibility(View.GONE);
         } else if (mFragment.getActivity().getClass() == MyTravelActivity.class) {
             url = Link.my_trip + Link.get_list;
+            mAdd.setVisibility(View.GONE);
         }
 
         loadDate(saveInstanceState, mCurl_page, v);
@@ -246,6 +252,25 @@ public class MyTravelFragment extends Fragment {
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                     }
                 }.sendEmptyMessageDelayed(0, 1000);
+            }
+        });
+
+        mAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = new ManagerTravelAddFragment();
+                fragment.setArguments(saveInstanceState);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
             }
         });
 

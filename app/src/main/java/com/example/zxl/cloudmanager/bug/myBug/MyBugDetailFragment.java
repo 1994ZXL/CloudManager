@@ -76,8 +76,9 @@ public class MyBugDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View view = layoutInflater.inflate(R.layout.bug_details, parent, false);
+        saveInstanceState = getArguments();
         init(view);
-        contorl();
+        contorl(saveInstanceState);
         return view;
     }
 
@@ -94,7 +95,7 @@ public class MyBugDetailFragment extends Fragment {
         mBack = (TextView) view.findViewById(R.id.my_bug_details_back);
     }
 
-    private void contorl() {
+    private void contorl(final Bundle saveInstanceState) {
         mProjectName.setText(sBug.getProject_name());
         mBugVersion.setText(sBug.getLevel());
         mBugState.setText(sBug.getStatus());
@@ -148,6 +149,12 @@ public class MyBugDetailFragment extends Fragment {
 
                 });
                 Fragment fragment = new MyBugFragment();
+
+                if (null != saveInstanceState) {
+                    Bundle bundle = new Bundle(saveInstanceState);
+                    fragment.setArguments(bundle);
+                }
+
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);

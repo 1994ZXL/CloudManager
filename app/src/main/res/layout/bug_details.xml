@@ -75,7 +75,7 @@
                         android:text="@string/bug_content" />
 
                     <EditText
-                        android:id="@+id/bug_details_"
+                        android:id="@+id/bug_details_content"
                         style="@style/EditText_Style"
                         android:hint="@string/input_bug_content" />
 
@@ -89,9 +89,9 @@
                         android:text="@string/usecase_model" />
 
                     <EditText
-                        android:id="@+id/bug_details_content"
+                        android:id="@+id/bug_details_usecase_model"
                         style="@style/EditText_Style"
-                        android:hint="@string/input_usecase_model" />
+                        android:focusable="false"/>
 
                 </LinearLayout>
 

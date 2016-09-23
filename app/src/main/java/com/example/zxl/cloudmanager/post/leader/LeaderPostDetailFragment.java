@@ -91,9 +91,10 @@ public class LeaderPostDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.post_details, container, false);
+        savedInstanceState = getArguments();
 
         init(view);
-        control();
+        control(savedInstanceState);
 
         return view;
     }
@@ -132,7 +133,7 @@ public class LeaderPostDetailFragment extends Fragment {
         mBack = (TextView) view.findViewById(R.id.post_details_back);
     }
 
-    private void control() {
+    private void control(final Bundle bundle) {
         mName.setText(sPost.getMem_name());
         mState.setText(sPost.getState());
 
@@ -231,6 +232,7 @@ public class LeaderPostDetailFragment extends Fragment {
                             }
                         });
                         Fragment fragment = new MyPostFragment();
+                        fragment.setArguments(bundle);
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         if (!fragment.isAdded()) {
                             transaction.addToBackStack(null);

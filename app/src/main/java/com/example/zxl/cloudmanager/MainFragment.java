@@ -149,17 +149,38 @@ public class MainFragment extends Fragment {
 
         init(v);
 
+        /**
+         * 职位(1.领导 2.项目负责人 3.一般员工)
+         * is_pmleader 0 不是项目领导
+         * is_pmmaster 0 不是考勤主管
+         * is_puncher 0 不是项目主管
+         * leaderLinearLayout 领导
+         * CMLinearLayout 考勤
+         * PMLinearLayout 项目
+         * */
 
-        //职位(1.领导 2.项目负责人 3.一般员工)
-        if (User.newInstance().getMem_job().equals("1")) {
-            CMLinearLayout.setVisibility(View.GONE);
-            PMLinearLayout.setVisibility(View.GONE);
-        } else if (User.newInstance().getMem_job().equals("2")) {
-            leaderLinearLayout.setVisibility(View.GONE);
-        } else if (User.newInstance().getMem_job().equals("3")) {
-            leaderLinearLayout.setVisibility(View.GONE);
-            CMLinearLayout.setVisibility(View.GONE);
-            PMLinearLayout.setVisibility(View.GONE);
+        if (!User.newInstance().getMem_job().equals("1")) {
+            if (User.newInstance().getIs_pmleader() == 0)
+                leaderLinearLayout.setVisibility(View.GONE);
+        }
+        if (!User.newInstance().getMem_job().equals("2")) {
+            if (!User.newInstance().getMem_job().equals("1")) {
+                if (User.newInstance().getIs_puncher() == 0)
+                    CMLinearLayout.setVisibility(View.GONE);
+            }
+            if (User.newInstance().getIs_pmmaster() == 0)
+                PMLinearLayout.setVisibility(View.GONE);
+        }
+        if (User.newInstance().getMem_job().equals("3")) {
+            if (User.newInstance().getIs_pmleader() == 0) {
+                leaderLinearLayout.setVisibility(View.GONE);
+            }
+            if (User.newInstance().getIs_puncher() == 0) {
+                CMLinearLayout.setVisibility(View.GONE);
+            }
+            if (User.newInstance().getIs_pmmaster() == 0) {
+                PMLinearLayout.setVisibility(View.GONE);
+            }
         }
 
         onClickListener(myMemoImage, new MemoActivity());

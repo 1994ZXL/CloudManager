@@ -43,38 +43,12 @@ public class ManagerCheckDetailFragment extends Fragment{
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.manager_check_edit, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_edit_check:
-                Fragment fragment = ManagerCheckEditFragment.newInstance(mCheck);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.manager_check_details, parent, false);
+        saveInstanceState = getArguments();
 
         init(v);
-        control();
+        control(saveInstanceState);
 
         return v;
     }
@@ -98,7 +72,7 @@ public class ManagerCheckDetailFragment extends Fragment{
         mBack = (TextView)view.findViewById(R.id.manager_check_details_back);
     }
 
-    private void control() {
+    private void control(final Bundle saveInstanceState) {
         name.setText(mCheck.getMem_name());
         checkLocation.setText(mCheck.getPuncher_name());
         checkManager.setText(mCheck.getMaster_name());
@@ -167,11 +141,17 @@ public class ManagerCheckDetailFragment extends Fragment{
             @Override
             public void onClick(View view) {
                 Fragment fragment = ManagerCheckEditFragment.newInstance(mCheck);
+
+                if (null != saveInstanceState) {
+                    Bundle bundle = new Bundle(saveInstanceState);
+                    fragment.setArguments(bundle);
+                }
+
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
                     transaction.hide(mFragment);
-                    transaction.add(R.id.blankActivity, fragment);
+                    transaction.replace(R.id.blankActivity, fragment);
                     transaction.commit();
                 } else {
                     transaction.hide(mFragment);

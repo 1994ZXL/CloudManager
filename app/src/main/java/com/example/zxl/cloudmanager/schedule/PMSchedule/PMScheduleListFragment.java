@@ -132,6 +132,7 @@ public class PMScheduleListFragment extends Fragment {
                                 @Override
                                 public void onItemClick(View view, Object data) {
                                     Fragment fragment = PMScheduleEditFragment.newInstance(data);
+                                    fragment.setArguments(saveInstanceState);
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     if (!fragment.isAdded()) {
                                         transaction.addToBackStack(null);
@@ -220,6 +221,7 @@ public class PMScheduleListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Fragment fragment = new PMScheduleAddFrament();
+                fragment.setArguments(saveInstanceState);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.addToBackStack(null);
                 transaction.replace(R.id.blankActivity, fragment);

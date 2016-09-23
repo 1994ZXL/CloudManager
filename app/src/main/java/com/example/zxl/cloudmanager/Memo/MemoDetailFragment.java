@@ -64,9 +64,10 @@ public class MemoDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_memodetail, container, false);
+        savedInstanceState = getArguments();
 
         init(v);
-        control();
+        control(savedInstanceState);
 
         return  v;
     }
@@ -80,7 +81,7 @@ public class MemoDetailFragment extends Fragment {
         url = Link.my_note + Link.edit;
     }
 
-    private void control() {
+    private void control(final Bundle bundle) {
         mTitle.setText(sMemos.getTitle());
         mTitle.addTextChangedListener(new TextWatcher() {
             @Override
@@ -153,6 +154,7 @@ public class MemoDetailFragment extends Fragment {
 
                 });
                 Fragment fragment = new MemoFragment();
+                fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);

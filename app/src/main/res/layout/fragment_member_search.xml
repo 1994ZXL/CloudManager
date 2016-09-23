@@ -41,7 +41,8 @@
                         style="@style/Spinner_Style" />
                 </LinearLayout>
                 <!--员工名-->
-                <LinearLayout style="@style/Viewline_LayoutStyle">
+                <LinearLayout style="@style/Viewline_LayoutStyle"
+                    android:id="@+id/member_name_linearLayout">
 
                     <TextView
                         style="@style/Text_view_Style"

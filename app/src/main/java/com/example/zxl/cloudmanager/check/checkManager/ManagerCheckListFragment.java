@@ -122,6 +122,12 @@ public class ManagerCheckListFragment extends Fragment {
                                 @Override
                                 public void onItemClick(View view, Object data) {
                                     Fragment fragment = ManagerCheckDetailFragment.newInstance(data);
+
+                                    if (null != saveInstanceState) {
+                                        Bundle bundle = new Bundle(saveInstanceState);
+                                        fragment.setArguments(bundle);
+                                    }
+
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     if (!fragment.isAdded()) {
                                         transaction.addToBackStack(null);
@@ -165,6 +171,7 @@ public class ManagerCheckListFragment extends Fragment {
                     @Override
                     public void handleMessage(Message msg) {
                         checks.clear();
+                        mCurl_page = 0;
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     }
@@ -176,7 +183,6 @@ public class ManagerCheckListFragment extends Fragment {
                 new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
-                        checks.clear();
                         mCurl_page = mCurl_page + 10;
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);

@@ -78,9 +78,10 @@ public class PMScheduleAddFrament extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.pm_schedule_add, container, false);
+        savedInstanceState = getArguments();
 
         init(v);
-        control();
+        control(savedInstanceState);
 
         return v;
     }
@@ -94,7 +95,7 @@ public class PMScheduleAddFrament extends Fragment {
         mAdd = (TextView) v.findViewById(R.id.pm_schedule_add_add);
     }
 
-    private void control() {
+    private void control(final Bundle bundle) {
         try {
             keyObj.put(Link.user_id, User.newInstance().getUser_id());
             key = DESCryptor.Encryptor(keyObj.toString());
@@ -212,6 +213,7 @@ public class PMScheduleAddFrament extends Fragment {
                     });
 
                     Fragment fragment = new PMScheduleListFragment();
+                    fragment.setArguments(bundle);
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     transaction.addToBackStack(null);
                     transaction.replace(R.id.blankActivity, fragment);

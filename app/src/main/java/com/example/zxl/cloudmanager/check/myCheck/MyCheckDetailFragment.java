@@ -41,11 +41,10 @@ public class MyCheckDetailFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View v = layoutInflater.inflate(R.layout.check_details, parent, false);
-
-
+        saveInstanceState = getArguments();
 
         init(v);
-        control();
+        control(saveInstanceState);
 
         return v;
     }
@@ -68,7 +67,7 @@ public class MyCheckDetailFragment extends Fragment{
         mBack = (TextView) view.findViewById(R.id.check_details_back);
     }
 
-    private void control() {
+    private void control(final Bundle saveInstanceState) {
         name.setText(mCheck.getMem_name());
         checkLocation.setText(mCheck.getPuncher_name());
         checkManager.setText(mCheck.getMaster_name());

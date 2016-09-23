@@ -89,9 +89,9 @@ public class MyBugAddFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View v = inflater.inflate(R.layout.bug_add, container, false);
-
+        savedInstanceState = getArguments();
         init(v);
-        control();
+        control(savedInstanceState);
 
         return v;
     }
@@ -111,7 +111,7 @@ public class MyBugAddFragment extends Fragment {
         mBack = (TextView) v.findViewById(R.id.my_bug_add_back);
     }
 
-    private void control() {
+    private void control(final Bundle savedInstanceState) {
         try {
             keyObj.put(Link.user_id, User.newInstance().getUser_id());
             key = DESCryptor.Encryptor(keyObj.toString());
@@ -322,6 +322,12 @@ public class MyBugAddFragment extends Fragment {
                                 e.printStackTrace();
                             }
                             Fragment fragment = new MyBugFragment();
+
+                            if (null != savedInstanceState) {
+                                Bundle bundle = new Bundle(savedInstanceState);
+                                fragment.setArguments(bundle);
+                            }
+
                             FragmentTransaction transaction = getFragmentManager().beginTransaction();
                             if (!fragment.isAdded()) {
                                 transaction.addToBackStack(null);

@@ -95,7 +95,7 @@ public class MyCheckFragment extends Fragment {
         try {
             keyObj.put(Link.mem_id, User.newInstance().getUser_id());
             keyObj.put("sort", "att_date desc");
-            keyObj.put("page_count", 20);
+            keyObj.put("page_count", 7);
             keyObj.put("curl_page", curl_page);
             key = DESCryptor.Encryptor(keyObj.toString());
         } catch (Exception e) {
@@ -187,6 +187,7 @@ public class MyCheckFragment extends Fragment {
                     @Override
                     public void handleMessage(Message msg) {
                         checks.clear();
+                        mCurl_page = 0;
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.refreshFinish(PullToRefreshLayout.SUCCEED);
                     }
@@ -198,8 +199,7 @@ public class MyCheckFragment extends Fragment {
                 new Handler() {
                     @Override
                     public void handleMessage(Message msg) {
-                        checks.clear();
-                        mCurl_page++;
+                        mCurl_page = mCurl_page + 7;
                         loadDate(saveInstanceState, mCurl_page, v);
                         pullToRefreshLayout.loadmoreFinish(PullToRefreshLayout.SUCCEED);
                     }

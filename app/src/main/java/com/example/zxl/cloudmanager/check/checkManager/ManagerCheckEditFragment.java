@@ -78,6 +78,9 @@ public class ManagerCheckEditFragment extends Fragment{
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         View view = layoutInflater.inflate(R.layout.main_fragment_manager_check_edit, parent, false);
 
+        saveInstanceState = getArguments();
+        final Bundle saveInstanceStates = saveInstanceState;
+
         mS_time = (TextView) view.findViewById(R.id.main_fragment_manager_check_edit_stipulate_dutytime);
         mS_att_time = (TextView) view.findViewById(R.id.main_fragment_manager_check_edit_duty_sign_time);
         mE_time = (TextView) view.findViewById(R.id.main_fragment_manager_check_edit_stipulate_offdutytime);
@@ -184,6 +187,11 @@ public class ManagerCheckEditFragment extends Fragment{
                     }
                 });
                 Fragment fragment = new ManagerCheckListFragment();
+
+                if (null != saveInstanceStates) {
+                    fragment.setArguments(new Bundle(saveInstanceStates));
+                }
+
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.hide(mFragment);

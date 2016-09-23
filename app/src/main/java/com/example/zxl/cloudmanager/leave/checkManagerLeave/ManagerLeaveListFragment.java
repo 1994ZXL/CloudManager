@@ -159,6 +159,7 @@ public class ManagerLeaveListFragment extends Fragment {
                                     } else if (mFragment.getActivity().getClass() == ManagerLeaveActivity.class) {
                                         mAimFragment = ManagerLeaveDealFragment.newInstance(data);
                                     }
+                                    mAimFragment.setArguments(saveInstanceState);
                                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                                     if (!mAimFragment.isAdded()) {
                                         transaction.addToBackStack(null);

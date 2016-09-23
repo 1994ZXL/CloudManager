@@ -56,9 +56,10 @@ public class PMManageMemberDetailFragment extends Fragment {
     private Button mSave;
     private Fragment mFragment;
 
-    private String mem_name;
-    private String project_name;
-    private String member_res;
+    private static boolean isDetail = false;
+    private static String mem_name;
+    private static String project_name;
+    private static String member_res;
 
     private ArrayAdapter<String> mProjectNameAdapter;
     private ArrayList<String> project_name_list = new ArrayList<String>(); //名字
@@ -71,8 +72,8 @@ public class PMManageMemberDetailFragment extends Fragment {
     private String mem_id;
 
     private ArrayAdapter<String> mRoleAdapter;
-    private String[] roleList = new String[3];
-    private String role;
+    private static String[] roleList = new String[]{"领导", "项目负责人", "一般成员"};
+    private static String role;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
@@ -90,7 +91,18 @@ public class PMManageMemberDetailFragment extends Fragment {
     private String keyAdd2 = "";
 
     public static PMManageMemberDetailFragment newInstance(Object data) {
+        isDetail = true;
         sPmMember = (PMMember) data;
+        mem_name = sPmMember.getMem_name();
+        project_name = sPmMember.getProject_name();
+        role = sPmMember.getRoleString();
+        if (role.equals("1"))
+            roleList = new String[]{"领导", "项目负责人", "一般成员"};
+        if (role.equals("2"))
+            roleList = new String[]{"项目负责人", "领导", "一般成员"};
+        if (role.equals("3"))
+            roleList = new String[]{"一般成员", "领导", "项目负责人"};
+        member_res = sPmMember.getMember_res();
         PMManageMemberDetailFragment fragment = new PMManageMemberDetailFragment();
         return fragment;
     }
@@ -124,19 +136,9 @@ public class PMManageMemberDetailFragment extends Fragment {
         mSearch = (TextView) v.findViewById(R.id.pm_manage_member_detail_search);
         mTitle = (TextView) v.findViewById(R.id.pm_manage_member_detail_title);
         mSave = (Button) v.findViewById(R.id.pm_manage_member_detail_save);
-        mem_name = sPmMember.getMem_name();
-        project_name = sPmMember.getProject_name();
-        role = sPmMember.getRoleString();
-        if (role.equals("1"))
-            roleList = new String[]{"领导", "项目负责人", "一般成员"};
-        if (role.equals("2"))
-            roleList = new String[]{"项目负责人", "领导", "一般成员"};
-        if (role.equals("3"))
-            roleList = new String[]{"一般成员", "领导", "项目负责人"};
-        member_res = sPmMember.getMember_res();
     }
 
-    private void control(Bundle bundle) {
+    private void control(final Bundle bundle) {
         if (mFragment.getActivity().getClass() == PSManageMemberActivity.class) {
             mSave.setVisibility(View.GONE);
             mMemberRes.setFocusable(false);
@@ -229,7 +231,7 @@ public class PMManageMemberDetailFragment extends Fragment {
         });
 
         //详情 else 为添加
-        if (bundle == null) {
+        if (isDetail) {
             mMemNameSpinner.setVisibility(View.GONE);
             mProjectNameSpinner.setVisibility(View.GONE);
             mSave.setOnClickListener(new View.OnClickListener() {
@@ -259,6 +261,7 @@ public class PMManageMemberDetailFragment extends Fragment {
                     });
 
                     Fragment fragment = new PMManageMemberListFragment();
+                    fragment.setArguments(bundle);
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     if (!fragment.isAdded()) {
                         transaction.hide(mFragment);
@@ -398,6 +401,7 @@ public class PMManageMemberDetailFragment extends Fragment {
                         }
                     });
                     Fragment fragment = new PMManageMemberListFragment();
+                    fragment.setArguments(bundle);
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();
                     if (!fragment.isAdded()) {
                         transaction.hide(mFragment);

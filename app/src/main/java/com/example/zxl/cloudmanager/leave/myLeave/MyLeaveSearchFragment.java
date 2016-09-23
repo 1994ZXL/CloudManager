@@ -233,7 +233,7 @@ public class MyLeaveSearchFragment extends Fragment {
         if (!mAimFragment.isAdded()) {
             transaction.addToBackStack(null);
             transaction.hide(mFragment);
-            transaction.add(R.id.blankActivity, mAimFragment);
+            transaction.replace(R.id.blankActivity, mAimFragment);
             transaction.commit();
         } else {
             transaction.hide(mFragment);

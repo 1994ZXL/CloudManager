@@ -3,6 +3,7 @@ package com.example.zxl.cloudmanager.overtime.checkManagerOverTime;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -49,7 +50,7 @@ public class ManagerOvertimeDetailFragment extends Fragment {
     private TextView mBack;
     private TextView mEdit;
 
-    private Fragment mFragemtn;
+    private Fragment mFragment;
 
     private static OverTime mOverTime = new OverTime();
 
@@ -72,15 +73,16 @@ public class ManagerOvertimeDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        mFragemtn = this;
+        mFragment = this;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_overtime_detail, container, false);
-
+        savedInstanceState = getArguments();
+        
         init(v);
-        control();
+        control(savedInstanceState);
 
         return v;
     }
@@ -103,11 +105,11 @@ public class ManagerOvertimeDetailFragment extends Fragment {
         mEdit = (TextView) v.findViewById(R.id.overtime_details_edit);
     }
 
-    private void control() {
+    private void control(final Bundle bundle) {
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mFragemtn.getActivity().finish();
+                mFragment.getActivity().finish();
             }
         });
 
@@ -143,6 +145,19 @@ public class ManagerOvertimeDetailFragment extends Fragment {
                         }
                     }
                 });
+                Fragment fragment = new ManagerOvertimeListFragment();
+                fragment.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                if (!fragment.isAdded()) {
+                    transaction.addToBackStack(null);
+                    transaction.hide(mFragment);
+                    transaction.replace(R.id.blankActivity, fragment);
+                    transaction.commit();
+                } else {
+                    transaction.hide(mFragment);
+                    transaction.show(fragment);
+                    transaction.commit();
+                }
             }
         });
 

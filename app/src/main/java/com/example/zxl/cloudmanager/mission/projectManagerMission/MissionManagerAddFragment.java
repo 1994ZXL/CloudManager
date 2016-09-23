@@ -101,9 +101,10 @@ public class MissionManagerAddFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceState) {
         final View v = layoutInflater.inflate(R.layout.mission_add, parent, false);
+        saveInstanceState = getArguments();
 
         init(v);
-        control();
+        control(saveInstanceState);
 
         return v;
     }
@@ -121,7 +122,7 @@ public class MissionManagerAddFragment extends Fragment {
         mBack = (TextView) v.findViewById(R.id.pm_task_add_back);
     }
 
-    public void control() {
+    public void control(final Bundle bundle) {
         try {
             keyObjProject.put(Link.user_id, User.newInstance().getUser_id());
             keyProject = DESCryptor.Encryptor(keyObjProject.toString());
@@ -295,7 +296,6 @@ public class MissionManagerAddFragment extends Fragment {
                             Toast.LENGTH_SHORT).show();
                 } else {
                     try {
-
                         keyObjAdd.put(Link.pm_id, projectId);
 
                         if (null != missionContent)
@@ -344,6 +344,7 @@ public class MissionManagerAddFragment extends Fragment {
                     });
                 }
                 Fragment fragment = new MissionManagerListFragment();
+                fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);

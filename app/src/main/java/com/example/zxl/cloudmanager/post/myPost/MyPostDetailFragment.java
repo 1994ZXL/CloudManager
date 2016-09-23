@@ -84,9 +84,10 @@ public class MyPostDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.post_details, container, false);
+        savedInstanceState = getArguments();
 
         init(view);
-        control();
+        control(savedInstanceState);
 
         return view;
     }
@@ -106,7 +107,7 @@ public class MyPostDetailFragment extends Fragment {
         mLevelSpinnerLinearLayout = (LinearLayout) view.findViewById(R.id.post_level_spinnerLinearLayout);
     }
 
-    private void control() {
+    private void control(final Bundle bundle) {
         mLevelSpinnerLinearLayout.setVisibility(View.GONE);
         mName.setText(sPost.getMem_name());
         mState.setText(sPost.getState());
@@ -166,6 +167,7 @@ public class MyPostDetailFragment extends Fragment {
 
                 });
                 Fragment fragment = new MyPostFragment();
+                fragment.setArguments(bundle);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 if (!fragment.isAdded()) {
                     transaction.addToBackStack(null);
@@ -186,60 +188,5 @@ public class MyPostDetailFragment extends Fragment {
                 mFragment.getActivity().finish();
             }
         });
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.message_save, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_item_edit_message:
-                try {
-                    keyObj.put(Link.daily_id, sPost.getDaily_id());
-                    keyObj.put(Link.content, content);
-                    key = DESCryptor.Encryptor(keyObj.toString());
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                mParams.put("key", key);
-                Log.d(TAG,"key:" + key);
-                mHttpc.post(Link.localhost + "my_daily&act=edit", mParams, new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                        try {
-                            Toast.makeText(getActivity(),
-                                    response.getString("msg"),
-                                    Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            Log.e(TAG, "ee2: " + e.getLocalizedMessage());
-                        }
-                    }
-
-                });
-                Fragment fragment = new MyPostFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                if (!fragment.isAdded()) {
-                    transaction.addToBackStack(null);
-                    transaction.hide(mFragment);
-                    transaction.replace(R.id.blankActivity, fragment);
-                    transaction.commit();
-                } else {
-                    transaction.hide(mFragment);
-                    transaction.show(fragment);
-                    transaction.commit();
-                }
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }
