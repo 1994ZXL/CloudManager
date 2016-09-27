@@ -24,6 +24,7 @@ import com.example.zxl.cloudmanager.bug.projectManagerBug.PMBugActivity;
 import com.example.zxl.cloudmanager.bug.projectManagerBug.PMBugDetailFragment;
 import com.example.zxl.cloudmanager.bug.publicSearchBug.PublicBugSearchActivity;
 import com.example.zxl.cloudmanager.model.Bug;
+import com.example.zxl.cloudmanager.model.CustomRecyclerAdapter;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.bug.publicSearchBug.BugSearchFragment;
@@ -53,7 +54,7 @@ public class MyBugFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
     private List<Bug> bugs = new ArrayList<Bug>();
-    private MyAdapter myAdapter;
+    private CustomRecyclerAdapter<Bug> mAdapter;
 
     private Button mAddTextView;
     private TextView mBack;
@@ -139,10 +140,23 @@ public class MyBugFragment extends Fragment {
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                             mRecyclerView.setHasFixedSize(true);
-                            myAdapter = new MyAdapter(mFragment.getActivity(), bugs);
-                            mRecyclerView.setAdapter(myAdapter);
-                            mCardView = (CardView)view.findViewById(R.id.fragment_my_bug);
-                            myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                            mAdapter = new CustomRecyclerAdapter<Bug>(mFragment.getActivity(), bugs, R.layout.bug_card_item) {
+                                @Override
+                                protected void display(ViewHolderHelper viewHolder, Bug data) {
+                                    viewHolder.setText(R.id.main_fragment_my_bug_projectName, data.getProject_name())
+                                            .setText(R.id.bug_card_item_bug_version, data.getLevel())
+                                            .setText(R.id.bug_card_item_bug_state, data.getStatus());
+
+                                    if (data.getSubmit_time() == 0)
+                                        viewHolder.setText(R.id.bug_card_item_found_time, "--");
+                                    else viewHolder.setText(R.id.bug_card_item_found_time, DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(data.getSubmit_time()));
+
+                                    if (data.getModify_time() == 0)
+                                        viewHolder.setText(R.id.bug_card_item_edit_time, "--");
+                                    else viewHolder.setText(R.id.bug_card_item_edit_time, DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(data.getModify_time()));
+                                }
+                            };
+                            mAdapter.setOnItemClickListener(new CustomRecyclerAdapter.OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
                                     Fragment fragment;
@@ -166,6 +180,7 @@ public class MyBugFragment extends Fragment {
                                     }
                                 }
                             });
+                            mRecyclerView.setAdapter(mAdapter);
 
                         } else {
 
@@ -184,8 +199,10 @@ public class MyBugFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup parent, Bundle saveInstanceStates) {
         final View v = layoutInflater.inflate(R.layout.main_fragment_my_bug, parent, false);
-
+        mAddTextView = (Button) v.findViewById(R.id.my_bug_add);
         mBack = (TextView) v.findViewById(R.id.my_bug_back);
+        mSearch = (TextView) v.findViewById(R.id.my_bug_search);
+
         mBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -193,7 +210,6 @@ public class MyBugFragment extends Fragment {
             }
         });
 
-        mSearch = (TextView) v.findViewById(R.id.my_bug_search);
         mSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -221,7 +237,6 @@ public class MyBugFragment extends Fragment {
             mAddTextView.setVisibility(View.GONE);
         }
 
-        mAddTextView = (Button) v.findViewById(R.id.my_bug_add);
         if (mFragment.getActivity().getClass() != PMBugActivity.class) {
             mAddTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -278,81 +293,6 @@ public class MyBugFragment extends Fragment {
                 }.sendEmptyMessageDelayed(0, 1500);
             }
         });
-
-
         return v;
     }
-
-    public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view, Object data);
-    }
-
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
-        private List<Bug> bugs;
-        private Context mContext;
-
-        public MyAdapter (Context context, List<Bug> bugs) {
-            this.bugs = bugs;
-            this.mContext = context;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.bug_card_item, viewGroup, false);
-            ViewHolder viewHolder = new ViewHolder(v);
-            v.setOnClickListener(this);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            Bug bug = bugs.get(i);
-
-            viewHolder.mProjectName.setText(bug.getProject_name());
-            viewHolder.mBugVersion.setText(bug.getLevel());
-            viewHolder.mBugState.setText(bug.getStatus());
-            if (bug.getSubmit_time() != 0)
-                viewHolder.mFoundTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(bug.getSubmit_time()));
-            if (bug.getModify_time() != 0)
-                viewHolder.mModifyTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(bug.getModify_time()));
-
-            viewHolder.itemView.setTag(bugs.get(i));
-        }
-
-        @Override
-        public int getItemCount() {
-            return bugs == null ? 0 : bugs.size();
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(v, v.getTag());
-            }
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder{
-            public TextView mProjectName;
-            public TextView mBugVersion;
-            public TextView mBugState;
-            public TextView mFoundTime;
-            public TextView mModifyTime;
-
-            public ViewHolder(View v) {
-                super(v);
-                mProjectName = (TextView)v.findViewById(R.id.main_fragment_my_bug_projectName);
-                mBugVersion = (TextView)v.findViewById(R.id.bug_card_item_bug_version);
-                mBugState = (TextView)v.findViewById(R.id.bug_card_item_bug_state);
-                mFoundTime = (TextView)v.findViewById(R.id.bug_card_item_found_time);
-                mModifyTime = (TextView)v.findViewById(R.id.bug_card_item_edit_time);
-            }
-        }
-
-        public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-            mOnItemClickListener = listener;
-        }
-    }
-
 }

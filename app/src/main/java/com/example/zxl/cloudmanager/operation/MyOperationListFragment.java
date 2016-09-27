@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.CustomRecyclerAdapter;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
@@ -54,7 +55,7 @@ public class MyOperationListFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
     private ArrayList<Operation> operations = new ArrayList<Operation>();
-    private MyAdapter myAdapter;
+    private CustomRecyclerAdapter<Operation> mAdapter;
 
     private Fragment mFragment;
 
@@ -119,10 +120,20 @@ public class MyOperationListFragment extends Fragment {
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                             mRecyclerView.setHasFixedSize(true);
-                            myAdapter = new MyAdapter(mFragment.getActivity(), operations);
-                            mRecyclerView.setAdapter(myAdapter);
                             mCardView = (CardView) v.findViewById(R.id.my_operation_card_item);
-                            myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                            mAdapter = new CustomRecyclerAdapter<Operation>(mFragment.getActivity(), operations, R.layout.my_operation_card_item) {
+                                @Override
+                                protected void display(ViewHolderHelper viewHolder, Operation data) {
+                                    viewHolder.setText(R.id.my_operation_card_projectname, data.getProject_name())
+                                            .setText(R.id.my_operation_card_contact_name, data.getContact_name())
+                                            .setText(R.id.my_operation_card_status, data.getProject_state());
+
+                                    if (data.getGoon_time() == 0)
+                                        viewHolder.setText(R.id.my_operation_card_goon_time, "--");
+                                    else viewHolder.setText(R.id.my_operation_card_goon_time, DateForGeLingWeiZhi.fromGeLinWeiZhi(data.getGoon_time()));
+                                }
+                            };
+                            mAdapter.setOnItemClickListener(new CustomRecyclerAdapter.OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
                                     Fragment fragment = MyOperationDetailsFragment.newInstance(data);
@@ -139,6 +150,7 @@ public class MyOperationListFragment extends Fragment {
                                     }
                                 }
                             });
+                            mRecyclerView.setAdapter(mAdapter);
 
                         } else {
 
@@ -226,72 +238,5 @@ public class MyOperationListFragment extends Fragment {
         });
 
         return v;
-    }
-
-    public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view, Object data);
-    }
-
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
-        private List<Operation> operations;
-        private Context mContext;
-
-        public MyAdapter (Context context, List<Operation> operations) {
-            this.operations = operations;
-            this.mContext = context;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.my_operation_card_item, viewGroup, false);
-            ViewHolder viewHolder = new ViewHolder(v);
-            v.setOnClickListener(this);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            Operation mOperation = operations.get(i);
-
-            viewHolder.mProjectName.setText(mOperation.getProject_name());
-            viewHolder.mContactName.setText(mOperation.getContact_name());
-            viewHolder.mStatus.setText(mOperation.getProject_state());
-            viewHolder.mGoonTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mOperation.getGoon_time()));
-
-            viewHolder.itemView.setTag(operations.get(i));
-        }
-
-        @Override
-        public int getItemCount() {
-            return operations == null ? 0 : operations.size();
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(v, v.getTag());
-            }
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder{
-            private TextView mProjectName;
-            private TextView mContactName;
-            private TextView mStatus;
-            private TextView mGoonTime;
-
-            public ViewHolder(View v) {
-                super(v);
-                mProjectName = (TextView) v.findViewById(R.id.my_operation_card_projectname);
-                mContactName = (TextView) v.findViewById(R.id.my_operation_card_contact_name);
-                mStatus = (TextView) v.findViewById(R.id.my_operation_card_status);
-                mGoonTime = (TextView) v.findViewById(R.id.my_operation_card_goon_time);
-            }
-        }
-
-        public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-            mOnItemClickListener = listener;
-        }
     }
 }

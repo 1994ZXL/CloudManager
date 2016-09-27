@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.contact.publicSearchContact.PSContactActivity;
 import com.example.zxl.cloudmanager.model.Contact;
+import com.example.zxl.cloudmanager.model.CustomRecyclerAdapter;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.User;
@@ -52,7 +53,7 @@ public class PMContactListFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
     private List<Contact> contacts = new ArrayList<Contact>();
-    private MyAdapter myAdapter;
+    private CustomRecyclerAdapter<Contact> mAdapter;
 
     private Fragment mFragment;
 
@@ -120,10 +121,14 @@ public class PMContactListFragment extends Fragment {
                         mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                         mRecyclerView.setHasFixedSize(true);
-                        myAdapter = new MyAdapter(mFragment.getActivity(), contacts);
-                        mRecyclerView.setAdapter(myAdapter);
-                        mCardView = (CardView) v.findViewById(R.id.pm_contact_card_item);
-                        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                        mAdapter = new CustomRecyclerAdapter<Contact>(mFragment.getActivity(), contacts, R.layout.pm_contact_card_item) {
+                            @Override
+                            protected void display(ViewHolderHelper viewHolder, Contact data) {
+                                viewHolder.setText(R.id.pm_contact_card_item_name, data.getContact_name())
+                                        .setText(R.id.pm_contact_card_item_phone, data.getPhone());
+                            }
+                        };
+                        mAdapter.setOnItemClickListener(new CustomRecyclerAdapter.OnRecyclerViewItemClickListener() {
                             @Override
                             public void onItemClick(View view, Object data) {
                                 Fragment fragment = PMContactDetailFragment.newInstance(data);
@@ -145,6 +150,7 @@ public class PMContactListFragment extends Fragment {
                                 }
                             }
                         });
+                        mRecyclerView.setAdapter(mAdapter);
 
                     } else {
 
@@ -249,67 +255,5 @@ public class PMContactListFragment extends Fragment {
         });
 
         return v;
-    }
-
-    public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view, Object data);
-    }
-
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener {
-        private List<Contact> contacts;
-        private Context mContext;
-
-        public MyAdapter(Context context, List<Contact> contacts) {
-            this.contacts = contacts;
-            this.mContext = context;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pm_contact_card_item, viewGroup, false);
-            ViewHolder viewHolder = new ViewHolder(v);
-            v.setOnClickListener(this);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-            Contact contact = contacts.get(i);
-
-            viewHolder.mName.setText(contact.getContact_name());
-            viewHolder.mPhone.setText(contact.getPhone());
-
-            viewHolder.itemView.setTag(contacts.get(i));
-        }
-
-        @Override
-        public int getItemCount() {
-            return contacts == null ? 0 : contacts.size();
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(v, v.getTag());
-            }
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-
-            private TextView mName;
-            private TextView mPhone;
-
-            public ViewHolder(View v) {
-                super(v);
-                mName = (TextView) v.findViewById(R.id.pm_contact_card_item_name);
-                mPhone = (TextView) v.findViewById(R.id.pm_contact_card_item_phone);
-            }
-        }
-
-        public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-            mOnItemClickListener = listener;
-        }
     }
 }

@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.mission.publicSearchMission.PublicSearchMissionActivity;
+import com.example.zxl.cloudmanager.model.CustomRecyclerAdapter;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
@@ -55,7 +56,7 @@ public class MissionManagerListFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
     private List<Mission> missions = new ArrayList<Mission>();
-    private MyAdapter myAdapter;
+    private CustomRecyclerAdapter<Mission> mAdapter;
 
     private TextView mAddTextView;
     private TextView mTitle;
@@ -136,10 +137,70 @@ public class MissionManagerListFragment extends Fragment {
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                             mRecyclerView.setHasFixedSize(true);
-                            myAdapter = new MyAdapter(mFragment.getActivity(), missions);
-                            mRecyclerView.setAdapter(myAdapter);
                             mCardView = (CardView) view.findViewById(R.id.fragment_my_check);
-                            myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                            mAdapter = new CustomRecyclerAdapter<Mission>(mFragment.getActivity(), missions, R.layout.mission_card_item) {
+                                @Override
+                                protected void display(ViewHolderHelper viewHolder, final Mission data) {
+                                    if (data.getStart_time() == 0)
+                                        viewHolder.setText(R.id.missoin_card_item_mission_begin_time, "--");
+                                    else viewHolder.setText(R.id.missoin_card_item_mission_begin_time, DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(data.getStart_time()));
+
+                                    if (data.getEnd_time() == 0)
+                                        viewHolder.setText(R.id.mission_card_item_mission_end_time, "--");
+                                    else viewHolder.setText(R.id.mission_card_item_mission_end_time, DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(data.getEnd_time()));
+
+                                    viewHolder.setText(R.id.mission_card_item_title, data.getTitle())
+                                            .setText(R.id.mission_card_item_state, data.getStatus())
+                                            .setImageButton(R.id.mission_card_item_delete, new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    final int i = missions.indexOf(data);
+                                                    AlertDialog.Builder builder = new AlertDialog.Builder(mFragment.getActivity());
+                                                    builder.setTitle("提示");
+                                                    builder.setMessage("是否要删除");
+                                                    builder.setNegativeButton("取消", null);
+                                                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            try {
+                                                                keyObjDelete.put(Link.pmtask_id, missions.get(i).getPmtask_id());
+                                                                keyDelete = DESCryptor.Encryptor(keyObjDelete.toString());
+                                                            } catch (Exception e) {
+                                                                e.printStackTrace();
+                                                            }
+                                                            mParamsDelete.put("key", keyDelete);
+                                                            Log.d(TAG, "key:" + keyDelete);
+
+                                                            mHttpcDelete.post(Link.localhost + "pm_task&act=drop", mParamsDelete, new JsonHttpResponseHandler() {
+                                                                @Override
+                                                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                                                    try {
+                                                                        Toast.makeText(getActivity(),
+                                                                                response.getString("msg"),
+                                                                                Toast.LENGTH_SHORT).show();
+                                                                    } catch (JSONException e) {
+                                                                        e.printStackTrace();
+                                                                    }
+                                                                }
+
+                                                                @Override
+                                                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                                                    Toast.makeText(getActivity(),
+                                                                            R.string.edit_error,
+                                                                            Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            });
+                                                            missions.remove(i);
+                                                            mRecyclerView.scrollToPosition(i - 1);
+                                                            mAdapter.notifyDataSetChanged();
+                                                        }
+                                                    });
+                                                    builder.show();
+                                                }
+                                            });
+                                }
+                            };
+                            mAdapter.setOnItemClickListener(new CustomRecyclerAdapter.OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
                                     Fragment fragment = MissionManagerEditFragment.newInstance(data);
@@ -157,6 +218,7 @@ public class MissionManagerListFragment extends Fragment {
                                     }
                                 }
                             });
+                            mRecyclerView.setAdapter(mAdapter);
 
                         } else {
 
@@ -271,134 +333,6 @@ public class MissionManagerListFragment extends Fragment {
                 }
             }
         });
-
         return view;
     }
-
-
-    public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view, Object data);
-    }
-
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener {
-        private List<Mission> missions;
-        private Context mContext;
-
-        public MyAdapter(Context context, List<Mission> missions) {
-            this.missions = missions;
-            this.mContext = context;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mission_card_item, viewGroup, false);
-            ViewHolder viewHolder = new ViewHolder(v);
-            v.setOnClickListener(this);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-            final Mission mission = missions.get(i);
-
-            if (mission.getStart_time() == 0)
-                viewHolder.mBeginTime.setText("--");
-            else
-                viewHolder.mBeginTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mission.getStart_time()));
-
-            if (mission.getEnd_time() == 0)
-                viewHolder.mEndTime.setText("--");
-            else
-                viewHolder.mEndTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(mission.getEnd_time()));
-
-            viewHolder.mName.setText(mission.getTitle());
-            viewHolder.mState.setText(mission.getStatus());
-
-            viewHolder.mDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(mFragment.getActivity());
-                    builder.setTitle("提示");
-                    builder.setMessage("是否要删除");
-                    builder.setNegativeButton("取消", null);
-                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            try {
-                                keyObjDelete.put(Link.pmtask_id, missions.get(i).getPmtask_id());
-                                keyDelete = DESCryptor.Encryptor(keyObjDelete.toString());
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            mParamsDelete.put("key", keyDelete);
-                            Log.d(TAG, "key:" + keyDelete);
-
-                            mHttpcDelete.post(Link.localhost + "pm_task&act=drop", mParamsDelete, new JsonHttpResponseHandler() {
-                                @Override
-                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                    try {
-                                        Toast.makeText(getActivity(),
-                                                response.getString("msg"),
-                                                Toast.LENGTH_SHORT).show();
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                                    Toast.makeText(getActivity(),
-                                            R.string.edit_error,
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            missions.remove(i);
-                            mRecyclerView.scrollToPosition(i - 1);
-                            myAdapter.notifyDataSetChanged();
-                        }
-                    });
-                    builder.show();
-                }
-            });
-
-            viewHolder.itemView.setTag(missions.get(i));
-        }
-
-        @Override
-        public int getItemCount() {
-            return missions == null ? 0 : missions.size();
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(v, v.getTag());
-            }
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            public TextView mName;
-            public TextView mState;
-            public TextView mBeginTime;
-            public TextView mEndTime;
-            public ImageButton mDelete;
-
-            public ViewHolder(View v) {
-                super(v);
-                mName = (TextView) v.findViewById(R.id.mission_card_item_title);
-                mState = (TextView) v.findViewById(R.id.mission_card_item_state);
-                mBeginTime = (TextView) v.findViewById(R.id.missoin_card_item_mission_begin_time);
-                mEndTime = (TextView) v.findViewById(R.id.mission_card_item_mission_end_time);
-                mDelete = (ImageButton) v.findViewById(R.id.mission_card_item_delete);
-            }
-        }
-
-        public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-            mOnItemClickListener = listener;
-        }
-
-    }
-
 }

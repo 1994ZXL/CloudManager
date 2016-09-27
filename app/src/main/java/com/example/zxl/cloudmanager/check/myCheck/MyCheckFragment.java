@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.model.Check;
+import com.example.zxl.cloudmanager.model.CustomRecyclerAdapter;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
@@ -45,7 +46,7 @@ public class MyCheckFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
     private ArrayList<Check> checks = new ArrayList<Check>();
-    private MyAdapter myAdapter;
+    private CustomRecyclerAdapter<Check> mAdapter;
 
     private Button mSearchBtn;
     private TextView mBack;
@@ -119,10 +120,23 @@ public class MyCheckFragment extends Fragment {
                         mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                         mRecyclerView.setHasFixedSize(true);
-                        myAdapter = new MyAdapter(mFragment.getActivity(), checks);
-                        mRecyclerView.setAdapter(myAdapter);
                         mCardView = (CardView) v.findViewById(R.id.fragment_my_check);
-                        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                        mAdapter = new CustomRecyclerAdapter<Check>(mFragment.getActivity(), checks, R.layout.check_card_item) {
+                            @Override
+                            protected void display(ViewHolderHelper viewHolder, Check data) {
+                                viewHolder.setText(R.id.ls_check_card_item_time, DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(data.getAtt_date() + 28800))
+                                        .setText(R.id.ls_check_card_item_location, data.getPuncher_name());
+
+                                if (data.getS_att_time() == 0)
+                                    viewHolder.setText(R.id.ls_check_card_item_dutytime, "--");
+                                else viewHolder.setText(R.id.ls_check_card_item_dutytime, DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(data.getS_att_time()+28800));
+
+                                if (data.getE_att_time() == 0)
+                                    viewHolder.setText(R.id.ls_check_card_item_offdutytime, "--");
+                                else viewHolder.setText(R.id.ls_check_card_item_offdutytime, DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(data.getE_att_time()+28800));
+                            }
+                        };
+                        mAdapter.setOnItemClickListener(new CustomRecyclerAdapter.OnRecyclerViewItemClickListener() {
                             @Override
                             public void onItemClick(View view, Object data) {
                                 Fragment fragment = MyCheckDetailFragment.newInstance(data);
@@ -139,6 +153,7 @@ public class MyCheckFragment extends Fragment {
                                 }
                             }
                         });
+                        mRecyclerView.setAdapter(mAdapter);
 
                     } else {
 
@@ -208,78 +223,5 @@ public class MyCheckFragment extends Fragment {
         });
 
         return v;
-    }
-
-    public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view, Object data);
-    }
-
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener {
-        private ArrayList<Check> checks;
-        private Context mContext;
-
-        public MyAdapter(Context context, ArrayList<Check> checks) {
-            this.checks = checks;
-            this.mContext = context;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.check_card_item, viewGroup, false);
-            ViewHolder viewHolder = new ViewHolder(v);
-            v.setOnClickListener(this);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            Check check = checks.get(i);
-            viewHolder.mCheckLocation.setText(check.getPuncher_name());
-            viewHolder.mDate.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(check.getAtt_date() + 28800));
-            if (check.getS_att_time() != 0) {
-                viewHolder.mDutyTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(check.getS_att_time()+28800));
-            } else {
-                viewHolder.mDutyTime.setText("--");
-            }
-            if (check.getE_att_time() != 0) {
-                viewHolder.mOffDutyTime.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi2(check.getE_att_time()+28800));
-            } else {
-                viewHolder.mOffDutyTime.setText("--");
-            }
-            viewHolder.itemView.setTag(checks.get(i));
-        }
-
-        @Override
-        public int getItemCount() {
-            return checks == null ? 0 : checks.size();
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(v, v.getTag());
-            }
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            public TextView mDate;
-            public TextView mCheckLocation;
-            public TextView mDutyTime;
-            public TextView mOffDutyTime;
-
-            public ViewHolder(View v) {
-                super(v);
-                mDate = (TextView) v.findViewById(R.id.ls_check_card_item_time);
-                mCheckLocation = (TextView) v.findViewById(R.id.ls_check_card_item_location);
-                mDutyTime = (TextView) v.findViewById(R.id.ls_check_card_item_dutytime);
-                mOffDutyTime = (TextView) v.findViewById(R.id.ls_check_card_item_offdutytime);
-            }
-        }
-
-        public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-            mOnItemClickListener = listener;
-        }
     }
 }

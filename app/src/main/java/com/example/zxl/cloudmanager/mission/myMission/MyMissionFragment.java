@@ -22,6 +22,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.CustomRecyclerAdapter;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
@@ -50,7 +51,7 @@ public class MyMissionFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
     private ArrayList<Mission> missions = new ArrayList<Mission>();
-    private MyAdapter myAdapter;
+    private CustomRecyclerAdapter<Mission> mAdapter;
 
     private TextView mSearch;
     private TextView mBack;
@@ -130,10 +131,23 @@ public class MyMissionFragment extends Fragment {
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                             mRecyclerView.setHasFixedSize(true);
-                            myAdapter = new MyAdapter(mFragment.getActivity(), missions);
-                            mRecyclerView.setAdapter(myAdapter);
                             mCardView = (CardView) view.findViewById(R.id.fragment_my_check);
-                            myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                            mAdapter = new CustomRecyclerAdapter<Mission>(mFragment.getActivity(), missions, R.layout.mission_card_item) {
+                                @Override
+                                protected void display(ViewHolderHelper viewHolder, Mission data) {
+                                    viewHolder.setText(R.id.mission_card_item_title, data.getTitle())
+                                            .setText(R.id.mission_card_item_state, data.getStatus());
+
+                                    if (data.getStart_time() == 0)
+                                        viewHolder.setText(R.id.missoin_card_item_mission_begin_time, "--");
+                                    else viewHolder.setText(R.id.missoin_card_item_mission_begin_time, DateForGeLingWeiZhi.fromGeLinWeiZhi(data.getStart_time()));
+
+                                    if (data.getEnd_time() == 0)
+                                        viewHolder.setText(R.id.mission_card_item_mission_end_time, "--");
+                                    else viewHolder.setText(R.id.mission_card_item_mission_end_time, DateForGeLingWeiZhi.fromGeLinWeiZhi(data.getEnd_time()));
+                                }
+                            };
+                            mAdapter.setOnItemClickListener(new CustomRecyclerAdapter.OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
                                     Fragment fragment = MyMissionDetailFragment.newInstance(data);
@@ -151,6 +165,8 @@ public class MyMissionFragment extends Fragment {
                                     }
                                 }
                             });
+
+                            mRecyclerView.setAdapter(mAdapter);
                         } else {
 
                         }
@@ -229,82 +245,4 @@ public class MyMissionFragment extends Fragment {
 
         return view;
     }
-
-    public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view, Object data);
-    }
-
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener {
-        private List<Mission> missions;
-        private Context mContext;
-
-        public MyAdapter(Context context, List<Mission> missions) {
-            this.missions = missions;
-            this.mContext = context;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mission_card_item, viewGroup, false);
-            ViewHolder viewHolder = new ViewHolder(v);
-            v.setOnClickListener(this);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            Mission mission = missions.get(i);
-
-            if (mission.getStart_time() == 0) {
-                viewHolder.mBeginTime.setText("——");
-            } else {
-                viewHolder.mBeginTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mission.getStart_time()));
-            }
-
-            if (mission.getStart_time() == 0) {
-                viewHolder.mEndTime.setText("——");
-            } else {
-                viewHolder.mEndTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mission.getEnd_time()));
-            }
-
-            viewHolder.mName.setText(mission.getTitle());
-            viewHolder.mState.setText(mission.getStatus());
-
-            viewHolder.itemView.setTag(missions.get(i));
-        }
-
-        @Override
-        public int getItemCount() {
-            return missions == null ? 0 : missions.size();
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(v, v.getTag());
-            }
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            public TextView mName;
-            public TextView mState;
-            public TextView mBeginTime;
-            public TextView mEndTime;
-
-            public ViewHolder(View v) {
-                super(v);
-                mName = (TextView) v.findViewById(R.id.mission_card_item_title);
-                mState = (TextView) v.findViewById(R.id.mission_card_item_state);
-                mBeginTime = (TextView) v.findViewById(R.id.missoin_card_item_mission_begin_time);
-                mEndTime = (TextView) v.findViewById(R.id.mission_card_item_mission_end_time);
-            }
-        }
-
-        public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-            mOnItemClickListener = listener;
-        }
-    }
-
 }

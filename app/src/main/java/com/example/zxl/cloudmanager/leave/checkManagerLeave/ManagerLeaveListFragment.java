@@ -21,6 +21,7 @@ import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.leave.leader.LeaderLeaveSearchActivity;
 import com.example.zxl.cloudmanager.leave.myLeave.MyLeaveDetailFragment;
 import com.example.zxl.cloudmanager.leave.myLeave.MyLeaveSearchFragment;
+import com.example.zxl.cloudmanager.model.CustomRecyclerAdapter;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Leave;
@@ -49,7 +50,7 @@ public class ManagerLeaveListFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
     private ArrayList<Leave> leaves = new ArrayList<Leave>();
-    private MyAdapter myAdapter;
+    private CustomRecyclerAdapter<Leave> mAdapter;
     public static final int REFRESH_DELAY = 4000;
 
     private TextView mBack;
@@ -148,10 +149,25 @@ public class ManagerLeaveListFragment extends Fragment {
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                             mRecyclerView.setHasFixedSize(true);
-                            myAdapter = new MyAdapter(mFragment.getActivity(), leaves);
-                            mRecyclerView.setAdapter(myAdapter);
                             mCardView = (CardView) v.findViewById(R.id.fragment_my_check);
-                            myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                            mAdapter = new CustomRecyclerAdapter<Leave>(mFragment.getActivity(), leaves, R.layout.cm_leave_card_item) {
+                                @Override
+                                protected void display(ViewHolderHelper viewHolder, Leave data) {
+                                    viewHolder.setText(R.id.cm_leave_card_item_name, data.getMem_name())
+                                            .setText(R.id.cm_leave_card_item_state, data.getStatus())
+                                            .setText(R.id.cm_leave_card_item_type, data.getLeave_type());
+
+                                    if (data.getStart_time() == 0)
+                                        viewHolder.setText(R.id.cm_leave_card_item_begin_time, "--");
+                                    else viewHolder.setText(R.id.cm_leave_card_item_begin_time, DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(data.getStart_time()));
+
+                                    if (data.getEnd_time() == 0)
+                                        viewHolder.setText(R.id.cm_leave_card_item_end_time, "--");
+                                    else viewHolder.setText(R.id.cm_leave_card_item_end_time, DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(data.getEnd_time()));
+
+                                }
+                            };
+                            mAdapter.setOnItemClickListener(new CustomRecyclerAdapter.OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
                                     if (mFragment.getActivity().getClass() == LeaderLeaveSearchActivity.class) {
@@ -173,6 +189,7 @@ public class ManagerLeaveListFragment extends Fragment {
                                     }
                                 }
                             });
+                            mRecyclerView.setAdapter(mAdapter);
 
                         } else {
 
@@ -250,76 +267,5 @@ public class ManagerLeaveListFragment extends Fragment {
         Log.d(TAG, "调用了一次");
 
         return v;
-    }
-
-    public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view, Object data);
-    }
-
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener {
-        private List<Leave> leaves;
-        private Context mContext;
-
-        public MyAdapter(Context context, List<Leave> leaves) {
-            this.leaves = leaves;
-            this.mContext = context;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cm_leave_card_item, viewGroup, false);
-            ViewHolder viewHolder = new ViewHolder(v);
-            v.setOnClickListener(this);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            Leave leave = leaves.get(i);
-
-            viewHolder.mName.setText(leave.getMem_name());
-            viewHolder.mState.setText(leave.getStatus());
-            viewHolder.mType.setText(leave.getLeave_type());
-            viewHolder.mLeaveBegin.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(leave.getStart_time()));
-            viewHolder.mLeaveEnd.setText(DateForGeLingWeiZhi.newInstance().fromGeLinWeiZhi(leave.getEnd_time()));
-
-            viewHolder.itemView.setTag(leaves.get(i));
-        }
-
-        @Override
-        public int getItemCount() {
-            return leaves == null ? 0 : leaves.size();
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(v, v.getTag());
-            }
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            public TextView mType;
-            public TextView mLeaveBegin;
-            public TextView mLeaveEnd;
-            public TextView mState;
-            public TextView mName;
-
-            public ViewHolder(View v) {
-                super(v);
-                mName = (TextView) v.findViewById(R.id.cm_leave_card_item_name);
-                mState = (TextView) v.findViewById(R.id.cm_leave_card_item_state);
-                mLeaveBegin = (TextView) v.findViewById(R.id.cm_leave_card_item_begin_time);
-                mLeaveEnd = (TextView) v.findViewById(R.id.cm_leave_card_item_end_time);
-                mType = (TextView) v.findViewById(R.id.cm_leave_card_item_type);
-
-            }
-        }
-
-        public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-            mOnItemClickListener = listener;
-        }
     }
 }

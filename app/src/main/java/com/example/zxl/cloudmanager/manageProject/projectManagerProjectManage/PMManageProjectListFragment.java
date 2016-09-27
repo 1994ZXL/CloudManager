@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
 import com.example.zxl.cloudmanager.manageProject.publicSearchProjectManage.PSManageProjectActivity;
+import com.example.zxl.cloudmanager.model.CustomRecyclerAdapter;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Project;
@@ -54,7 +55,7 @@ public class PMManageProjectListFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
     private List<Project> project = new ArrayList<Project>();
-    private MyAdapter myAdapter;
+    private CustomRecyclerAdapter<Project> mAdapter;
 
     private Fragment mFragment;
     private PullToRefreshLayout mPullToRefreshLayout;
@@ -134,10 +135,65 @@ public class PMManageProjectListFragment extends Fragment {
                         mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                         mRecyclerView.setHasFixedSize(true);
-                        myAdapter = new MyAdapter(mFragment.getActivity(), project);
-                        mRecyclerView.setAdapter(myAdapter);
                         mCardView = (CardView)v.findViewById(R.id.pm_manager_item);
-                        myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                        mAdapter = new CustomRecyclerAdapter<Project>(mFragment.getActivity(), project, R.layout.pm_manager_item) {
+                            @Override
+                            protected void display(ViewHolderHelper viewHolder, final Project data) {
+                                viewHolder.setText(R.id.pm_item_name, data.getProject_name())
+                                        .setText(R.id.pm_item_state, data.getProject_state())
+                                        .setText(R.id.pm_item_manager, data.getGoon_technical_name())
+                                        .setText(R.id.pm_item_contactor, data.getCustom_name())
+                                        .setText(R.id.pm_item_company, data.getBelong_unit())
+                                        .setImageButton(R.id.pm_item_delete, new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                final int i = project.indexOf(data);
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(mFragment.getActivity());
+                                                builder.setTitle("提示");
+                                                builder.setMessage("是否要删除");
+                                                builder.setNegativeButton("取消", null);
+                                                builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog,int which){
+                                                        try {
+                                                            keyObjDelete.put(Link.pm_id, project.get(i).getPm_id());
+                                                            keyDelete = DESCryptor.Encryptor(keyObjDelete.toString());
+                                                        } catch (Exception e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                        mParamsDelete.put("key", keyDelete);
+                                                        Log.d(TAG,"key:" + keyDelete);
+
+                                                        mHttpcDelete.post(Link.localhost + "manage_pm&act=drop", mParamsDelete, new JsonHttpResponseHandler() {
+                                                            @Override
+                                                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                                                try {
+                                                                    Toast.makeText(getActivity(),
+                                                                            response.getString("msg"),
+                                                                            Toast.LENGTH_SHORT).show();
+                                                                } catch (JSONException e) {
+                                                                    e.printStackTrace();
+                                                                }
+                                                            }
+
+                                                            @Override
+                                                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                                                Toast.makeText(getActivity(),
+                                                                        R.string.edit_error,
+                                                                        Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        });
+                                                        project.remove(i);
+                                                        mRecyclerView.scrollToPosition(i - 1);
+                                                        mAdapter.notifyDataSetChanged();
+                                                    }
+                                                });
+                                                builder.show();
+                                            }
+                                        });
+                            }
+                        };
+                        mAdapter.setOnItemClickListener(new CustomRecyclerAdapter.OnRecyclerViewItemClickListener() {
                             @Override
                             public void onItemClick(View view, Object data) {
                                 Fragment fragment = PMManageProjectDetailFragment.newInstance(data);
@@ -155,6 +211,7 @@ public class PMManageProjectListFragment extends Fragment {
                                 }
                             }
                         });
+                        mRecyclerView.setAdapter(mAdapter);
 
                     } else {
 
@@ -258,124 +315,4 @@ public class PMManageProjectListFragment extends Fragment {
 
         return v;
     }
-
-    public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view, Object data);
-    }
-
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
-        private List<Project> projects;
-        private Context mContext;
-
-        public MyAdapter (Context context, List<Project> projects) {
-            this.projects = projects;
-            this.mContext = context;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pm_manager_item, viewGroup,false);
-            ViewHolder viewHolder = new ViewHolder(v);
-            v.setOnClickListener(this);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-            Project project = projects.get(i);
-
-            viewHolder.mProjectName.setText(project.getProject_name());
-            viewHolder.mGoonTechnical.setText(project.getGoon_technical_name());
-            viewHolder.mBelongUnit.setText(project.getBelong_unit());
-            viewHolder.mState.setText(project.getProject_state());
-            viewHolder.mCustomName.setText(project.getCustom_name());
-            viewHolder.mDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(mFragment.getActivity());
-                    builder.setTitle("提示");
-                    builder.setMessage("是否要删除");
-                    builder.setNegativeButton("取消", null);
-                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){
-                        @Override
-                        public void onClick(DialogInterface dialog,int which){
-                            try {
-                                keyObjDelete.put(Link.pm_id, projects.get(i).getPm_id());
-                                keyDelete = DESCryptor.Encryptor(keyObjDelete.toString());
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            mParamsDelete.put("key", keyDelete);
-                            Log.d(TAG,"key:" + keyDelete);
-
-                            mHttpcDelete.post(Link.localhost + "manage_pm&act=drop", mParamsDelete, new JsonHttpResponseHandler() {
-                                @Override
-                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                    try {
-                                        Toast.makeText(getActivity(),
-                                                response.getString("msg"),
-                                                Toast.LENGTH_SHORT).show();
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                                    Toast.makeText(getActivity(),
-                                            R.string.edit_error,
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            projects.remove(i);
-                            mRecyclerView.scrollToPosition(i - 1);
-                            myAdapter.notifyDataSetChanged();
-                        }
-                    });
-                    builder.show();
-                }
-            });
-
-            viewHolder.itemView.setTag(projects.get(i));
-        }
-
-        @Override
-        public int getItemCount() {
-            return projects == null ? 0 : projects.size();
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(v, v.getTag());
-            }
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder{
-            public TextView mProjectName;
-            public TextView mCustomName;
-            public TextView mGoonTechnical;
-            public TextView mBelongUnit;
-            public TextView mState;
-            public ImageButton mDelete;
-
-            public ViewHolder(View v) {
-                super(v);
-                mProjectName = (TextView) v.findViewById(R.id.pm_item_name);
-                mState = (TextView)v.findViewById(R.id.pm_item_state);
-                mGoonTechnical = (TextView)v.findViewById(R.id.pm_item_manager);
-                mCustomName= (TextView)v.findViewById(R.id.pm_item_contactor);
-                mBelongUnit = (TextView)v.findViewById(R.id.pm_item_company);
-                mDelete = (ImageButton) v.findViewById(R.id.pm_item_delete);
-            }
-        }
-
-        public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-            mOnItemClickListener = listener;
-        }
-    }
-
-
 }

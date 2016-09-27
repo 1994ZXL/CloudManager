@@ -161,8 +161,17 @@ public class ManagerOvertimeDetailFragment extends Fragment {
             }
         });
 
-        mBeginTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mOverTime.getStart_time()));
-        mEndTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(mOverTime.getEnd_time()));
+        if (mOverTime.getStart_time() == 0) {
+            mBeginTime.setText("--");
+        } else {
+            mBeginTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi2(mOverTime.getStart_time()));
+        }
+
+        if (mOverTime.getEnd_time() == 0) {
+            mEndTime.setText("--");
+        } else {
+            mEndTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi2(mOverTime.getEnd_time()));
+        }
         mEmployer.setText(mOverTime.getMem_name());
         mProjectName.setText(mOverTime.getWork_pm());
         mOvertimeReasonET.setText(mOverTime.getWork_resaon());

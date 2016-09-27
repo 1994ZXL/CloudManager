@@ -65,8 +65,12 @@ public class MyOvertimeDetailFragment extends Fragment {
     private void control() {
         mEmployerNameTV.setText(sOverTime.getMem_name());
         mProjectName.setText(sOverTime.getWork_pm());
-        mBeginTimeTV.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sOverTime.getStart_time()));
-        mEndTimeTV.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sOverTime.getEnd_time()));
+        if (sOverTime.getStart_time() != 0)
+            mBeginTimeTV.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sOverTime.getStart_time()));
+        else mBeginTimeTV.setText("--");
+        if (sOverTime.getEnd_time() != 0)
+            mEndTimeTV.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(sOverTime.getEnd_time()));
+        else mEndTimeTV.setText("--");
         mOvertimeReasonTV.setText(sOverTime.getWork_resaon());
         mWorkTime.setText(sOverTime.getWork_time());
         mWorkStatus.setText(sOverTime.getStatus());

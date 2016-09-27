@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.CustomRecyclerAdapter;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
@@ -50,7 +51,7 @@ public class PMScheduleListFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
     private List<Schedule> schedules = new ArrayList<Schedule>();
-    private MyAdapter myAdapter;
+    private CustomRecyclerAdapter<Schedule> mAdapter;
 
     private TextView mBack;
     private Button mAdd;
@@ -125,10 +126,70 @@ public class PMScheduleListFragment extends Fragment {
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                             mRecyclerView.setHasFixedSize(true);
-                            myAdapter = new MyAdapter(mFragment.getActivity(), schedules);
-                            mRecyclerView.setAdapter(myAdapter);
                             mCardView = (CardView)view.findViewById(R.id.pm_schedule_card_item);
-                            myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                            mAdapter = new CustomRecyclerAdapter<Schedule>(mFragment.getActivity(), schedules, R.layout.pm_schedule_card_item) {
+                                @Override
+                                protected void display(ViewHolderHelper viewHolder, final Schedule data) {
+                                    if (data.getPmsch_time() == 0)
+                                        viewHolder.setText(R.id.pm_schedule_card_item_pmsch_time, "--");
+                                    else viewHolder.setText(R.id.pm_schedule_card_item_pmsch_time, DateForGeLingWeiZhi.fromGeLinWeiZhi2(data.getPmsch_time()));
+
+                                    if (data.getReport_time() == 0)
+                                        viewHolder.setText(R.id.pm_schedule_card_item_submit_time, "--");
+                                    else viewHolder.setText(R.id.pm_schedule_card_item_submit_time, DateForGeLingWeiZhi.fromGeLinWeiZhi2(data.getReport_time()));
+
+                                    viewHolder.setText(R.id.pm_schedule_card_item_title, data.getTitle())
+                                            .setText(R.id.pm_schedule_card_item_percent, String.valueOf(data.getPercent()))
+                                            .setImageButton(R.id.pm_schedule_card_item_delete, new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    final int i = schedules.indexOf(data);
+                                                    AlertDialog.Builder builder = new AlertDialog.Builder(mFragment.getActivity());
+                                                    builder.setTitle("提示");
+                                                    builder.setMessage("是否要删除");
+                                                    builder.setNegativeButton("取消", null);
+                                                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog,int which){
+                                                            try {
+                                                                keyObjDelete.put(Link.pmsch_id, schedules.get(i).getPmsch_id());
+                                                                keyDelete = DESCryptor.Encryptor(keyObjDelete.toString());
+                                                            } catch (Exception e) {
+                                                                e.printStackTrace();
+                                                            }
+                                                            mParamsDelete.put("key", keyDelete);
+                                                            Log.d(TAG,"key:" + keyDelete);
+
+                                                            mHttpcDelete.post(Link.localhost + "pm_schedule&act=drop", mParamsDelete, new JsonHttpResponseHandler() {
+                                                                @Override
+                                                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                                                    try {
+                                                                        Toast.makeText(getActivity(),
+                                                                                response.getString("msg"),
+                                                                                Toast.LENGTH_SHORT).show();
+                                                                    } catch (JSONException e) {
+                                                                        e.printStackTrace();
+                                                                    }
+                                                                }
+
+                                                                @Override
+                                                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                                                    Toast.makeText(getActivity(),
+                                                                            R.string.edit_error,
+                                                                            Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            });
+                                                            schedules.remove(i);
+                                                            mRecyclerView.scrollToPosition(i - 1);
+                                                            mAdapter.notifyDataSetChanged();
+                                                        }
+                                                    });
+                                                    builder.show();
+                                                }
+                                            });
+                                }
+                            };
+                            mAdapter.setOnItemClickListener(new CustomRecyclerAdapter.OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
                                     Fragment fragment = PMScheduleEditFragment.newInstance(data);
@@ -146,6 +207,7 @@ public class PMScheduleListFragment extends Fragment {
                                     }
                                 }
                             });
+                            mRecyclerView.setAdapter(mAdapter);
                         } else {
 
                         }
@@ -230,120 +292,5 @@ public class PMScheduleListFragment extends Fragment {
         });
 
         return v;
-    }
-
-    public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view, Object data);
-    }
-
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
-        private List<Schedule> schedules;
-        private Context mContext;
-
-        public MyAdapter (Context context, List<Schedule> schedules) {
-            this.schedules = schedules;
-            this.mContext = context;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.pm_schedule_card_item, viewGroup,false);
-            ViewHolder viewHolder = new ViewHolder(v);
-            v.setOnClickListener(this);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-            Schedule schedule = schedules.get(i);
-
-            viewHolder.mTitle.setText(schedule.getTitle());
-            viewHolder.mPmschTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi2(schedule.getPmsch_time()));
-            viewHolder.mSubmitTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi2(schedule.getReport_time()));
-            viewHolder.mPercent.setText(String.valueOf(schedule.getPercent()));
-            viewHolder.mDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(mFragment.getActivity());
-                    builder.setTitle("提示");
-                    builder.setMessage("是否要删除");
-                    builder.setNegativeButton("取消", null);
-                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){
-                        @Override
-                        public void onClick(DialogInterface dialog,int which){
-                            try {
-                                keyObjDelete.put(Link.pmsch_id, schedules.get(i).getPmsch_id());
-                                keyDelete = DESCryptor.Encryptor(keyObjDelete.toString());
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            mParamsDelete.put("key", keyDelete);
-                            Log.d(TAG,"key:" + keyDelete);
-
-                            mHttpcDelete.post(Link.localhost + "pm_schedule&act=drop", mParamsDelete, new JsonHttpResponseHandler() {
-                                @Override
-                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                    try {
-                                        Toast.makeText(getActivity(),
-                                                response.getString("msg"),
-                                                Toast.LENGTH_SHORT).show();
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                                    Toast.makeText(getActivity(),
-                                            R.string.edit_error,
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            schedules.remove(i);
-                            mRecyclerView.scrollToPosition(i - 1);
-                            myAdapter.notifyDataSetChanged();
-                        }
-                    });
-                    builder.show();
-                }
-            });
-
-            viewHolder.itemView.setTag(schedules.get(i));
-        }
-
-        @Override
-        public int getItemCount() {
-            return schedules == null ? 0 : schedules.size();
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(v, v.getTag());
-            }
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder{
-            public TextView mTitle;
-            public TextView mPmschTime;
-            public TextView mSubmitTime;
-            public TextView mPercent;
-            public ImageButton mDelete;
-
-            public ViewHolder(View v) {
-                super(v);
-                mTitle = (TextView) v.findViewById(R.id.pm_schedule_card_item_title);
-                mPmschTime = (TextView) v.findViewById(R.id.pm_schedule_card_item_pmsch_time);
-                mSubmitTime = (TextView) v.findViewById(R.id.pm_schedule_card_item_submit_time);
-                mPercent = (TextView) v.findViewById(R.id.pm_schedule_card_item_percent);
-                mDelete = (ImageButton) v.findViewById(R.id.pm_schedule_card_item_delete);
-            }
-        }
-
-        public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-            mOnItemClickListener = listener;
-        }
     }
 }

@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.CustomRecyclerAdapter;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
@@ -62,7 +63,7 @@ public class MyTravelFragment extends Fragment {
     private CardView mCardView;
     private RecyclerView mRecyclerView;
 
-    private MyAdapter myAdapter;
+    private CustomRecyclerAdapter<Travel> mAdapter;
 
     private static final String TAG = "MyTravelFragment";
 
@@ -142,10 +143,24 @@ public class MyTravelFragment extends Fragment {
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                             mRecyclerView.setHasFixedSize(true);
-                            myAdapter = new MyAdapter(mFragment.getActivity(), travels);
-                            mRecyclerView.setAdapter(myAdapter);
                             mCardView = (CardView) v.findViewById(R.id.travel_card_item);
-                            myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                            mAdapter = new CustomRecyclerAdapter<Travel>(mFragment.getActivity(), travels, R.layout.main_fragment_travel_list) {
+                                @Override
+                                protected void display(ViewHolderHelper viewHolder, Travel data) {
+                                    if (data.getStart_time() == 0)
+                                        viewHolder.setText(R.id.my_travel_beginTime, "--");
+                                    else viewHolder.setText(R.id.my_travel_beginTime, DateForGeLingWeiZhi.fromGeLinWeiZhi(data.getStart_time()));
+
+                                    if (data.getEnd_time() == 0)
+                                        viewHolder.setText(R.id.my_travel_endTime, "--");
+                                    else viewHolder.setText(R.id.my_travel_endTime, DateForGeLingWeiZhi.fromGeLinWeiZhi(data.getEnd_time()));
+
+                                    viewHolder.setText(R.id.my_travel_name, data.getMem_name())
+                                            .setText(R.id.my_travel_status, data.getStatus())
+                                            .setText(R.id.my_travel_reason, data.getTrip_reason());
+                                }
+                            };
+                            mAdapter.setOnItemClickListener(new CustomRecyclerAdapter.OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
                                     Fragment fragment = new Fragment();
@@ -170,6 +185,7 @@ public class MyTravelFragment extends Fragment {
                                     }
                                 }
                             });
+                            mRecyclerView.setAdapter(mAdapter);
 
                         }
                     } catch (JSONException e) {
@@ -276,76 +292,4 @@ public class MyTravelFragment extends Fragment {
 
         return v;
     }
-
-    public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view, Object data);
-    }
-
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener {
-        private ArrayList<Travel> travels;
-        private Context mContext;
-
-        public MyAdapter(Context context, ArrayList<Travel> travels) {
-            this.travels = travels;
-            this.mContext = context;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.main_fragment_travel_list, viewGroup, false);
-            ViewHolder viewHolder = new ViewHolder(v);
-            v.setOnClickListener(this);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            Travel travel = travels.get(i);
-
-            viewHolder.mName.setText(travel.getMem_name());
-            viewHolder.mStatus.setText(travel.getStatus());
-            viewHolder.mReason.setText(travel.getTrip_reason());
-            viewHolder.mBeginTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(travel.getStart_time()));
-            viewHolder.mEndTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(travel.getEnd_time()));
-
-            viewHolder.itemView.setTag(travels.get(i));
-        }
-
-        @Override
-        public int getItemCount() {
-            return travels == null ? 0 : travels.size();
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(v, v.getTag());
-            }
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-
-            private TextView mName;
-            private TextView mStatus;
-            private TextView mReason;
-            private TextView mBeginTime;
-            private TextView mEndTime;
-
-            public ViewHolder(View v) {
-                super(v);
-                mName = (TextView) v.findViewById(R.id.my_travel_name);
-                mStatus = (TextView) v.findViewById(R.id.my_travel_status);
-                mReason = (TextView) v.findViewById(R.id.my_travel_reason);
-                mBeginTime = (TextView) v.findViewById(R.id.my_travel_beginTime);
-                mEndTime = (TextView) v.findViewById(R.id.my_travel_endTime);
-            }
-        }
-
-        public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-            mOnItemClickListener = listener;
-        }
-    }
-
 }

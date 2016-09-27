@@ -3,13 +3,10 @@ package com.example.zxl.cloudmanager.post.myPost;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.app.ListFragment;
-import android.content.Context;
 import android.os.Bundle;
 
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,9 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.zxl.cloudmanager.R;
@@ -27,9 +22,9 @@ import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
 import com.example.zxl.cloudmanager.model.Post;
+import com.example.zxl.cloudmanager.model.CustomRecyclerAdapter;
 import com.example.zxl.cloudmanager.model.User;
 import com.example.zxl.cloudmanager.post.leader.LeaderPostDetailFragment;
-import com.example.zxl.cloudmanager.post.leader.LeaderPostSearchActivity;
 import com.example.zxl.cloudmanager.post.projectManagerPost.PMPostActivtiy;
 import com.example.zxl.cloudmanager.pulltorefresh.MyListener;
 import com.example.zxl.cloudmanager.pulltorefresh.PullToRefreshLayout;
@@ -53,10 +48,10 @@ public class MyPostFragment extends Fragment {
 
     private ArrayList<Post> mPosts = new ArrayList<Post>();
 
-    private CardView mCardView;
     private RecyclerView mRecyclerView;
 
-    private MyAdapter myAdapter;
+//    private MyAdapter myAdapter;
+    private CustomRecyclerAdapter<Post> mAdapter;
 
     private TextView mSearch;
     private TextView mBack;
@@ -69,8 +64,6 @@ public class MyPostFragment extends Fragment {
     private Fragment mFragment;
 
     private static final String TAG = "MyPostFragment";
-
-    public static final int REFRESH_DELAY = 4000;
 
     private static AsyncHttpClient mHttpc = new AsyncHttpClient();
     private RequestParams mParams = new RequestParams();
@@ -137,10 +130,17 @@ public class MyPostFragment extends Fragment {
                                 mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                                 mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                                 mRecyclerView.setHasFixedSize(true);
-                                myAdapter = new MyAdapter(mFragment.getActivity(), mPosts);
-                                mRecyclerView.setAdapter(myAdapter);
-                                mCardView = (CardView)v.findViewById(R.id.my_post_card_item);
-                                myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                                mAdapter = new CustomRecyclerAdapter<Post>(mFragment.getActivity(), mPosts, R.layout.leader_post_list) {
+                                    @Override
+                                    protected void display(ViewHolderHelper viewHolder, Post data) {
+                                        viewHolder.setText(R.id.leader_post_list_name, data.getMem_name())
+                                                .setText(R.id.leader_post_list_data, DateForGeLingWeiZhi.fromGeLinWeiZhi(data.getDaily_date() + 28800))
+                                                .setText(R.id.leader_post_list_opinion, data.getOpinion())
+                                                .setText(R.id.leader_post_list_status, data.getState())
+                                                .setText(R.id.leader_post_list_content, data.getContent());
+                                    }
+                                };
+                                mAdapter.setOnItemClickListener(new CustomRecyclerAdapter.OnRecyclerViewItemClickListener() {
                                     @Override
                                     public void onItemClick(View view, Object data) {
                                         Fragment fragment;
@@ -163,6 +163,7 @@ public class MyPostFragment extends Fragment {
                                         }
                                     }
                                 });
+                                mRecyclerView.setAdapter(mAdapter);
                             }
                             Log.d(TAG, "mPosts: " + mPosts);
 
@@ -251,80 +252,5 @@ public class MyPostFragment extends Fragment {
         });
 
         return view;
-    }
-
-    public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view, Object data);
-    }
-
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
-        private ArrayList<Post> posts;
-        private Context mContext;
-
-        public MyAdapter (Context context, ArrayList<Post> posts) {
-            this.posts = posts;
-            this.mContext = context;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.leader_post_list, viewGroup,false);
-            ViewHolder viewHolder = new ViewHolder(v);
-            v.setOnClickListener(this);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            Post check = posts.get(i);
-
-            viewHolder.mName.setText(check.getMem_name());
-            viewHolder.mDate.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(check.getDaily_date() + 28800));
-            if ("null".equals(check.getOpinion())){
-                viewHolder.mOpinion.setText("--");
-            } else {
-                viewHolder.mOpinion.setText(check.getOpinion());
-            }
-            viewHolder.mStatus.setText(check.getState());
-            viewHolder.mContent.setText(check.getContent());
-
-            viewHolder.itemView.setTag(posts.get(i));
-        }
-
-        @Override
-        public int getItemCount() {
-            return posts == null ? 0 : posts.size();
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(v, v.getTag());
-            }
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder{
-
-            private TextView mName;
-            private TextView mDate;
-            private TextView mOpinion;
-            private TextView mStatus;
-            private TextView mContent;
-
-            public ViewHolder(View v) {
-                super(v);
-                mName = (TextView) v.findViewById(R.id.leader_post_list_name);
-                mDate = (TextView) v.findViewById(R.id.leader_post_list_data);
-                mOpinion = (TextView) v.findViewById(R.id.leader_post_list_opinion);
-                mStatus = (TextView) v.findViewById(R.id.leader_post_list_status);
-                mContent = (TextView) v.findViewById(R.id.leader_post_list_content);
-            }
-        }
-
-        public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-            mOnItemClickListener = listener;
-        }
     }
 }

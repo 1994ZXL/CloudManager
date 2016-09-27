@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.zxl.cloudmanager.R;
+import com.example.zxl.cloudmanager.model.CustomRecyclerAdapter;
 import com.example.zxl.cloudmanager.model.DESCryptor;
 import com.example.zxl.cloudmanager.model.DateForGeLingWeiZhi;
 import com.example.zxl.cloudmanager.model.Link;
@@ -55,7 +56,7 @@ public class MemoFragment extends Fragment {
 
     private CardView mCardView;
     private RecyclerView mRecyclerView;
-    private MyAdapter myAdapter;
+    private CustomRecyclerAdapter<Memo> mAdpter;
     private List<Memo> memos = new ArrayList<Memo>();
 
     private static int mCurl_page;
@@ -132,10 +133,66 @@ public class MemoFragment extends Fragment {
                             mRecyclerView.setLayoutManager(new LinearLayoutManager(mFragment.getActivity()));
                             mRecyclerView.setItemAnimator(new DefaultItemAnimator());
                             mRecyclerView.setHasFixedSize(true);
-                            myAdapter = new MyAdapter(mFragment.getActivity(), memos);
-                            mRecyclerView.setAdapter(myAdapter);
                             mCardView = (CardView)v.findViewById(R.id.fragment_my_memo);
-                            myAdapter.setOnItemClickListener(new OnRecyclerViewItemClickListener() {
+                            mAdpter = new CustomRecyclerAdapter<Memo>(mFragment.getActivity(), memos, R.layout.memo_card_item) {
+                                @Override
+                                protected void display(final ViewHolderHelper viewHolder, final Memo data) {
+                                    if (data.getCreate_time() == 0)
+                                        viewHolder.setText(R.id.memo_card_create_time,"--");
+                                    else viewHolder.setText(R.id.memo_card_create_time, DateForGeLingWeiZhi.fromGeLinWeiZhi(data.getCreate_time()));
+
+                                    viewHolder.setText(R.id.memo_card_title, data.getTitle())
+                                            .setText(R.id.memo_card_content, data.getContent())
+                                            .setImageButton(R.id.memo_card_delete, new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    final int i = memos.indexOf(data);
+                                                    AlertDialog.Builder builder = new AlertDialog.Builder(mFragment.getActivity());
+                                                    builder.setTitle("提示");
+                                                    builder.setMessage("是否要删除");
+                                                    builder.setNegativeButton("取消", null);
+                                                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+                                                        @Override
+                                                        public void onClick(DialogInterface dialog,int which){
+                                                            try {
+                                                                keyObjDelete.put(Link.note_id, memos.get(i).getNote_id());
+                                                                keyDelete = DESCryptor.Encryptor(keyObjDelete.toString());
+                                                            } catch (Exception e) {
+                                                                e.printStackTrace();
+                                                            }
+                                                            mParamsDelete.put("key", keyDelete);
+                                                            Log.d(TAG,"key:" + keyDelete);
+
+                                                            mHttpcDelete.post(Link.localhost + "my_note&act=drop", mParamsDelete, new JsonHttpResponseHandler() {
+                                                                @Override
+                                                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                                                    try {
+                                                                        Toast.makeText(getActivity(),
+                                                                                response.getString("msg"),
+                                                                                Toast.LENGTH_SHORT).show();
+                                                                    } catch (JSONException e) {
+                                                                        e.printStackTrace();
+                                                                    }
+                                                                }
+
+                                                                @Override
+                                                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                                                    Toast.makeText(getActivity(),
+                                                                            R.string.edit_error,
+                                                                            Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            });
+                                                            memos.remove(i);
+                                                            mRecyclerView.scrollToPosition(i - 1);
+                                                            mAdpter.notifyDataSetChanged();
+                                                        }
+                                                    });
+                                                    builder.show();
+                                                }
+                                            });
+                                }
+                            };
+                            mAdpter.setOnItemClickListener(new CustomRecyclerAdapter.OnRecyclerViewItemClickListener() {
                                 @Override
                                 public void onItemClick(View view, Object data) {
                                     Fragment fragment = MemoDetailFragment.newInstance(data);
@@ -153,6 +210,8 @@ public class MemoFragment extends Fragment {
                                     }
                                 }
                             });
+
+                            mRecyclerView.setAdapter(mAdpter);
 
                         } else {
 
@@ -244,127 +303,14 @@ public class MemoFragment extends Fragment {
             public void onClick(View view) {
                 Fragment fragment = null;
                 if (null == fragment) {
-                    fragment.setArguments(saveInstanceState);
                     FragmentManager fm = getFragmentManager();
                     fragment = new MemoAddFragment();
+                    fragment.setArguments(saveInstanceState);
                     fm.beginTransaction().replace(R.id.blankActivity, fragment).commit();
                 }
             }
         });
 
         return v;
-    }
-
-    public interface OnRecyclerViewItemClickListener {
-        void onItemClick(View view, Object data);
-    }
-
-    private OnRecyclerViewItemClickListener mOnItemClickListener = null;
-
-
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener{
-        private List<Memo> memos;
-        private Context mContext;
-
-        public MyAdapter (Context context, List<Memo> memos) {
-            this.memos = memos;
-            this.mContext = context;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-            View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.memo_card_item, viewGroup,false);
-            ViewHolder viewHolder = new ViewHolder(v);
-            v.setOnClickListener(this);
-            return viewHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(ViewHolder viewHolder, final int i) {
-            Memo m = memos.get(i);
-
-            viewHolder.mTitle.setText(m.getTitle());
-            viewHolder.mCreateTime.setText(DateForGeLingWeiZhi.fromGeLinWeiZhi(m.getCreate_time()));
-            viewHolder.mContent.setText(m.getContent());
-            viewHolder.mDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(mFragment.getActivity());
-                    builder.setTitle("提示");
-                    builder.setMessage("是否要删除");
-                    builder.setNegativeButton("取消", null);
-                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){
-                        @Override
-                        public void onClick(DialogInterface dialog,int which){
-                            try {
-                                keyObjDelete.put(Link.note_id, memos.get(i).getNote_id());
-                                keyDelete = DESCryptor.Encryptor(keyObjDelete.toString());
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                            mParamsDelete.put("key", keyDelete);
-                            Log.d(TAG,"key:" + keyDelete);
-
-                            mHttpcDelete.post(Link.localhost + "my_note&act=drop", mParamsDelete, new JsonHttpResponseHandler() {
-                                @Override
-                                public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                                    try {
-                                        Toast.makeText(getActivity(),
-                                                response.getString("msg"),
-                                                Toast.LENGTH_SHORT).show();
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-
-                                @Override
-                                public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                                    Toast.makeText(getActivity(),
-                                            R.string.edit_error,
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            memos.remove(i);
-                            mRecyclerView.scrollToPosition(i - 1);
-                            myAdapter.notifyDataSetChanged();
-                        }
-                    });
-                    builder.show();
-                }
-            });
-
-            viewHolder.itemView.setTag(memos.get(i));
-        }
-
-        @Override
-        public int getItemCount() {
-            return memos == null ? 0 : memos.size();
-        }
-
-        @Override
-        public void onClick(View v) {
-            if (mOnItemClickListener != null) {
-                mOnItemClickListener.onItemClick(v, v.getTag());
-            }
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder{
-            private TextView mTitle;
-            private TextView mCreateTime;
-            private TextView mContent;
-            private ImageButton mDelete;
-
-            public ViewHolder(View v) {
-                super(v);
-                mTitle = (TextView) v.findViewById(R.id.memo_card_title);
-                mCreateTime = (TextView) v.findViewById(R.id.memo_card_create_time);
-                mContent = (TextView) v.findViewById(R.id.memo_card_content);
-                mDelete = (ImageButton) v.findViewById(R.id.memo_card_delete);
-            }
-        }
-
-        public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {
-            mOnItemClickListener = listener;
-        }
     }
 }
