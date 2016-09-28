@@ -90,6 +90,12 @@ public abstract class CustomRecyclerAdapter<T> extends RecyclerView.Adapter<Cust
             return this;
         }
 
+        public ViewHolderHelper setImageButtonGone(int resId) {
+            ImageButton view = converToViewFromId(resId);
+            view.setVisibility(View.GONE);
+            return this;
+        }
+
     }
 
     public void setOnItemClickListener(OnRecyclerViewItemClickListener listener) {

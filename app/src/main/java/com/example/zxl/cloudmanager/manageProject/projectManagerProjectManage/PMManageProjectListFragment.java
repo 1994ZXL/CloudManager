@@ -139,6 +139,9 @@ public class PMManageProjectListFragment extends Fragment {
                         mAdapter = new CustomRecyclerAdapter<Project>(mFragment.getActivity(), project, R.layout.pm_manager_item) {
                             @Override
                             protected void display(ViewHolderHelper viewHolder, final Project data) {
+                                if (mFragment.getActivity().getClass() == PSManageProjectActivity.class) {
+                                    viewHolder.setImageButtonGone(R.id.pm_item_delete);
+                                }
                                 viewHolder.setText(R.id.pm_item_name, data.getProject_name())
                                         .setText(R.id.pm_item_state, data.getProject_state())
                                         .setText(R.id.pm_item_manager, data.getGoon_technical_name())

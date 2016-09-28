@@ -37,11 +37,11 @@
 
             <TextView
                 style="@style/Text_view_Style"
-                android:text="@string/my_post_content" />
+                android:text="@string/post_opinion" />
 
-            <!--内容-->
+            <!--评价-->
             <TextView
-                android:id="@+id/leader_post_list_content"
+                android:id="@+id/leader_post_list_opinion"
                 style="@style/Text_view_Style"
                 android:maxLength="14" />
         </LinearLayout>
@@ -50,11 +50,11 @@
 
             <TextView
                 style="@style/Text_view_Style"
-                android:text="@string/post_opinion" />
+                android:text="@string/my_post_content" />
 
-            <!--评价-->
+            <!--内容-->
             <TextView
-                android:id="@+id/leader_post_list_opinion"
+                android:id="@+id/leader_post_list_content"
                 style="@style/Text_view_Style"
                 android:maxLength="14" />
         </LinearLayout>

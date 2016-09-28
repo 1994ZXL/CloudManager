@@ -136,7 +136,8 @@ public class MyMissionFragment extends Fragment {
                                 @Override
                                 protected void display(ViewHolderHelper viewHolder, Mission data) {
                                     viewHolder.setText(R.id.mission_card_item_title, data.getTitle())
-                                            .setText(R.id.mission_card_item_state, data.getStatus());
+                                            .setText(R.id.mission_card_item_state, data.getStatus())
+                                            .setImageButtonGone(R.id.mission_card_item_delete);
 
                                     if (data.getStart_time() == 0)
                                         viewHolder.setText(R.id.missoin_card_item_mission_begin_time, "--");

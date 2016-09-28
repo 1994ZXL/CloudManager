@@ -33,7 +33,8 @@
 
         <com.example.zxl.cloudmanager.pulltorefresh.pullableview.PullableScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/bg_white">
 
             <ScrollView style="@style/ScrollView_Style">
 
@@ -51,7 +52,7 @@
                             android:id="@+id/post_recyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@color/white"
+                            android:background="@color/bg_white"
                             android:dividerHeight="10dp" />
                     </LinearLayout>
 
